@@ -1,19 +1,19 @@
-# pw-books
+# pw-books toolkit
 A collection of tools for reading/writing/manipulating e-book files.
 
 #### pw-books consists of some parts:
 * a core (**jem-core**) that reads/writes e-books
-* a console tool named **SCJ** manages e-books
-* a swing-based book editor named **Imabw**
+* a console tool named **scj** manages e-books
+* a swing-based book editor named **imabw**
 
-#### To use the core, the following are reauired:
+#### To use the jem-core, the following are reauired:
 * commons-logging 1.2+
 
-#### SCJ resuired:
+#### scj resuired:
 * jem-core 2.0+
 * commons-cli 1.2+
 
-#### Imabw required:
+#### imabw required:
 * jem-core 2.0+
 
 ## Command line examples
