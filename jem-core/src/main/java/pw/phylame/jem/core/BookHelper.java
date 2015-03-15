@@ -254,7 +254,7 @@ public final class BookHelper {
     }
 
     /**
-     * Walks <tt>Part</tt> sub-part tree.
+     * Walks sub-part tree of specified part.
      * @param part the <tt>Part</tt> to watched
      * @param walker watch the part
      */
