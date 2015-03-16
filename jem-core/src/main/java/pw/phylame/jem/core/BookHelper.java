@@ -248,10 +248,29 @@ public final class BookHelper {
         }
     }
 
+<<<<<<< HEAD
     static {
         registerBuiltinParsers();
         registerCustomParsers();
         registerBuiltinMakers();
         registerCustomMakers();
+=======
+    /**
+     * Walks sub-part tree of specified part.
+     * @param part the <tt>Part</tt> to watched
+     * @param walker watch the part
+     */
+    public static void walkPart(Part part, Walker walker) {
+        if (walker == null) {
+            throw new NullPointerException("walker");
+        }
+        assert part != null;
+        if (!walker.watch(part)) {
+            return;
+        }
+        for (int ix = 0; ix < part.size(); ++ix) {
+            walkPart(part.get(ix), walker);
+        }
+>>>>>>> 9dfb60faa8a00e3655485b4f73d1c7d78797a44f
     }
 }
