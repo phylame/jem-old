@@ -19,7 +19,7 @@
 package pw.phylame.jem.formats.pmab;
 
 import pw.phylame.jem.core.Book;
-import pw.phylame.jem.core.BookMaker;
+import pw.phylame.jem.core.Maker;
 import pw.phylame.jem.util.JemException;
 
 import java.util.Map;
@@ -28,9 +28,9 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * <tt>BookMaker</tt> implement for PMAB book.
+ * <tt>Maker</tt> implement for PMAB book.
  */
-public class PmabMaker implements BookMaker {
+public class PmabMaker implements Maker {
     /**
      * Returns the format name(normally the extension name).
      */

@@ -21,6 +21,7 @@ package pw.phylame.jem.core;
 import pw.phylame.tools.TextObject;
 import pw.phylame.tools.file.FileObject;
 
+import java.util.Iterator;
 import java.util.List;
 import java.io.IOException;
 
@@ -36,7 +37,7 @@ import java.io.IOException;
  * </ul>
  *
  */
-public class Part extends Attributes {
+public class Part extends Attributes implements Iterable<Part> {
     /** Key name for part title.*/
     public static final String TITLE = "title";
 
@@ -218,6 +219,15 @@ public class Part extends Attributes {
      */
     public Part get(int index) {
         return children.get(index);
+    }
+
+    /**
+     * Returns an iterator over sub-part list.
+     * @return an Iterator.
+     */
+    @Override
+    public Iterator<Part> iterator() {
+        return children.iterator();
     }
 
     /**

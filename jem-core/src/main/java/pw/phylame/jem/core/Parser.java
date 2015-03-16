@@ -25,11 +25,11 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * <tt>BookParser</tt> used for parsing book file and stores to <tt>Book</tt>.
+ * <tt>Parser</tt> used for parsing book file and stores to <tt>Book</tt>.
  */
-public interface BookParser {
+public interface Parser {
     /**
-     * Returns the format name(normally the extension name).
+     * Returns the format name (normally the extension name).
      */
     String getName();
 

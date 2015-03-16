@@ -19,7 +19,7 @@
 package pw.phylame.jem.formats.pmab;
 
 import pw.phylame.jem.core.Book;
-import pw.phylame.jem.core.BookParser;
+import pw.phylame.jem.core.Parser;
 import pw.phylame.jem.util.JemException;
 
 import java.util.Map;
@@ -28,9 +28,9 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * <tt>BookParser</tt> implement for PMAB book.
+ * <tt>Parser</tt> implement for PMAB book.
  */
-public class PmabParser implements BookParser {
+public class PmabParser implements Parser {
     /**
      * Returns the format name(normally the extension name).
      */

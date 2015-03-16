@@ -27,7 +27,7 @@ public abstract class StringUtil {
      * @param separator separator between string and string
      * @return joined string
      */
-    public static String join(String[] seq, String separator) {
+    public static <T> String join(T[] seq, String separator) {
         return join(java.util.Arrays.asList(seq), separator);
     }
 
@@ -37,11 +37,11 @@ public abstract class StringUtil {
      * @param separator separator between string and string
      * @return joined string
      */
-    public static String join(java.util.Collection<String> seq, String separator) {
+    public static <T> String join(java.util.Collection<T> seq, String separator) {
         int i = 1;
         StringBuilder sb = new StringBuilder();
-        for (String s: seq) {
-            sb.append(s);
+        for (T o: seq) {
+            sb.append(o);
             /* not last item */
             if (i++ != seq.size()) {
                 sb.append(separator);

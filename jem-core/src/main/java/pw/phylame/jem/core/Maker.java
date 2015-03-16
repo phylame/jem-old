@@ -25,11 +25,11 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * <tt>BookMaker</tt> used for making <tt>Book</tt> to book file.
+ * <tt>Maker</tt> used for making <tt>Book</tt> to book file.
  */
-public interface BookMaker {
+public interface Maker {
     /**
-     * Returns the format name(normally the extension name).
+     * Returns the format name (normally the extension name).
      */
     String getName();
 
