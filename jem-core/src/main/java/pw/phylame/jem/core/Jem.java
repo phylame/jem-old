@@ -22,6 +22,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import pw.phylame.jem.util.JemException;
+import pw.phylame.tools.TextObject;
+import pw.phylame.tools.file.FileObject;
 
 /**
  * This class contains utility methods for book operations.
@@ -165,6 +167,48 @@ public final class Jem {
         }
         for (int ix = 0; ix < part.size(); ++ix) {
             walkPart(part.get(ix), walker);
+        }
+    }
+
+    private static java.util.Map<Class<?>, String> variantTypes = new java.util.HashMap<Class<?>, String>();
+    static {
+        variantTypes.put(String.class, "str");
+        variantTypes.put(java.util.Date.class, "datetime");
+        variantTypes.put(byte.class, "int");
+        variantTypes.put(Byte.class, "int");
+        variantTypes.put(short.class, "int");
+        variantTypes.put(Short.class, "int");
+        variantTypes.put(int.class, "int");
+        variantTypes.put(Integer.class, "int");
+        variantTypes.put(long.class, "int");
+        variantTypes.put(Long.class, "int");
+        variantTypes.put(boolean.class, "bool");
+        variantTypes.put(Boolean.class, "int");
+        variantTypes.put(byte[].class, "bytes");
+        variantTypes.put(float.class, "real");
+        variantTypes.put(Float.class, "int");
+        variantTypes.put(double.class, "real");
+        variantTypes.put(Double.class, "int");
+    }
+
+    /**
+     * Returns type name of attribute value format with PEM.
+     * @param o attribute value
+     * @return type name
+     */
+    public static String getVariantType(Object o) {
+        if (o instanceof FileObject) {
+            return "file";
+        } else if (o instanceof TextObject) {
+            return "text";
+        } else if (o instanceof Part) {
+            return "part";
+        } else {
+            String name = variantTypes.get(o.getClass());
+            if (name == null || !variantTypes.containsKey(o.getClass())) {
+                name = o.getClass().getSimpleName().toLowerCase();
+            }
+            return name;
         }
     }
 }

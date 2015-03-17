@@ -20,7 +20,7 @@ package pw.phylame.tools;
  * Utility class for byte operations.
  * This class contains a number of static methods perform byte operations.
  */
-public final class ByteUtil {
+public final class ByteUtils {
 
     /** Byte endian */
     public enum Endian {
@@ -46,27 +46,27 @@ public final class ByteUtil {
         }
 
         public byte[] putInt8(byte x) {
-            return ByteUtil.putInt8(x, endian);
+            return ByteUtils.putInt8(x, endian);
         }
 
         public byte[] putUint8(int x) {
-            return ByteUtil.putUint8(x, endian);
+            return ByteUtils.putUint8(x, endian);
         }
 
         public byte[] putInt16(short x) {
-            return ByteUtil.putInt16(x, endian);
+            return ByteUtils.putInt16(x, endian);
         }
 
         public byte[] putUint16(int x) {
-            return ByteUtil.putUint16(x, endian);
+            return ByteUtils.putUint16(x, endian);
         }
 
         public byte[] putInt32(int x) {
-            return ByteUtil.putInt32(x, endian);
+            return ByteUtils.putInt32(x, endian);
         }
 
         public byte[] putUint32(long x) {
-            return ByteUtil.putUint32(x, endian);
+            return ByteUtils.putUint32(x, endian);
         }
     }
 
@@ -92,27 +92,27 @@ public final class ByteUtil {
         }
 
         public byte getInt8(byte[] b, int index) {
-            return ByteUtil.getInt8(b, index, endian);
+            return ByteUtils.getInt8(b, index, endian);
         }
 
         public int getUint8(byte[] b, int index) {
-            return ByteUtil.getUint8(b, index, endian);
+            return ByteUtils.getUint8(b, index, endian);
         }
 
         public short getInt16(byte[] b, int index) {
-            return ByteUtil.getInt16(b, index, endian);
+            return ByteUtils.getInt16(b, index, endian);
         }
 
         public int getUint16(byte[] b, int index) {
-            return ByteUtil.getUint16(b, index, endian);
+            return ByteUtils.getUint16(b, index, endian);
         }
 
         public int getInt32(byte[] b, int index) {
-            return ByteUtil.getInt32(b, index, endian);
+            return ByteUtils.getInt32(b, index, endian);
         }
 
         public long getUint32(byte[] b, int index) {
-            return ByteUtil.getUint32(b, index, endian);
+            return ByteUtils.getUint32(b, index, endian);
         }
     }
 

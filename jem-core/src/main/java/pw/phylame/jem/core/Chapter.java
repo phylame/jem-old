@@ -35,16 +35,28 @@ public class Chapter extends Part {
         this("", "", null, null);
     }
 
+    public Chapter(String title, String text) {
+        this(title, text, null, null);
+    }
+
     public Chapter(String title, String text, FileObject cover, TextObject intro) {
         super(title, text);
         setCover(cover);
         setIntro(intro);
     }
 
+    public Chapter(String title, FileObject file, String encoding) {
+        this(title, file, encoding, null, null);
+    }
+
     public Chapter(String title, FileObject file, String encoding, FileObject cover, TextObject intro) {
         super(title, file, encoding);
         setCover(cover);
         setIntro(intro);
+    }
+
+    public Chapter(String title, TextObject content) {
+        this(title, content, null, null);
     }
 
     public Chapter(String title, TextObject content, FileObject cover, TextObject intro) {
@@ -91,5 +103,13 @@ public class Chapter extends Part {
      */
     public void setIntro(TextObject intro) {
         setAttribute(INTRO, intro);
+    }
+
+    /**
+     * Replaces chapter intro with specified intro text.
+     * @param intro intro text
+     */
+    public void setIntro(String intro) {
+        setIntro(new TextObject(intro));
     }
 }

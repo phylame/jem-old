@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Peng Wan
+ * Copyright 2014-2015 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -16,15 +16,22 @@
  * limitations under the License.
  */
 
-package pw.phylame.jem.core;
+package pw.phylame.jem.formats.pmab.writer;
 
-import pw.phylame.jem.core.Part;
+import pw.phylame.jem.core.Book;
+import pw.phylame.jem.formats.pmab.PmabConfig;
+
+import java.util.zip.ZipOutputStream;
 
 /**
- * This interface used for walking sub-parts.
+ * Created by Peng Wan on 2015-3-17.
  */
-public interface  Walker {
+public final class WriterV3 {
+    public static void writePBM(Book book, ZipOutputStream zipOut, PmabConfig config) {
+        System.out.println("PBM 3.0");
+    }
 
-    /** Returns <tt>false</tt> to stop walking. */
-    boolean watch(Part part);
+    public static void writePBC(Book book, ZipOutputStream zipOut, PmabConfig config) {
+        System.out.println("PBC 3.0");
+    }
 }

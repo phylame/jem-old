@@ -17,7 +17,7 @@
 package pw.phylame.tools;
 
 import pw.phylame.tools.file.FileObject;
-import pw.phylame.tools.file.FileUtil;
+import pw.phylame.tools.file.FileUtils;
 
 import java.io.Reader;
 import java.io.Writer;
@@ -118,7 +118,7 @@ public class TextObject {
             case FILE:
                 Reader reader = openReader();
                 assert reader != null;
-                String text = FileUtil.readText(reader);
+                String text = FileUtils.readText(reader);
                 getFile().reset();
                 return text;
             default:
@@ -146,7 +146,7 @@ public class TextObject {
             case FILE:
                 Reader reader = openReader();
                 assert reader != null;
-                String[] lines = FileUtil.readLines(reader, skipEmptyLine);
+                String[] lines = FileUtils.readLines(reader, skipEmptyLine);
                 getFile().reset();
                 return lines;
             default:
@@ -177,7 +177,7 @@ public class TextObject {
             case FILE:
                 Reader reader = openReader();
                 assert reader != null;
-                total = FileUtil.copy(reader, writer, size);
+                total = FileUtils.copy(reader, writer, size);
                 getFile().reset();
                 break;
             default:

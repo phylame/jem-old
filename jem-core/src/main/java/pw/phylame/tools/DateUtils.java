@@ -18,11 +18,40 @@ package pw.phylame.tools;
 
 import java.util.Date;
 import java.util.Calendar;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 /**
  * Utility class for date operations.
  */
-public class DateUtil {
+public class DateUtils {
+
+    /**
+     * Parses date from text with specified format.
+     * @param text date string
+     * @param format the format
+     * @param def if date string is invalid return {@code def}
+     * @return the Date or {@code def}
+     */
+    public static Date parseDate(String text, String format, Date def) {
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        try {
+            return sdf.parse(text);
+        } catch (ParseException e) {
+            return def;
+        }
+    }
+
+    /**
+     * Formats date with specified format.
+     * @param date the date
+     * @param format the date format
+     * @return formatted string
+     */
+    public static String formatDate(Date date, String format) {
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        return sdf.format(date);
+    }
 
     /**
      * Returns end date from specified begin date and interval days.

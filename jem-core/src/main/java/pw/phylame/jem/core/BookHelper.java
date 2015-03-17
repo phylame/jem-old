@@ -18,6 +18,9 @@
 
 package pw.phylame.jem.core;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.io.IOException;
 import java.util.Map;
 import java.util.Collection;
@@ -33,6 +36,8 @@ import java.util.Collection;
  * The properties files must be stored in valid class path.
  */
 public final class BookHelper {
+    private static Log LOG = LogFactory.getLog(BookHelper.class);
+
     public static final String PARSER_DEFINE_FILE = "jem-parsers.properties";
 
     /** Class path of registered book parsers */
@@ -112,7 +117,7 @@ public final class BookHelper {
             throw new UnsupportedFormatException(name, "Not found parser");
         }
         Class clazz = Class.forName(path);
-        if (Parser.class.isAssignableFrom(clazz)) {
+        if (! Parser.class.isAssignableFrom(clazz)) {
             throw new InstantiationException("Class not extend Parser");
         }
         return (Parser) clazz.newInstance();
@@ -190,7 +195,7 @@ public final class BookHelper {
             throw new UnsupportedFormatException(name, "Not found maker");
         }
         Class clazz = Class.forName(path);
-        if (!Maker.class.isAssignableFrom(clazz)) {
+        if (! Maker.class.isAssignableFrom(clazz)) {
             throw new InstantiationException("Class not extend Maker");
         }
         return (Maker) clazz.newInstance();
@@ -205,17 +210,18 @@ public final class BookHelper {
         return names;
     }
 
-    private static void loadAndRegister(String path, Map<String, String> recv) throws IOException {
+    private static void loadAndRegister(String path, Map<String, String> map) throws IOException {
         java.util.Properties prop = new java.util.Properties();
         java.io.InputStream in = BookHelper.class.getResourceAsStream(path);
         if (in == null) {
+            LOG.debug("not found "+path);
             return;
         }
         prop.load(in);
         for (String name: prop.stringPropertyNames()) {
             String clazz = prop.getProperty(name);
             if (clazz != null && !"".equals(clazz)) {
-                recv.put(name, clazz);
+                map.put(name, clazz);
             }
         }
     }

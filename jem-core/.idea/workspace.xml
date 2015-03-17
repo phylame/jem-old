@@ -2,7 +2,47 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="43c239c1-c0d7-481c-9eb1-894ad8728ebf" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../format-pack/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../format-pack/.idea/libraries/Maven__pw_books_jem_core_2_0_.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../format-pack/.idea/libraries/Maven__pw_books_jem_core_2_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabConfig.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../format-pack/src/main/java/pw/phylame/jem/formats/txt/TxtMaker.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../format-pack/src/main/java/pw/phylame/jem/formats/txt/TxtParser.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../format-pack/src/main/java/pw/phylame/jem/formats/umd/UmdMaker.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../format-pack/src/main/java/pw/phylame/jem/formats/umd/UmdParser.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/writer/WriterV3.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../format-pack/src/main/resources/jem-makers.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../format-pack/src/main/resources/jem-parsers.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/script/test.bat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../format-pack/.idea/uiDesigner.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/.classpath" afterPath="$PROJECT_DIR$/../scj/.classpath" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/.project" afterPath="$PROJECT_DIR$/../scj/.project" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Book.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Book.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/BookHelper.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/BookHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Chapter.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Chapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileObject.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Part.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Part.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/TextObject.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/TextObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Walker.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Walker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/scj/Worker.java" afterPath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/scj/Worker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jem-core.iml" afterPath="$PROJECT_DIR$/jem-core.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/.settings/org.eclipse.core.resources.prefs" afterPath="$PROJECT_DIR$/../scj/.settings/org.eclipse.core.resources.prefs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/.settings/org.eclipse.jdt.core.prefs" afterPath="$PROJECT_DIR$/../scj/.settings/org.eclipse.jdt.core.prefs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/pom.xml" afterPath="$PROJECT_DIR$/../scj/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="D:\code\pw-books\jem-core\src\main\java\pw\phylame\tools\ByteUtil.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/ByteUtils.java" />
+      <change type="MOVED" beforePath="D:\code\pw-books\jem-core\src\main\java\pw\phylame\tools\DateUtil.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/DateUtils.java" />
+      <change type="MOVED" beforePath="D:\code\pw-books\jem-core\src\main\java\pw\phylame\tools\NumberUtil.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/NumberUtils.java" />
+      <change type="MOVED" beforePath="D:\code\pw-books\jem-core\src\main\java\pw\phylame\tools\StringUtil.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/StringUtils.java" />
+      <change type="MOVED" beforePath="D:\code\pw-books\jem-core\src\main\java\pw\phylame\tools\ZLibUtil.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/ZLibUtils.java" />
+      <change type="MOVED" beforePath="D:\code\pw-books\jem-core\src\main\java\pw\phylame\tools\file\FileUtil.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileUtils.java" />
+      <change type="MOVED" beforePath="D:\code\pw-books\scj\src\main\java\pw\phylame\scj\Console.java" afterPath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/scj/SCI.java" />
+      <change type="MOVED" beforePath="D:\code\pw-books\scj\src\main\resources\scj.properties" afterPath="$PROJECT_DIR$/../scj/src/main/resources/i18n/scj.properties" />
     </list>
     <ignored path="jem-core.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,7 +66,77 @@
     <favorites_list name="jem-core" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="PmabConfig.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabConfig.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="527" max-vertical-offset="1029">
+              <caret line="41" column="40" selection-start-line="41" selection-start-column="40" selection-end-line="41" selection-end-column="40" />
+              <folding>
+                <element signature="e#0#1361#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PmabMaker.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2501" max-vertical-offset="3087">
+              <caret line="133" column="52" selection-start-line="133" selection-start-column="52" selection-end-line="133" selection-end-column="52" />
+              <folding>
+                <element signature="e#0#4837#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#1594#1595#0" expanded="true" />
+                <element signature="e#1623#1624#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WriterV3.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/writer/WriterV3.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.97507787" vertical-offset="65" max-vertical-offset="567">
+              <caret line="34" column="31" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#974#975#0" expanded="true" />
+                <element signature="e#1019#1020#0" expanded="true" />
+                <element signature="e#1108#1109#0" expanded="true" />
+                <element signature="e#1153#1154#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FileUtils.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="5806" max-vertical-offset="6762">
+              <caret line="316" column="0" selection-start-line="316" selection-start-column="0" selection-end-line="316" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#10589#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#978#994#0" expanded="true" />
+                <element signature="e#10103#10111#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test.bat" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/script/test.bat">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="126">
+              <caret line="0" column="75" selection-start-line="0" selection-start-column="75" selection-end-line="0" selection-end-column="75" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -34,16 +144,34 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Parser.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Maker.java" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Part.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/StringUtil.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/DateUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Walker.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Part.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Chapter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Book.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabParser.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/BookHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabConfig.java" />
+        <option value="$PROJECT_DIR$/src/test/script/scj.bat" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileUtils.java" />
+        <option value="$PROJECT_DIR$/src/test/script/test.bat" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/writer/WriterV3.java" />
       </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
     </option>
   </component>
   <component name="ProjectFrameBounds">
@@ -75,78 +203,7 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pw.phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pw.phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pw.phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -179,6 +236,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="script" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -208,34 +287,8 @@
               <option name="myItemId" value="phylame" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem" />
+              <option name="myItemId" value="tools" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -265,17 +318,166 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="jem" />
+              <option name="myItemId" value="tools" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
+              <option name="myItemId" value="file" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phylame" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pw.phylame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pw.phylame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pw.phylame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pw.phylame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pmab" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pw.phylame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pmab" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="writer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -291,9 +493,12 @@
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Facets" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="FullScreen" value="false" />
+    <property name="recentsLimit" value="5" />
+    <property name="restartRequiresConfirmation" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -306,7 +511,34 @@
       <recent name="pw.phylame.jem.core" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Batch.test">
+    <configuration default="false" name="scj.sh" type="BashConfigurationType" factoryName="Bash" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="INTERPRETER_PATH" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/test/script" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/test/script/scj.sh" />
+      <option name="PARAMETERS" value="" />
+      <module name="jem-core" />
+      <envs />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="test" type="BatchConfigurationType" factoryName="Batch" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/test/script" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <module name="jem-core" />
+      <option name="SCRIPT_NAME" value="test.bat" />
+      <option name="PARAMETERS" value="" />
+      <RunnerSettings RunnerId="BatchRunner" />
+      <ConfigurationWrapper RunnerId="BatchRunner" />
+      <method>
+        <option name="Make" enabled="false" />
+      </method>
+    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -393,7 +625,7 @@
       <option name="WORKING_DIRECTORY" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
-      <module name="" />
+      <module name="jem-core" />
       <option name="SCRIPT_NAME" value="" />
       <option name="PARAMETERS" value="" />
       <method />
@@ -481,7 +713,16 @@
       <listeners />
       <method />
     </configuration>
-    <list size="0" />
+    <list size="2">
+      <item index="0" class="java.lang.String" itemvalue="Bash.scj.sh" />
+      <item index="1" class="java.lang.String" itemvalue="Batch.test" />
+    </list>
+    <recent_temporary>
+      <list size="2">
+        <item index="0" class="java.lang.String" itemvalue="Batch.test" />
+        <item index="1" class="java.lang.String" itemvalue="Bash.scj.sh" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="SvnConfiguration">
@@ -503,27 +744,27 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852563" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32786885" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852563" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32786885" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32969034" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18729097" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24963397" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18729097" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852563" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24916388" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852563" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852563" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -543,7 +784,9 @@
     </option>
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="antWorkspaceConfiguration">
@@ -551,15 +794,35 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/StringUtil.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1869">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="docComment;class#Jem#0" expanded="false" />
+            <element signature="docComment;field#VERSION#0;class#Jem#0" expanded="false" />
+            <element signature="docComment;field#PMAB_FORMAT#0;class#Jem#0" expanded="false" />
+            <element signature="docComment;method#readBook#0;class#Jem#0" expanded="false" />
+            <element signature="method#readBook#0;class#Jem#0" expanded="false" />
+            <element signature="docComment;method#readBook#1;class#Jem#0" expanded="false" />
+            <element signature="method#readBook#1;class#Jem#0" expanded="false" />
+            <element signature="docComment;method#writeBook#0;class#Jem#0" expanded="false" />
+            <element signature="method#writeBook#0;class#Jem#0" expanded="false" />
+            <element signature="docComment;method#writeBook#1;class#Jem#0" expanded="false" />
+            <element signature="method#writeBook#1;class#Jem#0" expanded="false" />
+            <element signature="docComment;method#getPart#0;class#Jem#0" expanded="false" />
+            <element signature="method#getPart#0;class#Jem#0" expanded="false" />
+            <element signature="docComment;method#walkPart#0;class#Jem#0" expanded="false" />
+            <element signature="method#walkPart#0;class#Jem#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/StringUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2415">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#3270#0" expanded="true" />
-            <element signature="e#943#944#0" expanded="true" />
-            <element signature="e#1011#1012#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -571,13 +834,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="38" max-vertical-offset="152">
           <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="MarkdownPreviewEditor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/BookHelper.java">
@@ -591,13 +854,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="577">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2898305" vertical-offset="0" max-vertical-offset="684">
-          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -650,48 +906,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://D:/devel/Java/jdk1.8.0_25/src.zip!/java/util/Map.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9254766" vertical-offset="2981" max-vertical-offset="22097">
-          <caret line="211" column="6" selection-start-line="211" selection-start-column="6" selection-end-line="211" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.5101695" vertical-offset="0" max-vertical-offset="3040">
-          <caret line="125" column="0" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="152">
           <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="MarkdownPreviewEditor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/package-info.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="609">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Book.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33266932" vertical-offset="148" max-vertical-offset="2730">
-          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Attributes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.04183267" vertical-offset="0" max-vertical-offset="1533">
-          <caret line="17" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -710,42 +938,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Part.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7071713" vertical-offset="3593" max-vertical-offset="5250">
-          <caret line="231" column="4" selection-start-line="231" selection-start-column="4" selection-end-line="231" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://D:/devel/Java/jdk1.8.0_25/src.zip!/java/util/Set.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.113546" vertical-offset="5083" max-vertical-offset="8274">
           <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.66533864" vertical-offset="23" max-vertical-offset="798">
-          <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/devel/Java/jdk1.8.0_25/src.zip!/java/util/Collection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.7048542" vertical-offset="4386" max-vertical-offset="12159">
-          <caret line="143" column="17" selection-start-line="143" selection-start-column="17" selection-end-line="143" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/devel/Java/jdk1.8.0_25/src.zip!/java/lang/String.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45816734" vertical-offset="60607" max-vertical-offset="64218">
-          <caret line="2982" column="0" selection-start-line="2982" selection-start-column="0" selection-end-line="2982" selection-end-column="0" />
-          <folding>
-            <element signature="e#117534#117535#0" expanded="true" />
-            <element signature="e#117596#117597#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -763,23 +959,292 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/StringUtil.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/StringUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5708738" vertical-offset="588" max-vertical-offset="2415">
           <caret line="42" column="16" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.874502" vertical-offset="464" max-vertical-offset="1092">
+          <caret line="43" column="18" selection-start-line="43" selection-start-column="18" selection-end-line="43" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/DateUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6693227" vertical-offset="672" max-vertical-offset="2625">
+          <caret line="48" column="31" selection-start-line="48" selection-start-column="31" selection-end-line="48" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/devel/Java/jdk1.8.0_25/src.zip!/java/util/Date.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33266932" vertical-offset="1807" max-vertical-offset="27342">
+          <caret line="130" column="13" selection-start-line="130" selection-start-column="13" selection-end-line="130" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/devel/Java/jdk1.8.0_25/src.zip!/java/util/Collection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.691235" vertical-offset="5335" max-vertical-offset="12159">
+          <caret line="143" column="17" selection-start-line="143" selection-start-column="17" selection-end-line="143" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Attributes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="904" max-vertical-offset="1533">
+          <caret line="84" column="16" selection-start-line="84" selection-start-column="16" selection-end-line="84" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Walker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3669903" vertical-offset="0" max-vertical-offset="515">
+          <caret line="25" column="18" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Chapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.034951456" vertical-offset="1236" max-vertical-offset="2541">
+          <caret line="58" column="39" selection-start-line="58" selection-start-column="39" selection-end-line="58" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/devel/Java/jdk1.8.0_25/src.zip!/java/util/Locale.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33266932" vertical-offset="15457" max-vertical-offset="66843">
+          <caret line="812" column="25" selection-start-line="812" selection-start-column="25" selection-end-line="812" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Book.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.69902915" vertical-offset="606" max-vertical-offset="2352">
+          <caret line="72" column="34" selection-start-line="72" selection-start-column="34" selection-end-line="72" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Part.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.4163346" vertical-offset="1026" max-vertical-offset="2079">
+          <caret line="52" column="11" selection-start-line="52" selection-start-column="11" selection-end-line="52" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/devel/Java/jdk1.8.0_25/src.zip!/java/util/Map.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4243028" vertical-offset="11568" max-vertical-offset="24423">
+          <caret line="587" column="8" selection-start-line="587" selection-start-column="8" selection-end-line="589" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.79922026" vertical-offset="829" max-vertical-offset="1869">
+          <caret line="190" column="31" selection-start-line="190" selection-start-column="31" selection-end-line="190" selection-end-column="31" />
           <folding>
-            <element signature="e#0#3270#0" expanded="true" />
-            <element signature="e#943#944#0" expanded="true" />
-            <element signature="e#1011#1012#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="docComment;class#Jem#0" expanded="false" />
+            <element signature="docComment;field#VERSION#0;class#Jem#0" expanded="false" />
+            <element signature="docComment;field#PMAB_FORMAT#0;class#Jem#0" expanded="false" />
+            <element signature="docComment;method#readBook#0;class#Jem#0" expanded="false" />
+            <element signature="method#readBook#0;class#Jem#0" expanded="false" />
+            <element signature="docComment;method#readBook#1;class#Jem#0" expanded="false" />
+            <element signature="method#readBook#1;class#Jem#0" expanded="false" />
+            <element signature="docComment;method#writeBook#0;class#Jem#0" expanded="false" />
+            <element signature="method#writeBook#0;class#Jem#0" expanded="false" />
+            <element signature="docComment;method#writeBook#1;class#Jem#0" expanded="false" />
+            <element signature="method#writeBook#1;class#Jem#0" expanded="false" />
+            <element signature="docComment;method#getPart#0;class#Jem#0" expanded="false" />
+            <element signature="method#getPart#0;class#Jem#0" expanded="false" />
+            <element signature="docComment;method#walkPart#0;class#Jem#0" expanded="false" />
+            <element signature="method#walkPart#0;class#Jem#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/BookHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37250996" vertical-offset="4685" max-vertical-offset="5397">
-          <caret line="256" column="4" selection-start-line="256" selection-start-column="4" selection-end-line="256" selection-end-column="4" />
+        <state vertical-scroll-proportion="0.5418327" vertical-offset="4264" max-vertical-offset="6027">
+          <caret line="216" column="41" selection-start-line="216" selection-start-column="41" selection-end-line="216" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#10566#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1596#1612#0" expanded="false" />
+            <element signature="e#1746#1779#0" expanded="false" />
+            <element signature="e#1978#1994#0" expanded="false" />
+            <element signature="e#2125#2157#0" expanded="false" />
+            <element signature="e#6828#6829#0" expanded="false" />
+            <element signature="e#6909#6910#0" expanded="false" />
+            <element signature="e#9112#9113#0" expanded="false" />
+            <element signature="e#9192#9193#0" expanded="false" />
+            <element signature="e#9560#9561#0" expanded="false" />
+            <element signature="e#9638#9639#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.65048546" vertical-offset="757" max-vertical-offset="1281">
+          <caret line="52" column="52" selection-start-line="52" selection-start-column="52" selection-end-line="52" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#1624#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1061#1062#0" expanded="false" />
+            <element signature="e#1090#1091#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/devel/Java/jdk1.8.0_25/src.zip!/java/util/zip/ZipConstants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7339806" vertical-offset="0" max-vertical-offset="1701">
+          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/devel/Java/jdk1.8.0_25/src.zip!/java/util/zip/DeflaterOutputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.9302788" vertical-offset="1786" max-vertical-offset="5460">
+          <caret line="41" column="6" selection-start-line="41" selection-start-column="6" selection-end-line="41" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="527" max-vertical-offset="1029">
+          <caret line="41" column="40" selection-start-line="41" selection-start-column="40" selection-end-line="41" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#1361#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/devel/Java/jdk1.8.0_25/src.zip!/java/util/zip/Deflater.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.78058255" vertical-offset="5499" max-vertical-offset="11151">
+          <caret line="312" column="0" selection-start-line="312" selection-start-column="0" selection-end-line="312" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/devel/Java/jdk1.8.0_25/src.zip!/java/util/zip/ZipOutputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37281552" vertical-offset="1110" max-vertical-offset="3087">
+          <caret line="176" column="16" selection-start-line="176" selection-start-column="16" selection-end-line="176" selection-end-column="16" />
+          <folding>
+            <element signature="docComment;class#ZipOutputStream#0" expanded="false" />
+            <element signature="docComment;field#inhibitZip64#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="class#XEntry#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="method#XEntry#0;class#XEntry#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="method#version#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="docComment;method#ensureOpen#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="method#ensureOpen#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="docComment;field#STORED#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="docComment;field#DEFLATED#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="docComment;method#ZipOutputStream#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="docComment;method#ZipOutputStream#1;class#ZipOutputStream#0" expanded="false" />
+            <element signature="method#ZipOutputStream#1;class#ZipOutputStream#0" expanded="false" />
+            <element signature="docComment;method#setComment#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="method#setComment#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="docComment;method#setMethod#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="docComment;method#setLevel#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="e#5211#5212#0" expanded="true" />
+            <element signature="e#5246#5247#0" expanded="true" />
+            <element signature="docComment;method#putNextEntry#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="method#putNextEntry#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="e#6000#6054#0" expanded="false" />
+            <element signature="e#6388#6449#0" expanded="false" />
+            <element signature="e#6659#6720#0" expanded="false" />
+            <element signature="docComment;method#closeEntry#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="method#closeEntry#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="docComment;method#write#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="method#write#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="docComment;method#finish#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="method#finish#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="docComment;method#close#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="method#close#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="method#writeLOC#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="e#13116#13174#0" expanded="false" />
+            <element signature="e#13755#13818#0" expanded="false" />
+            <element signature="method#writeEXT#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="method#writeCEN#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="e#18096#18147#0" expanded="false" />
+            <element signature="e#18640#18693#0" expanded="false" />
+            <element signature="method#writeEND#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="method#getExtraLen#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="method#writeExtra#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="method#writeByte#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="method#writeShort#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="method#writeInt#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="method#writeLong#0;class#ZipOutputStream#0" expanded="false" />
+            <element signature="method#writeBytes#0;class#ZipOutputStream#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/devel/Java/jdk1.8.0_25/src.zip!/java/lang/String.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33266932" vertical-offset="17662" max-vertical-offset="64176">
+          <caret line="902" column="18" selection-start-line="902" selection-start-column="18" selection-end-line="902" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="5806" max-vertical-offset="6762">
+          <caret line="316" column="0" selection-start-line="316" selection-start-column="0" selection-end-line="316" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#10589#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#978#994#0" expanded="true" />
+            <element signature="e#10103#10111#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/script/test.bat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="126">
+          <caret line="0" column="75" selection-start-line="0" selection-start-column="75" selection-end-line="0" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2501" max-vertical-offset="3087">
+          <caret line="133" column="52" selection-start-line="133" selection-start-column="52" selection-end-line="133" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#4837#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#1594#1595#0" expanded="true" />
+            <element signature="e#1623#1624#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/writer/WriterV3.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.97507787" vertical-offset="65" max-vertical-offset="567">
+          <caret line="34" column="31" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#974#975#0" expanded="true" />
+            <element signature="e#1019#1020#0" expanded="true" />
+            <element signature="e#1108#1109#0" expanded="true" />
+            <element signature="e#1153#1154#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -860,7 +1325,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>Maven: commons-logging:commons-logging:1.2</last-edited>
+          <last-edited>Maven: junit:junit:4.10</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

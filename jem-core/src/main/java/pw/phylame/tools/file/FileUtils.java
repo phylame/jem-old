@@ -16,13 +16,7 @@
 
 package pw.phylame.tools.file;
 
-import java.io.Reader;
-import java.io.Writer;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.BufferedReader;
-import java.io.RandomAccessFile;
+import java.io.*;
 
 import java.util.HashMap;
 import java.util.zip.ZipEntry;
@@ -31,7 +25,7 @@ import java.util.zip.ZipOutputStream;
 /**
  * Utility for file operations.
  */
-public class FileUtil {
+public class FileUtils {
 
     /** Buffer area size */
     public static final int BUFFER_SIZE = 4096;
@@ -42,7 +36,7 @@ public class FileUtil {
     /** Loads some known MIMEs from file. */
     private static void initBuiltinMime() {
         java.util.Properties prop = new java.util.Properties();
-        InputStream in = FileUtil.class.getResourceAsStream("mime.properties");
+        InputStream in = FileUtils.class.getResourceAsStream("mime.properties");
         if (in == null) {       // not found file
             return;
         }
@@ -275,6 +269,23 @@ public class FileUtil {
         StringBuilder builder = new StringBuilder();
         copy(reader, builder, -1);
         return builder.toString();
+    }
+
+    /**
+     * Writes string to stream.
+     * @param out the stream
+     * @param text the string to be written
+     * @param encoding the encoding, if <tt>null</tt> using platform encoding
+     * @throws IOException encoding is invalid or occurs UI errors
+     */
+    public static void writeText(OutputStream out, String text, String encoding) throws IOException {
+        byte[] bytes;
+        if (encoding != null) {
+            bytes = text.getBytes();
+        } else {
+            bytes = text.getBytes(encoding);
+        }
+        out.write(bytes);
     }
 
     /**

@@ -21,9 +21,8 @@ package pw.phylame.jem.core;
 import pw.phylame.tools.TextObject;
 import pw.phylame.tools.file.FileObject;
 
-import java.util.Iterator;
 import java.util.List;
-import java.io.IOException;
+import java.util.Iterator;
 
 /**
  * <p>A part in book contents.</p>
@@ -73,10 +72,7 @@ public class Part extends Attributes implements Iterable<Part> {
     public Part(String title, TextObject content) {
         super();
         setTitle(title);
-        if (content == null) {
-            throw new NullPointerException("content");
-        }
-        source = content;
+        setSource(content);
     }
 
     /**
@@ -101,48 +97,22 @@ public class Part extends Attributes implements Iterable<Part> {
     }
 
     /**
-     * Returns text content of the <tt>Part</tt>.
-     * @return content string or <tt>null</tt> if occurs errors.
+     * Returns the current content source.
+     * @return the TextObject
      */
-    public String getContent() {
-        try {
-            return source.getText();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+    public TextObject getSource() {
+        return source;
+    }
+
+    /**
+     * Replaces source content with specified source.
+     * @param source content source
+     */
+    public void setSource(TextObject source) {
+        if (source == null) {
+            throw new NullPointerException("source");
         }
-    }
-
-    /**
-     * Returns text content and split by line separator.
-     * @return array of lines or <tt>null</tt> if occurs errors.
-     */
-    public String[] getLines() {
-        try {
-            return source.getLines();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    /**
-     * Writes all text content to output writer.
-     * @param writer output <tt>Writer</tt>
-     * @return number of written characters
-     */
-    public long writeTo(java.io.Writer writer) throws IOException {
-        return source.writeTo(writer);
-    }
-
-    /**
-     * Writes some characters to output writer.
-     * @param writer output <tt>Writer</tt>
-     * @param size number of characters to written
-     * @return number of written characters
-     */
-    public long writeTo(java.io.Writer writer, long size) throws IOException {
-        return source.writeTo(writer, size);
+        this.source = source;
     }
 
     // ************************

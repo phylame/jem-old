@@ -19,7 +19,7 @@ package pw.phylame.tools;
 /**
  * Utility for string operations.
  */
-public abstract class StringUtil {
+public abstract class StringUtils {
 
     /**
      * Joins string array to string.

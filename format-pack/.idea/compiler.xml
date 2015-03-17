@@ -23,11 +23,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="jem-core" />
+        <module name="format-pack" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.6">
-      <module name="jem-core" target="1.6" />
+    <bytecodeTargetLevel>
+      <module name="format-pack" target="1.6" />
     </bytecodeTargetLevel>
   </component>
 </project>

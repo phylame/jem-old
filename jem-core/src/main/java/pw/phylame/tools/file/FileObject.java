@@ -78,6 +78,6 @@ public abstract class FileObject {
     public long copyTo(OutputStream out, long size) throws IOException {
         InputStream in = openInputStream();
         assert in != null;
-        return FileUtil.copy(in, out, size);
+        return FileUtils.copy(in, out, size);
     }
 }

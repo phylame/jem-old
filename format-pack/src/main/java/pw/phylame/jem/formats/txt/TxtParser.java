@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Peng Wan
+ * Copyright 2014-2015 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -16,15 +16,27 @@
  * limitations under the License.
  */
 
-package pw.phylame.jem.core;
+package pw.phylame.jem.formats.txt;
 
-import pw.phylame.jem.core.Part;
+import pw.phylame.jem.core.Book;
+import pw.phylame.jem.core.Parser;
+import pw.phylame.jem.util.JemException;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Map;
 
 /**
- * This interface used for walking sub-parts.
+ * Created by Peng Wan on 2015-3-17.
  */
-public interface  Walker {
+public class TxtParser implements Parser {
+    @Override
+    public String getName() {
+        return null;
+    }
 
-    /** Returns <tt>false</tt> to stop walking. */
-    boolean watch(Part part);
+    @Override
+    public Book parse(File file, Map<String, Object> map) throws IOException, JemException {
+        return null;
+    }
 }
