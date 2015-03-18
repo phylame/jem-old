@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Peng Wan
+ * Copyright 2015 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *

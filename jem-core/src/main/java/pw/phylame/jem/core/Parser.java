@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Peng Wan
+ * Copyright 2015 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -18,11 +18,10 @@
 
 package pw.phylame.jem.core;
 
-import pw.phylame.jem.util.JemException;
-
+import java.util.Map;
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
+import pw.phylame.jem.util.JemException;
 
 /**
  * <tt>Parser</tt> used for parsing book file and stores to <tt>Book</tt>.

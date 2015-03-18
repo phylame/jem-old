@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Peng Wan
+ * Copyright 2015 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -75,7 +75,7 @@ public class Book extends Chapter {
     }
 
     public String getAuthor() {
-        return getStringAttribute(AUTHOR, "");
+        return stringAttribute(AUTHOR, "");
     }
 
     public void setAuthor(String author) {
@@ -83,7 +83,7 @@ public class Book extends Chapter {
     }
 
     public String getGenre() {
-        return getStringAttribute(GENRE, "");
+        return stringAttribute(GENRE, "");
     }
 
     public void setGenre(String genre) {
@@ -91,7 +91,7 @@ public class Book extends Chapter {
     }
 
     public String getState() {
-        return getStringAttribute(STATE, "");
+        return stringAttribute(STATE, "");
     }
 
     public void setState(String state) {
@@ -99,7 +99,7 @@ public class Book extends Chapter {
     }
 
     public String getSubject() {
-        return getStringAttribute(SUBJECT, "");
+        return stringAttribute(SUBJECT, "");
     }
 
     public void setSubject(String subject) {
@@ -120,7 +120,7 @@ public class Book extends Chapter {
     }
 
     public String getPublisher() {
-        return getStringAttribute(PUBLISHER, "");
+        return stringAttribute(PUBLISHER, "");
     }
 
     public void setPublisher(String publisher) {
@@ -128,7 +128,7 @@ public class Book extends Chapter {
     }
 
     public String getRights() {
-        return getStringAttribute(RIGHTS, "");
+        return stringAttribute(RIGHTS, "");
     }
 
     public void setRights(String rights) {
@@ -136,7 +136,7 @@ public class Book extends Chapter {
     }
 
     public String getLanguage() {
-        return getStringAttribute(LANGUAGE, "");
+        return stringAttribute(LANGUAGE, "");
     }
 
     public void setLanguage(String language) {

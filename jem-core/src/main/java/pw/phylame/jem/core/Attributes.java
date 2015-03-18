@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Peng Wan
+ * Copyright 2015 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -27,11 +27,6 @@ import java.util.Collection;
 public class Attributes {
     private Map<String, Object> metaMap = new java.util.TreeMap<String, Object>();
 
-    /** Returns <tt>true</tt> if {@code key} in attributes map otherwise <tt>false</tt>. */
-    public boolean hasAttribute(String key) {
-        return metaMap.containsKey(key);
-    }
-
     /**
      * Associates the specified value with the specified key in attributes map.
      * <p>If the {@code key} not exists add a new attribute, otherwise overwritten old value.</p>
@@ -40,6 +35,27 @@ public class Attributes {
      */
     public void setAttribute(String key, Object value) {
         metaMap.put(key, value);
+    }
+
+    /**
+     * Updates attributes with specified map
+     * @param metaMap the source map
+     */
+    public void updateAttributes(Map<String, Object> metaMap) {
+        this.metaMap.putAll(metaMap);
+    }
+
+    /**
+     * Updates attributes with other object
+     * @param other the source attributes
+     */
+    public void updateAttributes(Attributes other) {
+        updateAttributes(other.metaMap);
+    }
+
+    /** Returns <tt>true</tt> if {@code key} in attributes map otherwise <tt>false</tt>. */
+    public boolean hasAttribute(String key) {
+        return metaMap.containsKey(key);
     }
 
     /** Returns attribute value by its key. If {@code key} not exists return {@code defaultValue}. */
@@ -56,7 +72,7 @@ public class Attributes {
      * Returns attribute value converted to string by its key.
      * If {@code key} not exists return {@code defaultValue}.
      */
-    public String getStringAttribute(String key, String defaultValue) {
+    public String stringAttribute(String key, String defaultValue) {
         Object v = metaMap.get(key);
         if (v != null) {
             return v.toString();

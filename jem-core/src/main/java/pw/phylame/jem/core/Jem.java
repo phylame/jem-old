@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Peng Wan
+ * Copyright 2015 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -18,12 +18,12 @@
 
 package pw.phylame.jem.core;
 
+import java.util.Map;
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
-import pw.phylame.jem.util.JemException;
 import pw.phylame.tools.TextObject;
 import pw.phylame.tools.file.FileObject;
+import pw.phylame.jem.util.JemException;
 
 /**
  * This class contains utility methods for book operations.
@@ -127,11 +127,11 @@ public final class Jem {
     }
 
     /**
-     * Gets child with specified index from part sub-part tree.
+     * Gets child part with specified index from part sub-part tree.
      * @param owner the <tt>Part</tt> to be indexed
      * @param orders list of index in sub-part tree
      * @param fromIndex begin position of index in {@code orders}
-     * @return the <tt>Part</tt> or <tt>null</tt> if not found
+     * @return the <tt>Part</tt>
      * @throws IndexOutOfBoundsException index in {@code orders} or {@code  fromIndex} is invalid
      */
     public static Part getPart(Part owner, int[] orders, int fromIndex) {
@@ -152,42 +152,58 @@ public final class Jem {
         }
     }
 
+    public static Book toBook(Part part) {
+        Book book = new Book();
+        // copy attributes
+        book.updateAttributes(part);
+        // copy sub-parts
+        for (Part sub: part) {
+            book.append(sub);
+        }
+        return book;
+    }
+
+    /**
+     * This interface used for walking sub-parts.
+     */
+    public static interface  Walker {
+        /** Returns <tt>false</tt> to stop walking. */
+        boolean watch(Part part);
+    }
+
     /**
      * Walks <tt>Part</tt> sub-part tree.
      * @param part the <tt>Part</tt> to be watched
      * @param walker watch the part
      */
     public static void walkPart(Part part, Walker walker) {
+        if (part == null) {
+            throw new NullPointerException("part");
+        }
         if (walker == null) {
             throw new NullPointerException("walker");
         }
-        assert part != null;
         if (!walker.watch(part)) {
             return;
         }
-        for (int ix = 0; ix < part.size(); ++ix) {
-            walkPart(part.get(ix), walker);
+        for (Part sub: part) {
+            walkPart(sub, walker);
         }
     }
 
     private static java.util.Map<Class<?>, String> variantTypes = new java.util.HashMap<Class<?>, String>();
     static {
+        variantTypes.put(Character.class, "str");
         variantTypes.put(String.class, "str");
         variantTypes.put(java.util.Date.class, "datetime");
-        variantTypes.put(byte.class, "int");
         variantTypes.put(Byte.class, "int");
-        variantTypes.put(short.class, "int");
         variantTypes.put(Short.class, "int");
-        variantTypes.put(int.class, "int");
         variantTypes.put(Integer.class, "int");
-        variantTypes.put(long.class, "int");
         variantTypes.put(Long.class, "int");
-        variantTypes.put(boolean.class, "bool");
         variantTypes.put(Boolean.class, "int");
         variantTypes.put(byte[].class, "bytes");
-        variantTypes.put(float.class, "real");
+        variantTypes.put(Byte[].class, "bytes");
         variantTypes.put(Float.class, "int");
-        variantTypes.put(double.class, "real");
         variantTypes.put(Double.class, "int");
     }
 
@@ -196,14 +212,15 @@ public final class Jem {
      * @param o attribute value
      * @return type name
      */
-    public static String getVariantType(Object o) {
+    public static String variantType(Object o) {
         if (o instanceof FileObject) {
             return "file";
         } else if (o instanceof TextObject) {
             return "text";
         } else if (o instanceof Part) {
             return "part";
-        } else {
+        }
+        else {
             String name = variantTypes.get(o.getClass());
             if (name == null || !variantTypes.containsKey(o.getClass())) {
                 name = o.getClass().getSimpleName().toLowerCase();

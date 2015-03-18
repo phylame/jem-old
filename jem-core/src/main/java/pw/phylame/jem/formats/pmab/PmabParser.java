@@ -20,6 +20,7 @@ package pw.phylame.jem.formats.pmab;
 
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Parser;
+import pw.phylame.jem.core.Part;
 import pw.phylame.jem.util.JemException;
 
 import java.util.Map;
@@ -50,6 +51,16 @@ public class PmabParser implements Parser {
      */
     @Override
     public Book parse(File file, Map<String, Object> kw) throws IOException, JemException {
-        throw new JemException("under development");
+        Book book = new Book();
+        for (int i = 1; i < 20; ++i) {
+            Part p = new Part("Chapter "+i, "");
+            int n = pw.phylame.tools.NumberUtils.randInteger(1, 20);
+            for (int j = 1; j < n; ++j) {
+                Part pp = new Part(p.getTitle()+"."+j, "");
+                p.append(pp);
+            }
+            book.append(p);
+        }
+        return book;
     }
 }

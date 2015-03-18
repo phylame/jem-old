@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Peng Wan
+ * Copyright 2015 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -16,9 +16,7 @@
  * limitations under the License.
  */
 
-package pw.phylame.jem.core;
-
-import pw.phylame.jem.util.JemException;
+package pw.phylame.jem.util;
 
 /**
  * Exception for unsupported book format.

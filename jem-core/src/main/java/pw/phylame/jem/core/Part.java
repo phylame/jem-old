@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Peng Wan
+ * Copyright 2015 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -18,11 +18,13 @@
 
 package pw.phylame.jem.core;
 
-import pw.phylame.tools.TextObject;
-import pw.phylame.tools.file.FileObject;
-
 import java.util.List;
 import java.util.Iterator;
+import java.io.IOException;
+import pw.phylame.tools.TextObject;
+import pw.phylame.tools.file.FileObject;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <p>A part in book contents.</p>
@@ -30,15 +32,28 @@ import java.util.Iterator;
  * <p><tt>Part</tt> structure contains following parts:</p>
  * <ul>
  *     <li>attributes map: Meta attributes map</li>
- *     <li>text content: main text of the part</li>
+ *     <li>text content: main text of the part, provided by TextObject source</li>
  *     <li>sub-part list: list of sub parts</li>
  *     <li>clean works: clean resources and others</li>
  * </ul>
  *
  */
 public class Part extends Attributes implements Iterable<Part> {
+    private static Log LOG = LogFactory.getLog(Part.class);
+
     /** Key name for part title.*/
     public static final String TITLE = "title";
+
+    /**
+     * This interface is designed for cleaning part resource when destroys part.
+     */
+    public static interface Cleanable {
+        /**
+         * Cleans the specified <tt>Part</tt>
+         * @param part the <tt>Part</tt> to be cleaned
+         */
+        void clean(Part part);
+    }
 
     /** Constructs part used empty title and content. */
     public Part() {
@@ -88,13 +103,17 @@ public class Part extends Attributes implements Iterable<Part> {
      * @return title string if present or <tt>null</tt>
      */
     public String getTitle() {
-        return getStringAttribute(TITLE, "");
+        return stringAttribute(TITLE, "");
     }
 
     @Override
     public String toString() {
         return getTitle();
     }
+
+    // *****************
+    // ** text content
+    // *****************
 
     /**
      * Returns the current content source.
@@ -115,19 +134,46 @@ public class Part extends Attributes implements Iterable<Part> {
         this.source = source;
     }
 
+    /**
+     * Returns text content of the <tt>Part</tt>.
+     * @return content string or <tt>null</tt> if occurs errors when loading source.
+     */
+    public String getText() {
+        try {
+            return source.getText();
+        } catch (IOException e) {
+            LOG.debug("cannot load text source", e);
+            return null;
+        }
+    }
+
+    /**
+     * Returns text content and split by line separator.
+     * @return array of lines or <tt>null</tt> if occurs errors when loading source..
+     */
+    public String[] getLines() {
+        try {
+            return source.getLines();
+        } catch (IOException e) {
+            LOG.debug("cannot load text source", e);
+            return null;
+        }
+    }
+
+    /**
+     * Writes some characters to output writer.
+     * @param writer output <tt>Writer</tt>
+     * @param size number of characters to written, if < <tt>0</tt> writes all text
+     * @return number of written characters
+     * @throws java.io.IOException occurs IO errors when loading source or write IO device.
+     */
+    public long writeTo(java.io.Writer writer, long size) throws IOException {
+        return source.writeTo(writer, size);
+    }
+
     // ************************
     // ** Sub-part operations
     // ************************
-
-    /** Returns size of sub-part list. */
-    public int size() {
-        return children.size();
-    }
-
-    /** Returns <tt>true</tt> if has sub-part(s). */
-    public boolean isSection() {
-        return size() != 0;
-    }
 
     /**
      * Appends the specified part to the end of sub-part list.
@@ -189,6 +235,16 @@ public class Part extends Attributes implements Iterable<Part> {
      */
     public Part get(int index) {
         return children.get(index);
+    }
+
+    /** Returns size of sub-part list. */
+    public int size() {
+        return children.size();
+    }
+
+    /** Returns <tt>true</tt> if has sub-part(s). */
+    public boolean isSection() {
+        return size() != 0;
     }
 
     /**

@@ -69,35 +69,40 @@ public final class SCI {
 		Option inFormat = OptionBuilder.withArgName(
 				getString("ARG_FORMAT")).hasArg().withDescription(
 						getString("HELP_FROM_FORMAT")).create("f");
+
 		Option outFormat = OptionBuilder.withArgName(
 				getString("ARG_FORMAT")).hasArg().withDescription(
 						String.format(getString("HELP_TO_FORMAT"),
-								Jem.PMAB_FORMAT.toUpperCase())
-						).create("t");
+								Jem.PMAB_FORMAT.toUpperCase())).create("t");
+
 		Option output = OptionBuilder.withArgName(
 				getString("ARG_PATH")).hasArg().withDescription(
 						getString("HELP_OUTPUT")).create("o");
+
 		options.addOption(inFormat).addOption(outFormat).addOption(output);
 
 		// operations
-		Option create = new Option("n", getString("HELP_NEW"));
 		Option convert = new Option("c", getString("HELP_CONVERT"));
 		Option join = new Option("j", getString("HELP_JOIN"));
 		Option extract = OptionBuilder.withArgName(
 				getString("ARG_INDEX")).hasArg().withDescription(
 						getString("HELP_EXTRACT")).create("x");
+
 		Option view = OptionBuilder.withArgName(
 				getString("ARG_NAME")).hasArg().withValueSeparator().withDescription(
 						getString("HELP_VIEW")).create("V");
-		options.addOptionGroup(new OptionGroup().addOption(create).addOption(
+
+		options.addOptionGroup(new OptionGroup().addOption(
 				convert).addOption(join).addOption(extract).addOption(view));
 
 		Option attr = OptionBuilder.withArgName(
 			getString("ARG_KV")).hasArgs(2).withValueSeparator().withDescription(
 					getString("HELP_ATTRIBUTE")).create("A");
+
 		Option inKW = OptionBuilder.withArgName(
 				getString("ARG_KV")).hasArgs(2).withValueSeparator().withDescription(
 						getString("HELP_IN_ARGUMENT")).create("P");
+
 		Option outKw = OptionBuilder.withArgName(
 				getString("ARG_KV")).hasArgs(2).withValueSeparator().withDescription(
 						getString("HELP_OUT_ARGUMENT")).create("M");
@@ -126,9 +131,9 @@ public final class SCI {
 	private static void showSupported() {
 		System.out.println(getString("LIST_SUPPORTED_TITLE"));
 		System.out.printf(" %s %s\n", getString("LIST_INPUT"),
-			StringUtils.join(BookHelper.getSupportedParsers(), ",").toUpperCase());
+			StringUtils.join(BookHelper.supportedParsers(), ",").toUpperCase());
 		System.out.printf(" %s %s\n", getString("LIST_OUTPUT"),
-			StringUtils.join(BookHelper.getSupportedMakers(), ",").toUpperCase());
+			StringUtils.join(BookHelper.supportedMakers(), ",").toUpperCase());
 	}
 
 	public static void error(String msg) {
@@ -164,7 +169,7 @@ public final class SCI {
 
 	// command type
 	enum Command {
-		New, Convert, Join, Extract, View
+		Convert, Join, Extract, View
 	}
 
 	public static int exec(String name, String[] args) {
@@ -181,7 +186,7 @@ public final class SCI {
 		if (cmd.hasOption("h")) {
 			HelpFormatter hf = new HelpFormatter();
 			hf.setSyntaxPrefix("");
-			hf.printHelp(SCJ_SYNTAX, getString("SCI_OPTIONS"), options,
+			hf.printHelp(100, SCJ_SYNTAX, getString("SCI_OPTIONS"), options,
 					getString("SCJ_BUG_REPORT"));
 			return 0;
 		} else if (cmd.hasOption("v")) {
@@ -198,8 +203,6 @@ public final class SCI {
 			command = Command.Convert;
 		} else if (cmd.hasOption("V")) {
 			viewNames = cmd.getOptionValues("V");
-		} else if (cmd.hasOption("n")) {
-			command = Command.New;
 		} else if (cmd.hasOption("j")) {
 			command = Command.Join;
 		} else if (cmd.hasOption("x")) {
@@ -208,19 +211,19 @@ public final class SCI {
 		}
 		String inFormat = cmd.getOptionValue("f"), outFormat = cmd.getOptionValue("t");
 		outFormat = outFormat == null ? Jem.PMAB_FORMAT : outFormat;
-		if (inFormat != null && ! BookHelper.getSupportedParsers().contains(inFormat)) {
+		if (inFormat != null && ! BookHelper.supportedParsers().contains(inFormat)) {
 			error(String.format(getString("SCI_IN_UNSUPPORTED"), inFormat));
 			System.out.println(getString("SCI_UNSUPPORTED_HELP"));
 			return -1;
 		}
-		if (! BookHelper.getSupportedMakers().contains(outFormat)) {
+		if (! BookHelper.supportedMakers().contains(outFormat)) {
 			error(String.format(getString("SCI_OUT_UNSUPPORTED"), outFormat));
 			System.out.println(getString("SCI_UNSUPPORTED_HELP"));
 			return -1;
 		}
 		// inputs
 		String[] files = cmd.getArgs();
-		if (files.length == 0 && command != Command.New) {
+		if (files.length == 0) {
 			error(getString("SCI_NO_INPUT"));
 			return -1;
 		}
@@ -231,17 +234,6 @@ public final class SCI {
 		Map<String, Object> inKw = parseArguments(cmd.getOptionProperties("P"));
 		Map<String, Object> outKw = parseArguments(cmd.getOptionProperties("M"));
 		Map<String, Object> attrs = parseArguments(cmd.getOptionProperties("A"));
-
-		// create new book
-		if (command == Command.New) {
-			String result = Worker.newBook(attrs, output, outFormat, outKw);
-			if (result != null) {
-				System.out.println(result);
-				return 0;
-			} else {
-				return -1;
-			}
-		}
 
 		List<File> inputs = new java.util.ArrayList<File>();
 		// exit status

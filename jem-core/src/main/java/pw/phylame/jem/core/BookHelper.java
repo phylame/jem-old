@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Peng Wan
+ * Copyright 2015 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -18,12 +18,12 @@
 
 package pw.phylame.jem.core;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import java.io.IOException;
 import java.util.Map;
 import java.util.Collection;
+import java.io.IOException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import pw.phylame.jem.util.UnsupportedFormatException;
 
 /**
  * This class manages the parsers and makers.
@@ -62,10 +62,10 @@ public final class BookHelper {
      */
     public static void registerParser(String name, String classPath) {
         if (name == null || "".equals(name)) {
-            throw new IllegalArgumentException("name cannot be empty");
+            throw new IllegalArgumentException("name cannot be null or empty");
         }
         if (classPath == null || "".equals(name)) {
-            throw new IllegalArgumentException("classPath cannot be empty");
+            throw new IllegalArgumentException("classPath cannot be null or empty");
         }
         cachedParsers.remove(name);
         parsers.put(name, classPath);
@@ -79,12 +79,21 @@ public final class BookHelper {
      */
     public static void registerParser(String name, Class<? extends Parser> parser) {
         if (name == null || "".equals(name)) {
-            throw new IllegalArgumentException("name cannot be empty");
+            throw new IllegalArgumentException("name cannot be null or empty");
         }
         if (parser == null) {
             throw new NullPointerException("parser");
         }
         cachedParsers.put(name, parser);
+    }
+
+    /**
+     * Removes registered parser with specified name.
+     * @param name name of the parser
+     */
+    public static void removeParser(String name) {
+        cachedParsers.remove(name);
+        parsers.remove(name);
     }
 
     /**
@@ -101,7 +110,7 @@ public final class BookHelper {
      * @throws IllegalAccessException cannot access the parser class
      * @throws InstantiationException cannot create new instance of parser class
      * @throws ClassNotFoundException if registered class path is invalid
-     * @throws UnsupportedFormatException the parser is not registered
+     * @throws pw.phylame.jem.util.UnsupportedFormatException the parser is not registered
      */
     public static Parser getParser(String name) throws IllegalAccessException, InstantiationException,
             ClassNotFoundException, UnsupportedFormatException {
@@ -114,11 +123,11 @@ public final class BookHelper {
         }
         String path = parsers.get(name);
         if (path == null) {
-            throw new UnsupportedFormatException(name, "Not found parser");
+            throw new UnsupportedFormatException(name, "not found parser");
         }
         Class clazz = Class.forName(path);
         if (! Parser.class.isAssignableFrom(clazz)) {
-            throw new InstantiationException("Class not extend Parser");
+            throw new InstantiationException("class not extend Parser");
         }
         return (Parser) clazz.newInstance();
     }
@@ -126,7 +135,7 @@ public final class BookHelper {
     /**
      * Returns names of registered parser class.
      */
-    public static Collection<String> getSupportedParsers() {
+    public static Collection<String> supportedParsers() {
         java.util.Set<String> names = parsers.keySet();
         names.addAll(cachedParsers.keySet());
         return names;
@@ -140,10 +149,10 @@ public final class BookHelper {
      */
     public static void registerMaker(String name, String classPath) {
         if (name == null || "".equals(name)) {
-            throw new IllegalArgumentException("name cannot be empty");
+            throw new IllegalArgumentException("name cannot be null or empty");
         }
         if (classPath == null || "".equals(classPath)) {
-            throw new NullPointerException("classPath cannot be empty");
+            throw new NullPointerException("classPath cannot be null or empty");
         }
         cachedMakers.remove(name);
         makers.put(name, classPath);
@@ -157,12 +166,21 @@ public final class BookHelper {
      */
     public static void registerMaker(String name, Class<? extends Maker> maker) {
         if (name == null || "".equals(name)) {
-            throw new IllegalArgumentException("name cannot be empty");
+            throw new IllegalArgumentException("name cannot be null or empty");
         }
         if (maker == null) {
             throw new NullPointerException("maker");
         }
         cachedMakers.put(name, maker);
+    }
+
+    /**
+     * Removes registered maker with specified name.
+     * @param name name of the maker
+     */
+    public static void removeMaker(String name) {
+        cachedMakers.remove(name);
+        makers.remove(name);
     }
 
     /**
@@ -192,11 +210,11 @@ public final class BookHelper {
         }
         String path = makers.get(name);
         if (path == null) {
-            throw new UnsupportedFormatException(name, "Not found maker");
+            throw new UnsupportedFormatException(name, "not found maker");
         }
         Class clazz = Class.forName(path);
         if (! Maker.class.isAssignableFrom(clazz)) {
-            throw new InstantiationException("Class not extend Maker");
+            throw new InstantiationException("class not extend Maker");
         }
         return (Maker) clazz.newInstance();
     }
@@ -204,7 +222,7 @@ public final class BookHelper {
     /**
      * Returns names of registered maker class.
      */
-    public static Collection<String> getSupportedMakers() {
+    public static Collection<String> supportedMakers() {
         java.util.Set<String> names = makers.keySet();
         names.addAll(cachedMakers.keySet());
         return names;
@@ -259,23 +277,5 @@ public final class BookHelper {
         registerCustomParsers();
         registerBuiltinMakers();
         registerCustomMakers();
-    }
-
-    /**
-     * Walks sub-part tree of specified part.
-     * @param part the <tt>Part</tt> to be watched
-     * @param walker watch the part
-     */
-    public static void walkPart(Part part, Walker walker) {
-        if (walker == null) {
-            throw new NullPointerException("walker");
-        }
-        assert part != null;
-        if (!walker.watch(part)) {
-            return;
-        }
-        for (int ix = 0; ix < part.size(); ++ix) {
-            walkPart(part.get(ix), walker);
-        }
     }
 }
