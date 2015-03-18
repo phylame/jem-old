@@ -287,15 +287,15 @@ public final class Worker {
 		}
 	}
 
-	private static void viewExtension(Book book, String[] names, boolean ignoreEmpty) {
+	private static void viewExtension(Book book, String[] names) {
 		for (String name: names) {
 			Object value = book.getItem(name, null);
-			if (! ignoreEmpty || value != null) {
+			if (value == null) {
+				SCI.echo(String.format(SCI.getString("SCI_NOT_FOUND_ITEM"), name));
+			} else {
 				String str = formatVariant(value);
-				if (! "".equals(str)) {
-					System.out.println(String.format(SCI.getString("SCI_ITEM_FORMAT"),
-							name, Jem.variantType(value), str));
-				}
+				System.out.println(String.format(SCI.getString("SCI_ITEM_FORMAT"),
+						name, Jem.variantType(value), str));
 			}
 		}
 	}
@@ -331,11 +331,11 @@ public final class Worker {
 		setAttributes(book, attributes);
 		for (String key: keys) {
 			if (key.equals("ext")) {
-				viewExtension(book, book.itemNames().toArray(new String[0]), false);
+				viewExtension(book, book.itemNames().toArray(new String[0]));
 			} else if (key.matches(CHAPTER_REGEX)) {
 				viewChapter(book, key);
 			} else if (key.matches(ITEM_REGEX)) {
-				viewExtension(book, new String[]{key.replaceFirst("item\\$", "")}, false);
+				viewExtension(book, new String[]{key.replaceFirst("item\\$", "")});
 			} else {
 				viewPart(book, new String[]{key},
 						System.getProperty("line.separator"), false, false);

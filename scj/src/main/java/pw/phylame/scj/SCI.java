@@ -52,8 +52,16 @@ public final class SCI {
 
 	public static String Name = "scj";
 
-	private static ResourceBundle bundle = ResourceBundle.getBundle("i18n.scj",
-			Locale.getDefault());
+	private static ResourceBundle bundle = null;
+
+	static {
+		String locale = System.getProperty("scj.locale");
+		if (locale == null) {
+			bundle = ResourceBundle.getBundle("i18n.scj", Locale.getDefault());
+		} else {
+			bundle = ResourceBundle.getBundle("i18n.scj", Locale.forLanguageTag(locale));
+		}
+	}
 
 	public static String getString(String key) {
 		return bundle.getString(key);
