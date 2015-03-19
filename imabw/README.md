@@ -1,5 +1,6 @@
 # imabw - I aM A BookWorm
-A swing-base e-book editor
+A GUI e-books editor based on SWING.
 
 ## Required
-* pw-core 2.0+
+* jem-core 2.0+
+* jem-formats 1.0+

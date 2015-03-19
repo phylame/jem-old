@@ -23,7 +23,8 @@ public abstract class StringUtils {
 
     /**
      * Joins string array to string.
-     * @param seq array of {@code String}
+     * @param <T> the class of the objects in the array
+     * @param seq array of object or string
      * @param separator separator between string and string
      * @return joined string
      */
@@ -33,6 +34,7 @@ public abstract class StringUtils {
 
     /**
      * Joins string collection to string.
+     * @param <T> the class of the objects in the array
      * @param seq collection of {@code String}
      * @param separator separator between string and string
      * @return joined string
@@ -50,7 +52,11 @@ public abstract class StringUtils {
         return sb.toString();
     }
 
-    /** Returns a copy of {@code s} converted first char to upper case. */
+    /**
+     * Returns a copy of {@code s} converted first char to upper case.
+     * @param s the source string
+     * @return string which first character is upper
+     */
     public static String toCapital(String s) {
         if (s == null || s.length() == 0) {
             return s;
@@ -60,7 +66,11 @@ public abstract class StringUtils {
         return sb.toString();
     }
 
-    /** Returns a copy of {@code s} converted each word to capital. */
+    /**
+     * Returns a copy of {@code s} converted each word to capital.
+     * @param s the source string
+     * @return string which each word is capital
+     */
     public static String toTitle(String s) {
         if (s == null || s.length() == 0) {
             return s;
@@ -81,7 +91,10 @@ public abstract class StringUtils {
     }
 
     /**
-     * Returns {@code true} if all chars in {@code s} is lower case.
+     * Tests if all characters of specified string are upper case.
+     * @param s the string
+     * @return <tt>true</tt> if all characters are upper case or <tt>false</tt> if contains
+     *          lower case character(s)
      */
     public static boolean isLowerCase(String s) {
         for (int i=0; i<s.length(); ++i) {
@@ -94,7 +107,10 @@ public abstract class StringUtils {
     }
 
     /**
-     * Returns {@code true} if all chars in {@code s} is upper case.
+     * Tests if all characters of specified string are lower case.
+     * @param s the string
+     * @return <tt>true</tt> if all characters are lower case or <tt>false</tt> if contains
+     *          upper case character(s)
      */
     public static boolean isUpperCase(String s) {
         for (int i=0; i<s.length(); ++i) {

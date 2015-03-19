@@ -146,23 +146,40 @@ public class Book extends Chapter {
         extensions.put(name, value);
     }
 
-    /** Returns item in extensions by its name, if not present returns {@code defaultValue}. */
+    /**
+     * Returns item value in extensions by its name, if not present returns {@code defaultValue}.
+     * @param name name of item
+     * @param defaultValue default value to returned if not found item with <tt>name</tt>
+     * @return item value associated with <tt>name</tt> or <tt>defaultValue</tt> if not
+     *          found item for <tt>name</tt>
+     */
     public Object getItem(String name, Object defaultValue) {
         Object v = extensions.get(name);
         return (v != null || extensions.containsKey(name)) ? v : defaultValue;
     }
 
-    /** Removes one item with specified name from extensions. */
+    /**
+     * Removes one item with specified name from extensions.
+     * @param name name of item
+     * @return the previous item value associated with <tt>name</tt>, or
+     *         <tt>null</tt> if there was item for <tt>name</tt>.
+     */
     public Object removeItem(String name) {
         return extensions.remove(name);
     }
 
-    /** Returns number of items in extensions. */
+    /**
+     * Returns size of extensions in this object.
+     * @return number of items
+     */
     public int itemSize() {
         return extensions.size();
     }
 
-    /** Returns all names of item in extensions. */
+    /**
+     * Returns all names of item in extensions.
+     * @return sequence of item names
+     */
     public Collection<String> itemNames() {
         return extensions.keySet();
     }

@@ -29,6 +29,7 @@ import pw.phylame.jem.util.JemException;
 public interface Maker {
     /**
      * Returns the format name (normally the extension name).
+     * @return the name of format
      */
     String getName();
 

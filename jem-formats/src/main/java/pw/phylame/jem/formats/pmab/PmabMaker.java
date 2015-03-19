@@ -26,7 +26,6 @@ import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.Maker;
 import pw.phylame.jem.formats.pmab.writer.WriterV3;
 import pw.phylame.jem.util.JemException;
-import pw.phylame.jem.util.InvalidMakerArgumentException;
 import pw.phylame.tools.file.FileUtils;
 
 import java.io.File;
@@ -68,13 +67,13 @@ public class PmabMaker implements Maker {
             if (o instanceof String) {
                 config.pbmVersion = (String)o;
             } else {
-                throw new InvalidMakerArgumentException("invalid pbm_version string: "+o);
+                throw new JemException("invalid pbm_version string: "+o);
             }
             o = kw.get("pbc_version");
             if (o instanceof String) {
                 config.pbcVersion = (String)o;
             } else {
-                throw new InvalidMakerArgumentException("invalid pbm_version string: "+o);
+                throw new JemException("invalid pbm_version string: "+o);
             }
             o = kw.get("pmab_method");
             if (o != null) {
@@ -85,10 +84,10 @@ public class PmabMaker implements Maker {
                     try {
                         int n = Integer.parseInt(s);
                     } catch (NumberFormatException ex) {
-                        throw new InvalidMakerArgumentException("invalid ZIP method: "+s);
+                        throw new JemException("invalid ZIP method: "+s);
                     }
                 } else {
-                    throw new InvalidMakerArgumentException("pmab_method require int or str");
+                    throw new JemException("pmab_method require int or str");
                 }
             }
         }

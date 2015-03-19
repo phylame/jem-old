@@ -188,7 +188,11 @@ public final class Jem {
      * This interface used for walking sub-parts.
      */
     public static interface  Walker {
-        /** Returns <tt>false</tt> to stop walking. */
+        /**
+         * Watches the specified part.
+         * @param part the part to be watched
+         * @return <tt>false</tt> to stop walking
+         */
         boolean watch(Part part);
     }
 

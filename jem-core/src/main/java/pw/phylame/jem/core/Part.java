@@ -21,6 +21,8 @@ package pw.phylame.jem.core;
 import java.util.List;
 import java.util.Iterator;
 import java.io.IOException;
+
+import pw.phylame.jem.util.Attributes;
 import pw.phylame.tools.TextObject;
 import pw.phylame.tools.file.FileObject;
 import org.apache.commons.logging.Log;
@@ -163,7 +165,7 @@ public class Part extends Attributes implements Iterable<Part> {
     /**
      * Writes some characters to output writer.
      * @param writer output <tt>Writer</tt>
-     * @param size number of characters to written, if < <tt>0</tt> writes all text
+     * @param size number of characters to written, if <tt>0</tt> writes all text
      * @return number of written characters
      * @throws java.io.IOException occurs IO errors when loading source or write IO device.
      */
@@ -237,12 +239,19 @@ public class Part extends Attributes implements Iterable<Part> {
         return children.get(index);
     }
 
-    /** Returns size of sub-part list. */
+    /**
+     * Returns size of sub-part list.
+     * @return number of sub-parts
+     */
     public int size() {
         return children.size();
     }
 
-    /** Returns <tt>true</tt> if has sub-part(s). */
+    /**
+     * Tests this object is a section or not.
+     * <p>A section is a container of parts.</p>
+     * @return <tt>true</tt> if has sub-parts otherwise <tt>false</tt>
+     */
     public boolean isSection() {
         return size() != 0;
     }

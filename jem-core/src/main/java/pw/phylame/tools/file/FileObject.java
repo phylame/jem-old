@@ -37,10 +37,16 @@ public abstract class FileObject {
         this.mime = mime;
     }
 
-    /** Returns the name of file content. */
+    /**
+     * Returns the name of file content.
+     * @return the name
+     */
     public abstract String getName();
 
-    /** Returns MIME type of file content. */
+    /**
+     * Returns MIME type of file content.
+     * @return the MIME name
+     */
     public String getMime() {
         return mime;
     }

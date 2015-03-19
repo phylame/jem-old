@@ -2,28 +2,72 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="43c239c1-c0d7-481c-9eb1-894ad8728ebf" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/InvalidMakerArgumentException.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/InvalidParserArgumentException.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/Pmab.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../imabw/.idea/libraries/Maven__pw_books_jem_formats_1_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../jem-formats/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../jem-formats/.idea/dictionaries/nanu.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/package-info.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../format-pack/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../format-pack/.idea/.name" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../format-pack/.idea/compiler.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../format-pack/.idea/copyright/ALv2.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../format-pack/.idea/copyright/profiles_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../format-pack/.idea/encodings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../format-pack/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../format-pack/.idea/libraries/Maven__pw_books_jem_core_2_0_.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../format-pack/.idea/libraries/Maven__pw_books_jem_core_2_0_SNAPSHOT.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../format-pack/.idea/misc.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../format-pack/.idea/modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../format-pack/.idea/scopes/scope_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../format-pack/.idea/uiDesigner.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../format-pack/.idea/vcs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../format-pack/.idea/workspace.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../format-pack/jem-formats.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../format-pack/pom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../format-pack/src/main/java/pw/phylame/jem/formats/txt/TxtMaker.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../format-pack/src/main/java/pw/phylame/jem/formats/txt/TxtParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../format-pack/src/main/java/pw/phylame/jem/formats/umd/UmdMaker.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../format-pack/src/main/java/pw/phylame/jem/formats/umd/UmdParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../format-pack/src/main/resources/jem-makers.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../format-pack/src/main/resources/jem-parsers.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/package-info.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/Pmab.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabConfig.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/writer/WriterV3.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/InvalidMakerArgumentException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/InvalidParserArgumentException.java" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Attributes.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/Attributes.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/.classpath" afterPath="$PROJECT_DIR$/../scj/.classpath" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Book.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Book.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/BookHelper.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/BookHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Chapter.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Chapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileFactory.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileObject.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileUtils.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileUtils.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabConfig.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabParser.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/scj/SCI.java" afterPath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/scj/SCI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/scj/Worker.java" afterPath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/scj/Worker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/src/main/resources/i18n/scj.properties" afterPath="$PROJECT_DIR$/../scj/src/main/resources/i18n/scj.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/res/i18n/scj_zh_CN.input.properties" afterPath="$PROJECT_DIR$/../scj/res/i18n/scj_zh_CN.input.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/script/test.bat" afterPath="$PROJECT_DIR$/src/test/script/test.bat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../format-pack/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../format-pack/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Maker.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Maker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Parser.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Parser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Part.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Part.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/README.md" afterPath="$PROJECT_DIR$/../imabw/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/StringUtils.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/StringUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/TextObject.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/TextObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/UnsupportedFormatException.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/UnsupportedFormatException.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/.idea/encodings.xml" afterPath="$PROJECT_DIR$/../imabw/.idea/encodings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/imabw.iml" afterPath="$PROJECT_DIR$/../imabw/imabw.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jem-core.iml" afterPath="$PROJECT_DIR$/jem-core.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/.idea/misc.xml" afterPath="$PROJECT_DIR$/../imabw/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/package-info.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/package-info.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/package-info.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/package-info.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/pom.xml" afterPath="$PROJECT_DIR$/../imabw/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/pom.xml" afterPath="$PROJECT_DIR$/../scj/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../imabw/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="jem-core.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/target/" />
+    <ignored path=".idea/dataSources.local.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,32 +91,46 @@
       <file leaf-file-name="BookHelper.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/BookHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.66533864" vertical-offset="4370" max-vertical-offset="4893">
-              <caret line="309" column="31" selection-start-line="309" selection-start-column="31" selection-end-line="309" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.365416" vertical-offset="420" max-vertical-offset="4554">
+              <caret line="28" column="24" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="24" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#0#17283#0" expanded="true" />
                 <element signature="docComment;class#BookHelper#0" expanded="false" />
                 <element signature="docComment;field#parsers#0;class#BookHelper#0" expanded="false" />
                 <element signature="docComment;field#cachedParsers#0;class#BookHelper#0" expanded="false" />
                 <element signature="docComment;field#makers#0;class#BookHelper#0" expanded="false" />
                 <element signature="docComment;field#cachedMakers#0;class#BookHelper#0" expanded="false" />
                 <element signature="docComment;method#registerParser#0;class#BookHelper#0" expanded="false" />
+                <element signature="method#registerParser#0;class#BookHelper#0" expanded="false" />
                 <element signature="docComment;method#registerParser#1;class#BookHelper#0" expanded="false" />
+                <element signature="method#registerParser#1;class#BookHelper#0" expanded="false" />
                 <element signature="docComment;method#removeParser#0;class#BookHelper#0" expanded="false" />
                 <element signature="method#removeParser#0;class#BookHelper#0" expanded="false" />
                 <element signature="docComment;method#hasParser#0;class#BookHelper#0" expanded="false" />
                 <element signature="method#hasParser#0;class#BookHelper#0" expanded="false" />
+                <element signature="docComment;method#getParser#0;class#BookHelper#0" expanded="false" />
                 <element signature="docComment;method#supportedParsers#0;class#BookHelper#0" expanded="false" />
                 <element signature="method#supportedParsers#0;class#BookHelper#0" expanded="false" />
                 <element signature="docComment;method#registerMaker#0;class#BookHelper#0" expanded="false" />
+                <element signature="method#registerMaker#0;class#BookHelper#0" expanded="false" />
                 <element signature="docComment;method#registerMaker#1;class#BookHelper#0" expanded="false" />
+                <element signature="method#registerMaker#1;class#BookHelper#0" expanded="false" />
                 <element signature="docComment;method#removeMaker#0;class#BookHelper#0" expanded="false" />
                 <element signature="method#removeMaker#0;class#BookHelper#0" expanded="false" />
                 <element signature="docComment;method#hasMaker#0;class#BookHelper#0" expanded="false" />
+                <element signature="method#hasMaker#0;class#BookHelper#0" expanded="false" />
+                <element signature="docComment;method#getMaker#0;class#BookHelper#0" expanded="false" />
                 <element signature="docComment;method#supportedMakers#0;class#BookHelper#0" expanded="false" />
                 <element signature="method#supportedMakers#0;class#BookHelper#0" expanded="false" />
-                <element signature="docComment;method#registerCustomParsers#0;class#BookHelper#0" expanded="false" />
-                <element signature="docComment;method#registerBuiltinMakers#0;class#BookHelper#0" expanded="false" />
+                <element signature="docComment;method#getContextClassLoaderInternal#0;class#BookHelper#0" expanded="false" />
+                <element signature="method#getContextClassLoaderInternal#0;class#BookHelper#0" expanded="false" />
+                <element signature="docComment;method#directGetContextClassLoader#0;class#BookHelper#0" expanded="false" />
+                <element signature="method#directGetContextClassLoader#0;class#BookHelper#0" expanded="false" />
+                <element signature="docComment;method#getResources#0;class#BookHelper#0" expanded="false" />
+                <element signature="e#13431#13487#0" expanded="false" />
+                <element signature="docComment;method#getProperties#0;class#BookHelper#0" expanded="false" />
+                <element signature="method#getProperties#0;class#BookHelper#0" expanded="false" />
+                <element signature="e#14490#14546#0" expanded="false" />
                 <element signature="docComment;method#registerCustomMakers#0;class#BookHelper#0" expanded="false" />
               </folding>
             </state>
@@ -87,44 +145,48 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/StringUtil.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/test/script/scj.bat" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/writer/WriterV3.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/package-info.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Walker.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/UnsupportedFormatException.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/UnsupportedFormatException.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Maker.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Parser.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/JemException.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/DateUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/NumberUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/package-info.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/StringUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/TextObject.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/ZLibUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileObject.java" />
         <option value="$PROJECT_DIR$/src/main/resources/pw/phylame/tools/file/mime.properties" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Attributes.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Part.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/InvalidMakerArgumentException.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/InvalidParserArgumentException.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileFactory.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabParser.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/Pmab.java" />
         <option value="$PROJECT_DIR$/src/test/script/test.bat" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Chapter.java" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/package-info.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileObject.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Parser.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Maker.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Part.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Book.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Attributes.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/StringUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/TextObject.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/UnsupportedFormatException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/package-info.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/package-info.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/BookHelper.java" />
       </list>
     </option>
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
   </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
@@ -134,10 +196,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="62" />
-    <option name="y" value="36" />
-    <option name="width" value="1204" />
-    <option name="height" value="661" />
+    <option name="x" value="-1" />
+    <option name="y" value="23" />
+    <option name="width" value="1368" />
+    <option name="height" value="746" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -146,11 +208,13 @@
     <OptionsSetting value="true" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
+    <OptionsSetting value="true" id="Undo Check Out" />
+    <OptionsSetting value="true" id="Get Latest Version" />
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="PackagesPane" proportions="" version="1">
+    <navigator proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -161,139 +225,7 @@
       <autoscrollFromSource />
       <sortByType />
     </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pw.phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pw.phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pw.phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="formats" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pw.phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="formats" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pmab" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pw.phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="GoToClass.includeLibraries" value="false" />
@@ -314,6 +246,8 @@
     <property name="FullScreen" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="restartRequiresConfirmation" value="true" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -385,44 +319,12 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="BashConfigurationType" factoryName="Bash">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="INTERPRETER_PATH" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <module name="" />
-      <envs />
-      <method />
-    </configuration>
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="" />
       <option name="ACTIVITY_CLASS" value="" />
       <option name="MODE" value="default_activity" />
       <option name="DEPLOY" value="true" />
       <option name="ARTIFACT_NAME" value="" />
-      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="USE_COMMAND_LINE" value="true" />
-      <option name="COMMAND_LINE" value="" />
-      <option name="WIPE_USER_DATA" value="false" />
-      <option name="DISABLE_BOOT_ANIMATION" value="false" />
-      <option name="NETWORK_SPEED" value="full" />
-      <option name="NETWORK_LATENCY" value="none" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
-      <method />
-    </configuration>
-    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
-      <module name="" />
-      <option name="TESTING_TYPE" value="0" />
-      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="PACKAGE_NAME" value="" />
       <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
       <option name="USE_LAST_SELECTED_DEVICE" value="false" />
       <option name="PREFERRED_AVD" value="" />
@@ -447,39 +349,52 @@
       <option name="PARAMETERS" value="" />
       <method />
     </configuration>
-    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list />
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <method />
-    </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
       <option name="PROGRAM_PARAMETERS" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
+    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
       <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
+      <setting name="vmparams" value="" />
+      <setting name="cmdLine" value="run-app" />
+      <setting name="depsClasspath" value="false" />
+      <setting name="passParentEnv" value="true" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <setting name="launchBrowser" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="uTestRunConfiguration" factoryName="utest">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <extension name="scalaCoverage" />
+      <module name="" />
+      <setting name="path" value="" />
+      <setting name="package" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workingDirectory" value="$PROJECT_DIR$" />
+      <setting name="searchForTest" value="Across module dependencies" />
+      <setting name="testName" value="" />
+      <setting name="testKind" value="Class" />
+      <setting name="showProgressMessages" value="true" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="ScalaTestRunConfiguration" factoryName="ScalaTest">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <extension name="scalaCoverage" />
+      <module name="" />
+      <setting name="path" value="" />
+      <setting name="package" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workingDirectory" value="$PROJECT_DIR$" />
+      <setting name="searchForTest" value="Across module dependencies" />
+      <setting name="testName" value="" />
+      <setting name="testKind" value="Class" />
+      <setting name="showProgressMessages" value="true" />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JarApplication" factoryName="JAR Application">
@@ -530,6 +445,163 @@
       <listeners />
       <method />
     </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="BashConfigurationType" factoryName="Bash">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="INTERPRETER_PATH" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" appDescriptorForEmulator="Android" class_name="" emulatorAdlOptions="" method_name="" package_name="" scope="Class">
+      <option name="BCName" value="" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="/usr/bin/flashplayerdebugger" />
+        </LauncherParameters>
+      </option>
+      <option name="moduleName" value="" />
+      <option name="trusted" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
+      <option name="BCName" value="" />
+      <option name="IOSSimulatorSdkPath" value="" />
+      <option name="adlOptions" value="" />
+      <option name="airProgramParameters" value="" />
+      <option name="appDescriptorForEmulator" value="Android" />
+      <option name="debugTransport" value="USB" />
+      <option name="debuggerSdkRaw" value="BC SDK" />
+      <option name="emulator" value="NexusOne" />
+      <option name="emulatorAdlOptions" value="" />
+      <option name="fastPackaging" value="true" />
+      <option name="fullScreenHeight" value="0" />
+      <option name="fullScreenWidth" value="0" />
+      <option name="launchUrl" value="false" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="/usr/bin/flashplayerdebugger" />
+        </LauncherParameters>
+      </option>
+      <option name="mobileRunTarget" value="Emulator" />
+      <option name="moduleName" value="" />
+      <option name="overriddenMainClass" value="" />
+      <option name="overriddenOutputFileName" value="" />
+      <option name="overrideMainClass" value="false" />
+      <option name="runTrusted" value="true" />
+      <option name="screenDpi" value="0" />
+      <option name="screenHeight" value="0" />
+      <option name="screenWidth" value="0" />
+      <option name="url" value="http://" />
+      <option name="usbDebugPort" value="7936" />
+      <method />
+    </configuration>
+    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Specs2RunConfiguration" factoryName="Specs2">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <extension name="scalaCoverage" />
+      <module name="" />
+      <setting name="path" value="" />
+      <setting name="package" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workingDirectory" value="$PROJECT_DIR$" />
+      <setting name="searchForTest" value="Across module dependencies" />
+      <setting name="testName" value="" />
+      <setting name="testKind" value="Class" />
+      <setting name="showProgressMessages" value="true" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="myFilePath" />
+      <option name="GLUE" />
+      <option name="myNameFilter" />
+      <option name="myGeneratedName" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
     <list size="2">
       <item index="0" class="java.lang.String" itemvalue="Bash.scj.sh" />
       <item index="1" class="java.lang.String" itemvalue="Batch.test" />
@@ -551,37 +623,48 @@
       <created>1426380887913</created>
       <option name="number" value="Default" />
       <updated>1426380887913</updated>
+      <workItem from="1426757801019" duration="326000" />
+      <workItem from="1426760413486" duration="56000" />
+      <workItem from="1426766696141" duration="4716000" />
+      <workItem from="1426772531478" duration="573000" />
+      <workItem from="1426773115077" duration="17000" />
     </task>
     <servers />
   </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="5688000" />
+  </component>
   <component name="ToolWindowManager">
-    <frame x="62" y="36" width="1204" height="661" extended-state="0" />
-    <editor active="false" />
+    <frame x="-1" y="23" width="1368" height="746" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852563" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32969034" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32866043" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18729097" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24916388" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18667643" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2489019" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32786885" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32786885" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32786885" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32786885" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3271028" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32786885" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -611,227 +694,158 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/BookHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3979">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#17283#0" expanded="true" />
+            <element signature="docComment;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;field#parsers#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;field#cachedParsers#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;field#makers#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;field#cachedMakers#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#registerParser#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#registerParser#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#registerParser#1;class#BookHelper#0" expanded="false" />
+            <element signature="method#registerParser#1;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#removeParser#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#removeParser#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#hasParser#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#hasParser#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#getParser#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#supportedParsers#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#supportedParsers#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#registerMaker#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#registerMaker#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#registerMaker#1;class#BookHelper#0" expanded="false" />
+            <element signature="method#registerMaker#1;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#removeMaker#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#removeMaker#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#hasMaker#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#hasMaker#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#getMaker#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#supportedMakers#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#supportedMakers#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#getContextClassLoaderInternal#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#getContextClassLoaderInternal#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#directGetContextClassLoader#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#directGetContextClassLoader#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#getResources#0;class#BookHelper#0" expanded="false" />
+            <element signature="e#13431#13487#0" expanded="false" />
+            <element signature="docComment;method#getProperties#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#getProperties#0;class#BookHelper#0" expanded="false" />
+            <element signature="e#14490#14546#0" expanded="false" />
+            <element signature="docComment;method#registerCustomMakers#0;class#BookHelper#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="782" max-vertical-offset="1495">
+          <caret line="34" column="18" selection-start-line="34" selection-start-column="18" selection-end-line="34" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/BookHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6992">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#17283#0" expanded="true" />
+            <element signature="docComment;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;field#parsers#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;field#cachedParsers#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;field#makers#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;field#cachedMakers#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#registerParser#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#registerParser#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#registerParser#1;class#BookHelper#0" expanded="false" />
+            <element signature="method#registerParser#1;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#removeParser#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#removeParser#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#hasParser#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#hasParser#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#getParser#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#supportedParsers#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#supportedParsers#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#registerMaker#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#registerMaker#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#registerMaker#1;class#BookHelper#0" expanded="false" />
+            <element signature="method#registerMaker#1;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#removeMaker#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#removeMaker#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#hasMaker#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#hasMaker#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#getMaker#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#supportedMakers#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#supportedMakers#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#getContextClassLoaderInternal#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#getContextClassLoaderInternal#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#directGetContextClassLoader#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#directGetContextClassLoader#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#getResources#0;class#BookHelper#0" expanded="false" />
+            <element signature="e#13431#13487#0" expanded="false" />
+            <element signature="docComment;method#getProperties#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#getProperties#0;class#BookHelper#0" expanded="false" />
+            <element signature="e#14490#14546#0" expanded="false" />
+            <element signature="docComment;method#registerCustomMakers#0;class#BookHelper#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/BookHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5474">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#17283#0" expanded="true" />
+            <element signature="docComment;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;field#parsers#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;field#cachedParsers#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;field#makers#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;field#cachedMakers#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#registerParser#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#registerParser#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#registerParser#1;class#BookHelper#0" expanded="false" />
+            <element signature="method#registerParser#1;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#removeParser#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#removeParser#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#hasParser#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#hasParser#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#getParser#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#supportedParsers#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#supportedParsers#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#registerMaker#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#registerMaker#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#registerMaker#1;class#BookHelper#0" expanded="false" />
+            <element signature="method#registerMaker#1;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#removeMaker#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#removeMaker#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#hasMaker#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#hasMaker#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#getMaker#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#supportedMakers#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#supportedMakers#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#getContextClassLoaderInternal#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#getContextClassLoaderInternal#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#directGetContextClassLoader#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#directGetContextClassLoader#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#getResources#0;class#BookHelper#0" expanded="false" />
+            <element signature="e#13431#13487#0" expanded="false" />
+            <element signature="docComment;method#getProperties#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#getProperties#0;class#BookHelper#0" expanded="false" />
+            <element signature="e#14490#14546#0" expanded="false" />
+            <element signature="docComment;method#registerCustomMakers#0;class#BookHelper#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.08366534" vertical-offset="0" max-vertical-offset="777">
           <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/devel/Java/jdk1.8.0_25/src.zip!/java/util/Set.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.113546" vertical-offset="5083" max-vertical-offset="8274">
-          <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/devel/Java/jdk1.8.0_25/src.zip!/java/lang/StringBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37281552" vertical-offset="1971" max-vertical-offset="8610">
-          <caret line="130" column="33" selection-start-line="130" selection-start-column="33" selection-end-line="130" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/devel/Java/jdk1.8.0_25/src.zip!/java/util/Arrays.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33266932" vertical-offset="78100" max-vertical-offset="105588">
-          <caret line="3798" column="30" selection-start-line="3798" selection-start-column="30" selection-end-line="3798" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/devel/Java/jdk1.8.0_25/src.zip!/java/util/Date.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33266932" vertical-offset="1807" max-vertical-offset="27342">
-          <caret line="130" column="13" selection-start-line="130" selection-start-column="13" selection-end-line="130" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/devel/Java/jdk1.8.0_25/src.zip!/java/util/Collection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.691235" vertical-offset="5335" max-vertical-offset="12159">
-          <caret line="143" column="17" selection-start-line="143" selection-start-column="17" selection-end-line="143" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/devel/Java/jdk1.8.0_25/src.zip!/java/util/Locale.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33266932" vertical-offset="15457" max-vertical-offset="66843">
-          <caret line="812" column="25" selection-start-line="812" selection-start-column="25" selection-end-line="812" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/devel/Java/jdk1.8.0_25/src.zip!/java/util/Map.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4243028" vertical-offset="11568" max-vertical-offset="24423">
-          <caret line="587" column="8" selection-start-line="587" selection-start-column="8" selection-end-line="589" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/devel/Java/jdk1.8.0_25/src.zip!/java/util/zip/ZipConstants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7339806" vertical-offset="0" max-vertical-offset="1701">
-          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/devel/Java/jdk1.8.0_25/src.zip!/java/util/zip/DeflaterOutputStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.9302788" vertical-offset="1786" max-vertical-offset="5460">
-          <caret line="41" column="6" selection-start-line="41" selection-start-column="6" selection-end-line="41" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/devel/Java/jdk1.8.0_25/src.zip!/java/util/zip/Deflater.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.78058255" vertical-offset="5499" max-vertical-offset="11151">
-          <caret line="312" column="0" selection-start-line="312" selection-start-column="0" selection-end-line="312" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/devel/Java/jdk1.8.0_25/src.zip!/java/util/zip/ZipOutputStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37281552" vertical-offset="1110" max-vertical-offset="3087">
-          <caret line="176" column="16" selection-start-line="176" selection-start-column="16" selection-end-line="176" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/devel/Java/jdk1.8.0_25/src.zip!/java/lang/String.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33266932" vertical-offset="17662" max-vertical-offset="64176">
-          <caret line="902" column="18" selection-start-line="902" selection-start-column="18" selection-end-line="902" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/UnsupportedFormatException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7948207" vertical-offset="0" max-vertical-offset="2457">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/NumberUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0407767" vertical-offset="0" max-vertical-offset="945">
-          <caret line="1" column="44" selection-start-line="1" selection-start-column="44" selection-end-line="1" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/package-info.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0407767" vertical-offset="0" max-vertical-offset="609">
-          <caret line="1" column="44" selection-start-line="1" selection-start-column="44" selection-end-line="1" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/StringUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.04183267" vertical-offset="0" max-vertical-offset="2415">
-          <caret line="1" column="44" selection-start-line="1" selection-start-column="44" selection-end-line="1" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/TextObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.04183267" vertical-offset="0" max-vertical-offset="4389">
-          <caret line="1" column="44" selection-start-line="1" selection-start-column="44" selection-end-line="1" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/ZLibUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.58565736" vertical-offset="189" max-vertical-offset="3024">
-          <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/package-info.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0407767" vertical-offset="0" max-vertical-offset="609">
-          <caret line="1" column="44" selection-start-line="1" selection-start-column="44" selection-end-line="1" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/pw/phylame/tools/file/mime.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.5708738" vertical-offset="315" max-vertical-offset="861">
-          <caret line="1" column="43" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/writer/WriterV3.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.62350595" vertical-offset="23" max-vertical-offset="525">
-          <caret line="34" column="31" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.7339807" vertical-offset="1975" max-vertical-offset="6762">
-          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Part.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.5916334" vertical-offset="4411" max-vertical-offset="6153">
-          <caret line="186" column="5" selection-start-line="186" selection-start-column="5" selection-end-line="186" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Attributes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.51197606" vertical-offset="774" max-vertical-offset="2478">
-          <caret line="45" column="5" selection-start-line="45" selection-start-column="5" selection-end-line="45" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2854369" vertical-offset="0" max-vertical-offset="672">
-          <caret line="24" column="27" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Parser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3669903" vertical-offset="0" max-vertical-offset="651">
-          <caret line="28" column="17" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Maker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0438247" vertical-offset="232" max-vertical-offset="987">
-          <caret line="39" column="21" selection-start-line="39" selection-start-column="21" selection-end-line="39" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/DateUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6673307" vertical-offset="505" max-vertical-offset="2562">
-          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/InvalidParserArgumentException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.62350595" vertical-offset="128" max-vertical-offset="2184">
-          <caret line="21" column="44" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/InvalidMakerArgumentException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37649402" vertical-offset="252" max-vertical-offset="2184">
-          <caret line="21" column="43" selection-start-line="21" selection-start-column="43" selection-end-line="21" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.1203884" vertical-offset="1102" max-vertical-offset="1743">
-          <caret line="27" column="22" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -849,115 +863,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://D:/devel/Java/jdk1.8.0_25/src.zip!/java/lang/Throwable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33203885" vertical-offset="1698" max-vertical-offset="21735">
-          <caret line="113" column="13" selection-start-line="113" selection-start-column="13" selection-end-line="113" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/devel/Java/jdk1.8.0_25/src.zip!/java/lang/ClassNotFoundException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6737864" vertical-offset="1585" max-vertical-offset="2142">
-          <caret line="121" column="15" selection-start-line="121" selection-start-column="15" selection-end-line="121" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.2/commons-logging-1.2.jar!/org/apache/commons/logging/Log.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.21428572" vertical-offset="0" max-vertical-offset="987">
           <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.3007967" vertical-offset="2" max-vertical-offset="2268">
-          <caret line="114" column="41" selection-start-line="114" selection-start-column="41" selection-end-line="114" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8116505" vertical-offset="1514" max-vertical-offset="5418">
-          <caret line="92" column="51" selection-start-line="92" selection-start-column="51" selection-end-line="92" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#9292#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-            <element signature="e#7999#8017#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/Pmab.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5106796" vertical-offset="430" max-vertical-offset="966">
-          <caret line="49" column="38" selection-start-line="49" selection-start-column="38" selection-end-line="49" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Chapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.08167331" vertical-offset="1177" max-vertical-offset="2541">
-          <caret line="58" column="30" selection-start-line="58" selection-start-column="30" selection-end-line="58" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Book.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.61165047" vertical-offset="1029" max-vertical-offset="4011">
-          <caret line="64" column="23" selection-start-line="64" selection-start-column="23" selection-end-line="64" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.2/commons-logging-1.2.jar!/org/apache/commons/logging/LogFactory.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.68" vertical-offset="4411" max-vertical-offset="15477">
-          <caret line="238" column="22" selection-start-line="238" selection-start-column="22" selection-end-line="238" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8326693" vertical-offset="296" max-vertical-offset="1365">
-          <caret line="34" column="18" selection-start-line="34" selection-start-column="18" selection-end-line="34" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/devel/Java/jdk1.8.0_25/src.zip!/java/security/AccessController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33203885" vertical-offset="5541" max-vertical-offset="18165">
-          <caret line="297" column="47" selection-start-line="297" selection-start-column="47" selection-end-line="297" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.63106793" vertical-offset="787" max-vertical-offset="1743">
-          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/devel/Java/jdk1.8.0_25/src.zip!/java/lang/ClassLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.3446214" vertical-offset="20644" max-vertical-offset="44667">
-          <caret line="1130" column="28" selection-start-line="1130" selection-start-column="28" selection-end-line="1130" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.2/commons-logging-1.2-sources.jar!/org/apache/commons/logging/LogFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="26566" max-vertical-offset="34986">
-          <caret line="1293" column="56" selection-start-line="1293" selection-start-column="56" selection-end-line="1293" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/devel/Java/jdk1.8.0_25/src.zip!/java/lang/Thread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33266932" vertical-offset="28204" max-vertical-offset="41244">
-          <caret line="1430" column="23" selection-start-line="1430" selection-start-column="23" selection-end-line="1430" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -968,34 +877,374 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/pw/phylame/tools/file/mime.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.3882545" vertical-offset="261" max-vertical-offset="943">
+          <caret line="1" column="43" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="184">
+          <caret line="1" column="79" selection-start-line="1" selection-start-column="79" selection-end-line="1" selection-end-column="79" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="782" max-vertical-offset="1495">
+          <caret line="34" column="18" selection-start-line="34" selection-start-column="18" selection-end-line="34" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/java/jdk1.8.0_25/src.zip!/java/util/Arrays.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5102564" vertical-offset="85752" max-vertical-offset="116058">
+          <caret line="3792" column="5" selection-start-line="3792" selection-start-column="5" selection-end-line="3792" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/java/jdk1.8.0_25/src.zip!/java/util/Map.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.44665012" vertical-offset="12447" max-vertical-offset="26749">
+          <caret line="575" column="5" selection-start-line="575" selection-start-column="5" selection-end-line="576" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/Attributes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.44665012" vertical-offset="533" max-vertical-offset="2392">
+          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/package-info.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5872757" vertical-offset="54" max-vertical-offset="667">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="22" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/package-info.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.77487767" vertical-offset="54" max-vertical-offset="667">
+          <caret line="23" column="17" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/package-info.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.07504078" vertical-offset="0" max-vertical-offset="621">
+          <caret line="2" column="2" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/ZLibUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.345" vertical-offset="0" max-vertical-offset="2737">
+          <caret line="32" column="22" selection-start-line="32" selection-start-column="22" selection-end-line="32" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/TextObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4554">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/StringUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2691">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/NumberUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7879282" vertical-offset="0" max-vertical-offset="1035">
+          <caret line="21" column="20" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/DateUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33768353" vertical-offset="0" max-vertical-offset="2530">
+          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/ByteUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30666667" vertical-offset="0" max-vertical-offset="7015">
+          <caret line="22" column="19" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.48613375" vertical-offset="4946" max-vertical-offset="6992">
+          <caret line="246" column="21" selection-start-line="246" selection-start-column="21" selection-end-line="246" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33278957" vertical-offset="509" max-vertical-offset="1771">
+          <caret line="49" column="18" selection-start-line="49" selection-start-column="18" selection-end-line="49" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Part.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.79333335" vertical-offset="5136" max-vertical-offset="6440">
+          <caret line="294" column="37" selection-start-line="294" selection-start-column="37" selection-end-line="294" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Parser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24959217" vertical-offset="123" max-vertical-offset="736">
+          <caret line="31" column="33" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Maker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33166668" vertical-offset="77" max-vertical-offset="736">
+          <caret line="31" column="33" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.64" vertical-offset="996" max-vertical-offset="6026">
+          <caret line="60" column="44" selection-start-line="60" selection-start-column="44" selection-end-line="60" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#9396#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#8103#8121#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Chapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.32626426" vertical-offset="260" max-vertical-offset="2116">
+          <caret line="41" column="11" selection-start-line="41" selection-start-column="11" selection-end-line="41" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Book.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5628059" vertical-offset="1311" max-vertical-offset="2277">
+          <caret line="148" column="4" selection-start-line="148" selection-start-column="4" selection-end-line="148" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.2/commons-logging-1.2.jar!/org/apache/commons/logging/LogFactory.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.0" vertical-offset="4814" max-vertical-offset="16997">
+          <caret line="238" column="22" selection-start-line="238" selection-start-column="22" selection-end-line="238" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/java/jdk1.8.0_25/src.zip!/java/net/URL.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334" vertical-offset="22409" max-vertical-offset="28980">
+          <caret line="1036" column="29" selection-start-line="1036" selection-start-column="29" selection-end-line="1036" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/UnsupportedFormatException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33278957" vertical-offset="210" max-vertical-offset="2507">
+          <caret line="34" column="11" selection-start-line="34" selection-start-column="11" selection-end-line="34" selection-end-column="11" />
+          <folding>
+            <element signature="e#1158#1159#0" expanded="true" />
+            <element signature="e#1194#1195#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/java/jdk1.8.0_25/src.zip!/java/lang/InstantiationException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.78303427" vertical-offset="26" max-vertical-offset="1012">
+          <caret line="45" column="6" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.2/commons-logging-1.2-sources.jar!/org/apache/commons/logging/LogFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.35666665" vertical-offset="8287" max-vertical-offset="10626">
+          <caret line="1354" column="36" selection-start-line="1354" selection-start-column="36" selection-end-line="1354" selection-end-column="36" />
+          <folding>
+            <element signature="docComment;class#LogFactory#0" expanded="false" />
+            <element signature="e#1743#1791#0" expanded="false" />
+            <element signature="docComment;field#PRIORITY_KEY#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;field#TCCL_KEY#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;field#FACTORY_PROPERTY#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;field#FACTORY_DEFAULT#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;field#FACTORY_PROPERTIES#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;field#SERVICE_ID#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;field#DIAGNOSTICS_DEST_PROPERTY#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;field#diagnosticsStream#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;field#diagnosticPrefix#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;field#HASHTABLE_IMPLEMENTATION_PROPERTY#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;field#WEAK_HASHTABLE_CLASSNAME#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;field#thisClassLoader#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;method#LogFactory#0;class#LogFactory#0" expanded="false" />
+            <element signature="method#LogFactory#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;method#getAttribute#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;method#getAttributeNames#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;method#getInstance#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;method#getInstance#1;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;method#release#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;method#removeAttribute#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;method#setAttribute#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;field#factories#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;field#nullClassLoaderFactory#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;method#createFactoryStore#0;class#LogFactory#0" expanded="false" />
+            <element signature="method#createFactoryStore#0;class#LogFactory#0" expanded="false" />
+            <element signature="e#13954#14025#0" expanded="false" />
+            <element signature="e#14949#15009#0" expanded="false" />
+            <element signature="docComment;method#trim#0;class#LogFactory#0" expanded="false" />
+            <element signature="method#trim#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;method#handleThrowable#0;class#LogFactory#0" expanded="false" />
+            <element signature="method#handleThrowable#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;method#getFactory#0;class#LogFactory#0" expanded="false" />
+            <element signature="e#17999#18055#0" expanded="false" />
+            <element signature="e#18826#18850#0" expanded="false" />
+            <element signature="e#19398#19470#0" expanded="false" />
+            <element signature="e#19761#19822#0" expanded="false" />
+            <element signature="e#19977#20035#0" expanded="false" />
+            <element signature="e#20609#20664#0" expanded="false" />
+            <element signature="e#22053#22128#0" expanded="false" />
+            <element signature="e#22743#22801#0" expanded="false" />
+            <element signature="e#23512#23571#0" expanded="false" />
+            <element signature="e#24993#25069#0" expanded="false" />
+            <element signature="e#27505#27575#0" expanded="false" />
+            <element signature="docComment;method#getLog#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;method#getLog#1;class#LogFactory#0" expanded="false" />
+            <element signature="method#getLog#1;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;method#release#1;class#LogFactory#0" expanded="false" />
+            <element signature="method#release#1;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;method#releaseAll#0;class#LogFactory#0" expanded="false" />
+            <element signature="method#releaseAll#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;method#getClassLoader#0;class#LogFactory#0" expanded="false" />
+            <element signature="method#getClassLoader#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;method#getContextClassLoader#0;class#LogFactory#0" expanded="false" />
+            <element signature="method#getContextClassLoader#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;method#getContextClassLoaderInternal#0;class#LogFactory#0" expanded="false" />
+            <element signature="method#getContextClassLoaderInternal#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;method#directGetContextClassLoader#0;class#LogFactory#0" expanded="false" />
+            <element signature="method#directGetContextClassLoader#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;method#getCachedFactory#0;class#LogFactory#0" expanded="false" />
+            <element signature="method#getCachedFactory#0;class#LogFactory#0" expanded="false" />
+            <element signature="e#38785#38849#0" expanded="false" />
+            <element signature="docComment;method#cacheFactory#0;class#LogFactory#0" expanded="false" />
+            <element signature="method#cacheFactory#0;class#LogFactory#0" expanded="false" />
+            <element signature="e#39649#39716#0" expanded="false" />
+            <element signature="docComment;method#newFactory#0;class#LogFactory#0" expanded="false" />
+            <element signature="method#newFactory#0;class#LogFactory#0" expanded="false" />
+            <element signature="e#42723#42788#0" expanded="false" />
+            <element signature="docComment;method#newFactory#1;class#LogFactory#0" expanded="false" />
+            <element signature="method#newFactory#1;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;method#createFactory#0;class#LogFactory#0" expanded="false" />
+            <element signature="method#createFactory#0;class#LogFactory#0" expanded="false" />
+            <element signature="e#45400#45451#0" expanded="false" />
+            <element signature="e#45646#45705#0" expanded="false" />
+            <element signature="e#46304#46306#0" expanded="false" />
+            <element signature="e#48846#48907#0" expanded="false" />
+            <element signature="e#49257#49259#0" expanded="false" />
+            <element signature="e#51334#51399#0" expanded="false" />
+            <element signature="e#53069#53117#0" expanded="false" />
+            <element signature="docComment;method#implementsLogFactory#0;class#LogFactory#0" expanded="false" />
+            <element signature="method#implementsLogFactory#0;class#LogFactory#0" expanded="false" />
+            <element signature="e#56184#56186#0" expanded="false" />
+            <element signature="e#56725#56727#0" expanded="false" />
+            <element signature="e#57320#57322#0" expanded="false" />
+            <element signature="docComment;method#getResourceAsStream#0;class#LogFactory#0" expanded="false" />
+            <element signature="method#getResourceAsStream#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;method#getResources#0;class#LogFactory#0" expanded="false" />
+            <element signature="method#getResources#0;class#LogFactory#0" expanded="false" />
+            <element signature="e#60453#60509#0" expanded="false" />
+            <element signature="docComment;method#getProperties#0;class#LogFactory#0" expanded="false" />
+            <element signature="method#getProperties#0;class#LogFactory#0" expanded="false" />
+            <element signature="e#61467#61523#0" expanded="false" />
+            <element signature="docComment;method#getConfigurationFile#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;method#getSystemProperty#0;class#LogFactory#0" expanded="false" />
+            <element signature="method#getSystemProperty#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;method#initDiagnostics#0;class#LogFactory#0" expanded="false" />
+            <element signature="method#initDiagnostics#0;class#LogFactory#0" expanded="false" />
+            <element signature="e#68864#68918#0" expanded="false" />
+            <element signature="docComment;method#isDiagnosticsEnabled#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;method#logDiagnostic#0;class#LogFactory#0" expanded="false" />
+            <element signature="method#logDiagnostic#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;method#logRawDiagnostic#0;class#LogFactory#0" expanded="false" />
+            <element signature="method#logRawDiagnostic#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;method#logClassLoaderEnvironment#0;class#LogFactory#0" expanded="false" />
+            <element signature="method#logClassLoaderEnvironment#0;class#LogFactory#0" expanded="false" />
+            <element signature="e#72114#72190#0" expanded="false" />
+            <element signature="docComment;method#logHierarchy#0;class#LogFactory#0" expanded="false" />
+            <element signature="method#logHierarchy#0;class#LogFactory#0" expanded="false" />
+            <element signature="docComment;method#objectId#0;class#LogFactory#0" expanded="false" />
+            <element signature="method#objectId#0;class#LogFactory#0" expanded="false" />
+            <element signature="e#75716#75789#0" expanded="false" />
+            <element signature="initializer##0;class#LogFactory#0" expanded="false" />
+            <element signature="e#76730#76795#0" expanded="false" />
+            <element signature="e#76910#76976#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/BookHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.66533864" vertical-offset="4370" max-vertical-offset="4893">
-          <caret line="309" column="31" selection-start-line="309" selection-start-column="31" selection-end-line="309" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.365416" vertical-offset="420" max-vertical-offset="4554">
+          <caret line="28" column="24" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="24" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#0#17283#0" expanded="true" />
             <element signature="docComment;class#BookHelper#0" expanded="false" />
             <element signature="docComment;field#parsers#0;class#BookHelper#0" expanded="false" />
             <element signature="docComment;field#cachedParsers#0;class#BookHelper#0" expanded="false" />
             <element signature="docComment;field#makers#0;class#BookHelper#0" expanded="false" />
             <element signature="docComment;field#cachedMakers#0;class#BookHelper#0" expanded="false" />
             <element signature="docComment;method#registerParser#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#registerParser#0;class#BookHelper#0" expanded="false" />
             <element signature="docComment;method#registerParser#1;class#BookHelper#0" expanded="false" />
+            <element signature="method#registerParser#1;class#BookHelper#0" expanded="false" />
             <element signature="docComment;method#removeParser#0;class#BookHelper#0" expanded="false" />
             <element signature="method#removeParser#0;class#BookHelper#0" expanded="false" />
             <element signature="docComment;method#hasParser#0;class#BookHelper#0" expanded="false" />
             <element signature="method#hasParser#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#getParser#0;class#BookHelper#0" expanded="false" />
             <element signature="docComment;method#supportedParsers#0;class#BookHelper#0" expanded="false" />
             <element signature="method#supportedParsers#0;class#BookHelper#0" expanded="false" />
             <element signature="docComment;method#registerMaker#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#registerMaker#0;class#BookHelper#0" expanded="false" />
             <element signature="docComment;method#registerMaker#1;class#BookHelper#0" expanded="false" />
+            <element signature="method#registerMaker#1;class#BookHelper#0" expanded="false" />
             <element signature="docComment;method#removeMaker#0;class#BookHelper#0" expanded="false" />
             <element signature="method#removeMaker#0;class#BookHelper#0" expanded="false" />
             <element signature="docComment;method#hasMaker#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#hasMaker#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#getMaker#0;class#BookHelper#0" expanded="false" />
             <element signature="docComment;method#supportedMakers#0;class#BookHelper#0" expanded="false" />
             <element signature="method#supportedMakers#0;class#BookHelper#0" expanded="false" />
-            <element signature="docComment;method#registerCustomParsers#0;class#BookHelper#0" expanded="false" />
-            <element signature="docComment;method#registerBuiltinMakers#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#getContextClassLoaderInternal#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#getContextClassLoaderInternal#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#directGetContextClassLoader#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#directGetContextClassLoader#0;class#BookHelper#0" expanded="false" />
+            <element signature="docComment;method#getResources#0;class#BookHelper#0" expanded="false" />
+            <element signature="e#13431#13487#0" expanded="false" />
+            <element signature="docComment;method#getProperties#0;class#BookHelper#0" expanded="false" />
+            <element signature="method#getProperties#0;class#BookHelper#0" expanded="false" />
+            <element signature="e#14490#14546#0" expanded="false" />
             <element signature="docComment;method#registerCustomMakers#0;class#BookHelper#0" expanded="false" />
           </folding>
         </state>

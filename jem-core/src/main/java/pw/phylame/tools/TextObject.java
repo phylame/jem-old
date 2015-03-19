@@ -54,7 +54,8 @@ public class TextObject {
     }
 
     /**
-     * Returns the raw text.
+     * Returns the previous raw text of the object.
+     * @return the raw string
      */
     public String getRaw() {
         return raw;
@@ -70,14 +71,16 @@ public class TextObject {
     }
 
     /**
-     * Returns the text file or <tt>null</tt> if not present.
+     * Returns the previous text file of the object.
+     * @return the file contains text content or <tt>null</tt> if not present.
      */
     public FileObject getFile() {
         return file;
     }
 
     /**
-     * Returns the encoding for the content file.
+     * Returns the current encoding for the content file.
+     * @return the encoding or <tt>null</tt> that uses platform encoding
      */
     public String getEncoding() {
         return encoding;
@@ -110,7 +113,8 @@ public class TextObject {
     }
 
     /**
-     * Returns text content in this object.
+     * Returns text content in source of this object.
+     * @return the string of text
      * @throws java.io.IOException occurs IO errors when reading text file if source is text file.
      */
     public String getText() throws IOException {

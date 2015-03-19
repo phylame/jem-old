@@ -1,5 +1,7 @@
 /*
- * Copyright 2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2015 Peng Wan <phylame@163.com>
+ *
+ * This file is part of Jem.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +17,8 @@
  */
 
 /**
- * Provides common utility classes.
+ * Defines utility classes for Jem.
  * @author Peng Wan, PW
  * @version 2.0
  */
-package pw.phylame.tools;
+package pw.phylame.jem.util;

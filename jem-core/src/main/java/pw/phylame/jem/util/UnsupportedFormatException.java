@@ -22,13 +22,15 @@ package pw.phylame.jem.util;
  * Exception for unsupported book format.
  */
 public class UnsupportedFormatException extends JemException {
-    /** The unsupported format. */
+    /** The unsupported format name. */
     private String format;
 
     /**
      * Constructs a new exception with {@code null} as its detail message.
      * The cause is not initialized, and may subsequently be initialized by a
      * call to {@link #initCause}.
+     *
+     * @param format the name of format
      */
     public UnsupportedFormatException(String format) {
         this.format = format;
@@ -39,6 +41,7 @@ public class UnsupportedFormatException extends JemException {
      * cause is not initialized, and may subsequently be initialized by
      * a call to {@link #initCause}.
      *
+     * @param format the name of format
      * @param message the detail message. The detail message is saved for
      *                later retrieval by the {@link #getMessage()} method.
      */
@@ -53,6 +56,7 @@ public class UnsupportedFormatException extends JemException {
      * {@code cause} is <i>not</i> automatically incorporated in
      * this exception's detail message.
      *
+     * @param format the name of format
      * @param message the detail message (which is saved for later retrieval
      *                by the {@link #getMessage()} method).
      * @param cause   the cause (which is saved for later retrieval by the
@@ -74,6 +78,7 @@ public class UnsupportedFormatException extends JemException {
      * wrappers for other throwables (for example, {@link
      * java.security.PrivilegedActionException}).
      *
+     * @param format the name of format
      * @param cause the cause (which is saved for later retrieval by the
      *              {@link #getCause()} method).  (A <tt>null</tt> value is
      *              permitted, and indicates that the cause is nonexistent or
@@ -90,6 +95,7 @@ public class UnsupportedFormatException extends JemException {
      * cause, suppression enabled or disabled, and writable stack
      * trace enabled or disabled.
      *
+     * @param format the name of format
      * @param message            the detail message.
      * @param cause              the cause.  (A {@code null} value is permitted,
      *                           and indicates that the cause is nonexistent or unknown.)
@@ -105,6 +111,10 @@ public class UnsupportedFormatException extends JemException {
         this.format = format;
     }
 
+    /**
+     * Returns the unsupported format.
+     * @return the format name
+     */
     public String getFormat() {
         return format;
     }

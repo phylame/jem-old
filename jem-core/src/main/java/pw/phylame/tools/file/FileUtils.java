@@ -280,7 +280,7 @@ public class FileUtils {
      */
     public static void writeText(OutputStream out, String text, String encoding) throws IOException {
         byte[] bytes;
-        if (encoding != null) {
+        if (encoding == null) {
             bytes = text.getBytes();
         } else {
             bytes = text.getBytes(encoding);

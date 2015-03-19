@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package pw.phylame.jem.core;
+package pw.phylame.jem.util;
 
 import java.util.Map;
 import java.util.Collection;
@@ -53,12 +53,22 @@ public class Attributes {
         updateAttributes(other.metaMap);
     }
 
-    /** Returns <tt>true</tt> if {@code key} in attributes map otherwise <tt>false</tt>. */
+    /**
+     * Tests attribute with <tt>key</tt> is mapped or not.
+     * @param key key of the attribute
+     * @return <tt>true</tt> if has value mapped to <tt>key</tt> otherwise <tt>not</tt>
+     */
     public boolean hasAttribute(String key) {
         return metaMap.containsKey(key);
     }
 
-    /** Returns attribute value by its key. If {@code key} not exists return {@code defaultValue}. */
+    /**
+     * Returns attribute value by its key. If {@code key} not exists return {@code defaultValue}.
+     * @param key key of the attribute
+     * @param defaultValue the default value of the key
+     * @return the value to which the specified key is mapped, or
+     *         <tt>defaultValue</tt> if this map contains no attribute for the key
+     */
     public Object getAttribute(String key, Object defaultValue) {
         Object v = metaMap.get(key);
         if (v != null || metaMap.containsKey(key)) {
@@ -70,7 +80,10 @@ public class Attributes {
 
     /**
      * Returns attribute value converted to string by its key.
-     * If {@code key} not exists return {@code defaultValue}.
+     * @param key key of the attribute
+     * @param defaultValue the default value of the key
+     * @return the value to which the specified key is mapped, or
+     *         <tt>defaultValue</tt> if this map contains no attribute for the key
      */
     public String stringAttribute(String key, String defaultValue) {
         Object v = metaMap.get(key);
@@ -92,12 +105,18 @@ public class Attributes {
         return metaMap.remove(key);
     }
 
-    /** Returns number of attribute in attributes map. */
+    /**
+     * Returns size of attributes map.
+     * @return number of attributes
+     */
     public int attributeSize() {
         return metaMap.size();
     }
 
-    /** Returns all names in attributes map. */
+    /**
+     * Returns all names in attributes map.
+     * @return sequence of attribute names
+     */
     public Collection<String> attributeNames() {
         return metaMap.keySet();
     }

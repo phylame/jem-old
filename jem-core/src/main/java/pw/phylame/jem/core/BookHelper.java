@@ -18,12 +18,17 @@
 
 package pw.phylame.jem.core;
 
-import java.io.InputStream;
+import java.net.URLConnection;
 import java.util.Map;
 import java.util.Collection;
+import java.util.Enumeration;
+import java.net.URL;
+import java.io.InputStream;
 import java.io.IOException;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
+import java.util.Properties;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import pw.phylame.jem.util.UnsupportedFormatException;
@@ -100,7 +105,9 @@ public final class BookHelper {
     }
 
     /**
-     * Returns <tt>true</tt> if the specified {@code name} of parser is registered otherwise <tt>false</tt>.
+     * Tests parser with specified name is registered or not.
+     * @param name the name of format
+     * @return <tt>true</tt> if the parser is registered otherwise <tt>false</tt>
      */
     public static boolean hasParser(String name) {
         return cachedParsers.containsKey(name) || parsers.containsKey(name);
@@ -130,13 +137,14 @@ public final class BookHelper {
         }
         Class clazz = Class.forName(path);
         if (! Parser.class.isAssignableFrom(clazz)) {
-            throw new InstantiationException("class not extend Parser");
+            throw new UnsupportedFormatException(name, "class not extend Parser");
         }
         return (Parser) clazz.newInstance();
     }
 
     /**
      * Returns names of registered parser class.
+     * @return sequence of format names
      */
     public static Collection<String> supportedParsers() {
         java.util.Set<String> names = parsers.keySet();
@@ -187,7 +195,9 @@ public final class BookHelper {
     }
 
     /**
-     * Returns <tt>true</tt> if the specified {@code name} of maker is registered otherwise <tt>false</tt>.
+     * Tests maker with specified name is registered or not.
+     * @param name the name of format
+     * @return <tt>true</tt> if the maker is registered otherwise <tt>false</tt>
      */
     public static boolean hasMaker(String name) {
         return cachedMakers.containsKey(name) || makers.containsKey(name);
@@ -217,13 +227,14 @@ public final class BookHelper {
         }
         Class clazz = Class.forName(path);
         if (! Maker.class.isAssignableFrom(clazz)) {
-            throw new InstantiationException("class not extend Maker");
+            throw new UnsupportedFormatException(name, "class not extend Maker");
         }
         return (Maker) clazz.newInstance();
     }
 
     /**
      * Returns names of registered maker class.
+     * @return sequence of format names
      */
     public static Collection<String> supportedMakers() {
         java.util.Set<String> names = makers.keySet();
@@ -231,8 +242,20 @@ public final class BookHelper {
         return names;
     }
 
-    private static ClassLoader getContextClassLoader() {
-        return (ClassLoader) AccessController.doPrivileged(
+    /**
+     * Calls directGetContextClassLoader under the control of an
+     * AccessController class. This means that java code running under a
+     * security manager that forbids access to ClassLoaders will still work
+     * if this class is given appropriate privileges, even when the caller
+     * doesn't have such privileges. Without using an AccessController, the
+     * the entire call stack must have the privilege before the call is
+     * allowed.
+     *
+     * @return the context classloader associated with the current thread,
+     *  or null if security doesn't allow it.
+     */
+    private static ClassLoader getContextClassLoaderInternal() {
+        return (ClassLoader)AccessController.doPrivileged(
                 new PrivilegedAction() {
                     public Object run() {
                         return directGetContextClassLoader();
@@ -240,73 +263,165 @@ public final class BookHelper {
                 });
     }
 
+    /**
+     * Return the thread context class loader if available; otherwise return null.
+     * <p>
+     * Most/all code should call getContextClassLoaderInternal rather than
+     * calling this method directly.
+     * <p>
+     * The thread context class loader is available for JDK 1.2
+     * or later, if certain security conditions are met.
+     * <p>
+     * Note that no internal logging is done within this method because
+     * this method is called every time LogFactory.getLogger() is called,
+     * and we don't want too much output generated here.
+     *
+     * @return the thread's context classloader or {@code null} if the java security
+     *  policy forbids access to the context classloader from one of the classes
+     *  in the current call stack.
+     * @since 1.1
+     */
     protected static ClassLoader directGetContextClassLoader() {
         ClassLoader classLoader = null;
+
         try {
             classLoader = Thread.currentThread().getContextClassLoader();
         } catch (SecurityException ex) {
-            LOG.debug("cannot get context class loader", ex);
+            /**
+             * getContextClassLoader() throws SecurityException when
+             * the context class loader isn't an ancestor of the
+             * calling class's class loader, or if security
+             * permissions are restricted.
+             *
+             * We ignore this exception to be consistent with the previous
+             * behavior (e.g. 1.1.3 and earlier).
+             */
+            // ignore
         }
+
+        // Return the selected class loader
         return classLoader;
     }
 
-    private static InputStream getResourceAsStream(ClassLoader classLoader, String name) {
-        if (classLoader != null) {
-            return classLoader.getResourceAsStream(name);
-        } else {
-            return ClassLoader.getSystemResourceAsStream(name);
-        }
+    /**
+     * Given a filename, return an enumeration of URLs pointing to
+     * all the occurrences of that filename in the classpath.
+     * <p>
+     * This is just like ClassLoader.getResources except that the
+     * operation is done under an AccessController so that this method will
+     * succeed when this jar file is privileged but the caller is not.
+     * This method must therefore remain private to avoid security issues.
+     * <p>
+     * If no instances are found, an Enumeration is returned whose
+     * hasMoreElements method returns false (ie an "empty" enumeration).
+     * If resources could not be listed for some reason, null is returned.
+     */
+    private static Enumeration getResources(final ClassLoader loader, final String name) {
+        PrivilegedAction action =
+                new PrivilegedAction() {
+                    public Object run() {
+                        try {
+                            if (loader != null) {
+                                return loader.getResources(name);
+                            } else {
+                                return ClassLoader.getSystemResources(name);
+                            }
+                        } catch (IOException e) {
+                            LOG.debug("Exception while trying to find configuration file " +
+                                    name + ":" + e);
+                            return null;
+                        } catch (NoSuchMethodError e) {
+                            // we must be running on a 1.1 JVM which doesn't support
+                            // ClassLoader.getSystemResources; just return null in
+                            // this case.
+                            return null;
+                        }
+                    }
+                };
+        Object result = AccessController.doPrivileged(action);
+        return (Enumeration) result;
     }
 
-    private static void loadRegistrations(String path, Map<String, String> map) throws IOException {
-        java.io.InputStream stream = getResourceAsStream(getContextClassLoader(), path);
-        if (stream == null) {
-            LOG.debug("not found URL "+path);
+    /**
+     * Given a URL that refers to a .properties file, load that file.
+     * This is done under an AccessController so that this method will
+     * succeed when this jar file is privileged but the caller is not.
+     * This method must therefore remain private to avoid security issues.
+     * <p>
+     * {@code Null} is returned if the URL cannot be opened.
+     */
+    private static Properties getProperties(final URL url) {
+        PrivilegedAction action =
+                new PrivilegedAction() {
+                    public Object run() {
+                        InputStream stream = null;
+                        try {
+                            // We must ensure that useCaches is set to false, as the
+                            // default behaviour of java is to cache file handles, and
+                            // this "locks" files, preventing hot-redeploy on windows.
+                            URLConnection connection = url.openConnection();
+                            connection.setUseCaches(false);
+                            stream = connection.getInputStream();
+                            if (stream != null) {
+                                Properties props = new Properties();
+                                props.load(stream);
+                                stream.close();
+                                stream = null;
+                                return props;
+                            }
+                        } catch (IOException e) {
+                            LOG.debug("Unable to read URL " + url, e);
+                        } finally {
+                            if (stream != null) {
+                                try {
+                                    stream.close();
+                                } catch (IOException e) {
+                                    // ignore exception; this should not happen
+                                    LOG.debug("Unable to close stream for URL " + url, e);
+                                }
+                            }
+                        }
+
+                        return null;
+                    }
+                };
+        return (Properties) AccessController.doPrivileged(action);
+    }
+
+    private static void loadRegistrations(String fileName, Map<String, String> map) {
+        // Identify the class loader we will be using
+        ClassLoader contextClassLoader = getContextClassLoaderInternal();
+
+        Enumeration urls = getResources(contextClassLoader, fileName);
+        if (urls == null) {
             return;
         }
-        java.util.Properties prop = new java.util.Properties();
-        prop.load(stream);
-        for (String name: prop.stringPropertyNames()) {
-            String clazz = prop.getProperty(name);
-            if (clazz != null && !"".equals(clazz)) {
-                map.put(name, clazz);
+        while (urls.hasMoreElements()) {
+            URL url = (URL) urls.nextElement();
+            Properties prop = getProperties(url);
+            if (prop != null) {
+                for (String name: prop.stringPropertyNames()) {
+                    String clazz = prop.getProperty(name);
+                    if (clazz != null && ! "".equals(clazz)) {
+                        map.put(name, clazz);
+                    }
+                }
             }
         }
-        stream.close();
-    }
-
-    /** Registers parser class provided by Jem. */
-    private static void registerBuiltinParsers() {
-        registerParser("pmab", "pw.phylame.jem.formats.pmab.PmabParser");
     }
 
     /** Registers custom parser classes from config file. */
     private static void registerCustomParsers() {
-        try {
-            loadRegistrations(PARSER_DEFINE_FILE, parsers);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /** Registers maker class provided by Jem. */
-    private static void registerBuiltinMakers() {
-        registerMaker("pmab", "pw.phylame.jem.formats.pmab.PmabMaker");
+        loadRegistrations(PARSER_DEFINE_FILE, parsers);
     }
 
     /** Registers custom maker classes from config file. */
     private static void registerCustomMakers() {
-        try {
-            loadRegistrations(MAKER_DEFINE_FILE, makers);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        loadRegistrations(MAKER_DEFINE_FILE, makers);
     }
 
     static {
-        registerBuiltinParsers();
         registerCustomParsers();
-        registerBuiltinMakers();
         registerCustomMakers();
     }
 }

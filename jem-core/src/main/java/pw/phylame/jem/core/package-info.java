@@ -19,6 +19,6 @@
 /**
  * Core library of Jem provides base framework.
  * @author Peng Wan, PW
- * @version 2.0-SNAPSHOT
+ * @version 2.0
  */
 package pw.phylame.jem.core;
