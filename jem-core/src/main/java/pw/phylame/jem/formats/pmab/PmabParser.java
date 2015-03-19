@@ -24,14 +24,19 @@ import pw.phylame.jem.core.Part;
 import pw.phylame.jem.util.JemException;
 
 import java.util.Map;
-
 import java.io.File;
 import java.io.IOException;
+import java.util.zip.ZipFile;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <tt>Parser</tt> implement for PMAB book.
  */
 public class PmabParser implements Parser {
+    private static Log LOG = LogFactory.getLog(PmabParser.class);
+
     /**
      * Returns the format name(normally the extension name).
      */
@@ -51,16 +56,43 @@ public class PmabParser implements Parser {
      */
     @Override
     public Book parse(File file, Map<String, Object> kw) throws IOException, JemException {
-        Book book = new Book();
-        for (int i = 1; i < 20; ++i) {
-            Part p = new Part("Chapter "+i, "");
-            int n = pw.phylame.tools.NumberUtils.randInteger(1, 20);
-            for (int j = 1; j < n; ++j) {
-                Part pp = new Part(p.getTitle()+"."+j, "");
-                p.append(pp);
-            }
-            book.append(p);
+        ZipFile zipFile = new ZipFile(file);
+        try {
+            return parse(zipFile);
+        } catch (IOException ex) {
+            zipFile.close();
+            throw ex;
+        } catch (JemException ex) {
+            zipFile.close();
+            throw ex;
         }
+    }
+
+    public Book parse(final ZipFile zipFile) throws IOException, JemException {
+        if (! Pmab.isPmab(zipFile)) {
+            throw new JemException("invalid PMAB archive");
+        }
+        Book book = new Book();
+        readPBM(zipFile, book);
+        readPBC(zipFile, book);
+        book.registerCleanup(new Part.Cleanable() {
+            @Override
+            public void clean(Part part) {
+                try {
+                    zipFile.close();
+                } catch (IOException e) {
+                    LOG.debug("cannot close PMAB source", e);
+                }
+            }
+        });
         return book;
+    }
+
+    private void readPBM(ZipFile zipFile, Book book) {
+
+    }
+
+    private void readPBC(ZipFile zipFile, Book book) {
+
     }
 }

@@ -22,7 +22,7 @@ import java.util.zip.Deflater;
 import java.util.zip.ZipOutputStream;
 
 /**
- * Configuration for make PMAB.
+ * Configuration for making PMAB.
  */
 public class PmabConfig {
     // directory

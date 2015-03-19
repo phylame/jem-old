@@ -18,9 +18,12 @@
 
 package pw.phylame.jem.core;
 
+import java.io.InputStream;
 import java.util.Map;
 import java.util.Collection;
 import java.io.IOException;
+import java.security.AccessController;
+import java.security.PrivilegedAction;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import pw.phylame.jem.util.UnsupportedFormatException;
@@ -228,20 +231,48 @@ public final class BookHelper {
         return names;
     }
 
-    private static void loadAndRegister(String path, Map<String, String> map) throws IOException {
-        java.util.Properties prop = new java.util.Properties();
-        java.io.InputStream in = BookHelper.class.getResourceAsStream(path);
-        if (in == null) {
-            LOG.debug("not found "+path);
+    private static ClassLoader getContextClassLoader() {
+        return (ClassLoader) AccessController.doPrivileged(
+                new PrivilegedAction() {
+                    public Object run() {
+                        return directGetContextClassLoader();
+                    }
+                });
+    }
+
+    protected static ClassLoader directGetContextClassLoader() {
+        ClassLoader classLoader = null;
+        try {
+            classLoader = Thread.currentThread().getContextClassLoader();
+        } catch (SecurityException ex) {
+            LOG.debug("cannot get context class loader", ex);
+        }
+        return classLoader;
+    }
+
+    private static InputStream getResourceAsStream(ClassLoader classLoader, String name) {
+        if (classLoader != null) {
+            return classLoader.getResourceAsStream(name);
+        } else {
+            return ClassLoader.getSystemResourceAsStream(name);
+        }
+    }
+
+    private static void loadRegistrations(String path, Map<String, String> map) throws IOException {
+        java.io.InputStream stream = getResourceAsStream(getContextClassLoader(), path);
+        if (stream == null) {
+            LOG.debug("not found URL "+path);
             return;
         }
-        prop.load(in);
+        java.util.Properties prop = new java.util.Properties();
+        prop.load(stream);
         for (String name: prop.stringPropertyNames()) {
             String clazz = prop.getProperty(name);
             if (clazz != null && !"".equals(clazz)) {
                 map.put(name, clazz);
             }
         }
+        stream.close();
     }
 
     /** Registers parser class provided by Jem. */
@@ -252,7 +283,7 @@ public final class BookHelper {
     /** Registers custom parser classes from config file. */
     private static void registerCustomParsers() {
         try {
-            loadAndRegister(PARSER_DEFINE_FILE, parsers);
+            loadRegistrations(PARSER_DEFINE_FILE, parsers);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -266,7 +297,7 @@ public final class BookHelper {
     /** Registers custom maker classes from config file. */
     private static void registerCustomMakers() {
         try {
-            loadAndRegister(MAKER_DEFINE_FILE, makers);
+            loadRegistrations(MAKER_DEFINE_FILE, makers);
         } catch (IOException e) {
             e.printStackTrace();
         }

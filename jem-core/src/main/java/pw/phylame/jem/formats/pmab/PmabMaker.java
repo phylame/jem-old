@@ -26,6 +26,7 @@ import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.Maker;
 import pw.phylame.jem.formats.pmab.writer.WriterV3;
 import pw.phylame.jem.util.JemException;
+import pw.phylame.jem.util.InvalidMakerArgumentException;
 import pw.phylame.tools.file.FileUtils;
 
 import java.io.File;
@@ -41,11 +42,6 @@ import java.util.zip.ZipOutputStream;
  */
 public class PmabMaker implements Maker {
     private static Log LOG = LogFactory.getLog(PmabMaker.class);
-
-    ///// MIME type for PMAB /////
-    private static final String MIME_FILE = "mimetype";
-    private static final String MT_PMAB = "application/pmab+zip";
-
 
     /**
      * Returns the format name(normally the extension name).
@@ -72,13 +68,13 @@ public class PmabMaker implements Maker {
             if (o instanceof String) {
                 config.pbmVersion = (String)o;
             } else {
-                LOG.debug("invalid pbm_version string: "+o);
+                throw new InvalidMakerArgumentException("invalid pbm_version string: "+o);
             }
             o = kw.get("pbc_version");
             if (o instanceof String) {
                 config.pbcVersion = (String)o;
             } else {
-                LOG.debug("invalid pbm_version string: "+o);
+                throw new InvalidMakerArgumentException("invalid pbm_version string: "+o);
             }
             o = kw.get("pmab_method");
             if (o != null) {
@@ -89,10 +85,10 @@ public class PmabMaker implements Maker {
                     try {
                         int n = Integer.parseInt(s);
                     } catch (NumberFormatException ex) {
-                        LOG.debug("invalid ZIP method: "+s);
+                        throw new InvalidMakerArgumentException("invalid ZIP method: "+s);
                     }
                 } else {
-                    LOG.debug("pmab_method require int or str");
+                    throw new InvalidMakerArgumentException("pmab_method require int or str");
                 }
             }
         }
@@ -115,8 +111,8 @@ public class PmabMaker implements Maker {
     }
 
     private void writeMIME(ZipOutputStream zipOut) throws IOException {
-        zipOut.putNextEntry(new ZipEntry(MIME_FILE));
-        FileUtils.writeText(zipOut, MT_PMAB, "UTF-8");
+        zipOut.putNextEntry(new ZipEntry(Pmab.MIME_FILE));
+        FileUtils.writeText(zipOut, Pmab.MT_PMAB, "UTF-8");
     }
 
     private void writePBM(Book book, ZipOutputStream zipOut, PmabConfig config) throws JemException {
@@ -125,7 +121,7 @@ public class PmabMaker implements Maker {
         } else if ("2.0".equals(config.pbmVersion)) {
 
         } else {
-            throw new JemException("Unsupported PBM version: "+config.pbmVersion);
+            throw new JemException("unsupported PBM version: "+config.pbmVersion);
         }
     }
 
@@ -135,7 +131,7 @@ public class PmabMaker implements Maker {
         } else if ("2.0".equals(config.pbcVersion)) {
 
         } else {
-            throw new JemException("Unsupported PBC version: "+config.pbcVersion);
+            throw new JemException("unsupported PBC version: "+config.pbcVersion);
         }
     }
 }

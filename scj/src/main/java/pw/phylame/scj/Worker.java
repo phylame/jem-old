@@ -36,6 +36,7 @@ import pw.phylame.tools.StringUtils;
 import pw.phylame.tools.TextObject;
 import pw.phylame.tools.file.FileUtils;
 import pw.phylame.tools.file.FileObject;
+import pw.phylame.tools.file.FileFactory;
 
 /**
  * Utility class for SCJ.
@@ -46,7 +47,7 @@ public final class Worker {
 	private static final String CHAPTER_REGEX = "^chapter-?[\\d]+(\\$.*)?";
 	private static final String ITEM_REGEX = "^item\\$.*";
 
-	public static void setAttributes(Part part, Map<String, Object> attributes) {
+	public static boolean setAttributes(Part part, Map<String, Object> attributes) {
 		for (String key: attributes.keySet()) {
 			String raw = String.valueOf(attributes.get(key));
 			Object value = null;
@@ -54,13 +55,20 @@ public final class Worker {
 				File file = new File(raw);
 				if (! file.exists()) {
 					SCI.error(String.format(SCI.getString("SCI_NOT_EXISTS_COVER"), raw));
-				} else {
-					// TODO: set cover to book using FileObject
-				}
+					return false;
+				} else
+					try {
+						part.setAttribute("cover", FileFactory.getFile(file, null));
+					} catch (Exception ex) {
+						SCI.error(ex.getMessage());
+						LOG.debug("cannot create FileObject", ex);
+						return false;
+					}
 			} else if ("date".equals(key)) {
 				Date date = DateUtils.parseDate(raw, SCI.getString("SCI_DATE_FORMAT"), null);
 				if (date == null) {
 					SCI.error(String.format(SCI.getString("SCI_INVALID_DATE"), raw));
+					return false;
 				} else {
 					value = date;
 				}
@@ -73,6 +81,7 @@ public final class Worker {
 				part.setAttribute(key, value);
 			}
 		}
+		return true;
 	}
 
 	public static Book openBook(File input, String format, Map<String, Object> kw) {
@@ -83,8 +92,10 @@ public final class Worker {
 		try {
 			book = Jem.readBook(input, format, kw);
 		} catch (IOException e) {
+			SCI.error(e.getMessage());
 			LOG.debug("reading "+format.toUpperCase(), e);
 		} catch (JemException e) {
+			SCI.error(e.getMessage());
 			LOG.debug("reading "+format.toUpperCase(), e);
 		}
 		return book;
@@ -100,8 +111,10 @@ public final class Worker {
 			Jem.writeBook(book, output, format, kw);
 			path = output.getPath();
 		} catch (IOException e) {
+			SCI.error(e.getMessage());
 			LOG.debug("writing "+format.toUpperCase(), e);
 		} catch (JemException e) {
+			SCI.error(e.getMessage());
 			LOG.debug("writing "+format.toUpperCase(), e);
 		}
 		return path;
@@ -115,7 +128,9 @@ public final class Worker {
 			SCI.error(String.format(SCI.getString("SCI_READ_FAILED"), input.getPath()));
 			return null;
 		}
-		setAttributes(book, attributes);
+		if (! setAttributes(book, attributes)) {
+			return null;
+		}
 		String path = saveBook(book, output, outFormat, outKw);
 		if (path == null) {
 			SCI.error(String.format(SCI.getString("SCI_CONVERT_FAILED"),
@@ -136,7 +151,9 @@ public final class Worker {
 				book.append(sub);
 			}
 		}
-		setAttributes(book, attributes);
+		if (! setAttributes(book, attributes)) {
+			return null;
+		}
 		String path = saveBook(book, output, outFormat, outKw);
 		if (path == null) {
 			SCI.error(String.format(SCI.getString("SCI_JOIN_FAILED"), output.getPath()));
@@ -176,7 +193,9 @@ public final class Worker {
 			return null;
 		}
 		Part part = Jem.getPart(book, indexs, 0);
-		setAttributes(part, attributes);
+		if (! setAttributes(part, attributes)) {
+			return null;
+		}
 		String path = saveBook(Jem.toBook(part), output, outFormat, outKw);
 		if (path == null) {
 			SCI.error(String.format(SCI.getString("SCI_EXTRACT_FAILED"), index,
@@ -194,6 +213,8 @@ public final class Worker {
 			try {
 				str = to.getText();
 			} catch (IOException ex) {
+				SCI.error(String.format(SCI.getString("SCI_LOAD_TEXT_FAILED"),
+						to.getFile().getName()));
 				LOG.debug("load text of "+to.getFile().getName(), ex);
 			}
 		} else if (value instanceof Date) {
@@ -328,7 +349,9 @@ public final class Worker {
 					input.getPath()));
 			return false;
 		}
-		setAttributes(book, attributes);
+		if (! setAttributes(book, attributes)) {
+			return false;
+		}
 		for (String key: keys) {
 			if (key.equals("ext")) {
 				viewExtension(book, book.itemNames().toArray(new String[0]));

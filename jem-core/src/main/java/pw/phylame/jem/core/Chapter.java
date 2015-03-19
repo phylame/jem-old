@@ -32,11 +32,11 @@ public class Chapter extends Part {
     public static final String INTRO = "intro";
 
     public Chapter() {
-        this("", "", null, null);
+        super();
     }
 
     public Chapter(String title, String text) {
-        this(title, text, null, null);
+        super(title, text);
     }
 
     public Chapter(String title, String text, FileObject cover, TextObject intro) {
@@ -46,7 +46,7 @@ public class Chapter extends Part {
     }
 
     public Chapter(String title, FileObject file, String encoding) {
-        this(title, file, encoding, null, null);
+        super(title, file, encoding);
     }
 
     public Chapter(String title, FileObject file, String encoding, FileObject cover, TextObject intro) {
@@ -56,7 +56,7 @@ public class Chapter extends Part {
     }
 
     public Chapter(String title, TextObject content) {
-        this(title, content, null, null);
+        super(title, content);
     }
 
     public Chapter(String title, TextObject content, FileObject cover, TextObject intro) {

@@ -33,12 +33,12 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.CommandLineParser;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import pw.phylame.jem.core.Jem;
 import pw.phylame.tools.StringUtils;
+import pw.phylame.tools.file.FileUtils;
 import pw.phylame.jem.core.BookHelper;
 
 /**
@@ -139,9 +139,9 @@ public final class SCI {
 	private static void showSupported() {
 		System.out.println(getString("LIST_SUPPORTED_TITLE"));
 		System.out.printf(" %s %s\n", getString("LIST_INPUT"),
-			StringUtils.join(BookHelper.supportedParsers(), ",").toUpperCase());
+			StringUtils.join(BookHelper.supportedParsers(), " ").toUpperCase());
 		System.out.printf(" %s %s\n", getString("LIST_OUTPUT"),
-			StringUtils.join(BookHelper.supportedMakers(), ",").toUpperCase());
+			StringUtils.join(BookHelper.supportedMakers(), " ").toUpperCase());
 	}
 
 	public static void error(String msg) {
@@ -219,11 +219,6 @@ public final class SCI {
 		}
 		String inFormat = cmd.getOptionValue("f"), outFormat = cmd.getOptionValue("t");
 		outFormat = outFormat == null ? Jem.PMAB_FORMAT : outFormat;
-		if (inFormat != null && ! BookHelper.supportedParsers().contains(inFormat)) {
-			error(String.format(getString("SCI_IN_UNSUPPORTED"), inFormat));
-			System.out.println(getString("SCI_UNSUPPORTED_HELP"));
-			return -1;
-		}
 		if (! BookHelper.supportedMakers().contains(outFormat)) {
 			error(String.format(getString("SCI_OUT_UNSUPPORTED"), outFormat));
 			System.out.println(getString("SCI_UNSUPPORTED_HELP"));
@@ -253,15 +248,24 @@ public final class SCI {
 				status = -1;
 				continue;
 			}
+			String inFmt = inFormat;
+			if (inFmt == null) {
+				inFmt = FileUtils.getExtension(file);
+			}
+			if (inFmt != null && ! BookHelper.supportedParsers().contains(inFmt)) {
+				error(String.format(getString("SCI_IN_UNSUPPORTED"), inFmt));
+				System.out.println(getString("SCI_UNSUPPORTED_HELP"));
+				return -1;
+			}
 			String result = null;
 			switch (command) {
 			case View:
-				if (! Worker.viewBook(input, inFormat, inKw, attrs, viewNames)) {
+				if (! Worker.viewBook(input, inFmt, inKw, attrs, viewNames)) {
 					status = -1;
 				}
 				break;
 			case Convert:
-				result = Worker.convertBook(input, inFormat, inKw, attrs, output,
+				result = Worker.convertBook(input, inFmt, inKw, attrs, output,
 						outFormat, outKw);
 				status = result != null ? 0 : 1;
 				break;
@@ -269,7 +273,7 @@ public final class SCI {
 				inputs.add(input);
 				break;
 			case Extract:
-				result = Worker.extractBook(input, inFormat, inKw, attrs, indexs,
+				result = Worker.extractBook(input, inFmt, inKw, attrs, indexs,
 						output, outFormat, outKw);
 				status = result != null ? 0 : 1;
 				break;
@@ -293,7 +297,6 @@ public final class SCI {
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		System.exit(exec(Name, args));
 	}
 }

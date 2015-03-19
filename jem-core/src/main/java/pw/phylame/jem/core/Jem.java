@@ -21,6 +21,10 @@ package pw.phylame.jem.core;
 import java.util.Map;
 import java.io.File;
 import java.io.IOException;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import pw.phylame.jem.util.UnsupportedFormatException;
 import pw.phylame.tools.TextObject;
 import pw.phylame.tools.file.FileObject;
 import pw.phylame.jem.util.JemException;
@@ -29,6 +33,8 @@ import pw.phylame.jem.util.JemException;
  * This class contains utility methods for book operations.
  */
 public final class Jem {
+    private static Log LOG = LogFactory.getLog(Jem.class);
+
     /** Jem version */
     public static final String VERSION = "2.0-SNAPSHOT";
 
@@ -70,13 +76,22 @@ public final class Jem {
         try {
             parser = BookHelper.getParser(format);
         } catch (IllegalAccessException e) {
-            throw new JemException(e);
+            LOG.debug("cannot access Parser class", e);
+            throw new UnsupportedFormatException(format, "unsupported format: "+format);
         } catch (InstantiationException e) {
-            throw new JemException(e);
+            LOG.debug("cannot create Parser instance", e);
+            throw new UnsupportedFormatException(format, "unsupported format: "+format);
         } catch (ClassNotFoundException e) {
-            throw new JemException(e);
+            LOG.debug("not found Parser class", e);
+            throw new UnsupportedFormatException(format, "unsupported format: "+format);
+        } catch (UnsupportedFormatException e) {
+            LOG.debug("not registered Parser class", e);
+            throw new UnsupportedFormatException(format, "unsupported format: "+format);
         }
-        return parser.parse(file, kw);
+        Book book = parser.parse(file, kw);
+        book.setAttribute("source_path", file.getPath());
+        book.setAttribute("source_format", format);
+        return book;
     }
 
     /**
@@ -117,11 +132,17 @@ public final class Jem {
         try {
             maker = BookHelper.getMaker(format);
         } catch (IllegalAccessException e) {
-            throw new JemException(e);
+            LOG.debug("cannot access Maker class", e);
+            throw new UnsupportedFormatException(format, "unsupported format: "+format);
         } catch (InstantiationException e) {
-            throw new JemException(e);
+            LOG.debug("cannot create Maker instance", e);
+            throw new UnsupportedFormatException(format, "unsupported format: "+format);
         } catch (ClassNotFoundException e) {
-            throw new JemException(e);
+            LOG.debug("not found Maker class", e);
+            throw new UnsupportedFormatException(format, "unsupported format: "+format);
+        } catch (UnsupportedFormatException e) {
+            LOG.debug("not registered Maker class", e);
+            throw new UnsupportedFormatException(format, "unsupported format: "+format);
         }
         maker.make(book, output, kw);
     }

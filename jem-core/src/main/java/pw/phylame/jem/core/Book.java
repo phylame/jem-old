@@ -62,16 +62,9 @@ public class Book extends Chapter {
     }
 
     public Book(String title, String author) {
-        super(title, "", null, null);
+        super(title, "");
         setAuthor(author);
-        setGenre("");
-        setState("");
-        setSubject("");
         setDate(new Date());
-        setPublisher("");
-        setRights("");
-        java.util.Locale locale = java.util.Locale.getDefault();
-        setLanguage(locale.getLanguage()+"_"+locale.getCountry());
     }
 
     public String getAuthor() {
