@@ -36,6 +36,13 @@ public class Pmab {
     static final String MIME_FILE = "mimetype";
     static final String MT_PMAB = "application/pmab+zip";
 
+    ///// PBM(PMAB Book Metadata) /////
+    static final String PBM_FILE = "book.xml";
+    static final String PBM_XML_NS = "http://phylame.pw/format/pmab/pbm";
+
+    ///// PBC(PMAB Book Content) /////
+    static final String PBC_FILE = "content.xml";
+    static final String PBC_XML_NS = "http://phylame.pw/format/pmab/pbc";
 
     public static boolean isPmab(ZipFile zipFile) {
         InputStream in;

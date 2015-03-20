@@ -16,20 +16,21 @@
  * limitations under the License.
  */
 
-package pw.phylame.jem.formats.pmab.writer;
+package pw.phylame.jem.formats.pmab.reader;
 
+import java.util.zip.ZipFile;
 import pw.phylame.jem.core.Book;
-import pw.phylame.jem.formats.pmab.PmabConfig;
-
-import java.util.zip.ZipOutputStream;
+import javax.xml.stream.XMLStreamReader;
 
 /**
- * PBM and PBC writer for PMAB 3.x.
+ * PBM and PBC reader for PMAB 2.x.
  */
-public final class WriterV3 {
-    public static void writePBM(Book book, ZipOutputStream zipOut, PmabConfig config) {
+public class ReaderV2 {
+    public static void readPBM(XMLStreamReader streamReader, Book book, ZipFile zipFile) {
+
     }
 
-    public static void writePBC(Book book, ZipOutputStream zipOut, PmabConfig config) {
+    public static void readPBC(XMLStreamReader streamReader, Book book, ZipFile zipFile) {
+
     }
 }

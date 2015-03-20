@@ -23,13 +23,23 @@ import pw.phylame.jem.core.Parser;
 import pw.phylame.jem.core.Part;
 import pw.phylame.jem.util.JemException;
 
+import java.io.BufferedInputStream;
 import java.util.Map;
 import java.io.File;
+import java.io.InputStream;
 import java.io.IOException;
+import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamConstants;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
+
+import pw.phylame.jem.formats.pmab.reader.*;
 
 /**
  * <tt>Parser</tt> implement for PMAB book.
@@ -73,7 +83,11 @@ public class PmabParser implements Parser {
             throw new JemException("invalid PMAB archive");
         }
         Book book = new Book();
-        readPBM(zipFile, book);
+        try {
+            readPBM(zipFile, book);
+        } catch (XMLStreamException e) {
+            throw new JemException("Invalid PBM document", e);
+        }
         readPBC(zipFile, book);
         book.registerCleanup(new Part.Cleanable() {
             @Override
@@ -88,8 +102,68 @@ public class PmabParser implements Parser {
         return book;
     }
 
-    private void readPBM(ZipFile zipFile, Book book) {
-
+    private void readPBM(ZipFile zipFile, Book book) throws IOException, JemException, XMLStreamException {
+        ZipEntry zipEntry = zipFile.getEntry(Pmab.PBM_FILE);
+        if (zipEntry == null) {
+            throw new IOException("Not found "+Pmab.PBM_FILE+" in PMAB "+zipFile.getName());
+        }
+        InputStream input = new BufferedInputStream(zipFile.getInputStream(zipEntry));
+        XMLInputFactory inputFactory = XMLInputFactory.newFactory();
+        XMLStreamReader streamReader = inputFactory.createXMLStreamReader(input);
+        try {
+            int event = streamReader.getEventType();
+            while (true) {
+                switch (event) {
+                    case XMLStreamConstants.START_ELEMENT:
+                        System.out.println(streamReader.getLocalName());
+                        break;
+                }
+                if (! streamReader.hasNext()) {
+                    break;
+                }
+                event = streamReader.next();
+            }
+        } finally {
+            streamReader.close();
+        }
+        input.close();
+//        try {
+//            while (streamReader.hasNext()) {
+//                switch (streamReader.next()) {
+//                    case XMLStreamConstants.DTD:
+//                        // TODO add DTD check
+//                        break;
+//                    case XMLStreamConstants.START_ELEMENT:     // check root element
+//                        String name = streamReader.getLocalName();
+//                        String version;
+//                        if ("pbm".equals(name)) {
+//                            version = streamReader.getAttributeValue(null, "version");
+//                        } else if ("package".equals(name)) {    // PMAB 1.x
+//                            version = "1.0";
+//                        } else {
+//                            streamReader.close();
+//                            input.close();
+//                            throw new JemException("Invalid PBM document in "+zipFile.getName());
+//                        }
+//                        if ("2.0".equals(version)) {
+//                            ReaderV2.readPBM(streamReader, book, zipFile);
+//                        } else if ("3.0".equals(version)) {
+//                            ReaderV3.readPBM(streamReader, book, zipFile);
+//                        } else if ("1.0".equals(version)) {
+//                            ReaderV1.readPBM(streamReader, book, zipFile);
+//                        } else {
+//                            streamReader.close();
+//                            input.close();
+//                            throw new JemException("Unsupported PMAB version: "+version);
+//                        }
+//                        streamReader.close();
+//                        input.close();
+//                        return;
+//                }
+//            }
+//        } catch (XMLStreamException e) {
+//            throw new JemException("Invalid PBM document in "+zipFile.getName(), e);
+//        }
     }
 
     private void readPBC(ZipFile zipFile, Book book) {

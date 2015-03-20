@@ -62,7 +62,7 @@ public abstract class FileObject {
      * Resets file object status to last status.
      * The method should be used after using <tt>openInputStream</tt>.
      */
-    public void reset() {}
+    public void reset() throws IOException {}
 
     /**
      * Writes file content to <tt>OutputStream</tt>.

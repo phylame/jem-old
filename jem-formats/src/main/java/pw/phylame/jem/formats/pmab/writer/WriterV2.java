@@ -18,18 +18,8 @@
 
 package pw.phylame.jem.formats.pmab.writer;
 
-import pw.phylame.jem.core.Book;
-import pw.phylame.jem.formats.pmab.PmabConfig;
-
-import java.util.zip.ZipOutputStream;
-
 /**
- * PBM and PBC writer for PMAB 3.x.
+ * PBM and PBC writer for PMAB 2.x.
  */
-public final class WriterV3 {
-    public static void writePBM(Book book, ZipOutputStream zipOut, PmabConfig config) {
-    }
-
-    public static void writePBC(Book book, ZipOutputStream zipOut, PmabConfig config) {
-    }
+public class WriterV2 {
 }
