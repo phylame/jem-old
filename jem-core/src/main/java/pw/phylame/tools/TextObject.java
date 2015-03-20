@@ -109,7 +109,11 @@ public class TextObject {
         if (file == null) {
             return null;
         }
-        return new java.io.InputStreamReader(file.openInputStream());
+        if (encoding != null) {
+            return new java.io.InputStreamReader(file.openInputStream(), encoding);
+        } else {
+            return new java.io.InputStreamReader(file.openInputStream());
+        }
     }
 
     /**

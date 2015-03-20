@@ -18,8 +18,21 @@
 
 package pw.phylame.jem.formats.pmab.writer;
 
+import org.dom4j.Document;
+import pw.phylame.jem.core.Book;
+import pw.phylame.jem.formats.pmab.PmabConfig;
+
+import java.util.zip.ZipOutputStream;
+
 /**
  * PBM and PBC writer for PMAB 1.x.
  */
 public class WriterV1 {
+    public static void writePBM(Book book, Document doc, ZipOutputStream zipOut, PmabConfig config) {
+        doc.addDocType("package", null, null);
+    }
+
+    public static void writePBC(Book book, Document doc, ZipOutputStream zipOut, PmabConfig config) {
+        doc.addDocType("container", null, null);
+    }
 }

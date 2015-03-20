@@ -18,19 +18,19 @@
 
 package pw.phylame.jem.formats.pmab.reader;
 
+import org.dom4j.Element;
 import java.util.zip.ZipFile;
 import pw.phylame.jem.core.Book;
-import javax.xml.stream.XMLStreamReader;
 
 /**
  * PBM and PBC reader for PMAB 3.x.
  */
 public class ReaderV3 {
-    public static void readPBM(XMLStreamReader streamReader, Book book, ZipFile zipFile) {
+    public static void readPBM(Element root, Book book, ZipFile zipFile) {
 
     }
 
-    public static void readPBC(XMLStreamReader streamReader, Book book, ZipFile zipFile) {
+    public static void readPBC(Element root, Book book, ZipFile zipFile) {
 
     }
 }

@@ -104,6 +104,11 @@ public final class FileFactory {
             assert zipEntry != null;
             return zipFile.getInputStream(zipEntry);
         }
+
+        @Override
+        public String toString() {
+            return zipFile.getName()+"!"+getName();
+        }
     }
 
     private static class AreaFile extends FileObject {
@@ -165,6 +170,11 @@ public final class FileFactory {
             if (oldOffset != -1) {
                 file.seek(oldOffset);
             }
+        }
+
+        @Override
+        public String toString() {
+            return String.format("Area <offset=%d; size=%d> in %s", offset, size, getName());
         }
     }
 

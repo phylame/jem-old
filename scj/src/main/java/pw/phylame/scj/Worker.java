@@ -44,7 +44,7 @@ import pw.phylame.tools.file.FileFactory;
 public final class Worker {
 	private static Log LOG = LogFactory.getLog(Worker.class);
 
-	private static final String CHAPTER_REGEX = "^chapter-?[\\d]+(\\$.*)?";
+	private static final String CHAPTER_REGEX = "^chapter([\\-\\d\\.]+)(\\$.*)?";
 	private static final String ITEM_REGEX = "^item\\$.*";
 
 	public static boolean setAttributes(Part part, Map<String, Object> attributes) {
@@ -165,7 +165,13 @@ public final class Worker {
 		List<Integer> parts = new java.util.ArrayList<Integer>();
 		for (String part: indexs.split("\\.")) {
 			try {
-				parts.add(new Integer(part));
+				int n = new Integer(part);
+				if (n == 0) {
+					SCI.error(String.format(SCI.getString("SCI_INVALID_INDEXS"),
+							indexs));
+					return null;
+				}
+				parts.add(n);
 			} catch(NumberFormatException ex) {
 				SCI.error(String.format(SCI.getString("SCI_INVALID_INDEXS"), indexs));
 				return null;
@@ -174,6 +180,9 @@ public final class Worker {
 		int[] results = new int[parts.size()];
 		int ix = 0;
 		for (int n: parts) {
+			if (n > 0) {
+				n--;
+			}
 			results[ix++] = n;
 		}
 		return results;
@@ -265,6 +274,7 @@ public final class Worker {
 				try {
 					System.out.println(part.getSource().getText());
 				} catch (IOException ex) {
+					ex.printStackTrace();
 					LOG.debug("load content source: "+part.getSource().getFile().getName(), ex);
 					SCI.error(String.format(SCI.getString("SCI_LOAD_CONTENT_FAILED"),
 							part.getTitle()));

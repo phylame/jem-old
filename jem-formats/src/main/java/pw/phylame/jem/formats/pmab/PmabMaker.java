@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Peng Wan
+ * Copyright 2015 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -21,10 +21,12 @@ package pw.phylame.jem.formats.pmab;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.Maker;
-import pw.phylame.jem.formats.pmab.writer.WriterV3;
+import pw.phylame.jem.formats.pmab.writer.*;
 import pw.phylame.jem.util.JemException;
 import pw.phylame.tools.file.FileUtils;
 
@@ -63,17 +65,11 @@ public class PmabMaker implements Maker {
     public void make(Book book, File file, Map<String, Object> kw) throws IOException, JemException {
         PmabConfig config = new PmabConfig();
         if (kw != null && kw.size() != 0) {
-            Object o = kw.get("pbm_version");
+            Object o = kw.get("pmab_version");
             if (o instanceof String) {
-                config.pbmVersion = (String)o;
+                config.pmabVersion = (String)o;
             } else {
-                throw new JemException("invalid pbm_version string: "+o);
-            }
-            o = kw.get("pbc_version");
-            if (o instanceof String) {
-                config.pbcVersion = (String)o;
-            } else {
-                throw new JemException("invalid pbm_version string: "+o);
+                throw new JemException("invalid pmab_version string: "+o);
             }
             o = kw.get("pmab_method");
             if (o != null) {
@@ -84,7 +80,7 @@ public class PmabMaker implements Maker {
                     try {
                         int n = Integer.parseInt(s);
                     } catch (NumberFormatException ex) {
-                        throw new JemException("invalid ZIP method: "+s);
+                        throw new JemException("Invalid ZIP method: "+s);
                     }
                 } else {
                     throw new JemException("pmab_method require int or str");
@@ -114,23 +110,33 @@ public class PmabMaker implements Maker {
         FileUtils.writeText(zipOut, Pmab.MT_PMAB, "UTF-8");
     }
 
-    private void writePBM(Book book, ZipOutputStream zipOut, PmabConfig config) throws JemException {
-        if ("3.0".equals(config.pbmVersion)) {
-            WriterV3.writePBM(book, zipOut, config);
-        } else if ("2.0".equals(config.pbmVersion)) {
-
+    private void writePBM(Book book, ZipOutputStream zipOut, PmabConfig config) throws IOException, JemException {
+        Document doc = DocumentHelper.createDocument();
+        if ("3.0".equals(config.pmabVersion)) {
+            WriterV3.writePBM(book, doc, zipOut, config);
+        } else if ("2.0".equals(config.pmabVersion)) {
+            WriterV2.writePBM(book, doc, zipOut, config);
+        } else if ("1.0".equals(config.pmabVersion)) {
+            WriterV1.writePBM(book, doc, zipOut, config);
         } else {
-            throw new JemException("unsupported PBM version: "+config.pbmVersion);
+            throw new JemException("Unsupported PMAB version: "+config.pmabVersion);
         }
+        zipOut.putNextEntry(new ZipEntry(Pmab.PBM_FILE));
+        Pmab.writeXML(doc, zipOut, config.xmlEncoding, config.xmlIndent, config.xmlLineSeparator);
     }
 
-    private void writePBC(Book book, ZipOutputStream zipOut, PmabConfig config) throws JemException {
-        if ("3.0".equals(config.pbcVersion)) {
-            WriterV3.writePBC(book, zipOut, config);
-        } else if ("2.0".equals(config.pbcVersion)) {
-
+    private void writePBC(Book book, ZipOutputStream zipOut, PmabConfig config) throws IOException, JemException {
+        Document doc = DocumentHelper.createDocument();
+        if ("3.0".equals(config.pmabVersion)) {
+            WriterV3.writePBC(book, doc, zipOut, config);
+        } else if ("2.0".equals(config.pmabVersion)) {
+            WriterV2.writePBC(book, doc, zipOut, config);
+        } else if ("1.0".equals(config.pmabVersion)) {
+            WriterV1.writePBC(book, doc, zipOut, config);
         } else {
-            throw new JemException("unsupported PBC version: "+config.pbcVersion);
+            throw new JemException("Unsupported PMAB version: "+config.pmabVersion);
         }
+        zipOut.putNextEntry(new ZipEntry(Pmab.PBC_FILE));
+        Pmab.writeXML(doc, zipOut, config.xmlEncoding, config.xmlIndent, config.xmlLineSeparator);
     }
 }

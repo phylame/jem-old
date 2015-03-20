@@ -29,15 +29,18 @@ public class PmabConfig {
     public String textDir = "text", imageDir = "images", extraDir = "extras";
 
     // XML style
-    public String xmlEncoding = "UTF-8", xmlIndent = "  ",
+    public String xmlEncoding = "UTF-8", xmlIndent = "\t",
             xmlLineSeparator = System.getProperty("line.separator");
 
     // encoding for text content
     public String textEncoding = System.getProperty("file.encoding");
 
     // output version
-    public String pbmVersion = "3.0", pbcVersion = "3.0";
+    public String pmabVersion = "3.0";
 
     // ZIP compression
     public int zipMethod = Deflater.DEFLATED, zipLevel = Deflater.DEFAULT_COMPRESSION;
+
+    // date format
+    public String dateFormat = "yyyy-M-d";
 }

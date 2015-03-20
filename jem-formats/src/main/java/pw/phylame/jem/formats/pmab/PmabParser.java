@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Peng Wan
+ * Copyright 2015 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -18,26 +18,27 @@
 
 package pw.phylame.jem.formats.pmab;
 
+import org.dom4j.Element;
+import org.dom4j.Document;
+import org.dom4j.io.SAXReader;
+import org.dom4j.DocumentException;
+
+import org.xml.sax.EntityResolver;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Parser;
 import pw.phylame.jem.core.Part;
 import pw.phylame.jem.util.JemException;
 
-import java.io.BufferedInputStream;
+import java.io.*;
 import java.util.Map;
-import java.io.File;
-import java.io.InputStream;
-import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamConstants;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
 
 import pw.phylame.jem.formats.pmab.reader.*;
 
@@ -80,14 +81,10 @@ public class PmabParser implements Parser {
 
     public Book parse(final ZipFile zipFile) throws IOException, JemException {
         if (! Pmab.isPmab(zipFile)) {
-            throw new JemException("invalid PMAB archive");
+            throw new JemException("Invalid PMAB archive");
         }
         Book book = new Book();
-        try {
-            readPBM(zipFile, book);
-        } catch (XMLStreamException e) {
-            throw new JemException("Invalid PBM document", e);
-        }
+        readPBM(zipFile, book);
         readPBC(zipFile, book);
         book.registerCleanup(new Part.Cleanable() {
             @Override
@@ -102,71 +99,109 @@ public class PmabParser implements Parser {
         return book;
     }
 
-    private void readPBM(ZipFile zipFile, Book book) throws IOException, JemException, XMLStreamException {
+    private void readPBM(ZipFile zipFile, Book book) throws IOException, JemException {
         ZipEntry zipEntry = zipFile.getEntry(Pmab.PBM_FILE);
         if (zipEntry == null) {
             throw new IOException("Not found "+Pmab.PBM_FILE+" in PMAB "+zipFile.getName());
         }
         InputStream input = new BufferedInputStream(zipFile.getInputStream(zipEntry));
-        XMLInputFactory inputFactory = XMLInputFactory.newFactory();
-        XMLStreamReader streamReader = inputFactory.createXMLStreamReader(input);
-        try {
-            int event = streamReader.getEventType();
-            while (true) {
-                switch (event) {
-                    case XMLStreamConstants.START_ELEMENT:
-                        System.out.println(streamReader.getLocalName());
-                        break;
-                }
-                if (! streamReader.hasNext()) {
-                    break;
-                }
-                event = streamReader.next();
+        SAXReader reader = new SAXReader();
+        reader.setEntityResolver(new EntityResolver() {
+            @Override
+            public InputSource resolveEntity(String publicId, String systemId)
+                    throws SAXException, IOException {
+                return new InputSource(new ByteArrayInputStream("".getBytes()));
             }
-        } finally {
-            streamReader.close();
+        });
+        Document doc;
+        try {
+            doc = reader.read(input);
+        } catch (DocumentException e) {
+            e.printStackTrace();
+            throw new JemException("Invalid PBM document in "+zipFile.getName(), e);
+        }
+        Element root = doc.getRootElement();
+        String version;
+        String tag = root.getName();
+        if ("pbm".equals(tag)) {
+            // check DTD if present
+            if (doc.getDocType() != null && ! doc.getDocType().getName().equals("pbm")) {
+                throw new JemException("Invalid PBC document: DTD is not pbm");
+            }
+            version = root.attributeValue("version");
+        } else if ("package".equals(tag)) {
+            // check DTD if present
+            if (doc.getDocType() != null && ! doc.getDocType().getName().equals("package")) {
+                throw new JemException("Invalid PBC document: DTD is not package");
+            }
+            version = "1.0";
+        } else {
+            input.close();
+            throw new JemException("Invalid PBM document: root is not pbm or package");
+        }
+        if ("2.0".equals(version)) {
+            ReaderV2.readPBM(root, book, zipFile);
+        } else if ("3.0".equals(version)) {
+            ReaderV3.readPBM(root, book, zipFile);
+        } else  if ("1.0".equals(version)) {
+            ReaderV1.readPBM(root, book, zipFile);
+        } else {
+            input.close();
+            throw new JemException("Invalid PBM version: "+version);
         }
         input.close();
-//        try {
-//            while (streamReader.hasNext()) {
-//                switch (streamReader.next()) {
-//                    case XMLStreamConstants.DTD:
-//                        // TODO add DTD check
-//                        break;
-//                    case XMLStreamConstants.START_ELEMENT:     // check root element
-//                        String name = streamReader.getLocalName();
-//                        String version;
-//                        if ("pbm".equals(name)) {
-//                            version = streamReader.getAttributeValue(null, "version");
-//                        } else if ("package".equals(name)) {    // PMAB 1.x
-//                            version = "1.0";
-//                        } else {
-//                            streamReader.close();
-//                            input.close();
-//                            throw new JemException("Invalid PBM document in "+zipFile.getName());
-//                        }
-//                        if ("2.0".equals(version)) {
-//                            ReaderV2.readPBM(streamReader, book, zipFile);
-//                        } else if ("3.0".equals(version)) {
-//                            ReaderV3.readPBM(streamReader, book, zipFile);
-//                        } else if ("1.0".equals(version)) {
-//                            ReaderV1.readPBM(streamReader, book, zipFile);
-//                        } else {
-//                            streamReader.close();
-//                            input.close();
-//                            throw new JemException("Unsupported PMAB version: "+version);
-//                        }
-//                        streamReader.close();
-//                        input.close();
-//                        return;
-//                }
-//            }
-//        } catch (XMLStreamException e) {
-//            throw new JemException("Invalid PBM document in "+zipFile.getName(), e);
-//        }
     }
 
-    private void readPBC(ZipFile zipFile, Book book) {
-
+    private void readPBC(ZipFile zipFile, Book book) throws IOException, JemException {
+        ZipEntry zipEntry = zipFile.getEntry(Pmab.PBC_FILE);
+        if (zipEntry == null) {
+            throw new IOException("Not found "+Pmab.PBC_FILE+" in PMAB "+zipFile.getName());
+        }
+        InputStream input = new BufferedInputStream(zipFile.getInputStream(zipEntry));
+        SAXReader reader = new SAXReader();
+        reader.setEntityResolver(new EntityResolver() {
+            @Override
+            public InputSource resolveEntity(String publicId, String systemId)
+                    throws SAXException, IOException {
+                return new InputSource(new ByteArrayInputStream("".getBytes()));
+            }
+        });
+        Document doc;
+        try {
+            doc = reader.read(input);
+        } catch (DocumentException e) {
+            e.printStackTrace();
+            throw new JemException("Invalid PBC document in "+zipFile.getName(), e);
+        }
+        Element root = doc.getRootElement();
+        String version;
+        String tag = root.getName();
+        if ("pbc".equals(tag)) {
+            // check DTD if present
+            if (doc.getDocType() != null && ! doc.getDocType().getName().equals("pbc")) {
+                throw new JemException("Invalid PBC document: DTD is not pbc");
+            }
+            version = root.attributeValue("version");
+        } else if ("container".equals(tag)) {
+            // check DTD if present
+            if (doc.getDocType() != null && ! doc.getDocType().getName().equals("container")) {
+                throw new JemException("Invalid PBC document: DTD is not container");
+            }
+            version = "1.0";
+        } else {
+            input.close();
+            throw new JemException("Invalid PBC document: root is not pbc or container");
+        }
+        if ("2.0".equals(version)) {
+            ReaderV2.readPBC(root, book, zipFile);
+        } else if ("3.0".equals(version)) {
+            ReaderV3.readPBC(root, book, zipFile);
+        } else  if ("1.0".equals(version)) {
+            ReaderV1.readPBC(root, book, zipFile);
+        } else {
+            input.close();
+            throw new JemException("Invalid PBC version: "+version);
+        }
+        input.close();
     }
 }
