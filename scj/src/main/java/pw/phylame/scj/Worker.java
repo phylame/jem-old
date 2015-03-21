@@ -47,6 +47,15 @@ public final class Worker {
 	private static final String CHAPTER_REGEX = "^chapter([\\-\\d\\.]+)(\\$.*)?";
 	private static final String ITEM_REGEX = "^item\\$.*";
 
+	public static <T> boolean contains(T[] a, T o) {
+		for (int ix = 0; ix < a.length; ++ix) {
+			if (a[ix] == o || a[ix].equals(o)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public static boolean setAttributes(Part part, Map<String, Object> attributes) {
 		for (String key: attributes.keySet()) {
 			String raw = String.valueOf(attributes.get(key));

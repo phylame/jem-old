@@ -36,6 +36,9 @@ public class TextObject {
         TEXT, FILE
     }
 
+    /** More than this size of content is large. */
+    public static int LARGE_SIZE = 4096;
+
     /**
      * Constructs object with specified raw text.
      * @param raw the raw text
@@ -98,6 +101,28 @@ public class TextObject {
         this.file = file;
         this.encoding = encoding;
         sourceType = SourceType.FILE;
+    }
+
+    /**
+     * Returns <tt>true</tt> if the text content is large.
+     * @return <tt>true</tt> if large otherwise <tt>false</tt>
+     */
+    public boolean isLarge() {
+        long size;
+        switch (sourceType) {
+            case FILE:
+                try {
+                    size = getFile().available();
+                } catch (IOException e) {
+//                    e.printStackTrace();
+                    size = LARGE_SIZE;
+                }
+                break;
+            default:
+                size = getRaw().length();
+                break;
+        }
+        return size >= LARGE_SIZE;
     }
 
     /**

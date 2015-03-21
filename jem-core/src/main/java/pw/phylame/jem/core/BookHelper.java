@@ -18,16 +18,16 @@
 
 package pw.phylame.jem.core;
 
-import java.net.URLConnection;
 import java.util.Map;
-import java.util.Collection;
+import java.util.Properties;
 import java.util.Enumeration;
-import java.net.URL;
-import java.io.InputStream;
-import java.io.IOException;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
-import java.util.Properties;
+
+import java.net.URL;
+import java.net.URLConnection;
+import java.io.InputStream;
+import java.io.IOException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -146,10 +146,10 @@ public final class BookHelper {
      * Returns names of registered parser class.
      * @return sequence of format names
      */
-    public static Collection<String> supportedParsers() {
+    public static String[] supportedParsers() {
         java.util.Set<String> names = parsers.keySet();
         names.addAll(cachedParsers.keySet());
-        return names;
+        return names.toArray(new String[0]);
     }
 
     /**
@@ -236,10 +236,10 @@ public final class BookHelper {
      * Returns names of registered maker class.
      * @return sequence of format names
      */
-    public static Collection<String> supportedMakers() {
+    public static String[] supportedMakers() {
         java.util.Set<String> names = makers.keySet();
         names.addAll(cachedMakers.keySet());
-        return names;
+        return names.toArray(new String[0]);
     }
 
     /**

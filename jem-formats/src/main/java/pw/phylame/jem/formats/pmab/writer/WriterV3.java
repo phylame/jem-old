@@ -28,12 +28,12 @@ import pw.phylame.jem.core.Part;
 import pw.phylame.jem.formats.pmab.Pmab;
 import pw.phylame.jem.formats.pmab.PmabConfig;
 import pw.phylame.tools.DateUtils;
+import pw.phylame.tools.StringUtils;
 import pw.phylame.tools.TextObject;
-import pw.phylame.tools.file.FileUtils;
 
-import javax.tools.FileObject;
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 import java.util.Date;
 import java.util.zip.ZipOutputStream;
 
@@ -79,14 +79,25 @@ public final class WriterV3 {
             }
         } else if (type.equals("datetime")) {
             type += ";format=" + config.dateFormat;
-            text = DateUtils.formatDate((Date)value, config.dateFormat);
+            text = DateUtils.formatDate((Date) value, config.dateFormat);
+        } else if (type.equals("bytes")) {
+            text = StringUtils.join((Byte[])value, " ");
         } else {
-            type = "str";
             text = String.valueOf(value);
         }
         item.addAttribute("type", type);
         if (! "".equals(text)) {
             item.setText(text);
+        }
+    }
+
+    private static void makeHead(Element parent, Map<String, String> metaInfo) {
+        Element head = parent.addElement("head");
+        for (String name: metaInfo.keySet()) {
+            String value = metaInfo.get(name);
+            if (value != null) {
+                head.addElement("meta").addAttribute("name", name).addAttribute("value", value);
+            }
         }
     }
 
@@ -102,6 +113,10 @@ public final class WriterV3 {
             throws IOException {
         doc.addDocType("pbm", null, null);
         Element root = doc.addElement("pbm", Pmab.PBM_XML_NS).addAttribute("version", "3.0");
+        // head
+        if (config.metaInfo != null && config.metaInfo.size() > 0) {
+            makeHead(root, config.metaInfo);
+        }
         // attributes
         makeAttributes(root, book, zipOut, config);
         // extensions
@@ -116,7 +131,7 @@ public final class WriterV3 {
         Element item = parent.addElement("chapter");
         makeAttributes(item, part, zipOut, config);
         // TODO  content
-        String href = config.textDir + "/chapter"+suffix+".txt";
+        String href = config.textDir + "/chapter-"+suffix+".txt";
         String encoding = config.textEncoding != null ? config.textEncoding :
                 System.getProperty("file.encoding");
         Pmab.writeText(part.getSource(), zipOut, href, encoding);
@@ -126,7 +141,7 @@ public final class WriterV3 {
 
         int ix = 1;
         for (Part sub: part) {
-            makeChapter(item, sub, zipOut, config, suffix+"."+ix++);
+            makeChapter(item, sub, zipOut, config, suffix+"-"+ix++);
         }
     }
 

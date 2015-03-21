@@ -19,7 +19,7 @@ package pw.phylame.tools;
 /**
  * Utility class for number operations.
  */
-public abstract class NumberUtils {
+public final class NumberUtils {
 
     private static java.util.Random random = null;
 

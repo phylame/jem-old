@@ -89,6 +89,14 @@ public abstract class FileObject {
         return total;
     }
 
+    /**
+     * Gets available bytes ti be read.
+     * @return the size or <tt>-1</tt> if unknown
+     */
+    public long available() throws IOException {
+        return -1;
+    }
+
     @Override
     public String toString() {
         return getName();

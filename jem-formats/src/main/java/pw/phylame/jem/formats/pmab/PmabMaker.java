@@ -26,7 +26,9 @@ import org.dom4j.DocumentHelper;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.Maker;
-import pw.phylame.jem.formats.pmab.writer.*;
+import pw.phylame.jem.formats.pmab.writer.WriterV1;
+import pw.phylame.jem.formats.pmab.writer.WriterV2;
+import pw.phylame.jem.formats.pmab.writer.WriterV3;
 import pw.phylame.jem.util.JemException;
 import pw.phylame.tools.file.FileUtils;
 
@@ -64,6 +66,8 @@ public class PmabMaker implements Maker {
     @Override
     public void make(Book book, File file, Map<String, Object> kw) throws IOException, JemException {
         PmabConfig config = new PmabConfig();
+        config.metaInfo = new java.util.HashMap<String, String>();
+        config.metaInfo.put("generator", "Jem "+Jem.VERSION);
         if (kw != null && kw.size() != 0) {
             Object o = kw.get("pmab_version");
             if (o instanceof String) {

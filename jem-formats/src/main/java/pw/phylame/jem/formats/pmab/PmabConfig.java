@@ -18,8 +18,8 @@
 
 package pw.phylame.jem.formats.pmab;
 
+import java.util.Map;
 import java.util.zip.Deflater;
-import java.util.zip.ZipOutputStream;
 
 /**
  * Configuration for making PMAB.
@@ -43,4 +43,7 @@ public class PmabConfig {
 
     // date format
     public String dateFormat = "yyyy-M-d";
+
+    // meta data
+    public Map<String, String> metaInfo = null;
 }

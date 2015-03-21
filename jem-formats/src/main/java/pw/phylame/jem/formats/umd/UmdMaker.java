@@ -32,11 +32,11 @@ import java.util.Map;
 public class UmdMaker implements Maker {
     @Override
     public String getName() {
-        return null;
+        return "umd";
     }
 
     @Override
     public void make(Book book, File file, Map<String, Object> map) throws IOException, JemException {
-
+        throw new JemException("under development");
     }
 }

@@ -25,7 +25,7 @@ import java.util.zip.ZipOutputStream;
 /**
  * Utility for file operations.
  */
-public class FileUtils {
+public final class FileUtils {
 
     /** Buffer area size */
     public static final int BUFFER_SIZE = 4096;

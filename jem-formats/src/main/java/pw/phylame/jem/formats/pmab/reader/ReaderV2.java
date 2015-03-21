@@ -109,8 +109,7 @@ public class ReaderV2 {
             }
             String type = item.attributeValue("type");
             if (type == null) {
-                LOG.debug("ignore 'item' element without 'type' attribute in PBM extension");
-                continue;
+                type = "text";      // as text
             }
             String value = item.attributeValue("value");
             if (type.equals("file")) {

@@ -32,11 +32,11 @@ import java.util.Map;
 public class TxtParser implements Parser {
     @Override
     public String getName() {
-        return null;
+        return "txt";
     }
 
     @Override
     public Book parse(File file, Map<String, Object> map) throws IOException, JemException {
-        return null;
+        throw new JemException("under development");
     }
 }

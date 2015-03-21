@@ -19,7 +19,7 @@ package pw.phylame.tools;
 /**
  * Utility for string operations.
  */
-public abstract class StringUtils {
+public final class StringUtils {
 
     /**
      * Joins string array to string.
@@ -29,27 +29,44 @@ public abstract class StringUtils {
      * @return joined string
      */
     public static <T> String join(T[] seq, String separator) {
-        return join(java.util.Arrays.asList(seq), separator);
+        int iMax = seq.length - 1;
+        if (iMax == -1) {
+            return "";
+        }
+
+        StringBuilder b = new StringBuilder();
+        for (int i = 0; ; i++) {
+            b.append(seq[i]);
+            if (i == iMax) {
+                return b.toString();
+            }
+            b.append(separator);
+        }
     }
 
     /**
      * Joins string collection to string.
      * @param <T> the class of the objects in the array
-     * @param seq collection of {@code String}
+     * @param seq collection of object or string
      * @param separator separator between string and string
      * @return joined string
      */
     public static <T> String join(java.util.Collection<T> seq, String separator) {
-        int i = 1;
-        StringBuilder sb = new StringBuilder();
-        for (T o: seq) {
-            sb.append(o);
-            /* not last item */
-            if (i++ != seq.size()) {
-                sb.append(separator);
-            }
+        int iMax = seq.size() - 1;
+        if (iMax == -1) {
+            return "";
         }
-        return sb.toString();
+
+        StringBuilder b = new StringBuilder();
+        int ix = 0;
+        for (T o: seq) {
+            b.append(o);
+            if (ix++ == iMax) {
+                break;
+            }
+            b.append(separator);
+        }
+        return b.toString();
     }
 
     /**

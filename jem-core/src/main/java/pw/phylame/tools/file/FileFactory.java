@@ -62,6 +62,7 @@ public final class FileFactory {
         public InputStream openInputStream() throws IOException {
             return new FileInputStream(file);
         }
+
     }
 
     private static class InnerZip extends FileObject {
@@ -170,6 +171,16 @@ public final class FileFactory {
             if (oldOffset != -1) {
                 file.seek(oldOffset);
             }
+        }
+
+        /**
+         * Gets available bytes ti be read.
+         *
+         * @return the size or <tt>-1</tt> if unknown
+         */
+        @Override
+        public long available() throws IOException {
+            return size;
         }
 
         @Override

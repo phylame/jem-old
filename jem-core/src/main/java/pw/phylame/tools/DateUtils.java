@@ -24,7 +24,7 @@ import java.text.SimpleDateFormat;
 /**
  * Utility class for date operations.
  */
-public class DateUtils {
+public final class DateUtils {
 
     /**
      * Parses date from text with specified format.

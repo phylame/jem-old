@@ -30,6 +30,9 @@ import org.xml.sax.SAXException;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Parser;
 import pw.phylame.jem.core.Part;
+import pw.phylame.jem.formats.pmab.reader.ReaderV1;
+import pw.phylame.jem.formats.pmab.reader.ReaderV2;
+import pw.phylame.jem.formats.pmab.reader.ReaderV3;
 import pw.phylame.jem.util.JemException;
 
 import java.io.*;
@@ -39,8 +42,6 @@ import java.util.zip.ZipFile;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import pw.phylame.jem.formats.pmab.reader.*;
 
 /**
  * <tt>Parser</tt> implement for PMAB book.

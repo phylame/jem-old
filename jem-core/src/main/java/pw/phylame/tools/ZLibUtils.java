@@ -30,7 +30,7 @@ import java.util.zip.InflaterInputStream;
 /**
  * Utility class for ZLib operations.
  */
-public abstract class ZLibUtils {
+public final class ZLibUtils {
     /** Buffer size */
     public static final int BUFFER_SIZE = 2048;
 
