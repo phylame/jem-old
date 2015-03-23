@@ -138,28 +138,19 @@ public class Part extends Attributes implements Iterable<Part> {
 
     /**
      * Returns text content of the <tt>Part</tt>.
-     * @return content string or <tt>null</tt> if occurs errors when loading source.
+     * @return content string
      */
-    public String getText() {
-        try {
-            return source.getText();
-        } catch (IOException e) {
-            LOG.debug("cannot load text source", e);
-            return null;
-        }
+    public String getText() throws IOException {
+        return source.getText();
     }
 
     /**
      * Returns text content and split by line separator.
-     * @return array of lines or <tt>null</tt> if occurs errors when loading source..
+     * @param skipEmptyLine <tt>true</tt> to skip empty lines
+     * @return array of lines
      */
-    public String[] getLines() {
-        try {
-            return source.getLines();
-        } catch (IOException e) {
-            LOG.debug("cannot load text source", e);
-            return null;
-        }
+    public String[] getLines(boolean skipEmptyLine) throws IOException {
+        return source.getLines(skipEmptyLine);
     }
 
     /**

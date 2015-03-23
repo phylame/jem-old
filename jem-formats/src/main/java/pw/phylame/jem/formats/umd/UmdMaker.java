@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Created by Peng Wan on 2015-3-17.
+ * <tt>Maker</tt> implement for UMD book.
  */
 public class UmdMaker implements Maker {
     @Override
@@ -36,7 +36,7 @@ public class UmdMaker implements Maker {
     }
 
     @Override
-    public void make(Book book, File file, Map<String, Object> map) throws IOException, JemException {
+    public void make(Book book, File file, Map<String, Object> kw) throws IOException, JemException {
         throw new JemException("under development");
     }
 }

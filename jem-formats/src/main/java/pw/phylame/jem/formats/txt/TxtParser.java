@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Created by Peng Wan on 2015-3-17.
+ * <tt>Parser</tt> implement for TXT book.
  */
 public class TxtParser implements Parser {
     @Override
@@ -36,7 +36,7 @@ public class TxtParser implements Parser {
     }
 
     @Override
-    public Book parse(File file, Map<String, Object> map) throws IOException, JemException {
+    public Book parse(File file, Map<String, Object> kw) throws IOException, JemException {
         throw new JemException("under development");
     }
 }

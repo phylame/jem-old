@@ -48,7 +48,7 @@ public final class SCI {
 	private static Log LOG = LogFactory.getLog(SCI.class);
 
 	/** SCJ version message */
-	public static final String VERSION = "1.0-SNAPSHOT";
+	public static final String VERSION = "1.0.3-SNAPSHOT";
 
 	public static String Name = "scj";
 
@@ -69,9 +69,9 @@ public final class SCI {
 
 	private static Options makeOptions() {
 		Options options = new Options();
-		options.addOption("h", "help", false, getString("HELP_DESCRIPTION"));
-		options.addOption("v", "version", false, getString("HELP_VERSION"));
-		options.addOption("l", "list", false, getString("HELP_LIST"));
+		options.addOption("h", false, getString("HELP_DESCRIPTION"));
+		options.addOption("v", false, getString("HELP_VERSION"));
+		options.addOption("l", false, getString("HELP_LIST"));
 
 		// specified
 		Option inFormat = OptionBuilder.withArgName(
@@ -98,22 +98,22 @@ public final class SCI {
 
 		Option view = OptionBuilder.withArgName(
 				getString("ARG_NAME")).hasArg().withValueSeparator().withDescription(
-						getString("HELP_VIEW")).create("V");
+						getString("HELP_VIEW")).create("w");
 
 		options.addOptionGroup(new OptionGroup().addOption(
 				convert).addOption(join).addOption(extract).addOption(view));
 
 		Option attr = OptionBuilder.withArgName(
 			getString("ARG_KV")).hasArgs(2).withValueSeparator().withDescription(
-					getString("HELP_ATTRIBUTE")).create("A");
+					getString("HELP_ATTRIBUTE")).create("a");
 
 		Option inKW = OptionBuilder.withArgName(
 				getString("ARG_KV")).hasArgs(2).withValueSeparator().withDescription(
-						getString("HELP_IN_ARGUMENT")).create("P");
+						getString("HELP_IN_ARGUMENT")).create("p");
 
 		Option outKw = OptionBuilder.withArgName(
 				getString("ARG_KV")).hasArgs(2).withValueSeparator().withDescription(
-						getString("HELP_OUT_ARGUMENT")).create("M");
+						getString("HELP_OUT_ARGUMENT")).create("m");
 
 		options.addOption(attr).addOption(inKW).addOption(outKw);
 
@@ -209,8 +209,8 @@ public final class SCI {
 		Command command = Command.View;
 		if (cmd.hasOption("c")) {
 			command = Command.Convert;
-		} else if (cmd.hasOption("V")) {
-			viewNames = cmd.getOptionValues("V");
+		} else if (cmd.hasOption("w")) {
+			viewNames = cmd.getOptionValues("w");
 		} else if (cmd.hasOption("j")) {
 			command = Command.Join;
 		} else if (cmd.hasOption("x")) {
@@ -234,9 +234,9 @@ public final class SCI {
 		String out = cmd.getOptionValue("o");
 		File output = new File(out == null ? "." : out);
 
-		Map<String, Object> inKw = parseArguments(cmd.getOptionProperties("P"));
-		Map<String, Object> outKw = parseArguments(cmd.getOptionProperties("M"));
-		Map<String, Object> attrs = parseArguments(cmd.getOptionProperties("A"));
+		Map<String, Object> inKw = parseArguments(cmd.getOptionProperties("p"));
+		Map<String, Object> outKw = parseArguments(cmd.getOptionProperties("m"));
+		Map<String, Object> attrs = parseArguments(cmd.getOptionProperties("a"));
 
 		List<File> inputs = new java.util.ArrayList<File>();
 		// exit status

@@ -185,6 +185,25 @@ public final class Jem {
     }
 
     /**
+     * Returns the depth of sub-parts tree.
+     * @param part the part
+     * @return depth of the part
+     */
+    public static int getDepth(Part part) {
+        if (part == null || part.size() == 0) {
+            return 0;
+        }
+        int depth = 0;
+        for (Part sub: part) {
+            int d = getDepth(sub);
+            if (d > depth) {
+                depth = d;
+            }
+        }
+        return depth + 1;
+    }
+
+    /**
      * This interface used for walking sub-parts.
      */
     public static interface  Walker {

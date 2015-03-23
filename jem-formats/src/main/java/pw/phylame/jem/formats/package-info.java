@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Peng Wan
+ * Copyright 2015 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -17,7 +17,7 @@
  */
 
 /**
- * Builtin implements of book parser and maker.
+ * Implements of book parser and maker.
  * @author Peng Wan, PW
  * @version 2.0-SNAPSHOT
  */

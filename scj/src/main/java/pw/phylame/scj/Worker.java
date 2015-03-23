@@ -55,7 +55,7 @@ public final class Worker {
 		}
 		return false;
 	}
-	
+
 	public static boolean setAttributes(Part part, Map<String, Object> attributes) {
 		for (String key: attributes.keySet()) {
 			String raw = String.valueOf(attributes.get(key));
@@ -237,6 +237,10 @@ public final class Worker {
 			}
 		} else if (value instanceof Date) {
 			str = DateUtils.formatDate((Date)value, SCI.getString("SCI_DATE_FORMAT"));
+		} else if (value instanceof byte[]) {
+			str = java.util.Arrays.toString((byte[])value);
+		} else if (value instanceof Byte[]) {
+			str = java.util.Arrays.toString((Byte[])value);
 		} else if (value != null) {
 			str = String.valueOf(value);
 		}

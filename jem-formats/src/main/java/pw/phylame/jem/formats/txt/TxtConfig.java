@@ -16,27 +16,24 @@
  * limitations under the License.
  */
 
-package pw.phylame.jem.formats.umd;
-
-import pw.phylame.jem.core.Book;
-import pw.phylame.jem.core.Parser;
-import pw.phylame.jem.util.JemException;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Map;
+package pw.phylame.jem.formats.txt;
 
 /**
- * <tt>Parser</tt> implement for UMD book.
+ * Configuration for making PMAB.
  */
-public class UmdParser implements Parser {
-    @Override
-    public String getName() {
-        return "umd";
-    }
+public class TxtConfig {
+    // encoding
+    public String encoding = System.getProperty("file.encoding");
 
-    @Override
-    public Book parse(File file, Map<String, Object> kw) throws IOException, JemException {
-        throw new JemException("under development");
-    }
+    // line separator
+    public String lineSeparator = System.getProperty("line.separator");
+
+    // paragraph prefix
+    public String paragraphPrefix = "\u3000\u3000";     // chinese tab
+
+    // separator between intro and text
+    public String introSeparator = "------";
+
+    // skip empty lines
+    public boolean skipEmptyLine = false;
 }

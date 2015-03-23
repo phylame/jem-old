@@ -173,7 +173,7 @@ public class ReaderV2 {
         }
 
         for (Iterator it = elem.elementIterator(); it.hasNext(); ) {
-            if (count >= 0 && parent.size() >= count) {
+            if (count >= 0 && chapter.size() >= count) {
                 break;
             }
             Element item = (Element) it.next();

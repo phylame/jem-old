@@ -16,27 +16,26 @@
  * limitations under the License.
  */
 
-package pw.phylame.jem.formats.umd;
-
-import pw.phylame.jem.core.Book;
-import pw.phylame.jem.core.Parser;
-import pw.phylame.jem.util.JemException;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Map;
+package pw.phylame.jem.formats.jar;
 
 /**
- * <tt>Parser</tt> implement for UMD book.
+ * Defines constants and common methods.
  */
-public class UmdParser implements Parser {
-    @Override
-    public String getName() {
-        return "umd";
-    }
+public class Jar {
+    static final int FILE_HEADER = 0x13000;
 
-    @Override
-    public Book parse(File file, Map<String, Object> kw) throws IOException, JemException {
-        throw new JemException("under development");
-    }
+    static final String META_ENCODING = "UTF-8";
+
+    static final String TEXT_ENCODING = "UTF-16LE";
+
+    static final String MF_FILE = "META-INF/MANIFEST.MF";
+
+    static String MF_TEMPLATE = "Manifest-Version: 1.0\n" +
+            "Created-By: %s v%s\n" +
+            "MIDlet-1: %s,/jm.PNG,JavaBook\n" +
+            "MIDlet-Vendor: %s\n" +
+            "MIDlet-Version: 1.0\n" +
+            "MIDlet-Name: %s\n" +
+            "MicroEdition-Configuration: CLDC-1.0\n" +
+            "MicroEdition-Profile: MIDP-1.0";
 }
