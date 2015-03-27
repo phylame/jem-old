@@ -65,10 +65,20 @@ public class PmabMaker implements Maker {
         config.metaInfo.put("generator", "Jem "+Jem.VERSION);
         if (kw != null && kw.size() != 0) {
             Object o = kw.get("pmab_version");
-            if (o instanceof String) {
-                config.pmabVersion = (String)o;
-            } else {
-                throw new JemException("Invalid pmab_version string: "+o);
+            if (o != null) {
+                if (o instanceof String) {
+                    config.pmabVersion = (String) o;
+                } else {
+                    throw new JemException("Invalid pmab_version string: " + o);
+                }
+            }
+            o = kw.get("pmab_text_encoding");
+            if (o != null) {
+                if (o instanceof String) {
+                    config.textEncoding = (String) o;
+                } else {
+                    throw new JemException("Invalid pmab_text_encoding: " + o);
+                }
             }
             o = kw.get("pmab_compress_method");
             if (o != null) {

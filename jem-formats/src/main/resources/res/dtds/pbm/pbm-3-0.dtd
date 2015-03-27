@@ -11,7 +11,7 @@ file: pbm-3-0.dtd
 <!ENTITY % URI "CDATA" >
 
 <!-- Top Level PBM Container. -->
-<!ELEMENT pbm (head?, attributes, extensions)>
+<!ELEMENT pbm (head?, attributes, extensions?)>
 <!ATTLIST pbm
   version   CDATA   #FIXED   "3.0"
   xmlns     %URI;   #FIXED   "http://phylame.pw/format/pmab/pbm"

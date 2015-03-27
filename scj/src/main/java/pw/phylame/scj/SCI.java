@@ -159,7 +159,6 @@ public final class SCI {
 		System.out.println(Name + ": " + msg);
 	}
 
-
 	private static boolean isDebug = false;
 
 	public static void debug(String msg) {

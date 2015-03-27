@@ -45,22 +45,28 @@ public class TxtMaker implements Maker {
         TxtConfig config = new TxtConfig();
         if (kw != null && kw.size() > 0) {
             Object o = kw.get("txt_encoding");
-            if (o instanceof String) {
-                config.encoding = (String)o;
-            } else {
-                throw new JemException("Invalid txt_encoding string: "+o);
+            if (o != null) {
+                if (o instanceof String) {
+                    config.encoding = (String) o;
+                } else {
+                    throw new JemException("Invalid txt_encoding string: " + o);
+                }
             }
             o = kw.get("txt_linefeed");
-            if (o instanceof String) {
-                config.lineSeparator = (String)o;
-            } else {
-                throw new JemException("Invalid txt_linefeed string: "+o);
+            if (o != null) {
+                if (o instanceof String) {
+                    config.lineSeparator = (String) o;
+                } else {
+                    throw new JemException("Invalid txt_linefeed string: " + o);
+                }
             }
-            o = kw.get("paragraph_prefix");
-            if (o instanceof String) {
-                config.paragraphPrefix = (String)o;
-            } else {
-                throw new JemException("Invalid paragraph_prefix string: "+o);
+            o = kw.get("txt_para_prefix");
+            if (o != null) {
+                if (o instanceof String) {
+                    config.paragraphPrefix = (String) o;
+                } else {
+                    throw new JemException("Invalid txt_para_prefix string: " + o);
+                }
             }
         }
         java.io.FileOutputStream output = new java.io.FileOutputStream(file);
@@ -78,7 +84,7 @@ public class TxtMaker implements Maker {
         if (intro != null) {
             String[] lines = intro.getLines(config.skipEmptyLine);
             for (String line : lines) {
-                writer.write(config.paragraphPrefix+line+config.lineSeparator);
+                writer.write(config.paragraphPrefix+line.trim()+config.lineSeparator);
             }
         }
         for (Part sub: book) {
@@ -94,7 +100,7 @@ public class TxtMaker implements Maker {
             TextObject intro = (TextObject)o;
             String[] lines = intro.getLines(config.skipEmptyLine);
             for (String line : lines) {
-                writer.write(config.paragraphPrefix+line+config.lineSeparator);
+                writer.write(config.paragraphPrefix+line.trim()+config.lineSeparator);
             }
             if (lines.length > 0) {
                 writer.write(config.introSeparator+config.lineSeparator);
@@ -103,7 +109,7 @@ public class TxtMaker implements Maker {
         if (! part.isSection()) {
             String[] lines = part.getLines(config.skipEmptyLine);
             for (String line : lines) {
-                writer.write(config.paragraphPrefix+line+config.lineSeparator);
+                writer.write(config.paragraphPrefix+line.trim()+config.lineSeparator);
             }
         } else {
             for (Part sub: part) {

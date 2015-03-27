@@ -90,6 +90,7 @@ public class ReaderV2 {
     private static void readExtension(Element root, Book book, ZipFile zipFile) {
         Element ext = root.element("extension");
         if (ext == null) {
+            LOG.debug("no 'extension' found in PBM");
             return;
         }
         int count = parseNumber(ext.attributeValue("count"), -1);
