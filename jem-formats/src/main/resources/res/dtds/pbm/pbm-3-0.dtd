@@ -1,0 +1,84 @@
+﻿<!-- PBM 3.0 DTD 2015-3-12
+file: pbm-3-0.dtd
+
+  Author: Peng Wan
+  Revision: 2015-3-21
+  Description: 
+    The Package Document Type Definition (DTD) for the PMAB's Book Metadata Version 3.0.
+    PBM document defines structure of book properties map and extensions list.
+-->
+
+<!ENTITY % URI "CDATA" >
+
+<!-- Top Level PBM Container. -->
+<!ELEMENT pbm (head?, attributes, extensions)>
+<!ATTLIST pbm
+  version   CDATA   #FIXED   "3.0"
+  xmlns     %URI;   #FIXED   "http://phylame.pw/format/pmab/pbm"
+>
+
+<!-- Head - meta properties of this document -->
+<!ELEMENT head (meta*)>
+<!ELEMENT meta EMPTY>
+<!ATTLIST meta
+  name        CDATA   #REQUIRED
+  value       CDATA   #REQUIRED
+>
+
+<!-- Attributes - attributes of book -->
+<!ELEMENT attributes (item*)>
+
+<!-- Extensions - Additional resources of book -->
+<!ELEMENT extensions (item*)>
+
+<!-- Item - variant descriptor -->
+<!ELEMENT item (#PCDATA)>
+<!ATTLIST item
+  <!-- Name of the variant -->
+  name        CDATA   #REQUIRED
+  <!-- Value type of the variant, syntax: datatype|MIME[;<key=value>[;<key=value];...]], default "str" -->
+  type        CDATA   #IMPLIED
+>
+
+<!--
+  Available datatype:
+    int:         signed integer
+    uint:        unsigned integer
+    real:        real number
+    str:         plain string
+    bytes:       byte array, default key: sep=' '
+    date:        date, default key: format='yyyy-M-d'
+    time:        time, default key: format='H:m:S'
+    datetime:    date and time, default key: format='yyyy-M-d H:m:S'
+    bool:        true or false
+
+  Example of <item/>:
+    <item name="country">USA</item>
+    <item name="age" type="int">18</item>
+    <item name="salary" type="real">6000.0</item>
+    <item name="name" type="str">Joy James</item>
+    <item name="id" type="bytes">77 32 6 8 -2 4</item>
+    <item name="birthday" type="date">1993-5-6</item>
+    <item name="sleep" type="time">22:10:0</item>
+    <item name="student" type="bool">true</item>
+    <item name="photo" type="image/jpeg">foo.jpg</item>
+    <item name="intro" type="text/plain;encoding=ASCII>bar.txt</item>
+
+  Example of PBM:
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE pbm>
+    <pbm version="3.0" xmlns="http://phylame.pw/formats/pmab/pbm">
+      <properties>
+        <item name="title" type="str">Example book</item>
+        <item name="author" type="str">Tester</item>
+        <item name="cover" type="image/png">cover.png</item>
+        <item name="intro" type="text/plain;encoding=UTF-8">intro.txt</item>
+        <item name="data" type="date;format=yyyy-M">2001-5</item>
+        <item name="publisher">The publisher</item>
+      </properties>
+      <extensions>
+        <item name="use_pages" type="bool">false</item>
+        <item name="depth" type="uint">3</item>
+      </extensions>
+    </pbm>
+-->

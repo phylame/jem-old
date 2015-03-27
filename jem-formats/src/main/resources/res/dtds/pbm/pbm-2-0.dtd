@@ -1,0 +1,65 @@
+﻿<!-- PBM 2.0 DTD 2014-9-24
+file: pbm-2-0.dtd
+
+  Author: Peng Wan
+  Description:
+    PBM (Pem's Book Metadata) is a definition for book information.
+-->
+
+<!ENTITY % URI "CDATA" >
+
+<!-- Top Level PBM Container. -->
+<!ELEMENT pbm (head, metadata, extension)>
+<!ATTLIST pbm
+  version   CDATA   #FIXED   "2.0"
+  xmlns     %URI;   #FIXED   "http://phylame.pw/format/pmab/pbm"
+>
+
+<!-- Document Head -->
+<!ELEMENT head (meta*)>
+
+<!-- Meta information of PBM -->
+<!ELEMENT meta EMPTY>
+<!ATTLIST meta
+  name      CDATA   #REQUIRED
+  content   CDATA   #REQUIRED
+>
+
+<!-- Metadata - properties of book -->
+<!ELEMENT metadata (attr*)>
+<!ATTLIST metadata
+  count   CDATA   #IMPLIED
+>
+
+<!-- Attr - Attribute of book
+name, media-type: available when name = "cover"
+-->
+<!ELEMENT attr (#PCDATA)>
+<!ATTLIST attr
+  name        CDATA   #REQUIRED
+  media-type  CDATA   #IMPLIED
+>
+
+<!-- Extension - Additional resources of book -->
+<!ELEMENT extension (item*)>
+<!ATTLIST extension
+  count   CDATA   #REQUIRED
+>
+
+<!-- Item - resource item
+If type == "file", the value is null, has an <object> Element
+-->
+<!ELEMENT item (object?)>
+<!ATTLIST item
+  name    CDATA   #REQUIRED
+  type    CDATA   #REQUIRED
+  value   CDATA   #IMPLIED
+>
+
+<!-- Object - file object -->
+<!ELEMENT object EMPTY>
+<!ATTLIST object
+  href          %URI;   #REQUIRED
+  media-type    CDATA   #REQUIRED
+  encoding      CDATA   #IMPLIED
+>

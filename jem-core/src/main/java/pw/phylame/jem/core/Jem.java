@@ -77,16 +77,16 @@ public final class Jem {
             parser = BookHelper.getParser(format);
         } catch (IllegalAccessException e) {
             LOG.debug("cannot access Parser class", e);
-            throw new UnsupportedFormatException(format, "unsupported format: "+format);
+            throw new UnsupportedFormatException(format, "Unsupported format: "+format);
         } catch (InstantiationException e) {
             LOG.debug("cannot create Parser instance", e);
-            throw new UnsupportedFormatException(format, "unsupported format: "+format);
+            throw new UnsupportedFormatException(format, "Unsupported format: "+format);
         } catch (ClassNotFoundException e) {
             LOG.debug("not found Parser class", e);
-            throw new UnsupportedFormatException(format, "unsupported format: "+format);
+            throw new UnsupportedFormatException(format, "Unsupported format: "+format);
         } catch (UnsupportedFormatException e) {
             LOG.debug("not registered Parser class", e);
-            throw new UnsupportedFormatException(format, "unsupported format: "+format);
+            throw new UnsupportedFormatException(format, "Unsupported format: "+format);
         }
         Book book = parser.parse(file, kw);
         book.setAttribute("source_path", file.getPath());
@@ -133,16 +133,16 @@ public final class Jem {
             maker = BookHelper.getMaker(format);
         } catch (IllegalAccessException e) {
             LOG.debug("cannot access Maker class", e);
-            throw new UnsupportedFormatException(format, "unsupported format: "+format);
+            throw new UnsupportedFormatException(format, "Unsupported format: "+format);
         } catch (InstantiationException e) {
             LOG.debug("cannot create Maker instance", e);
-            throw new UnsupportedFormatException(format, "unsupported format: "+format);
+            throw new UnsupportedFormatException(format, "Unsupported format: "+format);
         } catch (ClassNotFoundException e) {
             LOG.debug("not found Maker class", e);
-            throw new UnsupportedFormatException(format, "unsupported format: "+format);
+            throw new UnsupportedFormatException(format, "Unsupported format: "+format);
         } catch (UnsupportedFormatException e) {
             LOG.debug("not registered Maker class", e);
-            throw new UnsupportedFormatException(format, "unsupported format: "+format);
+            throw new UnsupportedFormatException(format, "Unsupported format: "+format);
         }
         maker.make(book, output, kw);
     }
@@ -158,7 +158,7 @@ public final class Jem {
     public static Part getPart(Part owner, int[] orders, int fromIndex) {
         int index = orders[fromIndex];
         if (index >= owner.size()) {
-            throw new IndexOutOfBoundsException("index out of range: "+index);
+            throw new IndexOutOfBoundsException("Index out of range: "+index);
         }
         Part part;
         if (index < 0) {
@@ -216,7 +216,7 @@ public final class Jem {
     }
 
     /**
-     * Walks <tt>Part</tt> sub-part tree.
+     * Walks <tt>Part</tt> sub-part tree (first order) .
      * @param part the <tt>Part</tt> to be watched
      * @param walker watch the part
      */
@@ -227,7 +227,7 @@ public final class Jem {
         if (walker == null) {
             throw new NullPointerException("walker");
         }
-        if (!walker.watch(part)) {
+        if (! walker.watch(part)) {
             return;
         }
         for (Part sub: part) {

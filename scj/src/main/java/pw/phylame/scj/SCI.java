@@ -33,8 +33,6 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import pw.phylame.jem.core.Jem;
 import pw.phylame.tools.StringUtils;
@@ -45,7 +43,6 @@ import pw.phylame.jem.core.BookHelper;
  * SCI (Simple Console Interface) for Jem.
  */
 public final class SCI {
-	private static Log LOG = LogFactory.getLog(SCI.class);
 
 	/** SCJ version message */
 	public static final String VERSION = "1.0.3-SNAPSHOT";
@@ -63,15 +60,25 @@ public final class SCI {
 		}
 	}
 
+	/**
+	 * Gets a translated string by key.
+	 * @param key key of the string
+	 * @return the string mapped to the key
+	 */
 	public static String getString(String key) {
 		return bundle.getString(key);
 	}
 
+	/**
+	 * Makes CLI options.
+	 * @return the options
+	 */
 	private static Options makeOptions() {
 		Options options = new Options();
-		options.addOption("h", false, getString("HELP_DESCRIPTION"));
-		options.addOption("v", false, getString("HELP_VERSION"));
-		options.addOption("l", false, getString("HELP_LIST"));
+		options.addOption("h", "help", false, getString("HELP_DESCRIPTION"));
+		options.addOption("v", "version",false, getString("HELP_VERSION"));
+		options.addOption("l", "list", false, getString("HELP_LIST"));
+		options.addOption("d", "debug", false, getString("HELP_DEBUG"));
 
 		// specified
 		Option inFormat = OptionBuilder.withArgName(
@@ -152,6 +159,27 @@ public final class SCI {
 		System.out.println(Name + ": " + msg);
 	}
 
+
+	private static boolean isDebug = false;
+
+	public static void debug(String msg) {
+		if (isDebug) {
+			System.err.println(Name + ": debug: " + msg);
+		}
+	}
+
+	public static void debug(Exception ex) {
+		if (isDebug) {
+			ex.printStackTrace(System.err);
+		}
+	}
+
+	/**
+	 * Prints CLI errors.
+	 * @param name SCI name
+	 * @param syntax SCI syntax
+	 * @param e the exception
+	 */
 	private static void printError(String name, String syntax, ParseException e) {
 		String msg;
 		String clazz = e.getClass().getSimpleName();
@@ -204,6 +232,9 @@ public final class SCI {
 			showSupported();
 			return 0;
 		}
+		// debug model
+		isDebug = cmd.hasOption("d");
+
 		String[] viewNames = {"all"};
 		String indexs = null;
 		Command command = Command.View;
@@ -232,7 +263,7 @@ public final class SCI {
 		}
 		// output
 		String out = cmd.getOptionValue("o");
-		File output = new File(out == null ? "." : out);
+		File output = new File(out == null ? "." : out);	// if not given use curdir
 
 		Map<String, Object> inKw = parseArguments(cmd.getOptionProperties("p"));
 		Map<String, Object> outKw = parseArguments(cmd.getOptionProperties("m"));

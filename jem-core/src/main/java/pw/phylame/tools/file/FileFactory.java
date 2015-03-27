@@ -22,7 +22,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 /**
- * Factory to create <tt>FileObject</tt>.
+ * Factory class to create <tt>FileObject</tt>.
  */
 public final class FileFactory {
     private static String getMime(String path, String mime) {

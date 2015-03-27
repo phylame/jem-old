@@ -33,6 +33,7 @@ public class UnsupportedFormatException extends JemException {
      * @param format the name of format
      */
     public UnsupportedFormatException(String format) {
+        super();
         this.format = format;
     }
 
@@ -87,27 +88,6 @@ public class UnsupportedFormatException extends JemException {
      */
     public UnsupportedFormatException(String format, Throwable cause) {
         super(cause);
-        this.format = format;
-    }
-
-    /**
-     * Constructs a new exception with the specified detail message,
-     * cause, suppression enabled or disabled, and writable stack
-     * trace enabled or disabled.
-     *
-     * @param format the name of format
-     * @param message            the detail message.
-     * @param cause              the cause.  (A {@code null} value is permitted,
-     *                           and indicates that the cause is nonexistent or unknown.)
-     * @param enableSuppression  whether or not suppression is enabled
-     *                           or disabled
-     * @param writableStackTrace whether or not the stack trace should
-     *                           be writable
-     * @since 1.7
-     */
-    public UnsupportedFormatException(String format, String message, Throwable cause, boolean enableSuppression,
-                                      boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
         this.format = format;
     }
 

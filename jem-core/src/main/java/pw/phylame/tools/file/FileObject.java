@@ -61,6 +61,7 @@ public abstract class FileObject {
     /**
      * Resets file object status to last status.
      * The method should be used after using <tt>openInputStream</tt>.
+     * @throws java.io.IOException occur IO errors
      */
     public void reset() throws IOException {}
 
@@ -91,7 +92,8 @@ public abstract class FileObject {
 
     /**
      * Gets available bytes ti be read.
-     * @return the size or <tt>-1</tt> if unknown
+     * @return the size or <tt>-1</tt> if unknown number of bytes
+     * @throws java.io.IOException occur IO errors
      */
     public long available() throws IOException {
         return -1;

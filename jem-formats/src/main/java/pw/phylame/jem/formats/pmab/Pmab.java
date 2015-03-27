@@ -50,19 +50,22 @@ public class Pmab {
     public static final String PBC_XML_NS = "http://phylame.pw/format/pmab/pbc";
 
     public static boolean isPmab(ZipFile zipFile) {
-        InputStream in;
+        InputStream stream = null;
         try {
-            in = zipFile.getInputStream(zipFile.getEntry(MIME_FILE));
+            stream = zipFile.getInputStream(zipFile.getEntry(MIME_FILE));
+            String text = FileUtils.readText(new InputStreamReader(stream)).trim();
+            return MT_PMAB.equals(text);
         } catch (IOException e) {
             LOG.debug("cannot load "+MIME_FILE, e);
             return false;
-        }
-        try {
-            String text = FileUtils.readText(new InputStreamReader(in)).trim();
-            return MT_PMAB.equals(text);
-        } catch (IOException e) {
-            LOG.debug("cannot load " + MIME_FILE, e);
-            return false;
+        } finally {
+            if (stream != null) {
+                try {
+                    stream.close();
+                } catch (IOException e) {
+                    LOG.debug("cannot close "+MIME_FILE, e);
+                }
+            }
         }
     }
 
@@ -89,23 +92,25 @@ public class Pmab {
         xmlWriter.write(doc);
     }
 
-    public static void writeFile(FileObject fb, ZipOutputStream zipOut, String href) throws IOException {
-        zipOut.putNextEntry(new ZipEntry(href));
-        fb.copyTo(zipOut);
+    public static void writeFile(FileObject fb, ZipOutputStream zipout, String href) throws IOException {
+        zipout.putNextEntry(new ZipEntry(href));
+        fb.copyTo(zipout);
+        zipout.closeEntry();
     }
 
     /**
      * Writes text content in TextObject to PMAB archive.
      * @param tb the TextObject
-     * @param zipOut PMAB archive stream
+     * @param zipout PMAB archive stream
      * @param href name of entry to store text content
      * @param encoding encoding to encode text
      */
-    public static void writeText(TextObject tb, ZipOutputStream zipOut, String href, String encoding)
+    public static void writeText(TextObject tb, ZipOutputStream zipout, String href, String encoding)
             throws IOException {
-        zipOut.putNextEntry(new ZipEntry(href));
-        java.io.Writer writer = new java.io.OutputStreamWriter(zipOut, encoding);
+        zipout.putNextEntry(new ZipEntry(href));
+        java.io.Writer writer = new java.io.OutputStreamWriter(zipout, encoding);
         tb.writeTo(writer);
         writer.flush();
+        zipout.closeEntry();
     }
 }

@@ -28,11 +28,11 @@ import java.util.zip.ZipOutputStream;
  * PBM and PBC writer for PMAB 1.x.
  */
 public class WriterV1 {
-    public static void writePBM(Book book, Document doc, ZipOutputStream zipOut, PmabConfig config) {
+    public static void writePBM(Book book, Document doc, ZipOutputStream zipout, PmabConfig config) {
         doc.addDocType("package", null, null);
     }
 
-    public static void writePBC(Book book, Document doc, ZipOutputStream zipOut, PmabConfig config) {
+    public static void writePBC(Book book, Document doc, ZipOutputStream zipout, PmabConfig config) {
         doc.addDocType("container", null, null);
     }
 }

@@ -49,7 +49,7 @@ public final class Worker {
 
 	public static <T> boolean contains(T[] a, T o) {
 		for (int ix = 0; ix < a.length; ++ix) {
-			if (a[ix] == o || a[ix].equals(o)) {
+			if (a[ix] == o || a[ix].equals(o)) {	// if not null call equals
 				return true;
 			}
 		}
@@ -60,7 +60,7 @@ public final class Worker {
 		for (String key: attributes.keySet()) {
 			String raw = String.valueOf(attributes.get(key));
 			Object value = null;
-			if ("cover".equals(key)) {
+			if ("cover".equals(key)) {		// value is image path in disk
 				File file = new File(raw);
 				if (! file.exists()) {
 					SCI.error(String.format(SCI.getString("SCI_NOT_EXISTS_COVER"), raw));
@@ -69,7 +69,6 @@ public final class Worker {
 					try {
 						part.setAttribute("cover", FileFactory.getFile(file, null));
 					} catch (Exception ex) {
-						SCI.error(ex.getMessage());
 						LOG.debug("cannot create FileObject", ex);
 						return false;
 					}
@@ -101,10 +100,8 @@ public final class Worker {
 		try {
 			book = Jem.readBook(input, format, kw);
 		} catch (IOException e) {
-			SCI.error(e.getMessage());
 			LOG.debug("reading "+format.toUpperCase(), e);
 		} catch (JemException e) {
-			SCI.error(e.getMessage());
 			LOG.debug("reading "+format.toUpperCase(), e);
 		}
 		return book;
@@ -120,10 +117,8 @@ public final class Worker {
 			Jem.writeBook(book, output, format, kw);
 			path = output.getPath();
 		} catch (IOException e) {
-			SCI.error(e.getMessage());
 			LOG.debug("writing "+format.toUpperCase(), e);
 		} catch (JemException e) {
-			SCI.error(e.getMessage());
 			LOG.debug("writing "+format.toUpperCase(), e);
 		}
 		return path;
@@ -287,7 +282,7 @@ public final class Worker {
 				try {
 					System.out.println(part.getSource().getText());
 				} catch (IOException ex) {
-					ex.printStackTrace();
+					SCI.debug(ex.getMessage());
 					LOG.debug("load content source: "+part.getSource().getFile().getName(), ex);
 					SCI.error(String.format(SCI.getString("SCI_LOAD_CONTENT_FAILED"),
 							part.getTitle()));

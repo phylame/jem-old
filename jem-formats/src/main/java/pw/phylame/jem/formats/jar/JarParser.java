@@ -29,8 +29,8 @@ import pw.phylame.tools.file.FileFactory;
 
 import java.io.*;
 import java.util.Map;
-import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+import java.util.zip.ZipEntry;
 
 /**
  * <tt>Parser</tt> implement for JAR book.
@@ -71,25 +71,25 @@ public class JarParser implements Parser {
         if (entry == null) {
             throw new IOException("Not found '0' in JAR book");
         }
-        InputStream input = new BufferedInputStream(zipFile.getInputStream(entry));
-        DataInput di = new DataInputStream(input);
-        if (di.readInt() != Jar.FILE_HEADER) {
+        InputStream stream = new BufferedInputStream(zipFile.getInputStream(entry));
+        DataInput input = new DataInputStream(stream);
+        if (input.readInt() != Jar.FILE_HEADER) {
             throw new JemException("Unsupported JAR book: magic number");
         }
-        int length = di.readByte();
+        int length = input.readByte();
         byte[] buf = new byte[length];
-        di.readFully(buf);
+        input.readFully(buf);
         book.setTitle(new String(buf, Jar.META_ENCODING));
 
-        length = di.readShort();
+        length = input.readShort();
         buf = new byte[length];
-        di.readFully(buf);
+        input.readFully(buf);
         int chapterCount = Integer.parseInt(new String(buf, Jar.META_ENCODING));
 
         for (int i = 0; i < chapterCount; ++i) {
-            length = di.readShort();
+            length = input.readShort();
             buf = new byte[length];
-            di.readFully(buf);
+            input.readFully(buf);
             String str = new String(buf, Jar.META_ENCODING);
             String[] items = str.split(",");
             if (items.length < 3) {
@@ -100,9 +100,9 @@ public class JarParser implements Parser {
             book.append(chapter);
         }
 
-        length = di.readShort();
+        length = input.readShort();
         buf = new byte[length];
-        di.readFully(buf);
+        input.readFully(buf);
         book.setIntro(new String(buf, Jar.META_ENCODING));
     }
 }

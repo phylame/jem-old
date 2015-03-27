@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+package test;
+
 import junit.framework.TestCase;
 import pw.phylame.jem.util.Attributes;
 

@@ -18,8 +18,6 @@
 
 package pw.phylame.jem.formats.txt;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Chapter;
 import pw.phylame.jem.core.Part;
@@ -37,8 +35,6 @@ import java.io.OutputStreamWriter;
  * <tt>Maker</tt> implement for TXT book.
  */
 public class TxtMaker implements Maker {
-    private static Log LOG = LogFactory.getLog(TxtMaker.class);
-
     @Override
     public String getName() {
         return "txt";
@@ -82,7 +78,7 @@ public class TxtMaker implements Maker {
         if (intro != null) {
             String[] lines = intro.getLines(config.skipEmptyLine);
             for (String line : lines) {
-                writer.write(config.paragraphPrefix + line + config.lineSeparator);
+                writer.write(config.paragraphPrefix+line+config.lineSeparator);
             }
         }
         for (Part sub: book) {
@@ -98,7 +94,7 @@ public class TxtMaker implements Maker {
             TextObject intro = (TextObject)o;
             String[] lines = intro.getLines(config.skipEmptyLine);
             for (String line : lines) {
-                writer.write(config.paragraphPrefix + line + config.lineSeparator);
+                writer.write(config.paragraphPrefix+line+config.lineSeparator);
             }
             if (lines.length > 0) {
                 writer.write(config.introSeparator+config.lineSeparator);
@@ -107,7 +103,7 @@ public class TxtMaker implements Maker {
         if (! part.isSection()) {
             String[] lines = part.getLines(config.skipEmptyLine);
             for (String line : lines) {
-                writer.write(config.paragraphPrefix + line + config.lineSeparator);
+                writer.write(config.paragraphPrefix+line+config.lineSeparator);
             }
         } else {
             for (Part sub: part) {

@@ -1,0 +1,87 @@
+﻿<!-- PBC 3.0 DTD 2015-3-12
+file: pbc-3-0.dtd
+
+  Author: Peng Wan
+  Revision: 2015-3-21
+  Description:
+    The Package Document Type Definition (DTD) for the PMAB's Book Contents Version 3.0.
+    PBC document defines structure of book contents.
+-->
+
+<!ENTITY % URI "CDATA" >
+
+<!-- Top Level of PBC -->
+<!ELEMENT pbc (toc)>
+<!ATTLIST pbc
+  version  CDATA   #FIXED   "3.0"
+  xmlns    %URI;   #FIXED   "http://phylame.pw/format/pmab/pbc"
+>
+
+<!-- TOC - table of contents -->
+<!ELEMENT toc (chapter*)>
+
+<!-- Chapter - the part, chapter or section of book -->
+<!ELEMENT chapter (attributes?, content?, chapter*)>
+
+<!-- Attributes - attributes of chapter-->
+<!ELEMENT attributes (item*)>
+
+<!-- Content - chapter text content -->
+<!ELEMENT content (#PCDATA)>
+<!ATTLIST content
+  <!-- Content type, syntax: str|MIME[;<key=value>[;<key=value>];...]], default "str" -->
+  type      CDATA   #IMPLIED
+>
+
+<!-- Item - variant descriptor -->
+<!ELEMENT item (#PCDATA)>
+<!ATTLIST item
+  <!-- Name of the variant -->
+  name        CDATA   #REQUIRED
+  <!-- Value type of the variant, syntax: datatype|MIME[;<key=value>[;<key=value];...]], default "str" -->
+  type        CDATA   #IMPLIED
+>
+
+<!--
+  Available content type:
+    str:    plain string
+
+  Example of <content/>:
+    * single line
+    <content type="str">Just some text content</content>
+    * multi lines
+    <content type="str">Line one
+    Line two</content>
+    * text file use platform encoding
+    <content type="text/plain">chapter1.txt</content>
+    * text file and specified encoding
+    <content type="text/plain;encoding=UTF-8">chapter2.txt</content>
+
+  Available item datatype: see PBM item element
+
+  Example of PBC:
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE pbc>
+    <pbc version="3.0" xmlns="http://phylame.pw/formats/pmab/pbc">
+      <toc>
+        <chapter>
+          <properties>
+            <item name="title" type="str">Overview</item>
+          </properties>
+        <content>Overview of book</content>
+        </chapter>
+        <chapter>
+          <properties>
+            <item name="title" type="str">Part I</item>
+          <item name="cover" type="image/png">part-1.png</item>
+          </properties>
+          <chapter>
+            <properties>
+              <item name="title">Part I.I</item>
+            </properties>
+            <content type="text/plain;encoding="UTF-8">part-1-1.txt</content>
+          </chapter>
+        </chapter>
+      </toc>
+    </pbc>
+-->

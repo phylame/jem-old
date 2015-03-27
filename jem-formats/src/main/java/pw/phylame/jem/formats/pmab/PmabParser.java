@@ -105,7 +105,7 @@ public class PmabParser implements Parser {
         if (zipEntry == null) {
             throw new IOException("Not found "+Pmab.PBM_FILE+" in PMAB "+zipFile.getName());
         }
-        InputStream input = new BufferedInputStream(zipFile.getInputStream(zipEntry));
+        InputStream stream = new BufferedInputStream(zipFile.getInputStream(zipEntry));
         SAXReader reader = new SAXReader();
         reader.setEntityResolver(new EntityResolver() {
             @Override
@@ -116,9 +116,8 @@ public class PmabParser implements Parser {
         });
         Document doc;
         try {
-            doc = reader.read(input);
+            doc = reader.read(stream);
         } catch (DocumentException e) {
-            e.printStackTrace();
             throw new JemException("Invalid PBM document in "+zipFile.getName(), e);
         }
         Element root = doc.getRootElement();
@@ -137,7 +136,7 @@ public class PmabParser implements Parser {
             }
             version = "1.0";
         } else {
-            input.close();
+            stream.close();
             throw new JemException("Invalid PBM document: root is not pbm or package");
         }
         if ("2.0".equals(version)) {
@@ -147,10 +146,10 @@ public class PmabParser implements Parser {
         } else  if ("1.0".equals(version)) {
             ReaderV1.readPBM(root, book, zipFile);
         } else {
-            input.close();
+            stream.close();
             throw new JemException("Invalid PBM version: "+version);
         }
-        input.close();
+        stream.close();
     }
 
     private void readPBC(ZipFile zipFile, Book book) throws IOException, JemException {
@@ -158,7 +157,7 @@ public class PmabParser implements Parser {
         if (zipEntry == null) {
             throw new IOException("Not found "+Pmab.PBC_FILE+" in PMAB "+zipFile.getName());
         }
-        InputStream input = new BufferedInputStream(zipFile.getInputStream(zipEntry));
+        InputStream stream = new BufferedInputStream(zipFile.getInputStream(zipEntry));
         SAXReader reader = new SAXReader();
         reader.setEntityResolver(new EntityResolver() {
             @Override
@@ -169,9 +168,8 @@ public class PmabParser implements Parser {
         });
         Document doc;
         try {
-            doc = reader.read(input);
+            doc = reader.read(stream);
         } catch (DocumentException e) {
-            e.printStackTrace();
             throw new JemException("Invalid PBC document in "+zipFile.getName(), e);
         }
         Element root = doc.getRootElement();
@@ -190,7 +188,7 @@ public class PmabParser implements Parser {
             }
             version = "1.0";
         } else {
-            input.close();
+            stream.close();
             throw new JemException("Invalid PBC document: root is not pbc or container");
         }
         if ("2.0".equals(version)) {
@@ -200,9 +198,9 @@ public class PmabParser implements Parser {
         } else  if ("1.0".equals(version)) {
             ReaderV1.readPBC(root, book, zipFile);
         } else {
-            input.close();
+            stream.close();
             throw new JemException("Invalid PBC version: "+version);
         }
-        input.close();
+        stream.close();
     }
 }

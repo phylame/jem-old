@@ -57,7 +57,7 @@ public class WriterV2 {
         }
     }
 
-    private static void makeMetadata(Element parent, Book book, ZipOutputStream zipOut, PmabConfig config) {
+    private static void makeMetadata(Element parent, Book book, ZipOutputStream zipout, PmabConfig config) {
         Element md = parent.addElement("metadata");
         int count = 0;
         for (String name: book.attributeNames()) {
@@ -75,7 +75,7 @@ public class WriterV2 {
                     href = config.extraDir + "/" + file.getName();
                 }
                 try {
-                    Pmab.writeFile(fb, zipOut, href);
+                    Pmab.writeFile(fb, zipout, href);
                 } catch (IOException ex) {
                     LOG.debug("cannot write file to PMAB: "+fb.getName(), ex);
                 }
@@ -100,7 +100,7 @@ public class WriterV2 {
         md.addAttribute("count", String.valueOf(count));
     }
 
-    private static void makeExtension(Element parent, Book book, ZipOutputStream zipOut, PmabConfig config) {
+    private static void makeExtension(Element parent, Book book, ZipOutputStream zipout, PmabConfig config) {
         parent.addComment("The following data will be added to PMAB.");
         Element ext = parent.addElement("extension");
         int count = 0;
@@ -112,7 +112,7 @@ public class WriterV2 {
                 FileObject fb = (FileObject) value;
                 String href = config.extraDir + "/" + new File(fb.getName()).getName();
                 try {
-                    Pmab.writeFile(fb, zipOut, href);
+                    Pmab.writeFile(fb, zipout, href);
                 } catch (IOException ex) {
                     LOG.debug("cannot write file to PMAB: "+fb.getName(), ex);
                 }
@@ -125,7 +125,7 @@ public class WriterV2 {
                         System.getProperty("file.encoding");
                 String href = config.extraDir + "/" + tb.hashCode() + ".txt";
                 try {
-                    Pmab.writeText(tb, zipOut, href, encoding);
+                    Pmab.writeText(tb, zipout, href, encoding);
                 } catch (IOException ex) {
                     LOG.debug("cannot write text to PMAB: "+href, ex);
                 }
@@ -148,7 +148,7 @@ public class WriterV2 {
         ext.addAttribute("count", String.valueOf(count));
     }
 
-    public static void writePBM(Book book, Document doc, ZipOutputStream zipOut, PmabConfig config) {
+    public static void writePBM(Book book, Document doc, ZipOutputStream zipout, PmabConfig config) {
         doc.addDocType("pbm", null, null);
         Element root = doc.addElement("pbm", Pmab.PBM_XML_NS).addAttribute("version", "2.0");
         // head
@@ -156,12 +156,12 @@ public class WriterV2 {
             makeHead(root, config.metaInfo);
         }
         // metadata
-        makeMetadata(root, book, zipOut, config);
+        makeMetadata(root, book, zipout, config);
         // extension
-        makeExtension(root, book, zipOut, config);
+        makeExtension(root, book, zipout, config);
     }
 
-    private static void makeChapter(Element parent, Part part, ZipOutputStream zipOut, PmabConfig config,
+    private static void makeChapter(Element parent, Part part, ZipOutputStream zipout, PmabConfig config,
                                     String suffix) {
         Element elem = parent.addElement("chapter");
         elem.addElement("title").setText(part.getTitle());
@@ -174,7 +174,7 @@ public class WriterV2 {
             FileObject fb = (FileObject) o;
             String href = config.imageDir + "/" + base + "-cover." + FileUtils.getExtension(fb.getName());
             try {
-                Pmab.writeFile(fb, zipOut, href);
+                Pmab.writeFile(fb, zipout, href);
             } catch (IOException ex) {
                 LOG.debug("cannot write file to PMAB: "+fb.getName(), ex);
             }
@@ -186,7 +186,7 @@ public class WriterV2 {
             TextObject tb = (TextObject) o;
             String href = config.textDir + "/" + base + "-intro.txt";
             try {
-                Pmab.writeText(tb, zipOut, href, encoding);
+                Pmab.writeText(tb, zipout, href, encoding);
             } catch (IOException ex) {
                 LOG.debug("cannot write text to PMAB: "+href, ex);
             }
@@ -196,7 +196,7 @@ public class WriterV2 {
             TextObject tb = part.getSource();
             String href = config.textDir + "/" + base + ".txt";
             try {
-                Pmab.writeText(tb, zipOut, href, encoding);
+                Pmab.writeText(tb, zipout, href, encoding);
             } catch (IOException ex) {
                 LOG.debug("cannot write text to PMAB: "+href, ex);
             }
@@ -205,20 +205,20 @@ public class WriterV2 {
             int count = 0;
             for (Part sub: part) {
                 ++count;
-                makeChapter(elem, sub, zipOut, config, suffix + "-" + count);
+                makeChapter(elem, sub, zipout, config, suffix + "-" + count);
             }
             elem.addAttribute("count", String.valueOf(count));
         }
     }
 
-    public static void writePBC(Book book, Document doc, ZipOutputStream zipOut, PmabConfig config) {
+    public static void writePBC(Book book, Document doc, ZipOutputStream zipout, PmabConfig config) {
         doc.addDocType("pbc", null, null);
         Element root = doc.addElement("pbc", Pmab.PBC_XML_NS).addAttribute("version", "2.0");
         Element contents = root.addElement("contents");
         int count = 0;
         for (Part sub: book) {
             ++count;
-            makeChapter(contents, sub, zipOut, config, count + "");
+            makeChapter(contents, sub, zipout, config, count + "");
         }
         contents.addAttribute("count", String.valueOf(count));
         contents.addAttribute("depth", String.valueOf(Jem.getDepth(book)));

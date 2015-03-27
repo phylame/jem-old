@@ -1,0 +1,58 @@
+﻿<!-- PBC 2.0 DTD 2014-9-17
+file: pbc-2-0.dtd
+
+  Author: Peng Wan
+  Description:
+    PBC (Pem's Book Contents) is a definition for book contents.
+  
+  2014 Sept. 24: Add attribute href, media-type, encoding to <cover> and <intro>
+-->
+
+<!ENTITY % URI "CDATA" >
+
+<!-- Top Level of PBC -->
+<!ELEMENT pbc (contents)>
+<!ATTLIST pbc
+  version  CDATA   #FIXED   "2.0"
+  xmlns    %URI;   #FIXED   "http://phylame.pw/format/pmab/pbc"
+>
+
+<!-- Contents - table of contents -->
+<!ELEMENT contents (chapter*)>
+<!ATTLIST contents
+  count   CDATA   #IMPLIED
+  depth   CDATA   #REQUIRED
+>
+<!-- Chapter - the part, chapter or section of book -->
+<!ELEMENT chapter (title, cover?, intro?, chapter*)>
+<!-- The 'href', 'count' must be given one -->
+<!-- Revised, 9/28/2014: Set attribute 'encoding' to REQUIRED.
+If chapter has child chapter, the 'encoding' will be ignored.
+-->
+<!-- Revised, 10/17/2014: Remove attribute 'number' -->
+<!-- Revised, 10/25/2014: Set attribute 'encoding' to IMPLIED. If not given, use platform encoding -->
+<!ATTLIST chapter
+  href       %URI;   #IMPLIED
+  count      CDATA   #IMPLIED
+  encoding   CDATA   #IMPLIED
+>
+
+<!-- Title - title of chapter -->
+<!ELEMENT title (#PCDATA)>
+
+<!-- Cover - cover of chapter -->
+<!-- Revised, 9/24/2014: Remove (#PCDATA), add href, media-type attribute -->
+<!ELEMENT cover EMPTY>
+<!ATTLIST cover
+  href         %URI;   #REQUIRED
+  media-type   CDATA   #REQUIRED
+>
+
+<!-- Intro - intro of chapter -->
+<!-- Revised, 9/24/2014: Remove (#PCDATA), add href, encoding attribute -->
+<!-- Revised, 9/28/2014: Set attribute 'encoding' to REQUIRED -->
+<!ELEMENT intro EMPTY>
+<!ATTLIST intro
+  href       %URI;   #REQUIRED
+  encoding   CDATA   #REQUIRED
+>
