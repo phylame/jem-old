@@ -146,7 +146,7 @@ public final class SCI {
 	private static void showSupported() {
 		System.out.println(getString("LIST_SUPPORTED_TITLE"));
 		System.out.printf(" %s %s\n", getString("LIST_INPUT"),
-			StringUtils.join(BookHelper.supportedParsers(), " ").toUpperCase());
+				StringUtils.join(BookHelper.supportedParsers(), " ").toUpperCase());
 		System.out.printf(" %s %s\n", getString("LIST_OUTPUT"),
 			StringUtils.join(BookHelper.supportedMakers(), " ").toUpperCase());
 	}
@@ -262,7 +262,7 @@ public final class SCI {
 		}
 		// output
 		String out = cmd.getOptionValue("o");
-		File output = new File(out == null ? "." : out);	// if not given use curdir
+		File output = new File(out == null ? "." : out);	// if not specified use curdir
 
 		Map<String, Object> inKw = parseArguments(cmd.getOptionProperties("p"));
 		Map<String, Object> outKw = parseArguments(cmd.getOptionProperties("m"));
