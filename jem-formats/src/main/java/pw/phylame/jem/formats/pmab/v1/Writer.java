@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package pw.phylame.jem.formats.pmab.writer;
+package pw.phylame.jem.formats.pmab.v1;
 
 import org.dom4j.Document;
 import pw.phylame.jem.core.Book;
@@ -27,7 +27,7 @@ import java.util.zip.ZipOutputStream;
 /**
  * PBM and PBC writer for PMAB 1.x.
  */
-public class WriterV1 {
+public class Writer {
     public static void writePBM(Book book, Document doc, ZipOutputStream zipout, PmabConfig config) {
         doc.addDocType("package", null, null);
     }

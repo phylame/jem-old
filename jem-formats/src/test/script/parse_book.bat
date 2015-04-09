@@ -1,1 +1,1 @@
-scj D:\tmp\zd.pmab -V toc
+scj D:\tmp\zd.pmab -w toc

@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package pw.phylame.jem.formats.pmab.writer;
+package pw.phylame.jem.formats.pmab.v3;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -40,8 +40,8 @@ import java.util.zip.ZipOutputStream;
 /**
  * PBM and PBC writer for PMAB 3.x.
  */
-public final class WriterV3 {
-    private static Log LOG = LogFactory.getLog(WriterV3.class);
+public final class Writer {
+    private static Log LOG = LogFactory.getLog(Writer.class);
 
     private static Byte[] toBytes(byte[] ary) {
         Byte[] results = new Byte[ary.length];

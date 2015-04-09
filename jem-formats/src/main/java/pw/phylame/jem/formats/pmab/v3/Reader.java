@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package pw.phylame.jem.formats.pmab.reader;
+package pw.phylame.jem.formats.pmab.v3;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -37,8 +37,8 @@ import pw.phylame.tools.file.FileObject;
 /**
  * PBM and PBC reader for PMAB 3.x.
  */
-public class ReaderV3 {
-    private static Log LOG = LogFactory.getLog(ReaderV3.class);
+public class Reader {
+    private static Log LOG = LogFactory.getLog(Reader.class);
 
     private static byte[] toBytes(String[] num) {
         byte[] bytes = new byte[num.length];

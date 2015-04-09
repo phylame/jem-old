@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package pw.phylame.jem.formats.pmab.writer;
+package pw.phylame.jem.formats.pmab.v2;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -44,8 +44,8 @@ import java.util.zip.ZipOutputStream;
 /**
  * PBM and PBC writer for PMAB 2.x.
  */
-public class WriterV2 {
-    private static Log LOG = LogFactory.getLog(WriterV2.class);
+public class Writer {
+    private static Log LOG = LogFactory.getLog(Writer.class);
 
     private static void makeHead(Element parent, Map<String, String> metaInfo) {
         Element head = parent.addElement("head");

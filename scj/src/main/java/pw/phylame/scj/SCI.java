@@ -19,6 +19,7 @@
 package pw.phylame.scj;
 
 import java.io.File;
+import java.text.MessageFormat;
 import java.util.Map;
 import java.util.List;
 import java.util.Locale;
@@ -32,7 +33,6 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.ParseException;
-import org.apache.commons.cli.CommandLineParser;
 
 import pw.phylame.jem.core.Jem;
 import pw.phylame.tools.StringUtils;
@@ -60,13 +60,9 @@ public final class SCI {
 		}
 	}
 
-	/**
-	 * Gets a translated string by key.
-	 * @param key key of the string
-	 * @return the string mapped to the key
-	 */
-	public static String getString(String key) {
-		return bundle.getString(key);
+	public static String getText(String key, Object... objects) {
+		String pattern = bundle.getString(key);
+		return MessageFormat.format(pattern, objects);
 	}
 
 	/**
@@ -75,52 +71,50 @@ public final class SCI {
 	 */
 	private static Options makeOptions() {
 		Options options = new Options();
-		options.addOption("h", "help", false, getString("HELP_DESCRIPTION"));
-		options.addOption("v", "version",false, getString("HELP_VERSION"));
-		options.addOption("l", "list", false, getString("HELP_LIST"));
-		options.addOption("d", "debug", false, getString("HELP_DEBUG"));
+		options.addOption("h", "help", false, getText("HELP_DESCRIPTION"));
+		options.addOption("v", "version",false, getText("HELP_VERSION"));
+		options.addOption("l", "list", false, getText("HELP_LIST"));
 
 		// specified
 		Option inFormat = OptionBuilder.withArgName(
-				getString("ARG_FORMAT")).hasArg().withDescription(
-						getString("HELP_FROM_FORMAT")).create("f");
+				getText("ARG_FORMAT")).hasArg().withDescription(
+						getText("HELP_FROM_FORMAT")).create("f");
 
 		Option outFormat = OptionBuilder.withArgName(
-				getString("ARG_FORMAT")).hasArg().withDescription(
-						String.format(getString("HELP_TO_FORMAT"),
-								Jem.PMAB_FORMAT.toUpperCase())).create("t");
+				getText("ARG_FORMAT")).hasArg().withDescription(
+						getText("HELP_TO_FORMAT", Jem.PMAB_FORMAT.toUpperCase())).create("t");
 
 		Option output = OptionBuilder.withArgName(
-				getString("ARG_PATH")).hasArg().withDescription(
-						getString("HELP_OUTPUT")).create("o");
+				getText("ARG_PATH")).hasArg().withDescription(
+						getText("HELP_OUTPUT")).create("o");
 
 		options.addOption(inFormat).addOption(outFormat).addOption(output);
 
 		// operations
-		Option convert = new Option("c", getString("HELP_CONVERT"));
-		Option join = new Option("j", getString("HELP_JOIN"));
+		Option convert = new Option("c", "convert", false, getText("HELP_CONVERT"));
+		Option join = new Option("j", "join", false, getText("HELP_JOIN"));
 		Option extract = OptionBuilder.withArgName(
-				getString("ARG_INDEX")).hasArg().withDescription(
-						getString("HELP_EXTRACT")).create("x");
+				getText("ARG_INDEX")).hasArg().withDescription(
+						getText("HELP_EXTRACT")).create("x");
 
 		Option view = OptionBuilder.withArgName(
-				getString("ARG_NAME")).hasArg().withValueSeparator().withDescription(
-						getString("HELP_VIEW")).create("w");
+				getText("ARG_NAME")).hasArg().withValueSeparator().withDescription(
+						getText("HELP_VIEW")).create("w");
 
 		options.addOptionGroup(new OptionGroup().addOption(
 				convert).addOption(join).addOption(extract).addOption(view));
 
 		Option attr = OptionBuilder.withArgName(
-			getString("ARG_KV")).hasArgs(2).withValueSeparator().withDescription(
-					getString("HELP_ATTRIBUTE")).create("a");
+				getText("ARG_KV")).hasArgs(2).withValueSeparator().withDescription(
+						getText("HELP_ATTRIBUTE")).create("a");
 
 		Option inKW = OptionBuilder.withArgName(
-				getString("ARG_KV")).hasArgs(2).withValueSeparator().withDescription(
-						getString("HELP_IN_ARGUMENT")).create("p");
+				getText("ARG_KV")).hasArgs(2).withValueSeparator().withDescription(
+						getText("HELP_IN_ARGUMENT")).create("p");
 
 		Option outKw = OptionBuilder.withArgName(
-				getString("ARG_KV")).hasArgs(2).withValueSeparator().withDescription(
-						getString("HELP_OUT_ARGUMENT")).create("m");
+				getText("ARG_KV")).hasArgs(2).withValueSeparator().withDescription(
+						getText("HELP_OUT_ARGUMENT")).create("m");
 
 		options.addOption(attr).addOption(inKW).addOption(outKw);
 
@@ -136,19 +130,18 @@ public final class SCI {
 	}
 
 	private static void showVersion() {
-		String os = System.getProperty("os.name");
-		String arch = System.getProperty("os.arch");
-		System.out.printf("SCI for Jem v%s on %s(%s)\n", VERSION, os, arch);
+		System.out.printf("SCI for Jem v%s on %s (%s)\n", VERSION, System.getProperty("os.name"),
+				System.getProperty("os.arch"));
 		System.out.printf("jem-core: %s\n", Jem.VERSION);
-		System.out.printf("%s\n", getString("SCJ_COPYRIGHTS"));
+		System.out.printf("%s\n", getText("SCJ_COPYRIGHTS"));
 	}
 
 	private static void showSupported() {
-		System.out.println(getString("LIST_SUPPORTED_TITLE"));
-		System.out.printf(" %s %s\n", getString("LIST_INPUT"),
+		System.out.println(getText("LIST_SUPPORTED_TITLE"));
+		System.out.printf(" %s %s\n", getText("LIST_INPUT"),
 				StringUtils.join(BookHelper.supportedParsers(), " ").toUpperCase());
-		System.out.printf(" %s %s\n", getString("LIST_OUTPUT"),
-			StringUtils.join(BookHelper.supportedMakers(), " ").toUpperCase());
+		System.out.printf(" %s %s\n", getText("LIST_OUTPUT"),
+				StringUtils.join(BookHelper.supportedMakers(), " ").toUpperCase());
 	}
 
 	public static void error(String msg) {
@@ -159,41 +152,27 @@ public final class SCI {
 		System.out.println(Name + ": " + msg);
 	}
 
-	private static boolean isDebug = false;
-
-	public static void debug(String msg) {
-		if (isDebug) {
-			System.err.println(Name + ": debug: " + msg);
-		}
-	}
-
-	public static void debug(Exception ex) {
-		if (isDebug) {
-			ex.printStackTrace(System.err);
-		}
-	}
-
 	/**
 	 * Prints CLI errors.
 	 * @param name SCI name
 	 * @param syntax SCI syntax
 	 * @param e the exception
 	 */
-	private static void printError(String name, String syntax, ParseException e) {
+	private static void cliError(String name, String syntax, ParseException e) {
 		String msg;
 		String clazz = e.getClass().getSimpleName();
 		if ("UnrecognizedOptionException".equals(clazz)) {
-			msg = String.format(getString("SCI_UNRECOGNIZED_OPTION"),
+			msg = getText("SCI_UNRECOGNIZED_OPTION",
 					((org.apache.commons.cli.UnrecognizedOptionException)e).getOption());
 		} else if ("MissingOptionException".equals(clazz)) {
-			msg = String.format(getString("SCI_MISSING_OPTION"),
+			msg = getText("SCI_MISSING_OPTION",
 					((org.apache.commons.cli.MissingOptionException)e).getMissingOptions());
 		} else if ("MissingArgumentException".equals(clazz)) {
-			msg = String.format(getString("SCI_MISSING_ARGUMENT"),
+			msg = getText("SCI_MISSING_ARGUMENT",
 					"-" + ((org.apache.commons.cli.MissingArgumentException)e).getOption().getOpt());
 		} else if ("AlreadySelectedException".equals(clazz)) {
 			org.apache.commons.cli.AlreadySelectedException ex = (org.apache.commons.cli.AlreadySelectedException)e;
-			msg = String.format(getString("SCI_MORE_OPTIONS"),
+			msg = getText("SCI_MORE_OPTIONS",
 					"-" + ex.getOptionGroup().getSelected() + ", -" + ex.getOption().getOpt());
 		} else {
 			msg = e.getMessage();
@@ -208,21 +187,19 @@ public final class SCI {
 	}
 
 	public static int exec(String name, String[] args) {
+		final String SCJ_SYNTAX = getText("SCI_SYNTAX", name);
 		Options options = makeOptions();
-		final String SCJ_SYNTAX = String.format(getString("SCI_SYNTAX"), name);
 		CommandLine cmd;
-		CommandLineParser parser = new PosixParser();
 		try {
-			cmd = parser.parse(options, args);
+			cmd = new PosixParser().parse(options, args);    // POSIX style
 		} catch (ParseException e) {
-			printError(name, SCJ_SYNTAX, e);
+			cliError(name, SCJ_SYNTAX, e);
 			return -1;
 		}
 		if (cmd.hasOption("h")) {
 			HelpFormatter hf = new HelpFormatter();
 			hf.setSyntaxPrefix("");
-			hf.printHelp(100, SCJ_SYNTAX, getString("SCI_OPTIONS"), options,
-					getString("SCJ_BUG_REPORT"));
+			hf.printHelp(80, SCJ_SYNTAX, getText("SCI_OPTIONS_PREFIX"), options, getText("SCJ_BUG_REPORT"));
 			return 0;
 		} else if (cmd.hasOption("v")) {
 			showVersion();
@@ -231,8 +208,6 @@ public final class SCI {
 			showSupported();
 			return 0;
 		}
-		// debug model
-		isDebug = cmd.hasOption("d");
 
 		String[] viewNames = {"all"};
 		String indexs = null;
@@ -250,19 +225,19 @@ public final class SCI {
 		String inFormat = cmd.getOptionValue("f"), outFormat = cmd.getOptionValue("t");
 		outFormat = outFormat == null ? Jem.PMAB_FORMAT : outFormat;
 		if (! Worker.contains(BookHelper.supportedMakers(), outFormat)) {
-			error(String.format(getString("SCI_OUT_UNSUPPORTED"), outFormat));
-			System.out.println(getString("SCI_UNSUPPORTED_HELP"));
+			error(getText("SCI_OUT_UNSUPPORTED", outFormat));
+			System.out.println(getText("SCI_UNSUPPORTED_HELP"));
 			return -1;
 		}
 		// inputs
 		String[] files = cmd.getArgs();
 		if (files.length == 0) {
-			error(getString("SCI_NO_INPUT"));
+			error(getText("SCI_NO_INPUT"));
 			return -1;
 		}
 		// output
 		String out = cmd.getOptionValue("o");
-		File output = new File(out == null ? "." : out);	// if not specified use curdir
+		File output = new File(out == null ? "." : out);    // if not specified use current directory
 
 		Map<String, Object> inKw = parseArguments(cmd.getOptionProperties("p"));
 		Map<String, Object> outKw = parseArguments(cmd.getOptionProperties("m"));
@@ -274,7 +249,7 @@ public final class SCI {
 		for (String file: files) {
 			File input = new File(file);
 			if (! input.exists()) {
-				error(String.format(getString("SCI_NOT_EXISTS"), input.getPath()));
+				error(getText("SCI_NOT_EXISTS", input.getPath()));
 				status = -1;
 				continue;
 			}
@@ -283,9 +258,10 @@ public final class SCI {
 				inFmt = FileUtils.getExtension(file);
 			}
 			if (inFmt != null && ! Worker.contains(BookHelper.supportedParsers(), inFmt)) {
-				error(String.format(getString("SCI_IN_UNSUPPORTED"), inFmt));
-				System.out.println(getString("SCI_UNSUPPORTED_HELP"));
-				return -1;
+				error(getText("SCI_IN_UNSUPPORTED", inFmt));
+				System.out.println(getText("SCI_UNSUPPORTED_HELP"));
+				status = -1;
+				continue;
 			}
 			String result = null;
 			switch (command) {
@@ -295,17 +271,15 @@ public final class SCI {
 				}
 				break;
 			case Convert:
-				result = Worker.convertBook(input, inFmt, inKw, attrs, output,
-						outFormat, outKw);
-				status = result != null ? 0 : 1;
+				result = Worker.convertBook(input, inFmt, inKw, attrs, output, outFormat, outKw);
+				status = Math.min(result != null ? 0 : 1, status);
 				break;
 			case Join:
 				inputs.add(input);
 				break;
 			case Extract:
-				result = Worker.extractBook(input, inFmt, inKw, attrs, indexs,
-						output, outFormat, outKw);
-				status = result != null ? 0 : 1;
+				result = Worker.extractBook(input, inFmt, inKw, attrs, indexs, output, outFormat, outKw);
+				status = Math.min(result != null ? 0 : 1, status);
 				break;
 			}
 			if (result != null) {
@@ -314,13 +288,12 @@ public final class SCI {
 		}
 		// join books
 		if (command == Command.Join) {
-			String result = Worker.joinBook(inputs.toArray(new File[0]), inKw,
-					attrs, output, outFormat, outKw);
+			String result = Worker.joinBook(inputs.toArray(new File[0]), inKw, attrs, output,
+					outFormat, outKw);
 			if (result != null) {
 				System.out.println(result);
-				return 0;
 			} else {
-				return -1;
+				status = 1;
 			}
 		}
 		return status;

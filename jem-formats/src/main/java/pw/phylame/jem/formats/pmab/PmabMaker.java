@@ -23,9 +23,7 @@ import org.dom4j.DocumentHelper;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.Maker;
-import pw.phylame.jem.formats.pmab.writer.WriterV1;
-import pw.phylame.jem.formats.pmab.writer.WriterV2;
-import pw.phylame.jem.formats.pmab.writer.WriterV3;
+import pw.phylame.jem.formats.pmab.v3.Writer;
 import pw.phylame.jem.util.JemException;
 import pw.phylame.tools.file.FileUtils;
 
@@ -138,11 +136,11 @@ public class PmabMaker implements Maker {
     private void writePBM(Book book, ZipOutputStream zipout, PmabConfig config) throws IOException, JemException {
         Document doc = DocumentHelper.createDocument();
         if ("3.0".equals(config.pmabVersion)) {
-            WriterV3.writePBM(book, doc, zipout, config);
+            Writer.writePBM(book, doc, zipout, config);
         } else if ("2.0".equals(config.pmabVersion)) {
-            WriterV2.writePBM(book, doc, zipout, config);
+            pw.phylame.jem.formats.pmab.v2.Writer.writePBM(book, doc, zipout, config);
         } else if ("1.0".equals(config.pmabVersion)) {
-            WriterV1.writePBM(book, doc, zipout, config);
+            pw.phylame.jem.formats.pmab.v1.Writer.writePBM(book, doc, zipout, config);
         } else {
             throw new JemException("Unsupported PMAB version: "+config.pmabVersion);
         }
@@ -154,11 +152,11 @@ public class PmabMaker implements Maker {
     private void writePBC(Book book, ZipOutputStream zipout, PmabConfig config) throws IOException, JemException {
         Document doc = DocumentHelper.createDocument();
         if ("3.0".equals(config.pmabVersion)) {
-            WriterV3.writePBC(book, doc, zipout, config);
+            Writer.writePBC(book, doc, zipout, config);
         } else if ("2.0".equals(config.pmabVersion)) {
-            WriterV2.writePBC(book, doc, zipout, config);
+            pw.phylame.jem.formats.pmab.v2.Writer.writePBC(book, doc, zipout, config);
         } else if ("1.0".equals(config.pmabVersion)) {
-            WriterV1.writePBC(book, doc, zipout, config);
+            pw.phylame.jem.formats.pmab.v1.Writer.writePBC(book, doc, zipout, config);
         } else {
             throw new JemException("Unsupported PMAB version: "+config.pmabVersion);
         }

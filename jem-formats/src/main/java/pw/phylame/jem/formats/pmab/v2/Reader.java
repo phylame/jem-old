@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package pw.phylame.jem.formats.pmab.reader;
+package pw.phylame.jem.formats.pmab.v2;
 
 import org.dom4j.Element;
 
@@ -38,8 +38,8 @@ import pw.phylame.tools.file.FileObject;
 /**
  * PBM and PBC reader for PMAB 2.x.
  */
-public class ReaderV2 {
-    private static Log LOG = LogFactory.getLog(ReaderV2.class);
+public class Reader {
+    private static Log LOG = LogFactory.getLog(Reader.class);
 
     private static int parseNumber(String value, int def) {
         if (value == null) {

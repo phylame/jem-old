@@ -20,6 +20,7 @@ package pw.phylame.scj;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Map;
 import java.util.List;
 import java.util.Date;
@@ -49,30 +50,40 @@ public final class Worker {
 
 	public static <T> boolean contains(T[] a, T o) {
 		for (int ix = 0; ix < a.length; ++ix) {
-			if (a[ix] == o || a[ix].equals(o)) {	// if not null call equals
+			if (a[ix] == o || a[ix].equals(o)) {    // if not null call equals
 				return true;
 			}
 		}
 		return false;
 	}
 
+	private static URL detectURL(String url) throws IOException {
+		String href = null;
+		if (url.matches("((http://)|(https://)|(ftp://)|(file://)).*")) {
+			href = url;
+		} else {
+			href = "file:///" + url;
+		}
+		return new URL(href);
+	}
+
 	public static boolean setAttributes(Part part, Map<String, Object> attributes) {
 		for (String key: attributes.keySet()) {
 			String raw = String.valueOf(attributes.get(key));
 			Object value = null;
-			if ("cover".equals(key)) {		// value is image path in disk
+			if ("cover".equals(key)) {        // value is image path in disk
 				try {
-					File file = new File(raw);
-					part.setAttribute("cover", FileFactory.getFile(file, null));
+					URL url = detectURL(raw);
+					part.setAttribute("cover", FileFactory.getFile(url, null));
 				} catch (IOException e) {
-					SCI.error(String.format(SCI.getString("SCI_INVALID_COVER"), raw));
 					LOG.debug("invalid cover file: "+raw, e);
+					SCI.error(SCI.getText("SCI_INVALID_COVER", raw));
 					return false;
 				}
 			} else if ("date".equals(key)) {
-				Date date = DateUtils.parseDate(raw, SCI.getString("SCI_DATE_FORMAT"), null);
+				Date date = DateUtils.parseDate(raw, SCI.getText("SCI_DATE_FORMAT"), null);
 				if (date == null) {
-					SCI.error(String.format(SCI.getString("SCI_INVALID_DATE"), raw));
+					SCI.error(SCI.getText("SCI_INVALID_DATE", raw));
 					return false;
 				} else {
 					value = date;
@@ -97,11 +108,11 @@ public final class Worker {
 		try {
 			book = Jem.readBook(input, format, kw);
 		} catch (IOException e) {
-			LOG.debug(String.format("failed to read '%s' with '%s'",
-					input.getPath(), format.toUpperCase()), e);
+			LOG.debug(String.format("failed to read '%s' with '%s'", input.getPath(),
+					format.toUpperCase()), e);
 		} catch (JemException e) {
-			LOG.debug(String.format("failed to read '%s' with '%s'",
-					input.getPath(), format.toUpperCase()), e);
+			LOG.debug(String.format("failed to read '%s' with '%s'", input.getPath(),
+					format.toUpperCase()), e);
 		}
 		return book;
 	}
@@ -115,21 +126,20 @@ public final class Worker {
 			Jem.writeBook(book, output, format, kw);
 			path = output.getPath();
 		} catch (IOException e) {
-			LOG.debug(String.format("failed to write '%s' with '%s'",
-					output.getPath(), format.toUpperCase()), e);
+			LOG.debug(String.format("failed to write '%s' with '%s'", output.getPath(),
+					format.toUpperCase()), e);
 		} catch (JemException e) {
-			LOG.debug(String.format("failed to write '%s' with '%s'",
-					output.getPath(), format.toUpperCase()), e);
+			LOG.debug(String.format("failed to write '%s' with '%s'", output.getPath(),
+					format.toUpperCase()), e);
 		}
 		return path;
 	}
 
-	public static String convertBook(File input, String inFormat,
-			Map<String, Object> inKw, Map<String, Object> attributes,
-			File output, String outFormat, Map<String, Object> outKw) {
+	public static String convertBook(File input, String inFormat, Map<String, Object> inKw,
+			Map<String, Object> attributes, File output, String outFormat, Map<String, Object> outKw) {
 		Book book = openBook(input, inFormat, inKw);
 		if (book == null) {
-			SCI.error(String.format(SCI.getString("SCI_READ_FAILED"), input.getPath()));
+			SCI.error(SCI.getText("SCI_READ_FAILED", input.getPath()));
 			return null;
 		}
 		if (! setAttributes(book, attributes)) {
@@ -137,20 +147,18 @@ public final class Worker {
 		}
 		String path = saveBook(book, output, outFormat, outKw);
 		if (path == null) {
-			SCI.error(String.format(SCI.getString("SCI_CONVERT_FAILED"), input.getPath(),
-					output.getPath()));
+			SCI.error(SCI.getText("SCI_CONVERT_FAILED", input.getPath(), output.getPath()));
 		}
 		return path;
 	}
 
 	public static String joinBook(File[] inputs, Map<String, Object> inKw,
-			Map<String, Object> attributes, File output, String outFormat,
-			Map<String, Object> outKw) {
+			Map<String, Object> attributes, File output, String outFormat, Map<String, Object> outKw) {
 		Book book = new Book();
 		for (File input: inputs) {
 			Book sub = openBook(input, null, inKw);
 			if (sub == null) {
-				SCI.error(String.format(SCI.getString("SCI_READ_FAILED"), input.getPath()));
+				SCI.error(SCI.getText("SCI_READ_FAILED", input.getPath()));
 			} else {
 				book.append(sub);
 			}
@@ -160,7 +168,7 @@ public final class Worker {
 		}
 		String path = saveBook(book, output, outFormat, outKw);
 		if (path == null) {
-			SCI.error(String.format(SCI.getString("SCI_JOIN_FAILED"), output.getPath()));
+			SCI.error(SCI.getText("SCI_JOIN_FAILED", output.getPath()));
 		}
 		return path;
 	}
@@ -171,12 +179,12 @@ public final class Worker {
 			try {
 				int n = new Integer(part);
 				if (n == 0) {
-					SCI.error(String.format(SCI.getString("SCI_INVALID_INDEXS"), indexs));
+					SCI.error(SCI.getText("SCI_INVALID_INDEXS", indexs));
 					return null;
 				}
 				parts.add(n);
 			} catch(NumberFormatException ex) {
-				SCI.error(String.format(SCI.getString("SCI_INVALID_INDEXS"), indexs));
+				SCI.error(SCI.getText("SCI_INVALID_INDEXS", indexs));
 				return null;
 			}
 		}
@@ -196,7 +204,7 @@ public final class Worker {
 			Map<String, Object> outKw) {
 		Book book = openBook(input, inFormat, inKw);
 		if (book == null) {
-			SCI.error(String.format(SCI.getString("SCI_READ_FAILED"), input.getPath()));
+			SCI.error(SCI.getText("SCI_READ_FAILED", input.getPath()));
 			return null;
 		}
 		int[] indexs = parseIndexs(index);
@@ -209,7 +217,7 @@ public final class Worker {
 		}
 		String path = saveBook(Jem.toBook(part), output, outFormat, outKw);
 		if (path == null) {
-			SCI.error(String.format(SCI.getString("SCI_EXTRACT_FAILED"), index, output.getPath()));
+			SCI.error(SCI.getText("SCI_EXTRACT_FAILED", index, output.getPath()));
 		}
 		return path;
 	}
@@ -223,11 +231,11 @@ public final class Worker {
 			try {
 				str = to.getText();
 			} catch (IOException ex) {
-				SCI.error(String.format(SCI.getString("SCI_LOAD_TEXT_FAILED"), to.getFile().getName()));
 				LOG.debug("load text of "+to.getFile().getName(), ex);
+				SCI.error(SCI.getText("SCI_LOAD_TEXT_FAILED", to.getFile().getName()));
 			}
 		} else if (value instanceof Date) {
-			str = DateUtils.formatDate((Date)value, SCI.getString("SCI_DATE_FORMAT"));
+			str = DateUtils.formatDate((Date)value, SCI.getText("SCI_DATE_FORMAT"));
 		} else if (value instanceof byte[]) {
 			str = java.util.Arrays.toString((byte[])value);
 		} else if (value instanceof Byte[]) {
@@ -259,7 +267,7 @@ public final class Worker {
 
 	private static void viewToc(Part part, String[] keys, String indent, boolean showOrder,
 			boolean showBrackets) {
-		System.out.println(String.format(SCI.getString("SCI_TOC_TITLE"), part.getTitle()));
+		System.out.println(SCI.getText("SCI_TOC_TITLE", part.getTitle()));
 		walkTree(part, "", keys, false, showOrder, indent);
 	}
 
@@ -270,15 +278,13 @@ public final class Worker {
 			if (key.equals("all")) {
 				viewPart(part, part.attributeNames().toArray(new String[0]), sep, showBrackets, true);
 			} else if (key.equals("toc")) {
-				viewToc(part, new String[]{"title", "cover"}, SCI.getString("SCI_TOC_INDENT"),
-						true, true);
+				viewToc(part, new String[]{"title", "cover"}, SCI.getText("SCI_TOC_INDENT"), true, true);
 			} else if (key.equals("text")) {
 				try {
 					System.out.println(part.getSource().getText());
 				} catch (IOException ex) {
-					SCI.debug(ex.getMessage());
 					LOG.debug("load content source: "+part.getSource().getFile().getName(), ex);
-					SCI.error(String.format(SCI.getString("SCI_LOAD_CONTENT_FAILED"), part.getTitle()));
+					SCI.error(SCI.getText("SCI_LOAD_CONTENT_FAILED", part.getTitle()));
 				}
 			} else if (key.equals("names")) {
 				List<String> names = new java.util.ArrayList<String>(part.attributeNames());
@@ -290,22 +296,20 @@ public final class Worker {
 			} else if (key.equals("size") && ! part.hasAttribute("size")) {
 				String str = formatVariant(part.size());
 				if (! "".equals(str)) {
-					lines.add(String.format(SCI.getString("SCI_ATTRIBUTE_FORMAT"),
-							key, "\"" + str + "\""));
+					lines.add(SCI.getText("SCI_ATTRIBUTE_FORMAT", key, "\"" + str + "\""));
 				}
 			} else {
 				Object value = part.getAttribute(key, null);
-                String str = null;
-                if (! ignoreEmpty) {
-                    str = formatVariant(value);
-                } else if (value != null) {
-                    str = formatVariant(value);
-                    str = ! "".equals(str) ? str: null;
-                }
-                if (str != null) {
-                    lines.add(String.format(SCI.getString("SCI_ATTRIBUTE_FORMAT"), key,
-                                "\"" + str + "\""));
-                }
+				String str = null;
+				if (! ignoreEmpty) {
+					str = formatVariant(value);
+				} else if (value != null) {
+					str = formatVariant(value);
+					str = ! "".equals(str) ? str: null;
+				}
+				if (str != null) {
+					lines.add(SCI.getText("SCI_ATTRIBUTE_FORMAT", key, "\"" + str + "\""));
+				}
 			}
 		}
 		if (lines.size() == 0) {
@@ -322,11 +326,10 @@ public final class Worker {
 		for (String name: names) {
 			Object value = book.getItem(name, null);
 			if (value == null) {
-				SCI.echo(String.format(SCI.getString("SCI_NOT_FOUND_ITEM"), name));
+				SCI.echo(SCI.getText("SCI_NOT_FOUND_ITEM", name));
 			} else {
 				String str = formatVariant(value);
-				System.out.println(String.format(SCI.getString("SCI_ITEM_FORMAT"),
-						name, Jem.variantType(value), str));
+				System.out.println(SCI.getText("SCI_ITEM_FORMAT", name, Jem.variantType(value), str));
 			}
 		}
 	}
@@ -345,7 +348,7 @@ public final class Worker {
 			Part part = Jem.getPart(book, indexs, 0);
 			viewPart(part, new String[]{key}, System.getProperty("line.separator"), false, false);
 		} catch (IndexOutOfBoundsException ex) {
-			SCI.error(String.format(SCI.getString("SCI_NOT_FOUND_CHAPTER"), index, book.getTitle()));
+			SCI.error(SCI.getText("SCI_NOT_FOUND_CHAPTER", index, book.getTitle()));
 		}
 	}
 
@@ -353,7 +356,7 @@ public final class Worker {
 			Map<String, Object> attributes, String[] keys) {
 		Book book = openBook(input, inFormat, inKw);
 		if (book == null) {
-			SCI.error(String.format(SCI.getString("SCI_READ_FAILED"), input.getPath()));
+			SCI.error(SCI.getText("SCI_READ_FAILED", input.getPath()));
 			return false;
 		}
 		if (! setAttributes(book, attributes)) {

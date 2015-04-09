@@ -30,9 +30,7 @@ import org.xml.sax.SAXException;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Parser;
 import pw.phylame.jem.core.Part;
-import pw.phylame.jem.formats.pmab.reader.ReaderV1;
-import pw.phylame.jem.formats.pmab.reader.ReaderV2;
-import pw.phylame.jem.formats.pmab.reader.ReaderV3;
+import pw.phylame.jem.formats.pmab.v3.Reader;
 import pw.phylame.jem.util.JemException;
 
 import java.io.*;
@@ -140,11 +138,11 @@ public class PmabParser implements Parser {
             throw new JemException("Invalid PBM document: root is not pbm or package");
         }
         if ("2.0".equals(version)) {
-            ReaderV2.readPBM(root, book, zipFile);
+            pw.phylame.jem.formats.pmab.v2.Reader.readPBM(root, book, zipFile);
         } else if ("3.0".equals(version)) {
-            ReaderV3.readPBM(root, book, zipFile);
+            Reader.readPBM(root, book, zipFile);
         } else  if ("1.0".equals(version)) {
-            ReaderV1.readPBM(root, book, zipFile);
+            pw.phylame.jem.formats.pmab.v1.Reader.readPBM(root, book, zipFile);
         } else {
             stream.close();
             throw new JemException("Invalid PBM version: "+version);
@@ -192,11 +190,11 @@ public class PmabParser implements Parser {
             throw new JemException("Invalid PBC document: root is not pbc or container");
         }
         if ("2.0".equals(version)) {
-            ReaderV2.readPBC(root, book, zipFile);
+            pw.phylame.jem.formats.pmab.v2.Reader.readPBC(root, book, zipFile);
         } else if ("3.0".equals(version)) {
-            ReaderV3.readPBC(root, book, zipFile);
+            Reader.readPBC(root, book, zipFile);
         } else  if ("1.0".equals(version)) {
-            ReaderV1.readPBC(root, book, zipFile);
+            pw.phylame.jem.formats.pmab.v1.Reader.readPBC(root, book, zipFile);
         } else {
             stream.close();
             throw new JemException("Invalid PBC version: "+version);
