@@ -1,1 +1,1 @@
-scj D:\tmp\zd.pmab -w toc
+scj D:\tmp\zd.umd -w toc -wall

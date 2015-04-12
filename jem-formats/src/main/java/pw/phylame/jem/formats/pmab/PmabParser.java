@@ -79,7 +79,7 @@ public class PmabParser implements Parser {
     }
 
     public Book parse(final ZipFile zipFile) throws IOException, JemException {
-        if (! Pmab.isPmab(zipFile)) {
+        if (! PMAB.isPmab(zipFile)) {
             throw new JemException("Invalid PMAB archive");
         }
         Book book = new Book();
@@ -99,9 +99,9 @@ public class PmabParser implements Parser {
     }
 
     private void readPBM(ZipFile zipFile, Book book) throws IOException, JemException {
-        ZipEntry zipEntry = zipFile.getEntry(Pmab.PBM_FILE);
+        ZipEntry zipEntry = zipFile.getEntry(PMAB.PBM_FILE);
         if (zipEntry == null) {
-            throw new IOException("Not found "+Pmab.PBM_FILE+" in PMAB "+zipFile.getName());
+            throw new IOException("Not found "+ PMAB.PBM_FILE+" in PMAB "+zipFile.getName());
         }
         InputStream stream = new BufferedInputStream(zipFile.getInputStream(zipEntry));
         SAXReader reader = new SAXReader();
@@ -151,9 +151,9 @@ public class PmabParser implements Parser {
     }
 
     private void readPBC(ZipFile zipFile, Book book) throws IOException, JemException {
-        ZipEntry zipEntry = zipFile.getEntry(Pmab.PBC_FILE);
+        ZipEntry zipEntry = zipFile.getEntry(PMAB.PBC_FILE);
         if (zipEntry == null) {
-            throw new IOException("Not found "+Pmab.PBC_FILE+" in PMAB "+zipFile.getName());
+            throw new IOException("Not found "+ PMAB.PBC_FILE+" in PMAB "+zipFile.getName());
         }
         InputStream stream = new BufferedInputStream(zipFile.getInputStream(zipEntry));
         SAXReader reader = new SAXReader();

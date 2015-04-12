@@ -45,6 +45,7 @@ public final class FileFactory {
             }
             this.file = file;
         }
+
         /**
          * Returns the name of file content.
          */
@@ -52,6 +53,18 @@ public final class FileFactory {
         public String getName() {
             return file.getPath();
         }
+
+        /**
+         * Gets available bytes ti be read.
+         *
+         * @return the size or <tt>-1</tt> if unknown number of bytes
+         * @throws IOException occur IO errors
+         */
+        @Override
+        public long available() throws IOException {
+            return file.length();
+        }
+
         /**
          * Opens an {@code InputStream} for reading file content.
          *
@@ -62,7 +75,6 @@ public final class FileFactory {
         public InputStream openInputStream() throws IOException {
             return new FileInputStream(file);
         }
-
     }
 
     private static class InnerZip extends FileObject {
@@ -83,6 +95,7 @@ public final class FileFactory {
             this.zipFile = zipFile;
             entryName = name;
         }
+
         /**
          * Returns the name of file content.
          *
@@ -91,6 +104,19 @@ public final class FileFactory {
         @Override
         public String getName() {
             return entryName;
+        }
+
+        /**
+         * Gets available bytes ti be read.
+         *
+         * @return the size or <tt>-1</tt> if unknown number of bytes
+         * @throws IOException occur IO errors
+         */
+        @Override
+        public long available() throws IOException {
+            ZipEntry zipEntry = zipFile.getEntry(entryName);
+            assert zipEntry != null;
+            return zipEntry.getSize();
         }
 
         /**
@@ -155,8 +181,13 @@ public final class FileFactory {
             oldOffset = file.getFilePointer();
             file.seek(offset);
             return new InputStream() {
+                private long readBytes = 0;
+
                 @Override
                 public int read() throws IOException {
+                    if (readBytes++ >= size) {
+                        return -1;
+                    }
                     return file.read();
                 }
             };
@@ -185,7 +216,7 @@ public final class FileFactory {
 
         @Override
         public String toString() {
-            return String.format("Area <offset=%d; size=%d> in %s", offset, size, getName());
+            return String.format("Area %s <offset=%d; size=%d>", getName(), offset, size);
         }
     }
 

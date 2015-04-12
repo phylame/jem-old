@@ -32,31 +32,31 @@ public class Chapter extends Part {
     public static final String INTRO = "intro";
 
     public Chapter() {
-        super();
+        this("", new TextObject(), null, null);
+    }
+
+    public Chapter(String title) {
+        this(title, new TextObject(), null, null);
     }
 
     public Chapter(String title, String text) {
-        super(title, text);
+        this(title, new TextObject(text), null, null);
     }
 
     public Chapter(String title, String text, FileObject cover, TextObject intro) {
-        super(title, text);
-        setCover(cover);
-        setIntro(intro);
+        this(title, new TextObject(text), cover, intro);
     }
 
     public Chapter(String title, FileObject file, String encoding) {
-        super(title, file, encoding);
+        this(title, new TextObject(file, encoding), null, null);
     }
 
     public Chapter(String title, FileObject file, String encoding, FileObject cover, TextObject intro) {
-        super(title, file, encoding);
-        setCover(cover);
-        setIntro(intro);
+        this(title, new TextObject(file, encoding), cover, intro);
     }
 
     public Chapter(String title, TextObject content) {
-        super(title, content);
+        this(title, content, null, null);
     }
 
     public Chapter(String title, TextObject content, FileObject cover, TextObject intro) {
@@ -111,5 +111,35 @@ public class Chapter extends Part {
      */
     public void setIntro(String intro) {
         setIntro(new TextObject(intro));
+    }
+
+    public Chapter newChapter(String title) {
+        return newChapter(title, new TextObject(), null, null);
+    }
+
+    public Chapter newChapter(String title, String text) {
+        return newChapter(title, new TextObject(text), null, null);
+    }
+
+    public Chapter newChapter(String title, String text, FileObject cover, TextObject intro) {
+        return newChapter(title, new TextObject(text), cover, intro);
+    }
+
+    public Chapter newChapter(String title, FileObject file, String encoding) {
+        return newChapter(title, new TextObject(file, encoding), null, null);
+    }
+
+    public Chapter newChapter(String title, FileObject file, String encoding, FileObject cover, TextObject intro) {
+        return newChapter(title, new TextObject(file, encoding), cover, intro);
+    }
+
+    public Chapter newChapter(String title, TextObject content) {
+        return newChapter(title, content, null, null);
+    }
+
+    public Chapter newChapter(String title, TextObject content, FileObject cover, TextObject intro) {
+        Chapter sub = new Chapter(title, content, cover, intro);
+        append(sub);
+        return sub;
     }
 }

@@ -32,12 +32,19 @@ import java.io.IOException;
  * </ul>
  */
 public class TextObject {
-    protected static enum SourceType {
+    protected enum SourceType {
         TEXT, FILE
     }
 
     /** More than this size of content is large. */
     public static int LARGE_SIZE = 4096;
+
+    /**
+     * Constructs object with empty content.
+     */
+    public TextObject() {
+        this("");
+    }
 
     /**
      * Constructs object with specified raw text.
@@ -108,13 +115,20 @@ public class TextObject {
      * @return <tt>true</tt> if large otherwise <tt>false</tt>
      */
     public boolean isLarge() {
+        return aboutSize() >= LARGE_SIZE;
+    }
+
+    /**
+     * Returns about text size in the source.
+     * @return the size
+     */
+    protected long aboutSize() {
         long size;
         switch (sourceType) {
             case FILE:
                 try {
                     size = getFile().available();
                 } catch (IOException e) {
-//                    e.printStackTrace();
                     size = LARGE_SIZE;
                 }
                 break;
@@ -122,7 +136,7 @@ public class TextObject {
                 size = getRaw().length();
                 break;
         }
-        return size >= LARGE_SIZE;
+        return size;
     }
 
     /**

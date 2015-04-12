@@ -39,7 +39,7 @@ import java.util.zip.ZipOutputStream;
 public class JarMaker implements Maker {
 
     /** Java ME book template */
-    public static final String JAR_TEMPLATE = "/res/book.jar";
+    public static final String JAR_TEMPLATE = "book.jar";
 
     // for generating entry name
     int chapterCount = 1;
@@ -62,10 +62,10 @@ public class JarMaker implements Maker {
         // template
         copyTemplate(zipout);
         // MANIFEST
-        zipout.putNextEntry(new ZipEntry(Jar.MF_FILE));
-        String mf = String.format(Jar.MF_TEMPLATE, "Jem", Jem.VERSION, book.getTitle(),
+        zipout.putNextEntry(new ZipEntry(JAR.MF_FILE));
+        String mf = String.format(JAR.MF_TEMPLATE, "Jem", Jem.VERSION, book.getTitle(),
                 "PW", book.getTitle());
-        zipout.write(mf.getBytes(Jar.META_ENCODING));
+        zipout.write(mf.getBytes(JAR.META_ENCODING));
         zipout.closeEntry();
         // contents
         List<Item> items = new java.util.ArrayList<Item>();
@@ -102,7 +102,7 @@ public class JarMaker implements Maker {
         }
         String name = String.valueOf(chapterCount++);
         zipout.putNextEntry(new ZipEntry(name));
-        byte[] b = text.getBytes(Jar.TEXT_ENCODING);
+        byte[] b = text.getBytes(JAR.TEXT_ENCODING);
         zipout.write(b);
         zipout.closeEntry();
 
@@ -116,18 +116,18 @@ public class JarMaker implements Maker {
     private void writeMeta(Book book, ZipOutputStream zipout, List<Item> items) throws IOException {
         zipout.putNextEntry(new ZipEntry("0"));
         DataOutput output = new DataOutputStream(zipout);
-        output.writeInt(Jar.FILE_HEADER);
-        byte[] b = book.getTitle().getBytes(Jar.META_ENCODING);
+        output.writeInt(JAR.FILE_HEADER);
+        byte[] b = book.getTitle().getBytes(JAR.META_ENCODING);
         output.writeByte(b.length);
         output.write(b);
 
-        b = String.valueOf(items.size()).getBytes(Jar.META_ENCODING);
+        b = String.valueOf(items.size()).getBytes(JAR.META_ENCODING);
         output.writeShort(b.length);
         output.write(b);
 
         for (Item item: items) {
             String str = item.name+","+item.size+","+item.title;
-            b = str.getBytes(Jar.META_ENCODING);
+            b = str.getBytes(JAR.META_ENCODING);
             output.writeShort(b.length);
             output.write(b);
         }
@@ -140,7 +140,7 @@ public class JarMaker implements Maker {
                 sb.append(line).append("\n");
             }
         }
-        b = sb.toString().getBytes(Jar.META_ENCODING);
+        b = sb.toString().getBytes(JAR.META_ENCODING);
         output.writeShort(b.length);
         output.write(b);
         zipout.closeEntry();

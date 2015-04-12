@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Peng Wan
+ * Copyright 2015 Peng Wan <phylame@163.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -119,20 +119,10 @@ public final class ByteUtils {
     public static final Parser bigParser = new Parser(Endian.BIG);
     public static final Parser littleParser = new Parser(Endian.LITTLE);
 
-    public static int getUnsignedByte(byte n) {
-        return n & 0xFF;
-    }
-
-    public static int getUnsignedShort(short n) {
-        return n & 0xFFFF;
-    }
-
-    public static long getUnsignedInt(int n) {
-        return n & 0xFFFFFFFFL;
-    }
+    public static Endian defaultEndian = Endian.BIG;
 
     public static byte[] putInt8(byte x) {
-        return putUint8(x, Endian.BIG);
+        return putUint8(x, defaultEndian);
     }
 
     public static byte[] putInt8(byte x, Endian endian) {
@@ -140,7 +130,7 @@ public final class ByteUtils {
     }
 
     public static byte[] putUint8(int x) {
-        return putUint8(x, Endian.BIG);
+        return putUint8(x, defaultEndian);
     }
 
     public static byte[] putUint8(int x, Endian endian) {
@@ -150,7 +140,7 @@ public final class ByteUtils {
     }
 
     public static byte[] putInt16(short x) {
-        return putUint16(x, Endian.BIG);
+        return putUint16(x, defaultEndian);
     }
 
     public static byte[] putInt16(short x, Endian endian) {
@@ -158,7 +148,7 @@ public final class ByteUtils {
     }
 
     public static byte[] putUint16(int x) {
-        return putUint16(x, Endian.BIG);
+        return putUint16(x, defaultEndian);
     }
 
     public static byte[] putUint16(int x, Endian endian) {
@@ -174,7 +164,7 @@ public final class ByteUtils {
     }
 
     public static byte[] putInt32(int x) {
-        return putUint32(x, Endian.BIG);
+        return putUint32(x, defaultEndian);
     }
 
     public static byte[] putInt32(int x, Endian endian) {
@@ -182,7 +172,7 @@ public final class ByteUtils {
     }
 
     public static byte[] putUint32(long x) {
-        return putUint32(x, Endian.BIG);
+        return putUint32(x, defaultEndian);
     }
 
     public static byte[] putUint32(long x, Endian endian) {
@@ -218,7 +208,7 @@ public final class ByteUtils {
     }
 
     public static short getInt16(byte[] b, int index) {
-        return getInt16(b, index, Endian.BIG);
+        return getInt16(b, index, defaultEndian);
     }
 
     public static short getInt16(byte[] b, int index, Endian endian) {
@@ -230,7 +220,7 @@ public final class ByteUtils {
     }
 
     public static int getUint16(byte[] b, int index) {
-        return getUint16(b, index, Endian.BIG);
+        return getUint16(b, index, defaultEndian);
     }
 
     public static int getUint16(byte[] b, int index, Endian endian) {
@@ -238,7 +228,7 @@ public final class ByteUtils {
     }
 
     public static int getInt32(byte[] b, int index) {
-        return getInt32(b, index, Endian.BIG);
+        return getInt32(b, index, defaultEndian);
     }
 
     public static int getInt32(byte[] b, int index, Endian endian) {
@@ -256,27 +246,39 @@ public final class ByteUtils {
     }
 
     public static long getUint32(byte[] b, int index) {
-        return getInt32(b, index, Endian.BIG);
+        return getInt32(b, index, defaultEndian);
     }
 
     public static long getUint32(byte[] b, int index, Endian endian) {
         return getInt32(b, index, endian) & 0xFFFFFFFFL;
     }
 
+    public static int getUnsignedByte(byte n) {
+        return n & 0xFF;
+    }
+
+    public static int getUnsignedShort(short n) {
+        return n & 0xFFFF;
+    }
+
+    public static long getUnsignedInt(int n) {
+        return n & 0xFFFFFFFFL;
+    }
+
     public static  byte[] putShort(short x) {
-        return putInt16(x, Endian.BIG);
+        return putInt16(x, defaultEndian);
     }
 
     public static short getShort(byte[] b, int index) {
-        return getInt16(b, index, Endian.BIG);
+        return getInt16(b, index, defaultEndian);
     }
 
     public static  byte[] putInt(int x) {
-        return putInt32(x, Endian.BIG);
+        return putInt32(x, defaultEndian);
     }
 
     public static int getInt(byte[] b, int index) {
-        return getInt32(b, index, Endian.BIG);
+        return getInt32(b, index, defaultEndian);
     }
 
     public static byte[] putLong(long x) {

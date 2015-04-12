@@ -8,6 +8,7 @@
     </JAVADOC>
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/pw-books/jem-core/2.0-SNAPSHOT/jem-core-2.0-SNAPSHOT-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../jem-core/target/jem-core-2.0-SNAPSHOT-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

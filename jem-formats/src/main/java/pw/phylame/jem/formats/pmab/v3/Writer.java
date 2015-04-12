@@ -25,7 +25,7 @@ import org.dom4j.Element;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.Part;
-import pw.phylame.jem.formats.pmab.Pmab;
+import pw.phylame.jem.formats.pmab.PMAB;
 import pw.phylame.jem.formats.pmab.PmabConfig;
 import pw.phylame.tools.DateUtils;
 import pw.phylame.tools.StringUtils;
@@ -53,6 +53,9 @@ public final class Writer {
 
     private static void makeItem(Element parent, String name, Object value, ZipOutputStream zipout,
                                  PmabConfig config, String prefix) {
+        if (value == null) {    // ignore null value
+            return;
+        }
         Element item = parent.addElement("item").addAttribute("name", name);
         String type = Jem.variantType(value);
         String text;
@@ -66,7 +69,7 @@ public final class Writer {
                 text = config.extraDir + "/" + baseName;
             }
             try {
-                Pmab.writeFile(fb, zipout, text);
+                PMAB.writeFile(fb, zipout, text);
             } catch (IOException ex) {
                 LOG.debug("cannot write file to PMAB: "+fb.getName(), ex);
             }
@@ -82,7 +85,7 @@ public final class Writer {
                 text = config.extraDir + "/" + baseName;
             }
             try {
-                Pmab.writeText(tb, zipout, text, encoding);
+                PMAB.writeText(tb, zipout, text, encoding);
             } catch (IOException ex) {
                 LOG.debug("cannot write text to PMAB: "+text, ex);
             }
@@ -128,7 +131,7 @@ public final class Writer {
     public static void writePBM(Book book, Document doc, ZipOutputStream zipout, PmabConfig config)
             throws IOException {
         doc.addDocType("pbm", null, null);
-        Element root = doc.addElement("pbm", Pmab.PBM_XML_NS).addAttribute("version", "3.0");
+        Element root = doc.addElement("pbm", PMAB.PBM_XML_NS).addAttribute("version", "3.0");
         // head
         if (config.metaInfo != null && config.metaInfo.size() > 0) {
             makeHead(root, config.metaInfo);
@@ -151,7 +154,7 @@ public final class Writer {
         String href = config.textDir + "/"+ base + ".txt";
         String encoding = config.textEncoding != null ? config.textEncoding :
                 System.getProperty("file.encoding");
-        Pmab.writeText(part.getSource(), zipout, href, encoding);
+        PMAB.writeText(part.getSource(), zipout, href, encoding);
         Element content = item.addElement("content");
         content.addAttribute("type", "text/plain;encoding="+encoding);
         content.setText(href);
@@ -166,7 +169,7 @@ public final class Writer {
     public static void writePBC(Book book, Document doc, ZipOutputStream zipout, PmabConfig config)
             throws IOException {
         doc.addDocType("pbc", null, null);
-        Element root = doc.addElement("pbc", Pmab.PBC_XML_NS).addAttribute("version", "3.0");
+        Element root = doc.addElement("pbc", PMAB.PBC_XML_NS).addAttribute("version", "3.0");
 
         Element toc = root.addElement("toc");
         int count = 1;

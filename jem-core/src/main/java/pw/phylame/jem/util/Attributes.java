@@ -18,8 +18,8 @@
 
 package pw.phylame.jem.util;
 
+import java.util.Set;
 import java.util.Map;
-import java.util.Collection;
 
 /**
  * Provides map based attributes.
@@ -117,7 +117,7 @@ public class Attributes {
      * Returns all names in attributes map.
      * @return sequence of attribute names
      */
-    public Collection<String> attributeNames() {
+    public Set<String> attributeNames() {
         return metaMap.keySet();
     }
 

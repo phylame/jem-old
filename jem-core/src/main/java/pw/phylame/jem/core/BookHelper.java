@@ -18,9 +18,7 @@
 
 package pw.phylame.jem.core;
 
-import java.util.Map;
-import java.util.Properties;
-import java.util.Enumeration;
+import java.util.*;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 
@@ -135,10 +133,11 @@ public final class BookHelper {
         if (path == null) {
             throw new UnsupportedFormatException(name, "not found parser");
         }
-        Class clazz = Class.forName(path);
+        Class<?> clazz = Class.forName(path);
         if (! Parser.class.isAssignableFrom(clazz)) {
             throw new UnsupportedFormatException(name, "class not extend Parser");
         }
+        cachedParsers.put(name, (Class<Parser>) clazz);
         return (Parser) clazz.newInstance();
     }
 
@@ -146,10 +145,10 @@ public final class BookHelper {
      * Returns names of registered parser class.
      * @return sequence of format names
      */
-    public static String[] supportedParsers() {
-        java.util.Set<String> names = parsers.keySet();
-        names.addAll(cachedParsers.keySet());
-        return names.toArray(new String[0]);
+    public static Set<String> supportedParsers() {
+        Set<String> names = new HashSet<String>(cachedParsers.keySet());
+        names.addAll(parsers.keySet());
+        return names;
     }
 
     /**
@@ -225,10 +224,11 @@ public final class BookHelper {
         if (path == null) {
             throw new UnsupportedFormatException(name, "not found maker");
         }
-        Class clazz = Class.forName(path);
+        Class<?> clazz = Class.forName(path);
         if (! Maker.class.isAssignableFrom(clazz)) {
             throw new UnsupportedFormatException(name, "class not extend Maker");
         }
+        cachedMakers.put(name, (Class<Maker>) clazz);
         return (Maker) clazz.newInstance();
     }
 
@@ -236,10 +236,10 @@ public final class BookHelper {
      * Returns names of registered maker class.
      * @return sequence of format names
      */
-    public static String[] supportedMakers() {
-        java.util.Set<String> names = makers.keySet();
-        names.addAll(cachedMakers.keySet());
-        return names.toArray(new String[0]);
+    public static Set<String> supportedMakers() {
+        Set<String> names = new HashSet<String>(cachedMakers.keySet());
+        names.addAll(makers.keySet());
+        return names;
     }
 
     /**
@@ -255,9 +255,9 @@ public final class BookHelper {
      *  or null if security doesn't allow it.
      */
     private static ClassLoader getContextClassLoaderInternal() {
-        return (ClassLoader)AccessController.doPrivileged(
-                new PrivilegedAction() {
-                    public Object run() {
+        return AccessController.doPrivileged(
+                new PrivilegedAction<ClassLoader>() {
+                    public ClassLoader run() {
                         return directGetContextClassLoader();
                     }
                 });
@@ -316,10 +316,10 @@ public final class BookHelper {
      * hasMoreElements method returns false (ie an "empty" enumeration).
      * If resources could not be listed for some reason, null is returned.
      */
-    private static Enumeration getResources(final ClassLoader loader, final String name) {
-        PrivilegedAction action =
-                new PrivilegedAction() {
-                    public Object run() {
+    private static Enumeration<URL> getResources(final ClassLoader loader, final String name) {
+        PrivilegedAction<Enumeration<URL>> action =
+                new PrivilegedAction<Enumeration<URL>>() {
+                    public Enumeration<URL> run() {
                         try {
                             if (loader != null) {
                                 return loader.getResources(name);
@@ -338,8 +338,7 @@ public final class BookHelper {
                         }
                     }
                 };
-        Object result = AccessController.doPrivileged(action);
-        return (Enumeration) result;
+        return AccessController.doPrivileged(action);
     }
 
     /**
@@ -351,9 +350,9 @@ public final class BookHelper {
      * {@code Null} is returned if the URL cannot be opened.
      */
     private static Properties getProperties(final URL url) {
-        PrivilegedAction action =
-                new PrivilegedAction() {
-                    public Object run() {
+        PrivilegedAction<Properties> action =
+                new PrivilegedAction<Properties>() {
+                    public Properties run() {
                         InputStream stream = null;
                         try {
                             // We must ensure that useCaches is set to false, as the
@@ -385,19 +384,21 @@ public final class BookHelper {
                         return null;
                     }
                 };
-        return (Properties) AccessController.doPrivileged(action);
+        return AccessController.doPrivileged(action);
     }
 
-    private static void loadRegistrations(String fileName, Map<String, String> map) {
+    private static Map<String, String> loadRegistrations(String fileName) {
+        Map<String, String> map = new java.util.HashMap<String, String>();
+
         // Identify the class loader we will be using
         ClassLoader contextClassLoader = getContextClassLoaderInternal();
 
-        Enumeration urls = getResources(contextClassLoader, fileName);
+        Enumeration<URL> urls = getResources(contextClassLoader, fileName);
         if (urls == null) {
-            return;
+            return map;
         }
         while (urls.hasMoreElements()) {
-            URL url = (URL) urls.nextElement();
+            URL url = urls.nextElement();
             Properties prop = getProperties(url);
             if (prop != null) {
                 for (String name: prop.stringPropertyNames()) {
@@ -408,16 +409,21 @@ public final class BookHelper {
                 }
             }
         }
+        return map;
     }
 
     /** Registers custom parser classes from config file. */
     private static void registerCustomParsers() {
-        loadRegistrations(PARSER_DEFINE_FILE, parsers);
+        for (Map.Entry<String, String> entry: loadRegistrations(PARSER_DEFINE_FILE).entrySet()) {
+            registerParser(entry.getKey(), entry.getValue());
+        }
     }
 
     /** Registers custom maker classes from config file. */
     private static void registerCustomMakers() {
-        loadRegistrations(MAKER_DEFINE_FILE, makers);
+        for (Map.Entry<String, String> entry: loadRegistrations(MAKER_DEFINE_FILE).entrySet()) {
+            registerMaker(entry.getKey(), entry.getValue());
+        }
     }
 
     static {

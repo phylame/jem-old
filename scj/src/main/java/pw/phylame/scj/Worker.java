@@ -48,15 +48,6 @@ public final class Worker {
 	private static final String CHAPTER_REGEX = "^chapter([\\-\\d\\.]+)(\\$.*)?";
 	private static final String ITEM_REGEX = "^item\\$.*";
 
-	public static <T> boolean contains(T[] a, T o) {
-		for (int ix = 0; ix < a.length; ++ix) {
-			if (a[ix] == o || a[ix].equals(o)) {    // if not null call equals
-				return true;
-			}
-		}
-		return false;
-	}
-
 	private static URL detectURL(String url) throws IOException {
 		String href = null;
 		if (url.matches("((http://)|(https://)|(ftp://)|(file://)).*")) {
@@ -147,7 +138,7 @@ public final class Worker {
 		}
 		String path = saveBook(book, output, outFormat, outKw);
 		if (path == null) {
-			SCI.error(SCI.getText("SCI_CONVERT_FAILED", input.getPath(), output.getPath()));
+			SCI.error(SCI.getText("SCI_CONVERT_FAILED", input.getPath(), output.getAbsolutePath()));
 		}
 		return path;
 	}
@@ -168,7 +159,7 @@ public final class Worker {
 		}
 		String path = saveBook(book, output, outFormat, outKw);
 		if (path == null) {
-			SCI.error(SCI.getText("SCI_JOIN_FAILED", output.getPath()));
+			SCI.error(SCI.getText("SCI_JOIN_FAILED", output.getAbsolutePath()));
 		}
 		return path;
 	}
@@ -217,7 +208,7 @@ public final class Worker {
 		}
 		String path = saveBook(Jem.toBook(part), output, outFormat, outKw);
 		if (path == null) {
-			SCI.error(SCI.getText("SCI_EXTRACT_FAILED", index, output.getPath()));
+			SCI.error(SCI.getText("SCI_EXTRACT_FAILED", index, output.getAbsolutePath()));
 		}
 		return path;
 	}

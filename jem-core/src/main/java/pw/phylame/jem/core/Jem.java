@@ -206,7 +206,7 @@ public final class Jem {
     /**
      * This interface used for walking sub-parts.
      */
-    public static interface  Walker {
+    public interface  Walker {
         /**
          * Watches the specified part.
          * @param part the part to be watched
@@ -247,8 +247,8 @@ public final class Jem {
         variantTypes.put(Boolean.class, "int");
         variantTypes.put(byte[].class, "bytes");
         variantTypes.put(Byte[].class, "bytes");
-        variantTypes.put(Float.class, "int");
-        variantTypes.put(Double.class, "int");
+        variantTypes.put(Float.class, "real");
+        variantTypes.put(Double.class, "real");
     }
 
     /**

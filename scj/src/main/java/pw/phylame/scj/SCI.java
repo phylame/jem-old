@@ -224,7 +224,7 @@ public final class SCI {
 		}
 		String inFormat = cmd.getOptionValue("f"), outFormat = cmd.getOptionValue("t");
 		outFormat = outFormat == null ? Jem.PMAB_FORMAT : outFormat;
-		if (! Worker.contains(BookHelper.supportedMakers(), outFormat)) {
+		if (! BookHelper.supportedMakers().contains(outFormat)) {
 			error(getText("SCI_OUT_UNSUPPORTED", outFormat));
 			System.out.println(getText("SCI_UNSUPPORTED_HELP"));
 			return -1;
@@ -257,7 +257,7 @@ public final class SCI {
 			if (inFmt == null) {
 				inFmt = FileUtils.getExtension(file);
 			}
-			if (inFmt != null && ! Worker.contains(BookHelper.supportedParsers(), inFmt)) {
+			if (inFmt != null && ! BookHelper.supportedParsers().contains(inFmt)) {
 				error(getText("SCI_IN_UNSUPPORTED", inFmt));
 				System.out.println(getText("SCI_UNSUPPORTED_HELP"));
 				status = -1;

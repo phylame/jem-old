@@ -53,7 +53,7 @@ public class JarParser implements Parser {
                 try {
                     jarFile.close();
                 } catch (IOException e) {
-                    LOG.debug("cannot close Jar source: "+jarFile.getName(), e);
+                    LOG.debug("cannot close JAR source: "+jarFile.getName(), e);
                 }
             }
         });
@@ -73,36 +73,36 @@ public class JarParser implements Parser {
         }
         InputStream stream = new BufferedInputStream(zipFile.getInputStream(entry));
         DataInput input = new DataInputStream(stream);
-        if (input.readInt() != Jar.FILE_HEADER) {
+        if (input.readInt() != JAR.FILE_HEADER) {
             throw new JemException("Unsupported JAR book: magic number");
         }
         int length = input.readByte();
         byte[] buf = new byte[length];
         input.readFully(buf);
-        book.setTitle(new String(buf, Jar.META_ENCODING));
+        book.setTitle(new String(buf, JAR.META_ENCODING));
 
         length = input.readShort();
         buf = new byte[length];
         input.readFully(buf);
-        int chapterCount = Integer.parseInt(new String(buf, Jar.META_ENCODING));
+        int chapterCount = Integer.parseInt(new String(buf, JAR.META_ENCODING));
 
         for (int i = 0; i < chapterCount; ++i) {
             length = input.readShort();
             buf = new byte[length];
             input.readFully(buf);
-            String str = new String(buf, Jar.META_ENCODING);
+            String str = new String(buf, JAR.META_ENCODING);
             String[] items = str.split(",");
             if (items.length < 3) {
                 throw new JemException("Invalid JAR book: bad chapter item");
             }
             Chapter chapter = new Chapter(items[2], "");
-            chapter.getSource().setFile(FileFactory.getFile(zipFile, items[0], null), Jar.TEXT_ENCODING);
+            chapter.getSource().setFile(FileFactory.getFile(zipFile, items[0], null), JAR.TEXT_ENCODING);
             book.append(chapter);
         }
 
         length = input.readShort();
         buf = new byte[length];
         input.readFully(buf);
-        book.setIntro(new String(buf, Jar.META_ENCODING));
+        book.setIntro(new String(buf, JAR.META_ENCODING));
     }
 }

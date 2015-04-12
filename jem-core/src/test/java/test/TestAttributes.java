@@ -21,9 +21,9 @@ package test;
 import junit.framework.TestCase;
 import pw.phylame.jem.util.Attributes;
 
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Set;
 
 public class TestAttributes extends TestCase {
     public void testSize() {
@@ -97,7 +97,7 @@ public class TestAttributes extends TestCase {
         Attributes attrs = new Attributes();
         attrs.setAttribute("name", "PW");
         attrs.setAttribute("age", 21);
-        Collection<String> names = attrs.attributeNames();
+        Set<String> names = attrs.attributeNames();
         assertEquals(names.size(), 2);
         assertTrue(names.contains("name"));
         assertTrue(names.contains("age"));

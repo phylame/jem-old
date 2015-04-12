@@ -19,6 +19,7 @@ package pw.phylame.tools.file;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.ByteArrayOutputStream;
 
 /**
  * Provides read only input source.
@@ -64,6 +65,16 @@ public abstract class FileObject {
      * @throws java.io.IOException occur IO errors
      */
     public void reset() throws IOException {}
+
+    /**
+     * Reads all bytes from file content.
+     * @return the data in file
+     */
+    public byte[] readAll() throws IOException {
+        ByteArrayOutputStream o = new ByteArrayOutputStream();
+        copyTo(o);
+        return o.toByteArray();
+    }
 
     /**
      * Writes file content to <tt>OutputStream</tt>.

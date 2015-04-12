@@ -21,6 +21,7 @@ package pw.phylame.jem.formats.pmab.v1;
 import org.dom4j.Document;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.formats.pmab.PmabConfig;
+import pw.phylame.jem.util.JemException;
 
 import java.util.zip.ZipOutputStream;
 
@@ -28,11 +29,13 @@ import java.util.zip.ZipOutputStream;
  * PBM and PBC writer for PMAB 1.x.
  */
 public class Writer {
-    public static void writePBM(Book book, Document doc, ZipOutputStream zipout, PmabConfig config) {
+    public static void writePBM(Book book, Document doc, ZipOutputStream zipout, PmabConfig config) throws JemException {
         doc.addDocType("package", null, null);
+        throw new JemException("under develpment");
     }
 
-    public static void writePBC(Book book, Document doc, ZipOutputStream zipout, PmabConfig config) {
+    public static void writePBC(Book book, Document doc, ZipOutputStream zipout, PmabConfig config) throws JemException {
         doc.addDocType("container", null, null);
+        throw new JemException("under develpment");
     }
 }

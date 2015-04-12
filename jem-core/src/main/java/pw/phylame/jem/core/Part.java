@@ -25,8 +25,6 @@ import java.io.IOException;
 import pw.phylame.jem.util.Attributes;
 import pw.phylame.tools.TextObject;
 import pw.phylame.tools.file.FileObject;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <p>A part in book contents.</p>
@@ -41,15 +39,13 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class Part extends Attributes implements Iterable<Part> {
-    private static Log LOG = LogFactory.getLog(Part.class);
-
     /** Key name for part title.*/
     public static final String TITLE = "title";
 
     /**
      * This interface is designed for cleaning part resource when destroys part.
      */
-    public static interface Cleanable {
+    public interface Cleanable {
         /**
          * Cleans the specified <tt>Part</tt>
          * @param part the <tt>Part</tt> to be cleaned
@@ -59,7 +55,15 @@ public class Part extends Attributes implements Iterable<Part> {
 
     /** Constructs part used empty title and content. */
     public Part() {
-        this("", "");
+        this("", new TextObject());
+    }
+
+    /**
+     * Constructs part with specified title.
+     * @param title title of part
+     */
+    public Part(String title) {
+        this(title, new TextObject());
     }
 
     /**
@@ -230,6 +234,48 @@ public class Part extends Attributes implements Iterable<Part> {
      */
     public Part get(int index) {
         return children.get(index);
+    }
+
+    /**
+     * Creates a new sub-part.
+     * @param title title of part
+     * @return the newed part
+     */
+    public Part newPart(String title) {
+        return newPart(title, new TextObject());
+    }
+
+    /**
+     * Creates a new sub-part.
+     * @param title title of part
+     * @param text text content, if <tt>null</tt> sets empty text
+     * @return the newed part
+     */
+    public Part newPart(String title, String text) {
+        return newPart(title, new TextObject(text));
+    }
+
+    /**
+     * Creates a new sub-part.
+     * @param title title of part
+     * @param file file contains text
+     * @param encoding encoding of the file, if <tt>null</tt> uses platform encoding
+     * @return the newed part
+     */
+    public Part newPart(String title, FileObject file, String encoding) {
+        return newPart(title, new TextObject(file, encoding));
+    }
+
+    /**
+     * Creats a new sub-part.
+     * @param title title of part
+     * @param content text content provider
+     * @return the newed part
+     */
+    public Part newPart(String title, TextObject content) {
+        Part sub = new Part(title, content);
+        append(sub);
+        return sub;
     }
 
     /**

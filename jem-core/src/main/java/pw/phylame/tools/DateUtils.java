@@ -54,6 +54,21 @@ public final class DateUtils {
     }
 
     /**
+     * Modifies date field with specified value.
+     * @param date the origin date
+     * @param field date field
+     * @param value new value in field
+     * @return the new date
+     * @see Calendar
+     */
+    public static Date modifyDate(Date date, int field, int value) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(field, value);
+        return calendar.getTime();
+    }
+
+    /**
      * Returns end date from specified begin date and interval days.
      * @param sDate begin date
      * @param days the interval days

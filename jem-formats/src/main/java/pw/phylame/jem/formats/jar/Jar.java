@@ -21,7 +21,7 @@ package pw.phylame.jem.formats.jar;
 /**
  * Defines constants and common methods.
  */
-public class Jar {
+public final class JAR {
     static final int FILE_HEADER = 0x13000;
 
     static final String META_ENCODING = "UTF-8";

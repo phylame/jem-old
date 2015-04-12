@@ -19,8 +19,8 @@
 package pw.phylame.jem.core;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.Date;
-import java.util.Collection;
 
 /**
  * <tt>Book</tt> describes book structure.
@@ -180,7 +180,7 @@ public class Book extends Chapter {
      * Returns all names of item in extensions.
      * @return sequence of item names
      */
-    public Collection<String> itemNames() {
+    public Set<String> itemNames() {
         return extensions.keySet();
     }
 

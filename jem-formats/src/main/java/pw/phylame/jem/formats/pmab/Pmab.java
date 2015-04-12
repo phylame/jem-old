@@ -34,8 +34,8 @@ import org.apache.commons.logging.LogFactory;
 /**
  * Defines constants and common methods.
  */
-public class Pmab {
-    private static Log LOG = LogFactory.getLog(Pmab.class);
+public final class PMAB {
+    private static Log LOG = LogFactory.getLog(PMAB.class);
 
     ///// MIME type for PMAB /////
     static final String MIME_FILE = "mimetype";
