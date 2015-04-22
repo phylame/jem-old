@@ -1,1 +1,0 @@
-scj D:\tmp\zd.umd -w toc -wall

@@ -24,6 +24,7 @@ import pw.phylame.jem.core.*;
 import pw.phylame.jem.util.JemException;
 import pw.phylame.tools.ZLibUtils;
 import pw.phylame.tools.NumberUtils;
+import pw.phylame.tools.file.FileNameUtils;
 import pw.phylame.tools.file.FileUtils;
 import pw.phylame.tools.file.FileObject;
 
@@ -285,7 +286,7 @@ public class UmdMaker implements Maker {
         if (cover == null) {
             return;
         }
-        int type = UMD.getFormatOfName(FileUtils.getExtension(cover.getName()));
+        int type = UMD.getFormatOfName(FileNameUtils.extensionName(cover.getName()));
         int check = NumberUtils.randInteger(0x1000, 0x1FFF);
         byte[] data = new byte[5];
         data[0] = (byte) type;

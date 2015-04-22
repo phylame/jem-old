@@ -31,8 +31,7 @@ public class PmabConfig {
     public String textDir = "text", imageDir = "images", extraDir = "extras";
 
     // XML style
-    public String xmlEncoding = "UTF-8", xmlIndent = "\t",
-            xmlLineSeparator = System.getProperty("line.separator");
+    public String xmlEncoding = "UTF-8", xmlIndent = "\t", xmlLineSeparator = System.getProperty("line.separator");
 
     // encoding for text content
     public String textEncoding = System.getProperty("file.encoding");

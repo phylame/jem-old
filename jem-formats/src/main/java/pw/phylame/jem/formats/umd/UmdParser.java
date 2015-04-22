@@ -80,7 +80,7 @@ public class UmdParser implements Parser {
         if (! isUmd()) {
             throw new JemException("Invalid UMD file: magic number");
         }
-        book = new Book("", "");
+        book = new Book();
         int sep;
         while ((sep=source.read()) != -1) {
             if (sep == UMD.CHUNK_SEPARATOR) {

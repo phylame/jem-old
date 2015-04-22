@@ -36,7 +36,7 @@ import org.apache.commons.cli.ParseException;
 
 import pw.phylame.jem.core.Jem;
 import pw.phylame.tools.StringUtils;
-import pw.phylame.tools.file.FileUtils;
+import pw.phylame.tools.file.FileNameUtils;
 import pw.phylame.jem.core.BookHelper;
 
 /**
@@ -91,18 +91,20 @@ public final class SCI {
 		options.addOption(inFormat).addOption(outFormat).addOption(output);
 
 		// operations
-		Option convert = new Option("c", "convert", false, getText("HELP_CONVERT"));
-		Option join = new Option("j", "join", false, getText("HELP_JOIN"));
+		options.addOption("c", "convert", false, getText("HELP_CONVERT"));
+		options.addOption("j", "join", false, getText("HELP_JOIN"));
+
 		Option extract = OptionBuilder.withArgName(
 				getText("ARG_INDEX")).hasArg().withDescription(
 						getText("HELP_EXTRACT")).create("x");
+
+		options.addOption(extract);
 
 		Option view = OptionBuilder.withArgName(
 				getText("ARG_NAME")).hasArg().withValueSeparator().withDescription(
 						getText("HELP_VIEW")).create("w");
 
-		options.addOptionGroup(new OptionGroup().addOption(
-				convert).addOption(join).addOption(extract).addOption(view));
+		options.addOption(view);
 
 		Option attr = OptionBuilder.withArgName(
 				getText("ARG_KV")).hasArgs(2).withValueSeparator().withDescription(
@@ -170,10 +172,6 @@ public final class SCI {
 		} else if ("MissingArgumentException".equals(clazz)) {
 			msg = getText("SCI_MISSING_ARGUMENT",
 					"-" + ((org.apache.commons.cli.MissingArgumentException)e).getOption().getOpt());
-		} else if ("AlreadySelectedException".equals(clazz)) {
-			org.apache.commons.cli.AlreadySelectedException ex = (org.apache.commons.cli.AlreadySelectedException)e;
-			msg = getText("SCI_MORE_OPTIONS",
-					"-" + ex.getOptionGroup().getSelected() + ", -" + ex.getOption().getOpt());
 		} else {
 			msg = e.getMessage();
 		}
@@ -255,7 +253,7 @@ public final class SCI {
 			}
 			String inFmt = inFormat;
 			if (inFmt == null) {
-				inFmt = FileUtils.getExtension(file);
+				inFmt = FileNameUtils.extensionName(file);
 			}
 			if (inFmt != null && ! BookHelper.supportedParsers().contains(inFmt)) {
 				error(getText("SCI_IN_UNSUPPORTED", inFmt));

@@ -25,6 +25,7 @@
 			<groupId>pw-books</groupId>
 			<artifactId>jem-formats</artifactId>
 			<version>1.0-SNAPSHOT</version>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>

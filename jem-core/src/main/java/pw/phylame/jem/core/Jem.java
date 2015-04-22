@@ -38,7 +38,7 @@ public final class Jem {
     /** Jem version */
     public static final String VERSION = "2.0-SNAPSHOT";
 
-    /** Format of Pem's default format */
+    /** Format of Pem default format */
     public static final String PMAB_FORMAT = "pmab";
 
     /**

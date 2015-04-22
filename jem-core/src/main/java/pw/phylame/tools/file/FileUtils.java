@@ -18,7 +18,6 @@ package pw.phylame.tools.file;
 
 import java.io.*;
 
-import java.util.HashMap;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -29,61 +28,6 @@ public final class FileUtils {
 
     /** Buffer area size */
     public static final int BUFFER_SIZE = 4096;
-
-    /** Some known MIME types */
-    private static HashMap<String, String> MIMEs = new HashMap<String, String>();
-
-    /** Loads some known MIMEs from file. */
-    private static void initBuiltinMime() {
-        java.util.Properties prop = new java.util.Properties();
-        InputStream in = FileUtils.class.getResourceAsStream("mime.properties");
-        if (in == null) {       // not found file
-            return;
-        }
-        try {
-            prop.load(in);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        for (String fmt: prop.stringPropertyNames()) {
-            MIMEs.put(fmt, prop.getProperty(fmt));
-        }
-    }
-
-    static {
-        initBuiltinMime();
-    }
-
-    /**
-     * Returns the extension name of specified file name.
-     * @param name name of file
-     * @return string of extension. If not contain extension return {@code ""}.
-     */
-    public static String getExtension(String name) {
-        int index = name.lastIndexOf(".");
-        if (index >= 0) {
-            return name.substring(index + 1);
-        } else {
-            return "";
-        }
-    }
-
-    /**
-     * Returns the MIME type of specified file name.
-     * @param name path name of file
-     * @return string of MIME.
-     */
-    public static String getMimeType(String name) {
-        if (name == null || name.equals("")) {
-            return "";
-        }
-        String mime = MIMEs.get(getExtension(name));
-        if (mime != null) {
-            return mime;
-        } else {
-            return new javax.activation.MimetypesFileTypeMap().getContentType(name);
-        }
-    }
 
     /**
      * Copies some number of bytes from <tt>InputStream</tt> to <tt>OutputStream</tt>.

@@ -26,5 +26,8 @@
         <module name="imabw" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="imabw" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -35,7 +35,7 @@ import pw.phylame.jem.util.JemException;
 import pw.phylame.tools.DateUtils;
 import pw.phylame.tools.StringUtils;
 import pw.phylame.tools.TextObject;
-import pw.phylame.tools.file.FileUtils;
+import pw.phylame.tools.file.FileNameUtils;
 import pw.phylame.tools.file.FileObject;
 import pw.phylame.tools.file.FileFactory;
 
@@ -53,9 +53,17 @@ public final class Worker {
 		if (url.matches("((http://)|(https://)|(ftp://)|(file://)).*")) {
 			href = url;
 		} else {
-			href = "file:///" + url;
+			href = "file:///" + new File(url).getAbsolutePath();
 		}
 		return new URL(href);
+	}
+
+	private static FileObject getPemCover() {
+		URL url = Worker.class.getResource("/cover.png");
+		if (url != null) {
+			return FileFactory.getFile(url, null);
+		}
+		return null;
 	}
 
 	public static boolean setAttributes(Part part, Map<String, Object> attributes) {
@@ -63,13 +71,19 @@ public final class Worker {
 			String raw = String.valueOf(attributes.get(key));
 			Object value = null;
 			if ("cover".equals(key)) {        // value is image path in disk
-				try {
-					URL url = detectURL(raw);
-					part.setAttribute("cover", FileFactory.getFile(url, null));
-				} catch (IOException e) {
-					LOG.debug("invalid cover file: "+raw, e);
-					SCI.error(SCI.getText("SCI_INVALID_COVER", raw));
-					return false;
+				FileObject cover = null;
+				if ("_pem_cover_".equals(raw)) {
+					cover = getPemCover();
+				} else {
+					try {
+						cover = FileFactory.getFile(detectURL(raw), null);
+					} catch (IOException e) {
+						LOG.debug("invalid cover file: "+raw, e);
+						SCI.error(SCI.getText("SCI_INVALID_COVER", raw));
+					}
+				}
+				if (cover != null) {
+					part.setAttribute("cover", cover);
 				}
 			} else if ("date".equals(key)) {
 				Date date = DateUtils.parseDate(raw, SCI.getText("SCI_DATE_FORMAT"), null);
@@ -93,7 +107,7 @@ public final class Worker {
 
 	public static Book openBook(File input, String format, Map<String, Object> kw) {
 		if (format == null || "".equals(format)) {
-			format = FileUtils.getExtension(input.getPath()).toLowerCase();
+			format = FileNameUtils.extensionName(input.getPath()).toLowerCase();
 		}
 		Book book = null;
 		try {
@@ -140,6 +154,8 @@ public final class Worker {
 		if (path == null) {
 			SCI.error(SCI.getText("SCI_CONVERT_FAILED", input.getPath(), output.getAbsolutePath()));
 		}
+
+		book.cleanup();
 		return path;
 	}
 
@@ -161,6 +177,11 @@ public final class Worker {
 		if (path == null) {
 			SCI.error(SCI.getText("SCI_JOIN_FAILED", output.getAbsolutePath()));
 		}
+
+		for (Part sub: book) {
+			sub.cleanup();
+		}
+		book.cleanup();
 		return path;
 	}
 
@@ -210,6 +231,8 @@ public final class Worker {
 		if (path == null) {
 			SCI.error(SCI.getText("SCI_EXTRACT_FAILED", index, output.getAbsolutePath()));
 		}
+
+		book.cleanup();
 		return path;
 	}
 
@@ -364,6 +387,8 @@ public final class Worker {
 				viewPart(book, new String[]{key}, System.getProperty("line.separator"), false, false);
 			}
 		}
+
+		book.cleanup();
 		return true;
 	}
 }

@@ -27,7 +27,7 @@ import java.util.zip.ZipFile;
 public final class FileFactory {
     private static String getMime(String path, String mime) {
         if (mime == null || "".equals(mime)) {
-            return FileUtils.getMimeType(path);
+            return FileNameUtils.getMimeType(path);
         }
         return mime;
     }
@@ -74,6 +74,11 @@ public final class FileFactory {
         @Override
         public InputStream openInputStream() throws IOException {
             return new FileInputStream(file);
+        }
+
+        @Override
+        public String toString() {
+            return "file:///" + file.getAbsolutePath();
         }
     }
 
@@ -134,7 +139,7 @@ public final class FileFactory {
 
         @Override
         public String toString() {
-            return zipFile.getName()+"!"+getName();
+            return "zip://"+zipFile.getName()+"!"+getName();
         }
     }
 
@@ -249,6 +254,11 @@ public final class FileFactory {
         @Override
         public InputStream openInputStream() throws IOException {
             return url.openStream();
+        }
+
+        @Override
+        public String toString() {
+            return url.toString();
         }
     }
 

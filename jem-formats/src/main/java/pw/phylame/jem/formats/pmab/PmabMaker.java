@@ -29,6 +29,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.FileOutputStream;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -56,6 +57,10 @@ public class PmabMaker implements Maker {
      */
     @Override
     public void make(Book book, File file, Map<String, Object> kw) throws IOException, JemException {
+        make(book, file, parseConfig(kw));
+    }
+
+    private PmabConfig parseConfig(Map<String, Object> kw) throws JemException {
         PmabConfig config = new PmabConfig();
         if (kw != null && kw.size() != 0) {
             Object o = kw.get("pmab_version");
@@ -104,8 +109,19 @@ public class PmabMaker implements Maker {
                     throw new JemException("pmab_compress_level require int or str");
                 }
             }
+            o = kw.get("pmab_meta_data");
+            if (o instanceof Map) {
+                Map map = (Map) o;
+                config.metaInfo = new HashMap<String, String>();
+                for (Object key: map.keySet()) {
+                    Object v = map.get(key);
+                    if (v != null) {
+                        config.metaInfo.put(String.valueOf(key), String.valueOf(v));
+                    }
+                }
+            }
         }
-        make(book, file, config);
+        return config;
     }
 
     public void make(Book book, File file, PmabConfig config) throws IOException, JemException {
@@ -135,8 +151,6 @@ public class PmabMaker implements Maker {
             pw.phylame.jem.formats.pmab.v3.Writer.writePBM(book, doc, zipout, config);
         } else if (config.pmabVersion.startsWith("2")) {
             pw.phylame.jem.formats.pmab.v2.Writer.writePBM(book, doc, zipout, config);
-        } else if (config.pmabVersion.startsWith("1")) {
-            pw.phylame.jem.formats.pmab.v1.Writer.writePBM(book, doc, zipout, config);
         } else {
             throw new JemException("Unsupported PMAB version: "+config.pmabVersion);
         }
@@ -151,8 +165,6 @@ public class PmabMaker implements Maker {
             pw.phylame.jem.formats.pmab.v3.Writer.writePBC(book, doc, zipout, config);
         } else if (config.pmabVersion.startsWith("2")) {
             pw.phylame.jem.formats.pmab.v2.Writer.writePBC(book, doc, zipout, config);
-        } else if (config.pmabVersion.startsWith("1")) {
-            pw.phylame.jem.formats.pmab.v1.Writer.writePBC(book, doc, zipout, config);
         } else {
             throw new JemException("Unsupported PMAB version: "+config.pmabVersion);
         }

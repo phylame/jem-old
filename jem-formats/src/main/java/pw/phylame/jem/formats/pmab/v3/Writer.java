@@ -30,11 +30,14 @@ import pw.phylame.jem.formats.pmab.PmabConfig;
 import pw.phylame.tools.DateUtils;
 import pw.phylame.tools.StringUtils;
 import pw.phylame.tools.TextObject;
+import pw.phylame.tools.file.FileNameUtils;
 import pw.phylame.tools.file.FileUtils;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Date;
+import java.util.Set;
 import java.util.zip.ZipOutputStream;
 
 /**
@@ -42,6 +45,10 @@ import java.util.zip.ZipOutputStream;
  */
 public final class Writer {
     private static Log LOG = LogFactory.getLog(Writer.class);
+    private static Set<String> IgnoredNames = new HashSet<String>();
+    static {
+        IgnoredNames.addAll(java.util.Arrays.asList("source_path", "source_format"));
+    }
 
     private static Byte[] toBytes(byte[] ary) {
         Byte[] results = new Byte[ary.length];
@@ -62,7 +69,7 @@ public final class Writer {
         if (type.equals("file")) {
             pw.phylame.tools.file.FileObject fb = (pw.phylame.tools.file.FileObject) value;
             type = fb.getMime();
-            String baseName = prefix + name + "." + FileUtils.getExtension(fb.getName());
+            String baseName = prefix + name + "." + FileNameUtils.extensionName(fb.getName());
             if (type.startsWith("image/")) {        // image file
                 text = config.imageDir + "/" + baseName;
             } else {
@@ -75,8 +82,7 @@ public final class Writer {
             }
         } else if (type.equals("text")) {
             TextObject tb = (TextObject) value;
-            String encoding = config.textEncoding != null ? config.textEncoding :
-                    System.getProperty("file.encoding");
+            String encoding = config.textEncoding != null ? config.textEncoding : System.getProperty("file.encoding");
             type = "text/plain;encoding=" + encoding;
             String baseName = prefix + name + ".txt";
             if (name.equals("intro")) {
@@ -124,6 +130,9 @@ public final class Writer {
             throws IOException {
         Element attributes = parent.addElement("attributes");
         for (String name: part.attributeNames()) {
+            if (IgnoredNames.contains(name)) {
+                continue;
+            }
             makeItem(attributes, name, part.getAttribute(name, null), zipout, config, prefix);
         }
     }
@@ -152,8 +161,7 @@ public final class Writer {
         makeAttributes(item, part, zipout, config, base+"-");
         // TODO  content
         String href = config.textDir + "/"+ base + ".txt";
-        String encoding = config.textEncoding != null ? config.textEncoding :
-                System.getProperty("file.encoding");
+        String encoding = config.textEncoding != null ? config.textEncoding : System.getProperty("file.encoding");
         PMAB.writeText(part.getSource(), zipout, href, encoding);
         Element content = item.addElement("content");
         content.addAttribute("type", "text/plain;encoding="+encoding);
