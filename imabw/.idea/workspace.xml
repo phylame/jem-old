@@ -2,41 +2,35 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1bc92d87-a603-42f4-8578-13b4ed0e3554" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/epub/EpubConfig.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/tools/file/FileNameUtils.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/epub/HtmlMaker.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../jem-core/.idea/libraries/Maven__log4j_log4j_1_2_12.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../jem-core/src/test/java/test/TestFileNameUtils.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../jem-formats/src/main/resources/pw/phylame/jem/formats/txt/txt.properties" />
-      <change type="DELETED" beforePath="D:\code\pw-books\jem-formats\src\main\java\pw\phylame\jem\formats\pmab\v1\Writer.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\code\pw-books\jem-formats\src\test\script\parse_book.bat" afterPath="" />
-      <change type="DELETED" beforePath="D:\code\pw-books\jem-formats\src\test\script\parse_book.sh" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/tools/file/FileFactory.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/tools/file/FileFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/tools/file/FileUtils.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/tools/file/FileUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/core/Jem.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/core/Jem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/PmabConfig.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/PmabConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/scj/SCI.java" afterPath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/scj/SCI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/txt/TxtParser.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/txt/TxtParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/umd/UmdMaker.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/umd/UmdMaker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/umd/UmdParser.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/umd/UmdParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/scj/Worker.java" afterPath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/scj/Worker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v2/Writer.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v2/Writer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v3/Writer.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v3/Writer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/.idea/encodings.xml" afterPath="$PROJECT_DIR$/../jem-formats/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imabw.iml" afterPath="$PROJECT_DIR$/imabw.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/jem-core.iml" afterPath="$PROJECT_DIR$/../jem-core/jem-core.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/jem-formats.iml" afterPath="$PROJECT_DIR$/../jem-formats/jem-formats.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/pom.xml" afterPath="$PROJECT_DIR$/../jem-core/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/pom.xml" afterPath="$PROJECT_DIR$/../scj/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/src/main/resources/i18n/scj.properties" afterPath="$PROJECT_DIR$/../scj/src/main/resources/i18n/scj.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/res/img/tree/chapter.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/res/img/menu/search-next.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/res/img/menu/search-previous.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/res/img/menu/search-replace.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/res/img/tree/section.png" />
+      <change type="DELETED" beforePath="D:\code\pw-books\imabw\src\main\resources\res\img\menu\search-find-replace.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\code\pw-books\imabw\src\main\resources\res\img\menu\tools-edit-extra.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\code\pw-books\imabw\src\main\resources\res\img\menu\tools-meta-edit.png" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/res/img/tree/book.png" afterPath="$PROJECT_DIR$/src/main/resources/res/img/tree/book.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/res/img/menu/search-find.png" afterPath="$PROJECT_DIR$/src/main/resources/res/img/menu/search-find.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/AboutDialog.form" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/AboutDialog.form" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/AboutDialog.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/AboutDialog.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Application.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Application.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Constants.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Constants.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/ixin/frame/IFrame.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/ixin/frame/IFrame.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/ixin/ITree.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/ixin/ITree.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/com/MainPane.form" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/com/MainPane.form" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/com/MainPane.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/com/MainPane.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Manager.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Manager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/core/Part.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/core/Part.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/UIDesign.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/UIDesign.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/Viewer.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/Viewer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/res/i18n/imabw.properties" afterPath="$PROJECT_DIR$/src/main/resources/res/i18n/imabw.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/src/raw/i18n/scj_zh_CN.input.properties" afterPath="$PROJECT_DIR$/../scj/src/raw/i18n/scj_zh_CN.input.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../jem-core/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../jem-formats/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="D:\code\pw-books\jem-formats\.idea\dictionaries\nanu.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/Luxin.xml" />
+      <change type="MOVED" beforePath="D:\code\pw-books\imabw\src\main\resources\res\img\menu\edit-settings.png" afterPath="$PROJECT_DIR$/src/main/resources/res/img/menu/settings.png" />
+      <change type="MOVED" beforePath="D:\code\pw-books\imabw\src\main\resources\res\img\tree\book.png" afterPath="$PROJECT_DIR$/src/main/resources/res/img/tree/contents.png" />
     </list>
     <ignored path="imabw.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -50,6 +44,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/imabw$Application.coverage" NAME="Application Coverage Results" MODIFIED="1429704484373" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>pw.phylame.imabw.*</FILTER>
+    </SUITE>
+  </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
@@ -63,22 +62,126 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Manager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="119" column="46" selection-start-line="119" selection-start-column="46" selection-end-line="119" selection-end-column="46" />
+              <caret line="172" column="23" selection-start-line="172" selection-start-column="23" selection-end-line="172" selection-end-column="23" />
               <folding>
-                <element signature="e#0#5334#0" expanded="true" />
+                <element signature="e#0#5392#0" expanded="true" />
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Application.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Application.java">
+      <file leaf-file-name="UIDesign.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/UIDesign.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.68041235">
-              <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="108" column="62" selection-start-line="108" selection-start-column="62" selection-end-line="108" selection-end-column="62" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="imabw.properties" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/res/i18n/imabw.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.57474226">
+              <caret line="113" column="30" selection-start-line="113" selection-start-column="30" selection-end-line="113" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Constants.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Constants.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="19" column="23" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IFrame.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/ixin/frame/IFrame.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="147" column="25" selection-start-line="147" selection-start-column="25" selection-end-line="147" selection-end-column="25" />
               <folding>
-                <element signature="e#0#2800#0" expanded="true" />
+                <element signature="e#0#7883#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#1345#1346#0" expanded="true" />
+                <element signature="e#1395#1396#0" expanded="true" />
+                <element signature="e#1462#1463#0" expanded="true" />
+                <element signature="e#1512#1513#0" expanded="true" />
+                <element signature="e#1577#1578#0" expanded="true" />
+                <element signature="e#1627#1628#0" expanded="true" />
+                <element signature="e#3133#3309#0" expanded="true" />
+                <element signature="e#3308#3309#0" expanded="true" />
+                <element signature="e#4174#4175#0" expanded="true" />
+                <element signature="e#4208#4209#0" expanded="true" />
+                <element signature="e#4255#4256#0" expanded="true" />
+                <element signature="e#4297#4298#0" expanded="true" />
+                <element signature="e#4347#4348#0" expanded="true" />
+                <element signature="e#4392#4393#0" expanded="true" />
+                <element signature="e#4749#5582#0" expanded="true" />
+                <element signature="e#5243#5454#0" expanded="true" />
+                <element signature="e#5453#5454#0" expanded="true" />
+                <element signature="e#5581#5582#0" expanded="true" />
+                <element signature="e#5981#5982#0" expanded="true" />
+                <element signature="e#6038#6039#0" expanded="true" />
+                <element signature="e#6101#6102#0" expanded="true" />
+                <element signature="e#6155#6156#0" expanded="true" />
+                <element signature="e#6309#6310#0" expanded="true" />
+                <element signature="e#6339#6340#0" expanded="true" />
+                <element signature="e#6378#6379#0" expanded="true" />
+                <element signature="e#6435#6436#0" expanded="true" />
+                <element signature="e#6477#6478#0" expanded="true" />
+                <element signature="e#6510#6511#0" expanded="true" />
+                <element signature="e#6868#6869#0" expanded="true" />
+                <element signature="e#6900#6901#0" expanded="true" />
+                <element signature="e#6941#6942#0" expanded="true" />
+                <element signature="e#7002#7003#0" expanded="true" />
+                <element signature="e#7039#7040#0" expanded="true" />
+                <element signature="e#7083#7084#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="chapter.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/res/img/tree/chapter.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="section.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/res/img/tree/section.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainPane.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/com/MainPane.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="91" column="32" selection-start-line="91" selection-start-column="32" selection-end-line="91" selection-end-column="32" />
+              <folding>
+                <element signature="docComment;class#MainPane#0" expanded="false" />
+                <element signature="method#MainPane#0;class#MainPane#0" expanded="false" />
+                <element signature="method#createContentsPopupMenu#0;class#MainPane#0" expanded="false" />
+                <element signature="method#showContentsMenu#0;class#MainPane#0" expanded="false" />
+                <element signature="method#createEditorPopupMenu#0;class#MainPane#0" expanded="false" />
+                <element signature="method#createEditorWindow#0;class#MainPane#0" expanded="false" />
+                <element signature="method#showOrHideSideBar#0;class#MainPane#0" expanded="false" />
+                <element signature="method#setBook#0;class#MainPane#0" expanded="false" />
+                <element signature="method#focusToEditorWindow#0;class#MainPane#0" expanded="false" />
+                <element signature="method#closeAllTabs#0;class#MainPane#0" expanded="false" />
+                <element signature="method#nextTab#0;class#MainPane#0" expanded="false" />
+                <element signature="method#prevTab#0;class#MainPane#0" expanded="false" />
+                <element signature="method#setEditorState#0;class#MainPane#0" expanded="false" />
+                <element signature="method#destroy#0;class#MainPane#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -104,9 +207,6 @@
         <option value="$PROJECT_DIR$/src/main/java/i18n/imabw_zh_CN.input.properties" />
         <option value="$PROJECT_DIR$/src/main/java/i18n/imabw_zh_CN.properties" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/com/EditorTab.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/com/MainPane.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/AboutDialog.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/ixin/ITree.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/ixin/com/IMenuLabel.java" />
         <option value="$PROJECT_DIR$/src/main/java/res/doc/authors.html" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/ixin/ITextEdit.java" />
@@ -127,17 +227,20 @@
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/com/BookTreeModel.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/ixin/IApplication.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/ixin/IToolkit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/ixin/frame/IFrame.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Constants.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/AboutDialog.form" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/InputDialog.form" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/InputDialog.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Worker.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/com/MainPane.form" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/Viewer.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Manager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/Viewer.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Application.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/com/MainPane.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/AboutDialog.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/ixin/ITree.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/UIDesign.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Constants.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/AboutDialog.form" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/ixin/frame/IFrame.java" />
         <option value="$PROJECT_DIR$/src/main/resources/res/i18n/imabw.properties" />
       </list>
     </option>
@@ -180,7 +283,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
+    <navigator currentView="PackagesPane" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -193,103 +296,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="Scratches" />
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pw.phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pw.phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pw.phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="img" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="i18n" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -325,171 +331,180 @@
               <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="imabw" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="imabw" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="imabw" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="imabw" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="img" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="i18n" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+              <option name="myItemId" value="img" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="menu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="pw.phylame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="ixin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="imabw" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pw.phylame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ixin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="frame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="imabw" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="imabw" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pw.phylame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="imabw" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="imabw" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="imabw" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pw.phylame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="imabw" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="pw.phylame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dialog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="AboutDialog" />
@@ -499,39 +514,57 @@
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="pw.phylame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MainPane" />
+              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="imabw" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="imabw" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pw.phylame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="imabw" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -556,12 +589,14 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java" />
     <property name="recentsLimit" value="5" />
-    <property name="settings.editor.selected.configurable" value="Groovy compiler" />
+    <property name="settings.editor.selected.configurable" value="File.Encoding" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\code\pw-books\imabw\src\main\resources\res\img\menu" />
+      <recent name="D:\code\pw-books\imabw\src\main\resources\res\img\tree" />
       <recent name="D:\code\pw-books\imabw\.idea\copyright" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -764,6 +799,18 @@
       <listeners />
       <method />
     </configuration>
+    <configuration default="true" type="executeSpecs" factoryName="Gauge Execution">
+      <setting name="environment" value="" />
+      <setting name="specsToExecute" value="" />
+      <setting name="tags" value="" />
+      <setting name="parallelNodes" value="" />
+      <setting name="execInParallel" value="false" />
+      <setting name="programParameters" value="" />
+      <setting name="workingDirectory" value="" />
+      <envMap />
+      <setting name="rowsRange" value="" />
+      <method />
+    </configuration>
     <list size="1">
       <item index="0" class="java.lang.String" itemvalue="Application.Application" />
     </list>
@@ -801,7 +848,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1374" height="746" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -812,9 +859,10 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33543307" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329429" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917318" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29648608" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29648608" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24963397" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -852,75 +900,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Manager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="119" column="46" selection-start-line="119" selection-start-column="46" selection-end-line="119" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#5334#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/res/i18n/imabw.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="ResourceBundle">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1" column="36" selection-start-line="1" selection-start-column="36" selection-end-line="1" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="14" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="14" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1" column="36" selection-start-line="1" selection-start-column="36" selection-end-line="1" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42166665">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/copyright/ALv2.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.32394367">
@@ -1043,25 +1022,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/ixin/com/IMenuModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2409836">
-          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/ixin/com/IPaneRender.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.17213115">
           <caret line="19" column="26" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/ixin/com/IAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9311475">
-          <caret line="121" column="21" selection-start-line="121" selection-start-column="21" selection-end-line="121" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -1089,45 +1053,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/ixin/frame/IFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.53934425">
-          <caret line="167" column="25" selection-start-line="167" selection-start-column="25" selection-end-line="167" selection-end-column="25" />
-          <folding>
-            <element signature="docComment;class#IFrame#0" expanded="false" />
-            <element signature="method#IFrame#0;class#IFrame#0" expanded="false" />
-            <element signature="method#IFrame#1;class#IFrame#0" expanded="false" />
-            <element signature="method#init#0;class#IFrame#0" expanded="false" />
-            <element signature="method#createMenuActions#0;class#IFrame#0" expanded="false" />
-            <element signature="method#createMenuBar#0;class#IFrame#0" expanded="false" />
-            <element signature="method#createMenu#0;class#IFrame#0" expanded="false" />
-            <element signature="method#createToolBar#0;class#IFrame#0" expanded="false" />
-            <element signature="method#createDefaultStatusBar#0;class#IFrame#0" expanded="false" />
-            <element signature="method#setPaneRender#0;class#IFrame#0" expanded="false" />
-            <element signature="method#setStatusText#0;class#IFrame#0" expanded="false" />
-            <element signature="e#6104#6124#0" expanded="false" />
-            <element signature="docComment;field#paneRender#0;class#IFrame#0" expanded="false" />
-            <element signature="docComment;field#menuActions#0;class#IFrame#0" expanded="false" />
-            <element signature="docComment;field#toolBarActions#0;class#IFrame#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19298245">
-          <caret line="29" column="71" selection-start-line="29" selection-start-column="71" selection-end-line="29" selection-end-column="71" />
-          <folding>
-            <element signature="e#0#3238#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/AboutDialog.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="jar://D:/devel/Java/jdk1.8.0_40/src.zip!/java/awt/Component.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3327869">
@@ -1153,31 +1078,251 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/com/MainPane.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Worker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.67704916">
           <caret line="46" column="48" selection-start-line="46" selection-start-column="48" selection-end-line="46" selection-end-column="48" />
           <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/ixin/com/IAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.29617304">
+          <caret line="31" column="22" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
+          <folding>
+            <element signature="docComment;class#IAction#0" expanded="false" />
+            <element signature="docComment;field#ID#0;class#IAction#0" expanded="false" />
+            <element signature="docComment;field#STATUS_TIP_TEXT#0;class#IAction#0" expanded="false" />
+            <element signature="method#createAction#0;class#IAction#0" expanded="false" />
+            <element signature="class#2533:2882" expanded="false" />
+            <element signature="method#actionPerformed#0;class#2533:2882" expanded="false" />
+            <element signature="method#IAction#0;class#IAction#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/Viewer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.62113404">
+          <caret line="65" column="27" selection-start-line="65" selection-start-column="27" selection-end-line="65" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#2449#0" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="e#1457#1458#0" expanded="true" />
+            <element signature="e#1527#1528#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/res/img/menu/settings.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/com/MainPane.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/ixin/IApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7387687">
+          <caret line="72" column="16" selection-start-line="72" selection-start-column="16" selection-end-line="72" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#3622#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/ixin/ITextEdit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.48918468">
+          <caret line="251" column="6" selection-start-line="251" selection-start-column="6" selection-end-line="251" selection-end-column="6" />
+          <folding>
+            <element signature="docComment;class#ITextEdit#0" expanded="false" />
+            <element signature="docComment;field#textArea#0;class#ITextEdit#0" expanded="false" />
+            <element signature="docComment;field#undoManager#0;class#ITextEdit#0" expanded="false" />
+            <element signature="method#ITextEdit#2;class#ITextEdit#0" expanded="false" />
+            <element signature="method#ITextEdit#3;class#ITextEdit#0" expanded="false" />
+            <element signature="method#ITextEdit#5;class#ITextEdit#0" expanded="false" />
+            <element signature="method#undo#0;class#ITextEdit#0" expanded="false" />
+            <element signature="method#redo#0;class#ITextEdit#0" expanded="false" />
+            <element signature="method#canPaste#0;class#ITextEdit#0" expanded="false" />
+            <element signature="method#getCurrentRow#0;class#ITextEdit#0" expanded="false" />
+            <element signature="method#getCurrentColumn#0;class#ITextEdit#0" expanded="false" />
+            <element signature="method#gotoLine#0;class#ITextEdit#0" expanded="false" />
+            <element signature="method#read#0;class#ITextEdit#0" expanded="false" />
+            <element signature="method#write#0;class#ITextEdit#0" expanded="false" />
+            <element signature="docComment;field#contextMenu#0;class#ITextEdit#0" expanded="false" />
+            <element signature="docComment;field#contextActions#0;class#ITextEdit#0" expanded="false" />
+            <element signature="method#setContextMenuTipListener#0;class#ITextEdit#0" expanded="false" />
+            <element signature="method#createContextMenu#0;class#ITextEdit#0" expanded="false" />
+            <element signature="class#9314:9791" expanded="false" />
+            <element signature="method#showingTip#0;class#9314:9791" expanded="false" />
+            <element signature="method#closingTip#0;class#9314:9791" expanded="false" />
+            <element signature="docComment;method#addContextActions#0;class#ITextEdit#0" expanded="false" />
+            <element signature="method#addContextActions#0;class#ITextEdit#0" expanded="false" />
+            <element signature="docComment;method#updateContextMenu#0;class#ITextEdit#0" expanded="false" />
+            <element signature="method#updateContextMenu#0;class#ITextEdit#0" expanded="false" />
+            <element signature="method#getEditAction#0;class#ITextEdit#0" expanded="false" />
+            <element signature="initializer##0;class#ITextEdit#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/devel/Java/jdk1.8.0_40/src.zip!/javax/swing/JFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33247423">
+          <caret line="187" column="11" selection-start-line="187" selection-start-column="11" selection-end-line="187" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5953608">
+          <caret line="20" column="36" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#2799#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Manager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="172" column="23" selection-start-line="172" selection-start-column="23" selection-end-line="172" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#5392#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/devel/Java/jdk1.8.0_40/src.zip!/javax/swing/JLabel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.39175257">
+          <caret line="660" column="23" selection-start-line="660" selection-start-column="16" selection-end-line="660" selection-end-column="23" />
+          <folding>
+            <element signature="docComment;field#uiClassID#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;field#LABELED_BY_PROPERTY#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#JLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#JLabel#1;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#JLabel#2;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#JLabel#3;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#JLabel#4;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#JLabel#5;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getUI#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#setUI#0;class#JLabel#0" expanded="false" />
+            <element signature="method#setUI#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#updateUI#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getUIClassID#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getText#0;class#JLabel#0" expanded="false" />
+            <element signature="method#setText#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#setIcon#0;class#JLabel#0" expanded="false" />
+            <element signature="method#setIcon#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getDisabledIcon#0;class#JLabel#0" expanded="false" />
+            <element signature="method#getDisabledIcon#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#setDisabledIcon#0;class#JLabel#0" expanded="false" />
+            <element signature="method#setDisabledIcon#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#setDisplayedMnemonic#0;class#JLabel#0" expanded="false" />
+            <element signature="method#setDisplayedMnemonic#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#setDisplayedMnemonic#1;class#JLabel#0" expanded="false" />
+            <element signature="method#setDisplayedMnemonic#1;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getDisplayedMnemonic#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#setDisplayedMnemonicIndex#0;class#JLabel#0" expanded="false" />
+            <element signature="method#setDisplayedMnemonicIndex#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getDisplayedMnemonicIndex#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#checkHorizontalKey#0;class#JLabel#0" expanded="false" />
+            <element signature="method#checkHorizontalKey#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#checkVerticalKey#0;class#JLabel#0" expanded="false" />
+            <element signature="method#checkVerticalKey#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#setIconTextGap#0;class#JLabel#0" expanded="false" />
+            <element signature="method#setIconTextGap#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#setVerticalAlignment#0;class#JLabel#0" expanded="false" />
+            <element signature="method#setVerticalAlignment#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getHorizontalAlignment#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#setHorizontalAlignment#0;class#JLabel#0" expanded="false" />
+            <element signature="method#setHorizontalAlignment#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getVerticalTextPosition#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#setVerticalTextPosition#0;class#JLabel#0" expanded="false" />
+            <element signature="method#setVerticalTextPosition#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getHorizontalTextPosition#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#setHorizontalTextPosition#0;class#JLabel#0" expanded="false" />
+            <element signature="method#setHorizontalTextPosition#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#imageUpdate#0;class#JLabel#0" expanded="false" />
+            <element signature="method#imageUpdate#0;class#JLabel#0" expanded="false" />
+            <element signature="e#29092#29159#0" expanded="false" />
+            <element signature="docComment;method#writeObject#0;class#JLabel#0" expanded="false" />
+            <element signature="method#writeObject#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#paramString#0;class#JLabel#0" expanded="false" />
+            <element signature="method#paramString#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getLabelFor#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#setLabelFor#0;class#JLabel#0" expanded="false" />
+            <element signature="method#setLabelFor#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getAccessibleContext#0;class#JLabel#0" expanded="false" />
+            <element signature="method#getAccessibleContext#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getAccessibleName#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="method#getAccessibleName#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getAccessibleRole#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getAccessibleIcon#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="method#getAccessibleIcon#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getAccessibleRelationSet#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="method#getAccessibleRelationSet#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="e#38158#38205#0" expanded="false" />
+            <element signature="method#getAccessibleText#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getIndexAtPoint#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="method#getIndexAtPoint#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getCharacterBounds#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="method#getCharacterBounds#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getCharCount#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="method#getCharCount#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getCaretPosition#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="method#getCaretPosition#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getAtIndex#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="method#getAtIndex#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getAfterIndex#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="method#getAfterIndex#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getBeforeIndex#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="method#getBeforeIndex#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getCharacterAttribute#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="method#getCharacterAttribute#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getSelectionStart#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="method#getSelectionStart#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getSelectionEnd#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="method#getSelectionEnd#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getSelectedText#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="method#getSelectedText#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="method#getText#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="method#getTextRectangle#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getAccessibleExtendedComponent#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getToolTipText#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getTitledBorderText#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getAccessibleKeyBinding#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="method#getAccessibleKeyBinding#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="class#LabelKeyBinding#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getAccessibleKeyBindingCount#0;class#LabelKeyBinding#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="docComment;method#getAccessibleKeyBinding#0;class#LabelKeyBinding#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
+            <element signature="method#getAccessibleKeyBinding#0;class#LabelKeyBinding#0;class#AccessibleJLabel#0;class#JLabel#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/com/MainPane.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.27377048">
-          <caret line="61" column="11" selection-start-line="61" selection-start-column="11" selection-end-line="61" selection-end-column="11" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="91" column="32" selection-start-line="91" selection-start-column="32" selection-end-line="91" selection-end-column="32" />
           <folding>
             <element signature="docComment;class#MainPane#0" expanded="false" />
             <element signature="method#MainPane#0;class#MainPane#0" expanded="false" />
-            <element signature="method#initComp#0;class#MainPane#0" expanded="false" />
             <element signature="method#createContentsPopupMenu#0;class#MainPane#0" expanded="false" />
-            <element signature="method#createContentsWindow#0;class#MainPane#0" expanded="false" />
             <element signature="method#showContentsMenu#0;class#MainPane#0" expanded="false" />
             <element signature="method#createEditorPopupMenu#0;class#MainPane#0" expanded="false" />
             <element signature="method#createEditorWindow#0;class#MainPane#0" expanded="false" />
@@ -1193,76 +1338,137 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/Viewer.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/ixin/ITree.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.552459">
-          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.39175257">
+          <caret line="67" column="28" selection-start-line="67" selection-start-column="24" selection-end-line="67" selection-end-column="28" />
           <folding>
-            <element signature="docComment;class#Viewer#0" expanded="false" />
-            <element signature="initializer##0;class#Viewer#0" expanded="false" />
-            <element signature="docComment;field#app#0;class#Viewer#0" expanded="false" />
-            <element signature="method#createComponent#0;class#Viewer#0" expanded="false" />
-            <element signature="method#init#0;class#Viewer#0" expanded="false" />
+            <element signature="e#2380#2381#0" expanded="true" />
+            <element signature="e#2420#2421#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/AboutDialog.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/ixin/com/IMenuModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24378109">
-          <caret line="72" column="40" selection-start-line="72" selection-start-column="40" selection-end-line="72" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.7903494">
+          <caret line="41" column="11" selection-start-line="41" selection-start-column="11" selection-end-line="41" selection-end-column="11" />
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Manager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="119" column="46" selection-start-line="119" selection-start-column="46" selection-end-line="119" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#5334#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/ixin/IApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.88557214">
-          <caret line="72" column="16" selection-start-line="72" selection-start-column="16" selection-end-line="72" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#3622#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/res/i18n/imabw.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="228" column="13" selection-start-line="228" selection-start-column="13" selection-end-line="228" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="ResourceBundle">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/UIDesign.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8076923">
-          <caret line="123" column="26" selection-start-line="123" selection-start-column="26" selection-end-line="123" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="108" column="62" selection-start-line="108" selection-start-column="62" selection-end-line="108" selection-end-column="62" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Application.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/AboutDialog.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/AboutDialog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.68041235">
-          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.8118557">
+          <caret line="95" column="40" selection-start-line="95" selection-start-column="40" selection-end-line="95" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="23" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/ixin/frame/IFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="147" column="25" selection-start-line="147" selection-start-column="25" selection-end-line="147" selection-end-column="25" />
           <folding>
-            <element signature="e#0#2800#0" expanded="true" />
+            <element signature="e#0#7883#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#1345#1346#0" expanded="true" />
+            <element signature="e#1395#1396#0" expanded="true" />
+            <element signature="e#1462#1463#0" expanded="true" />
+            <element signature="e#1512#1513#0" expanded="true" />
+            <element signature="e#1577#1578#0" expanded="true" />
+            <element signature="e#1627#1628#0" expanded="true" />
+            <element signature="e#3133#3309#0" expanded="true" />
+            <element signature="e#3308#3309#0" expanded="true" />
+            <element signature="e#4174#4175#0" expanded="true" />
+            <element signature="e#4208#4209#0" expanded="true" />
+            <element signature="e#4255#4256#0" expanded="true" />
+            <element signature="e#4297#4298#0" expanded="true" />
+            <element signature="e#4347#4348#0" expanded="true" />
+            <element signature="e#4392#4393#0" expanded="true" />
+            <element signature="e#4749#5582#0" expanded="true" />
+            <element signature="e#5243#5454#0" expanded="true" />
+            <element signature="e#5453#5454#0" expanded="true" />
+            <element signature="e#5581#5582#0" expanded="true" />
+            <element signature="e#5981#5982#0" expanded="true" />
+            <element signature="e#6038#6039#0" expanded="true" />
+            <element signature="e#6101#6102#0" expanded="true" />
+            <element signature="e#6155#6156#0" expanded="true" />
+            <element signature="e#6309#6310#0" expanded="true" />
+            <element signature="e#6339#6340#0" expanded="true" />
+            <element signature="e#6378#6379#0" expanded="true" />
+            <element signature="e#6435#6436#0" expanded="true" />
+            <element signature="e#6477#6478#0" expanded="true" />
+            <element signature="e#6510#6511#0" expanded="true" />
+            <element signature="e#6868#6869#0" expanded="true" />
+            <element signature="e#6900#6901#0" expanded="true" />
+            <element signature="e#6941#6942#0" expanded="true" />
+            <element signature="e#7002#7003#0" expanded="true" />
+            <element signature="e#7039#7040#0" expanded="true" />
+            <element signature="e#7083#7084#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/res/img/tree/chapter.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/res/img/tree/book.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/res/img/tree/contents.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/res/img/tree/section.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/res/img/menu/search-next.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/res/img/menu/search-replace.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/res/i18n/imabw.properties">
+      <provider editor-type-id="ResourceBundle">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.57474226">
+          <caret line="113" column="30" selection-start-line="113" selection-start-column="30" selection-end-line="113" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>

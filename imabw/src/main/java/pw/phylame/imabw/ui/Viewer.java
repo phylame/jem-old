@@ -19,6 +19,7 @@ package pw.phylame.imabw.ui;
 import pw.phylame.imabw.Application;
 import pw.phylame.imabw.Constants;
 import pw.phylame.imabw.ui.com.MainPane;
+import pw.phylame.ixin.ITextEdit;
 import pw.phylame.ixin.com.IPaneRender;
 import pw.phylame.ixin.frame.IFrame;
 
@@ -42,11 +43,12 @@ public class Viewer extends IFrame {
 
     public Viewer() {
         super();
-        createComponent();
         init();
     }
 
-    private void createComponent() {
+    @Override
+    public void initialized() {
+        getMenuActions().putAll(ITextEdit.getContextActions());
     }
 
     private void init() {

@@ -18,6 +18,7 @@ package pw.phylame.imabw.ui.dialog;
 
 import pw.phylame.imabw.Application;
 import pw.phylame.imabw.Constants;
+import pw.phylame.jem.core.Jem;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -29,6 +30,7 @@ public class AboutDialog extends JDialog {
     private JLabel lbRights;
     private JLabel lbHome;
     private JLabel lbLicense;
+    private JLabel lbJem;
 
     public AboutDialog(JFrame owner) {
         super(owner);
@@ -60,6 +62,7 @@ public class AboutDialog extends JDialog {
         final Application app = Application.getApplication();
 
         lbInfo.setText(String.format("%s %s", app.getText("App.Name"), Constants.VERSION));
+        lbJem.setText(String.format("Jem core: %s", Jem.VERSION));
         lbRights.setText(app.getText("App.Rights"));
 
         lbLicense.setText(String.format("<html><a href=\"\">%s</a>  |</html>",
@@ -90,8 +93,7 @@ public class AboutDialog extends JDialog {
             }
         });
 
-        setTitle(String.format("%s %s", app.getText("Dialog.About.Title"),
-                app.getText("App.Name")));
+        setTitle(app.getText("Dialog.About.Title"));
         pack();
         setResizable(false);
         setLocationRelativeTo(getOwner());

@@ -95,7 +95,7 @@ public class MainPane extends IPaneRender {
         }
         createContentsPopupMenu();
         treeModel = new BookTreeModel();
-        contentsTree = new ITree(app.getText("Frame.Contents.Title"), treeModel);
+        contentsTree = new ITree(app.getText("Frame.Contents.Title")+" ", treeModel);
         contentsTree.setTitleIcon(IToolkit.createImageIcon(app.getText("Frame.Contents.TitleIcon")));
         final JTree tree = contentsTree.getTree();
         tree.addMouseListener(new MouseAdapter() {

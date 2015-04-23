@@ -31,8 +31,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.HashMap;
 
 /**
  * Simple frame model.
@@ -53,15 +53,42 @@ public abstract class IFrame extends JFrame implements IStatusTipListener {
 
     public IFrame() {
         super();
+        initialized();
         init();
     }
 
     public IFrame(String title) {
         super(title);
+        initialized();
         init();
     }
 
+    protected void initialized() {
+
+    }
+
+    private void initFonts() {
+        Font font = new Font(Font.SANS_SERIF, Font.PLAIN, 14);
+        UIManager.put("MenuBar.font", font);
+        UIManager.put("Menu.font", font);
+        UIManager.put("MenuItem.font", font);
+        UIManager.put("PopupMenu.font", font);
+        UIManager.put("CheckBoxMenuItem.font", font);
+        UIManager.put("RadioButtonMenuItem.font", font);
+
+        font = new Font(Font.SANS_SERIF, Font.PLAIN, 14);
+        UIManager.put("Button.font", font);
+        UIManager.put("CheckBox.font", font);
+        UIManager.put("RadioButton.font", font);
+        UIManager.put("ToggleButton.font", font);
+
+        UIManager.put("ToolTip.font", new Font(Font.SANS_SERIF, Font.PLAIN, 12));
+        UIManager.put("Label.font", new Font(Font.SERIF, Font.PLAIN, 13));
+    }
+
     private void init() {
+//        initFonts();
+
         Container topPane = getContentPane();
         createMenu();
         createToolBar();
@@ -109,6 +136,10 @@ public abstract class IFrame extends JFrame implements IStatusTipListener {
         createMenuBar();
     }
 
+    public Map<Object, IAction> getMenuActions() {
+        return menuActions;
+    }
+
     public IAction getMenuAction(Object id) {
         return menuActions.get(id);
     }
@@ -122,6 +153,7 @@ public abstract class IFrame extends JFrame implements IStatusTipListener {
         if (toolBarModel != null) {
             IToolkit.addButton(toolBar, java.util.Arrays.asList(toolBarModel), toolBarActions, this);
         }
+        toolBar.setFloatable(false);
         toolBar.setRollover(true);
         /* lock toolbar menu */
         toolBar.addMouseListener(new MouseAdapter() {
@@ -148,6 +180,7 @@ public abstract class IFrame extends JFrame implements IStatusTipListener {
 
     private void createDefaultStatusBar() {
         statusLabel = new JLabel();
+//        statusLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 12));
         statusBar = new JPanel(new BorderLayout());
         statusBar.add(new JSeparator(), BorderLayout.NORTH);
         statusBar.add(statusLabel, BorderLayout.WEST);

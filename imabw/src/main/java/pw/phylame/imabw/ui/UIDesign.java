@@ -17,6 +17,9 @@
 package pw.phylame.imabw.ui;
 
 import pw.phylame.imabw.Application;
+import pw.phylame.ixin.ITextEdit;
+import pw.phylame.ixin.IToolkit;
+import pw.phylame.ixin.com.IAction;
 import pw.phylame.ixin.com.IMenuModel;
 import pw.phylame.ixin.com.IMenuLabel;
 
@@ -84,11 +87,34 @@ public class UIDesign {
 
     /* Search */
     public static Object[][] SEARCH_MENU_ACTIONS = {
+            {FIND_TEXT,
+                    app.getText("Menu.Search.Find"), app.getText("Menu.Search.Find.Icon"),
+                    app.getText("Menu.Search.Find.Mnemonic"), app.getText("Menu.Search.Find.Shortcut"),
+                    app.getText("Menu.Search.Find.Tip"), false},
+            {FIND_NEXT,
+                    app.getText("Menu.Search.Next"), app.getText("Menu.Search.Next.Icon"),
+                    app.getText("Menu.Search.Next.Mnemonic"), app.getText("Menu.Search.Next.Shortcut"),
+                    app.getText("Menu.Search.Next.Tip"), false},
+            {FIND_PREVIOUS,
+                    app.getText("Menu.Search.Previous"), app.getText("Menu.Search.Previous.Icon"),
+                    app.getText("Menu.Search.Previous.Mnemonic"), app.getText("Menu.Search.Previous.Shortcut"),
+                    app.getText("Menu.Search.Previous.Tip"), false},
+            {FIND_AND_REPLACE,
+                    app.getText("Menu.Search.Replace"), app.getText("Menu.Search.Replace.Icon"),
+                    app.getText("Menu.Search.Replace.Mnemonic"), app.getText("Menu.Search.Replace.Shortcut"),
+                    app.getText("Menu.Search.Replace.Tip"), false},
+            {GO_TO_POSITION,
+                    app.getText("Menu.Search.Goto"), app.getText("Menu.Search.Goto.Icon"),
+                    app.getText("Menu.Search.Goto.Mnemonic"), app.getText("Menu.Search.Goto.Shortcut"),
+                    app.getText("Menu.Search.Goto.Tip"), false}
     };
 
     /* Tools */
     public static Object[][] TOOLS_MENU_ACTIONS = {
-
+            {EDIT_META,
+                    app.getText("Menu.Tools.Meta"), app.getText("Menu.Tools.Meta.Icon"),
+                    app.getText("Menu.Tools.Meta.Mnemonic"), app.getText("Menu.Tools.Meta.Shortcut"),
+                    app.getText("Menu.Tools.Meta.Tip")}
     };
 
     /* Help */
@@ -121,6 +147,16 @@ public class UIDesign {
     /* Edit */
     public static Object[] EDIT_MENU_MODEL = {
             new IMenuLabel(app.getText("Menu.Edit"), null, app.getText("Menu.Edit.Mnemonic")),
+            ITextEdit.UNDO,
+            ITextEdit.REDO,
+            null,
+            ITextEdit.CUT,
+            ITextEdit.COPY,
+            ITextEdit.PASTE,
+            ITextEdit.DELETE,
+            null,
+            ITextEdit.SELECT_ALL,
+            null,
             EDIT_PREFERENCE
     };
 
@@ -135,11 +171,17 @@ public class UIDesign {
     /* Search */
     public static Object[] SEARCH_MENU_MODEL = {
             new IMenuLabel(app.getText("Menu.Search"), null, app.getText("Menu.Search.Mnemonic")),
+            FIND_TEXT, FIND_NEXT, FIND_PREVIOUS,
+            null,
+            FIND_AND_REPLACE,
+            null,
+            GO_TO_POSITION
     };
 
     /* Tools */
     public static Object[] TOOLS_MENU_MODEL = {
             new IMenuLabel(app.getText("Menu.Tools"), null, app.getText("Menu.Tools.Mnemonic")),
+            EDIT_META
     };
 
     /* Help */
@@ -157,7 +199,12 @@ public class UIDesign {
     /* Tool bar */
     public static Object[] TOOL_BAR_MODEL = {
             NEW_FILE, OPEN_FILE, SAVE_FILE,
-            null
+            null,
+            ITextEdit.UNDO, ITextEdit.REDO, null, ITextEdit.CUT, ITextEdit.COPY, ITextEdit.PASTE,
+            null,
+            FIND_TEXT, FIND_AND_REPLACE, GO_TO_POSITION,
+            null,
+            EDIT_META
     };
 
     /* Tab control */
@@ -285,22 +332,24 @@ public class UIDesign {
     };
 
     /* set ITextEdit text and icons */
-//    static {
-//        Object[][] editModel = new Object[][] {
-//                {ITextEdit.UNDO, "undo"},
-//                {ITextEdit.REDO, "redo"},
-//                {ITextEdit.CUT, "cut"},
-//                {ITextEdit.COPY, "copy"},
-//                {ITextEdit.PASTE, "paste"},
-//                {ITextEdit.DELETE, "delete"},
-//                {ITextEdit.SELECT_ALL, "select_all"},
-//        };
-//        for (Object[] model: editModel) {
-//            IAction action = ITextEdit.getEditAction(model[0]);
-//            String key = "menu_edit_"+model[1];
-//            action.setText(app.getString(key));
-//            action.setTitleIcon(pw.phylame.ixin.IToolkit.createImageIcon(app.getString("icon.menu.edit." + model[1])));
-//            action.setStatusTip(app.getString(key+"_tip"));
-//        }
-//    }
+    static {
+        Object[][] editModel = new Object[][] {
+                {ITextEdit.UNDO, "Undo"},
+                {ITextEdit.REDO, "Redo"},
+                {ITextEdit.CUT, "Cut"},
+                {ITextEdit.COPY, "Copy"},
+                {ITextEdit.PASTE, "Paste"},
+                {ITextEdit.DELETE, "Delete"},
+                {ITextEdit.SELECT_ALL, "SelectAll"},
+        };
+        for (Object[] model: editModel) {
+            IAction action = ITextEdit.getEditAction(model[0]);
+            String key = "Editor.Menu."+model[1];
+            action.setText(app.getText(key));
+            action.setIcon(pw.phylame.ixin.IToolkit.createImageIcon(app.getText(key + ".Icon")));
+            action.setMnemonic(IToolkit.getMnemonic(app.getText(key + ".Mnemonic")));
+            action.setAccelerator(IToolkit.getKeyStroke(app.getText(key + ".Shortcut")));
+            action.setStatusTip(app.getText(key + ".Tip"));
+        }
+    }
 }

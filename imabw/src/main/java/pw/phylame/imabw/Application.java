@@ -51,13 +51,12 @@ public class Application extends IApplication {
 
     /** Load configuration file */
     private void loadSettings() {
-
     }
 
     /** Initialize Imabw */
     private void initApp() {
         loadBundle(Constants.I18N_PATH);
-        setTheme("nimbus");
+        setTheme("system");
     }
 
     /** Get the application instance */

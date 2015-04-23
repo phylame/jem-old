@@ -50,8 +50,8 @@ public final class Constants {
     /* Search */
     public static final String FIND_TEXT = "find-text";
     public static final String FIND_NEXT = "find-next";
-    public static final String FIND_PREVIOUS = "find-prev";
-    public static final String REPLACE_TEXT = "replace-text";
+    public static final String FIND_PREVIOUS = "find-previous";
+    public static final String FIND_AND_REPLACE = "find-and-replace";
     public static final String GO_TO_POSITION = "goto-position";
 
     /* Tools */

@@ -160,6 +160,9 @@ public class Manager {
             case EXIT_APP:
                 stop();
                 break;
+            case EDIT_PREFERENCE:
+
+                break;
             case SHOW_TOOLBAR:
                 viewer.showOrHideToolBar();
                 break;
