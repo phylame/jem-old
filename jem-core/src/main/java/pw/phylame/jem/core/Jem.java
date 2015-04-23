@@ -38,6 +38,9 @@ public final class Jem {
     /** Jem version */
     public static final String VERSION = "2.0-SNAPSHOT";
 
+    /** Jem vendor */
+    public static final String VENDOR = "PW";
+
     /** Format of Pem default format */
     public static final String PMAB_FORMAT = "pmab";
 
@@ -89,7 +92,7 @@ public final class Jem {
             throw new UnsupportedFormatException(format, "Unsupported format: "+format);
         }
         Book book = parser.parse(file, kw);
-        book.setAttribute("source_path", file.getPath());
+        book.setAttribute("source_file", file);
         book.setAttribute("source_format", format);
         return book;
     }

@@ -65,10 +65,7 @@ public class ITree extends JPanel {
 
     private void initComp(String title) {
         titleLabel = new JLabel(title);
-//        titleLabel.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 13));
         add(titleLabel, BorderLayout.NORTH);
-
-//        jTree.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 12));
         add(new JScrollPane(jTree), BorderLayout.CENTER);
     }
 

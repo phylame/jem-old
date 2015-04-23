@@ -67,28 +67,7 @@ public abstract class IFrame extends JFrame implements IStatusTipListener {
 
     }
 
-    private void initFonts() {
-        Font font = new Font(Font.SANS_SERIF, Font.PLAIN, 14);
-        UIManager.put("MenuBar.font", font);
-        UIManager.put("Menu.font", font);
-        UIManager.put("MenuItem.font", font);
-        UIManager.put("PopupMenu.font", font);
-        UIManager.put("CheckBoxMenuItem.font", font);
-        UIManager.put("RadioButtonMenuItem.font", font);
-
-        font = new Font(Font.SANS_SERIF, Font.PLAIN, 14);
-        UIManager.put("Button.font", font);
-        UIManager.put("CheckBox.font", font);
-        UIManager.put("RadioButton.font", font);
-        UIManager.put("ToggleButton.font", font);
-
-        UIManager.put("ToolTip.font", new Font(Font.SANS_SERIF, Font.PLAIN, 12));
-        UIManager.put("Label.font", new Font(Font.SERIF, Font.PLAIN, 13));
-    }
-
     private void init() {
-//        initFonts();
-
         Container topPane = getContentPane();
         createMenu();
         createToolBar();
@@ -180,7 +159,6 @@ public abstract class IFrame extends JFrame implements IStatusTipListener {
 
     private void createDefaultStatusBar() {
         statusLabel = new JLabel();
-//        statusLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 12));
         statusBar = new JPanel(new BorderLayout());
         statusBar.add(new JSeparator(), BorderLayout.NORTH);
         statusBar.add(statusLabel, BorderLayout.WEST);

@@ -37,7 +37,10 @@ public class AboutDialog extends JDialog {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(btnClose);
+        final Application app = Application.getApplication();
 
+        btnClose.setText(app.getText("Dialog.About.ButtonClose"));
+        btnClose.setToolTipText(app.getText("Dialog.About.ButtonClose.Tip"));
         btnClose.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
@@ -59,10 +62,9 @@ public class AboutDialog extends JDialog {
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
-        final Application app = Application.getApplication();
-
-        lbInfo.setText(String.format("%s %s", app.getText("App.Name"), Constants.VERSION));
-        lbJem.setText(String.format("Jem core: %s", Jem.VERSION));
+        lbInfo.setText(String.format("%s %s on %s (%s)", app.getText("App.Name"), Constants.VERSION,
+                System.getProperty("os.name"), System.getProperty("os.arch")));
+        lbJem.setText(String.format("Jem core: %s by %s", Jem.VERSION, Jem.VENDOR));
         lbRights.setText(app.getText("App.Rights"));
 
         lbLicense.setText(String.format("<html><a href=\"\">%s</a>  |</html>",

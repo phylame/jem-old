@@ -20,6 +20,9 @@ import pw.phylame.imabw.ui.Viewer;
 import pw.phylame.ixin.IApplication;
 import pw.phylame.ixin.frame.IFrame;
 
+import java.awt.*;
+import java.util.Locale;
+
 /**
  * The entry of Imabw.
  */
@@ -51,6 +54,23 @@ public class Application extends IApplication {
 
     /** Load configuration file */
     private void loadSettings() {
+        String locale = System.getProperty("imabw.locale");
+        if (locale != null) {
+            settings.put("locale", Locale.forLanguageTag(locale));
+        } else {
+            settings.put("locale", Locale.getDefault());
+        }
+
+        settings.put("editor.font", new Font("Droid Sans Fallback", Font.PLAIN, 16));
+        settings.put("editor.background", Color.WHITE);
+        settings.put("editor.foreground", Color.BLACK);
+    }
+
+    /**
+     * Saves settings to file.
+     */
+    public void saveSettings() {
+
     }
 
     /** Initialize Imabw */

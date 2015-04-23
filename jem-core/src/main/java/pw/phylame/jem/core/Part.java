@@ -352,6 +352,9 @@ public class Part extends Attributes implements Iterable<Part> {
             work.clean(this);
         }
         cleanWorks.clear();
+        for (Part sub: children) {
+            sub.cleanup();
+        }
         children.clear();
         clearAttributes();
     }

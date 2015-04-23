@@ -363,8 +363,12 @@ public class ITextEdit extends JScrollPane {
         });
     }
 
-    /** Set context menu status by {@code textEdit} */
     public static void updateContextMenu(ITextEdit textEdit) {
+       updateContextMenu(textEdit, textEdit.canCopy());
+    }
+
+    /** Set context menu status by {@code textEdit} */
+    public static void updateContextMenu(ITextEdit textEdit, boolean hasSelection) {
         currentInstance = textEdit;
         if (textEdit == null) {
             for (IAction action: contextActions.values()) {
@@ -374,10 +378,10 @@ public class ITextEdit extends JScrollPane {
         }
         contextActions.get(UNDO).setEnabled(textEdit.canUndo());
         contextActions.get(REDO).setEnabled(textEdit.canRedo());
-        contextActions.get(CUT).setEnabled(textEdit.canCopy());
-        contextActions.get(COPY).setEnabled(textEdit.canCopy());
+        contextActions.get(CUT).setEnabled(hasSelection);
+        contextActions.get(COPY).setEnabled(hasSelection);
         contextActions.get(PASTE).setEnabled(textEdit.canPaste());
-        contextActions.get(DELETE).setEnabled(textEdit.canCopy());
+        contextActions.get(DELETE).setEnabled(hasSelection);
         contextActions.get(SELECT_ALL).setEnabled(true);
     }
 

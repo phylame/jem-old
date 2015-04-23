@@ -43,7 +43,6 @@ public abstract class IApplication {
     protected IApplication(String[] args) {
         instance = this;
         this.args = args;
-        settings.put("locale", Locale.getDefault());
     }
 
     protected void loadBundle(String path) throws java.util.MissingResourceException {
@@ -104,6 +103,15 @@ public abstract class IApplication {
      */
     public Map<String, Object> getSettings() {
         return settings;
+    }
+
+    /**
+     * Returns setting item with specified key.
+     * @param key item key
+     * @return item value or <code>null</code> if <code>null</code> not found
+     */
+    public Object getSetting(String key) {
+        return settings.get(key);
     }
 
     /**

@@ -16,39 +16,55 @@
 
 package pw.phylame.imabw.ui.com;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import pw.phylame.ixin.ITextEdit;
+import pw.phylame.jem.core.Book;
+import pw.phylame.jem.core.Part;
+
 import pw.phylame.ixin.IToolkit;
 import pw.phylame.ixin.ITree;
 import pw.phylame.ixin.com.IAction;
 import pw.phylame.ixin.com.IPaneRender;
 import pw.phylame.ixin.event.IActionEvent;
 import pw.phylame.ixin.event.IActionListener;
-import pw.phylame.jem.core.Book;
 
 import pw.phylame.imabw.Application;
 import pw.phylame.imabw.ui.UIDesign;
+
 import static pw.phylame.imabw.Constants.*;
 
 import javax.swing.*;
-import javax.swing.tree.TreePath;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.tree.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Map;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * Main pane of Imabw.
  */
 public class MainPane extends IPaneRender {
+    private static Log LOG = LogFactory.getLog(MainPane.class);
+
     private Application app = Application.getApplication();
     private JPanel rootPane;
     // split pane
     private JSplitPane splitPane;
+    private Action nextWindowAction = null;
+    private Action prevWindowAction = null;
+
     // status
     private int dividerLocation, dividerSize;
     // ******************
     // ** Contents tree
     // ******************
     private ITree contentsTree;
-    private BookTreeModel treeModel;
+    private DefaultTreeModel treeModel;
     private JPopupMenu treeContextMenu;
     private Map<Object, IAction> treeActions;
 
@@ -58,6 +74,7 @@ public class MainPane extends IPaneRender {
     private JTabbedPane editorWindow;
     private JPopupMenu tabContextMenu;
     private Map<Object, IAction> tabActions;
+    private java.util.List<EditorTab> editorTabs = new ArrayList<>();
 
     public MainPane() {
         initComp();
@@ -94,11 +111,25 @@ public class MainPane extends IPaneRender {
             return;
         }
         createContentsPopupMenu();
-        treeModel = new BookTreeModel();
+        treeModel = new DefaultTreeModel(null);
         contentsTree = new ITree(app.getText("Frame.Contents.Title")+" ", treeModel);
         contentsTree.setTitleIcon(IToolkit.createImageIcon(app.getText("Frame.Contents.TitleIcon")));
         final JTree tree = contentsTree.getTree();
+
+        tree.setCellRenderer(new PartCellRender());
+
+        addSplitAction(tree);
+        IToolkit.addInputActions(tree, treeActions.values());
         tree.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // for open chapter text, only left key
+                if (e.getClickCount() != 2 || e.isMetaDown()) {
+                    return;
+                }
+                viewSelectionNode();
+            }
+
             @Override
             public void mouseReleased(MouseEvent e) {
                 if (!e.isMetaDown()) {
@@ -112,15 +143,22 @@ public class MainPane extends IPaneRender {
             }
         });
         tree.registerKeyboardAction(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                java.awt.Rectangle rect = tree.getPathBounds(tree.getSelectionPath());
-                if (rect == null) {
-                    return;
-                }
-                showContentsMenu((int) rect.getX(), (int) rect.getY());
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_CONTEXT_MENU, 0),
+                                        @Override
+                                        public void actionPerformed(ActionEvent e) {
+                                            java.awt.Rectangle rect = tree.getPathBounds(tree.getSelectionPath());
+                                            if (rect == null) {
+                                                return;
+                                            }
+                                            showContentsMenu((int) rect.getX(), (int) rect.getY());
+                                        }
+                                    }, KeyStroke.getKeyStroke(KeyEvent.VK_CONTEXT_MENU, 0),
+                JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        tree.registerKeyboardAction(new ActionListener() {
+                                        @Override
+                                        public void actionPerformed(ActionEvent e) {
+                                            viewSelectionNode();
+                                        }
+                                    }, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0),
                 JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
@@ -146,7 +184,7 @@ public class MainPane extends IPaneRender {
             case 1:
                 menuStatus.put(TREE_MERGE, false);
                 /* section cannot import */
-                BookTreeModel.PartNode node = BookTreeModel.getPartNode(selectedPaths[0]);
+                PartNode node = PartNode.getPartNode(selectedPaths[0]);
                 if (node.getChildCount() != 0) {
                     menuStatus.put(TREE_IMPORT, false);
                 }
@@ -176,6 +214,21 @@ public class MainPane extends IPaneRender {
         treeContextMenu.show(tree, x, y);
     }
 
+    private void viewSelectionNode() {
+        TreePath[] paths = contentsTree.getSelectionPaths();
+        if (paths == null) {
+            return;
+        }
+        for (TreePath tp: paths) {
+            PartNode node = PartNode.getPartNode(tp);
+            assert node != null;
+            if (! node.isLeaf()) {
+                continue;
+            }
+            app.getManager().viewPart(node.getPart());
+        }
+    }
+
     private void createEditorPopupMenu() {
         if (tabContextMenu != null) {
             return;
@@ -196,12 +249,55 @@ public class MainPane extends IPaneRender {
         editorWindow.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
-                if (! e.isMetaDown() || editorWindow.getTabCount() == 0) {  // not meta key or empty editor
+                if (!e.isMetaDown() || editorWindow.getTabCount() == 0) {  // not meta key or empty editor
                     return;
                 }
                 tabContextMenu.show(editorWindow, e.getX(), e.getY());
             }
         });
+    }
+
+
+    // **********************
+    // ** window operations
+    // **********************
+    public void focusNextWindow(JComponent currentWindow) {
+        if (currentWindow == contentsTree.getTree()) {
+            focusToEditorWindow();
+        } else {
+            focusToTreeWindow();
+        }
+    }
+
+    public void focusPrevWindow(JComponent currentWindow) {
+        if (currentWindow == contentsTree.getTree()) {
+            focusToEditorWindow();
+        } else {
+            focusToTreeWindow();
+        }
+    }
+
+    private void addSplitAction(final JComponent comp) {
+        if (nextWindowAction == null) {
+            nextWindowAction = new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    focusNextWindow((JComponent) e.getSource());
+                }
+            };
+        }
+        if (prevWindowAction == null) {
+            prevWindowAction = new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    focusPrevWindow((JComponent) e.getSource());
+                }
+            };
+        }
+        comp.registerKeyboardAction(prevWindowAction, KeyStroke.getKeyStroke("alt shift LEFT"),
+                JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        comp.registerKeyboardAction(nextWindowAction, KeyStroke.getKeyStroke("alt shift RIGHT"),
+                JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
     // ****************************************
@@ -225,8 +321,8 @@ public class MainPane extends IPaneRender {
         contentsTree.requestFocus();
     }
 
-    public void setBook(Book book) {
-        treeModel.setBook(book);
+    public void setBook(Part part) {
+        treeModel.setRoot(PartNode.makePartTree(part));
         contentsTree.setSelectionRow(0);
         focusToTreeWindow();
     }
@@ -241,20 +337,179 @@ public class MainPane extends IPaneRender {
         }
     }
 
+    public void closeTab(EditorTab tab) {
+        editorWindow.remove(tab.getTextEdit());
+        editorTabs.remove(tab);
+    }
+
+    public void closeActiveTab() {
+        EditorTab tab = editorTabs.get(editorWindow.getSelectedIndex());
+        try {
+            tab.cache();
+        } catch (IOException e) {
+            LOG.debug("cannot cache editor content: "+tab.getPart().getTitle(), e);
+        }
+        closeTab(tab);
+    }
+
+    public void closeOtherTabs() {
+        EditorTab tab = editorTabs.get(editorWindow.getSelectedIndex());
+        EditorTab[] tabs = editorTabs.toArray(new EditorTab[0]);
+        for (EditorTab item: tabs) {
+            if (item != tab) {
+                closeTab(item);
+            }
+        }
+    }
+
+    public void closeUnmodifiedTabs() {
+        EditorTab[] tabs = editorTabs.toArray(new EditorTab[0]);
+        for (EditorTab item: tabs) {
+            if (! item.isModified()) {
+                closeTab(item);
+            }
+        }
+    }
+
     public void closeAllTabs() {
-
-    }
-
-    public void nextTab() {
-
-    }
-
-    public void prevTab() {
-
+        for (EditorTab tab: editorTabs) {
+            try {
+                tab.cache();
+            } catch (IOException e) {
+                LOG.debug("cannot cache editor content: "+tab.getPart().getTitle(), e);
+            }
+        }
+        editorWindow.removeAll();
+        editorTabs.clear();
     }
 
     public void setEditorState(int row, int column) {
 
+    }
+
+    // add and view new tab
+    public EditorTab newTab(Part part) {
+        String text;
+        try {
+            text = part.getText();
+        } catch (IOException e) {
+            e.printStackTrace();
+            text = "";
+        }
+        EditorTab tab = new EditorTab(new ITextEdit(text, app.getViewer()), part);
+        initEditorTab(tab);
+        editorWindow.addTab(tab.getPart().getTitle(), tab.getTextEdit());
+        editorTabs.add(tab);
+
+        if (editorTabs.size() == 1) {   // first open tab activate search menus
+            activateSearchMenu();
+        }
+
+        return tab;
+    }
+
+    private void initEditorTab(final EditorTab tab) {
+        final ITextEdit textEdit = tab.getTextEdit();
+
+        IToolkit.addInputActions(textEdit.getTextEditor(), tabActions.values());
+        setEditorStyle(textEdit);
+
+        textEdit.addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                ITextEdit.updateContextMenu(textEdit, false);
+                tab.setModified(true);
+                app.getManager().notifyModified(app.getText("Task.ContentModified", tab.getPart().getTitle()));
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                ITextEdit.updateContextMenu(textEdit, false);
+                tab.setModified(true);
+                app.getManager().notifyModified(app.getText("Task.ContentModified", tab.getPart().getTitle()));
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
+        });
+
+        textEdit.addCaretListener(new CaretListener() {
+            @Override
+            public void caretUpdate(CaretEvent e) {
+                if (e.getMark() > e.getDot()) {
+                    ITextEdit.updateContextMenu(textEdit, true);
+                } else {
+                    setEditorState(textEdit.getCurrentRow() + 1, textEdit.getCurrentColumn() + 1);
+                }
+            }
+        });
+
+        textEdit.setCaretPosition(0);
+        addSplitAction(textEdit.getTextEditor());
+        ITextEdit.updateContextMenu(textEdit, false);
+    }
+
+    private void setEditorStyle(ITextEdit textEdit) {
+        JTextArea textArea = textEdit.getTextEditor();
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+
+        textArea.setFont((Font) app.getSetting("editor.font"));
+
+        textArea.setBackground((Color) app.getSetting("editor.background"));
+        textArea.setForeground((Color) app.getSetting("editor.foreground"));
+    }
+
+    private void activateSearchMenu() {
+        String[] keys = {FIND_TEXT, FIND_AND_REPLACE, GO_TO_POSITION};
+        IAction action;
+        for (String key: keys) {
+            action = app.getViewer().getMenuAction(key);
+            if (action != null) {
+                action.setEnabled(true);
+            }
+        }
+    }
+
+    public void switchToTab(EditorTab tab) {
+        editorWindow.setSelectedComponent(tab.getTextEdit());
+        tab.getTextEdit().requestFocus();
+    }
+
+    public EditorTab findEditorTab(Part part) {
+        for (EditorTab tab: editorTabs) {
+            if (part == tab.getPart()) {
+                return tab;
+            }
+        }
+        return null;
+    }
+
+    public void nextTab() {
+        if (editorWindow.getTabCount() < 2) {
+            return;
+        }
+        int index = editorWindow.getSelectedIndex();
+        if (index == editorWindow.getTabCount() - 1) {
+            index = 0;
+        } else {
+            ++index;
+        }
+        editorWindow.setSelectedIndex(index);
+    }
+
+    public void prevTab() {
+        if (editorWindow.getTabCount() < 2) {
+            return;
+        }
+        int index = editorWindow.getSelectedIndex();
+        if (index == 0) {
+            index = editorWindow.getTabCount() - 1;
+        } else {
+            --index;
+        }
+        editorWindow.setSelectedIndex(index);
     }
 
     @Override
@@ -265,6 +520,76 @@ public class MainPane extends IPaneRender {
     @Override
     public JPanel getPane() {
         return rootPane;
+    }
+}
+
+class PartNode extends DefaultMutableTreeNode {
+    public static PartNode makePartTree(Part part) {
+        PartNode node = new PartNode(part);
+
+        for (Part sub: part) {
+            node.add(makePartTree(sub));
+        }
+
+        return node;
+    }
+
+    public static PartNode getPartNode(TreePath treePath) {
+        if (treePath == null) {
+            return null;
+        }
+
+        Object value = treePath.getLastPathComponent();
+        if (value instanceof PartNode) {
+            return (PartNode) value;
+        }
+
+        return null;
+    }
+
+    public PartNode(Part part) {
+        setUserObject(part);
+    }
+
+    public Part getPart() {
+        return (Part) getUserObject();
+    }
+
+    @Override
+    public String toString() {
+        return getPart().getTitle();
+    }
+}
+
+class PartCellRender extends DefaultTreeCellRenderer {
+    private Icon bookIcon, sectionIcon, chapterIcon;
+
+    public PartCellRender() {
+        bookIcon = IToolkit.createImageIcon(":/res/img/tree/book.png");
+        sectionIcon = IToolkit.createImageIcon(":/res/img/tree/section.png");
+        chapterIcon = IToolkit.createImageIcon(":/res/img/tree/chapter.png");
+    }
+
+    @Override
+    public Component getTreeCellRendererComponent(JTree tree,
+                                           Object value,
+                                           boolean selected,
+                                           boolean expanded,
+                                           boolean leaf,
+                                           int row,
+                                           boolean hasFocus) {
+        super.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, hasFocus);
+        if (leaf) {
+            setIcon(chapterIcon);
+        } else {
+            Part part = ((PartNode) value).getPart();
+            if (part instanceof Book) {
+                setIcon(bookIcon);
+            } else {
+                setIcon(sectionIcon);
+            }
+        }
+        return this;
     }
 
 }

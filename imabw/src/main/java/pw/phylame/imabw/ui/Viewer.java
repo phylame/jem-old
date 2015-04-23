@@ -22,6 +22,7 @@ import pw.phylame.imabw.ui.com.MainPane;
 import pw.phylame.ixin.ITextEdit;
 import pw.phylame.ixin.com.IPaneRender;
 import pw.phylame.ixin.frame.IFrame;
+import pw.phylame.jem.core.Part;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
@@ -48,7 +49,7 @@ public class Viewer extends IFrame {
 
     @Override
     public void initialized() {
-        getMenuActions().putAll(ITextEdit.getContextActions());
+        getMenuActions().putAll(ITextEdit.getContextActions());     // using ITextEdit edit actions
     }
 
     private void init() {

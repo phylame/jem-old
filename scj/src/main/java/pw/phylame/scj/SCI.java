@@ -54,9 +54,9 @@ public final class SCI {
 	static {
 		String locale = System.getProperty("scj.locale");
 		if (locale == null) {
-			bundle = ResourceBundle.getBundle("i18n.scj", Locale.getDefault());
+			bundle = ResourceBundle.getBundle("res/i18n.scj", Locale.getDefault());
 		} else {
-			bundle = ResourceBundle.getBundle("i18n.scj", Locale.forLanguageTag(locale));
+			bundle = ResourceBundle.getBundle("res/i18n.scj", Locale.forLanguageTag(locale));
 		}
 	}
 

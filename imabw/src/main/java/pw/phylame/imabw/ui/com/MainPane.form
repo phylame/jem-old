@@ -14,7 +14,10 @@
             <preferred-size width="200" height="200"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <dividerLocation value="149"/>
+          <dividerSize value="3"/>
+        </properties>
         <border type="none"/>
         <children>
           <tabbedpane id="70747" binding="editorWindow">
