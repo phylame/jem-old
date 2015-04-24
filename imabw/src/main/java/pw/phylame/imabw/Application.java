@@ -16,17 +16,27 @@
 
 package pw.phylame.imabw;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import pw.phylame.imabw.ui.Viewer;
 import pw.phylame.ixin.IApplication;
 import pw.phylame.ixin.frame.IFrame;
 
-import java.awt.*;
+import java.awt.Font;
+import java.awt.Color;
+
+import java.io.Reader;
+import java.io.IOException;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.Locale;
+import java.util.Properties;
 
 /**
  * The entry of Imabw.
  */
 public class Application extends IApplication {
+    private static Log LOG = LogFactory.getLog(Application.class);
 
     /** The manager */
     private Manager manager = null;
@@ -52,18 +62,82 @@ public class Application extends IApplication {
         }
     }
 
+    public boolean isEmpty(String str) {
+        return str == null || str.length() == 0;
+    }
+
     /** Load configuration file */
     private void loadSettings() {
-        String locale = System.getProperty("imabw.locale");
-        if (locale != null) {
-            settings.put("locale", Locale.forLanguageTag(locale));
+        Properties prop = new Properties();
+        Reader reader = null;
+        try {
+            reader = new InputStreamReader(new FileInputStream(Constants.SETTINGS_FILE), "UTF-8");
+            prop.load(reader);
+        } catch (IOException e) {
+            LOG.debug("cannot load settings file: "+Constants.SETTINGS_FILE, e);
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    LOG.debug("cannot close settings file", e);
+                }
+            }
+        }
+        // locale
+        String str = prop.getProperty("imabw.locale");
+        if (! isEmpty(str)) {
+            settings.put("locale", Locale.forLanguageTag(str.replace('_', '-')));
         } else {
             settings.put("locale", Locale.getDefault());
         }
 
-        settings.put("editor.font", new Font("Droid Sans Fallback", Font.PLAIN, 16));
-        settings.put("editor.background", Color.WHITE);
-        settings.put("editor.foreground", Color.BLACK);
+        // **************
+        // ** UI
+        // **************
+
+        // L&F
+        str = prop.getProperty("ui.theme");
+        if (isEmpty(str)) {
+            str = "system";
+        }
+        settings.put("ui.theme", str);
+        // Toolbar
+        str = prop.getProperty("ui.show_toolbar");
+        settings.put("ui.show_toolbar", isEmpty(str) || Boolean.parseBoolean(str));
+        // Lock toolbar
+        str = prop.getProperty("ui.lock_toolbar");
+        settings.put("ui.lock_toolbar", isEmpty(str) || Boolean.parseBoolean(str));
+        // Sidebar
+        str = prop.getProperty("ui.show_sidebar");
+        settings.put("ui.show_sidebar", isEmpty(str) || Boolean.parseBoolean(str));
+        // Statusbar
+        str = prop.getProperty("ui.show_statusbar");
+        settings.put("ui.show_statusbar", isEmpty(str) || Boolean.parseBoolean(str));
+        // global font
+        str = prop.getProperty("ui.font.global");
+        Font font = new Font(Font.SANS_SERIF, Font.PLAIN, 14);
+        if (! isEmpty(str)) {
+            font = Font.decode(str);
+        }
+        settings.put("ui.font.global", font);
+        // Anti aliasing font
+        str = prop.getProperty("ui.font.aatext");
+        settings.put("ui.font.aatext", isEmpty(str) || Boolean.parseBoolean(str));
+
+        // editor font
+        str = prop.getProperty("editor.font");
+        font = new Font(Font.SANS_SERIF, Font.PLAIN, 16);
+        if (! isEmpty(str)) {
+            font = Font.decode(str);
+        }
+        settings.put("editor.font", font);
+
+        // editor color
+        str = prop.getProperty("editor.background");
+        settings.put("editor.background", Color.getColor(str, Color.WHITE));
+        str = prop.getProperty("editor.foreground");
+        settings.put("editor.foreground", Color.getColor(str, Color.BLACK));
     }
 
     /**
@@ -76,7 +150,9 @@ public class Application extends IApplication {
     /** Initialize Imabw */
     private void initApp() {
         loadBundle(Constants.I18N_PATH);
-        setTheme("system");
+        setTheme((String) getSetting("ui.theme"));
+        setAAText((boolean) getSetting("ui.font.aatext"));
+        setGloablFont((Font) getSetting("ui.font.global"));
     }
 
     /** Get the application instance */

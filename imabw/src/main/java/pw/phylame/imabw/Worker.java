@@ -16,8 +16,10 @@
 
 package pw.phylame.imabw;
 
+import pw.phylame.imabw.ui.com.PartNode;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Jem;
+import pw.phylame.jem.core.Part;
 import pw.phylame.jem.util.JemException;
 import pw.phylame.tools.StringUtils;
 import pw.phylame.tools.file.FileFactory;
@@ -38,9 +40,19 @@ import java.util.*;
  * Utilities functions and constants for Imabw.
  */
 public class Worker {
-    private Application app = Application.getApplication();
+    Application app = Application.getApplication();
 
     private JFileChooser fileChooser = new JFileChooser();
+
+    private Map<String, String> formatNames = new HashMap<>();
+
+    public Worker() {
+        String[] formats = {"pmab", "umd", "jar", "txt", "epub", "jpg", "jpeg", "png", "gif", "bmp"};
+        for (String fmt: formats) {
+            String name = app.getText("Common.Format."+fmt.toUpperCase());
+            formatNames.put(fmt, String.format("%s (*.%s)", name, fmt));
+        }
+    }
 
     public String inputText(Component parent, String title, String tip, String initValue) {
         return (String) JOptionPane.showInputDialog(parent, tip, title, JOptionPane.PLAIN_MESSAGE, null, null, initValue);
@@ -100,14 +112,14 @@ public class Worker {
         }
     }
 
-    public List<FileFilter> makeFileFormatFilters(Map<String, String> formats, boolean acceptAll) {
+    public List<FileFilter> makeFileFormatFilters(List<String> formats, boolean acceptAll) {
         List<FileFilter> filters = new java.util.ArrayList<>();
         if (acceptAll) {
-            filters.add(new FileNameExtensionFilter(app.getText("", StringUtils.join(formats.keySet(), " *.")),
-                    formats.keySet().toArray(new String[0])));
+            filters.add(new FileNameExtensionFilter(app.getText("Common.Format.All", StringUtils.join(formats, " *.")),
+                    formats.toArray(new String[0])));
         }
-        for (Map.Entry<String, String> entry: formats.entrySet()) {
-            filters.add(new FileNameExtensionFilter(entry.getValue(), entry.getKey()));
+        for (String format: formats) {
+            filters.add(new FileNameExtensionFilter(formatNames.get(format), format));
         }
         return filters;
     }
@@ -150,13 +162,22 @@ public class Worker {
     }
 
     public File selectOpenBook(Component parent, String title) {
-        return new File("/home/nanu/tmp/zd.pmab");
-//        return selectOpenFile(parent, title, makeFileFormatFilters(null, false), null, true, null);
+        List<String> formats = Arrays.asList("pmab", "umd", "jar", "txt", "epub");
+        return selectOpenFile(parent, title, makeFileFormatFilters(formats, true), null, true, null);
     }
 
-
-    public Book newBook() {
-        Book book = new Book(app.getText("Common.NewBookTitle"), "");
+    public Book newBook(String title) {
+        if (title == null) {
+            title = inputText(app.getViewer(), app.getText("Dialog.NewBook.Title"), app.getText("Dialog.NewBook.Tip"),
+                    app.getText("Common.NewBookTitle"));
+            if (title == null) {
+                return null;
+            } else if (title.length() == 0) {
+                showError(app.getViewer(), app.getText("Dialog.NewBook.Title"), app.getText("Dialog.NewBook.NoInput"));
+                return null;
+            }
+        }
+        Book book = new Book(title, "");
         addAttributes(book);
         book.newChapter(app.getText("Common.NewChapterTitle"));
         return book;
@@ -167,9 +188,11 @@ public class Worker {
      * @param title title of open file dialog
      * @return the book
      */
-    public Book openBook(String title) {
+    public Book openBook(File file, String title) {
         // 1. select book file
-        File file = selectOpenBook(app.getViewer(), title);
+        if (file == null) {
+            file = selectOpenBook(app.getViewer(), title);
+        }
         if (file == null) {
             return null;
         }
@@ -188,6 +211,26 @@ public class Worker {
         }
 
         return book;
+    }
+
+    public PartNode newChapter(PartNode parent, String title) {
+        String text = inputText(app.getViewer(), title, app.getText("Dialog.NewChapter.Tip"),
+                app.getText("Common.NewChapterTitle"));
+        PartNode node = null;
+        if (text == null) {
+            // nothing
+        } else if (text.length() == 0) {
+            showError(app.getViewer(), title, app.getText("Dialog.NewChapter.NoInput"));
+        } else {
+            if (parent == null) {
+                node = new PartNode(new Part(text));
+            } else {
+                node = new PartNode(parent.getPart().newPart(text));
+                parent.add(node);
+            }
+        }
+
+        return node;
     }
 
     /**
@@ -220,4 +263,5 @@ public class Worker {
             book.setRights(String.format("(C) %d PW arts", Calendar.getInstance().get(Calendar.YEAR)));
         }
     }
+
 }

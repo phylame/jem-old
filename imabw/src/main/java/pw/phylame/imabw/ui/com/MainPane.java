@@ -327,6 +327,34 @@ public class MainPane extends IPaneRender {
         focusToTreeWindow();
     }
 
+    public void expandTreePath(TreePath path) {
+        contentsTree.getTree().expandPath(path);
+    }
+
+    public TreePath getSelectedPath() {
+        return contentsTree.getSelectionPath();
+    }
+
+    public PartNode getSelectedNode() {
+        TreePath treePath = contentsTree.getSelectionPath();
+        if (treePath == null) {
+            return null;
+        }
+        return PartNode.getPartNode(treePath);
+    }
+
+    public void refreshNode(PartNode node) {
+        treeModel.reload(node);
+    }
+
+
+    public void focusToNode(TreePath parent, PartNode node) {
+        JTree tree = contentsTree.getTree();
+        int row = tree.getRowForPath(parent);
+        row += node.getParent().getChildCount();
+        tree.setSelectionRow(row);
+    }
+
     // ******************************
     // ** Editor operations
     // ******************************
@@ -338,18 +366,23 @@ public class MainPane extends IPaneRender {
     }
 
     public void closeTab(EditorTab tab) {
+        try {
+            tab.cache();
+        } catch (IOException e) {
+            LOG.debug("cannot cache editor content: "+tab.getPart().getTitle(), e);
+        }
         editorWindow.remove(tab.getTextEdit());
         editorTabs.remove(tab);
     }
 
     public void closeActiveTab() {
         EditorTab tab = editorTabs.get(editorWindow.getSelectedIndex());
-        try {
-            tab.cache();
-        } catch (IOException e) {
-            LOG.debug("cannot cache editor content: "+tab.getPart().getTitle(), e);
-        }
         closeTab(tab);
+
+        if (editorTabs.size() == 0) {
+            switchEditableMenus(false);
+            focusToTreeWindow();
+        }
     }
 
     public void closeOtherTabs() {
@@ -360,6 +393,11 @@ public class MainPane extends IPaneRender {
                 closeTab(item);
             }
         }
+
+        if (editorTabs.size() == 0) {
+            switchEditableMenus(false);
+            focusToTreeWindow();
+        }
     }
 
     public void closeUnmodifiedTabs() {
@@ -368,6 +406,10 @@ public class MainPane extends IPaneRender {
             if (! item.isModified()) {
                 closeTab(item);
             }
+        }
+        if (editorTabs.size() == 0) {
+            switchEditableMenus(false);
+            focusToTreeWindow();
         }
     }
 
@@ -381,6 +423,8 @@ public class MainPane extends IPaneRender {
         }
         editorWindow.removeAll();
         editorTabs.clear();
+        switchEditableMenus(false);
+        focusToTreeWindow();
     }
 
     public void setEditorState(int row, int column) {
@@ -402,7 +446,7 @@ public class MainPane extends IPaneRender {
         editorTabs.add(tab);
 
         if (editorTabs.size() == 1) {   // first open tab activate search menus
-            activateSearchMenu();
+            switchEditableMenus(true);
         }
 
         return tab;
@@ -417,14 +461,14 @@ public class MainPane extends IPaneRender {
         textEdit.addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                ITextEdit.updateContextMenu(textEdit, false);
+                ITextEdit.updateContextMenu(textEdit);
                 tab.setModified(true);
                 app.getManager().notifyModified(app.getText("Task.ContentModified", tab.getPart().getTitle()));
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                ITextEdit.updateContextMenu(textEdit, false);
+                ITextEdit.updateContextMenu(textEdit);
                 tab.setModified(true);
                 app.getManager().notifyModified(app.getText("Task.ContentModified", tab.getPart().getTitle()));
             }
@@ -438,7 +482,7 @@ public class MainPane extends IPaneRender {
             @Override
             public void caretUpdate(CaretEvent e) {
                 if (e.getMark() > e.getDot()) {
-                    ITextEdit.updateContextMenu(textEdit, true);
+                    ITextEdit.updateContextMenu(textEdit);
                 } else {
                     setEditorState(textEdit.getCurrentRow() + 1, textEdit.getCurrentColumn() + 1);
                 }
@@ -447,7 +491,7 @@ public class MainPane extends IPaneRender {
 
         textEdit.setCaretPosition(0);
         addSplitAction(textEdit.getTextEditor());
-        ITextEdit.updateContextMenu(textEdit, false);
+        ITextEdit.updateContextMenu(textEdit);
     }
 
     private void setEditorStyle(ITextEdit textEdit) {
@@ -461,14 +505,17 @@ public class MainPane extends IPaneRender {
         textArea.setForeground((Color) app.getSetting("editor.foreground"));
     }
 
-    private void activateSearchMenu() {
+    private void switchEditableMenus(boolean enable) {
         String[] keys = {FIND_TEXT, FIND_AND_REPLACE, GO_TO_POSITION};
         IAction action;
         for (String key: keys) {
             action = app.getViewer().getMenuAction(key);
             if (action != null) {
-                action.setEnabled(true);
+                action.setEnabled(enable);
             }
+        }
+        if (! enable) {
+            ITextEdit.updateContextMenu(null);
         }
     }
 
@@ -520,44 +567,6 @@ public class MainPane extends IPaneRender {
     @Override
     public JPanel getPane() {
         return rootPane;
-    }
-}
-
-class PartNode extends DefaultMutableTreeNode {
-    public static PartNode makePartTree(Part part) {
-        PartNode node = new PartNode(part);
-
-        for (Part sub: part) {
-            node.add(makePartTree(sub));
-        }
-
-        return node;
-    }
-
-    public static PartNode getPartNode(TreePath treePath) {
-        if (treePath == null) {
-            return null;
-        }
-
-        Object value = treePath.getLastPathComponent();
-        if (value instanceof PartNode) {
-            return (PartNode) value;
-        }
-
-        return null;
-    }
-
-    public PartNode(Part part) {
-        setUserObject(part);
-    }
-
-    public Part getPart() {
-        return (Part) getUserObject();
-    }
-
-    @Override
-    public String toString() {
-        return getPart().getTitle();
     }
 }
 

@@ -29,6 +29,9 @@ public final class Constants {
     /** User home of Imabw */
     public static final String IMABW_HOME = String.format("%s/.imabw", System.getProperty("user.home"));
 
+    /** Settings file */
+    public static final String SETTINGS_FILE = IMABW_HOME + "/" + "settings.prop";
+
     // *******************
     // ** Menu commands **
     // *******************

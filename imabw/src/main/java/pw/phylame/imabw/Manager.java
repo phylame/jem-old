@@ -17,14 +17,17 @@
 package pw.phylame.imabw;
 
 import static pw.phylame.imabw.Constants.*;
+
 import pw.phylame.imabw.ui.Viewer;
 import pw.phylame.imabw.ui.com.EditorTab;
 import pw.phylame.imabw.ui.com.MainPane;
+import pw.phylame.imabw.ui.com.PartNode;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.Part;
 
 import javax.swing.*;
+import javax.swing.tree.TreePath;
 import java.io.File;
 
 /**
@@ -56,9 +59,15 @@ public class Manager {
     public void begin() {
         showMainPane();
         viewer.setVisible(true);
-
-        newFile();
         viewer.setStatusText(app.getText("Frame.StatusBar.Ready"));
+
+        newFile(app.getText("Common.NewBookTitle"));
+
+        String[] argv = app.getArguments();
+        if (argv.length > 0) {
+            openFile(new File(argv[0]));
+        }
+
     }
 
     /** Stop manager works */
@@ -85,7 +94,7 @@ public class Manager {
         if (source != null) {
             name = source.getPath();
         } else {
-            name = String.format("%s.%s", app.getText("Common.NewBookTitle"), Jem.PMAB_FORMAT);
+            name = String.format("%s.%s", book.getTitle(), Jem.PMAB_FORMAT);
         }
         return name;
     }
@@ -141,14 +150,20 @@ public class Manager {
         return true;
     }
 
-    private void newFile() {
+    private void newFile(String title) {
         if (! maybeSave(app.getText("Dialog.New.Title"))) {
+            return;
+        }
+        Book _book = worker.newBook(title);
+        if (_book == null) {
             return;
         }
         if (book != null) {
             book.cleanup();
         }
-        book = worker.newBook();
+        mainPane.closeAllTabs();
+        book = _book;
+
         source = null;
         format = Jem.PMAB_FORMAT;
         modified = false;
@@ -160,17 +175,18 @@ public class Manager {
         viewer.setStatusText(app.getText("Task.NewedBook", book.getTitle()));
     }
 
-    private void openFile() {
+    private void openFile(File file) {
         if (! maybeSave(app.getText("Dialog.Open.Title"))) {
             return;
         }
-        Book _book = worker.openBook(app.getText("Dialog.OpenBook.Title"));
+        Book _book = worker.openBook(file, app.getText("Dialog.OpenBook.Title"));
         if (_book == null) {
             return;
         }
         if (book != null) {
             book.cleanup();
         }
+        mainPane.closeAllTabs();
         book = _book;
 
         Object o = book.getAttribute("source_file", null);
@@ -211,26 +227,16 @@ public class Manager {
     }
 
     private void viewProperties(Part part) {
-
-    }
-
-    public void viewPart(Part part) {
-        // if part is opened, switch to the tab
-        // else open new tab and switch to it
-        EditorTab tab = mainPane.findEditorTab(part);
-        if (tab == null) {
-            tab = mainPane.newTab(part);
-        }
-        mainPane.switchToTab(tab);
+        System.out.println("view attributes of "+part.getTitle());
     }
 
     public void onCommand(Object cmdID) {
         switch ((String) cmdID) {
             case NEW_FILE:
-                newFile();
+                newFile(null);
                 break;
             case OPEN_FILE:
-                openFile();
+                openFile(null);
                 break;
             case SAVE_FILE:
                 saveFile();
@@ -260,15 +266,123 @@ public class Manager {
                 viewProperties(book);
                 break;
             default:
-                System.out.println(cmdID);
+                System.out.println("menu action: "+cmdID);
                 break;
+        }
+    }
+
+    // **************************
+    // ** Tree action function
+    // **************************
+    public void viewPart(Part part) {
+        EditorTab tab = mainPane.findEditorTab(part);
+        if (tab == null) {
+            tab = mainPane.newTab(part);
+        }
+        mainPane.switchToTab(tab);
+    }
+
+    private void newChapter() {
+        TreePath treePath = mainPane.getSelectedPath();
+        if (treePath == null) {
+            return;
+        }
+        PartNode node = PartNode.getPartNode(treePath);
+        Part part = node.getPart();
+        if (! part.isSection()) {
+            if (! worker.showConfirm(app.getViewer(), app.getText("Dialog.NewChapter.Title"),
+                    app.getText("Dialog.NewChapter.NonSection", part.getTitle()))) {
+                return;
+            }
+        }
+        PartNode sub = worker.newChapter(node, app.getText("Dialog.NewChapter.Title"));
+        if (sub == null) {
+            return;
+        }
+        mainPane.refreshNode(node);
+        mainPane.expandTreePath(treePath);
+        mainPane.focusToNode(treePath, sub);
+        notifyModified(app.getText("Task.NewedChapter", sub.getPart().getTitle(), part.getTitle()));
+    }
+
+    private void insertChapter() {
+        TreePath treePath = mainPane.getSelectedPath();
+        if (treePath == null || treePath.getPathCount() == 1) {     // no selection or root
+            return;
+        }
+        PartNode node = PartNode.getPartNode(treePath);
+        PartNode parent = (PartNode) node.getParent();
+        PartNode sub = worker.newChapter(null, app.getText("Dialog.InsertChapter.Title"));
+        if (sub == null) {
+            return;
+        }
+        int index = parent.getIndex(node);
+        parent.getPart().insert(index, sub.getPart());
+        parent.insert(sub, index);
+        mainPane.refreshNode(parent);
+        mainPane.focusToNode(treePath.getParentPath(), sub);
+        notifyModified(app.getText("Task.InsertedChapter", sub.getPart().getTitle(), node.getPart().getTitle()));
+    }
+
+    private void saveAsPart() {
+        PartNode node = mainPane.getSelectedNode();
+        if (node == null) {
+            return;
+        }
+        Part part = node.getPart();
+    }
+
+    private void renameChapter() {
+        PartNode node = mainPane.getSelectedNode();
+        if (node == null) {
+            return;
+        }
+        Part part = node.getPart();
+        String oldTitle = part.getTitle();
+        String text = worker.inputText(app.getViewer(), app.getText("Dialog.RenameChapter.Title", part.getTitle()),
+                app.getText("Dialog.RenameChapter.Tip"), oldTitle);
+        if (text == null) {
+            // nothing
+        } else if (text.length() == 0) {
+            worker.showError(app.getViewer(), app.getText("Dialog.RenameChapter.Title", part.getTitle()),
+                    app.getText("Dialog.RenameChapter.NoInput"));
+        } else {
+            part.setTitle(text);
+            mainPane.refreshNode(node);
+            notifyModified(app.getText("Task.RenamedChapter", oldTitle, text));
         }
     }
 
     public void onTreeAction(Object actionID) {
         switch ((String) actionID) {
+            case TREE_NEW:
+                newChapter();
+                break;
+            case TREE_INSERT:
+                insertChapter();
+                break;
+            case TREE_IMPORT:
+                break;
+            case TREE_SAVE_AS:
+                saveAsPart();
+                break;
+            case TREE_MOVE:
+                break;
+            case TREE_RENAME:
+                renameChapter();
+                break;
+            case TREE_DELETE:
+                break;
+            case TREE_MERGE:
+                break;
+            case TREE_PROPERTIES:
+                PartNode node = mainPane.getSelectedNode();
+                if (node != null) {
+                    viewProperties(node.getPart());
+                }
+                break;
             default:
-                System.out.println(actionID);
+                System.out.println("tree action: "+actionID);
                 break;
         }
     }
@@ -292,6 +406,9 @@ public class Manager {
                 break;
             case TAB_SELECT_PREVIOUS:
                 mainPane.prevTab();
+                break;
+            default:
+                System.out.println("tab action: "+actionID);
                 break;
         }
     }
