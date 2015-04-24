@@ -102,6 +102,9 @@ public class Application extends IApplication {
             str = "system";
         }
         settings.put("ui.theme", str);
+        // Title bar decorated
+        str = prop.getProperty("ui.decorated");
+        settings.put("ui.decorated", ! isEmpty(str) && Boolean.parseBoolean(str));
         // Toolbar
         str = prop.getProperty("ui.show_toolbar");
         settings.put("ui.show_toolbar", isEmpty(str) || Boolean.parseBoolean(str));
@@ -135,9 +138,17 @@ public class Application extends IApplication {
 
         // editor color
         str = prop.getProperty("editor.background");
-        settings.put("editor.background", Color.getColor(str, Color.WHITE));
+        Color color = Color.WHITE;
+        if (! isEmpty(str)) {
+            color = Color.decode(str);
+        }
+        settings.put("editor.background", color);
         str = prop.getProperty("editor.foreground");
-        settings.put("editor.foreground", Color.getColor(str, Color.BLACK));
+        color = Color.BLACK;
+        if (! isEmpty(str)) {
+            color = Color.decode(str);
+        }
+        settings.put("editor.foreground", color);
     }
 
     /**
@@ -150,7 +161,7 @@ public class Application extends IApplication {
     /** Initialize Imabw */
     private void initApp() {
         loadBundle(Constants.I18N_PATH);
-        setTheme((String) getSetting("ui.theme"));
+        setTheme((String) getSetting("ui.theme"), (boolean) getSetting("ui.decorated"));
         setAAText((boolean) getSetting("ui.font.aatext"));
         setGloablFont((Font) getSetting("ui.font.global"));
     }

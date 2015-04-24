@@ -71,13 +71,17 @@ public abstract class IApplication {
      * Set SWING L&F.
      * @param name class name of L&F class or brief name.
      */
-    public void setTheme(String name) {
-        String theme = pw.phylame.ixin.IToolkit.getLookAndFeel(name);
+    public void setTheme(String name, boolean decorated) {
+        /* decorated title bar */
+        javax.swing.JFrame.setDefaultLookAndFeelDecorated(decorated);
+        javax.swing.JDialog.setDefaultLookAndFeelDecorated(decorated);
+
+        String theme = IToolkit.getLookAndFeel(name);
         try {
             UIManager.setLookAndFeel(theme);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
-                javax.swing.UnsupportedLookAndFeelException exp) {
-            exp.printStackTrace();
+                javax.swing.UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
         }
     }
 

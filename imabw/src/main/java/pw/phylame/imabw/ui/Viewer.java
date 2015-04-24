@@ -64,8 +64,33 @@ public class Viewer extends IFrame {
             }
         });
 
+        getToolBar().setVisible((boolean) app.getSetting("ui.show_toolbar"));
+        getToolBar().setFloatable(!(boolean) app.getSetting("ui.lock_toolbar"));
+        getStatusBar().setVisible((boolean) app.getSetting("ui.show_statusbar"));
+
+        JMenu menu = getViewMenu();
+        ((JCheckBoxMenuItem)menu.getItem(0)).setState(getToolBar().isVisible());
+        ((JCheckBoxMenuItem)menu.getItem(1)).setState(getStatusBar().isVisible());
+        ((JCheckBoxMenuItem)menu.getItem(2)).setState((boolean) app.getSetting("ui.show_sidebar"));
+
         setSize(1066, 600);
         setLocationRelativeTo(null);
+    }
+
+    public JMenu getFileMenu() {
+        return getJMenuBar().getMenu(0);
+    }
+
+    public JMenu getEditMenu() {
+        return getJMenuBar().getMenu(1);
+    }
+
+    public JMenu getViewMenu() {
+        return getJMenuBar().getMenu(2);
+    }
+
+    public JMenu getToolsMenu() {
+        return getJMenuBar().getMenu(3);
     }
 
     public void showOrHideSideBar() {

@@ -207,7 +207,8 @@ public class Worker {
             // 3. addAttributes
             addAttributes(book);
         } catch (IOException |JemException e) {
-            e.printStackTrace();
+            showError(app.getViewer(), title, app.getText("Dialog.OpenBook.Error",
+                    file.getPath(), e.getMessage()));
         }
 
         return book;

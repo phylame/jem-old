@@ -79,9 +79,6 @@ public class MainPane extends IPaneRender {
     public MainPane() {
         initComp();
 
-        dividerLocation = splitPane.getDividerLocation();
-        dividerSize = splitPane.getDividerSize();
-
         focusToTreeWindow();
     }
 
@@ -89,6 +86,10 @@ public class MainPane extends IPaneRender {
         createContentsWindow();
         splitPane.setLeftComponent(contentsTree);
         createEditorWindow();
+
+        if (app.getSetting("ui.show_sidebar").equals(false)) {
+            showOrHideSideBar();
+        }
     }
 
     private void createContentsPopupMenu() {

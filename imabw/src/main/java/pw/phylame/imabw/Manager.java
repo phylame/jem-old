@@ -61,13 +61,10 @@ public class Manager {
         viewer.setVisible(true);
         viewer.setStatusText(app.getText("Frame.StatusBar.Ready"));
 
-        newFile(app.getText("Common.NewBookTitle"));
-
         String[] argv = app.getArguments();
-        if (argv.length > 0) {
-            openFile(new File(argv[0]));
+        if (argv.length < 1 || ! openFile(new File(argv[0]))) {
+            newFile(app.getText("Common.NewBookTitle"));
         }
-
     }
 
     /** Stop manager works */
@@ -175,13 +172,13 @@ public class Manager {
         viewer.setStatusText(app.getText("Task.NewedBook", book.getTitle()));
     }
 
-    private void openFile(File file) {
+    private boolean openFile(File file) {
         if (! maybeSave(app.getText("Dialog.Open.Title"))) {
-            return;
+            return false;
         }
         Book _book = worker.openBook(file, app.getText("Dialog.OpenBook.Title"));
         if (_book == null) {
-            return;
+            return false;
         }
         if (book != null) {
             book.cleanup();
@@ -204,6 +201,7 @@ public class Manager {
 
         mainPane.focusToTreeWindow();
         viewer.setStatusText(app.getText("Task.OpenedBook", source.getPath()));
+        return true;
     }
 
     private void saveFile() {
