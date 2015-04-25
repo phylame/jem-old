@@ -135,7 +135,7 @@ public class JarMaker implements Maker {
         StringBuilder sb = new StringBuilder(book.getTitle());
         TextObject intro = book.getIntro();
         if (intro != null) {
-            String[] lines = intro.getLines(false);
+            String[] lines = intro.getLines();
             for (String line : lines) {
                 sb.append(line).append("\n");
             }

@@ -146,6 +146,11 @@ public final class IToolkit {
             public void mouseExited(MouseEvent e) {
                 tipListener.closingTip(createEvent(e));
             }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                tipListener.closingTip(createEvent(e));
+            }
         });
         /* hide default tip note */
         action.setToolTip(null);

@@ -33,7 +33,4 @@ public class TxtConfig {
 
     // separator between intro and text
     public String introSeparator = "------";
-
-    // skip empty lines
-    public boolean skipEmptyLine = false;
 }

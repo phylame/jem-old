@@ -18,6 +18,7 @@ package pw.phylame.imabw.ui.com;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import pw.phylame.imabw.ui.Viewer;
 import pw.phylame.ixin.ITextEdit;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Part;
@@ -31,14 +32,12 @@ import pw.phylame.ixin.event.IActionListener;
 
 import pw.phylame.imabw.Application;
 import pw.phylame.imabw.ui.UIDesign;
+import pw.phylame.tools.TextObject;
 
 import static pw.phylame.imabw.Constants.*;
 
 import javax.swing.*;
-import javax.swing.event.CaretEvent;
-import javax.swing.event.CaretListener;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
+import javax.swing.event.*;
 import javax.swing.tree.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -76,8 +75,12 @@ public class MainPane extends IPaneRender {
     private Map<Object, IAction> tabActions;
     private java.util.List<EditorTab> editorTabs = new ArrayList<>();
 
+    private EditorIndicator editorIndicator;
+
     public MainPane() {
         initComp();
+
+        editorIndicator = ((Viewer)app.getViewer()).getEditorIndicator();
 
         focusToTreeWindow();
     }
@@ -256,8 +259,23 @@ public class MainPane extends IPaneRender {
                 tabContextMenu.show(editorWindow, e.getX(), e.getY());
             }
         });
+        editorWindow.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                int index = editorWindow.getSelectedIndex();
+                if (index == -1) {      // close all tabs
+                    updateEditorIndicator(null);
+                    switchEditableMenus(false);
+                    focusToTreeWindow();
+                    ITextEdit.updateContextMenu(null);
+                } else {
+                    EditorTab tab = editorTabs.get(index);
+                    updateEditorIndicator(tab);
+                    ITextEdit.updateContextMenu(tab.getTextEdit());
+                }
+            }
+        });
     }
-
 
     // **********************
     // ** window operations
@@ -379,11 +397,6 @@ public class MainPane extends IPaneRender {
     public void closeActiveTab() {
         EditorTab tab = editorTabs.get(editorWindow.getSelectedIndex());
         closeTab(tab);
-
-        if (editorTabs.size() == 0) {
-            switchEditableMenus(false);
-            focusToTreeWindow();
-        }
     }
 
     public void closeOtherTabs() {
@@ -394,11 +407,6 @@ public class MainPane extends IPaneRender {
                 closeTab(item);
             }
         }
-
-        if (editorTabs.size() == 0) {
-            switchEditableMenus(false);
-            focusToTreeWindow();
-        }
     }
 
     public void closeUnmodifiedTabs() {
@@ -407,10 +415,6 @@ public class MainPane extends IPaneRender {
             if (! item.isModified()) {
                 closeTab(item);
             }
-        }
-        if (editorTabs.size() == 0) {
-            switchEditableMenus(false);
-            focusToTreeWindow();
         }
     }
 
@@ -424,12 +428,6 @@ public class MainPane extends IPaneRender {
         }
         editorWindow.removeAll();
         editorTabs.clear();
-        switchEditableMenus(false);
-        focusToTreeWindow();
-    }
-
-    public void setEditorState(int row, int column) {
-
     }
 
     // add and view new tab
@@ -441,10 +439,10 @@ public class MainPane extends IPaneRender {
             e.printStackTrace();
             text = "";
         }
-        EditorTab tab = new EditorTab(new ITextEdit(text, app.getViewer()), part);
+        EditorTab tab = new EditorTab(new ITextEdit(text, app.getViewer()), part, (String) app.getSetting("pmab.encoding"));
         initEditorTab(tab);
-        editorWindow.addTab(tab.getPart().getTitle(), tab.getTextEdit());
         editorTabs.add(tab);
+        editorWindow.addTab(tab.getPart().getTitle(), tab.getTextEdit());
 
         if (editorTabs.size() == 1) {   // first open tab activate search menus
             switchEditableMenus(true);
@@ -457,12 +455,14 @@ public class MainPane extends IPaneRender {
         final ITextEdit textEdit = tab.getTextEdit();
 
         IToolkit.addInputActions(textEdit.getTextEditor(), tabActions.values());
+
         setEditorStyle(textEdit);
 
         textEdit.addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 ITextEdit.updateContextMenu(textEdit);
+                editorIndicator.setWords(textEdit.getText().length());
                 tab.setModified(true);
                 app.getManager().notifyModified(app.getText("Task.ContentModified", tab.getPart().getTitle()));
             }
@@ -471,6 +471,7 @@ public class MainPane extends IPaneRender {
             public void removeUpdate(DocumentEvent e) {
                 ITextEdit.updateContextMenu(textEdit);
                 tab.setModified(true);
+                editorIndicator.setWords(textEdit.getText().length());
                 app.getManager().notifyModified(app.getText("Task.ContentModified", tab.getPart().getTitle()));
             }
 
@@ -482,17 +483,15 @@ public class MainPane extends IPaneRender {
         textEdit.addCaretListener(new CaretListener() {
             @Override
             public void caretUpdate(CaretEvent e) {
-                if (e.getMark() > e.getDot()) {
-                    ITextEdit.updateContextMenu(textEdit);
-                } else {
-                    setEditorState(textEdit.getCurrentRow() + 1, textEdit.getCurrentColumn() + 1);
-                }
+                ITextEdit.updateContextMenu(textEdit, e.getMark() - e.getDot() != 0);   // has selection or not
+                editorIndicator.setRuler(textEdit.getCurrentRow() + 1, textEdit.getCurrentColumn() + 1,
+                        textEdit.getSelectionCount());
             }
         });
 
-        textEdit.setCaretPosition(0);
         addSplitAction(textEdit.getTextEditor());
         ITextEdit.updateContextMenu(textEdit);
+        textEdit.setCaretPosition(0);
     }
 
     private void setEditorStyle(ITextEdit textEdit) {
@@ -521,8 +520,23 @@ public class MainPane extends IPaneRender {
     }
 
     public void switchToTab(EditorTab tab) {
-        editorWindow.setSelectedComponent(tab.getTextEdit());
-        tab.getTextEdit().requestFocus();
+        ITextEdit textEdit = tab.getTextEdit();
+        editorWindow.setSelectedComponent(textEdit);
+        textEdit.requestFocus();
+        updateEditorIndicator(tab);
+    }
+
+    private void updateEditorIndicator(EditorTab tab) {
+        if (tab != null) {
+            ITextEdit textEdit = tab.getTextEdit();
+            editorIndicator.setRuler(textEdit.getCurrentRow() + 1, textEdit.getCurrentColumn() + 1, textEdit.getSelectionCount());
+            editorIndicator.setEncoding(tab.getEncoding());
+            editorIndicator.setWords(textEdit.getText().length());
+        } else {
+            editorIndicator.setRuler(-1, -1, 0);
+            editorIndicator.setEncoding(null);
+            editorIndicator.setWords(-1);
+        }
     }
 
     public EditorTab findEditorTab(Part part) {
@@ -589,15 +603,18 @@ class PartCellRender extends DefaultTreeCellRenderer {
                                            int row,
                                            boolean hasFocus) {
         super.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, hasFocus);
+        Application app = Application.getApplication();
+        Part part = ((PartNode) value).getPart();
         if (leaf) {
             setIcon(chapterIcon);
+            setToolTipText(app.getText("Frame.Tree.ChapterTip", part.getTitle()));
         } else {
-            Part part = ((PartNode) value).getPart();
             if (part instanceof Book) {
                 setIcon(bookIcon);
             } else {
                 setIcon(sectionIcon);
             }
+            setToolTipText(app.getText("Frame.Tree.SectionTip", part.getTitle(), part.size()));
         }
         return this;
     }

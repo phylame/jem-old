@@ -134,7 +134,7 @@ public final class SCI {
 	private static void showVersion() {
 		System.out.printf("SCI for Jem v%s on %s (%s)\n", VERSION, System.getProperty("os.name"),
 				System.getProperty("os.arch"));
-		System.out.printf("jem-core: %s\n", Jem.VERSION);
+		System.out.printf("jem-core: %s by %s\n", Jem.VERSION, Jem.VENDOR);
 		System.out.printf("%s\n", getText("SCJ_COPYRIGHTS"));
 	}
 

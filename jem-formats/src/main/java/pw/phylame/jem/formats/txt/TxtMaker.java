@@ -82,7 +82,7 @@ public class TxtMaker implements Maker {
         }
         TextObject intro = book.getIntro();
         if (intro != null) {
-            String[] lines = intro.getLines(config.skipEmptyLine);
+            String[] lines = intro.getLines();
             for (String line : lines) {
                 writer.write(config.paragraphPrefix+line.trim()+config.lineSeparator);
             }
@@ -98,7 +98,7 @@ public class TxtMaker implements Maker {
         Object o = part.getAttribute(Chapter.INTRO, null);
         if (o instanceof TextObject) {
             TextObject intro = (TextObject)o;
-            String[] lines = intro.getLines(config.skipEmptyLine);
+            String[] lines = intro.getLines();
             for (String line : lines) {
                 writer.write(config.paragraphPrefix+line.trim()+config.lineSeparator);
             }
@@ -107,7 +107,7 @@ public class TxtMaker implements Maker {
             }
         }
         if (! part.isSection()) {
-            String[] lines = part.getLines(config.skipEmptyLine);
+            String[] lines = part.getLines();
             for (String line : lines) {
                 writer.write(config.paragraphPrefix+line.trim()+config.lineSeparator);
             }

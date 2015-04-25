@@ -41,6 +41,7 @@ public final class Constants {
     public static final String OPEN_FILE = "open-file";
     public static final String SAVE_FILE = "save-file";
     public static final String SAVE_AS_FILE = "save-as-file";
+    public static final String FILE_DETAILS = "file-properties";
     public static final String EXIT_APP = "exit-app";
 
     public static final String EDIT_PREFERENCE = "edit-settings";

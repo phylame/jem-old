@@ -42,24 +42,6 @@
             <version>2.5.3</version>
             <scope>runtime</scope>
         </dependency>
-        <!--
-            Quaqua Look & Feel
-        -->
-        <dependency>
-            <groupId>org.devzendo</groupId>
-            <artifactId>Quaqua</artifactId>
-            <version>7.3.4</version>
-            <scope>runtime</scope>
-        </dependency>
-        <!--
-            Sea Glass Look & Feel
-        -->
-        <dependency>
-            <groupId>com.seaglasslookandfeel</groupId>
-            <artifactId>seaglasslookandfeel</artifactId>
-            <version>0.2</version>
-            <scope>runtime</scope>
-        </dependency>
     </dependencies>
 
     <build>

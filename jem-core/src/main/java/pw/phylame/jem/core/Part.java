@@ -151,12 +151,11 @@ public class Part extends Attributes implements Iterable<Part> {
 
     /**
      * Returns text content and split by line separator.
-     * @param skipEmptyLine <tt>true</tt> to skip empty lines
      * @return array of lines
      * @throws IOException occurs IO errors when load text from text source
      */
-    public String[] getLines(boolean skipEmptyLine) throws IOException {
-        return source.getLines(skipEmptyLine);
+    public String[] getLines() throws IOException {
+        return source.getLines();
     }
 
     /**

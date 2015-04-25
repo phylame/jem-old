@@ -145,9 +145,7 @@ public class TextObject {
      * @throws java.io.IOException cannot create reader
      */
     private Reader openReader() throws IOException {
-        if (file == null) {
-            return null;
-        }
+        assert file != null;
         if (encoding != null) {
             return new java.io.InputStreamReader(file.openInputStream(), encoding);
         } else {
@@ -164,7 +162,6 @@ public class TextObject {
         switch (sourceType) {
             case FILE:
                 Reader reader = openReader();
-                assert reader != null;
                 String text = FileUtils.readText(reader);
                 getFile().reset();
                 return text;
@@ -179,21 +176,11 @@ public class TextObject {
      * @throws java.io.IOException occurs IO errors when reading text file if source is text file.
      */
     public String[] getLines() throws IOException {
-        return getLines(false);
-    }
-
-    /**
-     * Returns list of lines split from text content in this object.
-     * @param skipEmptyLine <tt>true</tt> to skips empty lines otherwise keeps all lines
-     * @return list of lines
-     * @throws java.io.IOException occurs IO errors when reading text file if source is text file.
-     */
-    public String[] getLines(boolean skipEmptyLine) throws IOException {
         switch (sourceType) {
             case FILE:
                 Reader reader = openReader();
                 assert reader != null;
-                String[] lines = FileUtils.readLines(reader, skipEmptyLine);
+                String[] lines = FileUtils.readLines(reader);
                 getFile().reset();
                 return lines;
             default:

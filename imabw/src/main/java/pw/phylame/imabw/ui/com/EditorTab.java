@@ -31,12 +31,14 @@ public class EditorTab {
 
     private ITextEdit textEdit;
     private Part part;
+    private String encoding;
     private boolean modified = false;
     private File file = null;
 
-    public EditorTab(ITextEdit textEdit, Part part) {
+    public EditorTab(ITextEdit textEdit, Part part, String encoding) {
         this.textEdit = textEdit;
         this.part = part;
+        this.encoding = encoding;
     }
 
     public ITextEdit getTextEdit() {
@@ -53,6 +55,14 @@ public class EditorTab {
 
     public void setPart(Part part) {
         this.part = part;
+    }
+
+    public String getEncoding() {
+        return encoding;
+    }
+
+    public void setEncoding(String encoding) {
+        this.encoding = encoding;
     }
 
     public boolean isModified() {

@@ -145,6 +145,6 @@ public abstract class IAction extends AbstractAction {
 
     @Override
     public String toString() {
-        return String.format("IAction: id=%s text=%s", getId(), getText());
+        return String.format("IAction: id=%s text=%s accelerator=%s", getId(), getText(), getAccelerator());
     }
 }

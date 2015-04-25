@@ -446,11 +446,11 @@ class UmdSource extends TextObject {
     }
 
     @Override
-    public String[] getLines(boolean skipEmptyLine) throws IOException {
+    public String[] getLines() throws IOException {
         if (fromUmd) {
             return rawText().split(UMD.SYMBIAN_LINE_FEED);
         } else {
-            return super.getLines(skipEmptyLine);
+            return super.getLines();
         }
     }
 

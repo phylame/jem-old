@@ -235,11 +235,10 @@ public final class FileUtils {
     /**
      * Reads all characters from specified <tt>Reader</tt> and split to list by line separator.
      * @param reader the <tt>Reader</tt> to be read
-     * @param skipEmptyLine <tt>true</tt> to skip empty lines otherwise keep all lines
      * @return split lines read from reader
      * @throws java.io.IOException occurs IO errors
      */
-    public static String[] readLines(Reader reader, boolean skipEmptyLine) throws IOException {
+    public static String[] readLines(Reader reader) throws IOException {
         java.util.ArrayList<String> results = new java.util.ArrayList<String>();
         BufferedReader br;
         // make buffer reader
@@ -250,9 +249,6 @@ public final class FileUtils {
         }
         String line;
         while ((line=br.readLine()) != null) {
-            if (skipEmptyLine && line.isEmpty()) {
-                continue;
-            }
             results.add(line);
         }
         return results.toArray(new String[0]);

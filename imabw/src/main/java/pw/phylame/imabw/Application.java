@@ -92,10 +92,6 @@ public class Application extends IApplication {
             settings.put("locale", Locale.getDefault());
         }
 
-        // **************
-        // ** UI
-        // **************
-
         // L&F
         str = prop.getProperty("ui.theme");
         if (isEmpty(str)) {
@@ -149,6 +145,10 @@ public class Application extends IApplication {
             color = Color.decode(str);
         }
         settings.put("editor.foreground", color);
+
+        // PMAB output encoding
+        str = prop.getProperty("pmab.encoding");
+        settings.put("pmab.encoding", str != null ? str : System.getProperty("file.encoding"));
     }
 
     /**
@@ -163,7 +163,7 @@ public class Application extends IApplication {
         loadBundle(Constants.I18N_PATH);
         setTheme((String) getSetting("ui.theme"), (boolean) getSetting("ui.decorated"));
         setAAText((boolean) getSetting("ui.font.aatext"));
-        setGloablFont((Font) getSetting("ui.font.global"));
+        setGeneralFonts((Font) getSetting("ui.font.global"));
     }
 
     /** Get the application instance */

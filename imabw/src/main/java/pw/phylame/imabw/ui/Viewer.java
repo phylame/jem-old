@@ -18,6 +18,7 @@ package pw.phylame.imabw.ui;
 
 import pw.phylame.imabw.Application;
 import pw.phylame.imabw.Constants;
+import pw.phylame.imabw.ui.com.EditorIndicator;
 import pw.phylame.imabw.ui.com.MainPane;
 import pw.phylame.ixin.ITextEdit;
 import pw.phylame.ixin.com.IPaneRender;
@@ -25,6 +26,7 @@ import pw.phylame.ixin.frame.IFrame;
 import pw.phylame.jem.core.Part;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -42,6 +44,8 @@ public class Viewer extends IFrame {
     /** The application */
     private Application app = Application.getApplication();
 
+    private EditorIndicator editorIndicator;
+
     public Viewer() {
         super();
         init();
@@ -53,6 +57,10 @@ public class Viewer extends IFrame {
     }
 
     private void init() {
+        // editor indicator
+        editorIndicator = new EditorIndicator();
+        getStatusBar().add(editorIndicator.getRootPanel(), BorderLayout.EAST);
+
         setTitle(app.getText("App.Name"));
         setIconImage(pw.phylame.ixin.IToolkit.createImage(app.getText("App.Icon")));
 
@@ -98,6 +106,10 @@ public class Viewer extends IFrame {
         if (paneRender instanceof MainPane) {
             ((MainPane) paneRender).showOrHideSideBar();
         }
+    }
+
+    public EditorIndicator getEditorIndicator() {
+        return editorIndicator;
     }
 
     @Override

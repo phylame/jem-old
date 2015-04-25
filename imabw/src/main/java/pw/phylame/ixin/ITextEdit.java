@@ -32,10 +32,7 @@ import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
@@ -335,8 +332,9 @@ public class ITextEdit extends JScrollPane {
 
     /** Add context menu to {@code textEdit} */
     private static void addContextActions(final ITextEdit textEdit) {
+        JTextArea textArea = textEdit.getTextEditor();
         /* context menu key */
-        textEdit.getTextEditor().getActionMap().put("C_M", new AbstractAction() {
+        textArea.registerKeyboardAction(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateContextMenu(textEdit);
@@ -347,11 +345,15 @@ public class ITextEdit extends JScrollPane {
                     exp.printStackTrace();
                 }
             }
-        });
-        textEdit.getTextEditor().getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_CONTEXT_MENU, 0), "C_M");
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_CONTEXT_MENU, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
+        IAction action = getEditAction(UNDO);
+        textArea.registerKeyboardAction(action, action.getAccelerator(), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        action = getEditAction(REDO);
+        textArea.registerKeyboardAction(action, action.getAccelerator(), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
         /* meta mouse */
-        textEdit.getTextEditor().addMouseListener(new MouseAdapter() {
+        textArea.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
                 if (!e.isMetaDown()) {
@@ -378,6 +380,17 @@ public class ITextEdit extends JScrollPane {
         contextActions.get(COPY).setEnabled(textEdit.canCopy());
         contextActions.get(PASTE).setEnabled(textEdit.canPaste());
         contextActions.get(DELETE).setEnabled(textEdit.canCopy());
+        contextActions.get(SELECT_ALL).setEnabled(true);
+    }
+
+    public static void updateContextMenu(ITextEdit textEdit, boolean hasSelection) {
+        currentInstance = textEdit;
+        contextActions.get(UNDO).setEnabled(textEdit.canUndo());
+        contextActions.get(REDO).setEnabled(textEdit.canRedo());
+        contextActions.get(CUT).setEnabled(hasSelection);
+        contextActions.get(COPY).setEnabled(hasSelection);
+        contextActions.get(PASTE).setEnabled(textEdit.canPaste());
+        contextActions.get(DELETE).setEnabled(hasSelection);
         contextActions.get(SELECT_ALL).setEnabled(true);
     }
 

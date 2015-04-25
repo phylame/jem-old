@@ -59,7 +59,7 @@ public class Manager {
     public void begin() {
         showMainPane();
         viewer.setVisible(true);
-        viewer.setStatusText(app.getText("Frame.StatusBar.Ready"));
+        viewer.setStatusText(app.getText("Frame.Statusbar.Ready"));
 
         String[] argv = app.getArguments();
         if (argv.length < 1 || ! openFile(new File(argv[0]))) {
@@ -98,14 +98,19 @@ public class Manager {
 
     /** Update frame title */
     private void updateTitle() {
+        // book_title - [book_author] - [imported] - path - app_info
         StringBuilder sb = new StringBuilder(book.getTitle());
         if (modified) {
             sb.append("*");
         }
         sb.append(" - ");
         String author = book.getAuthor();
-        if (! "".equals(author)) {
-            sb.append("[").append(author).append("] - ");
+        if ("".equals(author)) {
+            author = app.getText("Common.NonAuthor");
+        }
+        sb.append("[").append(author).append("] - ");
+        if (! format.equals(Jem.PMAB_FORMAT)) {     // from other format
+            sb.append("[").append(app.getText("Frame.Title.Imported")).append("] - ");
         }
         sb.append(getSourceName()).append(" - ");
         sb.append(app.getText("App.Name")).append(" ").append(Constants.VERSION);
@@ -155,13 +160,15 @@ public class Manager {
         if (_book == null) {
             return;
         }
-        if (book != null) {
+        if (book != null) {     // clean old book
             book.cleanup();
         }
         mainPane.closeAllTabs();
         book = _book;
 
         source = null;
+        viewer.getMenuAction(FILE_DETAILS).setEnabled(false);   // disable file details menu
+
         format = Jem.PMAB_FORMAT;
         modified = false;
 
@@ -180,7 +187,7 @@ public class Manager {
         if (_book == null) {
             return false;
         }
-        if (book != null) {
+        if (book != null) {     // clean old book
             book.cleanup();
         }
         mainPane.closeAllTabs();
@@ -189,6 +196,7 @@ public class Manager {
         Object o = book.getAttribute("source_file", null);
         assert o instanceof File;
         source = (File) o;
+        viewer.getMenuAction(FILE_DETAILS).setEnabled(true);
 
         o = book.getAttribute("source_format", null);
         assert o instanceof String;
@@ -225,7 +233,7 @@ public class Manager {
     }
 
     private void viewProperties(Part part) {
-        System.out.println("view attributes of "+part.getTitle());
+        pw.phylame.imabw.ui.dialog.PropertiesDialog.viewProperties(viewer, part);
     }
 
     public void onCommand(Object cmdID) {

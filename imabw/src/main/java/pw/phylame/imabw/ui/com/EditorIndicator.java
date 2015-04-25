@@ -18,12 +18,72 @@
 
 package pw.phylame.imabw.ui.com;
 
-import javax.swing.*;
+import pw.phylame.imabw.Application;
+import pw.phylame.tools.DateUtils;
 
-/**
- * Created by nanu on 15-4-23.
- */
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
+
 public class EditorIndicator {
-    private JComboBox comboBox1;
-    private JComboBox comboBox2;
+    private JLabel ruler;
+    private JLabel encoding;
+    private JLabel words;
+    private JPanel rootPanel;
+    private JLabel time;
+
+    public EditorIndicator() {
+        Application app = Application.getApplication();
+        ruler.setToolTipText(app.getText("Frame.Statusbar.Ruler"));
+        encoding.setToolTipText(app.getText("Frame.Statusbar.Encoding"));
+        words.setToolTipText(app.getText("Frame.Statusbar.Words"));
+        time.setToolTipText(app.getText("Frame.Statusbar.Time"));
+
+        setRuler(-1, -1, 0);
+        setEncoding(null);
+        setWords(-1);
+
+        // per second
+        time.setText(DateUtils.formatDate(new Date(), "H:m "));
+        new Timer(30000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                time.setText(DateUtils.formatDate(new Date(), "H:m "));
+            }
+        }).start();
+    }
+
+    public void setRuler(int row, int column, int selected) {
+        StringBuilder sb = new StringBuilder();
+        if (row < 0) {
+            sb.append("n/a");
+        } else {
+            sb.append(row).append(",").append(column);
+            if (selected > 0) {
+                sb.append("/").append(selected);
+            }
+        }
+        ruler.setText(sb.toString());
+    }
+
+    public void setEncoding(String codec) {
+        if (codec == null) {
+            encoding.setText("n/a");
+        } else {
+            encoding.setText(codec);
+        }
+    }
+
+    public void setWords(int n) {
+        if (n < 0) {
+            words.setText("n/a");
+        } else {
+            words.setText(String.valueOf(n));
+        }
+    }
+
+    public JPanel getRootPanel() {
+        return rootPanel;
+    }
 }

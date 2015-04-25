@@ -55,6 +55,10 @@ public class UIDesign {
                     app.getText("Menu.File.SaveAs"), app.getText("Menu.File.SaveAs.Icon"),
                     app.getText("Menu.File.SaveAs.Mnemonic"), app.getText("Menu.File.SaveAs.Shortcut"),
                     app.getText("Menu.File.SaveAs.Tip")},
+            {FILE_DETAILS,
+                    app.getText("Menu.File.Details"), app.getText("Menu.File.Details.Icon"),
+                    app.getText("Menu.File.Details.Mnemonic"), app.getText("Menu.File.Details.Shortcut"),
+                    app.getText("Menu.File.Details.Tip"), false},
             {EXIT_APP,
                     app.getText("Menu.File.Exit"), app.getText("Menu.File.Exit.Icon"),
                     app.getText("Menu.File.Exit.Mnemonic"), app.getText("Menu.File.Exit.Shortcut"),
@@ -140,6 +144,8 @@ public class UIDesign {
             NEW_FILE, OPEN_FILE,
             null,
             SAVE_FILE, SAVE_AS_FILE,
+            null,
+            FILE_DETAILS,
             null,
             EXIT_APP
     };
@@ -297,12 +303,12 @@ public class UIDesign {
                     app.getText("Frame.Tree.Menu.SaveAs.Mnemonic"),
                     app.getText("Frame.Tree.Menu.SaveAs.Shortcut"),
                     app.getText("Frame.Tree.Menu.SaveAs.Tip")},
-            {TREE_IMPORT,
-                    app.getText("Frame.Tree.Menu.Import"),
-                    app.getText("Frame.Tree.Menu.Import.Icon"),
-                    app.getText("Frame.Tree.Menu.Import.Mnemonic"),
-                    app.getText("Frame.Tree.Menu.Import.Shortcut"),
-                    app.getText("Frame.Tree.Menu.Import.Tip")}
+//            {TREE_IMPORT,
+//                    app.getText("Frame.Tree.Menu.Import"),
+//                    app.getText("Frame.Tree.Menu.Import.Icon"),
+//                    app.getText("Frame.Tree.Menu.Import.Mnemonic"),
+//                    app.getText("Frame.Tree.Menu.Import.Shortcut"),
+//                    app.getText("Frame.Tree.Menu.Import.Tip")}
     };
 
 
@@ -319,7 +325,7 @@ public class UIDesign {
             TREE_NEW,
             TREE_INSERT,
             null,
-            TREE_IMPORT,
+//            TREE_IMPORT,
             TREE_SAVE_AS,
             null,
             TREE_RENAME, TREE_MOVE,

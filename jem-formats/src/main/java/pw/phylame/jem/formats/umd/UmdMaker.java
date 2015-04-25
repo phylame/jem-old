@@ -47,6 +47,8 @@ public class UmdMaker implements Maker {
     private OutputStream output;
     private long writtenBytes = 0;
 
+    private RandomAccessFile source = null;
+
     @Override
     public String getName() {
         return "umd";
@@ -101,33 +103,46 @@ public class UmdMaker implements Maker {
         List<String> titles = new ArrayList<String>();
 
         // prepare text
-        final File cache = File.createTempFile("UMD", ".tmp");
+        final File cache = File.createTempFile("UMD_", ".tmp");
         book.registerCleanup(new Part.Cleanable() {
             @Override
             public void clean(Part part) {
-                if (! cache.delete()) {
-                    LOG.debug("cannot delete UMD cache: " + cache.getPath());
+                if (source != null) {
+                    try {
+                        source.close();
+                        if (! cache.delete()) {
+                            LOG.debug("cannot delete UMD cached file: "+cache.getPath());
+                        }
+                    } catch (IOException e) {
+                        LOG.debug("cannot close UMD cached file: "+cache.getPath());
+                    }
                 }
             }
         });
-        RandomAccessFile file = new RandomAccessFile(cache, "rw");
+        source = new RandomAccessFile(cache, "rw");
         for (Part sub: book) {
-            cachePart(sub, file, titles, offsets);
+            cachePart(sub, source, titles, offsets);
         }
-        long contentLength = file.getFilePointer();
-        file.seek(0L);
+        long contentLength = source.getFilePointer();
+        source.seek(0L);
 
         writeContentLength(contentLength);
         writeChapterOffsets(offsets);
         writeChapterTitles(titles);
 
         List<Long> blockChecks = new ArrayList<Long>();
-        writeText(file, contentLength, blockChecks);
+        writeText(source, contentLength, blockChecks);
         writeContentEnd(blockChecks);
 
         writeCoverImage();
         writeSimplePageOffsets(contentLength);
         writeUmdEnd();
+
+        source.close();
+        source = null;
+        if (! cache.delete()) {
+            LOG.debug("cannot delete UMD cached file: "+cache.getPath());
+        }
     }
 
     private void makeCartoon() throws IOException {
