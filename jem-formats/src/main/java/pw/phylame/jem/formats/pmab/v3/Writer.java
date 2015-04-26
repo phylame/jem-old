@@ -23,15 +23,13 @@ import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import pw.phylame.jem.core.Book;
-import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.Part;
 import pw.phylame.jem.formats.pmab.PMAB;
 import pw.phylame.jem.formats.pmab.PmabConfig;
 import pw.phylame.tools.DateUtils;
-import pw.phylame.tools.StringUtils;
 import pw.phylame.tools.TextObject;
 import pw.phylame.tools.file.FileNameUtils;
-import pw.phylame.tools.file.FileUtils;
+import pw.phylame.tools.file.FileObject;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -47,7 +45,7 @@ public final class Writer {
     private static Log LOG = LogFactory.getLog(Writer.class);
     private static Set<String> IgnoredNames = new HashSet<String>();
     static {
-        IgnoredNames.addAll(java.util.Arrays.asList("source_path", "source_format"));
+        IgnoredNames.addAll(java.util.Arrays.asList("source_file", "source_format"));
     }
 
     private static Byte[] toBytes(byte[] ary) {
@@ -64,10 +62,9 @@ public final class Writer {
             return;
         }
         Element item = parent.addElement("item").addAttribute("name", name);
-        String type = Jem.variantType(value);
-        String text;
-        if (type.equals("file")) {
-            pw.phylame.tools.file.FileObject fb = (pw.phylame.tools.file.FileObject) value;
+        String text, type;
+        if (value instanceof FileObject) {
+            FileObject fb = (FileObject) value;
             type = fb.getMime();
             String baseName = prefix + name + "." + FileNameUtils.extensionName(fb.getName());
             if (type.startsWith("image/")) {        // image file
@@ -80,7 +77,7 @@ public final class Writer {
             } catch (IOException ex) {
                 LOG.debug("cannot write file to PMAB: "+fb.getName(), ex);
             }
-        } else if (type.equals("text")) {
+        } else if (value instanceof TextObject) {
             TextObject tb = (TextObject) value;
             String encoding = config.textEncoding != null ? config.textEncoding : System.getProperty("file.encoding");
             type = "text/plain;encoding=" + encoding;
@@ -95,18 +92,14 @@ public final class Writer {
             } catch (IOException ex) {
                 LOG.debug("cannot write text to PMAB: "+text, ex);
             }
-        } else if (type.equals("datetime")) {
-            type += ";format=" + config.dateFormat;
+        } else if (value instanceof Date) {
+            type = "datetime;format=" + config.dateFormat;
             text = DateUtils.formatDate((Date) value, config.dateFormat);
-        } else if (type.equals("bytes")) {
-            Byte[] ary;
-            if (value instanceof byte[]) {
-                ary = toBytes((byte[]) value);
-            } else {
-                ary = (Byte[]) value;
-            }
-            text = StringUtils.join(ary, " ");
+        } else if (value instanceof byte[]) {
+            type = "bytes;sep=, ";
+            text = java.util.Arrays.toString((byte[]) value);
         } else {
+            type = "str";
             text = String.valueOf(value);
         }
         item.addAttribute("type", type);

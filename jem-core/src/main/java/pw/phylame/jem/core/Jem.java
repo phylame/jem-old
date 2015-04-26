@@ -260,17 +260,19 @@ public final class Jem {
      * @return type name
      */
     public static String variantType(Object o) {
+        if (o == null) {
+            throw new NullPointerException("o");
+        }
         if (o instanceof FileObject) {
             return "file";
         } else if (o instanceof TextObject) {
             return "text";
         } else if (o instanceof Part) {
             return "part";
-        }
-        else {
+        } else {
             String name = variantTypes.get(o.getClass());
-            if (name == null || !variantTypes.containsKey(o.getClass())) {
-                name = o.getClass().getSimpleName().toLowerCase();
+            if (name == null) {
+                name = o.getClass().getSimpleName();
             }
             return name;
         }

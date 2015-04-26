@@ -21,7 +21,7 @@ package pw.phylame.imabw;
  */
 public final class Constants {
     /** Version of the Imabw */
-    public static final String VERSION = "1.0-SNAPSHOT";
+    public static final String VERSION = "2.0-SNAPSHOT";
 
     /** Name of {@code ResourceBundle} file */
     public static final String I18N_PATH = "res/i18n/imabw";

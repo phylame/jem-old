@@ -25,10 +25,12 @@ import pw.phylame.imabw.ui.com.PartNode;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.Part;
+import pw.phylame.tools.file.FileNameUtils;
 
 import javax.swing.*;
 import javax.swing.tree.TreePath;
 import java.io.File;
+import java.util.Date;
 
 /**
  * The manager.
@@ -249,6 +251,15 @@ public class Manager {
                 break;
             case SAVE_AS_FILE:
                 saveAsFile();
+                break;
+            case FILE_DETAILS:
+                StringBuilder sb = new StringBuilder();
+                sb.append(app.getText("Dialog.FileDetails.Name", source.getName())).append("\n");
+                sb.append(app.getText("Dialog.FileDetails.Path", source.getParent())).append("\n");
+                sb.append(app.getText("Dialog.FileDetails.Format", FileNameUtils.extensionName(source.getPath()))).append("\n");
+                sb.append(app.getText("Dialog.FileDetails.Size", source.length())).append("\n");
+                sb.append(app.getText("Dialog.FileDetails.Date", new Date(source.lastModified())));
+                worker.showMessage(viewer, app.getText("Dialog.FileDetails.Title", source.getPath()), sb.toString());
                 break;
             case EXIT_APP:
                 stop();

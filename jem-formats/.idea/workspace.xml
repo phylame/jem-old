@@ -2,45 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c6a5609f-7253-47fb-908f-8eec8dd23b4e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/file-details.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/PropertiesDialog.form" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/PropertiesDialog.java" />
-      <change type="DELETED" beforePath="D:\code\pw-books\imabw\.idea\libraries\Maven__com_seaglasslookandfeel_seaglasslookandfeel_0_2.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\code\pw-books\imabw\.idea\libraries\Maven__org_devzendo_Quaqua_7_3_4.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Application.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Application.java" />
+      <change type="DELETED" beforePath="D:\code\pw-books\imabw\.idea\artifacts\imabw_jar.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Constants.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Constants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/com/EditorIndicator.form" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/com/EditorIndicator.form" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/com/EditorIndicator.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/com/EditorIndicator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/com/EditorTab.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/com/EditorTab.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/tools/file/FileUtils.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/tools/file/FileUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/ixin/com/IAction.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/ixin/com/IAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/ixin/IApplication.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/ixin/IApplication.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/ixin/ITextEdit.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/ixin/ITextEdit.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/ixin/IToolkit.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/ixin/IToolkit.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/jar/JarMaker.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/jar/JarMaker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/com/MainPane.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/com/MainPane.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Manager.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Manager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/core/Part.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/core/Part.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/scj/SCI.java" afterPath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/scj/SCI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/tools/TextObject.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/tools/TextObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/txt/TxtConfig.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/txt/TxtConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/txt/TxtMaker.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/txt/TxtMaker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/UIDesign.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/UIDesign.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/umd/UmdMaker.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/umd/UmdMaker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/umd/UmdParser.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/umd/UmdParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/Viewer.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/Viewer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/.idea/compiler.xml" afterPath="$PROJECT_DIR$/../imabw/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/.idea/compiler.xml" afterPath="$PROJECT_DIR$/../jem-core/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v2/Writer.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v2/Writer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v3/Writer.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v3/Writer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/imabw.iml" afterPath="$PROJECT_DIR$/../imabw/imabw.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/i18n/imabw_en_US.properties" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/i18n/imabw_en_US.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/i18n/imabw_zh_CN.properties" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/i18n/imabw_zh_CN.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/pom.xml" afterPath="$PROJECT_DIR$/../imabw/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/.idea/uiDesigner.xml" afterPath="$PROJECT_DIR$/../imabw/.idea/uiDesigner.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../imabw/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../jem-core/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="D:\code\pw-books\jem-formats\src\main\java\pw\phylame\jem\formats\jar\book.jar" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/jem/formats/jar/book.jar" />
     </list>
     <ignored path="format-pack.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -63,46 +34,7 @@
     <favorites_list name="format-pack" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="UmdMaker.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/umd/UmdMaker.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5163934">
-              <caret line="139" column="0" selection-start-line="139" selection-start-column="0" selection-end-line="139" selection-end-column="0" />
-              <folding>
-                <element signature="docComment;class#UmdMaker#0" expanded="false" />
-                <element signature="method#make#1;class#UmdMaker#0" expanded="false" />
-                <element signature="e#3260#3268#0" expanded="true" />
-                <element signature="e#3390#3940#0" expanded="true" />
-                <element signature="e#3939#3940#0" expanded="true" />
-                <element signature="method#makeCartoon#0;class#UmdMaker#0" expanded="false" />
-                <element signature="method#makeComic#0;class#UmdMaker#0" expanded="false" />
-                <element signature="method#writeChunk#0;class#UmdMaker#0" expanded="false" />
-                <element signature="method#writeChunk#1;class#UmdMaker#0" expanded="false" />
-                <element signature="method#writeAddition#0;class#UmdMaker#0" expanded="false" />
-                <element signature="method#writeUmdHead#0;class#UmdMaker#0" expanded="false" />
-                <element signature="method#writeAttributes#0;class#UmdMaker#0" expanded="false" />
-                <element signature="method#writeContentLength#0;class#UmdMaker#0" expanded="false" />
-                <element signature="method#writeChapterOffsets#0;class#UmdMaker#0" expanded="false" />
-                <element signature="method#writeChapterTitles#0;class#UmdMaker#0" expanded="false" />
-                <element signature="method#writeImageFormat#0;class#UmdMaker#0" expanded="false" />
-                <element signature="method#writeLicenseKey#0;class#UmdMaker#0" expanded="false" />
-                <element signature="method#writeContentId#0;class#UmdMaker#0" expanded="false" />
-                <element signature="method#writeContentEnd#0;class#UmdMaker#0" expanded="false" />
-                <element signature="method#writeCoverImage#0;class#UmdMaker#0" expanded="false" />
-                <element signature="method#writeSimplePageOffsets#0;class#UmdMaker#0" expanded="false" />
-                <element signature="method#writeUmdEnd#0;class#UmdMaker#0" expanded="false" />
-                <element signature="method#cachePart#0;class#UmdMaker#0" expanded="false" />
-                <element signature="method#writeText#0;class#UmdMaker#0" expanded="false" />
-                <element signature="method#writeString#0;class#UmdMaker#0" expanded="false" />
-                <element signature="method#findImages#0;class#UmdMaker#0" expanded="false" />
-                <element signature="method#writeImages#0;class#UmdMaker#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -150,9 +82,7 @@
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/EpubConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v1/Writer.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/txt/txt.properties" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v3/Writer.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v2/Writer.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/HtmlMaker.java" />
         <option value="$PROJECT_DIR$/src/test/script/parse_book.sh" />
@@ -165,6 +95,8 @@
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/jar/JarMaker.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/umd/UmdParser.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/umd/UmdMaker.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v2/Writer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v3/Writer.java" />
       </list>
     </option>
   </component>
@@ -218,6 +150,53 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pw.phylame.jem.formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pw.phylame.jem.formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -370,89 +349,12 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="umd" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-formats" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-formats" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="formats" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="txt" />
+              <option name="myItemId" value="pmab" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-formats" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-formats" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-formats" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-formats" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pw.phylame.jem.formats" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-formats" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-formats" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pw.phylame.jem.formats" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -878,15 +780,16 @@
       <workItem from="1429878414377" duration="127000" />
       <workItem from="1429964479526" duration="110000" />
       <workItem from="1429964664288" duration="404000" />
+      <workItem from="1430033629722" duration="1020000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83938000" />
+    <option name="totallyTimeSpent" value="84958000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1374" height="746" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -895,24 +798,24 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294702" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33278146" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36037442" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21669106" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21669106" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24853802" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24938068" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32763976" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33278146" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32761312" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -968,6 +871,39 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/umd/UmdMaker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="docComment;class#UmdMaker#0" expanded="false" />
+            <element signature="method#make#1;class#UmdMaker#0" expanded="false" />
+            <element signature="method#makeCartoon#0;class#UmdMaker#0" expanded="false" />
+            <element signature="method#makeComic#0;class#UmdMaker#0" expanded="false" />
+            <element signature="method#writeChunk#0;class#UmdMaker#0" expanded="false" />
+            <element signature="method#writeChunk#1;class#UmdMaker#0" expanded="false" />
+            <element signature="method#writeAddition#0;class#UmdMaker#0" expanded="false" />
+            <element signature="method#writeUmdHead#0;class#UmdMaker#0" expanded="false" />
+            <element signature="method#writeAttributes#0;class#UmdMaker#0" expanded="false" />
+            <element signature="method#writeContentLength#0;class#UmdMaker#0" expanded="false" />
+            <element signature="method#writeChapterOffsets#0;class#UmdMaker#0" expanded="false" />
+            <element signature="method#writeChapterTitles#0;class#UmdMaker#0" expanded="false" />
+            <element signature="method#writeImageFormat#0;class#UmdMaker#0" expanded="false" />
+            <element signature="method#writeLicenseKey#0;class#UmdMaker#0" expanded="false" />
+            <element signature="method#writeContentId#0;class#UmdMaker#0" expanded="false" />
+            <element signature="method#writeContentEnd#0;class#UmdMaker#0" expanded="false" />
+            <element signature="method#writeCoverImage#0;class#UmdMaker#0" expanded="false" />
+            <element signature="method#writeSimplePageOffsets#0;class#UmdMaker#0" expanded="false" />
+            <element signature="method#writeUmdEnd#0;class#UmdMaker#0" expanded="false" />
+            <element signature="method#cachePart#0;class#UmdMaker#0" expanded="false" />
+            <element signature="method#writeText#0;class#UmdMaker#0" expanded="false" />
+            <element signature="method#writeString#0;class#UmdMaker#0" expanded="false" />
+            <element signature="method#findImages#0;class#UmdMaker#0" expanded="false" />
+            <element signature="method#writeImages#0;class#UmdMaker#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/umd/UmdParser.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -982,7 +918,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1165,20 +1100,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v3/Writer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.28032786">
-          <caret line="96" column="13" selection-start-line="96" selection-start-column="13" selection-end-line="96" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v2/Writer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6885246">
-          <caret line="176" column="121" selection-start-line="176" selection-start-column="121" selection-end-line="176" selection-end-column="121" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabConfig.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.10491803">
@@ -1247,7 +1168,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1282,14 +1202,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/umd/UmdMaker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5163934">
-          <caret line="139" column="0" selection-start-line="139" selection-start-column="0" selection-end-line="139" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.27540985">
+          <caret line="147" column="33" selection-start-line="147" selection-start-column="33" selection-end-line="147" selection-end-column="33" />
           <folding>
             <element signature="docComment;class#UmdMaker#0" expanded="false" />
             <element signature="method#make#1;class#UmdMaker#0" expanded="false" />
-            <element signature="e#3260#3268#0" expanded="true" />
-            <element signature="e#3390#3940#0" expanded="true" />
-            <element signature="e#3939#3940#0" expanded="true" />
             <element signature="method#makeCartoon#0;class#UmdMaker#0" expanded="false" />
             <element signature="method#makeComic#0;class#UmdMaker#0" expanded="false" />
             <element signature="method#writeChunk#0;class#UmdMaker#0" expanded="false" />
@@ -1312,6 +1229,56 @@
             <element signature="method#writeString#0;class#UmdMaker#0" expanded="false" />
             <element signature="method#findImages#0;class#UmdMaker#0" expanded="false" />
             <element signature="method#writeImages#0;class#UmdMaker#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v2/Writer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.447541">
+          <caret line="53" column="64" selection-start-line="53" selection-start-column="64" selection-end-line="53" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/pw-books/jem-core/2.0/jem-core-2.0-sources.jar!/pw/phylame/jem/core/Jem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3327869">
+          <caret line="261" column="25" selection-start-line="261" selection-start-column="25" selection-end-line="261" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/pw-books/jem-core/2.0/jem-core-2.0-sources.jar!/pw/phylame/tools/StringUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3327869">
+          <caret line="30" column="29" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/devel/Java/jdk1.8.0_40/src.zip!/java/util/Arrays.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3327869">
+          <caret line="4435" column="25" selection-start-line="4435" selection-start-column="25" selection-end-line="4435" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/devel/Java/jdk1.8.0_40/src.zip!/java/lang/String.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.2622951">
+          <caret line="2053" column="18" selection-start-line="2053" selection-start-column="18" selection-end-line="2053" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v3/Writer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27540985">
+          <caret line="45" column="22" selection-start-line="45" selection-start-column="22" selection-end-line="45" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
