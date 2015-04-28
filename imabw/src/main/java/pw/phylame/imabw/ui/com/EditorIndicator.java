@@ -19,6 +19,7 @@
 package pw.phylame.imabw.ui.com;
 
 import pw.phylame.imabw.Application;
+import pw.phylame.ixin.com.IPaneRender;
 import pw.phylame.tools.DateUtils;
 
 import javax.swing.*;
@@ -26,7 +27,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
-public class EditorIndicator {
+public class EditorIndicator extends IPaneRender {
     private JLabel ruler;
     private JLabel encoding;
     private JLabel words;
@@ -45,13 +46,23 @@ public class EditorIndicator {
         setWords(-1);
 
         // per second
-        time.setText(DateUtils.formatDate(new Date(), "H:m "));
+        time.setText(DateUtils.formatDate(new Date(), "H:mm "));
         new Timer(30000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 time.setText(DateUtils.formatDate(new Date(), "H:m "));
             }
         }).start();
+    }
+
+    @Override
+    public void destroy() {
+
+    }
+
+    @Override
+    public JPanel getPane() {
+        return rootPanel;
     }
 
     public void setRuler(int row, int column, int selected) {
@@ -81,9 +92,5 @@ public class EditorIndicator {
         } else {
             words.setText(String.valueOf(n));
         }
-    }
-
-    public JPanel getRootPanel() {
-        return rootPanel;
     }
 }

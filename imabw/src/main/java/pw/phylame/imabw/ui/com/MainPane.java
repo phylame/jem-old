@@ -18,6 +18,7 @@ package pw.phylame.imabw.ui.com;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import pw.phylame.imabw.Constants;
 import pw.phylame.imabw.ui.Viewer;
 import pw.phylame.ixin.ITextEdit;
 import pw.phylame.jem.core.Book;
@@ -32,9 +33,6 @@ import pw.phylame.ixin.event.IActionListener;
 
 import pw.phylame.imabw.Application;
 import pw.phylame.imabw.ui.UIDesign;
-import pw.phylame.tools.TextObject;
-
-import static pw.phylame.imabw.Constants.*;
 
 import javax.swing.*;
 import javax.swing.event.*;
@@ -47,7 +45,7 @@ import java.util.*;
 /**
  * Main pane of Imabw.
  */
-public class MainPane extends IPaneRender {
+public class MainPane extends IPaneRender implements Constants {
     private static Log LOG = LogFactory.getLog(MainPane.class);
 
     private Application app = Application.getApplication();
@@ -66,6 +64,8 @@ public class MainPane extends IPaneRender {
     private DefaultTreeModel treeModel;
     private JPopupMenu treeContextMenu;
     private Map<Object, IAction> treeActions;
+    private TreeOptionsPane treeOptionsPane;
+    private boolean contentsLocked = false;
 
     // ******************
     // ** Tabbed editor
@@ -90,7 +90,7 @@ public class MainPane extends IPaneRender {
         splitPane.setLeftComponent(contentsTree);
         createEditorWindow();
 
-        if (app.getSetting("ui.show_sidebar").equals(false)) {
+        if (app.getSetting("ui.window.showSidebar").equals(false)) {
             showOrHideSideBar();
         }
     }
@@ -106,8 +106,7 @@ public class MainPane extends IPaneRender {
             }
         });
         treeContextMenu = new JPopupMenu();
-        IToolkit.addMenuItem(treeContextMenu, UIDesign.TREE_POPUP_MENU_MODEL, treeActions,
-                app.getViewer());
+        IToolkit.addMenuItem(treeContextMenu, UIDesign.TREE_POPUP_MENU_MODEL, treeActions, app.getViewer());
     }
 
     private void createContentsWindow() {
@@ -118,6 +117,8 @@ public class MainPane extends IPaneRender {
         treeModel = new DefaultTreeModel(null);
         contentsTree = new ITree(app.getText("Frame.Contents.Title")+" ", treeModel);
         contentsTree.setTitleIcon(IToolkit.createImageIcon(app.getText("Frame.Contents.TitleIcon")));
+        treeOptionsPane = new TreeOptionsPane();
+        contentsTree.getTitleBar().add(treeOptionsPane.getPane(), BorderLayout.CENTER);
         final JTree tree = contentsTree.getTree();
 
         tree.setCellRenderer(new PartCellRender());
@@ -170,49 +171,47 @@ public class MainPane extends IPaneRender {
         JTree tree = contentsTree.getTree();
         TreePath[] selectedPaths = tree.getSelectionPaths();
         if (selectedPaths == null) {
-//            log.trace("No selected path");
             return;
         }
 
-        Map<Object, Boolean> menuStatus = new java.util.HashMap<>();
-        for (Object id: treeActions.keySet()) {
-            menuStatus.put(id, true);
+        // disable all
+        for (IAction action: treeActions.values()) {
+            action.setEnabled(false);
         }
 
+        java.util.List<Object> keys = new ArrayList<>();    // enable menu item
         switch (selectedPaths.length) {
-            case 0:     // all disable
-                for (Object id: treeActions.keySet()) {
-                    menuStatus.put(id, false);
-                }
+            case 0:     // no selection disable all
                 break;
             case 1:
-                menuStatus.put(TREE_MERGE, false);
+                if (contentsLocked) {
+                    keys.addAll(Arrays.asList(SAVE_CHAPTER, TREE_PROPERTIES));
+                } else {
+                    keys.addAll(treeActions.keySet());
+                    keys.remove(MERGE_CHAPTER);     // one item cannot be merged
+                }
                 /* section cannot import */
-                PartNode node = PartNode.getPartNode(selectedPaths[0]);
-                if (node.getChildCount() != 0) {
-                    menuStatus.put(TREE_IMPORT, false);
-                }
+//                PartNode node = PartNode.getPartNode(selectedPaths[0]);
+//                if (node.getChildCount() != 0) {
+//                    menuStatus.put(IMPORT_CHAPTER, false);
+//                }
                 break;
-            default:
-                // cannot add, insert, save as, rename, properties, import
-                Object[] keys = {TREE_NEW, TREE_INSERT, TREE_IMPORT, TREE_SAVE_AS, TREE_RENAME,
-                        TREE_PROPERTIES};
-                for (Object id: keys) {
-                    menuStatus.put(id, false);
+            default:    // multi selection
+                if (! contentsLocked) {     // not locked
+                    keys.addAll(Arrays.asList(MOVE_CHAPTER, DELETE_CHAPTER, MERGE_CHAPTER));
                 }
                 break;
         }
-        if (tree.isPathSelected(tree.getPathForRow(0))) {
-            // root cannot insert, save as, move, delete, merge
-            Object[] keys = {TREE_INSERT, TREE_SAVE_AS, TREE_IMPORT, TREE_MOVE, TREE_DELETE, TREE_MERGE};
-            for (Object id: keys) {
-                menuStatus.put(id, false);
-            }
+        if (tree.isPathSelected(tree.getPathForRow(0))) {       // selected root
+            // root cannot insert, save, move, delete, merge
+            Object[] _keys = {INSERT_CHAPTER, SAVE_CHAPTER, MOVE_CHAPTER, DELETE_CHAPTER, MERGE_CHAPTER};
+            keys.removeAll(Arrays.asList(_keys));
         }
-        for (Map.Entry<Object, Boolean> entry: menuStatus.entrySet()) {
-            IAction action = treeActions.get(entry.getKey());
+
+        for (Object key: keys) {
+            IAction action = treeActions.get(key);
             if (action != null) {
-                action.setEnabled(entry.getValue());
+                action.setEnabled(true);
             }
         }
         treeContextMenu.show(tree, x, y);
@@ -244,8 +243,7 @@ public class MainPane extends IPaneRender {
             }
         });
         tabContextMenu = new JPopupMenu();
-        IToolkit.addMenuItem(tabContextMenu, UIDesign.TAB_POPUP_MENU_MODEL, tabActions,
-                app.getViewer());
+        IToolkit.addMenuItem(tabContextMenu, UIDesign.TAB_POPUP_MENU_MODEL, tabActions, app.getViewer());
     }
 
     private void createEditorWindow() {
@@ -336,13 +334,22 @@ public class MainPane extends IPaneRender {
         contentsTree.setVisible(visible);
     }
 
+    public boolean isContentsLocked() {
+        return contentsLocked;
+    }
+
+    public void setContentsLocked(boolean contentsLocked) {
+        this.contentsLocked = contentsLocked;
+        treeOptionsPane.setButtonLock(contentsLocked);
+    }
+
     public void focusToTreeWindow() {
         contentsTree.requestFocus();
     }
 
     public void setBook(Part part) {
         treeModel.setRoot(PartNode.makePartTree(part));
-        contentsTree.setSelectionRow(0);
+        focusToRoot();
         focusToTreeWindow();
     }
 
@@ -354,18 +361,35 @@ public class MainPane extends IPaneRender {
         return contentsTree.getSelectionPath();
     }
 
+    public TreePath[] getSelectedPaths() {
+        return contentsTree.getSelectionPaths();
+    }
+
     public PartNode getSelectedNode() {
-        TreePath treePath = contentsTree.getSelectionPath();
-        if (treePath == null) {
+        TreePath path = getSelectedPath();
+        if (path == null) {
             return null;
         }
-        return PartNode.getPartNode(treePath);
+
+        return PartNode.getPartNode(path);
+    }
+
+    public void refreshRoot() {
+        treeModel.reload();
+        focusToRoot();
     }
 
     public void refreshNode(PartNode node) {
         treeModel.reload(node);
     }
 
+    public void focusToRoot() {
+        contentsTree.setSelectionRow(0);
+    }
+
+    public void focusToPath(TreePath path) {
+        contentsTree.getTree().setSelectionPath(path);
+    }
 
     public void focusToNode(TreePath parent, PartNode node) {
         JTree tree = contentsTree.getTree();
@@ -392,6 +416,13 @@ public class MainPane extends IPaneRender {
         }
         editorWindow.remove(tab.getTextEdit());
         editorTabs.remove(tab);
+    }
+
+    public void closeTab(Part part) {
+        EditorTab tab = findEditorTab(part);
+        if (tab != null) {
+            closeTab(tab);
+        }
     }
 
     public void closeActiveTab() {
@@ -439,7 +470,8 @@ public class MainPane extends IPaneRender {
             e.printStackTrace();
             text = "";
         }
-        EditorTab tab = new EditorTab(new ITextEdit(text, app.getViewer()), part, (String) app.getSetting("pmab.encoding"));
+        EditorTab tab = new EditorTab(new ITextEdit(text, app.getViewer()), part,
+                (String) app.getSetting("jem.pmab.textEncoding"));
         initEditorTab(tab);
         editorTabs.add(tab);
         editorWindow.addTab(tab.getPart().getTitle(), tab.getTextEdit());
@@ -499,10 +531,10 @@ public class MainPane extends IPaneRender {
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
 
-        textArea.setFont((Font) app.getSetting("editor.font"));
+        textArea.setFont((Font) app.getSetting("editor.style.font"));
 
-        textArea.setBackground((Color) app.getSetting("editor.background"));
-        textArea.setForeground((Color) app.getSetting("editor.foreground"));
+        textArea.setBackground((Color) app.getSetting("editor.style.background"));
+        textArea.setForeground((Color) app.getSetting("editor.style.foreground"));
     }
 
     private void switchEditableMenus(boolean enable) {

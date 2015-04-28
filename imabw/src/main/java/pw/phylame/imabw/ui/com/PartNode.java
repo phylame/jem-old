@@ -23,6 +23,7 @@ import pw.phylame.jem.core.Part;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreePath;
+import java.util.Iterator;
 
 public class PartNode extends DefaultMutableTreeNode {
     public static PartNode makePartTree(Part part) {
@@ -55,6 +56,22 @@ public class PartNode extends DefaultMutableTreeNode {
     public Part getPart() {
         return (Part) getUserObject();
     }
+
+    public void insertNode(PartNode newChild, int childIndex) {
+        super.insert(newChild, childIndex);
+        getPart().insert(childIndex, newChild.getPart());
+    }
+
+    public void appendNode(PartNode newChild) {
+        super.add(newChild);
+        getPart().append(newChild.getPart());
+    }
+
+    public void removeNode(PartNode aChild) {
+        super.remove(aChild);
+        getPart().remove(aChild.getPart());
+    }
+
     @Override
     public String toString() {
         return getPart().getTitle();

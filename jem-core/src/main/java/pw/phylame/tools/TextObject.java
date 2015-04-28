@@ -36,6 +36,9 @@ public class TextObject {
         TEXT, FILE
     }
 
+    public static final String PLAIN = "plain";
+    public static final String HTML = "html";
+
     /** More than this size of content is large. */
     public static int LARGE_SIZE = 4096;
 
@@ -51,6 +54,7 @@ public class TextObject {
      * @param raw the raw text
      */
     public TextObject(String raw) {
+        setType(PLAIN);
         setRaw(raw);
     }
 
@@ -60,6 +64,7 @@ public class TextObject {
      * @param encoding encoding for the file, if <tt>null</tt> uses platform encoding
      */
     public TextObject(FileObject file, String encoding) {
+        setType(PLAIN);
         setFile(file, encoding);
     }
 
@@ -153,6 +158,14 @@ public class TextObject {
         }
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     /**
      * Returns text content in source of this object.
      * @return the string of text
@@ -222,6 +235,8 @@ public class TextObject {
         return total;
     }
 
+    /** content type */
+    private String type;
 
     /** Raw text */
     private String raw;

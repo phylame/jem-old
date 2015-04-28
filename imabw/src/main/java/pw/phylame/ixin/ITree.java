@@ -64,9 +64,15 @@ public class ITree extends JPanel {
     }
 
     private void initComp(String title) {
+        titleBar = new JPanel(new BorderLayout());
         titleLabel = new JLabel(title);
-        add(titleLabel, BorderLayout.NORTH);
+        titleBar.add(titleLabel, BorderLayout.WEST);
+        add(titleBar, BorderLayout.NORTH);
         add(new JScrollPane(jTree), BorderLayout.CENTER);
+    }
+
+    public JPanel getTitleBar() {
+        return titleBar;
     }
 
     public String getTitle() {
@@ -127,6 +133,7 @@ public class ITree extends JPanel {
     }
 
     // private data
+    private JPanel titleBar;
     private JLabel titleLabel;
     private JTree jTree;
 }

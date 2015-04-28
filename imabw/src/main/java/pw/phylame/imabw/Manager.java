@@ -16,12 +16,14 @@
 
 package pw.phylame.imabw;
 
-import static pw.phylame.imabw.Constants.*;
-
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import pw.phylame.imabw.ui.Viewer;
 import pw.phylame.imabw.ui.com.EditorTab;
 import pw.phylame.imabw.ui.com.MainPane;
 import pw.phylame.imabw.ui.com.PartNode;
+import pw.phylame.imabw.ui.com.UIFactory;
+import pw.phylame.ixin.IToolkit;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.Part;
@@ -30,12 +32,14 @@ import pw.phylame.tools.file.FileNameUtils;
 import javax.swing.*;
 import javax.swing.tree.TreePath;
 import java.io.File;
-import java.util.Date;
+import java.util.*;
 
 /**
  * The manager.
  */
-public class Manager {
+public class Manager implements Constants {
+    private static Log LOG = LogFactory.getLog(Manager.class);
+
     /** The application */
     private Application app = Application.getApplication();
 
@@ -86,21 +90,9 @@ public class Manager {
         viewer.setPaneRender(mainPane);
     }
 
-    /** Get current name of book file */
-    private String getSourceName() {
-        String name;
-        /* saved or open PMAB file */
-        if (source != null) {
-            name = source.getPath();
-        } else {
-            name = String.format("%s.%s", book.getTitle(), Jem.PMAB_FORMAT);
-        }
-        return name;
-    }
-
     /** Update frame title */
     private void updateTitle() {
-        // book_title - [book_author] - [imported] - path - app_info
+        // book_title - [book_author] - [imported] - [path]? - app_info
         StringBuilder sb = new StringBuilder(book.getTitle());
         if (modified) {
             sb.append("*");
@@ -114,7 +106,9 @@ public class Manager {
         if (! format.equals(Jem.PMAB_FORMAT)) {     // from other format
             sb.append("[").append(app.getText("Frame.Title.Imported")).append("] - ");
         }
-        sb.append(getSourceName()).append(" - ");
+        if (source != null) {
+            sb.append(source.getPath()).append(" - ");
+        }
         sb.append(app.getText("App.Name")).append(" ").append(Constants.VERSION);
         viewer.setTitle(sb.toString());
     }
@@ -138,8 +132,9 @@ public class Manager {
         }
         Object[] options = {app.getText("Dialog.ButtonSave"), app.getText("Dialog.ButtonDiscard"),
                 app.getText("Dialog.ButtonCancel")};
-        int ret = JOptionPane.showOptionDialog(viewer, app.getText("Dialog.Save.LabelSaveTip"),
-                title, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+        int ret = JOptionPane.showOptionDialog(viewer, app.getText("Dialog.Save.LabelSaveTip"), title,
+                JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+                IToolkit.createImageIcon(":/res/img/dialog/save.png"),
                 options, options[0]);
         switch (ret) {
             case JOptionPane.YES_OPTION:
@@ -177,6 +172,7 @@ public class Manager {
         mainPane.setBook(book);
         updateTitle();
 
+        mainPane.setContentsLocked(false);
         mainPane.focusToTreeWindow();
         viewer.setStatusText(app.getText("Task.NewedBook", book.getTitle()));
     }
@@ -209,6 +205,7 @@ public class Manager {
         mainPane.setBook(book);
         updateTitle();
 
+        mainPane.setContentsLocked(false);
         mainPane.focusToTreeWindow();
         viewer.setStatusText(app.getText("Task.OpenedBook", source.getPath()));
         return true;
@@ -219,19 +216,31 @@ public class Manager {
         if (path == null) {
             return;
         }
+
         source = path;
         modified = false;
 
         updateTitle();
 
-        viewer.setStatusText(app.getText("Task.SavedBook", source.getPath()));
+        viewer.setStatusText(app.getText("Task.SavedBook", book.getTitle(), source.getPath()));
     }
 
     private void saveAsFile() {
         File path = worker.saveBook(book, null, format, app.getText("Dialog.SaveBook.Title"));
         if (path != null) {
-            viewer.setStatusText(app.getText("Task.SavedAsBook", path.getPath()));
+            viewer.setStatusText(app.getText("Task.SavedBook", book.getTitle(), path.getPath()));
         }
+    }
+
+    private void fileDetails(File file) {
+        List<Object[]> info = new ArrayList<>();
+        info.add(new Object[]{app.getText("Dialog.FileDetails.Name"), source.getName()});
+        info.add(new Object[]{app.getText("Dialog.FileDetails.Path"), source.getParent()});
+        info.add(new Object[]{app.getText("Dialog.FileDetails.Format"), FileNameUtils.extensionName(source.getPath())});
+        info.add(new Object[]{app.getText("Dialog.FileDetails.Size"), source.length()});
+        info.add(new Object[]{app.getText("Dialog.FileDetails.Date"), new Date(source.lastModified())});
+        worker.showMessage(viewer, app.getText("Dialog.FileDetails.Title", source.getPath()),
+                UIFactory.infoLabel(info.toArray(new Object[0][])));
     }
 
     private void viewProperties(Part part) {
@@ -253,13 +262,7 @@ public class Manager {
                 saveAsFile();
                 break;
             case FILE_DETAILS:
-                StringBuilder sb = new StringBuilder();
-                sb.append(app.getText("Dialog.FileDetails.Name", source.getName())).append("\n");
-                sb.append(app.getText("Dialog.FileDetails.Path", source.getParent())).append("\n");
-                sb.append(app.getText("Dialog.FileDetails.Format", FileNameUtils.extensionName(source.getPath()))).append("\n");
-                sb.append(app.getText("Dialog.FileDetails.Size", source.length())).append("\n");
-                sb.append(app.getText("Dialog.FileDetails.Date", new Date(source.lastModified())));
-                worker.showMessage(viewer, app.getText("Dialog.FileDetails.Title", source.getPath()), sb.toString());
+                fileDetails(source);
                 break;
             case EXIT_APP:
                 stop();
@@ -334,26 +337,31 @@ public class Manager {
             return;
         }
         int index = parent.getIndex(node);
-        parent.getPart().insert(index, sub.getPart());
-        parent.insert(sub, index);
+        parent.insertNode(sub, index);
         mainPane.refreshNode(parent);
         mainPane.focusToNode(treePath.getParentPath(), sub);
         notifyModified(app.getText("Task.InsertedChapter", sub.getPart().getTitle(), node.getPart().getTitle()));
     }
 
     private void saveAsPart() {
-        PartNode node = mainPane.getSelectedNode();
-        if (node == null) {
+        TreePath treePath = mainPane.getSelectedPath();
+        if (treePath == null) {
             return;
         }
+        PartNode node = PartNode.getPartNode(treePath);
         Part part = node.getPart();
+        File path = worker.saveBook(Jem.toBook(part), null, Jem.PMAB_FORMAT, app.getText("Dialog.SaveBook.Title"));
+        if (path != null) {
+            viewer.setStatusText(app.getText("Task.SavedBook", part.getTitle(), path.getPath()));
+        }
     }
 
     private void renameChapter() {
-        PartNode node = mainPane.getSelectedNode();
-        if (node == null) {
+        TreePath treePath = mainPane.getSelectedPath();
+        if (treePath == null) {
             return;
         }
+        PartNode node = PartNode.getPartNode(treePath);
         Part part = node.getPart();
         String oldTitle = part.getTitle();
         String text = worker.inputText(app.getViewer(), app.getText("Dialog.RenameChapter.Title", part.getTitle()),
@@ -366,37 +374,105 @@ public class Manager {
         } else {
             part.setTitle(text);
             mainPane.refreshNode(node);
+            mainPane.focusToPath(treePath);
             notifyModified(app.getText("Task.RenamedChapter", oldTitle, text));
         }
     }
 
+    private void moveChapters() {
+        TreePath[] paths = mainPane.getSelectedPaths();
+        if (paths == null || paths[0].getPathCount() == 1) {    // null or root
+            return;
+        }
+        // select destination
+    }
+
+    private void deleteChapters() {
+        TreePath[] paths = mainPane.getSelectedPaths();
+        if (paths == null || paths[0].getPathCount() == 1) {    // null or root
+            return;
+        }
+        if (! worker.showConfirm(viewer, app.getText("Dialog.DeleteChapter.Title"),
+                app.getText("Dialog.DeleteChapter.Tip", paths.length))) {
+            return;
+        }
+        for (TreePath path: paths) {
+            PartNode node = PartNode.getPartNode(path);
+            PartNode parent = (PartNode) node.getParent();
+            TreePath parentPath = path.getParentPath();
+
+            mainPane.closeTab(node.getPart());
+            parent.removeNode(node);
+
+            mainPane.refreshNode(parent);
+            mainPane.expandTreePath(parentPath);
+        }
+        mainPane.focusToRoot();
+        notifyModified(app.getText("Task.DeletedChapter", paths.length));
+    }
+
+    private void mergeChapters() {
+        TreePath[] paths = mainPane.getSelectedPaths();
+        if (paths == null || paths[0].getPathCount() == 1) {    // null or root
+            return;
+        }
+        // select destination
+    }
+
+    private void searchChapters(Part part) {
+        String key = worker.inputText(viewer, app.getText("Dialog.SearchChapter.Title"),
+                app.getText("Dialog.SearchChapter.Tip"), null);
+        if (key == null) {
+            return;
+        }
+        if (key.length() == 0) {
+            worker.showError(viewer, app.getText("Dialog.SearchChapter.Title"), app.getText("Dialog.SearchChapter.NoInput"));
+            return;
+        }
+        List<Part> results = worker.findParts(part, key);
+        System.out.println(results.size());
+    }
+
     public void onTreeAction(Object actionID) {
         switch ((String) actionID) {
-            case TREE_NEW:
+            case NEW_CHAPTER:
                 newChapter();
                 break;
-            case TREE_INSERT:
+            case INSERT_CHAPTER:
                 insertChapter();
                 break;
-            case TREE_IMPORT:
-                break;
-            case TREE_SAVE_AS:
+            case SAVE_CHAPTER:
                 saveAsPart();
                 break;
-            case TREE_MOVE:
+            case MOVE_CHAPTER:
+                moveChapters();
                 break;
-            case TREE_RENAME:
+            case RENAME_CHAPTER:
                 renameChapter();
                 break;
-            case TREE_DELETE:
+            case DELETE_CHAPTER:
+                deleteChapters();
                 break;
-            case TREE_MERGE:
+            case MERGE_CHAPTER:
+                mergeChapters();
                 break;
             case TREE_PROPERTIES:
-                PartNode node = mainPane.getSelectedNode();
-                if (node != null) {
-                    viewProperties(node.getPart());
+                TreePath path = mainPane.getSelectedPath();
+                if (path != null) {
+                    viewProperties(PartNode.getPartNode(path).getPart());
                 }
+                break;
+            case SEARCH_CHAPTER:
+                path = mainPane.getSelectedPath();
+                if (path != null) {
+                    searchChapters(PartNode.getPartNode(path).getPart());
+                }
+                break;
+            case REFRESH_CONTENTS:
+                mainPane.refreshNode(mainPane.getSelectedNode());
+                break;
+            case LOCK_CONTENTS:
+                mainPane.setContentsLocked(!mainPane.isContentsLocked());
                 break;
             default:
                 System.out.println("tree action: "+actionID);
@@ -406,22 +482,22 @@ public class Manager {
 
     public void onTabAction(Object actionID) {
         switch ((String) actionID) {
-            case TAB_CLOSE:
+            case CLOSE_TAB:
                 mainPane.closeActiveTab();
                 break;
-            case TAB_CLOSE_OTHERS:
+            case CLOSE_OTHER_TABS:
                 mainPane.closeOtherTabs();
                 break;
-            case TAB_CLOSE_UNMODIFIED:
+            case CLOSE_UNMODIFIED_TABS:
                 mainPane.closeUnmodifiedTabs();
                 break;
-            case TAB_CLOSE_ALL:
+            case CLOSE_ALL_TABS:
                 mainPane.closeAllTabs();
                 break;
-            case TAB_SELECT_NEXT:
+            case SELECT_NEXT_TAB:
                 mainPane.nextTab();
                 break;
-            case TAB_SELECT_PREVIOUS:
+            case SELECT_PREVIOUS_TAB:
                 mainPane.prevTab();
                 break;
             default:

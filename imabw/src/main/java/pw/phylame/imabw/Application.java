@@ -85,7 +85,7 @@ public class Application extends IApplication {
             }
         }
         // locale
-        String str = prop.getProperty("imabw.locale");
+        String str = prop.getProperty("app.locale");
         if (! isEmpty(str)) {
             settings.put("locale", Locale.forLanguageTag(str.replace('_', '-')));
         } else {
@@ -93,26 +93,26 @@ public class Application extends IApplication {
         }
 
         // L&F
-        str = prop.getProperty("ui.theme");
+        str = prop.getProperty("ui.face.lafTheme");
         if (isEmpty(str)) {
             str = "system";
         }
-        settings.put("ui.theme", str);
+        settings.put("ui.face.lafTheme", str);
         // Title bar decorated
-        str = prop.getProperty("ui.decorated");
-        settings.put("ui.decorated", ! isEmpty(str) && Boolean.parseBoolean(str));
+        str = prop.getProperty("ui.face.decorateTitle");
+        settings.put("ui.face.decorateTitle", ! isEmpty(str) && Boolean.parseBoolean(str));
         // Toolbar
-        str = prop.getProperty("ui.show_toolbar");
-        settings.put("ui.show_toolbar", isEmpty(str) || Boolean.parseBoolean(str));
+        str = prop.getProperty("ui.window.showToolbar");
+        settings.put("ui.window.showToolbar", isEmpty(str) || Boolean.parseBoolean(str));
         // Lock toolbar
-        str = prop.getProperty("ui.lock_toolbar");
-        settings.put("ui.lock_toolbar", isEmpty(str) || Boolean.parseBoolean(str));
+        str = prop.getProperty("ui.window.lockToolbar");
+        settings.put("ui.window.lockToolbar", isEmpty(str) || Boolean.parseBoolean(str));
         // Sidebar
-        str = prop.getProperty("ui.show_sidebar");
-        settings.put("ui.show_sidebar", isEmpty(str) || Boolean.parseBoolean(str));
+        str = prop.getProperty("ui.window.showSidebar");
+        settings.put("ui.window.showSidebar", isEmpty(str) || Boolean.parseBoolean(str));
         // Statusbar
-        str = prop.getProperty("ui.show_statusbar");
-        settings.put("ui.show_statusbar", isEmpty(str) || Boolean.parseBoolean(str));
+        str = prop.getProperty("ui.window.showStatusbar");
+        settings.put("ui.window.showStatusbar", isEmpty(str) || Boolean.parseBoolean(str));
         // global font
         str = prop.getProperty("ui.font.global");
         Font font = new Font(Font.SANS_SERIF, Font.PLAIN, 14);
@@ -125,30 +125,30 @@ public class Application extends IApplication {
         settings.put("ui.font.aatext", isEmpty(str) || Boolean.parseBoolean(str));
 
         // editor font
-        str = prop.getProperty("editor.font");
+        str = prop.getProperty("editor.style.font");
         font = new Font(Font.SANS_SERIF, Font.PLAIN, 16);
         if (! isEmpty(str)) {
             font = Font.decode(str);
         }
-        settings.put("editor.font", font);
+        settings.put("editor.style.font", font);
 
         // editor color
-        str = prop.getProperty("editor.background");
+        str = prop.getProperty("editor.style.background");
         Color color = Color.WHITE;
         if (! isEmpty(str)) {
             color = Color.decode(str);
         }
-        settings.put("editor.background", color);
-        str = prop.getProperty("editor.foreground");
+        settings.put("editor.style.background", color);
+        str = prop.getProperty("editor.style.foreground");
         color = Color.BLACK;
         if (! isEmpty(str)) {
             color = Color.decode(str);
         }
-        settings.put("editor.foreground", color);
+        settings.put("editor.style.foreground", color);
 
         // PMAB output encoding
-        str = prop.getProperty("pmab.encoding");
-        settings.put("pmab.encoding", str != null ? str : System.getProperty("file.encoding"));
+        str = prop.getProperty("jem.pmab.textEncoding");
+        settings.put("jem.pmab.textEncoding", str != null ? str : System.getProperty("file.encoding"));
     }
 
     /**
@@ -161,7 +161,7 @@ public class Application extends IApplication {
     /** Initialize Imabw */
     private void initApp() {
         loadBundle(Constants.I18N_PATH);
-        setTheme((String) getSetting("ui.theme"), (boolean) getSetting("ui.decorated"));
+        setTheme((String) getSetting("ui.face.lafTheme"), (boolean) getSetting("ui.face.decorateTitle"));
         setAAText((boolean) getSetting("ui.font.aatext"));
         setGeneralFonts((Font) getSetting("ui.font.global"));
     }

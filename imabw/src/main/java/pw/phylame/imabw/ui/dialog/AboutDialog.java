@@ -67,8 +67,8 @@ public class AboutDialog extends JDialog {
         lbJem.setText(String.format("Jem core: %s by %s", Jem.VERSION, Jem.VENDOR));
         lbRights.setText(app.getText("App.Rights"));
 
-        lbLicense.setText(String.format("<html><a href=\"\">%s</a>  |</html>",
-                app.getText("Dialog.About.LabelLicense")));
+        lbLicense.setText(String.format("<html><a href=\"%s\">%s</a></html>",
+                app.getText("App.LicenseURL"), app.getText("Dialog.About.LabelLicense")));
         lbLicense.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -81,14 +81,14 @@ public class AboutDialog extends JDialog {
             }
         });
 
-        lbHome.setText(String.format("<html><a href=\"\">%s</a></html>",
-                app.getText("Dialog.About.LabelHomePage")));
+        lbHome.setText(String.format("<html><a href=\"%s\">%s</a></html>",
+                app.getText("App.HomeURL"), app.getText("Dialog.About.LabelHome")));
         lbHome.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 try {
                     java.awt.Desktop.getDesktop().browse(new java.net.URI(
-                            app.getText("App.HomePage")));
+                            app.getText("App.HomeURL")));
                 } catch (Exception exp) {
                     exp.printStackTrace();
                 }

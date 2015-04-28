@@ -19,7 +19,7 @@ package pw.phylame.imabw;
 /**
  * Constants for Imabw.
  */
-public final class Constants {
+public interface Constants {
     /** Version of the Imabw */
     public static final String VERSION = "2.0-SNAPSHOT";
 
@@ -41,7 +41,7 @@ public final class Constants {
     public static final String OPEN_FILE = "open-file";
     public static final String SAVE_FILE = "save-file";
     public static final String SAVE_AS_FILE = "save-as-file";
-    public static final String FILE_DETAILS = "file-properties";
+    public static final String FILE_DETAILS = "file-details";
     public static final String EXIT_APP = "exit-app";
 
     public static final String EDIT_PREFERENCE = "edit-settings";
@@ -66,21 +66,24 @@ public final class Constants {
     public static final String SHOW_ABOUT = "show-about";
 
     /* Tree options */
-    public static final String TREE_NEW = "tree-new";
-    public static final String TREE_INSERT = "tree-insert";
-    public static final String TREE_RENAME = "tree-rename";
-    public static final String TREE_MOVE = "tree-move";
-    public static final String TREE_DELETE = "tree-delete";
-    public static final String TREE_MERGE = "tree-merge";
+    public static final String NEW_CHAPTER = "new-chapter";
+    public static final String INSERT_CHAPTER = "insert-chapter";
+    public static final String RENAME_CHAPTER = "rename-chapter";
+    public static final String MOVE_CHAPTER = "move-chapter";
+    public static final String DELETE_CHAPTER = "delete-chapter";
+    public static final String MERGE_CHAPTER = "merge-chapter";
     public static final String TREE_PROPERTIES = "tree-property";
-    public static final String TREE_SAVE_AS = "tree-save-as";
-    public static final String TREE_IMPORT = "tree-import";
+    public static final String SAVE_CHAPTER = "save-chapter";
+    public static final String IMPORT_CHAPTER = "import-chapter";
+    public static final String SEARCH_CHAPTER = "search-chapter";
+    public static final String REFRESH_CONTENTS = "refresh-contents";
+    public static final String LOCK_CONTENTS = "lock-contents";
 
     /* Tab control */
-    public static final String TAB_CLOSE = "close-tab";
-    public static final String TAB_CLOSE_OTHERS = "close-other-tabs";
-    public static final String TAB_CLOSE_ALL = "close-all-tabs";
-    public static final String TAB_CLOSE_UNMODIFIED = "close-unmodified-tabs";
-    public static final String TAB_SELECT_NEXT = "select-next-tab";
-    public static final String TAB_SELECT_PREVIOUS = "select-previous-tab";
+    public static final String CLOSE_TAB = "close-tab";
+    public static final String CLOSE_OTHER_TABS = "close-other-tabs";
+    public static final String CLOSE_ALL_TABS = "close-all-tabs";
+    public static final String CLOSE_UNMODIFIED_TABS = "close-unmodified-tabs";
+    public static final String SELECT_NEXT_TAB = "select-next-tab";
+    public static final String SELECT_PREVIOUS_TAB = "select-previous-tab";
 }

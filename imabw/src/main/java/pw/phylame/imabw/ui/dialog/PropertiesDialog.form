@@ -199,7 +199,7 @@
                               <component id="5f011" class="javax.swing.JButton" binding="button3" default-binding="true">
                                 <constraints/>
                                 <properties>
-                                  <icon value="res/img/dialog/modified.png"/>
+                                  <icon value="res/img/dialog/modify.png"/>
                                   <text value=""/>
                                 </properties>
                               </component>

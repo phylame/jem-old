@@ -17,6 +17,7 @@
 package pw.phylame.imabw;
 
 import pw.phylame.imabw.ui.com.PartNode;
+import pw.phylame.ixin.IToolkit;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.Part;
@@ -35,6 +36,7 @@ import java.io.IOException;
 import java.net.URL;
 
 import java.util.*;
+import java.util.regex.Pattern;
 
 /**
  * Utilities functions and constants for Imabw.
@@ -52,26 +54,36 @@ public class Worker {
             String name = app.getText("Common.Format."+fmt.toUpperCase());
             formatNames.put(fmt, String.format("%s (*.%s)", name, fmt));
         }
+
+        UIManager.put("OptionPane.okButtonText", app.getText("Dialog.ButtonOk"));
+        UIManager.put("OptionPane.cancelButtonText", app.getText("Dialog.ButtonCancel"));
+        UIManager.put("OptionPane.yesButtonText", app.getText("Dialog.ButtonYes"));
+        UIManager.put("OptionPane.noButtonText", app.getText("Dialog.ButtonNo"));
     }
 
-    public String inputText(Component parent, String title, String tip, String initValue) {
-        return (String) JOptionPane.showInputDialog(parent, tip, title, JOptionPane.PLAIN_MESSAGE, null, null, initValue);
+    public String inputText(Component parent, String title, Object message, String initValue) {
+        return (String) JOptionPane.showInputDialog(parent, message, title, JOptionPane.PLAIN_MESSAGE, null, null, initValue);
     }
 
-    public boolean showConfirm(Component parent, String title, String text) {
-        return JOptionPane.showConfirmDialog(parent, text, title, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
+    public boolean showConfirm(Component parent, String title, Object message) {
+        return JOptionPane.showConfirmDialog(parent, message, title, JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                IToolkit.createImageIcon(":/res/img/dialog/question.png")) == JOptionPane.YES_OPTION;
     }
 
-    public void showMessage(Component parent, String title, String text) {
-        JOptionPane.showMessageDialog(parent, text, title, JOptionPane.INFORMATION_MESSAGE);
+    public void showMessage(Component parent, String title, Object message) {
+        JOptionPane.showMessageDialog(parent, message, title, JOptionPane.INFORMATION_MESSAGE,
+                IToolkit.createImageIcon(":/res/img/dialog/information.png"));
     }
 
-    public void showWarning(Component parent, String title, String text) {
-        JOptionPane.showMessageDialog(parent, text, title, JOptionPane.WARNING_MESSAGE);
+    public void showWarning(Component parent, String title, Object message) {
+        JOptionPane.showMessageDialog(parent, message, title, JOptionPane.WARNING_MESSAGE,
+                IToolkit.createImageIcon(":/res/img/dialog/warning.png"));
     }
 
-    public void showError(Component parent, String title, String text) {
-        JOptionPane.showMessageDialog(parent, text, title, JOptionPane.ERROR_MESSAGE);
+    public void showError(Component parent, String title, Object message) {
+        JOptionPane.showMessageDialog(parent, message, title, JOptionPane.ERROR_MESSAGE,
+                IToolkit.createImageIcon(":/res/img/dialog/prohibit.png"));
     }
 
     public Date selectDate(Component parent, String title, String tipText, Date initDate) {
@@ -167,14 +179,14 @@ public class Worker {
     }
 
     public Book newBook(String title) {
-        if (title == null) {
+        while (title == null || title.length() == 0) {
             title = inputText(app.getViewer(), app.getText("Dialog.NewBook.Title"), app.getText("Dialog.NewBook.Tip"),
                     app.getText("Common.NewBookTitle"));
             if (title == null) {
-                return null;
-            } else if (title.length() == 0) {
+                return null;    // cancel input
+            }
+            if (title.length() == 0) {
                 showError(app.getViewer(), app.getText("Dialog.NewBook.Title"), app.getText("Dialog.NewBook.NoInput"));
-                return null;
             }
         }
         Book book = new Book(title, "");
@@ -215,20 +227,20 @@ public class Worker {
     }
 
     public PartNode newChapter(PartNode parent, String title) {
-        String text = inputText(app.getViewer(), title, app.getText("Dialog.NewChapter.Tip"),
-                app.getText("Common.NewChapterTitle"));
-        PartNode node = null;
-        if (text == null) {
-            // nothing
-        } else if (text.length() == 0) {
-            showError(app.getViewer(), title, app.getText("Dialog.NewChapter.NoInput"));
-        } else {
-            if (parent == null) {
-                node = new PartNode(new Part(text));
-            } else {
-                node = new PartNode(parent.getPart().newPart(text));
-                parent.add(node);
+        String text = null;
+        while (text == null || text.length() == 0) {
+            text = inputText(app.getViewer(), title, app.getText("Dialog.NewChapter.Tip"),
+                    app.getText("Common.NewChapterTitle"));
+            if (text == null) {
+                return null;        // cancel input
             }
+            if (text.length() == 0) {
+                showError(app.getViewer(), title, app.getText("Dialog.NewChapter.NoInput"));
+            }
+        }
+        PartNode node = new PartNode(new Part(text));
+        if (parent != null) {
+            parent.appendNode(node);
         }
 
         return node;
@@ -265,4 +277,18 @@ public class Worker {
         }
     }
 
+    public List<Part> findParts(final Part part, String key) {
+        final List<Part> parts = new ArrayList<>();
+        final Pattern pattern = Pattern.compile(key);
+        Jem.walkPart(part, new Jem.Walker() {
+            @Override
+            public boolean watch(Part p) {
+                if (pattern.matcher(p.getTitle()).find()) {
+                    parts.add(p);
+                }
+                return true;
+            }
+        });
+        return parts;
+    }
 }

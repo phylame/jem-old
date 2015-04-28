@@ -5,19 +5,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="43c239c1-c0d7-481c-9eb1-894ad8728ebf" name="Default" comment="">
-      <change type="DELETED" beforePath="D:\code\pw-books\imabw\.idea\artifacts\imabw_jar.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Constants.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Constants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Manager.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Manager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/README.md" afterPath="$PROJECT_DIR$/../scj/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v2/Writer.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v2/Writer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v3/Writer.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v3/Writer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/imabw.iml" afterPath="$PROJECT_DIR$/../imabw/imabw.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/i18n/imabw_en_US.properties" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/i18n/imabw_en_US.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/i18n/imabw_zh_CN.properties" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/i18n/imabw_zh_CN.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/pom.xml" afterPath="$PROJECT_DIR$/../imabw/pom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/dialog/modify.png" />
+      <change type="DELETED" beforePath="D:\code\pw-books\imabw\src\main\resources\res\img\dialog\modified.png" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/tree/book.png" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/tree/book.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/tree/chapter.png" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/tree/chapter.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/edit-copy.png" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/edit-copy.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/edit-cut.png" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/edit-cut.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/edit-delete.png" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/edit-delete.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/edit-paste.png" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/edit-paste.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/edit-redo.png" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/edit-redo.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/edit-select-all.png" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/edit-select-all.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/edit-undo.png" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/edit-undo.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/exit.png" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/exit.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/file-details.png" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/file-details.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/dialog/minus.png" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/dialog/minus.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/new-file.png" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/new-file.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/open-file.png" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/open-file.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/dialog/plus.png" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/dialog/plus.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/save-as-file.png" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/save-as-file.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/save-file.png" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/save-file.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/search-find.png" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/search-find.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/search-goto.png" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/search-goto.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/search-next.png" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/search-next.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/search-previous.png" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/search-previous.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/search-replace.png" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/search-replace.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/tree/section.png" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/tree/section.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/settings.png" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/settings.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/tools-meta.png" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/img/menu/tools-meta.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Application.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Application.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/com/MainPane.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/com/MainPane.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/PropertiesDialog.form" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/PropertiesDialog.form" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/TextObject.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/TextObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/Viewer.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/Viewer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../imabw/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../jem-formats/.idea/workspace.xml" />
     </list>
     <ignored path="jem-core.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,7 +59,54 @@
     <favorites_list name="jem-core" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="TextObject.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/TextObject.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-1.403599">
+              <caret line="55" column="29" selection-start-line="55" selection-start-column="29" selection-end-line="55" selection-end-column="29" />
+              <folding>
+                <element signature="docComment;class#TextObject#0" expanded="false" />
+                <element signature="class#SourceType#0;class#TextObject#0" expanded="false" />
+                <element signature="docComment;field#LARGE_SIZE#0;class#TextObject#0" expanded="false" />
+                <element signature="docComment;method#TextObject#0;class#TextObject#0" expanded="false" />
+                <element signature="e#1373#1374#0" expanded="true" />
+                <element signature="e#1397#1398#0" expanded="true" />
+                <element signature="docComment;method#TextObject#1;class#TextObject#0" expanded="false" />
+                <element signature="docComment;method#TextObject#2;class#TextObject#0" expanded="false" />
+                <element signature="docComment;method#getRaw#0;class#TextObject#0" expanded="false" />
+                <element signature="docComment;method#setRaw#0;class#TextObject#0" expanded="false" />
+                <element signature="method#setRaw#0;class#TextObject#0" expanded="false" />
+                <element signature="docComment;method#getFile#0;class#TextObject#0" expanded="false" />
+                <element signature="docComment;method#getEncoding#0;class#TextObject#0" expanded="false" />
+                <element signature="docComment;method#setFile#0;class#TextObject#0" expanded="false" />
+                <element signature="method#setFile#0;class#TextObject#0" expanded="false" />
+                <element signature="docComment;method#isLarge#0;class#TextObject#0" expanded="false" />
+                <element signature="docComment;method#aboutSize#0;class#TextObject#0" expanded="false" />
+                <element signature="method#aboutSize#0;class#TextObject#0" expanded="false" />
+                <element signature="docComment;method#openReader#0;class#TextObject#0" expanded="false" />
+                <element signature="method#openReader#0;class#TextObject#0" expanded="false" />
+                <element signature="e#4453#4454#0" expanded="true" />
+                <element signature="e#4480#4481#0" expanded="true" />
+                <element signature="e#4520#4521#0" expanded="true" />
+                <element signature="e#4552#4553#0" expanded="true" />
+                <element signature="docComment;method#getText#0;class#TextObject#0" expanded="false" />
+                <element signature="method#getText#0;class#TextObject#0" expanded="false" />
+                <element signature="docComment;method#getLines#0;class#TextObject#0" expanded="false" />
+                <element signature="method#getLines#0;class#TextObject#0" expanded="false" />
+                <element signature="docComment;method#writeTo#0;class#TextObject#0" expanded="false" />
+                <element signature="method#writeTo#0;class#TextObject#0" expanded="false" />
+                <element signature="docComment;method#writeTo#1;class#TextObject#0" expanded="false" />
+                <element signature="method#writeTo#1;class#TextObject#0" expanded="false" />
+                <element signature="docComment;field#file#0;class#TextObject#0" expanded="false" />
+                <element signature="docComment;field#encoding#0;class#TextObject#0" expanded="false" />
+                <element signature="docComment;field#sourceType#0;class#TextObject#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -98,10 +165,10 @@
         <option value="$PROJECT_DIR$/src/test/java/test/TestFileNameUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/Attributes.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/TextObject.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Part.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/TextObject.java" />
       </list>
     </option>
   </component>
@@ -155,6 +222,53 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pw.phylame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pw.phylame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -239,79 +353,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pw.phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pw.phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pw.phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -691,15 +732,16 @@
       <workItem from="1429860108704" duration="30000" />
       <workItem from="1429878218281" duration="188000" />
       <workItem from="1430036340751" duration="178000" />
+      <workItem from="1430108768683" duration="230000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22946000" />
+    <option name="totallyTimeSpent" value="23176000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1374" height="746" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -708,7 +750,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3447738" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3447738" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1830161" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1047,39 +1089,19 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="1" column="79" selection-start-line="1" selection-start-column="79" selection-end-line="1" selection-end-column="79" />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="MarkdownPreviewEditor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Book.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.545">
           <caret line="195" column="18" selection-start-line="195" selection-start-column="18" selection-end-line="195" selection-end-column="18" />
-          <folding>
-            <element signature="docComment;class#Book#0" expanded="false" />
-            <element signature="docComment;field#AUTHOR#0;class#Book#0" expanded="false" />
-            <element signature="docComment;field#GENRE#0;class#Book#0" expanded="false" />
-            <element signature="docComment;field#STATE#0;class#Book#0" expanded="false" />
-            <element signature="docComment;field#SUBJECT#0;class#Book#0" expanded="false" />
-            <element signature="docComment;field#DATE#0;class#Book#0" expanded="false" />
-            <element signature="docComment;field#PUBLISHER#0;class#Book#0" expanded="false" />
-            <element signature="docComment;field#RIGHTS#0;class#Book#0" expanded="false" />
-            <element signature="docComment;field#LANGUAGE#0;class#Book#0" expanded="false" />
-            <element signature="method#Book#1;class#Book#0" expanded="false" />
-            <element signature="method#getDate#0;class#Book#0" expanded="false" />
-            <element signature="docComment;method#setItem#0;class#Book#0" expanded="false" />
-            <element signature="docComment;method#getItem#0;class#Book#0" expanded="false" />
-            <element signature="method#getItem#0;class#Book#0" expanded="false" />
-            <element signature="docComment;method#removeItem#0;class#Book#0" expanded="false" />
-            <element signature="docComment;method#itemSize#0;class#Book#0" expanded="false" />
-            <element signature="docComment;method#itemNames#0;class#Book#0" expanded="false" />
-            <element signature="docComment;method#clearItems#0;class#Book#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1104,13 +1126,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/TextObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.552459">
-          <caret line="182" column="47" selection-start-line="182" selection-start-column="47" selection-end-line="182" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Part.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1123,7 +1138,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.08032787">
           <caret line="1304" column="18" selection-start-line="1304" selection-start-column="18" selection-end-line="1304" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1131,7 +1145,50 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3114754">
           <caret line="263" column="48" selection-start-line="263" selection-start-column="48" selection-end-line="263" selection-end-column="48" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/TextObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.403599">
+          <caret line="55" column="29" selection-start-line="55" selection-start-column="29" selection-end-line="55" selection-end-column="29" />
+          <folding>
+            <element signature="docComment;class#TextObject#0" expanded="false" />
+            <element signature="class#SourceType#0;class#TextObject#0" expanded="false" />
+            <element signature="docComment;field#LARGE_SIZE#0;class#TextObject#0" expanded="false" />
+            <element signature="docComment;method#TextObject#0;class#TextObject#0" expanded="false" />
+            <element signature="e#1373#1374#0" expanded="true" />
+            <element signature="e#1397#1398#0" expanded="true" />
+            <element signature="docComment;method#TextObject#1;class#TextObject#0" expanded="false" />
+            <element signature="docComment;method#TextObject#2;class#TextObject#0" expanded="false" />
+            <element signature="docComment;method#getRaw#0;class#TextObject#0" expanded="false" />
+            <element signature="docComment;method#setRaw#0;class#TextObject#0" expanded="false" />
+            <element signature="method#setRaw#0;class#TextObject#0" expanded="false" />
+            <element signature="docComment;method#getFile#0;class#TextObject#0" expanded="false" />
+            <element signature="docComment;method#getEncoding#0;class#TextObject#0" expanded="false" />
+            <element signature="docComment;method#setFile#0;class#TextObject#0" expanded="false" />
+            <element signature="method#setFile#0;class#TextObject#0" expanded="false" />
+            <element signature="docComment;method#isLarge#0;class#TextObject#0" expanded="false" />
+            <element signature="docComment;method#aboutSize#0;class#TextObject#0" expanded="false" />
+            <element signature="method#aboutSize#0;class#TextObject#0" expanded="false" />
+            <element signature="docComment;method#openReader#0;class#TextObject#0" expanded="false" />
+            <element signature="method#openReader#0;class#TextObject#0" expanded="false" />
+            <element signature="e#4453#4454#0" expanded="true" />
+            <element signature="e#4480#4481#0" expanded="true" />
+            <element signature="e#4520#4521#0" expanded="true" />
+            <element signature="e#4552#4553#0" expanded="true" />
+            <element signature="docComment;method#getText#0;class#TextObject#0" expanded="false" />
+            <element signature="method#getText#0;class#TextObject#0" expanded="false" />
+            <element signature="docComment;method#getLines#0;class#TextObject#0" expanded="false" />
+            <element signature="method#getLines#0;class#TextObject#0" expanded="false" />
+            <element signature="docComment;method#writeTo#0;class#TextObject#0" expanded="false" />
+            <element signature="method#writeTo#0;class#TextObject#0" expanded="false" />
+            <element signature="docComment;method#writeTo#1;class#TextObject#0" expanded="false" />
+            <element signature="method#writeTo#1;class#TextObject#0" expanded="false" />
+            <element signature="docComment;field#file#0;class#TextObject#0" expanded="false" />
+            <element signature="docComment;field#encoding#0;class#TextObject#0" expanded="false" />
+            <element signature="docComment;field#sourceType#0;class#TextObject#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

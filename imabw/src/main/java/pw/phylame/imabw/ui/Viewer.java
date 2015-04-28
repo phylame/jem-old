@@ -59,7 +59,7 @@ public class Viewer extends IFrame {
     private void init() {
         // editor indicator
         editorIndicator = new EditorIndicator();
-        getStatusBar().add(editorIndicator.getRootPanel(), BorderLayout.EAST);
+        getStatusBar().add(editorIndicator.getPane(), BorderLayout.EAST);
 
         setTitle(app.getText("App.Name"));
         setIconImage(pw.phylame.ixin.IToolkit.createImage(app.getText("App.Icon")));
@@ -72,14 +72,14 @@ public class Viewer extends IFrame {
             }
         });
 
-        getToolBar().setVisible((boolean) app.getSetting("ui.show_toolbar"));
-        getToolBar().setFloatable(!(boolean) app.getSetting("ui.lock_toolbar"));
-        getStatusBar().setVisible((boolean) app.getSetting("ui.show_statusbar"));
+        getToolBar().setVisible((boolean) app.getSetting("ui.window.showToolbar"));
+        getToolBar().setFloatable(!(boolean) app.getSetting("ui.window.lockToolbar"));
+        getStatusBar().setVisible((boolean) app.getSetting("ui.window.showStatusbar"));
 
         JMenu menu = getViewMenu();
         ((JCheckBoxMenuItem)menu.getItem(0)).setState(getToolBar().isVisible());
         ((JCheckBoxMenuItem)menu.getItem(1)).setState(getStatusBar().isVisible());
-        ((JCheckBoxMenuItem)menu.getItem(2)).setState((boolean) app.getSetting("ui.show_sidebar"));
+        ((JCheckBoxMenuItem)menu.getItem(2)).setState((boolean) app.getSetting("ui.window.showSidebar"));
 
         setSize(1066, 600);
         setLocationRelativeTo(null);
