@@ -30,6 +30,8 @@ import java.awt.Component;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.tree.TreeNode;
+import javax.swing.tree.TreePath;
 
 import java.io.File;
 import java.io.IOException;
@@ -178,6 +180,33 @@ public class Worker {
         return selectOpenFile(parent, title, makeFileFormatFilters(formats, true), null, true, null);
     }
 
+    // get max same content in left of a and b
+    public <T> List<T> leftSame(List<T> a, List<T> b) {
+        List<T> results = new ArrayList<>();
+        Iterator<T> itA = a.iterator(), itB = b.iterator();
+        while (itA.hasNext() && itB.hasNext()) {
+            T iA = itA.next(), iB = itB.next();
+
+            if (! iA.equals(iB)) {      // different
+                break;
+            }
+            results.add(iA);
+        }
+        return results;
+    }
+
+    public String formatSize(long size) {
+        if (size < 0x400) {
+            return size + " b";
+        } else if (size < 0x100000) {
+            return String.format("%.2f Kb", size / 1024.0);
+        } else if (size < 0x40000000) {
+            return String.format("%.2f Mb", size / 1024.0 / 1024.0);
+        } else {
+            return String.format("%.2f Gb", size / 1024.0 / 1024.0 / 1024.0);
+        }
+    }
+
     public Book newBook(String title) {
         while (title == null || title.length() == 0) {
             title = inputText(app.getViewer(), app.getText("Dialog.NewBook.Title"), app.getText("Dialog.NewBook.Tip"),
@@ -258,6 +287,13 @@ public class Worker {
         // 1. select file path is path is null
         // 3. select output kw
         // 4. save book
+        Jem.walkPart(book, new Jem.Walker() {
+            @Override
+            public boolean watch(Part part) {
+                System.out.println(part.getTitle());
+                return true;
+            }
+        });
         System.out.printf("save %s to %s with %s\n", book, path, format);
         return null;
     }

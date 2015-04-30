@@ -374,9 +374,8 @@ public class MainPane extends IPaneRender implements Constants {
         return PartNode.getPartNode(path);
     }
 
-    public void refreshRoot() {
-        treeModel.reload();
-        focusToRoot();
+    public PartNode getRootNode() {
+        return (PartNode) treeModel.getRoot();
     }
 
     public void refreshNode(PartNode node) {
@@ -388,14 +387,17 @@ public class MainPane extends IPaneRender implements Constants {
     }
 
     public void focusToPath(TreePath path) {
-        contentsTree.getTree().setSelectionPath(path);
+        contentsTree.setSelectionPath(path);
     }
 
-    public void focusToNode(TreePath parent, PartNode node) {
+    // focus to child node in parent, index is child index in parent
+    public void focusToRow(TreePath parent, int index) {
         JTree tree = contentsTree.getTree();
         int row = tree.getRowForPath(parent);
-        row += node.getParent().getChildCount();
-        tree.setSelectionRow(row);
+        if (! tree.isExpanded(parent)) {
+            tree.expandPath(parent);
+        }
+        tree.setSelectionRow(row + index + 1);
     }
 
     // ******************************
@@ -459,6 +461,10 @@ public class MainPane extends IPaneRender implements Constants {
         }
         editorWindow.removeAll();
         editorTabs.clear();
+    }
+
+    public EditorTab getActiveTab() {
+        return editorTabs.get(editorWindow.getSelectedIndex());
     }
 
     // add and view new tab

@@ -122,7 +122,7 @@ public class Application extends IApplication {
         settings.put("ui.font.global", font);
         // Anti aliasing font
         str = prop.getProperty("ui.font.aatext");
-        settings.put("ui.font.aatext", isEmpty(str) || Boolean.parseBoolean(str));
+        settings.put("ui.font.aatext", ! isEmpty(str) && Boolean.parseBoolean(str));
 
         // editor font
         str = prop.getProperty("editor.style.font");

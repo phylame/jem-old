@@ -59,8 +59,8 @@ public interface Constants {
     public static final String GO_TO_POSITION = "goto-position";
 
     /* Tools */
-    public static final String EDIT_META = "edit-meta";
-    public static final String EDIT_EXTRA = "edit-extra";
+    public static final String BOOK_ATTRIBUTES = "book-attributes";
+    public static final String EXTRA_ITEMS = "extra-items";
 
     /* Help */
     public static final String SHOW_ABOUT = "show-about";

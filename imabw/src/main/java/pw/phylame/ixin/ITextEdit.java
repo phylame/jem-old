@@ -200,12 +200,8 @@ public class ITextEdit extends JScrollPane {
         return textArea.getLineCount();
     }
 
-    public void gotoLine(int line) {
-        try {
-            setCaretPosition(textArea.getLineStartOffset(line));
-        } catch (BadLocationException e) {
-            e.printStackTrace();
-        }
+    public void gotoLine(int line) throws BadLocationException {
+        setCaretPosition(textArea.getLineStartOffset(line));
     }
 
     public int getCaretPosition() {

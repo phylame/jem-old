@@ -91,12 +91,20 @@ public class ITree extends JPanel {
         titleLabel.setIcon(icon);
     }
 
+    public void setSelectionPath(TreePath path) {
+        jTree.setSelectionPath(path);
+    }
+
     public void setSelectionRow(int row) {
         jTree.setSelectionRow(row);
     }
 
     public int getSelectionCount() {
         return jTree.getSelectionCount();
+    }
+
+    public int getSelectionRow() {
+        return jTree.getLeadSelectionRow();
     }
 
     public TreePath getSelectionPath() {

@@ -17,18 +17,17 @@
 package pw.phylame.imabw.ui;
 
 import pw.phylame.imabw.Application;
+import pw.phylame.imabw.Constants;
 import pw.phylame.ixin.ITextEdit;
 import pw.phylame.ixin.IToolkit;
 import pw.phylame.ixin.com.IAction;
 import pw.phylame.ixin.com.IMenuModel;
 import pw.phylame.ixin.com.IMenuLabel;
 
-import static pw.phylame.imabw.Constants.*;
-
 /**
  * UI design for Imabw.
  */
-public class UIDesign {
+public class UIDesign implements Constants {
 
     private static Application app = Application.getApplication();
 
@@ -64,6 +63,16 @@ public class UIDesign {
                     app.getText("Menu.File.Exit.Mnemonic"), app.getText("Menu.File.Exit.Shortcut"),
                     app.getText("Menu.File.Exit.Tip")}
     };
+    public static Object[] FILE_MENU_MODEL = {
+            new IMenuLabel(app.getText("Menu.File"), null, app.getText("Menu.File.Mnemonic")),
+            NEW_FILE, OPEN_FILE,
+            null,
+            SAVE_FILE, SAVE_AS_FILE,
+            null,
+            FILE_DETAILS,
+            null,
+            EXIT_APP
+    };
 
     /* Edit */
     public static Object[][] EDIT_MENU_ACTIONS = {
@@ -71,6 +80,20 @@ public class UIDesign {
                     app.getText("Menu.Edit.Preference"), app.getText("Menu.Edit.Preference.Icon"),
                     app.getText("Menu.Edit.Preference.Mnemonic"), app.getText("Menu.Edit.Preference.Shortcut"),
                     app.getText("Menu.Edit.Preference.Tip")}
+    };
+    public static Object[] EDIT_MENU_MODEL = {
+            new IMenuLabel(app.getText("Menu.Edit"), null, app.getText("Menu.Edit.Mnemonic")),
+            ITextEdit.UNDO,
+            ITextEdit.REDO,
+            null,
+            ITextEdit.CUT,
+            ITextEdit.COPY,
+            ITextEdit.PASTE,
+            ITextEdit.DELETE,
+            null,
+            ITextEdit.SELECT_ALL,
+            null,
+            EDIT_PREFERENCE
     };
 
     /* View */
@@ -87,6 +110,12 @@ public class UIDesign {
                     app.getText("Menu.View.ShowSidebar"), app.getText("Menu.View.ShowSidebar.Icon"),
                     app.getText("Menu.View.ShowSidebar.Mnemonic"), app.getText("Menu.View.ShowSidebar.Shortcut"),
                     app.getText("Menu.View.ShowSidebar.Tip")}
+    };
+    public static Object[] VIEW_MENU_MODEL = {
+            new IMenuLabel(app.getText("Menu.View"), null, app.getText("Menu.View.Mnemonic")),
+            new IMenuModel(SHOW_TOOLBAR, IMenuModel.MenuType.CHECK, true),
+            new IMenuModel(SHOW_STATUSBAR, IMenuModel.MenuType.CHECK, true),
+            new IMenuModel(SHOW_SIDEBAR, IMenuModel.MenuType.CHECK, true),
     };
 
     /* Search */
@@ -112,69 +141,6 @@ public class UIDesign {
                     app.getText("Menu.Search.Goto.Mnemonic"), app.getText("Menu.Search.Goto.Shortcut"),
                     app.getText("Menu.Search.Goto.Tip"), false}
     };
-
-    /* Tools */
-    public static Object[][] TOOLS_MENU_ACTIONS = {
-            {EDIT_META,
-                    app.getText("Menu.Tools.Meta"), app.getText("Menu.Tools.Meta.Icon"),
-                    app.getText("Menu.Tools.Meta.Mnemonic"), app.getText("Menu.Tools.Meta.Shortcut"),
-                    app.getText("Menu.Tools.Meta.Tip")}
-    };
-
-    /* Help */
-    public static Object[][] HELP_MENU_ACTIONS = {
-            {SHOW_ABOUT,
-                    app.getText("Menu.Help.About"), app.getText("Menu.Help.About.Icon"),
-                    app.getText("Menu.Help.About.Mnemonic"), app.getText("Menu.Help.About.Shortcut"),
-                    app.getText("Menu.Help.About.Tip")}
-    };
-
-    public static Object[][][] MENU_ACTIONS = {
-            FILE_MENU_ACTIONS, EDIT_MENU_ACTIONS, VIEW_MENU_ACTIONS, SEARCH_MENU_ACTIONS,
-            TOOLS_MENU_ACTIONS, HELP_MENU_ACTIONS
-    };
-
-    // ******************
-    // ** Menu model   **
-    // ******************
-
-    /* File */
-    public static Object[] FILE_MENU_MODEL = {
-            new IMenuLabel(app.getText("Menu.File"), null, app.getText("Menu.File.Mnemonic")),
-            NEW_FILE, OPEN_FILE,
-            null,
-            SAVE_FILE, SAVE_AS_FILE,
-            null,
-            FILE_DETAILS,
-            null,
-            EXIT_APP
-    };
-
-    /* Edit */
-    public static Object[] EDIT_MENU_MODEL = {
-            new IMenuLabel(app.getText("Menu.Edit"), null, app.getText("Menu.Edit.Mnemonic")),
-            ITextEdit.UNDO,
-            ITextEdit.REDO,
-            null,
-            ITextEdit.CUT,
-            ITextEdit.COPY,
-            ITextEdit.PASTE,
-            ITextEdit.DELETE,
-            null,
-            ITextEdit.SELECT_ALL,
-            null,
-            EDIT_PREFERENCE
-    };
-
-    /* View */
-    public static Object[] VIEW_MENU_MODEL = {
-            new IMenuLabel(app.getText("Menu.View"), null, app.getText("Menu.View.Mnemonic")),
-            new IMenuModel(SHOW_TOOLBAR, IMenuModel.MenuType.CHECK, true),
-            new IMenuModel(SHOW_STATUSBAR, IMenuModel.MenuType.CHECK, true),
-            new IMenuModel(SHOW_SIDEBAR, IMenuModel.MenuType.CHECK, true),
-    };
-
-    /* Search */
     public static Object[] SEARCH_MENU_MODEL = {
             new IMenuLabel(app.getText("Menu.Search"), null, app.getText("Menu.Search.Mnemonic")),
             FIND_TEXT, FIND_NEXT, FIND_PREVIOUS,
@@ -185,15 +151,37 @@ public class UIDesign {
     };
 
     /* Tools */
+    public static Object[][] TOOLS_MENU_ACTIONS = {
+            {BOOK_ATTRIBUTES,
+                    app.getText("Menu.Tools.Meta"), app.getText("Menu.Tools.Meta.Icon"),
+                    app.getText("Menu.Tools.Meta.Mnemonic"), app.getText("Menu.Tools.Meta.Shortcut"),
+                    app.getText("Menu.Tools.Meta.Tip")},
+            {EXTRA_ITEMS,
+                    app.getText("Menu.Tools.Extra"), app.getText("Menu.Tools.Extra.Icon"),
+                    app.getText("Menu.Tools.Extra.Mnemonic"), app.getText("Menu.Tools.Extra.Shortcut"),
+                    app.getText("Menu.Tools.Extra.Tip")}
+    };
     public static Object[] TOOLS_MENU_MODEL = {
             new IMenuLabel(app.getText("Menu.Tools"), null, app.getText("Menu.Tools.Mnemonic")),
-            EDIT_META
+            BOOK_ATTRIBUTES,
+            EXTRA_ITEMS
     };
 
     /* Help */
+    public static Object[][] HELP_MENU_ACTIONS = {
+            {SHOW_ABOUT,
+                    app.getText("Menu.Help.About"), app.getText("Menu.Help.About.Icon"),
+                    app.getText("Menu.Help.About.Mnemonic"), app.getText("Menu.Help.About.Shortcut"),
+                    app.getText("Menu.Help.About.Tip")}
+    };
     public static Object[] HELP_MENU_MODEL = {
             new IMenuLabel(app.getText("Menu.Help"), null, app.getText("Menu.Help.Mnemonic")),
             SHOW_ABOUT
+    };
+
+    public static Object[][][] MENU_ACTIONS = {
+            FILE_MENU_ACTIONS, EDIT_MENU_ACTIONS, VIEW_MENU_ACTIONS, SEARCH_MENU_ACTIONS,
+            TOOLS_MENU_ACTIONS, HELP_MENU_ACTIONS
     };
 
     /* Menu bar */
@@ -210,7 +198,7 @@ public class UIDesign {
             null,
             FIND_TEXT, FIND_AND_REPLACE, GO_TO_POSITION,
             null,
-            EDIT_META
+            BOOK_ATTRIBUTES
     };
 
     /* Tab control */

@@ -23,15 +23,20 @@ import pw.phylame.imabw.ui.com.EditorTab;
 import pw.phylame.imabw.ui.com.MainPane;
 import pw.phylame.imabw.ui.com.PartNode;
 import pw.phylame.imabw.ui.com.UIFactory;
+import pw.phylame.imabw.ui.dialog.SelectPartDialog;
+import pw.phylame.ixin.ITextEdit;
 import pw.phylame.ixin.IToolkit;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.Part;
+import pw.phylame.tools.DateUtils;
+import pw.phylame.tools.StringUtils;
 import pw.phylame.tools.file.FileNameUtils;
 
 import javax.swing.*;
 import javax.swing.tree.TreePath;
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -234,17 +239,122 @@ public class Manager implements Constants {
 
     private void fileDetails(File file) {
         List<Object[]> info = new ArrayList<>();
-        info.add(new Object[]{app.getText("Dialog.FileDetails.Name"), source.getName()});
-        info.add(new Object[]{app.getText("Dialog.FileDetails.Path"), source.getParent()});
-        info.add(new Object[]{app.getText("Dialog.FileDetails.Format"), FileNameUtils.extensionName(source.getPath())});
-        info.add(new Object[]{app.getText("Dialog.FileDetails.Size"), source.length()});
-        info.add(new Object[]{app.getText("Dialog.FileDetails.Date"), new Date(source.lastModified())});
-        worker.showMessage(viewer, app.getText("Dialog.FileDetails.Title", source.getPath()),
+        info.add(new Object[]{app.getText("Dialog.FileDetails.Name"), file.getName()});
+        info.add(new Object[]{app.getText("Dialog.FileDetails.Path"), file.getAbsoluteFile().getParent()});
+        info.add(new Object[]{app.getText("Dialog.FileDetails.Format"),
+                FileNameUtils.extensionName(file.getPath()).toUpperCase()});
+        info.add(new Object[]{app.getText("Dialog.FileDetails.Size"), worker.formatSize(file.length())});
+        info.add(new Object[]{app.getText("Dialog.FileDetails.Date"),
+                DateUtils.formatDate(new Date(file.lastModified()), "yyyy-M-d H:m:s")});
+        worker.showMessage(viewer, app.getText("Dialog.FileDetails.Title", file.getPath()),
                 UIFactory.infoLabel(info.toArray(new Object[0][])));
     }
 
     private void viewProperties(Part part) {
         pw.phylame.imabw.ui.dialog.PropertiesDialog.viewProperties(viewer, part);
+    }
+
+
+    // ********************
+    // ** Search functions
+    // ********************
+    private String findText = null;
+
+    /** Find {@code str} from {@code fromIndex} by order {@code reserved} in active editor. */
+    private void findText(String str, int fromIndex, boolean reserved) {
+        EditorTab tab = mainPane.getActiveTab();
+        if (tab == null) {
+            return;
+        }
+        if (str == null || "".equals(str)) {
+            str = worker.inputText(viewer, app.getText("Dialog.Find.Title"),
+                    app.getText("Dialog.Find.Tip"), findText);
+        }
+        if (str == null || "".equals(str)) {
+            return;
+        }
+        ITextEdit editor = tab.getTextEdit();
+        if (fromIndex == -1) {
+            /* search from current position */
+            fromIndex = editor.getCaretPosition();
+        }
+        String text = editor.getText();
+        int index;
+        if (reserved) {
+            index = text.lastIndexOf(str, fromIndex);
+        } else {
+            index = text.indexOf(str, fromIndex);
+        }
+        findText = str;
+        if (index < 0) {
+            if (reserved) {     // find previous
+                viewer.getMenuAction(FIND_PREVIOUS).setEnabled(false);
+            } else {            // find next
+                viewer.getMenuAction(FIND_NEXT).setEnabled(false);
+            }
+            worker.showWarning(viewer, app.getText("Dialog.Find.Title"), app.getText("Dialog.Find.NotFound", str));
+        } else {
+            viewer.getMenuAction(FIND_NEXT).setEnabled(true);
+            viewer.getMenuAction(FIND_PREVIOUS).setEnabled(true);
+            editor.setCaretPosition(index);
+        }
+    }
+
+    /** Repeat last find operation whit order {@code reserved} */
+    private void repeatFind(boolean reserved) {
+        EditorTab tab = mainPane.getActiveTab();
+        if (tab == null) {
+            return;
+        }
+        ITextEdit editor = tab.getTextEdit();
+        /* not have find operator */
+        if (findText == null) {
+            return;
+        }
+        int index;
+        if (reserved) {
+            index = editor.getCaretPosition()-findText.length();
+        } else {
+            index = editor.getCaretPosition()+findText.length();
+        }
+        findText(findText, index, reserved);
+    }
+
+    private void replaceText() {
+        EditorTab tab = mainPane.getActiveTab();
+        if (tab == null) {
+            return;
+        }
+        ITextEdit editor = tab.getTextEdit();
+        if (editor == null) {
+            return;
+        }
+//        String str = worker.inputText(viewer, app.getText("Dialog.Replace.Title"), app.getText("Dialog.Replace.Tip"), findText);
+//        if (str == null || "".equals(str)) {
+//            return;
+//        }
+        System.out.println("Replace string");
+    }
+
+    private void gotoLine() {
+        EditorTab tab = mainPane.getActiveTab();
+        if (tab == null) {
+            return;
+        }
+        ITextEdit editor = tab.getTextEdit();
+        String str = worker.inputText(viewer, app.getText("Dialog.Goto.Title"),
+                app.getText("Dialog.Goto.Tip"), Integer.toString(editor.getCurrentRow() + 1));
+        if (str == null || "".equals(str)) {
+            return;
+        }
+        try {
+            editor.gotoLine(Integer.parseInt(str) - 1);
+            mainPane.focusToEditorWindow();
+        } catch (NumberFormatException e) {
+            worker.showError(viewer, app.getText("Dialog.Goto.Title"), app.getText("Dialog.Goto.InvalidNumber", str));
+        } catch (javax.swing.text.BadLocationException e) {
+            worker.showError(viewer, app.getText("Dialog.Goto.Title"), app.getText("Dialog.Goto.NoSuchLine", str));
+        }
     }
 
     public void onCommand(Object cmdID) {
@@ -279,10 +389,25 @@ public class Manager implements Constants {
             case SHOW_SIDEBAR:
                 viewer.showOrHideSideBar();
                 break;
+            case FIND_TEXT:
+                findText(null, -1, false);
+                break;
+            case FIND_NEXT:
+                repeatFind(false);
+                break;
+            case FIND_PREVIOUS:
+                repeatFind(true);
+                break;
+            case FIND_AND_REPLACE:
+                replaceText();
+                break;
+            case GO_TO_POSITION:
+                gotoLine();
+                break;
             case SHOW_ABOUT:
                 pw.phylame.imabw.ui.dialog.AboutDialog.showAbout(viewer);
                 break;
-            case EDIT_META:
+            case BOOK_ATTRIBUTES:
                 viewProperties(book);
                 break;
             default:
@@ -309,7 +434,7 @@ public class Manager implements Constants {
         }
         PartNode node = PartNode.getPartNode(treePath);
         Part part = node.getPart();
-        if (! part.isSection()) {
+        if (! part.isSection() && node.getParent() != null) {   // not section and not root
             if (! worker.showConfirm(app.getViewer(), app.getText("Dialog.NewChapter.Title"),
                     app.getText("Dialog.NewChapter.NonSection", part.getTitle()))) {
                 return;
@@ -321,25 +446,26 @@ public class Manager implements Constants {
         }
         mainPane.refreshNode(node);
         mainPane.expandTreePath(treePath);
-        mainPane.focusToNode(treePath, sub);
+        mainPane.focusToRow(treePath, node.getChildCount() - 1);
         notifyModified(app.getText("Task.NewedChapter", sub.getPart().getTitle(), part.getTitle()));
     }
 
     private void insertChapter() {
-        TreePath treePath = mainPane.getSelectedPath();
-        if (treePath == null || treePath.getPathCount() == 1) {     // no selection or root
+        TreePath path = mainPane.getSelectedPath();
+        if (path == null || path.getPathCount() == 1) {     // no selection or root
             return;
         }
-        PartNode node = PartNode.getPartNode(treePath);
-        PartNode parent = (PartNode) node.getParent();
         PartNode sub = worker.newChapter(null, app.getText("Dialog.InsertChapter.Title"));
         if (sub == null) {
             return;
         }
+        PartNode node = PartNode.getPartNode(path);
+        PartNode parent = (PartNode) node.getParent();
+        TreePath parentPath = path.getParentPath();
         int index = parent.getIndex(node);
         parent.insertNode(sub, index);
         mainPane.refreshNode(parent);
-        mainPane.focusToNode(treePath.getParentPath(), sub);
+        mainPane.focusToRow(parentPath, index);
         notifyModified(app.getText("Task.InsertedChapter", sub.getPart().getTitle(), node.getPart().getTitle()));
     }
 
@@ -364,19 +490,22 @@ public class Manager implements Constants {
         PartNode node = PartNode.getPartNode(treePath);
         Part part = node.getPart();
         String oldTitle = part.getTitle();
-        String text = worker.inputText(app.getViewer(), app.getText("Dialog.RenameChapter.Title", part.getTitle()),
-                app.getText("Dialog.RenameChapter.Tip"), oldTitle);
-        if (text == null) {
-            // nothing
-        } else if (text.length() == 0) {
-            worker.showError(app.getViewer(), app.getText("Dialog.RenameChapter.Title", part.getTitle()),
-                    app.getText("Dialog.RenameChapter.NoInput"));
-        } else {
-            part.setTitle(text);
-            mainPane.refreshNode(node);
-            mainPane.focusToPath(treePath);
-            notifyModified(app.getText("Task.RenamedChapter", oldTitle, text));
+        String text = null;
+
+        while (text == null || text.length() == 0) {
+            text = worker.inputText(app.getViewer(), app.getText("Dialog.RenameChapter.Title", part.getTitle()),
+                    app.getText("Dialog.RenameChapter.Tip"), oldTitle);
+            if (text == null) {
+                return;     // cancel input
+            } else if (text.length() == 0) {
+                worker.showError(app.getViewer(), app.getText("Dialog.RenameChapter.Title", part.getTitle()),
+                        app.getText("Dialog.RenameChapter.NoInput"));
+            }
         }
+        part.setTitle(text);
+        mainPane.refreshNode(node);
+        mainPane.focusToPath(treePath);
+        notifyModified(app.getText("Task.RenamedChapter", oldTitle, text));
     }
 
     private void moveChapters() {
@@ -385,6 +514,47 @@ public class Manager implements Constants {
             return;
         }
         // select destination
+        TreePath destPath = SelectPartDialog.selectPart(viewer,
+                app.getText("Dialog.MoveChapter.Title"), SelectPartDialog.CHAPTER_OR_SECTION,
+                mainPane.getRootNode(), null);
+        if (destPath == null) {
+            return;
+        }
+        PartNode destNode = PartNode.getPartNode(destPath);
+        if (destNode.isLeaf()) {    // base chapter
+            if (! worker.showConfirm(viewer, app.getText("Dialog.MoveChapter.Title"),
+                    app.getText("Dialog.MoveChapter.EmptyChapter", destNode.getPart().getTitle()))) {
+                return;
+            }
+        }
+        int count = 0;
+        ArrayList<PartNode> ignoredNodes = new ArrayList<>();
+        for (TreePath path: paths) {
+            PartNode node = PartNode.getPartNode(path);
+            // ignore: same one, already in, is ancestor
+            if (node == destNode || destNode.isNodeChild(node) || destNode.isNodeAncestor(node)) {
+                ignoredNodes.add(node);
+                continue;
+            }
+            PartNode parentNode = (PartNode) node.getParent();
+            parentNode.removeNode(node);
+            destNode.appendNode(node);
+            /* refresh old parent */
+            mainPane.refreshNode(parentNode);
+            ++count;
+        }
+        /* refresh, expand and go to destination */
+        mainPane.closeTab(destNode.getPart());  // close dest part tab if opened
+        mainPane.refreshNode(destNode);
+        mainPane.expandTreePath(destPath);
+        mainPane.focusToPath(destPath);
+        if (ignoredNodes.size() != 0) {     // has ignored item
+            String sep = "\n  ";
+            String str = sep+StringUtils.join(ignoredNodes, sep);
+            worker.showMessage(viewer, app.getText("Dialog.MoveChapter.Title"),
+                    app.getText("Dialog.MoveChapter.IgnoreTip", str));
+        }
+        notifyModified(app.getText("Task.MovedChapter", count, destNode.getPart().getTitle()));
     }
 
     private void deleteChapters() {
@@ -413,10 +583,63 @@ public class Manager implements Constants {
 
     private void mergeChapters() {
         TreePath[] paths = mainPane.getSelectedPaths();
-        if (paths == null || paths[0].getPathCount() == 1) {    // null or root
+        if (paths == null || paths.length < 2 || paths[0].getPathCount() == 1) {    // null, one or root
             return;
         }
         // select destination
+        TreePath destPath = SelectPartDialog.selectPart(viewer,
+                app.getText("Dialog.MergeChapter.Title"), SelectPartDialog.CHAPTER_ONLY,
+                mainPane.getRootNode(), null);
+        if (destPath == null) {
+            return;
+        }
+        for (TreePath path: paths) {
+            PartNode node = PartNode.getPartNode(path);
+            if (! node.isLeaf()) {
+                worker.showWarning(viewer, app.getText("Dialog.MergeChapter.Title"),
+                        app.getText("Dialog.MergeChapter.IsSection", node.getPart().getTitle()));
+                return;
+            }
+        }
+        PartNode destNode = PartNode.getPartNode(destPath);
+        Part destPart = destNode.getPart();
+        JCheckBox cb = new JCheckBox(app.getText("Dialog.MergerChapter.WithTitle"));
+        Object[] msg = {app.getText("Dialog.MergeChapter.EmptyChapter", destPart.getTitle()), cb};
+        if (! worker.showConfirm(viewer, app.getText("Dialog.MergeChapter.Title"), msg)) {
+            return;
+        }
+        StringBuilder sb = new StringBuilder();
+        int count = 0;
+        for (TreePath path: paths) {
+            PartNode node = PartNode.getPartNode(path);
+            PartNode parent = (PartNode) node.getParent();
+            if (node == destNode) {     // same node
+                continue;
+            }
+            Part part = node.getPart();
+            if (cb.isSelected()) {
+                sb.append(part.getTitle()).append("\n");
+            }
+            mainPane.closeTab(part);    // cache part content
+            try {
+                sb.append(part.getText()).append("\n");
+            } catch (IOException e) {
+                LOG.debug("cannot get text content of " + part.getTitle(), e);
+            }
+            parent.removeNode(node);
+            mainPane.refreshNode(parent);
+            ++count;
+        }
+        EditorTab tab = mainPane.findEditorTab(destPart);
+        if (tab != null) {      // is opened
+            tab.getTextEdit().setText(sb.toString());
+            mainPane.switchToTab(tab);
+        } else {
+            destPart.getSource().setRaw(sb.toString());
+            mainPane.newTab(destPart);
+        }
+        mainPane.focusToPath(destPath);
+        notifyModified(app.getText("Task.MergedChapter", count, destPart.getTitle()));
     }
 
     private void searchChapters(Part part) {
