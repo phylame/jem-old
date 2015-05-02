@@ -16,28 +16,14 @@
 
 package pw.phylame.ixin.com;
 
-import java.awt.Component;
 import javax.swing.JPanel;
 
 /**
- * Container of UI pane.
+ * Providers UI pane.
  */
-public abstract class IPaneRender {
-    private Component parent = null;
+public interface IPaneRender {
 
-    protected IPaneRender() {
+    void destroy();
 
-    }
-
-    public abstract void destroy();
-
-    public Component getParent() {
-        return parent;
-    }
-
-    public void setParent(Component parent) {
-        this.parent = parent;
-    }
-
-    public abstract JPanel getPane();
+    JPanel getPane();
 }

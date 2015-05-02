@@ -79,6 +79,16 @@ public class Attributes {
     }
 
     /**
+     * Returns attribute value by its key. If {@code key} not exists return {@code null}.
+     * @param key key of the attribute
+     * @return the value to which the specified key is mapped, or
+     *         <tt>null</tt> if this map contains no attribute for the key
+     */
+    public Object getAttribute(String key) {
+        return getAttribute(key, null);
+    }
+
+    /**
      * Returns attribute value converted to string by its key.
      * @param key key of the attribute
      * @param defaultValue the default value of the key
@@ -94,6 +104,16 @@ public class Attributes {
         } else {
             return null;
         }
+    }
+
+    /**
+     * Returns attribute value converted to string by its key.
+     * @param key key of the attribute
+     * @return the value to which the specified key is mapped, or
+     *         <tt>null</tt> if this map contains no attribute for the key
+     */
+    public String stringAttribute(String key) {
+        return stringAttribute(key, null);
     }
 
     /**

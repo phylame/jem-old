@@ -16,9 +16,8 @@
 
 package pw.phylame.ixin;
 
-import pw.phylame.ixin.frame.IFrame;
-
 import javax.swing.UIManager;
+import pw.phylame.ixin.frame.IFrame;
 
 import java.util.Map;
 import java.util.Locale;
@@ -32,8 +31,11 @@ public abstract class IApplication {
     /** The unique {@code IApplication} instance */
     protected static IApplication instance = null;
 
+    /** Application name */
+    private String name;
+
     /** The system arguments */
-    private String[] args = null;
+    private String[] args;
 
     /** Language resource */
     private java.util.ResourceBundle bundle = null;
@@ -42,9 +44,15 @@ public abstract class IApplication {
     protected Map<String, Object> settings = new java.util.HashMap<>();
 
     /** The constructor */
-    protected IApplication(String[] args) {
+    protected IApplication(String name, String[] args) {
         instance = this;
+        setName(name);
         this.args = args;
+        loadSettings();
+    }
+
+    protected void loadSettings() {
+
     }
 
     protected void loadBundle(String path) throws java.util.MissingResourceException {
@@ -131,7 +139,24 @@ public abstract class IApplication {
     }
 
     /**
-     * Get system arguments.
+     * Gets application name.
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Sets application name.
+     * @param name the new name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Gets system arguments.
+     * @return array of argument string
      */
     public String[] getArguments() {
         return args;

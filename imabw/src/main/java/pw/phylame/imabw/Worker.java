@@ -1,5 +1,7 @@
 /*
- * Copyright 2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2015 Peng Wan <phylame@163.com>
+ *
+ * This file is part of Imabw.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +18,14 @@
 
 package pw.phylame.imabw;
 
-import pw.phylame.imabw.ui.com.PartNode;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import pw.phylame.ixin.IToolkit;
+import pw.phylame.imabw.ui.com.PartNode;
+
 import pw.phylame.jem.core.Book;
+import pw.phylame.jem.core.BookHelper;
 import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.Part;
 import pw.phylame.jem.util.JemException;
@@ -27,33 +34,46 @@ import pw.phylame.tools.file.FileFactory;
 import pw.phylame.tools.file.FileNameUtils;
 
 import java.awt.Component;
-import javax.swing.*;
+import javax.swing.UIManager;
+import javax.swing.JOptionPane;
+import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.tree.TreeNode;
-import javax.swing.tree.TreePath;
 
+import java.net.URL;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 /**
- * Utilities functions and constants for Imabw.
+ * Utilities functions for Imabw.
  */
 public class Worker {
+    private static Log LOG = LogFactory.getLog(Worker.class);
+
+    private static Worker worker;
+
     Application app = Application.getApplication();
 
     private JFileChooser fileChooser = new JFileChooser();
 
-    private Map<String, String> formatNames = new HashMap<>();
+    private HashMap<String, String> formatNames = new HashMap<>();
 
     public Worker() {
+        worker = this;
+
+        // supported formats
         String[] formats = {"pmab", "umd", "jar", "txt", "epub", "jpg", "jpeg", "png", "gif", "bmp"};
-        for (String fmt: formats) {
-            String name = app.getText("Common.Format."+fmt.toUpperCase());
+        for (String fmt : formats) {
+            String name = app.getText("Common.Format." + fmt.toUpperCase());
             formatNames.put(fmt, String.format("%s (*.%s)", name, fmt));
         }
 
@@ -63,8 +83,13 @@ public class Worker {
         UIManager.put("OptionPane.noButtonText", app.getText("Dialog.ButtonNo"));
     }
 
+    public static Worker getInstance() {
+        return worker;
+    }
+
     public String inputText(Component parent, String title, Object message, String initValue) {
-        return (String) JOptionPane.showInputDialog(parent, message, title, JOptionPane.PLAIN_MESSAGE, null, null, initValue);
+        return (String) JOptionPane.showInputDialog(parent, message, title, JOptionPane.PLAIN_MESSAGE, null,
+                null, initValue);
     }
 
     public boolean showConfirm(Component parent, String title, Object message) {
@@ -88,6 +113,21 @@ public class Worker {
                 IToolkit.createImageIcon(":/res/img/dialog/prohibit.png"));
     }
 
+    public String inputLoop(Component parent, String title, String inputTip, String noInput, String initValue) {
+        String text = null;
+        while (StringUtils.isEmpty(text)) {
+            text = inputText(parent, title, inputTip, initValue);
+            if (text == null) {
+                break;          // cancel input
+            }
+            if (text.length() == 0) {
+                showError(parent, title, noInput);
+            }
+        }
+
+        return text;
+    }
+
     public Date selectDate(Component parent, String title, String tipText, Date initDate) {
         com.toedter.calendar.JCalendar calendar = new com.toedter.calendar.JCalendar(initDate);
         Object[] message = new Object[]{tipText, calendar};
@@ -107,8 +147,9 @@ public class Worker {
 
 
     public void initFileChooser(String title, List<FileFilter> filters, FileFilter initFilter,
-                                       boolean acceptAll, String initDir) {
+                                       boolean acceptAll, int mode, String initDir) {
         fileChooser.setDialogTitle(title);
+        fileChooser.setFileSelectionMode(mode);
         fileChooser.setAcceptAllFileFilterUsed(acceptAll);
         /* remove all file filters */
         fileChooser.resetChoosableFileFilters();
@@ -126,11 +167,11 @@ public class Worker {
         }
     }
 
-    public List<FileFilter> makeFileFormatFilters(List<String> formats, boolean acceptAll) {
+    public List<FileFilter> makeFileExtensionFilters(String[] formats, boolean acceptAll) {
         List<FileFilter> filters = new java.util.ArrayList<>();
         if (acceptAll) {
-            filters.add(new FileNameExtensionFilter(app.getText("Common.Format.All", StringUtils.join(formats, " *.")),
-                    formats.toArray(new String[0])));
+            filters.add(new FileNameExtensionFilter(
+                    app.getText("Common.Format.All", StringUtils.join(formats, " *.")), formats));
         }
         for (String format: formats) {
             filters.add(new FileNameExtensionFilter(formatNames.get(format), format));
@@ -140,8 +181,7 @@ public class Worker {
 
     public File selectOpenFile(Component parent, String title, List<FileFilter> filters,
                                       FileFilter initFilter, boolean acceptAll, String initDir) {
-        initFileChooser(title, filters, initFilter, acceptAll, initDir);
-        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        initFileChooser(title, filters, initFilter, acceptAll, JFileChooser.FILES_ONLY, initDir);
         if (fileChooser.showOpenDialog(parent) != JFileChooser.APPROVE_OPTION) {
             return null;
         }
@@ -149,26 +189,48 @@ public class Worker {
     }
 
     public File selectSaveFile(Component parent, String title, List<FileFilter> filters,
-                                      FileFilter initFilter, boolean acceptAll, String initDir) {
-        initFileChooser(title, filters, initFilter, acceptAll, initDir);
-        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        if (fileChooser.showSaveDialog(parent) != JFileChooser.APPROVE_OPTION) {
-            return null;
-        }
-        File file = fileChooser.getSelectedFile();
-        /* Add file extension name if not given */
-        FileNameExtensionFilter filter = (FileNameExtensionFilter) fileChooser.getFileFilter();
-        if (filter.getExtensions().length == 1) {
-            if ("".equals(FileNameUtils.extensionName(file.getPath()))) {
-                file = new File(file.getPath() + "." + filter.getExtensions()[0]);
+                               FileFilter initFilter, boolean acceptAll, String initDir) {
+        initFileChooser(title, filters, initFilter, acceptAll, JFileChooser.FILES_ONLY, initDir);
+        File file = null;
+        while (fileChooser.showSaveDialog(parent) == JFileChooser.APPROVE_OPTION) {
+            file = fileChooser.getSelectedFile();
+
+            /* Add file extension name if not given */
+            String format = getSelectedFormat();
+            if (format != null) {
+                if ("".equals(FileNameUtils.extensionName(file.getPath()))) {
+                    file = new File(file.getPath() + "." + format);
+                }
             }
+            if (file != null && file.exists()) {    // ask overwrite
+                if (! showConfirm(parent, title, app.getText("Dialog.SaveFile.Overwrite", file.getPath()))) {
+                    file = null;
+                    continue;
+                }
+            }
+            break;
         }
         return file;
     }
 
+    public String[] getSelectedFormats() {
+        FileFilter fileFilter = fileChooser.getFileFilter();
+        if (fileFilter instanceof FileNameExtensionFilter) {
+            return ((FileNameExtensionFilter) fileFilter).getExtensions();
+        }
+        return null;
+    }
+
+    public String getSelectedFormat() {
+        String[] formats = getSelectedFormats();
+        if (formats != null && formats.length > 0) {
+            return formats[0];
+        }
+        return null;
+    }
+
     public File selectDirectory(Component parent, String title, String initDir) {
-        initFileChooser(title, null, null, false, initDir);
-        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        initFileChooser(title, null, null, false, JFileChooser.DIRECTORIES_ONLY, initDir);
         if (fileChooser.showOpenDialog(parent) != JFileChooser.APPROVE_OPTION) {
             return null;
         }
@@ -176,8 +238,18 @@ public class Worker {
     }
 
     public File selectOpenBook(Component parent, String title) {
-        List<String> formats = Arrays.asList("pmab", "umd", "jar", "txt", "epub");
-        return selectOpenFile(parent, title, makeFileFormatFilters(formats, true), null, true, null);
+        String[] formats = BookHelper.supportedParsers().toArray(new String[0]);
+        return selectOpenFile(parent, title, makeFileExtensionFilters(formats, true), null, true, null);
+    }
+
+    public File selectSaveBook(Component parent, String title, String format) {
+        String[] formats;
+        if (format != null) {
+            formats = new String[]{format};
+        } else {
+            formats = BookHelper.supportedParsers().toArray(new String[0]);
+        }
+        return selectSaveFile(parent, title, makeFileExtensionFilters(formats, false), null, false, null);
     }
 
     // get max same content in left of a and b
@@ -207,15 +279,19 @@ public class Worker {
         }
     }
 
-    public Book newBook(String title) {
-        while (title == null || title.length() == 0) {
-            title = inputText(app.getViewer(), app.getText("Dialog.NewBook.Title"), app.getText("Dialog.NewBook.Tip"),
-                    app.getText("Common.NewBookTitle"));
+    /**
+     * Creates new book with specified title.
+     * If <code>title</code> is <code>null</code>, asks user input a new title.
+     * @param parent parent component of input dialog
+     * @param title initialized book title
+     * @return the new book
+     */
+    public Book newBook(Component parent, String title) {
+        if (StringUtils.isEmpty(title)) {
+            title = inputLoop(parent, app.getText("Dialog.NewBook.Title"), app.getText("Dialog.NewBook.Tip"),
+                    app.getText("Dialog.NewBook.NoInput"), app.getText("Common.NewBookTitle"));
             if (title == null) {
-                return null;    // cancel input
-            }
-            if (title.length() == 0) {
-                showError(app.getViewer(), app.getText("Dialog.NewBook.Title"), app.getText("Dialog.NewBook.NoInput"));
+                return null;
             }
         }
         Book book = new Book(title, "");
@@ -225,84 +301,154 @@ public class Worker {
     }
 
     /**
-     * Selects book file and open it.
+     * Loads book from book file.
+     * If <code>file</code> is <code>null</code>, asks user to select book file.
+     * @param file the book file
      * @param title title of open file dialog
      * @return the book
      */
-    public Book openBook(File file, String title) {
+    public Book openBook(Component parent, File file, String title) {
         // 1. select book file
         if (file == null) {
-            file = selectOpenBook(app.getViewer(), title);
+            file = selectOpenBook(parent, title);
         }
         if (file == null) {
-            return null;
+            return null;    // no selection
         }
 
+        fileChooser.setCurrentDirectory(file.getAbsoluteFile().getParentFile());
+
         String format = FileNameUtils.extensionName(file.getPath());
-        Map<String, Object> kw = null;
+        HashMap<String, Object> kw = null;
 
         // 2. read book
         Book book = null;
         try {
-            book = Jem.readBook(file, format, null);
+            book = Jem.readBook(file, format, kw);
             // 3. addAttributes
             addAttributes(book);
-        } catch (IOException |JemException e) {
-            showError(app.getViewer(), title, app.getText("Dialog.OpenBook.Error",
-                    file.getPath(), e.getMessage()));
+        } catch (IOException | JemException e) {
+            showError(parent, title, app.getText("Dialog.OpenBook.Error", file.getPath(), e.getMessage()));
         }
 
         return book;
     }
 
-    public PartNode newChapter(PartNode parent, String title) {
-        String text = null;
-        while (text == null || text.length() == 0) {
-            text = inputText(app.getViewer(), title, app.getText("Dialog.NewChapter.Tip"),
-                    app.getText("Common.NewChapterTitle"));
-            if (text == null) {
-                return null;        // cancel input
-            }
-            if (text.length() == 0) {
-                showError(app.getViewer(), title, app.getText("Dialog.NewChapter.NoInput"));
-            }
+    public File getSourceFile(Book book) {
+        Object o = book.getAttribute(Jem.SOURCE_FILE);
+        if (o instanceof File) {
+            return (File) o;
+        } else {
+            return null;
+        }
+    }
+
+    public String getSourceFormat(Book book) {
+        Object o = book.getAttribute(Jem.SOURCE_FORMAT);
+        if (o instanceof String) {
+            return (String) o;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Creates a new chapter node and appends it to <tt>parentNode</tt> if presents.
+     * @param parent parent component of input dialog
+     * @param parentNode parent node, if not <tt>null</tt>, appends new node to it.
+     * @param title dialog title of input dialog
+     * @return the new node
+     */
+    public PartNode newChapter(Component parent, PartNode parentNode, String title) {
+        String text = inputLoop(parent, title, app.getText("Dialog.NewChapter.Tip"),
+                app.getText("Dialog.NewChapter.NoInput"), app.getText("Common.NewChapterTitle"));
+        if (text == null) {
+            return null;
         }
         PartNode node = new PartNode(new Part(text));
-        if (parent != null) {
-            parent.appendNode(node);
+        if (parentNode != null) {
+            parentNode.appendNode(node);
         }
 
         return node;
     }
 
     /**
-     * Saves book to file. If {@code path} is <code>null</code>, select new file path.
+     * Saves book to file.
+     * If {@code path} is <code>null</code>, asks user tot select new file path.
+     * @param parent parent component of input dialog
+     * @param title title of save file dialog
      * @param book the book
      * @param path destination path
      * @param format output format
-     * @param title title of save file dialog
      * @return the saved path
      */
-    public File saveBook(Book book, File path, String format, String title) {
+    public File saveBook(Component parent, String title, Book book, File path, String format) {
         // 1. select file path is path is null
-        // 3. select output kw
-        // 4. save book
-        Jem.walkPart(book, new Jem.Walker() {
-            @Override
-            public boolean watch(Part part) {
-                System.out.println(part.getTitle());
-                return true;
+        if (path == null) {
+            path = selectSaveBook(parent, title, format);
+            if (path == null) {     // cancel saving
+                return null;
             }
-        });
-        System.out.printf("save %s to %s with %s\n", book, path, format);
-        return null;
+            File source = getSourceFile(app.getManager().getEditedBook());
+            if (source != null && source.compareTo(path) == 0) {
+                showError(parent, title, app.getText("Dialog.SaveBook.UsingFile", path));
+                return null;
+            }
+            format = getSelectedFormat();
+            assert format != null;
+        }
+        HashMap<String, Object> kw = new HashMap<>();
+        System.out.printf("save book %s to %s with %s\n", book, path, format);
+//
+//        File destFile;
+//        boolean isTemporary = false;
+//
+//        File openedFile = app.getManager().getOpenedFile();
+//        // output file is the current opened book file
+//        if (openedFile != null && path.compareTo(openedFile) == 0) {
+//            // when saving sub-part of current edited book, output file is
+//            //      the source of current edited book, so prohibit overwriting it.
+//            if (book != app.getManager().getEditedBook()) {
+//                showError(parent, title, app.getText("Dialog.SaveBook.UsingFile", path));
+//                return null;
+//            }
+//            // when saving the active book, using temporary file
+//            System.out.println("using temporary file");
+//            destFile = new File(path.getParent(), "."+path.getName()+".tmp");
+//            isTemporary = true;
+//        } else {
+//            destFile = path;
+//        }
+//        if (! destFile.exists()) {
+//            try {
+//                destFile.createNewFile();
+//            } catch (Exception e) {
+//                showError(app.getViewer(), title,
+//                        app.getText("Dialog.SaveBook.Error", path.getPath(), e.getMessage()));
+//                return null;
+//            }
+//        }
+//        try {
+//            Jem.writeBook(book, destFile, format, kw);
+//        } catch (IOException | JemException e) {
+//            showError(app.getViewer(), title,
+//                    app.getText("Dialog.SaveBook.Error", path.getPath(), e.getMessage()));
+//            return null;
+//        }
+//        if (isTemporary) {
+//            if (path.delete() && ! destFile.renameTo(path)) {
+//                return null;
+//            }
+//        }
+        return path;
     }
 
     private void addAttributes(Book book) {
         if (book.getCover() == null) {
             URL url = Worker.class.getResource("/cover.png");
             if (url != null) {
-                book.setCover(FileFactory.getFile(url, null));
+                book.setCover(FileFactory.fromURL(url, null));
             }
         }
         if ("".equals(book.stringAttribute("vendor", ""))) {

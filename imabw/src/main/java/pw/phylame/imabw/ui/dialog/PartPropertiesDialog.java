@@ -18,29 +18,44 @@
 
 package pw.phylame.imabw.ui.dialog;
 
-import pw.phylame.ixin.ITextEdit;
-import pw.phylame.jem.core.Part;
-
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
 
-public class PropertiesDialog extends JDialog {
-    private JPanel contentPane;
-    private JButton buttonOK;
-    private JButton buttonCancel;
-    private JButton openButton;
-    private JButton removeButton;
-    private JButton saveButton;
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
+import pw.phylame.jem.core.Part;
+import pw.phylame.imabw.Application;
+
+public class PartPropertiesDialog extends JDialog {
+    private static Application app = Application.getApplication();
+
+    private JPanel    contentPane;
+    private JButton   buttonOK;
+    private JButton   buttonCancel;
+    private JButton   buttonOpen;
+    private JButton   buttonRemove;
+    private JButton   buttonSave;
+    private JButton   button1;
+    private JButton   button2;
+    private JButton   button3;
     private JTextArea textArea1;
-    private JTable table1;
+    private JTable    table1;
 
-    public PropertiesDialog() {
+    private Part part;
+
+    public PartPropertiesDialog(Frame owner, String title, Part part) {
+        super(owner, title, true);
+        this.part = part;
+        init();
+    }
+
+    public PartPropertiesDialog(Dialog owner, String title, Part part) {
+        super(owner, title, true);
+        this.part = part;
+        init();
+    }
+
+    private void init() {
         setContentPane(contentPane);
-        setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
         buttonCancel.addActionListener(new ActionListener() {
@@ -49,7 +64,7 @@ public class PropertiesDialog extends JDialog {
             }
         });
 
-// call onCancel() when cross is clicked
+        // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -57,7 +72,7 @@ public class PropertiesDialog extends JDialog {
             }
         });
 
-// call onCancel() on ESCAPE
+        // call onCancel() on ESCAPE
         contentPane.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
@@ -69,13 +84,18 @@ public class PropertiesDialog extends JDialog {
     }
 
     private void onCancel() {
-// add your code here if necessary
         dispose();
     }
 
     public static void viewProperties(Frame owner, Part part) {
-        PropertiesDialog dialog = new PropertiesDialog();
+        PartPropertiesDialog dialog = new PartPropertiesDialog(owner,
+                app.getText("Dialog.PartProperties.Title", part.getTitle()), part);
+        dialog.setVisible(true);
+    }
 
+    public static void viewProperties(Dialog owner, Part part) {
+        PartPropertiesDialog dialog = new PartPropertiesDialog(owner,
+                app.getText("Dialog.PartProperties.Title", part.getTitle()), part);
         dialog.setVisible(true);
     }
 }

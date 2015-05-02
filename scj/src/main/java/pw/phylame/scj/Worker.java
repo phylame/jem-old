@@ -61,7 +61,7 @@ public final class Worker {
 	private static FileObject getPemCover() {
 		URL url = Worker.class.getResource("/cover.png");
 		if (url != null) {
-			return FileFactory.getFile(url, null);
+			return FileFactory.fromURL(url, null);
 		}
 		return null;
 	}
@@ -76,7 +76,7 @@ public final class Worker {
 					cover = getPemCover();
 				} else {
 					try {
-						cover = FileFactory.getFile(detectURL(raw), null);
+						cover = FileFactory.fromURL(detectURL(raw), null);
 					} catch (IOException e) {
 						LOG.debug("invalid cover file: "+raw, e);
 						SCI.error(SCI.getText("SCI_INVALID_COVER", raw));

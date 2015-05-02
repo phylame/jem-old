@@ -140,7 +140,7 @@ public class TxtParser implements Parser {
 
         int start = offsetIt.next();
         if (start > 0) {    // no formatted head
-            FileObject fb = FileFactory.getFile("text_head.txt", source, 0, start*2, null);
+            FileObject fb = FileFactory.fromBlock("text_head.txt", source, 0, start*2, null);
             book.setItem("text_head", new TextObject(fb, CACHED_TEXT_ENCODING));
         }
 
@@ -152,7 +152,7 @@ public class TxtParser implements Parser {
             int length = end - start;
 
             part.setTitle(title.trim());
-            FileObject fb = FileFactory.getFile(start + ".txt", source, start * 2, length * 2, null);
+            FileObject fb = FileFactory.fromBlock(start + ".txt", source, start * 2, length * 2, null);
             part.setSource(new TextObject(fb, CACHED_TEXT_ENCODING));
 
             start = end;

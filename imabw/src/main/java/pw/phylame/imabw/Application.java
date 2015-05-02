@@ -35,7 +35,7 @@ import java.util.Properties;
 /**
  * The entry of Imabw.
  */
-public class Application extends IApplication {
+public class Application extends IApplication implements Constants {
     private static Log LOG = LogFactory.getLog(Application.class);
 
     /** The manager */
@@ -48,7 +48,7 @@ public class Application extends IApplication {
     private Viewer viewer = null;
 
     public Application(String[] args) {
-        super(args);
+        super(INNER_NAME, args);
         checkHome();
         loadSettings();
         initApp();
@@ -56,7 +56,7 @@ public class Application extends IApplication {
 
     /** Check and create user home directory for Imabw */
     private void checkHome() {
-        java.io.File homeDir = new java.io.File(Constants.IMABW_HOME);
+        java.io.File homeDir = new java.io.File(IMABW_HOME);
         if (! homeDir.exists() && ! homeDir.mkdirs()) {
             throw new RuntimeException("Cannot create Imabw home directory");
         }
@@ -67,14 +67,15 @@ public class Application extends IApplication {
     }
 
     /** Load configuration file */
-    private void loadSettings() {
+    @Override
+    protected void loadSettings() {
         Properties prop = new Properties();
         Reader reader = null;
         try {
-            reader = new InputStreamReader(new FileInputStream(Constants.SETTINGS_FILE), "UTF-8");
+            reader = new InputStreamReader(new FileInputStream(SETTINGS_FILE), "UTF-8");
             prop.load(reader);
         } catch (IOException e) {
-            LOG.debug("cannot load settings file: "+Constants.SETTINGS_FILE, e);
+            LOG.debug("cannot load settings file: "+SETTINGS_FILE, e);
         } finally {
             if (reader != null) {
                 try {
@@ -160,7 +161,7 @@ public class Application extends IApplication {
 
     /** Initialize Imabw */
     private void initApp() {
-        loadBundle(Constants.I18N_PATH);
+        loadBundle(I18N_PATH);
         setTheme((String) getSetting("ui.face.lafTheme"), (boolean) getSetting("ui.face.decorateTitle"));
         setAAText((boolean) getSetting("ui.font.aatext"));
         setGeneralFonts((Font) getSetting("ui.font.global"));

@@ -262,21 +262,21 @@ public final class FileFactory {
         }
     }
 
-    public static FileObject getFile(File file, String mime) throws IOException {
+    public static FileObject fromFile(File file, String mime) throws IOException {
         if (file == null) {
             throw new NullPointerException("file");
         }
         return new NormalFile(file, getMime(file.getPath(), mime));
     }
 
-    public static FileObject getFile(ZipFile zipFile, String entryName, String mime) throws IOException {
+    public static FileObject fromZip(ZipFile zipFile, String entryName, String mime) throws IOException {
         if (entryName == null) {
             throw new NullPointerException("entryName");
         }
         return new InnerZip(zipFile, entryName, getMime(entryName, mime));
     }
 
-    public static FileObject getFile(String name, RandomAccessFile file, long offset, long size,
+    public static FileObject fromBlock(String name, RandomAccessFile file, long offset, long size,
                                      String mime) throws IOException {
         if (name == null) {
             throw new NullPointerException("name");
@@ -284,7 +284,7 @@ public final class FileFactory {
         return new AreaFile(name, file, offset, size, getMime(name, mime));
     }
 
-    public static FileObject getFile(URL url, String mime) {
+    public static FileObject fromURL(URL url, String mime) {
         if (url == null) {
             throw new NullPointerException("url");
         }

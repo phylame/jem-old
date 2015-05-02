@@ -18,20 +18,25 @@
 
 package pw.phylame.imabw.ui.com;
 
+import javax.swing.Timer;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import pw.phylame.imabw.Application;
+
 import pw.phylame.ixin.com.IPaneRender;
 import pw.phylame.tools.DateUtils;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Date;
 
-public class EditorIndicator extends IPaneRender {
+public class EditorIndicator implements IPaneRender {
+    private JPanel rootPanel;
+
     private JLabel ruler;
     private JLabel encoding;
     private JLabel words;
-    private JPanel rootPanel;
     private JLabel time;
 
     public EditorIndicator() {
@@ -45,19 +50,18 @@ public class EditorIndicator extends IPaneRender {
         setEncoding(null);
         setWords(-1);
 
-        // per second
+        // per 30 seconds
         time.setText(DateUtils.formatDate(new Date(), "H:mm "));
         new Timer(30000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                time.setText(DateUtils.formatDate(new Date(), "H:m "));
+                time.setText(DateUtils.formatDate(new Date(), "H:mm "));
             }
         }).start();
     }
 
     @Override
     public void destroy() {
-
     }
 
     @Override

@@ -20,10 +20,8 @@ package pw.phylame.imabw.ui.com;
 
 import pw.phylame.jem.core.Part;
 
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreePath;
-import java.util.Iterator;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 public class PartNode extends DefaultMutableTreeNode {
     public static PartNode makePartTree(Part part) {

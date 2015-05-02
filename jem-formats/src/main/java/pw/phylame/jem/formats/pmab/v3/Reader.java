@@ -132,7 +132,7 @@ public class Reader {
         } else {        // file
             String[] parts = type.split(";");
             try {
-                FileObject fb = FileFactory.getFile(zipFile, data, parts[0]);   // 0 is MIME
+                FileObject fb = FileFactory.fromZip(zipFile, data, parts[0]);   // 0 is MIME
                 value = prepareFile(fb, parts);
             } catch (IOException e) {
                 LOG.debug("not found file: "+data, e);
@@ -217,7 +217,7 @@ public class Reader {
                     }
                 }
                 try {
-                    FileObject fb = FileFactory.getFile(zipFile, content.getText(), mime);
+                    FileObject fb = FileFactory.fromZip(zipFile, content.getText(), mime);
                     chapter.getSource().setFile(fb, encoding);
                 } catch (IOException e) {
                     LOG.debug("cannot load text content: "+content.getText(), e);

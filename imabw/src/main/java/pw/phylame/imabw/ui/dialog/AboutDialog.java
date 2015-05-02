@@ -1,5 +1,7 @@
 /*
- * Copyright 2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2015 Peng Wan <phylame@163.com>
+ *
+ * This file is part of Imabw.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,94 +18,85 @@
 
 package pw.phylame.imabw.ui.dialog;
 
-import pw.phylame.imabw.Application;
-import pw.phylame.imabw.Constants;
-import pw.phylame.jem.core.Jem;
-
-import javax.swing.*;
 import java.awt.event.*;
+import javax.swing.*;
+
+import pw.phylame.jem.core.Jem;
+import pw.phylame.imabw.Application;
 
 public class AboutDialog extends JDialog {
     private JPanel contentPane;
-    private JButton btnClose;
-    private JLabel lbInfo;
-    private JLabel lbRights;
-    private JLabel lbHome;
-    private JLabel lbLicense;
-    private JLabel lbJem;
+    private JLabel labelMessage;
+    private JLabel labelJem;
+    private JLabel labelRights;
+    private JLabel labelLicense, labelHome;
+    private JButton buttonClose;
 
     public AboutDialog(JFrame owner) {
-        super(owner);
+        super(owner, true);
         setContentPane(contentPane);
-        setModal(true);
-        getRootPane().setDefaultButton(btnClose);
-        final Application app = Application.getApplication();
+        getRootPane().setDefaultButton(buttonClose);
 
-        btnClose.setText(app.getText("Dialog.About.ButtonClose"));
-        btnClose.setToolTipText(app.getText("Dialog.About.ButtonClose.Tip"));
-        btnClose.addActionListener(new ActionListener() {
+        final Application app = Application.getApplication();
+        setTitle(app.getText("Dialog.About.Title"));
+
+        buttonClose.setText(app.getText("Dialog.About.ButtonClose"));
+        buttonClose.setToolTipText(app.getText("Dialog.About.ButtonClose.Tip"));
+        buttonClose.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onCancel();
+                dispose();
             }
         });
 
-// call onCancel() when cross is clicked
+        // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                onCancel();
+                dispose();
             }
         });
 
-// call onCancel() on ESCAPE
+        // call onCancel() on ESCAPE
         contentPane.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onCancel();
+                dispose();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
-        lbInfo.setText(String.format("%s %s on %s (%s)", app.getText("App.Name"), Constants.VERSION,
+        labelMessage.setText(String.format("%s %s on %s (%s)", app.getText("App.Name"), Application.VERSION,
                 System.getProperty("os.name"), System.getProperty("os.arch")));
-        lbJem.setText(String.format("Jem core: %s by %s", Jem.VERSION, Jem.VENDOR));
-        lbRights.setText(app.getText("App.Rights"));
+        labelJem.setText(String.format("Jem core: %s by %s", Jem.VERSION, Jem.VENDOR));
+        labelRights.setText(app.getText("App.Rights"));
 
-        lbLicense.setText(String.format("<html><a href=\"%s\">%s</a></html>",
+        labelLicense.setText(String.format("<html><a href=\"%s\">%s</a></html>",
                 app.getText("App.LicenseURL"), app.getText("Dialog.About.LabelLicense")));
-        lbLicense.addMouseListener(new MouseAdapter() {
+        labelLicense.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 try {
-                    java.awt.Desktop.getDesktop().browse(new java.net.URI(
-                            app.getText("App.LicenseURL")));
+                    java.awt.Desktop.getDesktop().browse(new java.net.URI(app.getText("App.LicenseURL")));
                 } catch (Exception exp) {
                     exp.printStackTrace();
                 }
             }
         });
 
-        lbHome.setText(String.format("<html><a href=\"%s\">%s</a></html>",
+        labelHome.setText(String.format("<html><a href=\"%s\">%s</a></html>",
                 app.getText("App.HomeURL"), app.getText("Dialog.About.LabelHome")));
-        lbHome.addMouseListener(new MouseAdapter() {
+        labelHome.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 try {
-                    java.awt.Desktop.getDesktop().browse(new java.net.URI(
-                            app.getText("App.HomeURL")));
+                    java.awt.Desktop.getDesktop().browse(new java.net.URI(app.getText("App.HomeURL")));
                 } catch (Exception exp) {
                     exp.printStackTrace();
                 }
             }
         });
 
-        setTitle(app.getText("Dialog.About.Title"));
         pack();
         setResizable(false);
         setLocationRelativeTo(getOwner());
-    }
-
-    private void onCancel() {
-// add your code here if necessary
-        dispose();
     }
 
     public static void showAbout(JFrame owner) {

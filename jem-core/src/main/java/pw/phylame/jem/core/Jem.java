@@ -36,13 +36,19 @@ public final class Jem {
     private static Log LOG = LogFactory.getLog(Jem.class);
 
     /** Jem version */
-    public static final String VERSION = "2.0";
+    public static final String VERSION          = "2.0";
 
     /** Jem vendor */
-    public static final String VENDOR = "PW";
+    public static final String VENDOR           = "PW";
 
     /** Format of Pem default format */
-    public static final String PMAB_FORMAT = "pmab";
+    public static final String PMAB_FORMAT      = "pmab";
+
+    /** Key for source file, auto putted after parsing file */
+    public static final String SOURCE_FILE      = "source_file";
+
+    /** Key for source format, auto putted after parsing file */
+    public static final String SOURCE_FORMAT    = "source_format";
 
     /**
      * Reads <tt>Book</tt> from book file.
@@ -92,8 +98,8 @@ public final class Jem {
             throw new UnsupportedFormatException(format, "Unsupported format: "+format);
         }
         Book book = parser.parse(file, kw);
-        book.setAttribute("source_file", file);
-        book.setAttribute("source_format", format);
+        book.setAttribute(SOURCE_FILE, file);
+        book.setAttribute(SOURCE_FORMAT, format);
         return book;
     }
 

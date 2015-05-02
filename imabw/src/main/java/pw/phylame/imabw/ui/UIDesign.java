@@ -1,12 +1,14 @@
 /*
- * Copyright 2014 Peng Wan <phylame@163.com> <minexiac@gmail.com>
+ * Copyright 2014-2015 Peng Wan <phylame@163.com>
+ *
+ * This file is part of Imabw.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 	
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,10 +18,11 @@
 
 package pw.phylame.imabw.ui;
 
-import pw.phylame.imabw.Application;
 import pw.phylame.imabw.Constants;
-import pw.phylame.ixin.ITextEdit;
+import pw.phylame.imabw.Application;
+
 import pw.phylame.ixin.IToolkit;
+import pw.phylame.ixin.ITextEdit;
 import pw.phylame.ixin.com.IAction;
 import pw.phylame.ixin.com.IMenuModel;
 import pw.phylame.ixin.com.IMenuLabel;
@@ -203,7 +206,7 @@ public class UIDesign implements Constants {
 
     /* Tab control */
     public static Object[][] TAB_POPUP_MENU_ACTIONS = {
-            {CLOSE_TAB,
+            {CLOSE_ACTIVE_TAB,
                     app.getText("Frame.Tab.Menu.Close"),
                     app.getText("Frame.Tab.Menu.Close.Icon"),
                     app.getText("Frame.Tab.Menu.Close.Mnemonic"),
@@ -302,7 +305,7 @@ public class UIDesign implements Constants {
 
     /* Tab control */
     public static Object[] TAB_POPUP_MENU_MODEL = {
-            CLOSE_TAB, CLOSE_OTHER_TABS, CLOSE_ALL_TABS, CLOSE_UNMODIFIED_TABS,
+            CLOSE_ACTIVE_TAB, CLOSE_OTHER_TABS, CLOSE_ALL_TABS, CLOSE_UNMODIFIED_TABS,
             null,
             SELECT_NEXT_TAB,
             SELECT_PREVIOUS_TAB
@@ -325,7 +328,7 @@ public class UIDesign implements Constants {
             TREE_PROPERTIES
     };
 
-    /* set ITextEdit text and icons */
+    /* set text and icons for ITextEdit actions*/
     static {
         Object[][] editModel = new Object[][] {
                 {ITextEdit.UNDO, "Undo"},

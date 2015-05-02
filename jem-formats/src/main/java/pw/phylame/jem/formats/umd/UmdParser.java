@@ -324,7 +324,7 @@ public class UmdParser implements Parser {
 
     private void readCoverImage() throws IOException {
         long length = readInt(source) - 9;
-        FileObject cover = FileFactory.getFile("cover."+UMD.getNameOfFormat(coverFormat), source,
+        FileObject cover = FileFactory.fromBlock("cover."+UMD.getNameOfFormat(coverFormat), source,
                 source.getFilePointer(), length, null);
         book.setCover(cover);
         source.skipBytes((int) length);
@@ -345,7 +345,7 @@ public class UmdParser implements Parser {
                 break;
             case UMD.CARTOON:
                 String name = String.format("cartoon_%d.%s", book.size()+1, UMD.getNameOfFormat(imageFormat));
-                FileObject image = FileFactory.getFile(name, source, offset, length, null);
+                FileObject image = FileFactory.fromBlock(name, source, offset, length, null);
                 book.newChapter(String.valueOf(book.size() + 1), "", image, null);
                 break;
             case UMD.COMIC:

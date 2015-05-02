@@ -20,70 +20,85 @@ package pw.phylame.imabw;
  * Constants for Imabw.
  */
 public interface Constants {
-    /** Version of the Imabw */
-    public static final String VERSION = "2.0-SNAPSHOT";
+    /** Inner name of Imabw */
+    String INNER_NAME = "imabw";
 
-    /** Name of {@code ResourceBundle} file */
-    public static final String I18N_PATH = "res/i18n/imabw";
+    /** Version of the Imabw */
+    String VERSION = "2.0-SNAPSHOT";
+
+    /** Readable version string */
+    String RELEASE = "II";
+
+    /** Name of language {@code ResourceBundle} file */
+    String I18N_PATH = "res/i18n/imabw";
 
     /** User home of Imabw */
-    public static final String IMABW_HOME = String.format("%s/.imabw", System.getProperty("user.home"));
+    String IMABW_HOME = String.format("%s/.imabw", System.getProperty("user.home"));
 
     /** Settings file */
-    public static final String SETTINGS_FILE = IMABW_HOME + "/" + "settings.prop";
+    String SETTINGS_FILE = IMABW_HOME + "/settings.prop";
 
-    // *******************
-    // ** Menu commands **
-    // *******************
+    /** Plugins directory */
+    String PLUGINS_ROOT = IMABW_HOME + "/plugins";
 
-    /* Book file operation */
-    public static final String NEW_FILE = "new-file";
-    public static final String OPEN_FILE = "open-file";
-    public static final String SAVE_FILE = "save-file";
-    public static final String SAVE_AS_FILE = "save-as-file";
-    public static final String FILE_DETAILS = "file-details";
-    public static final String EXIT_APP = "exit-app";
+    // **************************
+    // ** Common menu commands **
+    // **************************
 
-    public static final String EDIT_PREFERENCE = "edit-settings";
+    /* File */
+    String NEW_FILE     = "new-file";
+    String OPEN_FILE    = "open-file";
+    String SAVE_FILE    = "save-file";
+    String SAVE_AS_FILE = "save-as-file";
+    String FILE_DETAILS = "file-details";
+    String EXIT_APP     = "exit-app";
+
+    String EDIT_PREFERENCE = "edit-settings";
 
     /* View */
-    public static final String SHOW_TOOLBAR = "show-toolbar";
-    public static final String SHOW_STATUSBAR = "show-statusbar";
-    public static final String SHOW_SIDEBAR = "show-sidebar";
+    String SHOW_TOOLBAR   = "show-toolbar";
+    String SHOW_STATUSBAR = "show-statusbar";
+    String SHOW_SIDEBAR   = "show-sidebar";
 
     /* Search */
-    public static final String FIND_TEXT = "find-text";
-    public static final String FIND_NEXT = "find-next";
-    public static final String FIND_PREVIOUS = "find-previous";
-    public static final String FIND_AND_REPLACE = "find-and-replace";
-    public static final String GO_TO_POSITION = "goto-position";
+    String FIND_TEXT        = "find-text";
+    String FIND_NEXT        = "find-next";
+    String FIND_PREVIOUS    = "find-previous";
+    String FIND_AND_REPLACE = "find-and-replace";
+    String GO_TO_POSITION   = "goto-position";
 
     /* Tools */
-    public static final String BOOK_ATTRIBUTES = "book-attributes";
-    public static final String EXTRA_ITEMS = "extra-items";
+    String BOOK_ATTRIBUTES = "book-attributes";
+    String EXTRA_ITEMS     = "extra-items";
 
     /* Help */
-    public static final String SHOW_ABOUT = "show-about";
+    String SHOW_ABOUT = "show-about";
 
-    /* Tree options */
-    public static final String NEW_CHAPTER = "new-chapter";
-    public static final String INSERT_CHAPTER = "insert-chapter";
-    public static final String RENAME_CHAPTER = "rename-chapter";
-    public static final String MOVE_CHAPTER = "move-chapter";
-    public static final String DELETE_CHAPTER = "delete-chapter";
-    public static final String MERGE_CHAPTER = "merge-chapter";
-    public static final String TREE_PROPERTIES = "tree-property";
-    public static final String SAVE_CHAPTER = "save-chapter";
-    public static final String IMPORT_CHAPTER = "import-chapter";
-    public static final String SEARCH_CHAPTER = "search-chapter";
-    public static final String REFRESH_CONTENTS = "refresh-contents";
-    public static final String LOCK_CONTENTS = "lock-contents";
+    // ****************************
+    // ** Contents tree commands **
+    // ****************************
 
-    /* Tab control */
-    public static final String CLOSE_TAB = "close-tab";
-    public static final String CLOSE_OTHER_TABS = "close-other-tabs";
-    public static final String CLOSE_ALL_TABS = "close-all-tabs";
-    public static final String CLOSE_UNMODIFIED_TABS = "close-unmodified-tabs";
-    public static final String SELECT_NEXT_TAB = "select-next-tab";
-    public static final String SELECT_PREVIOUS_TAB = "select-previous-tab";
+    String NEW_CHAPTER      = "new-chapter";
+    String INSERT_CHAPTER   = "insert-chapter";
+    String RENAME_CHAPTER   = "rename-chapter";
+    String MOVE_CHAPTER     = "move-chapter";
+    String DELETE_CHAPTER   = "delete-chapter";
+    String MERGE_CHAPTER    = "merge-chapter";
+    String TREE_PROPERTIES  = "tree-property";
+    String SAVE_CHAPTER     = "save-chapter";
+    String IMPORT_CHAPTER   = "import-chapter";
+    String SEARCH_CHAPTER   = "search-chapter";
+    String REFRESH_CONTENTS = "refresh-contents";
+    String LOCK_CONTENTS    = "lock-contents";
+
+    // ****************************
+    // ** Tabbed editor commands **
+    // ****************************
+
+    String CLOSE_ACTIVE_TAB      = "close-active-tab";
+    String CLOSE_OTHER_TABS      = "close-other-tabs";
+    String CLOSE_ALL_TABS        = "close-all-tabs";
+    String CLOSE_UNMODIFIED_TABS = "close-unmodified-tabs";
+    String SELECT_NEXT_TAB       = "select-next-tab";
+    String SELECT_PREVIOUS_TAB   = "select-previous-tab";
 }

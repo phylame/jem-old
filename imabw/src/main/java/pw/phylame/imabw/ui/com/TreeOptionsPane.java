@@ -18,16 +18,19 @@
 
 package pw.phylame.imabw.ui.com;
 
-import pw.phylame.imabw.Application;
-import pw.phylame.imabw.Constants;
-import pw.phylame.ixin.IToolkit;
-import pw.phylame.ixin.com.IPaneRender;
-
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JToggleButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TreeOptionsPane extends IPaneRender {
+import pw.phylame.imabw.Application;
+
+import pw.phylame.ixin.IToolkit;
+import pw.phylame.ixin.com.IPaneRender;
+
+
+public class TreeOptionsPane implements IPaneRender {
     private JPanel root;
     private JButton buttonSearch;
     private JButton buttonRefresh;
@@ -40,7 +43,7 @@ public class TreeOptionsPane extends IPaneRender {
         buttonSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                app.getManager().onTreeAction(Constants.SEARCH_CHAPTER);
+                app.getManager().onTreeAction(Application.SEARCH_CHAPTER);
             }
         });
 
@@ -48,7 +51,7 @@ public class TreeOptionsPane extends IPaneRender {
         buttonRefresh.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                app.getManager().onTreeAction(Constants.REFRESH_CONTENTS);
+                app.getManager().onTreeAction(Application.REFRESH_CONTENTS);
             }
         });
 
@@ -57,7 +60,7 @@ public class TreeOptionsPane extends IPaneRender {
         buttonLock.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                app.getManager().onTreeAction(Constants.LOCK_CONTENTS);
+                app.getManager().onTreeAction(Application.LOCK_CONTENTS);
                 if (buttonLock.isSelected()) {
                     buttonLock.setToolTipText(app.getText("Frame.Tree.Unlock.Tip"));
                 } else {

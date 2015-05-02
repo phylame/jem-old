@@ -139,4 +139,13 @@ public final class StringUtils {
         return true;
     }
 
+    /**
+     * Tests <code>s</code> is empty or not, empty string is null or length == 0
+     * @param s the string
+     * @return <code>true</code> if <code>s</code> is empty, otherwise <code>false</code>
+     */
+    public static boolean isEmpty(String s) {
+        return s == null || s.length() == 0;
+    }
+
 }

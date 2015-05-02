@@ -73,7 +73,7 @@ public class Reader {
             if (name.equals("cover")) {
                 String mime = attr.attributeValue("media-type");
                 try {
-                    book.setCover(FileFactory.getFile(zipFile, value, mime));
+                    book.setCover(FileFactory.fromZip(zipFile, value, mime));
                 } catch (IOException e) {
                     LOG.debug("not found cover source: "+value, e);
                 }
@@ -129,7 +129,7 @@ public class Reader {
                     LOG.debug("not found 'media-type' attribute of 'object' element in PBM extension");
                 }
                 try {
-                    book.setItem(name, FileFactory.getFile(zipFile, href, mt));
+                    book.setItem(name, FileFactory.fromZip(zipFile, href, mt));
                 } catch (IOException e) {
                     LOG.debug("not found file source: "+href+" in PBM extension");
                 }
@@ -166,7 +166,7 @@ public class Reader {
         String encoding = elem.attributeValue("encoding");
         if (href != null) { // base chapter
             try {
-                FileObject fb = FileFactory.getFile(zipFile, href, null);
+                FileObject fb = FileFactory.fromZip(zipFile, href, null);
                 chapter.getSource().setFile(fb, encoding);
             } catch (IOException e) {
                 LOG.debug("not found text source: "+href+" in PBC", e);
@@ -192,7 +192,7 @@ public class Reader {
                     LOG.debug("found 'cover' element without 'media-type' in PBC");
                 }
                 try {
-                    chapter.setCover(FileFactory.getFile(zipFile, href, mt));
+                    chapter.setCover(FileFactory.fromZip(zipFile, href, mt));
                 } catch (IOException e) {
                     LOG.debug("not found cover source: "+href+"in PBC", e);
                 }
@@ -208,7 +208,7 @@ public class Reader {
                 }
 
                 try {
-                    FileObject fb = FileFactory.getFile(zipFile, href, null);
+                    FileObject fb = FileFactory.fromZip(zipFile, href, null);
                     chapter.setIntro(new TextObject(fb, encoding));
                 } catch (IOException e) {
                     LOG.debug("not found intro source: "+href, e);

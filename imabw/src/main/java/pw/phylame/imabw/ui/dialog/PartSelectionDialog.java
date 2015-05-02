@@ -18,46 +18,42 @@
 
 package pw.phylame.imabw.ui.dialog;
 
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.tree.*;
+import javax.swing.event.*;
+
 import pw.phylame.imabw.Application;
 import pw.phylame.imabw.ui.com.PartNode;
 
-import javax.swing.*;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeNode;
-import javax.swing.tree.TreePath;
-import javax.swing.tree.TreeSelectionModel;
-import java.awt.*;
-import java.awt.event.*;
-
-public class SelectPartDialog extends JDialog {
+public class PartSelectionDialog extends JDialog {
     /** Select chapter and section */
     public static final int CHAPTER_OR_SECTION = 0;
     /** Only select chapter */
-    public static final int CHAPTER_ONLY = 1;
+    public static final int CHAPTER_ONLY       = 1;
     /** Only select section */
-    public static final int SECTION_ONLY = 2;
+    public static final int SECTION_ONLY       = 2;
 
-    private JPanel contentPane;
+    private JPanel  contentPane;
+    private JLabel  labelTip;
+    private JTree   contentsTree;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JLabel labelTip;
-    private JTree tree;
 
     private TreePath treePath = null;
 
-    public SelectPartDialog(Frame owner, String title, final int model, TreeNode root, TreePath initPath) {
+    public PartSelectionDialog(Frame owner, String title, int mode, TreeNode root, TreePath initPath) {
         super(owner, title, true);
-        init(model, root, initPath);
+        init(mode, root, initPath);
     }
 
-    public SelectPartDialog(Dialog owner, String title, final int model, TreeNode root, TreePath initPath) {
+    public PartSelectionDialog(Dialog owner, String title, int mode, TreeNode root, TreePath initPath) {
         super(owner, title, true);
-        init(model, root, initPath);
+        init(mode, root, initPath);
     }
 
-    private void init(final int model, TreeNode root, TreePath initPath) {
+    private void init(final int mode, TreeNode root, TreePath initPath) {
         setContentPane(contentPane);
         getRootPane().setDefaultButton(buttonOK);
 
@@ -65,24 +61,25 @@ public class SelectPartDialog extends JDialog {
 
         labelTip.setText(app.getText("Dialog.SelectPart.Tip"));
 
-        tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-        ((DefaultTreeModel) tree.getModel()).setRoot(root);
-        tree.setSelectionRow(0);
-        tree.requestFocus();
-        if (model == SECTION_ONLY || model == CHAPTER_OR_SECTION) {
+        contentsTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        ((DefaultTreeModel) contentsTree.getModel()).setRoot(root);
+        contentsTree.setSelectionRow(0);
+        contentsTree.requestFocus();
+
+        if (mode == SECTION_ONLY || mode == CHAPTER_OR_SECTION) {
             buttonOK.setEnabled(true);
         }
         if (initPath != null) {
-            tree.setSelectionPath(initPath);
+            contentsTree.setSelectionPath(initPath);
         }
-        tree.addMouseListener(new MouseAdapter() {
+        contentsTree.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 // for open chapter text, only left key
                 if (e.getClickCount() != 2 || e.isMetaDown()) {
                     return;
                 }
-                TreePath selectionPath = tree.getSelectionPath();
+                TreePath selectionPath = contentsTree.getSelectionPath();
                 if (selectionPath == null) {
                     return;
                 }
@@ -93,7 +90,7 @@ public class SelectPartDialog extends JDialog {
                 onOK();
             }
         });
-        tree.addTreeSelectionListener(new TreeSelectionListener() {
+        contentsTree.addTreeSelectionListener(new TreeSelectionListener() {
             @Override
             public void valueChanged(TreeSelectionEvent e) {
                 PartNode node = PartNode.getPartNode(e.getPath());
@@ -101,8 +98,8 @@ public class SelectPartDialog extends JDialog {
                     buttonOK.setEnabled(false);
                     return;
                 }
-                if (model == CHAPTER_ONLY) {   // select chapter
-                    if (! node.isLeaf()) {
+                if (mode == CHAPTER_ONLY) {   // select chapter
+                    if (!node.isLeaf()) {
                         buttonOK.setEnabled(false);
                         return;
                     }
@@ -110,35 +107,39 @@ public class SelectPartDialog extends JDialog {
                 buttonOK.setEnabled(true);
             }
         });
-        tree.registerKeyboardAction(new ActionListener() {
+        contentsTree.registerKeyboardAction(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TreePath path = tree.getSelectionPath();
+                TreePath path = contentsTree.getSelectionPath();
                 PartNode node = PartNode.getPartNode(path);
                 if (node == null) {
                     return;
                 }
-                if (! node.isLeaf()) {
-                    tree.expandPath(path);
+                if (!node.isLeaf()) {
+                    contentsTree.expandPath(path);
                     return;
                 }
                 onOK();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
+        buttonOK.setText(app.getText("Dialog.SelectPart.ButtonSelect"));
+        buttonOK.setToolTipText(app.getText("Dialog.SelectPart.ButtonSelect.Tip"));
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onOK();
             }
         });
 
+        buttonCancel.setText(app.getText("Dialog.SelectPart.ButtonCancel"));
+        buttonCancel.setToolTipText(app.getText("Dialog.SelectPart.ButtonCancel.Tip"));
         buttonCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
         });
 
-// call onCancel() when cross is clicked
+        // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -146,7 +147,7 @@ public class SelectPartDialog extends JDialog {
             }
         });
 
-// call onCancel() on ESCAPE
+        // call onCancel() on ESCAPE
         contentPane.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
@@ -158,26 +159,23 @@ public class SelectPartDialog extends JDialog {
     }
 
     private void onOK() {
-// add your code here
-        treePath = tree.getSelectionPath();
+        treePath = contentsTree.getSelectionPath();
         dispose();
     }
 
     private void onCancel() {
-// add your code here if necessary
         treePath = null;
         dispose();
     }
 
-    public static TreePath selectPart(Component owner, String title, int model, TreeNode root, TreePath initPath) {
-        SelectPartDialog dialog;
-        if (owner instanceof Frame) {
-            dialog = new SelectPartDialog((Frame) owner, title, model, root, initPath);
-        } else if (owner instanceof Dialog) {
-            dialog = new SelectPartDialog((Dialog) owner, title, model, root, initPath);
-        } else {
-            throw new IllegalArgumentException("owner must be Frame or Dialog");
-        }
+    public static TreePath selectPart(Dialog owner, String title, int mode, TreeNode root, TreePath initPath) {
+        PartSelectionDialog dialog = new PartSelectionDialog(owner, title, mode, root, initPath);
+        dialog.setVisible(true);
+        return dialog.treePath;
+    }
+
+    public static TreePath selectPart(Frame owner, String title, int mode, TreeNode root, TreePath initPath) {
+        PartSelectionDialog dialog = new PartSelectionDialog(owner, title, mode, root, initPath);
         dialog.setVisible(true);
         return dialog.treePath;
     }

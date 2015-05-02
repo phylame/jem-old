@@ -17,8 +17,11 @@
 package pw.phylame.ixin;
 
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.HashMap;
+
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * Provides common settings interface.
@@ -26,11 +29,11 @@ import java.util.Map;
 public class ISettings extends HashMap<String, Object> {
 
     public ISettings() {
-
+        super();
     }
 
-    public ISettings(URL source) {
-
+    public ISettings(URL source) throws IOException {
+        load(source);
     }
 
     public ISettings(Map<String, Object> m) {
@@ -39,6 +42,16 @@ public class ISettings extends HashMap<String, Object> {
         }
     }
 
+    public void load(URL source) throws IOException {
+    }
+
+    public void store(OutputStream out) throws IOException {
+
+    }
+
+    /**
+     * Resets all value to the default.
+     */
     public void reset() {
 
     }

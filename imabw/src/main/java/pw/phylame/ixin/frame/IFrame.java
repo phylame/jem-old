@@ -54,20 +54,20 @@ public abstract class IFrame extends JFrame implements IStatusTipListener {
     public IFrame() {
         super();
         initialized();
-        init();
+        initComp();
     }
 
     public IFrame(String title) {
         super(title);
         initialized();
-        init();
+        initComp();
     }
 
     protected void initialized() {
 
     }
 
-    private void init() {
+    private void initComp() {
         Container topPane = getContentPane();
         createMenu();
         createToolBar();
@@ -194,10 +194,13 @@ public abstract class IFrame extends JFrame implements IStatusTipListener {
         this.paneRender = paneRender;
         contentArea.removeAll();
         if (paneRender != null) {
-            paneRender.setParent(this);
             contentArea.add(paneRender.getPane(), BorderLayout.CENTER);
         }
         contentArea.updateUI();
+    }
+
+    public JPanel getContentArea() {
+        return contentArea;
     }
 
     public JPanel getStatusBar() {

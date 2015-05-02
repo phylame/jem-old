@@ -96,7 +96,7 @@ public class JarParser implements Parser {
                 throw new JemException("Invalid JAR book: bad chapter item");
             }
             Chapter chapter = new Chapter(items[2], "");
-            chapter.getSource().setFile(FileFactory.getFile(zipFile, items[0], null), JAR.TEXT_ENCODING);
+            chapter.getSource().setFile(FileFactory.fromZip(zipFile, items[0], null), JAR.TEXT_ENCODING);
             book.append(chapter);
         }
 

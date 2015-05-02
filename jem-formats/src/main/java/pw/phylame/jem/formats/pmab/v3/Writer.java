@@ -23,6 +23,7 @@ import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import pw.phylame.jem.core.Book;
+import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.Part;
 import pw.phylame.jem.formats.pmab.PMAB;
 import pw.phylame.jem.formats.pmab.PmabConfig;
@@ -45,7 +46,7 @@ public final class Writer {
     private static Log LOG = LogFactory.getLog(Writer.class);
     private static Set<String> IgnoredNames = new HashSet<String>();
     static {
-        IgnoredNames.addAll(java.util.Arrays.asList("source_file", "source_format"));
+        IgnoredNames.addAll(java.util.Arrays.asList(Jem.SOURCE_FILE, Jem.SOURCE_FORMAT));
     }
 
     private static Byte[] toBytes(byte[] ary) {

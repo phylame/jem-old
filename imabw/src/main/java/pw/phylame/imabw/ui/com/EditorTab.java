@@ -1,5 +1,7 @@
 /*
- * Copyright 2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2015 Peng Wan <phylame@163.com>
+ *
+ * This file is part of Imabw.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +18,20 @@
 
 package pw.phylame.imabw.ui.com;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+
 import pw.phylame.ixin.ITextEdit;
+
 import pw.phylame.jem.core.Part;
 import pw.phylame.tools.file.FileFactory;
 
-import java.io.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class EditorTab {
     private static Log LOG = LogFactory.getLog(EditorTab.class);
@@ -45,16 +54,8 @@ public class EditorTab {
         return textEdit;
     }
 
-    public void setTextEdit(ITextEdit textEdit) {
-        this.textEdit = textEdit;
-    }
-
     public Part getPart() {
         return part;
-    }
-
-    public void setPart(Part part) {
-        this.part = part;
     }
 
     public String getEncoding() {
@@ -73,31 +74,37 @@ public class EditorTab {
         this.modified = modified;
     }
 
-    // cache text content in textEdit to file
-    public void cache() throws IOException {
+    // cache text content in textEdit to temporary file
+    public void cacheContent() {
         if (! isModified()) {
             return;
         }
-        if (file == null) {
-            file = File.createTempFile("IMABW_", ".tmp");
-            getPart().registerCleanup(new Part.Cleanable() {
-                @Override
-                public void clean(Part part) {
-                    if (! file.delete()) {
-                        LOG.debug("cannot delete cached file: "+file);
-                    }
-                }
-            });
-        }
-        Writer writer = null;
+        BufferedWriter writer = null;
         try {
+            if (file == null) {
+                file = File.createTempFile("IMABW_", ".tmp");
+                part.registerCleanup(new Part.Cleanable() {
+                    @Override
+                    public void clean(Part part) {
+                        if (! file.delete()) {
+                            LOG.debug("cannot delete cached file: "+file);
+                        }
+                    }
+                });
+            }
             writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), CACHE_ENCODING));
             textEdit.write(writer);
-            part.getSource().setFile(FileFactory.getFile(file, null), CACHE_ENCODING);
+            part.getSource().setFile(FileFactory.fromFile(file, null), CACHE_ENCODING);
             modified = false;
+        } catch (IOException e) {
+            LOG.debug("cannot cache part content: "+part.getTitle(), e);
         } finally {
             if (writer != null) {
-                writer.close();
+                try {
+                    writer.close();
+                } catch (IOException e) {
+                    LOG.debug("cannot close cached file: "+file);
+                }
             }
         }
     }

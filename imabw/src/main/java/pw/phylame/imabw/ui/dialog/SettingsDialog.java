@@ -18,45 +18,45 @@
 
 package pw.phylame.imabw.ui.dialog;
 
-import pw.phylame.imabw.Application;
-
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
+
+import pw.phylame.imabw.Application;
+
 import java.util.Map;
 
 public class SettingsDialog extends JDialog {
-    private JPanel contentPane;
-    private JButton buttonOK;
-    private JButton buttonCancel;
-    private JTabbedPane tabbedPane1;
-    private JButton buttonReset;
-    private JComboBox comboBox1;
-    private JComboBox comboBox2;
-    private JCheckBox toolbarCheckBox;
-    private JCheckBox statusBarCheckBox;
-    private JCheckBox sideBarCheckBox;
+    private JPanel       contentPane;
+    private JButton      buttonOK;
+    private JButton      buttonCancel;
+    private JTabbedPane  tabbedPane1;
+    private JButton      buttonReset;
+    private JComboBox    comboBox1;
+    private JComboBox    comboBox2;
+    private JCheckBox    toolbarCheckBox;
+    private JCheckBox    statusBarCheckBox;
+    private JCheckBox    sideBarCheckBox;
     private JRadioButton plainRadioButton;
     private JRadioButton boldRadioButton;
     private JRadioButton itallicRadioButton;
-    private JSlider slider1;
-    private JComboBox comboBox3;
-    private JCheckBox showLineNumberCheckBox;
-    private JCheckBox lockToolbarCheckBox;
-    private JComboBox comboBox4;
-    private JComboBox comboBox5;
-    private JComboBox comboBox6;
-    private JComboBox comboBox7;
-    private JComboBox comboBox8;
-    private JTextField textField1;
-    private JTable table1;
+    private JSlider      slider1;
+    private JComboBox    comboBox3;
+    private JCheckBox    showLineNumberCheckBox;
+    private JCheckBox    lockToolbarCheckBox;
+    private JComboBox    comboBox4;
+    private JComboBox    comboBox5;
+    private JComboBox    comboBox6;
+    private JComboBox    comboBox7;
+    private JComboBox    comboBox8;
+    private JTextField   textField1;
+    private JTable       table1;
 
     private Application app = Application.getApplication();
 
     public SettingsDialog(Frame parent) {
-        super(parent);
+        super(parent, true);
         setContentPane(contentPane);
-        setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
         buttonOK.addActionListener(new ActionListener() {
@@ -71,7 +71,7 @@ public class SettingsDialog extends JDialog {
             }
         });
 
-// call onCancel() when cross is clicked
+        // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -79,7 +79,7 @@ public class SettingsDialog extends JDialog {
             }
         });
 
-// call onCancel() on ESCAPE
+        // call onCancel() on ESCAPE
         contentPane.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
@@ -87,7 +87,7 @@ public class SettingsDialog extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
         setTitle(app.getText("Dialog.Settings.Title"));
-        pack();
+        setSize(700, 394);
         setLocationRelativeTo(getOwner());
     }
 
@@ -96,12 +96,12 @@ public class SettingsDialog extends JDialog {
     }
 
     private void onOK() {
-// add your code here
+        // add your code here
         dispose();
     }
 
     private void onCancel() {
-// add your code here if necessary
+        // add your code here if necessary
         dispose();
     }
 
