@@ -18,6 +18,7 @@
 
 package pw.phylame.imabw.ui.dialog;
 
+import java.awt.Frame;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -32,13 +33,12 @@ public class AboutDialog extends JDialog {
     private JLabel labelLicense, labelHome;
     private JButton buttonClose;
 
-    public AboutDialog(JFrame owner) {
+    public AboutDialog(Frame owner) {
         super(owner, true);
         setContentPane(contentPane);
         getRootPane().setDefaultButton(buttonClose);
 
         final Application app = Application.getApplication();
-        setTitle(app.getText("Dialog.About.Title"));
 
         buttonClose.setText(app.getText("Dialog.About.ButtonClose"));
         buttonClose.setToolTipText(app.getText("Dialog.About.ButtonClose.Tip"));
@@ -94,12 +94,13 @@ public class AboutDialog extends JDialog {
             }
         });
 
+        setTitle(app.getText("Dialog.About.Title"));
         pack();
         setResizable(false);
         setLocationRelativeTo(getOwner());
     }
 
-    public static void showAbout(JFrame owner) {
+    public static void showAbout(Frame owner) {
         AboutDialog dialog = new AboutDialog(owner);
         dialog.setVisible(true);
     }

@@ -74,7 +74,7 @@ public abstract class IFrame extends JFrame implements IStatusTipListener {
         topPane.add(toolBar, BorderLayout.NORTH);
         contentArea = new JPanel(new BorderLayout());
         topPane.add(contentArea, BorderLayout.CENTER);
-        createDefaultStatusBar();
+        createStatusBar();
         topPane.add(statusBar, BorderLayout.SOUTH);
     }
 
@@ -157,7 +157,7 @@ public abstract class IFrame extends JFrame implements IStatusTipListener {
         });
     }
 
-    private void createDefaultStatusBar() {
+    private void createStatusBar() {
         statusLabel = new JLabel();
         statusBar = new JPanel(new BorderLayout());
         statusBar.add(new JSeparator(), BorderLayout.NORTH);
@@ -166,7 +166,7 @@ public abstract class IFrame extends JFrame implements IStatusTipListener {
 
     @Override
     public void showingTip(IStatusTipEvent e) {
-        statusLabel.setText(" "+e.getStatusTip());
+        statusLabel.setText(" " + e.getStatusTip());
     }
 
     @Override
@@ -230,14 +230,14 @@ public abstract class IFrame extends JFrame implements IStatusTipListener {
 
     private static Object[] toolBarModel = null;
 
-    private JToolBar toolBar = null;
-    private JPanel contentArea = null;
+    private JToolBar toolBar;
+    private JPanel contentArea;
 
     /** Content pane */
     private IPaneRender paneRender = null;
 
-    private JPanel statusBar = null;
-    private JLabel statusLabel = null;
+    private JPanel statusBar;
+    private JLabel statusLabel;
     private String oldStatusText = null;
 
     /** Menu actions */

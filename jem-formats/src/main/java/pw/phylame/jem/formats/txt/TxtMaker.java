@@ -72,6 +72,7 @@ public class TxtMaker implements Maker {
         java.io.FileOutputStream output = new java.io.FileOutputStream(file);
         Writer writer = new java.io.BufferedWriter(new OutputStreamWriter(output, config.encoding));
         make(book, writer, config);
+        writer.close();
     }
 
     public void make(Book book, Writer writer, TxtConfig config) throws IOException {

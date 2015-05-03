@@ -73,6 +73,7 @@ public class UmdMaker implements Maker {
             }
         }
         make(book, output, umdType);
+        output.close();
     }
 
     public void make(Book book, OutputStream output, int umdType) throws IOException, JemException {

@@ -373,9 +373,30 @@ public class Worker {
         return node;
     }
 
+    private File prepareSaving(Component parent, String title, File path, String format) {
+        if (path != null) {
+            return path;
+        }
+        path = selectSaveBook(parent, title, format);
+        if (path == null) {     // cancel
+            return null;
+        }
+        File source = app.getManager().getOpenedFile();
+        if (source != null && source.compareTo(path) == 0) {        // path of file is currently opening
+            showError(parent, title, app.getText("Dialog.SaveBook.UsingFile", path));
+            return null;
+        }
+        return path;
+    }
+
+    private HashMap<String, Object> getMakeArguments(Book book, String format) {
+        HashMap<String, Object> kw = new HashMap<>();
+
+        return kw;
+    }
+
     /**
      * Saves book to file.
-     * If {@code path} is <code>null</code>, asks user tot select new file path.
      * @param parent parent component of input dialog
      * @param title title of save file dialog
      * @param book the book
@@ -384,75 +405,49 @@ public class Worker {
      * @return the saved path
      */
     public File saveBook(Component parent, String title, Book book, File path, String format) {
-        // 1. select file path is path is null
         if (path == null) {
-            path = selectSaveBook(parent, title, format);
-            if (path == null) {     // cancel saving
+            path = prepareSaving(parent, title, null, format);
+            if (path == null) {     // cancel
                 return null;
             }
-            File source = getSourceFile(app.getManager().getEditedBook());
-            if (source != null && source.compareTo(path) == 0) {
-                showError(parent, title, app.getText("Dialog.SaveBook.UsingFile", path));
-                return null;
-            }
-            format = getSelectedFormat();
-            assert format != null;
         }
-        HashMap<String, Object> kw = new HashMap<>();
+        HashMap<String, Object> kw = getMakeArguments(book, format);
+
         System.out.printf("save book %s to %s with %s\n", book, path, format);
-//
-//        File destFile;
-//        boolean isTemporary = false;
-//
-//        File openedFile = app.getManager().getOpenedFile();
-//        // output file is the current opened book file
-//        if (openedFile != null && path.compareTo(openedFile) == 0) {
-//            // when saving sub-part of current edited book, output file is
-//            //      the source of current edited book, so prohibit overwriting it.
-//            if (book != app.getManager().getEditedBook()) {
-//                showError(parent, title, app.getText("Dialog.SaveBook.UsingFile", path));
-//                return null;
-//            }
-//            // when saving the active book, using temporary file
-//            System.out.println("using temporary file");
-//            destFile = new File(path.getParent(), "."+path.getName()+".tmp");
-//            isTemporary = true;
-//        } else {
-//            destFile = path;
-//        }
-//        if (! destFile.exists()) {
-//            try {
-//                destFile.createNewFile();
-//            } catch (Exception e) {
-//                showError(app.getViewer(), title,
-//                        app.getText("Dialog.SaveBook.Error", path.getPath(), e.getMessage()));
-//                return null;
-//            }
-//        }
-//        try {
-//            Jem.writeBook(book, destFile, format, kw);
-//        } catch (IOException | JemException e) {
-//            showError(app.getViewer(), title,
-//                    app.getText("Dialog.SaveBook.Error", path.getPath(), e.getMessage()));
-//            return null;
-//        }
-//        if (isTemporary) {
-//            if (path.delete() && ! destFile.renameTo(path)) {
-//                return null;
-//            }
-//        }
+
+        return path;
+    }
+
+    public File saveBook(Component parent, String title, Book book) {
+        File path = prepareSaving(parent, title, null, null);
+        if (path == null) {
+            return null;
+        }
+        String format = getSelectedFormat();
+        assert format != null;
+
+        HashMap<String, Object> kw = getMakeArguments(book, format);
+
+        try {
+            Jem.writeBook(book, path, format, kw);
+        } catch (IOException | JemException e) {
+            showError(app.getViewer(), title, app.getText("Dialog.SaveBook.Error", path.getPath(), e.getMessage()));
+            return null;
+        }
+
         return path;
     }
 
     private void addAttributes(Book book) {
         if (book.getCover() == null) {
-            URL url = Worker.class.getResource("/cover.png");
+            URL url = Worker.class.getResource("/cover.png");   // in jem-formats
             if (url != null) {
                 book.setCover(FileFactory.fromURL(url, null));
             }
         }
         if ("".equals(book.stringAttribute("vendor", ""))) {
-            book.setAttribute("vendor", String.format("%s v%s", app.getText("App.Name"), Constants.VERSION));
+            book.setAttribute("vendor", String.format("%s v%s %s", app.getText("App.Name"), Constants.VERSION,
+                    Constants.RELEASE));
         }
         if ("".equals(book.getRights())) {
             book.setRights(String.format("(C) %d PW arts", Calendar.getInstance().get(Calendar.YEAR)));

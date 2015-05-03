@@ -78,6 +78,7 @@ public interface Constants {
     // ** Contents tree commands **
     // ****************************
 
+    String VIEW_CHAPTER     = "view-chapter";
     String NEW_CHAPTER      = "new-chapter";
     String INSERT_CHAPTER   = "insert-chapter";
     String RENAME_CHAPTER   = "rename-chapter";

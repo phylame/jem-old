@@ -103,7 +103,7 @@ public class Viewer extends IFrame implements Constants {
         });
 
         getToolBar().setVisible((boolean) app.getSetting("ui.window.showToolbar"));
-        getToolBar().setFloatable(! (boolean) app.getSetting("ui.window.lockToolbar"));
+        getToolBar().setFloatable(!(boolean) app.getSetting("ui.window.lockToolbar"));
         getStatusBar().setVisible((boolean) app.getSetting("ui.window.showStatusbar"));
 
         JMenu menu = getViewMenu();
@@ -310,7 +310,7 @@ public class Viewer extends IFrame implements Constants {
             if (! node.isLeaf()) {
                 continue;
             }
-            app.getManager().viewPart(node.getPart());
+            app.getManager().onTreeAction(VIEW_CHAPTER);
         }
     }
 

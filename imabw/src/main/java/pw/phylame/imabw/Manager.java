@@ -242,9 +242,10 @@ public class Manager implements Constants {
     }
 
     private void saveAsFile() {
-        File path = worker.saveBook(viewer, app.getText("Dialog.SaveBook.Title"), book, null, null);
+        File path = worker.saveBook(viewer, app.getText("Dialog.SaveBook.Title"), book);
         if (path != null) {
-            viewer.setStatusText(app.getText("Task.SavedBook", book.getTitle(), path.getPath()));
+            worker.showMessage(viewer, app.getText("Dialog.SaveBook.Title"),
+                    app.getText("Task.SavedBook", book.getTitle(), path.getPath()));
         }
     }
 
@@ -441,7 +442,12 @@ public class Manager implements Constants {
     // **************************
     // ** Tree action function
     // **************************
-    public void viewPart(Part part) {
+    private void viewPart() {
+        TreePath path = viewer.getSelectedPath();
+        if (path == null) {
+            return;
+        }
+        Part part = PartNode.getPartNode(path).getPart();
         EditorTab tab = viewer.findTab(part);
         if (tab == null) {
             tab = viewer.newTab(part);
@@ -498,9 +504,10 @@ public class Manager implements Constants {
         }
         PartNode node = PartNode.getPartNode(treePath);
         Part part = node.getPart();
-        File path = worker.saveBook(viewer, app.getText("Dialog.SaveBook.Title"), Jem.toBook(part), null, null);
+        File path = worker.saveBook(viewer, app.getText("Dialog.SaveBook.Title"), Jem.toBook(part));
         if (path != null) {
-            viewer.setStatusText(app.getText("Task.SavedBook", part.getTitle(), path.getPath()));
+            worker.showMessage(viewer, app.getText("Dialog.SaveBook.Title"),
+                    app.getText("Task.SavedBook", part.getTitle(), path.getPath()));
         }
     }
 
@@ -675,6 +682,9 @@ public class Manager implements Constants {
 
     public void onTreeAction(Object actionID) {
         switch ((String) actionID) {
+            case VIEW_CHAPTER:
+                viewPart();
+                break;
             case NEW_CHAPTER:
                 newChapter();
                 break;

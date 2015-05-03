@@ -7,61 +7,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1bc92d87-a603-42f4-8578-13b4ed0e3554" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__commons_cli_commons_cli_1_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__log4j_log4j_1_2_12.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__pw_books_jem_core_2_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__pw_books_jem_formats_1_0_SNAPSHOT.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__xml_apis_xml_apis_1_0_b2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../scj/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/pw.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../scj/scj.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../scj/.idea/artifacts/scj_jar.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/com/MainPane.form" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/Viewer.form" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/com/MainPane.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/Viewer.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/PropertiesDialog.form" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/PartPropertiesDialog.form" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/PropertiesDialog.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/PartPropertiesDialog.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/SelectPartDialog.form" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/PartSelectionDialog.form" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/SelectPartDialog.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/PartSelectionDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/AboutDialog.form" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/AboutDialog.form" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/AboutDialog.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/AboutDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Application.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Application.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/util/Attributes.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/util/Attributes.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Constants.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Constants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/com/EditorIndicator.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/com/EditorIndicator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/com/EditorTab.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/com/EditorTab.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/tools/file/FileFactory.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/tools/file/FileFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/ixin/IApplication.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/ixin/IApplication.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/ixin/frame/IFrame.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/ixin/frame/IFrame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/ixin/com/IPaneRender.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/ixin/com/IPaneRender.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/ixin/ISettings.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/ixin/ISettings.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/jar/JarParser.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/jar/JarParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/core/Jem.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/core/Jem.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Manager.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Manager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/com/PartNode.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/com/PartNode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v1/Reader.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v1/Reader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v2/Reader.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v2/Reader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v3/Reader.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v3/Reader.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/SettingsDialog.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/SettingsDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/tools/StringUtils.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/tools/StringUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/com/TreeOptionsPane.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/com/TreeOptionsPane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/txt/TxtParser.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/txt/TxtParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/UIDesign.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/UIDesign.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/umd/UmdParser.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/umd/UmdParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/txt/TxtMaker.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/txt/TxtMaker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/umd/UmdMaker.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/umd/UmdMaker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/Viewer.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/Viewer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Worker.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Worker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/scj/Worker.java" afterPath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/scj/Worker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v2/Writer.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v2/Writer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v3/Writer.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v3/Writer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/.idea/compiler.xml" afterPath="$PROJECT_DIR$/../jem-core/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/.idea/compiler.xml" afterPath="$PROJECT_DIR$/../jem-formats/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/res/i18n/imabw_en_US.properties" afterPath="$PROJECT_DIR$/src/main/resources/res/i18n/imabw_en_US.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/res/i18n/imabw_zh_CN.properties" afterPath="$PROJECT_DIR$/src/main/resources/res/i18n/imabw_zh_CN.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../jem-core/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../jem-formats/.idea/workspace.xml" />
     </list>
     <ignored path="imabw.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -102,17 +57,47 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Manager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="189" column="31" selection-start-line="189" selection-start-column="31" selection-end-line="189" selection-end-column="31" />
+              <caret line="218" column="28" selection-start-line="218" selection-start-column="28" selection-end-line="218" selection-end-column="28" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#8365#8366#0" expanded="true" />
-                <element signature="e#8430#8431#0" expanded="true" />
-                <element signature="e#8465#8466#0" expanded="true" />
-                <element signature="e#8494#8495#0" expanded="true" />
-                <element signature="e#8532#8533#0" expanded="true" />
-                <element signature="e#8561#8562#0" expanded="true" />
-                <element signature="e#8596#8597#0" expanded="true" />
-                <element signature="e#8623#8624#0" expanded="true" />
+                <element signature="docComment;class#Manager#0" expanded="false" />
+                <element signature="docComment;field#app#0;class#Manager#0" expanded="false" />
+                <element signature="docComment;field#viewer#0;class#Manager#0" expanded="false" />
+                <element signature="docComment;field#worker#0;class#Manager#0" expanded="false" />
+                <element signature="method#Manager#0;class#Manager#0" expanded="false" />
+                <element signature="docComment;method#begin#0;class#Manager#0" expanded="false" />
+                <element signature="method#begin#0;class#Manager#0" expanded="false" />
+                <element signature="docComment;method#stop#0;class#Manager#0" expanded="false" />
+                <element signature="method#stop#0;class#Manager#0" expanded="false" />
+                <element signature="docComment;method#updateTitle#0;class#Manager#0" expanded="false" />
+                <element signature="method#updateTitle#0;class#Manager#0" expanded="false" />
+                <element signature="docComment;method#notifyModified#0;class#Manager#0" expanded="false" />
+                <element signature="method#notifyModified#0;class#Manager#0" expanded="false" />
+                <element signature="docComment;method#maybeSave#0;class#Manager#0" expanded="false" />
+                <element signature="method#maybeSave#0;class#Manager#0" expanded="false" />
+                <element signature="method#newFile#0;class#Manager#0" expanded="false" />
+                <element signature="method#openFile#0;class#Manager#0" expanded="false" />
+                <element signature="method#saveFile#0;class#Manager#0" expanded="false" />
+                <element signature="method#saveAsFile#0;class#Manager#0" expanded="false" />
+                <element signature="method#fileDetails#0;class#Manager#0" expanded="false" />
+                <element signature="docComment;method#findText#0;class#Manager#0" expanded="false" />
+                <element signature="method#findText#0;class#Manager#0" expanded="false" />
+                <element signature="docComment;method#repeatFind#0;class#Manager#0" expanded="false" />
+                <element signature="method#repeatFind#0;class#Manager#0" expanded="false" />
+                <element signature="method#replaceText#0;class#Manager#0" expanded="false" />
+                <element signature="e#11214#11344#0" expanded="false" />
+                <element signature="method#gotoLine#0;class#Manager#0" expanded="false" />
+                <element signature="method#onCommand#0;class#Manager#0" expanded="false" />
+                <element signature="method#viewPart#0;class#Manager#0" expanded="false" />
+                <element signature="method#newChapter#0;class#Manager#0" expanded="false" />
+                <element signature="method#insertChapter#0;class#Manager#0" expanded="false" />
+                <element signature="method#saveAsPart#0;class#Manager#0" expanded="false" />
+                <element signature="method#renameChapter#0;class#Manager#0" expanded="false" />
+                <element signature="method#moveChapters#0;class#Manager#0" expanded="false" />
+                <element signature="method#deleteChapters#0;class#Manager#0" expanded="false" />
+                <element signature="method#mergeChapters#0;class#Manager#0" expanded="false" />
+                <element signature="method#searchChapters#0;class#Manager#0" expanded="false" />
+                <element signature="method#onTreeAction#0;class#Manager#0" expanded="false" />
+                <element signature="method#onTabAction#0;class#Manager#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -121,12 +106,14 @@
       <file leaf-file-name="Worker.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Worker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.0">
-              <caret line="317" column="0" selection-start-line="317" selection-start-column="0" selection-end-line="317" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.73224044">
+              <caret line="405" column="7" selection-start-line="405" selection-start-column="7" selection-end-line="405" selection-end-column="7" />
               <folding>
+                <element signature="imports" expanded="true" />
                 <element signature="docComment;class#Worker#0" expanded="false" />
-                <element signature="method#Worker#0;class#Worker#0" expanded="false" />
-                <element signature="method#inputText#0;class#Worker#0" expanded="false" />
+                <element signature="e#2747#2748#0" expanded="true" />
+                <element signature="e#2776#2777#0" expanded="true" />
+                <element signature="method#showConfirm#0;class#Worker#0" expanded="false" />
                 <element signature="method#showMessage#0;class#Worker#0" expanded="false" />
                 <element signature="method#showWarning#0;class#Worker#0" expanded="false" />
                 <element signature="method#showError#0;class#Worker#0" expanded="false" />
@@ -147,69 +134,11 @@
                 <element signature="docComment;method#newBook#0;class#Worker#0" expanded="false" />
                 <element signature="method#newBook#0;class#Worker#0" expanded="false" />
                 <element signature="docComment;method#openBook#0;class#Worker#0" expanded="false" />
+                <element signature="method#openBook#0;class#Worker#0" expanded="false" />
                 <element signature="method#getSourceFile#0;class#Worker#0" expanded="false" />
                 <element signature="method#getSourceFormat#0;class#Worker#0" expanded="false" />
                 <element signature="docComment;method#newChapter#0;class#Worker#0" expanded="false" />
-                <element signature="method#newChapter#0;class#Worker#0" expanded="false" />
-                <element signature="docComment;method#saveBook#0;class#Worker#0" expanded="false" />
-                <element signature="method#saveBook#0;class#Worker#0" expanded="false" />
-                <element signature="e#15285#15287#0" expanded="false" />
-                <element signature="method#addAttributes#0;class#Worker#0" expanded="false" />
                 <element signature="method#findParts#0;class#Worker#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Viewer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/Viewer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="639" column="5" selection-start-line="639" selection-start-column="5" selection-end-line="639" selection-end-column="5" />
-              <folding>
-                <element signature="docComment;class#Viewer#0" expanded="false" />
-                <element signature="initializer##0;class#Viewer#0" expanded="false" />
-                <element signature="method#Viewer#0;class#Viewer#0" expanded="false" />
-                <element signature="method#initialized#0;class#Viewer#0" expanded="false" />
-                <element signature="method#createComponents#0;class#Viewer#0" expanded="false" />
-                <element signature="method#createContentsPopupMenu#0;class#Viewer#0" expanded="false" />
-                <element signature="method#createContentsWindow#0;class#Viewer#0" expanded="false" />
-                <element signature="method#setTreeStyle#0;class#Viewer#0" expanded="false" />
-                <element signature="class#5881:7144" expanded="false" />
-                <element signature="method#getTreeCellRendererComponent#0;class#5881:7144" expanded="false" />
-                <element signature="class#7343:8146" expanded="false" />
-                <element signature="method#mouseClicked#0;class#7343:8146" expanded="false" />
-                <element signature="method#mouseReleased#0;class#7343:8146" expanded="false" />
-                <element signature="method#showContentsMenu#0;class#Viewer#0" expanded="false" />
-                <element signature="e#9859#9932#0" expanded="false" />
-                <element signature="e#10397#10413#0" expanded="false" />
-                <element signature="method#viewSelectionNode#0;class#Viewer#0" expanded="false" />
-                <element signature="method#createEditorPopupMenu#0;class#Viewer#0" expanded="false" />
-                <element signature="e#11876#12236#0" expanded="true" />
-                <element signature="e#12235#12236#0" expanded="true" />
-                <element signature="e#12278#12930#0" expanded="true" />
-                <element signature="e#12929#12930#0" expanded="true" />
-                <element signature="method#setBook#0;class#Viewer#0" expanded="false" />
-                <element signature="method#focusNextWindow#0;class#Viewer#0" expanded="false" />
-                <element signature="method#focusPreviousWindow#0;class#Viewer#0" expanded="false" />
-                <element signature="method#addSplitAction#0;class#Viewer#0" expanded="false" />
-                <element signature="method#showOrHideSideBar#0;class#Viewer#0" expanded="false" />
-                <element signature="method#setContentsLocked#0;class#Viewer#0" expanded="false" />
-                <element signature="method#getSelectedNode#0;class#Viewer#0" expanded="false" />
-                <element signature="method#focusToRow#0;class#Viewer#0" expanded="false" />
-                <element signature="method#focusToEditorWindow#0;class#Viewer#0" expanded="false" />
-                <element signature="method#closeTab#1;class#Viewer#0" expanded="false" />
-                <element signature="method#initEditorTab#0;class#Viewer#0" expanded="false" />
-                <element signature="class#19300:20163" expanded="false" />
-                <element signature="method#insertUpdate#0;class#19300:20163" expanded="false" />
-                <element signature="method#removeUpdate#0;class#19300:20163" expanded="false" />
-                <element signature="method#changedUpdate#0;class#19300:20163" expanded="false" />
-                <element signature="method#setEditorStyle#0;class#Viewer#0" expanded="false" />
-                <element signature="method#switchEditableMenus#0;class#Viewer#0" expanded="false" />
-                <element signature="method#switchToTab#0;class#Viewer#0" expanded="false" />
-                <element signature="method#nextTab#0;class#Viewer#0" expanded="false" />
-                <element signature="method#previousTab#0;class#Viewer#0" expanded="false" />
-                <element signature="e#23289#23311#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -219,7 +148,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/resources/res/i18n/imabw_en_US.properties">
           <provider editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="349" column="0" selection-start-line="349" selection-start-column="0" selection-end-line="349" selection-end-column="0" />
+              <caret line="357" column="0" selection-start-line="357" selection-start-column="0" selection-end-line="357" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -269,7 +198,6 @@
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/com/Viewer.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/Viewer.form" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/ixin/com/IPaneRender.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/ixin/frame/IFrame.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/PropertiesDialog.form" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/PropertiesDialog.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/PartPropertiesDialog.form" />
@@ -278,8 +206,6 @@
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/PartSelectionDialog.form" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/AboutDialog.form" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/PartPropertiesDialog.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/AboutDialog.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/SettingsDialog.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/com/EditorTab.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/com/EditorIndicator.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/com/TreeOptionsPane.java" />
@@ -290,14 +216,17 @@
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/ixin/IApplication.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Application.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/ixin/ISettings.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/Viewer.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/BookTask.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Constants.java" />
         <option value="$PROJECT_DIR$/src/main/resources/res/i18n/imabw_en_US.properties" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Manager.java" />
         <option value="$PROJECT_DIR$/target/META-INF/MANIFEST.MF" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/OpenBookDialog.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/OpenBookDialog.form" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/SettingsDialog.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/AboutDialog.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Constants.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Manager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/ixin/frame/IFrame.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/Viewer.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Worker.java" />
       </list>
     </option>
@@ -325,10 +254,10 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="53" />
-    <option name="y" value="24" />
-    <option name="width" value="1313" />
-    <option name="height" value="744" />
+    <option name="x" value="-4" />
+    <option name="y" value="-4" />
+    <option name="width" value="1374" />
+    <option name="height" value="746" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -359,7 +288,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="PackagesPane" proportions="" version="1">
+    <navigator proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -370,402 +299,7 @@
       <autoscrollFromSource />
       <sortByType />
     </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="target" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="target" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="META-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dialog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dialog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AboutDialog" />
-              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="img" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="i18n" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resource Bundle 'imabw'" />
-              <option name="myItemType" value="com.intellij.lang.properties.projectView.ResourceBundleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pw.phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ixin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pw.phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pw.phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pw.phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dialog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="GoToClass.includeLibraries" value="false" />
@@ -847,7 +381,7 @@
       </extension>
       <option name="MAIN_CLASS_NAME" value="pw.phylame.imabw.Application" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="D:\tmp\zd.pmab" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" value="/usr/java/jre1.6.0_45" />
@@ -927,6 +461,27 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="" />
       <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="BashConfigurationType" factoryName="Bash">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="INTERPRETER_PATH" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="BatchConfigurationType" factoryName="Batch">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <module name="" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
       <method />
     </configuration>
     <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
@@ -1188,11 +743,14 @@
       <workItem from="1430533538773" duration="8434000" />
       <workItem from="1430544959420" duration="288000" />
       <workItem from="1430545417886" duration="27334000" />
+      <workItem from="1430575612970" duration="589000" />
+      <workItem from="1430613582319" duration="3326000" />
+      <workItem from="1430617385346" duration="3265000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="194404000" />
+    <option name="totallyTimeSpent" value="201584000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1204,24 +762,23 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="53" y="24" width="1313" height="744" extended-state="6" />
+    <frame x="-4" y="-4" width="1374" height="746" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32901135" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32564843" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32561985" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38616714" sideWeight="0.50292826" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32928678" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32901135" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3832853" sideWeight="0.49707174" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38065523" sideWeight="0.49707174" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32708934" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14623001" sideWeight="0.4943274" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1460396" sideWeight="0.4943274" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32928678" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32564843" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24828637" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24816984" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24962063" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15250379" sideWeight="0.50567263" order="3" side_tool="true" content_ui="tabs" />
@@ -1235,6 +792,7 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291789" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32564843" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1259,23 +817,484 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///usr/java/jdk1.8.0_45/src.zip!/java/awt/Window.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Manager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.9592145">
-          <caret line="1166" column="9" selection-start-line="1166" selection-start-column="9" selection-end-line="1166" selection-end-column="9" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="448" column="57" selection-start-line="448" selection-start-column="57" selection-end-line="448" selection-end-column="57" />
           <folding>
-            <element signature="e#40355#40356#0" expanded="true" />
-            <element signature="e#40382#40383#0" expanded="true" />
+            <element signature="docComment;class#Manager#0" expanded="false" />
+            <element signature="docComment;field#app#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;field#viewer#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;field#worker#0;class#Manager#0" expanded="false" />
+            <element signature="method#Manager#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;method#begin#0;class#Manager#0" expanded="false" />
+            <element signature="method#begin#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;method#stop#0;class#Manager#0" expanded="false" />
+            <element signature="method#stop#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;method#updateTitle#0;class#Manager#0" expanded="false" />
+            <element signature="method#updateTitle#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;method#notifyModified#0;class#Manager#0" expanded="false" />
+            <element signature="method#notifyModified#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;method#maybeSave#0;class#Manager#0" expanded="false" />
+            <element signature="method#maybeSave#0;class#Manager#0" expanded="false" />
+            <element signature="method#newFile#0;class#Manager#0" expanded="false" />
+            <element signature="method#openFile#0;class#Manager#0" expanded="false" />
+            <element signature="method#saveFile#0;class#Manager#0" expanded="false" />
+            <element signature="method#saveAsFile#0;class#Manager#0" expanded="false" />
+            <element signature="method#fileDetails#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;method#findText#0;class#Manager#0" expanded="false" />
+            <element signature="method#findText#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;method#repeatFind#0;class#Manager#0" expanded="false" />
+            <element signature="method#repeatFind#0;class#Manager#0" expanded="false" />
+            <element signature="method#replaceText#0;class#Manager#0" expanded="false" />
+            <element signature="e#11214#11344#0" expanded="false" />
+            <element signature="method#gotoLine#0;class#Manager#0" expanded="false" />
+            <element signature="method#onCommand#0;class#Manager#0" expanded="false" />
+            <element signature="method#viewPart#0;class#Manager#0" expanded="false" />
+            <element signature="method#newChapter#0;class#Manager#0" expanded="false" />
+            <element signature="method#insertChapter#0;class#Manager#0" expanded="false" />
+            <element signature="method#saveAsPart#0;class#Manager#0" expanded="false" />
+            <element signature="method#renameChapter#0;class#Manager#0" expanded="false" />
+            <element signature="method#moveChapters#0;class#Manager#0" expanded="false" />
+            <element signature="method#deleteChapters#0;class#Manager#0" expanded="false" />
+            <element signature="method#mergeChapters#0;class#Manager#0" expanded="false" />
+            <element signature="method#searchChapters#0;class#Manager#0" expanded="false" />
+            <element signature="method#onTreeAction#0;class#Manager#0" expanded="false" />
+            <element signature="method#onTabAction#0;class#Manager#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar:///usr/java/jdk1.8.0_45/src.zip!/javax/swing/JOptionPane.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Constants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5619335">
-          <caret line="1641" column="0" selection-start-line="1641" selection-start-column="0" selection-end-line="1641" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="80" column="43" selection-start-line="80" selection-start-column="43" selection-end-line="80" selection-end-column="43" />
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Worker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;class#Worker#0" expanded="false" />
+            <element signature="e#2747#2748#0" expanded="true" />
+            <element signature="e#2776#2777#0" expanded="true" />
+            <element signature="method#showConfirm#0;class#Worker#0" expanded="false" />
+            <element signature="method#showMessage#0;class#Worker#0" expanded="false" />
+            <element signature="method#showWarning#0;class#Worker#0" expanded="false" />
+            <element signature="method#showError#0;class#Worker#0" expanded="false" />
+            <element signature="method#inputLoop#0;class#Worker#0" expanded="false" />
+            <element signature="method#selectDate#0;class#Worker#0" expanded="false" />
+            <element signature="method#selectLanguage#0;class#Worker#0" expanded="false" />
+            <element signature="method#initFileChooser#0;class#Worker#0" expanded="false" />
+            <element signature="method#makeFileExtensionFilters#0;class#Worker#0" expanded="false" />
+            <element signature="method#selectOpenFile#0;class#Worker#0" expanded="false" />
+            <element signature="method#selectSaveFile#0;class#Worker#0" expanded="false" />
+            <element signature="method#getSelectedFormats#0;class#Worker#0" expanded="false" />
+            <element signature="method#getSelectedFormat#0;class#Worker#0" expanded="false" />
+            <element signature="method#selectDirectory#0;class#Worker#0" expanded="false" />
+            <element signature="method#selectOpenBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#selectSaveBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#leftSame#0;class#Worker#0" expanded="false" />
+            <element signature="method#formatSize#0;class#Worker#0" expanded="false" />
+            <element signature="docComment;method#newBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#newBook#0;class#Worker#0" expanded="false" />
+            <element signature="docComment;method#openBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#openBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#getSourceFile#0;class#Worker#0" expanded="false" />
+            <element signature="method#getSourceFormat#0;class#Worker#0" expanded="false" />
+            <element signature="docComment;method#newChapter#0;class#Worker#0" expanded="false" />
+            <element signature="method#findParts#0;class#Worker#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/Viewer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="312" column="42" selection-start-line="312" selection-start-column="42" selection-end-line="312" selection-end-column="42" />
+          <folding>
+            <element signature="docComment;class#Viewer#0" expanded="false" />
+            <element signature="initializer##0;class#Viewer#0" expanded="false" />
+            <element signature="method#Viewer#0;class#Viewer#0" expanded="false" />
+            <element signature="method#initialized#0;class#Viewer#0" expanded="false" />
+            <element signature="method#createComponents#0;class#Viewer#0" expanded="false" />
+            <element signature="method#createContentsPopupMenu#0;class#Viewer#0" expanded="false" />
+            <element signature="class#5880:7143" expanded="false" />
+            <element signature="method#getTreeCellRendererComponent#0;class#5880:7143" expanded="false" />
+            <element signature="method#mouseClicked#0;class#7342:8145" expanded="false" />
+            <element signature="method#mouseReleased#0;class#7342:8145" expanded="false" />
+            <element signature="e#8689#8851#0" expanded="true" />
+            <element signature="e#8850#8851#0" expanded="true" />
+            <element signature="method#showContentsMenu#0;class#Viewer#0" expanded="false" />
+            <element signature="e#9858#9931#0" expanded="false" />
+            <element signature="e#10396#10412#0" expanded="false" />
+            <element signature="method#viewSelectionNode#0;class#Viewer#0" expanded="false" />
+            <element signature="method#createEditorPopupMenu#0;class#Viewer#0" expanded="false" />
+            <element signature="method#createEditorWindow#0;class#Viewer#0" expanded="false" />
+            <element signature="method#setBook#0;class#Viewer#0" expanded="false" />
+            <element signature="method#focusNextWindow#0;class#Viewer#0" expanded="false" />
+            <element signature="method#focusPreviousWindow#0;class#Viewer#0" expanded="false" />
+            <element signature="method#addSplitAction#0;class#Viewer#0" expanded="false" />
+            <element signature="method#showOrHideSideBar#0;class#Viewer#0" expanded="false" />
+            <element signature="method#setContentsLocked#0;class#Viewer#0" expanded="false" />
+            <element signature="method#getSelectedNode#0;class#Viewer#0" expanded="false" />
+            <element signature="method#focusToRow#0;class#Viewer#0" expanded="false" />
+            <element signature="method#focusToEditorWindow#0;class#Viewer#0" expanded="false" />
+            <element signature="method#closeTab#0;class#Viewer#0" expanded="false" />
+            <element signature="method#closeTab#1;class#Viewer#0" expanded="false" />
+            <element signature="method#closeActiveTab#0;class#Viewer#0" expanded="false" />
+            <element signature="method#closeOtherTabs#0;class#Viewer#0" expanded="false" />
+            <element signature="method#closeUnmodifiedTabs#0;class#Viewer#0" expanded="false" />
+            <element signature="method#closeAllTabs#0;class#Viewer#0" expanded="false" />
+            <element signature="method#newTab#0;class#Viewer#0" expanded="false" />
+            <element signature="method#initEditorTab#0;class#Viewer#0" expanded="false" />
+            <element signature="class#19301:20164" expanded="false" />
+            <element signature="method#insertUpdate#0;class#19301:20164" expanded="false" />
+            <element signature="method#removeUpdate#0;class#19301:20164" expanded="false" />
+            <element signature="method#changedUpdate#0;class#19301:20164" expanded="false" />
+            <element signature="method#setEditorStyle#0;class#Viewer#0" expanded="false" />
+            <element signature="method#switchEditableMenus#0;class#Viewer#0" expanded="false" />
+            <element signature="method#findTab#0;class#Viewer#0" expanded="false" />
+            <element signature="method#switchToTab#0;class#Viewer#0" expanded="false" />
+            <element signature="method#updateEditorIndicator#0;class#Viewer#0" expanded="false" />
+            <element signature="method#nextTab#0;class#Viewer#0" expanded="false" />
+            <element signature="method#previousTab#0;class#Viewer#0" expanded="false" />
+            <element signature="e#23290#23312#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/res/i18n/imabw_en_US.properties">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="357" column="0" selection-start-line="357" selection-start-column="0" selection-end-line="357" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="ResourceBundle">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Manager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="402" column="64" selection-start-line="402" selection-start-column="64" selection-end-line="402" selection-end-column="64" />
+          <folding>
+            <element signature="docComment;class#Manager#0" expanded="false" />
+            <element signature="docComment;field#app#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;field#viewer#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;field#worker#0;class#Manager#0" expanded="false" />
+            <element signature="method#Manager#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;method#begin#0;class#Manager#0" expanded="false" />
+            <element signature="method#begin#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;method#stop#0;class#Manager#0" expanded="false" />
+            <element signature="method#stop#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;method#updateTitle#0;class#Manager#0" expanded="false" />
+            <element signature="method#updateTitle#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;method#notifyModified#0;class#Manager#0" expanded="false" />
+            <element signature="method#notifyModified#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;method#maybeSave#0;class#Manager#0" expanded="false" />
+            <element signature="method#maybeSave#0;class#Manager#0" expanded="false" />
+            <element signature="method#newFile#0;class#Manager#0" expanded="false" />
+            <element signature="method#openFile#0;class#Manager#0" expanded="false" />
+            <element signature="method#saveFile#0;class#Manager#0" expanded="false" />
+            <element signature="method#saveAsFile#0;class#Manager#0" expanded="false" />
+            <element signature="method#fileDetails#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;method#findText#0;class#Manager#0" expanded="false" />
+            <element signature="method#findText#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;method#repeatFind#0;class#Manager#0" expanded="false" />
+            <element signature="method#repeatFind#0;class#Manager#0" expanded="false" />
+            <element signature="method#replaceText#0;class#Manager#0" expanded="false" />
+            <element signature="e#11214#11344#0" expanded="false" />
+            <element signature="method#gotoLine#0;class#Manager#0" expanded="false" />
+            <element signature="method#onCommand#0;class#Manager#0" expanded="false" />
+            <element signature="method#viewPart#0;class#Manager#0" expanded="false" />
+            <element signature="method#newChapter#0;class#Manager#0" expanded="false" />
+            <element signature="method#insertChapter#0;class#Manager#0" expanded="false" />
+            <element signature="method#saveAsPart#0;class#Manager#0" expanded="false" />
+            <element signature="method#renameChapter#0;class#Manager#0" expanded="false" />
+            <element signature="method#moveChapters#0;class#Manager#0" expanded="false" />
+            <element signature="method#deleteChapters#0;class#Manager#0" expanded="false" />
+            <element signature="method#mergeChapters#0;class#Manager#0" expanded="false" />
+            <element signature="method#searchChapters#0;class#Manager#0" expanded="false" />
+            <element signature="method#onTreeAction#0;class#Manager#0" expanded="false" />
+            <element signature="method#onTabAction#0;class#Manager#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Worker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="121" column="13" selection-start-line="121" selection-start-column="13" selection-end-line="121" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;class#Worker#0" expanded="false" />
+            <element signature="e#2747#2748#0" expanded="true" />
+            <element signature="e#2776#2777#0" expanded="true" />
+            <element signature="method#showConfirm#0;class#Worker#0" expanded="false" />
+            <element signature="method#showMessage#0;class#Worker#0" expanded="false" />
+            <element signature="method#showWarning#0;class#Worker#0" expanded="false" />
+            <element signature="method#showError#0;class#Worker#0" expanded="false" />
+            <element signature="method#inputLoop#0;class#Worker#0" expanded="false" />
+            <element signature="method#selectDate#0;class#Worker#0" expanded="false" />
+            <element signature="method#selectLanguage#0;class#Worker#0" expanded="false" />
+            <element signature="method#initFileChooser#0;class#Worker#0" expanded="false" />
+            <element signature="method#makeFileExtensionFilters#0;class#Worker#0" expanded="false" />
+            <element signature="method#selectOpenFile#0;class#Worker#0" expanded="false" />
+            <element signature="method#selectSaveFile#0;class#Worker#0" expanded="false" />
+            <element signature="method#getSelectedFormats#0;class#Worker#0" expanded="false" />
+            <element signature="method#getSelectedFormat#0;class#Worker#0" expanded="false" />
+            <element signature="method#selectDirectory#0;class#Worker#0" expanded="false" />
+            <element signature="method#selectOpenBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#selectSaveBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#leftSame#0;class#Worker#0" expanded="false" />
+            <element signature="method#formatSize#0;class#Worker#0" expanded="false" />
+            <element signature="docComment;method#newBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#newBook#0;class#Worker#0" expanded="false" />
+            <element signature="docComment;method#openBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#openBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#getSourceFile#0;class#Worker#0" expanded="false" />
+            <element signature="method#getSourceFormat#0;class#Worker#0" expanded="false" />
+            <element signature="docComment;method#newChapter#0;class#Worker#0" expanded="false" />
+            <element signature="method#findParts#0;class#Worker#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/AboutDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/Viewer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="707" column="1" selection-start-line="707" selection-start-column="1" selection-end-line="707" selection-end-column="1" />
+          <folding>
+            <element signature="docComment;class#Viewer#0" expanded="false" />
+            <element signature="initializer##0;class#Viewer#0" expanded="false" />
+            <element signature="method#Viewer#0;class#Viewer#0" expanded="false" />
+            <element signature="method#initialized#0;class#Viewer#0" expanded="false" />
+            <element signature="method#createComponents#0;class#Viewer#0" expanded="false" />
+            <element signature="method#createContentsPopupMenu#0;class#Viewer#0" expanded="false" />
+            <element signature="class#5880:7143" expanded="false" />
+            <element signature="method#getTreeCellRendererComponent#0;class#5880:7143" expanded="false" />
+            <element signature="method#mouseClicked#0;class#7342:8145" expanded="false" />
+            <element signature="method#mouseReleased#0;class#7342:8145" expanded="false" />
+            <element signature="e#8689#8851#0" expanded="true" />
+            <element signature="e#8850#8851#0" expanded="true" />
+            <element signature="method#showContentsMenu#0;class#Viewer#0" expanded="false" />
+            <element signature="e#9858#9931#0" expanded="false" />
+            <element signature="e#10396#10412#0" expanded="false" />
+            <element signature="method#viewSelectionNode#0;class#Viewer#0" expanded="false" />
+            <element signature="method#createEditorPopupMenu#0;class#Viewer#0" expanded="false" />
+            <element signature="method#createEditorWindow#0;class#Viewer#0" expanded="false" />
+            <element signature="method#setBook#0;class#Viewer#0" expanded="false" />
+            <element signature="method#focusNextWindow#0;class#Viewer#0" expanded="false" />
+            <element signature="method#focusPreviousWindow#0;class#Viewer#0" expanded="false" />
+            <element signature="method#addSplitAction#0;class#Viewer#0" expanded="false" />
+            <element signature="method#showOrHideSideBar#0;class#Viewer#0" expanded="false" />
+            <element signature="method#setContentsLocked#0;class#Viewer#0" expanded="false" />
+            <element signature="method#getSelectedNode#0;class#Viewer#0" expanded="false" />
+            <element signature="method#focusToRow#0;class#Viewer#0" expanded="false" />
+            <element signature="method#focusToEditorWindow#0;class#Viewer#0" expanded="false" />
+            <element signature="method#closeTab#0;class#Viewer#0" expanded="false" />
+            <element signature="method#closeTab#1;class#Viewer#0" expanded="false" />
+            <element signature="method#closeActiveTab#0;class#Viewer#0" expanded="false" />
+            <element signature="method#closeOtherTabs#0;class#Viewer#0" expanded="false" />
+            <element signature="method#closeUnmodifiedTabs#0;class#Viewer#0" expanded="false" />
+            <element signature="method#closeAllTabs#0;class#Viewer#0" expanded="false" />
+            <element signature="method#newTab#0;class#Viewer#0" expanded="false" />
+            <element signature="method#initEditorTab#0;class#Viewer#0" expanded="false" />
+            <element signature="class#19301:20164" expanded="false" />
+            <element signature="method#insertUpdate#0;class#19301:20164" expanded="false" />
+            <element signature="method#removeUpdate#0;class#19301:20164" expanded="false" />
+            <element signature="method#changedUpdate#0;class#19301:20164" expanded="false" />
+            <element signature="method#setEditorStyle#0;class#Viewer#0" expanded="false" />
+            <element signature="method#switchEditableMenus#0;class#Viewer#0" expanded="false" />
+            <element signature="method#findTab#0;class#Viewer#0" expanded="false" />
+            <element signature="method#switchToTab#0;class#Viewer#0" expanded="false" />
+            <element signature="method#updateEditorIndicator#0;class#Viewer#0" expanded="false" />
+            <element signature="method#nextTab#0;class#Viewer#0" expanded="false" />
+            <element signature="method#previousTab#0;class#Viewer#0" expanded="false" />
+            <element signature="e#23290#23312#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/res/i18n/imabw_en_US.properties">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="357" column="0" selection-start-line="357" selection-start-column="0" selection-end-line="357" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="ResourceBundle">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Manager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="189" column="28" selection-start-line="189" selection-start-column="28" selection-end-line="189" selection-end-column="28" />
+          <folding>
+            <element signature="docComment;class#Manager#0" expanded="false" />
+            <element signature="docComment;field#app#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;field#viewer#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;field#worker#0;class#Manager#0" expanded="false" />
+            <element signature="method#Manager#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;method#begin#0;class#Manager#0" expanded="false" />
+            <element signature="method#begin#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;method#stop#0;class#Manager#0" expanded="false" />
+            <element signature="method#stop#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;method#updateTitle#0;class#Manager#0" expanded="false" />
+            <element signature="method#updateTitle#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;method#notifyModified#0;class#Manager#0" expanded="false" />
+            <element signature="method#notifyModified#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;method#maybeSave#0;class#Manager#0" expanded="false" />
+            <element signature="method#maybeSave#0;class#Manager#0" expanded="false" />
+            <element signature="method#newFile#0;class#Manager#0" expanded="false" />
+            <element signature="method#openFile#0;class#Manager#0" expanded="false" />
+            <element signature="method#saveFile#0;class#Manager#0" expanded="false" />
+            <element signature="method#saveAsFile#0;class#Manager#0" expanded="false" />
+            <element signature="method#fileDetails#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;method#findText#0;class#Manager#0" expanded="false" />
+            <element signature="method#findText#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;method#repeatFind#0;class#Manager#0" expanded="false" />
+            <element signature="method#repeatFind#0;class#Manager#0" expanded="false" />
+            <element signature="method#replaceText#0;class#Manager#0" expanded="false" />
+            <element signature="e#11214#11344#0" expanded="false" />
+            <element signature="method#gotoLine#0;class#Manager#0" expanded="false" />
+            <element signature="method#onCommand#0;class#Manager#0" expanded="false" />
+            <element signature="method#viewPart#0;class#Manager#0" expanded="false" />
+            <element signature="method#newChapter#0;class#Manager#0" expanded="false" />
+            <element signature="method#insertChapter#0;class#Manager#0" expanded="false" />
+            <element signature="method#saveAsPart#0;class#Manager#0" expanded="false" />
+            <element signature="method#renameChapter#0;class#Manager#0" expanded="false" />
+            <element signature="method#moveChapters#0;class#Manager#0" expanded="false" />
+            <element signature="method#deleteChapters#0;class#Manager#0" expanded="false" />
+            <element signature="method#mergeChapters#0;class#Manager#0" expanded="false" />
+            <element signature="method#searchChapters#0;class#Manager#0" expanded="false" />
+            <element signature="method#onTreeAction#0;class#Manager#0" expanded="false" />
+            <element signature="method#onTabAction#0;class#Manager#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Worker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;class#Worker#0" expanded="false" />
+            <element signature="e#2747#2748#0" expanded="true" />
+            <element signature="e#2776#2777#0" expanded="true" />
+            <element signature="method#showConfirm#0;class#Worker#0" expanded="false" />
+            <element signature="method#showMessage#0;class#Worker#0" expanded="false" />
+            <element signature="method#showWarning#0;class#Worker#0" expanded="false" />
+            <element signature="method#showError#0;class#Worker#0" expanded="false" />
+            <element signature="method#inputLoop#0;class#Worker#0" expanded="false" />
+            <element signature="method#selectDate#0;class#Worker#0" expanded="false" />
+            <element signature="method#selectLanguage#0;class#Worker#0" expanded="false" />
+            <element signature="method#initFileChooser#0;class#Worker#0" expanded="false" />
+            <element signature="method#makeFileExtensionFilters#0;class#Worker#0" expanded="false" />
+            <element signature="method#selectOpenFile#0;class#Worker#0" expanded="false" />
+            <element signature="method#selectSaveFile#0;class#Worker#0" expanded="false" />
+            <element signature="method#getSelectedFormats#0;class#Worker#0" expanded="false" />
+            <element signature="method#getSelectedFormat#0;class#Worker#0" expanded="false" />
+            <element signature="method#selectDirectory#0;class#Worker#0" expanded="false" />
+            <element signature="method#selectOpenBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#selectSaveBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#leftSame#0;class#Worker#0" expanded="false" />
+            <element signature="method#formatSize#0;class#Worker#0" expanded="false" />
+            <element signature="docComment;method#newBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#newBook#0;class#Worker#0" expanded="false" />
+            <element signature="docComment;method#openBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#openBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#getSourceFile#0;class#Worker#0" expanded="false" />
+            <element signature="method#getSourceFormat#0;class#Worker#0" expanded="false" />
+            <element signature="docComment;method#newChapter#0;class#Worker#0" expanded="false" />
+            <element signature="method#findParts#0;class#Worker#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/Viewer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="124" column="0" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
+          <folding>
+            <element signature="docComment;class#Viewer#0" expanded="false" />
+            <element signature="initializer##0;class#Viewer#0" expanded="false" />
+            <element signature="method#Viewer#0;class#Viewer#0" expanded="false" />
+            <element signature="method#initialized#0;class#Viewer#0" expanded="false" />
+            <element signature="method#createComponents#0;class#Viewer#0" expanded="false" />
+            <element signature="method#createContentsPopupMenu#0;class#Viewer#0" expanded="false" />
+            <element signature="class#5880:7143" expanded="false" />
+            <element signature="method#getTreeCellRendererComponent#0;class#5880:7143" expanded="false" />
+            <element signature="method#mouseClicked#0;class#7342:8145" expanded="false" />
+            <element signature="method#mouseReleased#0;class#7342:8145" expanded="false" />
+            <element signature="e#8689#8851#0" expanded="true" />
+            <element signature="e#8850#8851#0" expanded="true" />
+            <element signature="method#showContentsMenu#0;class#Viewer#0" expanded="false" />
+            <element signature="e#9858#9931#0" expanded="false" />
+            <element signature="e#10396#10412#0" expanded="false" />
+            <element signature="method#viewSelectionNode#0;class#Viewer#0" expanded="false" />
+            <element signature="method#createEditorPopupMenu#0;class#Viewer#0" expanded="false" />
+            <element signature="method#createEditorWindow#0;class#Viewer#0" expanded="false" />
+            <element signature="method#setBook#0;class#Viewer#0" expanded="false" />
+            <element signature="method#focusNextWindow#0;class#Viewer#0" expanded="false" />
+            <element signature="method#focusPreviousWindow#0;class#Viewer#0" expanded="false" />
+            <element signature="method#addSplitAction#0;class#Viewer#0" expanded="false" />
+            <element signature="method#showOrHideSideBar#0;class#Viewer#0" expanded="false" />
+            <element signature="method#setContentsLocked#0;class#Viewer#0" expanded="false" />
+            <element signature="method#getSelectedNode#0;class#Viewer#0" expanded="false" />
+            <element signature="method#focusToRow#0;class#Viewer#0" expanded="false" />
+            <element signature="method#focusToEditorWindow#0;class#Viewer#0" expanded="false" />
+            <element signature="method#closeTab#0;class#Viewer#0" expanded="false" />
+            <element signature="method#closeTab#1;class#Viewer#0" expanded="false" />
+            <element signature="method#closeActiveTab#0;class#Viewer#0" expanded="false" />
+            <element signature="method#closeOtherTabs#0;class#Viewer#0" expanded="false" />
+            <element signature="method#closeUnmodifiedTabs#0;class#Viewer#0" expanded="false" />
+            <element signature="method#closeAllTabs#0;class#Viewer#0" expanded="false" />
+            <element signature="method#newTab#0;class#Viewer#0" expanded="false" />
+            <element signature="method#initEditorTab#0;class#Viewer#0" expanded="false" />
+            <element signature="class#19301:20164" expanded="false" />
+            <element signature="method#insertUpdate#0;class#19301:20164" expanded="false" />
+            <element signature="method#removeUpdate#0;class#19301:20164" expanded="false" />
+            <element signature="method#changedUpdate#0;class#19301:20164" expanded="false" />
+            <element signature="method#setEditorStyle#0;class#Viewer#0" expanded="false" />
+            <element signature="method#switchEditableMenus#0;class#Viewer#0" expanded="false" />
+            <element signature="method#findTab#0;class#Viewer#0" expanded="false" />
+            <element signature="method#switchToTab#0;class#Viewer#0" expanded="false" />
+            <element signature="method#updateEditorIndicator#0;class#Viewer#0" expanded="false" />
+            <element signature="method#nextTab#0;class#Viewer#0" expanded="false" />
+            <element signature="method#previousTab#0;class#Viewer#0" expanded="false" />
+            <element signature="e#23290#23312#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/res/i18n/imabw_en_US.properties">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="349" column="0" selection-start-line="349" selection-start-column="0" selection-end-line="349" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="ResourceBundle">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/PartPropertiesDialog.form">
@@ -1283,105 +1302,14 @@
         <state />
       </provider>
     </entry>
-    <entry file="jar:///usr/java/jdk1.8.0_45/src.zip!/javax/swing/JDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3323263">
-          <caret line="975" column="21" selection-start-line="975" selection-start-column="21" selection-end-line="975" selection-end-column="21" />
-          <folding>
-            <element signature="docComment;class#JDialog#0" expanded="false" />
-            <element signature="docComment;field#defaultLookAndFeelDecoratedKey#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;field#rootPane#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;field#rootPaneCheckingEnabled#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;field#transferHandler#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#JDialog#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#JDialog#1;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#JDialog#2;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#JDialog#3;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#JDialog#4;class#JDialog#0" expanded="false" />
-            <element signature="method#JDialog#4;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#JDialog#5;class#JDialog#0" expanded="false" />
-            <element signature="method#JDialog#5;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#JDialog#6;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#JDialog#7;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#JDialog#8;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#JDialog#9;class#JDialog#0" expanded="false" />
-            <element signature="method#JDialog#9;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#JDialog#10;class#JDialog#0" expanded="false" />
-            <element signature="method#JDialog#10;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#JDialog#11;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#JDialog#12;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#JDialog#13;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#JDialog#14;class#JDialog#0" expanded="false" />
-            <element signature="method#JDialog#14;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#JDialog#15;class#JDialog#0" expanded="false" />
-            <element signature="method#JDialog#15;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#dialogInit#0;class#JDialog#0" expanded="false" />
-            <element signature="method#dialogInit#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#createRootPane#0;class#JDialog#0" expanded="false" />
-            <element signature="method#createRootPane#0;class#JDialog#0" expanded="false" />
-            <element signature="e#27038#27106#0" expanded="false" />
-            <element signature="docComment;method#processWindowEvent#0;class#JDialog#0" expanded="false" />
-            <element signature="method#processWindowEvent#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#setDefaultCloseOperation#0;class#JDialog#0" expanded="false" />
-            <element signature="method#setDefaultCloseOperation#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#getDefaultCloseOperation#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#setTransferHandler#0;class#JDialog#0" expanded="false" />
-            <element signature="method#setTransferHandler#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#getTransferHandler#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#update#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#setJMenuBar#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#getJMenuBar#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#isRootPaneCheckingEnabled#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#setRootPaneCheckingEnabled#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#addImpl#0;class#JDialog#0" expanded="false" />
-            <element signature="method#addImpl#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#remove#0;class#JDialog#0" expanded="false" />
-            <element signature="method#remove#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#setLayout#0;class#JDialog#0" expanded="false" />
-            <element signature="method#setLayout#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#getRootPane#0;class#JDialog#0" expanded="false" />
-            <element signature="e#37417#37418#0" expanded="false" />
-            <element signature="e#37448#37449#0" expanded="false" />
-            <element signature="docComment;method#setRootPane#0;class#JDialog#0" expanded="false" />
-            <element signature="method#setRootPane#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#getContentPane#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#setContentPane#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#getLayeredPane#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#setLayeredPane#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#getGlassPane#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#setGlassPane#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#getGraphics#0;class#JDialog#0" expanded="false" />
-            <element signature="method#getGraphics#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#repaint#0;class#JDialog#0" expanded="false" />
-            <element signature="method#repaint#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#setDefaultLookAndFeelDecorated#0;class#JDialog#0" expanded="false" />
-            <element signature="method#setDefaultLookAndFeelDecorated#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#isDefaultLookAndFeelDecorated#0;class#JDialog#0" expanded="false" />
-            <element signature="method#isDefaultLookAndFeelDecorated#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#paramString#0;class#JDialog#0" expanded="false" />
-            <element signature="method#paramString#0;class#JDialog#0" expanded="false" />
-            <element signature="e#45949#45966#0" expanded="false" />
-            <element signature="docComment;method#getAccessibleContext#0;class#JDialog#0" expanded="false" />
-            <element signature="method#getAccessibleContext#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;class#AccessibleJDialog#0;class#JDialog#0" expanded="false" />
-            <element signature="class#AccessibleJDialog#0;class#JDialog#0" expanded="false" />
-            <element signature="e#46922#46950#0" expanded="false" />
-            <element signature="docComment;method#getAccessibleName#0;class#AccessibleJDialog#0;class#JDialog#0" expanded="false" />
-            <element signature="method#getAccessibleName#0;class#AccessibleJDialog#0;class#JDialog#0" expanded="false" />
-            <element signature="docComment;method#getAccessibleStateSet#0;class#AccessibleJDialog#0;class#JDialog#0" expanded="false" />
-            <element signature="method#getAccessibleStateSet#0;class#AccessibleJDialog#0;class#JDialog#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/PartSelectionDialog.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/AboutDialog.form">
@@ -1404,28 +1332,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.2915407">
           <caret line="45" column="23" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#6553#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/SettingsDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.8655589">
-          <caret line="81" column="8" selection-start-line="81" selection-start-column="8" selection-end-line="81" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2050#2177#0" expanded="false" />
-            <element signature="e#2176#2177#0" expanded="false" />
-            <element signature="e#2697#2828#0" expanded="false" />
-            <element signature="e#2827#2828#0" expanded="false" />
-            <element signature="e#2697#2828#0" expanded="false" />
-            <element signature="e#2827#2828#0" expanded="false" />
-            <element signature="e#2697#2828#0" expanded="false" />
-            <element signature="e#2827#2828#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1438,7 +1344,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.25830814">
           <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1446,14 +1351,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.60725075">
           <caret line="35" column="4" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#2805#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#1727#1925#0" expanded="false" />
-            <element signature="e#1924#1925#0" expanded="false" />
-            <element signature="e#2034#2035#0" expanded="false" />
-            <element signature="e#2066#2067#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1463,32 +1360,19 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/com/TreeOptionsPane.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/com/TreeOptionsPane.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.4063444">
           <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#2775#0" expanded="false" />
-            <element signature="e#1355#1555#0" expanded="false" />
-            <element signature="e#1554#1555#0" expanded="false" />
-            <element signature="e#1676#1878#0" expanded="false" />
-            <element signature="e#1877#1878#0" expanded="false" />
-            <element signature="e#2090#2547#0" expanded="false" />
-            <element signature="e#2546#2547#0" expanded="false" />
-            <element signature="e#2603#2604#0" expanded="false" />
-            <element signature="e#2649#2650#0" expanded="false" />
-            <element signature="e#2744#2745#0" expanded="false" />
-            <element signature="e#2771#2772#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1496,26 +1380,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.8942598">
           <caret line="338" column="35" selection-start-line="338" selection-start-column="35" selection-end-line="338" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#16623#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/java/jdk1.8.0_45/src.zip!/javax/swing/tree/TreeCellRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25377643">
-          <caret line="41" column="17" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/java/jdk1.8.0_45/src.zip!/javax/swing/tree/DefaultTreeCellRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.50453174">
-          <caret line="105" column="69" selection-start-line="105" selection-start-column="69" selection-end-line="105" selection-end-column="69" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1523,21 +1387,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.30362538">
           <caret line="35" column="29" selection-start-line="35" selection-start-column="29" selection-end-line="35" selection-end-column="29" />
-          <folding>
-            <element signature="e#959#960#0" expanded="false" />
-            <element signature="e#988#989#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/java/jdk1.8.0_45/src.zip!/javax/swing/tree/DefaultMutableTreeNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3323263">
-          <caret line="677" column="19" selection-start-line="677" selection-start-column="19" selection-end-line="677" selection-end-column="19" />
-          <folding>
-            <element signature="e#22657#22658#0" expanded="false" />
-            <element signature="e#22699#22700#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1545,18 +1394,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5332326">
           <caret line="32" column="8" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#2029#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/ixin/frame/IFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3323263">
-          <caret line="53" column="11" selection-start-line="53" selection-start-column="11" selection-end-line="53" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1564,22 +1401,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.783988">
           <caret line="50" column="23" selection-start-line="50" selection-start-column="23" selection-end-line="50" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#6151#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#4374#4375#0" expanded="false" />
-            <element signature="e#4448#4449#0" expanded="false" />
-            <element signature="e#4549#4550#0" expanded="false" />
-            <element signature="e#4576#4577#0" expanded="false" />
-            <element signature="e#4694#4695#0" expanded="false" />
-            <element signature="e#4726#4727#0" expanded="false" />
-            <element signature="e#5421#5422#0" expanded="false" />
-            <element signature="e#5452#5453#0" expanded="false" />
-            <element signature="e#5665#5666#0" expanded="false" />
-            <element signature="e#5705#5706#0" expanded="false" />
-            <element signature="e#6112#6113#0" expanded="false" />
-            <element signature="e#6147#6148#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1594,25 +1415,10 @@
         <state />
       </provider>
     </entry>
-    <entry file="jar:///usr/java/jdk1.8.0_45/src.zip!/java/util/HashMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3323263">
-          <caret line="473" column="11" selection-start-line="473" selection-start-column="11" selection-end-line="473" selection-end-column="11" />
-          <folding>
-            <element signature="e#19296#19297#0" expanded="false" />
-            <element signature="e#19379#19380#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/ixin/ISettings.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.14350453">
           <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding>
-            <element signature="e#898#899#0" expanded="false" />
-            <element signature="e#921#922#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1640,74 +1446,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///usr/java/jdk1.8.0_45/src.zip!/java/util/Set.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.50453174">
-          <caret line="189" column="12" selection-start-line="189" selection-start-column="12" selection-end-line="189" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/java/jdk1.8.0_45/src.zip!/java/lang/Object.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3323263">
-          <caret line="147" column="19" selection-start-line="147" selection-start-column="19" selection-end-line="147" selection-end-column="19" />
-          <folding>
-            <element signature="e#5748#5749#0" expanded="false" />
-            <element signature="e#5784#5785#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/pw-books/jem-core/2.0/jem-core-2.0-sources.jar!/pw/phylame/jem/util/Attributes.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3323263">
           <caret line="97" column="18" selection-start-line="97" selection-start-column="18" selection-end-line="97" selection-end-column="18" />
-          <folding>
-            <element signature="e#3862#3863#0" expanded="false" />
-            <element signature="e#3911#3912#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/java/jdk1.8.0_45/src.zip!/java/lang/System.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.915408">
-          <caret line="492" column="30" selection-start-line="492" selection-start-column="30" selection-end-line="492" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/java/jdk1.8.0_45/src.zip!/javax/swing/filechooser/FileNameExtensionFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3897281">
-          <caret line="141" column="20" selection-start-line="141" selection-start-column="20" selection-end-line="141" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/java/jdk1.8.0_45/src.zip!/java/io/UnixFileSystem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="304" column="0" selection-start-line="304" selection-start-column="0" selection-end-line="304" selection-end-column="0" />
-          <folding>
-            <element signature="e#10645#10646#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/java/jdk1.8.0_45/src.zip!/java/lang/String.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6767372">
-          <caret line="963" column="19" selection-start-line="963" selection-start-column="19" selection-end-line="963" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/java/jdk1.8.0_45/src.zip!/java/lang/SecurityException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.28700906">
-          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -1720,34 +1462,114 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///usr/java/jdk1.8.0_45/src.zip!/java/util/ArrayList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27492446">
-          <caret line="425" column="40" selection-start-line="425" selection-start-column="15" selection-end-line="425" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/java/jdk1.8.0_45/src.zip!/java/lang/Iterable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.20543806">
-          <caret line="44" column="17" selection-start-line="44" selection-start-column="17" selection-end-line="44" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/com/EditorTab.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.20090635">
           <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/target/META-INF/MANIFEST.MF">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25830814">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/SettingsDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.10627177">
+          <caret line="56" column="11" selection-start-line="56" selection-start-column="11" selection-end-line="56" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/AboutDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.73170733">
+          <caret line="36" column="27" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/res/i18n/imabw_en_US.properties">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="357" column="0" selection-start-line="357" selection-start-column="0" selection-end-line="357" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="ResourceBundle">
+        <state />
+      </provider>
+    </entry>
+    <entry file="jar://D:/devel/Java/jdk1.8.0_40/src.zip!/java/awt/Container.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3327869">
+          <caret line="343" column="23" selection-start-line="343" selection-start-column="23" selection-end-line="343" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/devel/Java/jdk1.8.0_40/src.zip!/javax/swing/JComponent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.18360655">
+          <caret line="550" column="22" selection-start-line="550" selection-start-column="22" selection-end-line="550" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/devel/Java/jdk1.8.0_40/src.zip!/javax/swing/JToolBar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3327869">
+          <caret line="88" column="13" selection-start-line="88" selection-start-column="13" selection-end-line="88" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/ixin/frame/IFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.50491804">
+          <caret line="185" column="50" selection-start-line="185" selection-start-column="50" selection-end-line="185" selection-end-column="50" />
+          <folding>
+            <element signature="docComment;class#IFrame#0" expanded="false" />
+            <element signature="e#1462#1463#0" expanded="true" />
+            <element signature="e#1512#1513#0" expanded="true" />
+            <element signature="e#1577#1578#0" expanded="true" />
+            <element signature="e#1627#1628#0" expanded="true" />
+            <element signature="method#IFrame#0;class#IFrame#0" expanded="false" />
+            <element signature="method#initialized#0;class#IFrame#0" expanded="false" />
+            <element signature="e#3438#3439#0" expanded="true" />
+            <element signature="e#3480#3481#0" expanded="true" />
+            <element signature="e#3530#3531#0" expanded="true" />
+            <element signature="e#3575#3576#0" expanded="true" />
+            <element signature="e#3932#4765#0" expanded="true" />
+            <element signature="e#4764#4765#0" expanded="true" />
+            <element signature="e#5083#5084#0" expanded="true" />
+            <element signature="e#5142#5143#0" expanded="true" />
+            <element signature="e#5205#5206#0" expanded="true" />
+            <element signature="e#5259#5260#0" expanded="true" />
+            <element signature="e#5413#5414#0" expanded="true" />
+            <element signature="e#5443#5444#0" expanded="true" />
+            <element signature="e#5482#5483#0" expanded="true" />
+            <element signature="e#5539#5540#0" expanded="true" />
+            <element signature="method#setPaneRender#0;class#IFrame#0" expanded="false" />
+            <element signature="e#6004#6005#0" expanded="true" />
+            <element signature="e#6036#6037#0" expanded="true" />
+            <element signature="method#setStatusText#0;class#IFrame#0" expanded="false" />
+            <element signature="e#6348#6368#0" expanded="false" />
+            <element signature="docComment;field#paneRender#0;class#IFrame#0" expanded="false" />
+            <element signature="docComment;field#menuActions#0;class#IFrame#0" expanded="false" />
+            <element signature="docComment;field#toolBarActions#0;class#IFrame#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/Viewer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="639" column="5" selection-start-line="639" selection-start-column="5" selection-end-line="639" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.12622951">
+          <caret line="211" column="50" selection-start-line="211" selection-start-column="50" selection-end-line="211" selection-end-column="50" />
           <folding>
             <element signature="docComment;class#Viewer#0" expanded="false" />
             <element signature="initializer##0;class#Viewer#0" expanded="false" />
@@ -1755,22 +1577,18 @@
             <element signature="method#initialized#0;class#Viewer#0" expanded="false" />
             <element signature="method#createComponents#0;class#Viewer#0" expanded="false" />
             <element signature="method#createContentsPopupMenu#0;class#Viewer#0" expanded="false" />
-            <element signature="method#createContentsWindow#0;class#Viewer#0" expanded="false" />
-            <element signature="method#setTreeStyle#0;class#Viewer#0" expanded="false" />
-            <element signature="class#5881:7144" expanded="false" />
-            <element signature="method#getTreeCellRendererComponent#0;class#5881:7144" expanded="false" />
-            <element signature="class#7343:8146" expanded="false" />
-            <element signature="method#mouseClicked#0;class#7343:8146" expanded="false" />
-            <element signature="method#mouseReleased#0;class#7343:8146" expanded="false" />
+            <element signature="class#5880:7143" expanded="false" />
+            <element signature="method#getTreeCellRendererComponent#0;class#5880:7143" expanded="false" />
+            <element signature="method#mouseClicked#0;class#7342:8145" expanded="false" />
+            <element signature="method#mouseReleased#0;class#7342:8145" expanded="false" />
+            <element signature="e#8689#8851#0" expanded="true" />
+            <element signature="e#8850#8851#0" expanded="true" />
             <element signature="method#showContentsMenu#0;class#Viewer#0" expanded="false" />
-            <element signature="e#9859#9932#0" expanded="false" />
-            <element signature="e#10397#10413#0" expanded="false" />
+            <element signature="e#9858#9931#0" expanded="false" />
+            <element signature="e#10396#10412#0" expanded="false" />
             <element signature="method#viewSelectionNode#0;class#Viewer#0" expanded="false" />
             <element signature="method#createEditorPopupMenu#0;class#Viewer#0" expanded="false" />
-            <element signature="e#11876#12236#0" expanded="true" />
-            <element signature="e#12235#12236#0" expanded="true" />
-            <element signature="e#12278#12930#0" expanded="true" />
-            <element signature="e#12929#12930#0" expanded="true" />
+            <element signature="method#createEditorWindow#0;class#Viewer#0" expanded="false" />
             <element signature="method#setBook#0;class#Viewer#0" expanded="false" />
             <element signature="method#focusNextWindow#0;class#Viewer#0" expanded="false" />
             <element signature="method#focusPreviousWindow#0;class#Viewer#0" expanded="false" />
@@ -1780,383 +1598,34 @@
             <element signature="method#getSelectedNode#0;class#Viewer#0" expanded="false" />
             <element signature="method#focusToRow#0;class#Viewer#0" expanded="false" />
             <element signature="method#focusToEditorWindow#0;class#Viewer#0" expanded="false" />
+            <element signature="method#closeTab#0;class#Viewer#0" expanded="false" />
             <element signature="method#closeTab#1;class#Viewer#0" expanded="false" />
+            <element signature="method#closeActiveTab#0;class#Viewer#0" expanded="false" />
+            <element signature="method#closeOtherTabs#0;class#Viewer#0" expanded="false" />
+            <element signature="method#closeUnmodifiedTabs#0;class#Viewer#0" expanded="false" />
+            <element signature="method#closeAllTabs#0;class#Viewer#0" expanded="false" />
+            <element signature="method#newTab#0;class#Viewer#0" expanded="false" />
             <element signature="method#initEditorTab#0;class#Viewer#0" expanded="false" />
-            <element signature="class#19300:20163" expanded="false" />
-            <element signature="method#insertUpdate#0;class#19300:20163" expanded="false" />
-            <element signature="method#removeUpdate#0;class#19300:20163" expanded="false" />
-            <element signature="method#changedUpdate#0;class#19300:20163" expanded="false" />
+            <element signature="class#19301:20164" expanded="false" />
+            <element signature="method#insertUpdate#0;class#19301:20164" expanded="false" />
+            <element signature="method#removeUpdate#0;class#19301:20164" expanded="false" />
+            <element signature="method#changedUpdate#0;class#19301:20164" expanded="false" />
             <element signature="method#setEditorStyle#0;class#Viewer#0" expanded="false" />
             <element signature="method#switchEditableMenus#0;class#Viewer#0" expanded="false" />
+            <element signature="method#findTab#0;class#Viewer#0" expanded="false" />
             <element signature="method#switchToTab#0;class#Viewer#0" expanded="false" />
+            <element signature="method#updateEditorIndicator#0;class#Viewer#0" expanded="false" />
             <element signature="method#nextTab#0;class#Viewer#0" expanded="false" />
             <element signature="method#previousTab#0;class#Viewer#0" expanded="false" />
-            <element signature="e#23289#23311#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/ui/dialog/AboutDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.71299094">
-          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#23290#23312#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Constants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.60353535">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/res/i18n/imabw_en_US.properties">
-      <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="349" column="0" selection-start-line="349" selection-start-column="0" selection-end-line="349" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="ResourceBundle">
-        <state />
-      </provider>
-    </entry>
-    <entry file="jar:///usr/java/jdk1.8.0_45/src.zip!/javax/swing/JFileChooser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3323263">
-          <caret line="496" column="39" selection-start-line="496" selection-start-column="39" selection-end-line="496" selection-end-column="39" />
-          <folding>
-            <element signature="docComment;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;field#uiClassID#0;class#JFileChooser#0" expanded="false" />
-            <element signature="e#2366#2393#0" expanded="false" />
-            <element signature="docComment;field#OPEN_DIALOG#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;field#SAVE_DIALOG#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;field#CUSTOM_DIALOG#0;class#JFileChooser#0" expanded="false" />
-            <element signature="e#2981#3016#0" expanded="false" />
-            <element signature="docComment;field#CANCEL_OPTION#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;field#APPROVE_OPTION#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;field#ERROR_OPTION#0;class#JFileChooser#0" expanded="false" />
-            <element signature="e#3431#3468#0" expanded="false" />
-            <element signature="docComment;field#FILES_ONLY#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;field#DIRECTORIES_ONLY#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;field#FILES_AND_DIRECTORIES#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;field#CANCEL_SELECTION#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;field#APPROVE_SELECTION#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;field#APPROVE_BUTTON_TEXT_CHANGED_PROPERTY#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;field#APPROVE_BUTTON_TOOL_TIP_TEXT_CHANGED_PROPERTY#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;field#APPROVE_BUTTON_MNEMONIC_CHANGED_PROPERTY#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;field#CONTROL_BUTTONS_ARE_SHOWN_CHANGED_PROPERTY#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;field#DIRECTORY_CHANGED_PROPERTY#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;field#SELECTED_FILE_CHANGED_PROPERTY#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;field#SELECTED_FILES_CHANGED_PROPERTY#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;field#MULTI_SELECTION_ENABLED_CHANGED_PROPERTY#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;field#FILE_SYSTEM_VIEW_CHANGED_PROPERTY#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;field#FILE_VIEW_CHANGED_PROPERTY#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;field#FILE_HIDING_CHANGED_PROPERTY#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;field#FILE_FILTER_CHANGED_PROPERTY#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;field#FILE_SELECTION_MODE_CHANGED_PROPERTY#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;field#ACCESSORY_CHANGED_PROPERTY#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;field#ACCEPT_ALL_FILE_FILTER_USED_CHANGED_PROPERTY#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;field#DIALOG_TITLE_CHANGED_PROPERTY#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;field#DIALOG_TYPE_CHANGED_PROPERTY#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;field#CHOOSABLE_FILE_FILTER_CHANGED_PROPERTY#0;class#JFileChooser#0" expanded="false" />
-            <element signature="e#7441#7474#0" expanded="false" />
-            <element signature="e#8835#8875#0" expanded="false" />
-            <element signature="docComment;method#JFileChooser#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#JFileChooser#1;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#JFileChooser#2;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#JFileChooser#3;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#JFileChooser#4;class#JFileChooser#0" expanded="false" />
-            <element signature="method#JFileChooser#4;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#JFileChooser#5;class#JFileChooser#0" expanded="false" />
-            <element signature="method#JFileChooser#5;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#setup#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#setup#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#installHierarchyListener#0;class#JFileChooser#0" expanded="false" />
-            <element signature="class#12074:12633" expanded="false" />
-            <element signature="method#hierarchyChanged#0;class#12074:12633" expanded="false" />
-            <element signature="method#installShowFilesListener#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#setDragEnabled#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#setDragEnabled#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#getDragEnabled#0;class#JFileChooser#0" expanded="false" />
-            <element signature="e#15300#15332#0" expanded="false" />
-            <element signature="docComment;method#getSelectedFile#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#setSelectedFile#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#getSelectedFiles#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#getSelectedFiles#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#setSelectedFiles#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#setSelectedFiles#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#getCurrentDirectory#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#setCurrentDirectory#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#changeToParentDirectory#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#changeToParentDirectory#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#rescanCurrentDirectory#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#ensureFileIsVisible#0;class#JFileChooser#0" expanded="false" />
-            <element signature="e#20444#20485#0" expanded="false" />
-            <element signature="docComment;method#showOpenDialog#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#showSaveDialog#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#showSaveDialog#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#showDialog#0;class#JFileChooser#0" expanded="false" />
-            <element signature="class#25312:25453" expanded="false" />
-            <element signature="e#25640#25736#0" expanded="false" />
-            <element signature="docComment;method#createDialog#0;class#JFileChooser#0" expanded="false" />
-            <element signature="e#28301#28330#0" expanded="false" />
-            <element signature="docComment;method#getControlButtonsAreShown#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#setControlButtonsAreShown#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#setControlButtonsAreShown#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#getDialogType#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#setDialogType#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#setDialogType#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#setDialogTitle#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#setDialogTitle#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#getDialogTitle#0;class#JFileChooser#0" expanded="false" />
-            <element signature="e#33394#33433#0" expanded="false" />
-            <element signature="docComment;method#setApproveButtonToolTipText#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#setApproveButtonToolTipText#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#getApproveButtonToolTipText#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#getApproveButtonMnemonic#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#setApproveButtonMnemonic#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#setApproveButtonMnemonic#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#setApproveButtonMnemonic#1;class#JFileChooser#0" expanded="false" />
-            <element signature="method#setApproveButtonMnemonic#1;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#setApproveButtonText#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#setApproveButtonText#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#getApproveButtonText#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#getChoosableFileFilters#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#getChoosableFileFilters#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#addChoosableFileFilter#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#addChoosableFileFilter#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#removeChoosableFileFilter#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#removeChoosableFileFilter#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#resetChoosableFileFilters#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#resetChoosableFileFilters#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#getAcceptAllFileFilter#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#getAcceptAllFileFilter#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#isAcceptAllFileFilterUsed#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#setAcceptAllFileFilterUsed#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#setAcceptAllFileFilterUsed#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#getAccessory#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#setAccessory#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#setAccessory#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#setFileSelectionMode#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#setFileSelectionMode#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#getFileSelectionMode#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#isFileSelectionEnabled#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#isFileSelectionEnabled#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#isDirectorySelectionEnabled#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#isDirectorySelectionEnabled#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#setMultiSelectionEnabled#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#setMultiSelectionEnabled#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#isMultiSelectionEnabled#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#isFileHidingEnabled#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#setFileHidingEnabled#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#setFileHidingEnabled#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#setFileFilter#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#setFileFilter#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#getFileFilter#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#setFileView#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#setFileView#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#getFileView#0;class#JFileChooser#0" expanded="false" />
-            <element signature="e#51170#51203#0" expanded="false" />
-            <element signature="docComment;method#getName#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#getName#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#getDescription#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#getDescription#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#getTypeDescription#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#getTypeDescription#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#getIcon#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#getIcon#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#isTraversable#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#isTraversable#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#accept#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#accept#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#setFileSystemView#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#setFileSystemView#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#getFileSystemView#0;class#JFileChooser#0" expanded="false" />
-            <element signature="e#56443#56472#0" expanded="false" />
-            <element signature="docComment;method#approveSelection#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#approveSelection#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#cancelSelection#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#cancelSelection#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#addActionListener#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#removeActionListener#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#getActionListeners#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#fireActionPerformed#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#fireActionPerformed#0;class#JFileChooser#0" expanded="false" />
-            <element signature="e#59553#59602#0" expanded="false" />
-            <element signature="class#WeakPCL#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#propertyChange#0;class#WeakPCL#0;class#JFileChooser#0" expanded="false" />
-            <element signature="e#60601#60665#0" expanded="false" />
-            <element signature="e#61118#61154#0" expanded="false" />
-            <element signature="docComment;method#updateUI#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#updateUI#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#getUIClassID#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#getUI#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#readObject#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#readObject#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#writeObject#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#writeObject#0;class#JFileChooser#0" expanded="false" />
-            <element signature="e#63259#63320#0" expanded="false" />
-            <element signature="e#63528#63589#0" expanded="false" />
-            <element signature="docComment;method#paramString#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#paramString#0;class#JFileChooser#0" expanded="false" />
-            <element signature="e#66906#66923#0" expanded="false" />
-            <element signature="docComment;method#getAccessibleContext#0;class#JFileChooser#0" expanded="false" />
-            <element signature="method#getAccessibleContext#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;class#AccessibleJFileChooser#0;class#JFileChooser#0" expanded="false" />
-            <element signature="class#AccessibleJFileChooser#0;class#JFileChooser#0" expanded="false" />
-            <element signature="docComment;method#getAccessibleRole#0;class#AccessibleJFileChooser#0;class#JFileChooser#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/java/jdk1.8.0_45/src.zip!/java/io/File.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3323263">
-          <caret line="497" column="16" selection-start-line="497" selection-start-column="16" selection-end-line="497" selection-end-column="16" />
-          <folding>
-            <element signature="docComment;class#File#0" expanded="false" />
-            <element signature="docComment;field#fs#0;class#File#0" expanded="false" />
-            <element signature="docComment;field#path#0;class#File#0" expanded="false" />
-            <element signature="docComment;class#PathStatus#0;class#File#0" expanded="false" />
-            <element signature="class#PathStatus#0;class#File#0" expanded="false" />
-            <element signature="docComment;field#status#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#isInvalid#0;class#File#0" expanded="false" />
-            <element signature="method#isInvalid#0;class#File#0" expanded="false" />
-            <element signature="docComment;field#prefixLength#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#getPrefixLength#0;class#File#0" expanded="false" />
-            <element signature="docComment;field#separatorChar#0;class#File#0" expanded="false" />
-            <element signature="docComment;field#separator#0;class#File#0" expanded="false" />
-            <element signature="docComment;field#pathSeparatorChar#0;class#File#0" expanded="false" />
-            <element signature="docComment;field#pathSeparator#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#File#0;class#File#0" expanded="false" />
-            <element signature="method#File#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#File#1;class#File#0" expanded="false" />
-            <element signature="method#File#1;class#File#0" expanded="false" />
-            <element signature="docComment;method#File#2;class#File#0" expanded="false" />
-            <element signature="method#File#2;class#File#0" expanded="false" />
-            <element signature="docComment;method#File#3;class#File#0" expanded="false" />
-            <element signature="method#File#3;class#File#0" expanded="false" />
-            <element signature="docComment;method#File#4;class#File#0" expanded="false" />
-            <element signature="method#File#4;class#File#0" expanded="false" />
-            <element signature="docComment;method#File#5;class#File#0" expanded="false" />
-            <element signature="method#File#5;class#File#0" expanded="false" />
-            <element signature="docComment;method#getName#0;class#File#0" expanded="false" />
-            <element signature="method#getName#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#getParent#0;class#File#0" expanded="false" />
-            <element signature="method#getParent#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#getParentFile#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#getPath#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#isAbsolute#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#getAbsolutePath#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#getAbsoluteFile#0;class#File#0" expanded="false" />
-            <element signature="method#getAbsoluteFile#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#getCanonicalPath#0;class#File#0" expanded="false" />
-            <element signature="method#getCanonicalPath#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#getCanonicalFile#0;class#File#0" expanded="false" />
-            <element signature="method#getCanonicalFile#0;class#File#0" expanded="false" />
-            <element signature="method#slashify#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#toURL#0;class#File#0" expanded="false" />
-            <element signature="method#toURL#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#toURI#0;class#File#0" expanded="false" />
-            <element signature="method#toURI#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#canRead#0;class#File#0" expanded="false" />
-            <element signature="method#canRead#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#canWrite#0;class#File#0" expanded="false" />
-            <element signature="method#canWrite#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#exists#0;class#File#0" expanded="false" />
-            <element signature="method#exists#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#isDirectory#0;class#File#0" expanded="false" />
-            <element signature="method#isDirectory#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#isFile#0;class#File#0" expanded="false" />
-            <element signature="method#isFile#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#isHidden#0;class#File#0" expanded="false" />
-            <element signature="method#isHidden#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#lastModified#0;class#File#0" expanded="false" />
-            <element signature="method#lastModified#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#length#0;class#File#0" expanded="false" />
-            <element signature="method#length#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#delete#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#deleteOnExit#0;class#File#0" expanded="false" />
-            <element signature="method#deleteOnExit#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#list#0;class#File#0" expanded="false" />
-            <element signature="method#list#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#list#1;class#File#0" expanded="false" />
-            <element signature="method#list#1;class#File#0" expanded="false" />
-            <element signature="docComment;method#listFiles#0;class#File#0" expanded="false" />
-            <element signature="method#listFiles#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#listFiles#1;class#File#0" expanded="false" />
-            <element signature="method#listFiles#1;class#File#0" expanded="false" />
-            <element signature="docComment;method#listFiles#2;class#File#0" expanded="false" />
-            <element signature="method#listFiles#2;class#File#0" expanded="false" />
-            <element signature="docComment;method#mkdir#0;class#File#0" expanded="false" />
-            <element signature="method#mkdir#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#mkdirs#0;class#File#0" expanded="false" />
-            <element signature="method#mkdirs#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#setLastModified#0;class#File#0" expanded="false" />
-            <element signature="method#setLastModified#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#setReadOnly#0;class#File#0" expanded="false" />
-            <element signature="method#setReadOnly#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#setWritable#0;class#File#0" expanded="false" />
-            <element signature="method#setWritable#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#setWritable#1;class#File#0" expanded="false" />
-            <element signature="docComment;method#setReadable#0;class#File#0" expanded="false" />
-            <element signature="method#setReadable#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#setReadable#1;class#File#0" expanded="false" />
-            <element signature="docComment;method#setExecutable#0;class#File#0" expanded="false" />
-            <element signature="method#setExecutable#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#setExecutable#1;class#File#0" expanded="false" />
-            <element signature="docComment;method#canExecute#0;class#File#0" expanded="false" />
-            <element signature="method#canExecute#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#listRoots#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#getTotalSpace#0;class#File#0" expanded="false" />
-            <element signature="method#getTotalSpace#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#getFreeSpace#0;class#File#0" expanded="false" />
-            <element signature="method#getFreeSpace#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#getUsableSpace#0;class#File#0" expanded="false" />
-            <element signature="method#getUsableSpace#0;class#File#0" expanded="false" />
-            <element signature="class#TempDirectory#0;class#File#0" expanded="false" />
-            <element signature="method#generateFile#0;class#TempDirectory#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#createTempFile#0;class#File#0" expanded="false" />
-            <element signature="method#createTempFile#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#createTempFile#1;class#File#0" expanded="false" />
-            <element signature="method#createTempFile#1;class#File#0" expanded="false" />
-            <element signature="docComment;method#compareTo#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#equals#0;class#File#0" expanded="false" />
-            <element signature="method#equals#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#hashCode#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#toString#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#writeObject#0;class#File#0" expanded="false" />
-            <element signature="method#writeObject#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#readObject#0;class#File#0" expanded="false" />
-            <element signature="method#readObject#0;class#File#0" expanded="false" />
-            <element signature="initializer##0;class#File#0" expanded="false" />
-            <element signature="docComment;field#serialVersionUID#0;class#File#0" expanded="false" />
-            <element signature="docComment;method#toPath#0;class#File#0" expanded="false" />
-            <element signature="method#toPath#0;class#File#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/java/jdk1.8.0_45/src.zip!/java/io/PrintStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3323263">
-          <caret line="962" column="23" selection-start-line="962" selection-start-column="23" selection-end-line="962" selection-end-column="23" />
-          <folding>
-            <element signature="e#29974#29975#0" expanded="true" />
-            <element signature="e#30017#30018#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/target/META-INF/MANIFEST.MF">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25830814">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <caret line="80" column="43" selection-start-line="80" selection-start-column="43" selection-end-line="80" selection-end-column="43" />
           <folding />
         </state>
       </provider>
@@ -2164,29 +1633,61 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Manager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="189" column="31" selection-start-line="189" selection-start-column="31" selection-end-line="189" selection-end-column="31" />
+          <caret line="218" column="28" selection-start-line="218" selection-start-column="28" selection-end-line="218" selection-end-column="28" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#8365#8366#0" expanded="true" />
-            <element signature="e#8430#8431#0" expanded="true" />
-            <element signature="e#8465#8466#0" expanded="true" />
-            <element signature="e#8494#8495#0" expanded="true" />
-            <element signature="e#8532#8533#0" expanded="true" />
-            <element signature="e#8561#8562#0" expanded="true" />
-            <element signature="e#8596#8597#0" expanded="true" />
-            <element signature="e#8623#8624#0" expanded="true" />
+            <element signature="docComment;class#Manager#0" expanded="false" />
+            <element signature="docComment;field#app#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;field#viewer#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;field#worker#0;class#Manager#0" expanded="false" />
+            <element signature="method#Manager#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;method#begin#0;class#Manager#0" expanded="false" />
+            <element signature="method#begin#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;method#stop#0;class#Manager#0" expanded="false" />
+            <element signature="method#stop#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;method#updateTitle#0;class#Manager#0" expanded="false" />
+            <element signature="method#updateTitle#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;method#notifyModified#0;class#Manager#0" expanded="false" />
+            <element signature="method#notifyModified#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;method#maybeSave#0;class#Manager#0" expanded="false" />
+            <element signature="method#maybeSave#0;class#Manager#0" expanded="false" />
+            <element signature="method#newFile#0;class#Manager#0" expanded="false" />
+            <element signature="method#openFile#0;class#Manager#0" expanded="false" />
+            <element signature="method#saveFile#0;class#Manager#0" expanded="false" />
+            <element signature="method#saveAsFile#0;class#Manager#0" expanded="false" />
+            <element signature="method#fileDetails#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;method#findText#0;class#Manager#0" expanded="false" />
+            <element signature="method#findText#0;class#Manager#0" expanded="false" />
+            <element signature="docComment;method#repeatFind#0;class#Manager#0" expanded="false" />
+            <element signature="method#repeatFind#0;class#Manager#0" expanded="false" />
+            <element signature="method#replaceText#0;class#Manager#0" expanded="false" />
+            <element signature="e#11214#11344#0" expanded="false" />
+            <element signature="method#gotoLine#0;class#Manager#0" expanded="false" />
+            <element signature="method#onCommand#0;class#Manager#0" expanded="false" />
+            <element signature="method#viewPart#0;class#Manager#0" expanded="false" />
+            <element signature="method#newChapter#0;class#Manager#0" expanded="false" />
+            <element signature="method#insertChapter#0;class#Manager#0" expanded="false" />
+            <element signature="method#saveAsPart#0;class#Manager#0" expanded="false" />
+            <element signature="method#renameChapter#0;class#Manager#0" expanded="false" />
+            <element signature="method#moveChapters#0;class#Manager#0" expanded="false" />
+            <element signature="method#deleteChapters#0;class#Manager#0" expanded="false" />
+            <element signature="method#mergeChapters#0;class#Manager#0" expanded="false" />
+            <element signature="method#searchChapters#0;class#Manager#0" expanded="false" />
+            <element signature="method#onTreeAction#0;class#Manager#0" expanded="false" />
+            <element signature="method#onTabAction#0;class#Manager#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/Worker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0">
-          <caret line="317" column="0" selection-start-line="317" selection-start-column="0" selection-end-line="317" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.73224044">
+          <caret line="405" column="7" selection-start-line="405" selection-start-column="7" selection-end-line="405" selection-end-column="7" />
           <folding>
+            <element signature="imports" expanded="true" />
             <element signature="docComment;class#Worker#0" expanded="false" />
-            <element signature="method#Worker#0;class#Worker#0" expanded="false" />
-            <element signature="method#inputText#0;class#Worker#0" expanded="false" />
+            <element signature="e#2747#2748#0" expanded="true" />
+            <element signature="e#2776#2777#0" expanded="true" />
+            <element signature="method#showConfirm#0;class#Worker#0" expanded="false" />
             <element signature="method#showMessage#0;class#Worker#0" expanded="false" />
             <element signature="method#showWarning#0;class#Worker#0" expanded="false" />
             <element signature="method#showError#0;class#Worker#0" expanded="false" />
@@ -2207,14 +1708,10 @@
             <element signature="docComment;method#newBook#0;class#Worker#0" expanded="false" />
             <element signature="method#newBook#0;class#Worker#0" expanded="false" />
             <element signature="docComment;method#openBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#openBook#0;class#Worker#0" expanded="false" />
             <element signature="method#getSourceFile#0;class#Worker#0" expanded="false" />
             <element signature="method#getSourceFormat#0;class#Worker#0" expanded="false" />
             <element signature="docComment;method#newChapter#0;class#Worker#0" expanded="false" />
-            <element signature="method#newChapter#0;class#Worker#0" expanded="false" />
-            <element signature="docComment;method#saveBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#saveBook#0;class#Worker#0" expanded="false" />
-            <element signature="e#15285#15287#0" expanded="false" />
-            <element signature="method#addAttributes#0;class#Worker#0" expanded="false" />
             <element signature="method#findParts#0;class#Worker#0" expanded="false" />
           </folding>
         </state>

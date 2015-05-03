@@ -54,8 +54,8 @@ public class SettingsDialog extends JDialog {
 
     private Application app = Application.getApplication();
 
-    public SettingsDialog(Frame parent) {
-        super(parent, true);
+    public SettingsDialog(Frame owner) {
+        super(owner, true);
         setContentPane(contentPane);
         getRootPane().setDefaultButton(buttonOK);
 
@@ -105,8 +105,8 @@ public class SettingsDialog extends JDialog {
         dispose();
     }
 
-    public static void editSettings(Frame parent, Map<String, Object> setting) {
-        SettingsDialog dialog = new SettingsDialog(parent);
+    public static void editSettings(Frame owner, Map<String, Object> setting) {
+        SettingsDialog dialog = new SettingsDialog(owner);
         dialog.setSettings(setting);
         dialog.setVisible(true);
     }
