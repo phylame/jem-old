@@ -20,17 +20,14 @@ package pw.phylame.imabw;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import pw.phylame.imabw.ui.Viewer;
 import pw.phylame.imabw.ui.com.EditorTab;
 import pw.phylame.imabw.ui.com.PartNode;
 import pw.phylame.imabw.ui.com.UIFactory;
 import pw.phylame.imabw.ui.dialog.PartPropertiesDialog;
 import pw.phylame.imabw.ui.dialog.PartSelectionDialog;
-
-import pw.phylame.ixin.IToolkit;
 import pw.phylame.ixin.ITextEdit;
-
+import pw.phylame.ixin.IToolkit;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.Part;
@@ -38,16 +35,13 @@ import pw.phylame.tools.DateUtils;
 import pw.phylame.tools.StringUtils;
 import pw.phylame.tools.file.FileNameUtils;
 
+import javax.swing.*;
+import javax.swing.tree.TreePath;
 import java.io.File;
 import java.io.IOException;
-
-import java.util.List;
-import java.util.Date;
 import java.util.ArrayList;
-
-import javax.swing.JCheckBox;
-import javax.swing.JOptionPane;
-import javax.swing.tree.TreePath;
+import java.util.Date;
+import java.util.List;
 
 /**
  * The manager.
@@ -58,16 +52,11 @@ public class Manager implements Constants {
     /** The application */
     private Application app = Application.getApplication();
 
-    /** The viewer */
     private Viewer viewer;
 
-    /** The worker */
     private Worker worker;
 
-    private Book book;
-    private File source;
-    private String format;
-    private boolean modified = false;
+    private Task task = null;
 
     public Manager(Viewer viewer, Worker worker) {
         this.viewer = viewer;
@@ -87,32 +76,35 @@ public class Manager implements Constants {
 
     /** Stop manager works */
     public void stop() {
-        if (!maybeSave(app.getText("Dialog.Exit.Title"))) {
+        if (! maybeSave(app.getText("Dialog.Exit.Title"))) {
             return;
+        }
+        if (task != null) {
+            task.cleanup();
         }
         app.exit(0);
     }
 
     /** Update frame title */
     private void updateTitle() {
-        // book_title - [book_author] - [imported] - [path]? - app_info
-        StringBuilder sb = new StringBuilder(book.getTitle());
-        if (modified) {
+        // book_title - [book_author] - [imported]? - [path]? - title version
+        StringBuilder sb = new StringBuilder(task.getBook().getTitle());
+        if (task.isModified()) {
             sb.append("*");
         }
         sb.append(" - ");
-        String author = book.getAuthor();
+        String author = task.getBook().getAuthor();
         if ("".equals(author)) {
             author = app.getText("Common.NonAuthor");
         }
         sb.append("[").append(author).append("] - ");
-        if (!format.equals(Jem.PMAB_FORMAT)) {     // from other format
+        if (!task.getFormat().equals(Jem.PMAB_FORMAT)) {     // from other format
             sb.append("[").append(app.getText("Frame.Title.Imported")).append("] - ");
         }
-        if (source != null) {
-            sb.append(source.getPath()).append(" - ");
+        if (task.getSource() != null) {
+            sb.append(task.getSource().getPath()).append(" - ");
         }
-        sb.append(app.getText("App.Name")).append(" ").append(Constants.RELEASE);
+        sb.append(app.getText("App.Name")).append(" ").append(VERSION);
         viewer.setTitle(sb.toString());
     }
 
@@ -121,7 +113,7 @@ public class Manager implements Constants {
      * @param message the message
      */
     public void notifyModified(String message) {
-        modified = true;
+        task.setModified(true);
         updateTitle();
         if (message != null) {
             viewer.setStatusText(message);
@@ -133,12 +125,13 @@ public class Manager implements Constants {
      * @return <tt>true</tt> if saved changes, otherwise <tt>false</tt>.
      */
     private boolean maybeSave(String title) {
-        if (! modified) {
+        if (task == null || ! task.isModified()) {
             return true;
         }
         Object[] options = {app.getText("Dialog.ButtonSave"), app.getText("Dialog.ButtonDiscard"),
                 app.getText("Dialog.ButtonCancel")};
-        int ret = JOptionPane.showOptionDialog(viewer, app.getText("Dialog.Save.LabelSaveTip"), title,
+        int ret = JOptionPane.showOptionDialog(viewer, app.getText("Dialog.Save.LabelSaveTip"),
+                title,
                 JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
                 IToolkit.createImageIcon(":/res/img/dialog/save.png"),
                 options, options[0]);
@@ -155,97 +148,81 @@ public class Manager implements Constants {
         return true;
     }
 
-    private void newFile(String title) {
-        if (! maybeSave(app.getText("Dialog.New.Title"))) {
-            return;
+    private void setTask(Task task) {
+        if (this.task != null) {
+            this.task.cleanup();
+            viewer.closeAllTabs();
         }
-        Book _book = worker.newBook(viewer, title);
-        if (_book == null) {
-            return;
-        }
-        if (book != null) {
-            book.cleanup();
-        }
-        viewer.closeAllTabs();
 
-        book = _book;
-        source = null;
-        format = Jem.PMAB_FORMAT;
-        modified = false;
+        this.task = task;
 
-        viewer.getMenuAction(FILE_DETAILS).setEnabled(false);   // disable file details menu
-
-        viewer.setBook(book);
         updateTitle();
+
+        if (this.task.getSource() != null) {       // enable file details menu item
+            viewer.getMenuAction(FILE_DETAILS).setEnabled(true);
+        } else {
+            viewer.getMenuAction(FILE_DETAILS).setEnabled(false);
+        }
+
+        viewer.setBook(this.task.getBook());
 
         viewer.setContentsLocked(false);
         viewer.focusToTreeWindow();
-        viewer.setStatusText(app.getText("Task.CreatedBook", book.getTitle()));
+    }
+
+    private void newFile(String bookTitle) {
+        if (! maybeSave(app.getText("Dialog.NewBook.Title"))) {
+            return;
+        }
+        Task task = worker.newBook(viewer, app.getText("Dialog.NewBook.Title"), bookTitle);
+        if (task == null) {
+            return;
+        }
+
+        setTask(task);
+        viewer.setStatusText(app.getText("Task.CreatedBook", this.task.getBook().getTitle()));
     }
 
     private boolean openFile(File file) {
-        if (! maybeSave(app.getText("Dialog.Open.Title"))) {
+        if (! maybeSave(app.getText("Dialog.OpenBook.Title"))) {
             return false;
         }
-        Book _book = worker.openBook(viewer, file, app.getText("Dialog.OpenBook.Title"));
-        if (_book == null) {
+        Task task = worker.openBook(viewer, file, app.getText("Dialog.OpenBook.Title"));
+        if (task == null) {
             return false;
         }
-        if (book != null) {
-            book.cleanup();
-        }
-        viewer.closeAllTabs();
 
-        book = _book;
-        source = worker.getSourceFile(book);
-        assert source != null;
-
-        format = worker.getSourceFormat(book);
-        assert format != null;
-
-        modified = false;
-
-        viewer.getMenuAction(FILE_DETAILS).setEnabled(true);
-
-        viewer.setBook(book);
-        updateTitle();
-
-        viewer.setContentsLocked(false);
-        viewer.focusToTreeWindow();
-        viewer.setStatusText(app.getText("Task.OpenedBook", source.getPath(), format));
+        setTask(task);
+        viewer.setStatusText(app.getText("Task.OpenedBook", this.task.getSource().getPath()));
         return true;
     }
 
     private void saveFile() {
-        File path;
-        if (format.equals(Jem.PMAB_FORMAT)) {   // opened from pmab file
-            path = source;
-        } else {                                // imported from other formats
-            path = null;
-        }
-        path = worker.saveBook(viewer, app.getText("Dialog.SaveBook.Title"), book, path, Jem.PMAB_FORMAT);
-        if (path == null) {
+        viewer.cacheAllTabs();
+
+        if (! worker.saveBook(viewer, app.getText("Dialog.SaveBook.Title"), task)) {
             return;
         }
 
-        if (source != null) {
-            // reload book
-            System.out.println("reload book");
+        updateTitle();
+        if (this.task.getSource() != null) {       // enable file details menu item
+            viewer.getMenuAction(FILE_DETAILS).setEnabled(true);
+        } else {
+            viewer.getMenuAction(FILE_DETAILS).setEnabled(false);
         }
 
-        source = path;
-        format = Jem.PMAB_FORMAT;
-        modified = false;
-
-        updateTitle();
-        viewer.setStatusText(app.getText("Task.SavedBook", book.getTitle(), source.getPath()));
+        viewer.setStatusText(app.getText("Task.SavedBook", task.getBook().getTitle(),
+                task.getSource().getPath()));
     }
 
-    private void saveAsFile() {
-        File path = worker.saveBook(viewer, app.getText("Dialog.SaveBook.Title"), book);
+    private void exportFile() {
+        viewer.cacheAllTabs();
+
+        File path = worker.exportBook(viewer, app.getText("Dialog.SaveBook.Title"),
+                task.getBook(), task);
         if (path != null) {
             worker.showMessage(viewer, app.getText("Dialog.SaveBook.Title"),
-                    app.getText("Task.SavedBook", book.getTitle(), path.getPath()));
+                    app.getText("Task.SavedBook", task.getBook().getTitle(), path.getPath()));
         }
     }
 
@@ -258,24 +235,14 @@ public class Manager implements Constants {
         info.add(new Object[]{app.getText("Dialog.FileDetails.Size"), worker.formatSize(file.length())});
         info.add(new Object[]{app.getText("Dialog.FileDetails.Date"),
                 DateUtils.formatDate(new Date(file.lastModified()), "yyyy-M-d H:m:s")});
-        worker.showMessage(viewer, app.getText("Dialog.FileDetails.Title", file.getPath()),
+        worker.showMessage(viewer, app.getText("Dialog.FileDetails.Title"),
                 UIFactory.infoLabel(info.toArray(new Object[0][])));
     }
 
     private void viewProperties(Part part) {
-        PartPropertiesDialog.viewProperties(viewer, part);
-    }
-
-    public File getOpenedFile() {
-        return source;
-    }
-
-    public String getInputFormat() {
-        return format;
-    }
-
-    public Book getEditedBook() {
-        return book;
+        if (PartPropertiesDialog.viewProperties(viewer, part)) {    // modified
+            notifyModified(null);
+        }
     }
 
     // ********************
@@ -315,7 +282,8 @@ public class Manager implements Constants {
             } else {            // find next
                 viewer.getMenuAction(FIND_NEXT).setEnabled(false);
             }
-            worker.showWarning(viewer, app.getText("Dialog.Find.Title"), app.getText("Dialog.Find.NotFound", str));
+            worker.showWarning(viewer, app.getText("Dialog.Find.Title"),
+                    app.getText("Dialog.Find.NotFound", str));
         } else {
             viewer.getMenuAction(FIND_NEXT).setEnabled(true);
             viewer.getMenuAction(FIND_PREVIOUS).setEnabled(true);
@@ -392,10 +360,10 @@ public class Manager implements Constants {
                 saveFile();
                 break;
             case SAVE_AS_FILE:
-                saveAsFile();
+                exportFile();
                 break;
             case FILE_DETAILS:
-                fileDetails(source);
+                fileDetails(task.getSource());
                 break;
             case EXIT_APP:
                 stop();
@@ -430,8 +398,16 @@ public class Manager implements Constants {
             case SHOW_ABOUT:
                 pw.phylame.imabw.ui.dialog.AboutDialog.showAbout(viewer);
                 break;
+            case DO_ACTION:
+                String cmd = worker.inputText(viewer, app.getText("Dialog.DoAction.Title"),
+                        app.getText("Dialog.DoAction.Tip"), null);
+                if (StringUtils.isEmpty(cmd)) {
+                    return;
+                }
+                onCommand(cmd);
+                break;
             case BOOK_ATTRIBUTES:
-                viewProperties(book);
+                viewProperties(task.getBook());
                 break;
             default:
                 System.out.println("menu action: "+cmdID);
@@ -494,7 +470,8 @@ public class Manager implements Constants {
         parent.insertNode(sub, index);
         viewer.refreshNode(parent);
         viewer.focusToRow(parentPath, index);
-        notifyModified(app.getText("Task.InsertedChapter", sub.getPart().getTitle(), node.getPart().getTitle()));
+        notifyModified(app.getText("Task.InsertedChapter", sub.getPart().getTitle(),
+                node.getPart().getTitle()));
     }
 
     private void saveAsPart() {
@@ -502,9 +479,16 @@ public class Manager implements Constants {
         if (treePath == null) {
             return;
         }
+        viewer.cacheAllTabs();
+
         PartNode node = PartNode.getPartNode(treePath);
         Part part = node.getPart();
-        File path = worker.saveBook(viewer, app.getText("Dialog.SaveBook.Title"), Jem.toBook(part));
+
+        Book book = Jem.toBook(part);
+        if (! book.isSection()) {   // add new chapter with text
+            book.newChapter(app.getText("Common.TextChapterTitle"), part.getSource());
+        }
+        File path = worker.exportBook(viewer, app.getText("Dialog.SaveBook.Title"), book, task);
         if (path != null) {
             worker.showMessage(viewer, app.getText("Dialog.SaveBook.Title"),
                     app.getText("Task.SavedBook", part.getTitle(), path.getPath()));

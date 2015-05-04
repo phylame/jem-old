@@ -111,7 +111,8 @@ public class Viewer extends IFrame implements Constants {
         ((JCheckBoxMenuItem)menu.getItem(1)).setState(getStatusBar().isVisible());
         ((JCheckBoxMenuItem)menu.getItem(2)).setState((boolean) app.getSetting("ui.window.showSidebar"));
 
-        setSize(1066, 600);
+        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+        setSize((int)(d.getWidth()*0.8), (int)(d.getWidth()*0.45)); // 16x9
         setLocationRelativeTo(null);
 
         focusToTreeWindow();
@@ -160,7 +161,7 @@ public class Viewer extends IFrame implements Constants {
             }
         });
         treeContextMenu = new JPopupMenu();
-        IToolkit.addMenuItem(treeContextMenu, UIDesign.TREE_POPUP_MENU_MODEL, treeActions, app.getViewer());
+        IToolkit.addMenuItem(treeContextMenu, UIDesign.TREE_POPUP_MENU_MODEL, treeActions, this);
     }
 
     private void createContentsWindow() {
@@ -322,7 +323,7 @@ public class Viewer extends IFrame implements Constants {
             }
         });
         tabContextMenu = new JPopupMenu();
-        IToolkit.addMenuItem(tabContextMenu, UIDesign.TAB_POPUP_MENU_MODEL, tabActions, app.getViewer());
+        IToolkit.addMenuItem(tabContextMenu, UIDesign.TAB_POPUP_MENU_MODEL, tabActions, this);
     }
 
     private void createEditorWindow() {
@@ -332,7 +333,7 @@ public class Viewer extends IFrame implements Constants {
             @Override
             public void mouseReleased(MouseEvent e) {
                 // not meta key or empty editor
-                if (! e.isMetaDown() || editorWindow.getTabCount() == 0) {
+                if (!e.isMetaDown() || editorWindow.getTabCount() == 0) {
                     return;
                 }
                 tabContextMenu.show(editorWindow, e.getX(), e.getY());
@@ -529,15 +530,23 @@ public class Viewer extends IFrame implements Constants {
     }
 
     public void closeAllTabs() {
-        for (EditorTab tab: editorTabs) {
-            tab.cacheContent();
-        }
+        cacheAllTabs();
         editorWindow.removeAll();
         editorTabs.clear();
     }
 
+    public void cacheAllTabs() {
+        for (EditorTab tab: editorTabs) {
+            tab.cacheContent();
+        }
+    }
+
     public EditorTab getActiveTab() {
-        return editorTabs.get(editorWindow.getSelectedIndex());
+        try {
+            return editorTabs.get(editorWindow.getSelectedIndex());
+        } catch (IndexOutOfBoundsException e) {     // no tab opened
+            return null;
+        }
     }
 
     // add and view new tab
@@ -549,7 +558,7 @@ public class Viewer extends IFrame implements Constants {
             e.printStackTrace();
             text = "";
         }
-        EditorTab tab = new EditorTab(new ITextEdit(text, app.getViewer()), part,
+        EditorTab tab = new EditorTab(new ITextEdit(text, this), part,
                 (String) app.getSetting("jem.pmab.textEncoding"));
         initEditorTab(tab);
         editorTabs.add(tab);
@@ -620,7 +629,7 @@ public class Viewer extends IFrame implements Constants {
         String[] keys = {FIND_TEXT, FIND_AND_REPLACE, GO_TO_POSITION};
         IAction action;
         for (String key: keys) {
-            action = app.getViewer().getMenuAction(key);
+            action = getMenuAction(key);
             if (action != null) {
                 action.setEnabled(enable);
             }

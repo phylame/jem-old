@@ -5,58 +5,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="43c239c1-c0d7-481c-9eb1-894ad8728ebf" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__commons_cli_commons_cli_1_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__log4j_log4j_1_2_12.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__pw_books_jem_core_2_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__pw_books_jem_formats_1_0_SNAPSHOT.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__xml_apis_xml_apis_1_0_b2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../imabw/.idea/codeStyleSettings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../scj/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../imabw/.idea/dictionaries/pw.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../scj/scj.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../scj/.idea/artifacts/scj_jar.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/com/MainPane.form" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/Viewer.form" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/com/MainPane.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/Viewer.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/PropertiesDialog.form" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/PartPropertiesDialog.form" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/PropertiesDialog.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/PartPropertiesDialog.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/SelectPartDialog.form" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/PartSelectionDialog.form" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/SelectPartDialog.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/PartSelectionDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/AboutDialog.form" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/AboutDialog.form" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../imabw/.idea/libraries/Maven__pw_books_jem_core_2_0_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Task.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../imabw/.idea/libraries/Maven__pw_books_jem_core_2_0.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/AboutDialog.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/AboutDialog.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Application.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Application.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/Attributes.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/Attributes.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Book.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Book.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Constants.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Constants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/com/EditorIndicator.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/com/EditorIndicator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/DateUtils.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/DateUtils.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/com/EditorTab.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/com/EditorTab.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileFactory.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/ixin/IApplication.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/ixin/IApplication.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/ixin/frame/IFrame.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/ixin/frame/IFrame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/ixin/com/IPaneRender.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/ixin/com/IPaneRender.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/ixin/ISettings.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/ixin/ISettings.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/jar/JarParser.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/jar/JarParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileUtils.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/ixin/ITextEdit.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/ixin/ITextEdit.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/jar/JarMaker.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/jar/JarMaker.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Manager.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Manager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/com/PartNode.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/com/PartNode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v1/Reader.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v1/Reader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v2/Reader.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v2/Reader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v3/Reader.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v3/Reader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Part.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Part.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/PartPropertiesDialog.form" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/PartPropertiesDialog.form" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/PartPropertiesDialog.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/PartPropertiesDialog.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/SettingsDialog.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/SettingsDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/StringUtils.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/tools/StringUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/com/TreeOptionsPane.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/com/TreeOptionsPane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/txt/TxtParser.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/txt/TxtParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/txt/TxtMaker.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/txt/TxtMaker.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/UIDesign.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/UIDesign.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/umd/UmdParser.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/umd/UmdParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/umd/UmdMaker.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/umd/UmdMaker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/Viewer.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/Viewer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Worker.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Worker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/scj/Worker.java" afterPath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/scj/Worker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/.idea/compiler.xml" afterPath="$PROJECT_DIR$/../jem-formats/.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/.idea/compiler.xml" afterPath="$PROJECT_DIR$/../imabw/.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/imabw.iml" afterPath="$PROJECT_DIR$/../imabw/imabw.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/i18n/imabw_en_US.properties" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/i18n/imabw_en_US.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/.idea/artifacts/imabw_jar.xml" afterPath="$PROJECT_DIR$/../imabw/.idea/artifacts/imabw_jar.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/resources/res/i18n/imabw_zh_CN.properties" afterPath="$PROJECT_DIR$/../imabw/src/main/resources/res/i18n/imabw_zh_CN.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/pom.xml" afterPath="$PROJECT_DIR$/../imabw/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../imabw/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../jem-formats/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../scj/.idea/workspace.xml" />
     </list>
     <ignored path="jem-core.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -78,7 +61,30 @@
     <favorites_list name="jem-core" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="DateUtils.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/DateUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.4697802">
+              <caret line="52" column="45" selection-start-line="52" selection-start-column="45" selection-end-line="52" selection-end-column="45" />
+              <folding>
+                <element signature="docComment;class#DateUtils#0" expanded="false" />
+                <element signature="docComment;method#parseDate#0;class#DateUtils#0" expanded="false" />
+                <element signature="docComment;method#formatDate#0;class#DateUtils#0" expanded="false" />
+                <element signature="docComment;method#modifyDate#0;class#DateUtils#0" expanded="false" />
+                <element signature="method#modifyDate#0;class#DateUtils#0" expanded="false" />
+                <element signature="docComment;method#calculateEndDate#0;class#DateUtils#0" expanded="false" />
+                <element signature="method#calculateEndDate#0;class#DateUtils#0" expanded="false" />
+                <element signature="docComment;method#calculateInterval#0;class#DateUtils#0" expanded="false" />
+                <element signature="method#calculateInterval#0;class#DateUtils#0" expanded="false" />
+                <element signature="docComment;method#isLeapYear#0;class#DateUtils#0" expanded="false" />
+                <element signature="method#isLeapYear#0;class#DateUtils#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -126,21 +132,21 @@
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/ByteUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/ZLibUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileObject.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/DateUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Chapter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Book.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/BookHelper.java" />
         <option value="$PROJECT_DIR$/src/test/java/test/TestAttributes.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileNameUtils.java" />
         <option value="$PROJECT_DIR$/src/test/java/test/TestFileNameUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Part.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/TextObject.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileFactory.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/StringUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/Attributes.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Part.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Book.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/tools/DateUtils.java" />
       </list>
     </option>
   </component>
@@ -164,10 +170,10 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="52" />
-    <option name="y" value="-4" />
-    <option name="width" value="1315" />
-    <option name="height" value="773" />
+    <option name="x" value="74" />
+    <option name="y" value="100" />
+    <option name="width" value="1226" />
+    <option name="height" value="651" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -195,27 +201,6 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -241,22 +226,8 @@
               <option name="myItemId" value="pw.phylame" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pw.phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem" />
+              <option name="myItemId" value="tools" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -271,19 +242,32 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="pw.phylame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -647,14 +631,18 @@
       <workItem from="1430487139787" duration="16000" />
       <workItem from="1430536976512" duration="113000" />
       <workItem from="1430555618077" duration="357000" />
+      <workItem from="1430645336477" duration="75000" />
+      <workItem from="1430657737840" duration="237000" />
+      <workItem from="1430701490935" duration="157000" />
+      <workItem from="1430720997207" duration="868000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24130000" />
+    <option name="totallyTimeSpent" value="25467000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="52" y="-4" width="1315" height="773" extended-state="6" />
+    <frame x="74" y="100" width="1226" height="651" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -664,11 +652,11 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3443804" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34109816" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18278751" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1990212" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24676314" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24101306" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -708,27 +696,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="3" selection-start-line="33" selection-start-column="3" selection-end-line="33" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/Attributes.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -918,24 +885,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/NumberUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1498195">
-          <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/package-info.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.037906136">
           <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/DateUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="55" column="7" selection-start-line="55" selection-start-column="7" selection-end-line="55" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -988,13 +941,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Book.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.545">
-          <caret line="195" column="18" selection-start-line="195" selection-start-column="18" selection-end-line="195" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Chapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1002,31 +948,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27704918">
-          <caret line="236" column="51" selection-start-line="236" selection-start-column="51" selection-end-line="236" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Part.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="157" column="31" selection-start-line="157" selection-start-column="31" selection-end-line="157" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/TextObject.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.06885246">
           <caret line="55" column="29" selection-start-line="55" selection-start-column="29" selection-end-line="55" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20819671">
-          <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -1048,31 +973,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#4666#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-            <element signature="e#849#865#0" expanded="true" />
-            <element signature="e#1201#1202#0" expanded="true" />
-            <element signature="e#1240#1241#0" expanded="true" />
-            <element signature="e#1403#1404#0" expanded="true" />
-            <element signature="e#1447#1448#0" expanded="true" />
-            <element signature="e#1603#1604#0" expanded="true" />
-            <element signature="e#1650#1651#0" expanded="true" />
-            <element signature="e#1899#1900#0" expanded="true" />
-            <element signature="e#1946#1947#0" expanded="true" />
-            <element signature="e#2881#2882#0" expanded="true" />
-            <element signature="e#2927#2928#0" expanded="true" />
-            <element signature="e#3862#3863#0" expanded="true" />
-            <element signature="e#3911#3912#0" expanded="true" />
-            <element signature="e#4144#4145#0" expanded="true" />
-            <element signature="e#4186#4187#0" expanded="true" />
-            <element signature="e#4311#4312#0" expanded="true" />
-            <element signature="e#4348#4349#0" expanded="true" />
-            <element signature="e#4494#4495#0" expanded="true" />
-            <element signature="e#4533#4534#0" expanded="true" />
-            <element signature="e#4630#4631#0" expanded="true" />
-            <element signature="e#4661#4662#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1080,29 +980,317 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6268882">
           <caret line="142" column="80" selection-start-line="142" selection-start-column="80" selection-end-line="142" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/java/jdk1.8.0_45/src.zip!/java/nio/file/Files.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="2751" column="29" selection-start-line="2751" selection-start-column="29" selection-end-line="2751" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/file/FileUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22023809">
+          <caret line="29" column="46" selection-start-line="29" selection-start-column="46" selection-end-line="29" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Part.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="309" column="22" selection-start-line="309" selection-start-column="22" selection-end-line="309" selection-end-column="22" />
           <folding>
-            <element signature="docComment;class#StringUtils#0" expanded="false" />
-            <element signature="docComment;method#join#0;class#StringUtils#0" expanded="false" />
-            <element signature="docComment;method#join#1;class#StringUtils#0" expanded="false" />
-            <element signature="method#join#1;class#StringUtils#0" expanded="false" />
-            <element signature="docComment;method#toCapital#0;class#StringUtils#0" expanded="false" />
-            <element signature="method#toCapital#0;class#StringUtils#0" expanded="false" />
-            <element signature="docComment;method#toTitle#0;class#StringUtils#0" expanded="false" />
-            <element signature="method#toTitle#0;class#StringUtils#0" expanded="false" />
-            <element signature="docComment;method#isLowerCase#0;class#StringUtils#0" expanded="false" />
-            <element signature="method#isLowerCase#0;class#StringUtils#0" expanded="false" />
-            <element signature="docComment;method#isUpperCase#0;class#StringUtils#0" expanded="false" />
-            <element signature="method#isUpperCase#0;class#StringUtils#0" expanded="false" />
+            <element signature="e#8829#8830#0" expanded="false" />
+            <element signature="e#8860#8861#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Book.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.56766254">
+          <caret line="56" column="17" selection-start-line="56" selection-start-column="17" selection-end-line="56" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7068558">
-          <caret line="49" column="61" selection-start-line="49" selection-start-column="61" selection-end-line="49" selection-end-column="61" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="38" column="56" selection-start-line="38" selection-start-column="56" selection-end-line="38" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/NumberUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/java/jdk1.8.0_45/src.zip!/java/text/DateFormat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.1704745">
+          <caret line="342" column="24" selection-start-line="342" selection-start-column="24" selection-end-line="342" selection-end-column="24" />
           <folding>
-            <element signature="e#0#10203#0" expanded="true" />
+            <element signature="docComment;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#calendar#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#numberFormat#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#ERA_FIELD#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#YEAR_FIELD#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#MONTH_FIELD#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#DATE_FIELD#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#HOUR_OF_DAY1_FIELD#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#HOUR_OF_DAY0_FIELD#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#MINUTE_FIELD#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#SECOND_FIELD#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#MILLISECOND_FIELD#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#DAY_OF_WEEK_FIELD#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#DAY_OF_YEAR_FIELD#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#DAY_OF_WEEK_IN_MONTH_FIELD#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#WEEK_OF_YEAR_FIELD#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#WEEK_OF_MONTH_FIELD#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#AM_PM_FIELD#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#HOUR1_FIELD#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#HOUR0_FIELD#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#TIMEZONE_FIELD#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#format#0;class#DateFormat#0" expanded="false" />
+            <element signature="method#format#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#format#1;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#format#2;class#DateFormat#0" expanded="false" />
+            <element signature="method#format#2;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#parse#0;class#DateFormat#0" expanded="false" />
+            <element signature="method#parse#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#parse#1;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#parseObject#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#FULL#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#LONG#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#MEDIUM#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#SHORT#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#DEFAULT#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#getTimeInstance#0;class#DateFormat#0" expanded="false" />
+            <element signature="method#getTimeInstance#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#getTimeInstance#1;class#DateFormat#0" expanded="false" />
+            <element signature="method#getTimeInstance#1;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#getTimeInstance#2;class#DateFormat#0" expanded="false" />
+            <element signature="method#getTimeInstance#2;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#getDateInstance#0;class#DateFormat#0" expanded="false" />
+            <element signature="method#getDateInstance#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#getDateInstance#1;class#DateFormat#0" expanded="false" />
+            <element signature="method#getDateInstance#1;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#getDateInstance#2;class#DateFormat#0" expanded="false" />
+            <element signature="method#getDateInstance#2;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#getDateTimeInstance#0;class#DateFormat#0" expanded="false" />
+            <element signature="method#getDateTimeInstance#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#getDateTimeInstance#1;class#DateFormat#0" expanded="false" />
+            <element signature="method#getDateTimeInstance#1;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#getDateTimeInstance#2;class#DateFormat#0" expanded="false" />
+            <element signature="method#getDateTimeInstance#2;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#getInstance#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#getAvailableLocales#0;class#DateFormat#0" expanded="false" />
+            <element signature="method#getAvailableLocales#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#setCalendar#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#getCalendar#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#setNumberFormat#0;class#DateFormat#0" expanded="false" />
+            <element signature="method#setNumberFormat#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#getNumberFormat#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#setTimeZone#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#getTimeZone#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#setLenient#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#isLenient#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#hashCode#0;class#DateFormat#0" expanded="false" />
+            <element signature="method#hashCode#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#equals#0;class#DateFormat#0" expanded="false" />
+            <element signature="method#equals#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#clone#0;class#DateFormat#0" expanded="false" />
+            <element signature="method#clone#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#get#0;class#DateFormat#0" expanded="false" />
+            <element signature="method#get#0;class#DateFormat#0" expanded="false" />
+            <element signature="method#get#1;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#DateFormat#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;class#Field#0;class#DateFormat#0" expanded="false" />
+            <element signature="class#Field#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#calendarField#0;class#Field#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#ofCalendarField#0;class#Field#0;class#DateFormat#0" expanded="false" />
+            <element signature="method#ofCalendarField#0;class#Field#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#Field#0;class#Field#0;class#DateFormat#0" expanded="false" />
+            <element signature="method#Field#0;class#Field#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#getCalendarField#0;class#Field#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;method#readResolve#0;class#Field#0;class#DateFormat#0" expanded="false" />
+            <element signature="method#readResolve#0;class#Field#0;class#DateFormat#0" expanded="false" />
+            <element signature="e#35981#35983#0" expanded="false" />
+            <element signature="docComment;field#ERA#0;class#Field#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#YEAR#0;class#Field#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#MONTH#0;class#Field#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#DAY_OF_MONTH#0;class#Field#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#HOUR_OF_DAY1#0;class#Field#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#HOUR_OF_DAY0#0;class#Field#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#MINUTE#0;class#Field#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#SECOND#0;class#Field#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#MILLISECOND#0;class#Field#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#DAY_OF_WEEK#0;class#Field#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#DAY_OF_YEAR#0;class#Field#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#DAY_OF_WEEK_IN_MONTH#0;class#Field#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#WEEK_OF_YEAR#0;class#Field#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#WEEK_OF_MONTH#0;class#Field#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#AM_PM#0;class#Field#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#HOUR1#0;class#Field#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#HOUR0#0;class#Field#0;class#DateFormat#0" expanded="false" />
+            <element signature="docComment;field#TIME_ZONE#0;class#Field#0;class#DateFormat#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/java/jdk1.8.0_45/src.zip!/java/text/SimpleDateFormat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33241758">
+          <caret line="577" column="11" selection-start-line="577" selection-start-column="11" selection-end-line="577" selection-end-column="11" />
+          <folding>
+            <element signature="docComment;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;field#serialVersionOnStream#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;field#pattern#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;field#originalNumberFormat#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;field#minusSign#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;field#hasFollowingMinusSign#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;field#forceStandaloneForm#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;field#compiledPattern#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;field#TAG_QUOTE_ASCII_CHAR#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;field#zeroDigit#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;field#formatData#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;field#defaultCenturyStart#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;field#cachedNumberFormatData#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;field#locale#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;field#useDateFormatSymbols#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;method#SimpleDateFormat#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#SimpleDateFormat#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;method#SimpleDateFormat#1;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#SimpleDateFormat#1;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;method#SimpleDateFormat#2;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#SimpleDateFormat#2;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;method#SimpleDateFormat#3;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#SimpleDateFormat#3;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#initialize#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#initializeCalendar#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="e#26214#26287#0" expanded="false" />
+            <element signature="docComment;method#compile#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#compile#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="e#29447#29501#0" expanded="false" />
+            <element signature="e#32263#32319#0" expanded="false" />
+            <element signature="docComment;method#encode#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#encode#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#initializeDefaultCentury#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#parseAmbiguousDatesAsAfter#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;method#set2DigitYearStart#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#set2DigitYearStart#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;method#get2DigitYearStart#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;method#format#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#format#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#format#1;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;method#formatToCharacterIterator#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#formatToCharacterIterator#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;method#subFormat#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#subFormat#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="e#43728#43789#0" expanded="false" />
+            <element signature="e#50811#50855#0" expanded="false" />
+            <element signature="docComment;method#zeroPaddingNumber#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#zeroPaddingNumber#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="e#52168#52225#0" expanded="false" />
+            <element signature="docComment;method#parse#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#parse#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="e#57534#57585#0" expanded="false" />
+            <element signature="e#57910#57971#0" expanded="false" />
+            <element signature="e#59808#59872#0" expanded="false" />
+            <element signature="e#60110#60144#0" expanded="false" />
+            <element signature="e#60440#60507#0" expanded="false" />
+            <element signature="docComment;method#matchString#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#matchString#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="e#61388#61457#0" expanded="false" />
+            <element signature="e#61827#61892#0" expanded="false" />
+            <element signature="docComment;method#matchString#1;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#matchString#1;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#matchZoneString#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="e#63822#63863#0" expanded="false" />
+            <element signature="method#matchDSTString#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;method#subParseZoneString#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#subParseZoneString#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="e#64925#64988#0" expanded="false" />
+            <element signature="e#67057#67103#0" expanded="false" />
+            <element signature="docComment;method#subParseNumericZone#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#subParseNumericZone#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="e#68876#68930#0" expanded="false" />
+            <element signature="docComment;method#subParse#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#subParse#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="e#71966#72033#0" expanded="false" />
+            <element signature="e#72497#72557#0" expanded="false" />
+            <element signature="e#73075#73140#0" expanded="false" />
+            <element signature="e#75118#75178#0" expanded="false" />
+            <element signature="e#75756#75821#0" expanded="false" />
+            <element signature="e#76442#76506#0" expanded="false" />
+            <element signature="e#77588#77638#0" expanded="false" />
+            <element signature="e#77935#77969#0" expanded="false" />
+            <element signature="e#79648#79702#0" expanded="false" />
+            <element signature="e#84051#84089#0" expanded="false" />
+            <element signature="e#86152#86196#0" expanded="false" />
+            <element signature="docComment;method#useDateFormatSymbols#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;method#translatePattern#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#translatePattern#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="e#89076#89128#0" expanded="false" />
+            <element signature="docComment;method#toPattern#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;method#toLocalizedPattern#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#toLocalizedPattern#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;method#applyPattern#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#applyPatternImpl#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;method#applyLocalizedPattern#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#applyLocalizedPattern#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;method#getDateFormatSymbols#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#getDateFormatSymbols#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;method#setDateFormatSymbols#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#setDateFormatSymbols#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;method#clone#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#clone#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;method#hashCode#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#hashCode#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;method#equals#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#equals#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#getDisplayNamesMap#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="docComment;method#readObject#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#readObject#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="e#95244#95299#0" expanded="false" />
+            <element signature="docComment;method#checkNegativeNumberExpression#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="method#checkNegativeNumberExpression#0;class#SimpleDateFormat#0" expanded="false" />
+            <element signature="e#96327#96391#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/tools/DateUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4697802">
+          <caret line="52" column="45" selection-start-line="52" selection-start-column="45" selection-end-line="52" selection-end-column="45" />
+          <folding>
+            <element signature="docComment;class#DateUtils#0" expanded="false" />
+            <element signature="docComment;method#parseDate#0;class#DateUtils#0" expanded="false" />
+            <element signature="docComment;method#formatDate#0;class#DateUtils#0" expanded="false" />
+            <element signature="docComment;method#modifyDate#0;class#DateUtils#0" expanded="false" />
+            <element signature="method#modifyDate#0;class#DateUtils#0" expanded="false" />
+            <element signature="docComment;method#calculateEndDate#0;class#DateUtils#0" expanded="false" />
+            <element signature="method#calculateEndDate#0;class#DateUtils#0" expanded="false" />
+            <element signature="docComment;method#calculateInterval#0;class#DateUtils#0" expanded="false" />
+            <element signature="method#calculateInterval#0;class#DateUtils#0" expanded="false" />
+            <element signature="docComment;method#isLeapYear#0;class#DateUtils#0" expanded="false" />
+            <element signature="method#isLeapYear#0;class#DateUtils#0" expanded="false" />
           </folding>
         </state>
       </provider>

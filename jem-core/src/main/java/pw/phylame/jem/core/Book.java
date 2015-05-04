@@ -33,28 +33,28 @@ import java.util.Date;
  */
 public class Book extends Chapter {
     /** Key name for book author.*/
-    public final String AUTHOR = "author";
+    public static final String AUTHOR = "author";
 
     /** Key name for book genre.*/
-    public final String GENRE = "genre";
+    public static final String GENRE = "genre";
 
     /** Key name for book state.*/
-    public final String STATE = "state";
+    public static final String STATE = "state";
 
     /** Key name for book subject.*/
-    public final String SUBJECT = "subject";
+    public static final String SUBJECT = "subject";
 
     /** Key name for book date.*/
-    public final String DATE = "date";
+    public static final String DATE = "date";
 
     /** Key name for book publisher.*/
-    public final String PUBLISHER = "publisher";
+    public static final String PUBLISHER = "publisher";
 
     /** Key name for book rights.*/
-    public final String RIGHTS = "rights";
+    public static final String RIGHTS = "rights";
 
     /** Key name for book language.*/
-    public final String LANGUAGE = "language";
+    public static final String LANGUAGE = "language";
 
 
     public Book() {

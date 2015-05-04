@@ -87,7 +87,8 @@ public class SettingsDialog extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
         setTitle(app.getText("Dialog.Settings.Title"));
-        setSize(700, 394);
+        pack();
+        setSize((int)(getHeight()*1.7), getHeight());
         setLocationRelativeTo(getOwner());
     }
 

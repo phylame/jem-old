@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.Calendar;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 /**
  * Utility class for date operations.
@@ -50,6 +51,11 @@ public final class DateUtils {
      */
     public static String formatDate(Date date, String format) {
         SimpleDateFormat sdf = new SimpleDateFormat(format);
+        return sdf.format(date);
+    }
+
+    public static String formatDate(Date date, String format, Locale locale) {
+        SimpleDateFormat sdf = new SimpleDateFormat(format, locale);
         return sdf.format(date);
     }
 

@@ -48,6 +48,10 @@ public class ITextEdit extends JScrollPane {
     /** Undo manager */
     private UndoManager undoManager = null;
 
+    public ITextEdit() {
+        this(null, null, 0, 0, null);
+    }
+
     public ITextEdit(IStatusTipListener tipListener) {
         this(null, null, 0, 0, tipListener);
     }

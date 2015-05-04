@@ -24,10 +24,7 @@ public interface Constants {
     String INNER_NAME = "imabw";
 
     /** Version of the Imabw */
-    String VERSION = "2.0-SNAPSHOT";
-
-    /** Readable version string */
-    String RELEASE = "II";
+    String VERSION = "2.0.1";
 
     /** Name of language {@code ResourceBundle} file */
     String I18N_PATH = "res/i18n/imabw";
@@ -72,7 +69,8 @@ public interface Constants {
     String EXTRA_ITEMS     = "extra-items";
 
     /* Help */
-    String SHOW_ABOUT = "show-about";
+    String DO_ACTION        = "do-action";
+    String SHOW_ABOUT       = "show-about";
 
     // ****************************
     // ** Contents tree commands **

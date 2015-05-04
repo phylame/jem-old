@@ -36,7 +36,7 @@ public final class Jem {
     private static Log LOG = LogFactory.getLog(Jem.class);
 
     /** Jem version */
-    public static final String VERSION          = "2.0";
+    public static final String VERSION          = "2.0.1";
 
     /** Jem vendor */
     public static final String VENDOR           = "PW";
@@ -106,7 +106,7 @@ public final class Jem {
     /**
      * Writes <tt>Book</tt> to book with specified format.
      * @param book the <tt>Book</tt> to be written
-     * @param output path name of output book file (must exists)
+     * @param output path name of output book file
      * @param format output format
      * @param kw arguments to maker
      * @throws java.io.IOException occurs IO errors
@@ -120,7 +120,7 @@ public final class Jem {
     /**
      * Writes <tt>Book</tt> to book with specified format.
      * @param book the <tt>Book</tt> to be written
-     * @param output output book file (must exists)
+     * @param output output book file
      * @param format output format
      * @param kw arguments to maker
      * @throws java.io.IOException occurs IO errors
@@ -190,6 +190,8 @@ public final class Jem {
         for (Part sub: part) {
             book.append(sub);
         }
+        // copy content
+        book.setSource(part.getSource());
         return book;
     }
 

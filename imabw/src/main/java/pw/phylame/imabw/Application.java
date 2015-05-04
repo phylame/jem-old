@@ -116,7 +116,8 @@ public class Application extends IApplication implements Constants {
         settings.put("ui.window.showStatusbar", isEmpty(str) || Boolean.parseBoolean(str));
         // global font
         str = prop.getProperty("ui.font.global");
-        Font font = new Font(Font.SANS_SERIF, Font.PLAIN, 14);
+//        Font font = new Font(Font.SANS_SERIF, Font.PLAIN, 14);
+        Font font = null;
         if (! isEmpty(str)) {
             font = Font.decode(str);
         }
@@ -164,7 +165,10 @@ public class Application extends IApplication implements Constants {
         loadBundle(I18N_PATH);
         setTheme((String) getSetting("ui.face.lafTheme"), (boolean) getSetting("ui.face.decorateTitle"));
         setAAText((boolean) getSetting("ui.font.aatext"));
-        setGeneralFonts((Font) getSetting("ui.font.global"));
+        Font font = (Font) getSetting("ui.font.global");
+        if (font != null) {
+            setGeneralFonts(font);
+        }
     }
 
     /** Get the application instance */
@@ -199,7 +203,7 @@ public class Application extends IApplication implements Constants {
         if (manager == null) {
             manager = new Manager(viewer, worker);
         }
-        // notify manager work
+        // notify manager to work
         manager.begin();
     }
 

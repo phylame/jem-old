@@ -104,7 +104,7 @@ public class UmdMaker implements Maker {
         List<String> titles = new ArrayList<String>();
 
         // prepare text
-        final File cache = File.createTempFile("UMD_", ".tmp");
+        final File cache = File.createTempFile("umd_", ".stf");
         book.registerCleanup(new Part.Cleanable() {
             @Override
             public void clean(Part part) {

@@ -82,7 +82,7 @@ public class EditorTab {
         BufferedWriter writer = null;
         try {
             if (file == null) {
-                file = File.createTempFile("IMABW_", ".tmp");
+                file = File.createTempFile("imabw_", ".itf");
                 part.registerCleanup(new Part.Cleanable() {
                     @Override
                     public void clean(Part part) {

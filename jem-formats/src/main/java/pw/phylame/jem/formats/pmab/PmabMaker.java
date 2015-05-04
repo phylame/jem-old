@@ -25,9 +25,7 @@ import pw.phylame.jem.core.Maker;
 import pw.phylame.jem.util.JemException;
 import pw.phylame.tools.file.FileUtils;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.FileOutputStream;
+import java.io.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -125,7 +123,8 @@ public class PmabMaker implements Maker {
     }
 
     public void make(Book book, File file, PmabConfig config) throws IOException, JemException {
-        ZipOutputStream zipout = new ZipOutputStream(new FileOutputStream(file));
+        OutputStream stream = new BufferedOutputStream(new FileOutputStream(file));
+        ZipOutputStream zipout = new ZipOutputStream(stream);
         zipout.setMethod(config.zipMethod);
         zipout.setLevel(config.zipLevel);
         make(book, zipout, config);

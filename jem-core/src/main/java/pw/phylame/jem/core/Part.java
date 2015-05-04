@@ -307,7 +307,7 @@ public class Part extends Attributes implements Iterable<Part> {
      * Returns sub-parts list.
      * @return the list
      */
-    public List<Part> subList() {
+    public List<Part> partList() {
         return children;
     }
 

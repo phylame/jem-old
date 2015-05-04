@@ -172,6 +172,10 @@ public class UIDesign implements Constants {
 
     /* Help */
     public static Object[][] HELP_MENU_ACTIONS = {
+            {DO_ACTION,
+                    app.getText("Menu.Help.Action"), app.getText("Menu.Help.Action.Icon"),
+                    app.getText("Menu.Help.Action.Mnemonic"), app.getText("Menu.Help.Action.Shortcut"),
+                    app.getText("Menu.Help.Action.Tip")},
             {SHOW_ABOUT,
                     app.getText("Menu.Help.About"), app.getText("Menu.Help.About.Icon"),
                     app.getText("Menu.Help.About.Mnemonic"), app.getText("Menu.Help.About.Shortcut"),
@@ -179,6 +183,7 @@ public class UIDesign implements Constants {
     };
     public static Object[] HELP_MENU_MODEL = {
             new IMenuLabel(app.getText("Menu.Help"), null, app.getText("Menu.Help.Mnemonic")),
+            DO_ACTION,
             SHOW_ABOUT
     };
 

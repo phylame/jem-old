@@ -25,11 +25,8 @@ import pw.phylame.jem.core.Maker;
 import pw.phylame.jem.util.JemException;
 import pw.phylame.tools.TextObject;
 
+import java.io.*;
 import java.util.Map;
-import java.io.File;
-import java.io.Writer;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
 
 /**
  * <tt>Maker</tt> implement for TXT book.
@@ -69,8 +66,8 @@ public class TxtMaker implements Maker {
                 }
             }
         }
-        java.io.FileOutputStream output = new java.io.FileOutputStream(file);
-        Writer writer = new java.io.BufferedWriter(new OutputStreamWriter(output, config.encoding));
+        OutputStream output = new BufferedOutputStream(new FileOutputStream(file));
+        Writer writer = new BufferedWriter(new OutputStreamWriter(output, config.encoding));
         make(book, writer, config);
         writer.close();
     }
@@ -83,13 +80,14 @@ public class TxtMaker implements Maker {
         }
         TextObject intro = book.getIntro();
         if (intro != null) {
-            String[] lines = intro.getLines();
-            for (String line : lines) {
-                writer.write(config.paragraphPrefix+line.trim()+config.lineSeparator);
-            }
+            writeIntro(intro, writer, config);
         }
-        for (Part sub: book) {
-            writeChapter(sub, writer, config);
+        if (book.isSection()) {
+            for (Part sub: book) {
+                writeChapter(sub, writer, config);
+            }
+        } else {        // book has not sub-parts, then save its content
+            writeContent(book, writer, config);
         }
         writer.flush();
     }
@@ -97,25 +95,32 @@ public class TxtMaker implements Maker {
     private void writeChapter(Part part, Writer writer, TxtConfig config) throws IOException {
         writer.write(config.lineSeparator+part.getTitle()+config.lineSeparator);
         Object o = part.getAttribute(Chapter.INTRO, null);
-        if (o instanceof TextObject) {
-            TextObject intro = (TextObject)o;
-            String[] lines = intro.getLines();
-            for (String line : lines) {
-                writer.write(config.paragraphPrefix+line.trim()+config.lineSeparator);
-            }
-            if (lines.length > 0) {
-                writer.write(config.introSeparator+config.lineSeparator);
-            }
+        if (o instanceof TextObject) {  // valid intro
+            writeIntro((TextObject) o, writer, config);
         }
         if (! part.isSection()) {
-            String[] lines = part.getLines();
-            for (String line : lines) {
-                writer.write(config.paragraphPrefix+line.trim()+config.lineSeparator);
-            }
+            writeContent(part, writer, config);
         } else {
             for (Part sub: part) {
                 writeChapter(sub, writer, config);
             }
+        }
+    }
+
+    private void writeIntro(TextObject intro, Writer writer, TxtConfig config) throws IOException {
+        String[] lines = intro.getLines();
+        for (String line : lines) {
+            writer.write(config.paragraphPrefix+line.trim()+config.lineSeparator);
+        }
+        if (lines.length > 0) {
+            writer.write(config.introSeparator+config.lineSeparator);
+        }
+    }
+
+    private void writeContent(Part part, Writer writer, TxtConfig config) throws IOException {
+        String[] lines = part.getLines();
+        for (String line : lines) {
+            writer.write(config.paragraphPrefix+line.trim()+config.lineSeparator);
         }
     }
 }

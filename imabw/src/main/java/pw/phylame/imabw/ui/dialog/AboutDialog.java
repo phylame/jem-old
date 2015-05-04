@@ -63,7 +63,8 @@ public class AboutDialog extends JDialog {
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
-        labelMessage.setText(String.format("%s %s on %s (%s)", app.getText("App.Name"), Application.VERSION,
+        labelMessage.setText(String.format("%s v%s on %s (%s)", app.getText("App.Name"),
+                Application.VERSION,
                 System.getProperty("os.name"), System.getProperty("os.arch")));
         labelJem.setText(String.format("Jem core: %s by %s", Jem.VERSION, Jem.VENDOR));
         labelRights.setText(app.getText("App.Rights"));
@@ -94,7 +95,7 @@ public class AboutDialog extends JDialog {
             }
         });
 
-        setTitle(app.getText("Dialog.About.Title"));
+        setTitle(app.getText("Dialog.About.Title", app.getText("App.Name")));
         pack();
         setResizable(false);
         setLocationRelativeTo(getOwner());

@@ -20,82 +20,706 @@ package pw.phylame.imabw.ui.dialog;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.imageio.ImageIO;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.AbstractTableModel;
 
-import pw.phylame.jem.core.Part;
+import java.io.*;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.*;
+
+import pw.phylame.imabw.Worker;
 import pw.phylame.imabw.Application;
 
-public class PartPropertiesDialog extends JDialog {
-    private static Application app = Application.getApplication();
+import pw.phylame.imabw.ui.com.NewAttributePane;
+import pw.phylame.ixin.ITextEdit;
+import pw.phylame.jem.core.Book;
+import pw.phylame.jem.core.Jem;
+import pw.phylame.jem.core.Part;
+import pw.phylame.tools.DateUtils;
+import pw.phylame.tools.StringUtils;
+import pw.phylame.tools.TextObject;
+import pw.phylame.tools.file.FileObject;
+import pw.phylame.tools.file.FileFactory;
 
-    private JPanel    contentPane;
-    private JButton   buttonOK;
-    private JButton   buttonCancel;
-    private JButton   buttonOpen;
-    private JButton   buttonRemove;
-    private JButton   buttonSave;
-    private JButton   button1;
-    private JButton   button2;
-    private JButton   button3;
-    private JTextArea textArea1;
-    private JTable    table1;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+public class PartPropertiesDialog extends JDialog {
+    private static Log LOG = LogFactory.getLog(PartPropertiesDialog.class);
+
+    private static ArrayList<String> CommonNames  = new ArrayList<>(
+            Arrays.asList(Book.AUTHOR, Book.DATE, Book.GENRE, Book.LANGUAGE, Book.PUBLISHER,
+                    Book.RIGHTS, Book.STATE, Book.SUBJECT, "source", "vendor")
+    );
+    private static ArrayList<String> IgnoredNames = new ArrayList<>(
+            Arrays.asList(Book.TITLE, Book.COVER, Book.INTRO, Jem.SOURCE_FILE, Jem.SOURCE_FORMAT));
+
+    private static ArrayList<String> SupportedTypes = new ArrayList<>(
+            Arrays.asList("str", "int", "datetime")
+    );
+
+    private static Application app    = Application.getApplication();
+    private static Worker      worker = app.getWorker();
+
+    private JPanel              contentPane;
+    private JButton             buttonClose;
+    private JButton             buttonOpen;
+    private JButton             buttonRemove;
+    private JButton             buttonSave;
+    private JButton             buttonPlus;
+    private JButton             buttonNimus;
+    private JButton             buttonModify;
+    private AttributeTableModel tableModel;
+    private JTable              propertyTable;
+    private JPanel              introPane;
+    private JPanel              coverPane;
+    private JLabel              labelCover;
+    private JLabel              coverInfo;
+    private JPanel              attributesPane;
+    private JButton             buttonExport;
+    private ITextEdit           introEdit;
 
     private Part part;
+    private boolean modified = false;
 
     public PartPropertiesDialog(Frame owner, String title, Part part) {
         super(owner, title, true);
         this.part = part;
-        init();
+        initComp();
     }
 
     public PartPropertiesDialog(Dialog owner, String title, Part part) {
         super(owner, title, true);
         this.part = part;
-        init();
+        initComp();
     }
 
-    private void init() {
+    private void initComp() {
         setContentPane(contentPane);
-        getRootPane().setDefaultButton(buttonOK);
+        getRootPane().setDefaultButton(buttonClose);
 
-        buttonCancel.addActionListener(new ActionListener() {
+        // cover
+        createCoverPane();
+
+        // attributes
+        createAttributesPane();
+
+        // intro
+        createIntroPane();
+
+        buttonClose.setText(app.getText("Dialog.Properties.ButtonClose"));
+        buttonClose.setToolTipText(app.getText("Dialog.Properties.ButtonClose.Tip"));
+
+        buttonClose.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onCancel();
+                onClose();
             }
         });
 
-        // call onCancel() when cross is clicked
+        // call onClose() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                onCancel();
+                onClose();
             }
         });
 
-        // call onCancel() on ESCAPE
+        // call onClose() on ESCAPE
         contentPane.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onCancel();
+                onClose();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
-        setSize(900, 547);
+        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+        setSize((int) (d.getWidth() * 0.7), (int) (d.getWidth() * 0.4)); // 16x9
         setLocationRelativeTo(getOwner());
     }
 
-    private void onCancel() {
+    private void createCoverPane() {
+        ((TitledBorder) coverPane.getBorder()).setTitle(app.getText("Dialog.Properties.Cover"));
+        buttonOpen.setText(app.getText("Dialog.Properties.ButtonOpen"));
+        buttonOpen.setToolTipText(app.getText("Dialog.Properties.ButtonOpen.Tip"));
+        buttonOpen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                openCover();
+            }
+        });
+        buttonSave.setText(app.getText("Dialog.Properties.ButtonSave"));
+        buttonSave.setToolTipText(app.getText("Dialog.Properties.ButtonSave.Tip"));
+        buttonSave.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saveCover();
+            }
+        });
+        buttonRemove.setText(app.getText("Dialog.Properties.ButtonRemove"));
+        buttonRemove.setToolTipText(app.getText("Dialog.Properties.ButtonRemove.Tip"));
+        buttonRemove.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                removeCover();
+            }
+        });
+        Object o = part.getAttribute(Book.COVER);
+        if (o instanceof FileObject) {
+            updateCover((FileObject) o);
+        } else {
+            updateCover(null);
+        }
+    }
+
+    private void createAttributesPane() {
+        ((TitledBorder) attributesPane.getBorder()).setTitle(app.getText(
+                "Dialog.Properties.Attributes"));
+
+        tableModel = new AttributeTableModel();
+        propertyTable.setModel(tableModel);
+        propertyTable.setRowHeight(23);
+        propertyTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        ActionListener addAction = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addAttribute();
+            }
+        };
+        ActionListener removeAction = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                removeAttribute();
+            }
+        };
+        ActionListener modifyAction = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                modifyAttribute();
+            }
+        };
+        ActionListener exportAction = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                exportAttribute();
+            }
+        };
+        buttonPlus.setToolTipText(app.getText("Dialog.Properties.ButtonPlus.Tip"));
+        buttonPlus.addActionListener(addAction);
+
+        buttonNimus.setToolTipText(app.getText("Dialog.Properties.ButtonNimus.Tip"));
+        buttonNimus.addActionListener(removeAction);
+
+        buttonModify.setToolTipText(app.getText("Dialog.Properties.ButtonModify.Tip"));
+        buttonModify.addActionListener(modifyAction);
+
+        buttonExport.setToolTipText(app.getText("Dialog.Properties.ButtonExport.Tip"));
+        buttonExport.addActionListener(exportAction);
+
+        if (tableModel.getRowCount() > 0) {
+            propertyTable.setRowSelectionInterval(0, 0);
+        } else {        // no item
+            buttonNimus.setEnabled(false);
+            buttonModify.setEnabled(false);
+            buttonExport.setEnabled(false);
+        }
+        propertyTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    modifyAttribute();
+                }
+            }
+        });
+        propertyTable.registerKeyboardAction(removeAction,
+                KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0),
+                JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
+        propertyTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int row = propertyTable.getSelectedRow();
+                if (row == -1) {
+                    return;
+                }
+                String name = tableModel.getName(row);
+                Object o = part.getAttribute(name);
+                if (o instanceof FileObject) {
+                    buttonExport.setEnabled(true);
+                } else {
+                    buttonExport.setEnabled(false);
+                }
+            }
+        });
+    }
+
+    private void createIntroPane() {
+        Object o = part.getAttribute(Book.INTRO);
+        // load intro in this section to prohibit undo manager works when using setText
+        String intro = "";
+        if (o instanceof TextObject) {      // valid intro
+            try {
+                intro = ((TextObject) o).getText();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        introEdit = new ITextEdit(intro, 6, 0, null);
+        introEdit.getTextEditor().setWrapStyleWord(true);
+        introEdit.getTextEditor().setLineWrap(true);
+        introEdit.addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                modified = true;
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                modified = true;
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+
+            }
+        });
+        ((TitledBorder) introPane.getBorder()).setTitle(app.getText("Dialog.Properties.Intro"));
+        introPane.add(introEdit, BorderLayout.CENTER);
+    }
+
+    private void updateCover(FileObject fb) {
+        ImageIcon cover = null;
+        if (fb != null) {
+            cover = loadCover(fb);
+        }
+        if (cover == null) {
+            labelCover.setText(app.getText("Dialog.Properties.NoCover"));
+            labelCover.setIcon(null);
+            setCoverInfo(-1, -1, null);
+            buttonSave.setEnabled(false);
+            buttonRemove.setEnabled(false);
+        } else {
+            labelCover.setText(null);
+            labelCover.setIcon(cover);
+            setCoverInfo(cover.getIconWidth(), cover.getIconHeight(), fb.getMime());
+            buttonSave.setEnabled(true);
+            buttonRemove.setEnabled(true);
+        }
+    }
+
+    private ImageIcon loadCover(FileObject fb) {
+        ImageIcon icon = null;
+        try {
+            BufferedImage img = ImageIO.read(fb.openInputStream());
+            icon = new ImageIcon(img);
+        } catch (IOException e) {
+            LOG.debug("cannot load cover image of "+part.getTitle(), e);
+        }
+        return icon;
+    }
+
+    private void setCoverInfo(int width, int height, String mime) {
+        if (width < 0) {
+            coverInfo.setVisible(false);
+        } else {
+            coverInfo.setVisible(true);
+            coverInfo.setText(app.getText("Dialog.Properties.CoverDetails", width, height, mime));
+        }
+    }
+
+    private void openCover() {
+        File file = worker.selectOpenImage(this, app.getText("Dialog.Properties.OpenCover"));
+        if (file == null) {
+            return;
+        }
+        try {
+            FileObject fb = FileFactory.fromFile(file, null);
+            part.setAttribute(Book.COVER, fb);
+            updateCover(fb);
+            modified = true;
+        } catch (IOException e) {
+            e.printStackTrace();    // nothing
+        }
+    }
+
+    private void saveCover() {
+        File file = worker.selectSaveImage(this, app.getText("Dialog.Properties.SaveCover"));
+        if (file == null) {
+            return;
+        }
+        ImageIcon cover = (ImageIcon) labelCover.getIcon();
+        BufferedImage img = (BufferedImage) cover.getImage();
+        try {
+            ImageIO.write(img, worker.getSelectedFormat(), file);
+            worker.showError(this, app.getText("Dialog.Properties.SaveCover"),
+                    app.getText("Dialog.Properties.SaveCover.Success", file));
+        } catch (IOException e) {
+            LOG.debug("cannot save cover of "+part.getTitle(), e);
+            worker.showError(this, app.getText("Dialog.Properties.SaveCover"),
+                    app.getText("Dialog.Properties.SaveCover.Error"));
+        }
+    }
+
+    private void removeCover() {
+        part.setAttribute(Book.COVER, null);
+        updateCover(null);
+        modified = true;
+    }
+
+    // translate readable attribute name
+    private String transAttributeName(String name) {
+        name = StringUtils.toCapital(name);
+        try {
+            return app.getText("Dialog.Properties.Attributes.Name." + name);
+        } catch (MissingResourceException e) {
+            System.out.println(e.getKey());
+            return name;
+        }
+    }
+
+    private String getTypeName(String type) {
+        type = StringUtils.toCapital(type);
+        try {
+            return app.getText("Dialog.Properties.Attributes.Type." + type);
+        } catch (MissingResourceException e) {
+            System.out.println(e.getKey());
+            return type;
+        }
+    }
+
+    // translate readable attribute type
+    private String transAttributeType(String name) {
+        Object o = part.getAttribute(name);
+        String type;
+        if (o == null) {
+            type = "str";
+        } else {
+            type = Jem.variantType(o);
+        }
+        return getTypeName(type);
+    }
+
+    // translate readable attribute value
+    private String transAttributeValue(String name) {
+        Object o = part.getAttribute(name);
+        if (o == null) {
+            return "";
+        }
+        if (o instanceof Date) {
+            return DateUtils.formatDate((Date)o,
+                    app.getText("Dialog.Properties.Attributes.DateFormat"));
+        } else if (o instanceof TextObject) {
+            try {
+                String str = ((TextObject)o).getText();
+                return str.substring(0, Math.min(str.length(), 40));
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "";
+            }
+        } else if (name.equals(Book.LANGUAGE) && o instanceof String) {
+            String str = ((String) o).replace('_', '-');
+            return Locale.forLanguageTag(str).getDisplayName();
+        }
+        return String.valueOf(o);
+    }
+
+    private void addAttribute() {
+        ArrayList<String> keys = new ArrayList<>();
+        if (part instanceof Book) {
+            keys.addAll(new ArrayList<>(CommonNames));
+        }
+        keys.removeAll(part.attributeNames());
+        ArrayList<String> names = new ArrayList<>();
+        for (String key: keys) {
+            names.add(transAttributeName(key));
+        }
+        names.add(app.getText("Dialog.Properties.Attributes.Add.CustomerName"));
+
+        ArrayList<String> types = new ArrayList<>();
+        for (String type: SupportedTypes) {
+            types.add(getTypeName(type));
+        }
+
+        NewAttributePane pane = new NewAttributePane(names, types);
+        String title = app.getText("Dialog.Properties.Attributes.Add.Title");
+        int r = JOptionPane.showOptionDialog(this, pane.getPane(), title, JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.PLAIN_MESSAGE, null, null, null);
+        if (r != JOptionPane.OK_OPTION) {
+            return;
+        }
+        String key, type;
+        if (pane.isCustomized()) {
+            key = pane.getInput();
+            if (key.length() == 0) {
+                worker.showError(this, title, app.getText("Dialog.Properties.Attributes.Add.NoInputName"));
+                return;
+            }
+            type = SupportedTypes.get(pane.getType());
+        } else {
+            key = keys.get(pane.getName());
+            if (key.equals(Book.DATE)) {
+                type = "datetime";
+            } else {
+                type = "str";
+            }
+        }
+        pane.destroy();
+
+        Object value;
+        switch (type) {
+            case "str":
+                value = "";
+                break;
+            case "int":
+                value = 0;
+                break;
+            case "datetime":
+                value = new Date();
+                break;
+            default:
+                value = null;
+                break;
+        }
+        if (! part.hasAttribute(key)) {
+            part.setAttribute(key, value);
+            tableModel.addName(key);
+        }
+    }
+
+    private void removeAttribute() {
+        int row = propertyTable.getSelectedRow();
+        if (row == -1) {    // no selection
+            return;
+        }
+
+        String name = tableModel.getName(row);
+        if (! worker.showConfirm(this, app.getText("Dialog.Properties.Attributes.Remove.Title"),
+                app.getText("Dialog.Properties.Attributes.Remove.Tip", transAttributeName(name)))) {
+            return;
+        }
+        part.removeAttribute(name);
+        tableModel.removeRow(row);
+        modified = true;
+
+        int rows = tableModel.getRowCount();
+        if (rows == 0) {
+            buttonNimus.setEnabled(false);
+            buttonModify.setEnabled(false);
+            buttonExport.setEnabled(false);
+        } else {
+            if (row == rows) {
+                propertyTable.setRowSelectionInterval(rows - 1, rows - 1);
+            } else {
+                propertyTable.setRowSelectionInterval(row, row);
+            }
+        }
+    }
+
+    private void modifyAttribute() {
+        int row = propertyTable.getSelectedRow();
+        if (row == -1) {    // no selection
+            return;
+        }
+
+        String name = tableModel.getName(row);
+        Object o = part.getAttribute(name), newValue;
+        String title = app.getText("Dialog.Properties.Attributes.Modify", transAttributeName(name));
+        if (o instanceof Date) {
+            newValue = worker.selectDate(this, title, app.getText("Dialog.SelectDate.Tip"), (Date) o);
+            if (newValue == null) {
+                return;
+            }
+        } else if (o instanceof FileObject) {
+            File file = worker.selectSupportedFile(this,
+                    app.getText("Dialog.Properties.Attributes.Modify.SelectFile",
+                            transAttributeName(name)));
+            if (file == null) {
+                return;
+            }
+            try {
+                newValue = FileFactory.fromFile(file, null);
+            } catch (IOException e) {       // nothing
+                e.printStackTrace();
+                return;
+            }
+        } else if (o instanceof TextObject) {   // long text
+            String text;
+            try {
+                text = ((TextObject)o).getText();
+            } catch (IOException e) {
+                e.printStackTrace();
+                text = "";
+            }
+            text = worker.longInput(this, title, app.getText("Dialog.InputText.Tip"), text);
+            if (text == null) {
+                return;
+            }
+            newValue = new TextObject(text);
+        } else if (o instanceof String) {
+            if (name.equals(Book.LANGUAGE)) {   // language
+                newValue = worker.selectLanguage(this, title,
+                        app.getText("Dialog.SelectLanguage.Tip"), (String) o);
+                if (newValue == null) {
+                    return;
+                }
+            } else {        // other
+                newValue = worker.inputLoop(this, title, app.getText("Dialog.InputText.Tip"),
+                        app.getText("Dialog.InputText.NoInput"), (String)o);
+                if (newValue == null) {
+                    return;
+                }
+            }
+        } else if (o instanceof Number) {
+            String str = worker.inputLoop(this, title, app.getText("Dialog.InputNumber.Tip"),
+                    app.getText("Dialog.InputText.NoInput"), String.valueOf(o));
+            if (str == null) {
+                return;
+            }
+            try {
+                newValue = NumberFormat.getInstance().parse(str);
+            } catch (ParseException e) {
+                worker.showError(this, title,
+                        app.getText("Dialog.Properties.Attributes.Modify.InvalidNumber", str));
+                return;
+            }
+        } else {
+            return;
+        }
+        part.setAttribute(name, newValue);
+        tableModel.setValueAt(newValue, row, 2);
+        modified = true;
+    }
+
+    private void exportAttribute() {
+        int row = propertyTable.getSelectedRow();
+        if (row == -1) {    // no selection
+            return;
+        }
+
+        String name = tableModel.getName(row);
+        Object o = part.getAttribute(name);
+        String title = app.getText("Dialog.Properties.Attributes.Export", transAttributeName(name));
+        File file = worker.selectSaveFile(this, title, null, null, true, null);
+        if (file == null) {
+            return;
+        }
+        FileObject fb = (FileObject) o;
+        OutputStream out = null;
+        try {
+            out = new BufferedOutputStream(new FileOutputStream(file));
+            fb.copyTo(out);
+            worker.showMessage(this, title,
+                    app.getText("Dialog.Properties.Attributes.Export.Success", file.getPath()));
+        } catch (IOException e) {
+            LOG.debug("cannot save attribute "+name+" to "+file.getPath(), e);
+            worker.showMessage(this, title,
+                    app.getText("Dialog.Properties.Attributes.Export.Failed", file.getPath()));
+        } finally {
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    LOG.debug("cannot close file "+file.getPath(), e);
+                }
+            }
+        }
+    }
+
+    private void onClose() {
+        ITextEdit.updateContextMenu(null);
+        if (modified) {
+            part.setAttribute(Book.INTRO, new TextObject(introEdit.getText()));
+        }
         dispose();
     }
 
-    public static void viewProperties(Frame owner, Part part) {
+    public static boolean viewProperties(Frame owner, Part part) {
         PartPropertiesDialog dialog = new PartPropertiesDialog(owner,
                 app.getText("Dialog.PartProperties.Title", part.getTitle()), part);
         dialog.setVisible(true);
+        return dialog.modified;
     }
 
-    public static void viewProperties(Dialog owner, Part part) {
+    public static boolean viewProperties(Dialog owner, Part part) {
         PartPropertiesDialog dialog = new PartPropertiesDialog(owner,
                 app.getText("Dialog.PartProperties.Title", part.getTitle()), part);
         dialog.setVisible(true);
+        return dialog.modified;
+    }
+
+    private class AttributeTableModel extends AbstractTableModel {
+        private ArrayList<String> names = new ArrayList<>();
+
+        public AttributeTableModel() {
+            names.addAll(part.attributeNames());
+            names.removeAll(IgnoredNames);
+            Collections.sort(names);
+        }
+
+        @Override
+        public boolean isCellEditable(int rowIndex, int columnIndex) {
+            return false;
+        }
+
+        @Override
+        public int getRowCount() {
+            return names.size();
+        }
+
+        @Override
+        public int getColumnCount() {
+            return 3;
+        }
+
+        @Override
+        public String getColumnName(int column) {
+            switch (column) {
+                case 0:
+                    return app.getText("Dialog.Properties.Attributes.Name");
+                case 1:
+                    return app.getText("Dialog.Properties.Attributes.Type");
+                default:
+                    return app.getText("Dialog.Properties.Attributes.Value");
+            }
+        }
+
+        @Override
+        public Object getValueAt(int rowIndex, int columnIndex) {
+            String name = names.get(rowIndex);
+            switch (columnIndex) {
+                case 0:                 // name
+                    return transAttributeName(name);
+                case 1:                 // type
+                    return transAttributeType(name);
+                default:                // value
+                    return transAttributeValue(name);
+            }
+        }
+
+        @Override
+        public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+            fireTableCellUpdated(rowIndex, columnIndex);
+        }
+
+        public void removeRow(int row) {
+            names.remove(row);
+            fireTableRowsDeleted(row, row);
+        }
+
+        public String getName(int row) {
+            return names.get(row);
+        }
+
+        public void addName(String name) {
+            names.add(name);
+            fireTableRowsInserted(names.size()-1, names.size()-1);
+        }
     }
 }

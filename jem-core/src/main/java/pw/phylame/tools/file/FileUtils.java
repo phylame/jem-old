@@ -27,7 +27,7 @@ import java.util.zip.ZipOutputStream;
 public final class FileUtils {
 
     /** Buffer area size */
-    public static final int BUFFER_SIZE = 4096;
+    public static final int BUFFER_SIZE = 8192;
 
     /**
      * Copies some number of bytes from <tt>InputStream</tt> to <tt>OutputStream</tt>.
@@ -183,12 +183,21 @@ public final class FileUtils {
             } else if (total < size) {
                 builder.append(b, 0, n);
             } else {
-                builder.append(b, 0, (int)(n - (total - size)));
+                builder.append(b, 0, (int) (n - (total - size)));
                 total = size;
                 break;
             }
         }
         return total;
+    }
+
+    public static long copy(File source, File target) throws IOException {
+        InputStream in = new BufferedInputStream(new FileInputStream(source));
+        OutputStream out = new BufferedOutputStream(new FileOutputStream(target));
+        long size = copy(in, out, -1);
+        in.close();
+        out.close();
+        return size;
     }
 
     /**
