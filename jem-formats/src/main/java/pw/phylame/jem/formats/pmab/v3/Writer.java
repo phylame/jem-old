@@ -46,7 +46,8 @@ public final class Writer {
     private static Log LOG = LogFactory.getLog(Writer.class);
     private static Set<String> IgnoredNames = new HashSet<String>();
     static {
-        IgnoredNames.addAll(java.util.Arrays.asList(Jem.SOURCE_FILE, Jem.SOURCE_FORMAT));
+        IgnoredNames.addAll(java.util.Arrays.asList(Jem.SOURCE_FORMAT, Jem.SOURCE_FILE, Jem
+                .SOURCE_FORMAT));
     }
 
     private static Byte[] toBytes(byte[] ary) {

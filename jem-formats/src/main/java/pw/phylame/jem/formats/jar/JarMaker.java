@@ -24,7 +24,6 @@ import pw.phylame.jem.core.Maker;
 import pw.phylame.jem.core.Part;
 import pw.phylame.jem.util.JemException;
 import pw.phylame.tools.TextObject;
-import pw.phylame.tools.file.FileUtils;
 
 import java.io.*;
 import java.util.List;
@@ -85,7 +84,7 @@ public class JarMaker implements Maker {
         ZipEntry entry;
         while ((entry = zipin.getNextEntry()) != null) {
             zipout.putNextEntry(new ZipEntry(entry.getName()));
-            FileUtils.copy(zipin, zipout, -1);
+            org.apache.commons.io.IOUtils.copy(zipin, zipout);
             zipin.closeEntry();
             zipout.closeEntry();
         }
@@ -135,7 +134,7 @@ public class JarMaker implements Maker {
         StringBuilder sb = new StringBuilder(book.getTitle());
         TextObject intro = book.getIntro();
         if (intro != null) {
-            String[] lines = intro.getLines();
+            List<String> lines = intro.getLines();
             for (String line : lines) {
                 sb.append(line).append("\n");
             }

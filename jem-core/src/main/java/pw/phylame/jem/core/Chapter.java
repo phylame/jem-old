@@ -129,7 +129,8 @@ public class Chapter extends Part {
         return newChapter(title, new TextObject(file, encoding), null, null);
     }
 
-    public Chapter newChapter(String title, FileObject file, String encoding, FileObject cover, TextObject intro) {
+    public Chapter newChapter(String title, FileObject file, String encoding, FileObject cover,
+                              TextObject intro) {
         return newChapter(title, new TextObject(file, encoding), cover, intro);
     }
 
@@ -137,7 +138,8 @@ public class Chapter extends Part {
         return newChapter(title, content, null, null);
     }
 
-    public Chapter newChapter(String title, TextObject content, FileObject cover, TextObject intro) {
+    public Chapter newChapter(String title, TextObject content, FileObject cover,
+                              TextObject intro) {
         Chapter sub = new Chapter(title, content, cover, intro);
         append(sub);
         return sub;

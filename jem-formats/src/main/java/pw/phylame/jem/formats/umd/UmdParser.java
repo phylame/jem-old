@@ -20,29 +20,37 @@ package pw.phylame.jem.formats.umd;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import pw.phylame.jem.core.Book;
+
 import pw.phylame.jem.core.Part;
+import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Chapter;
-import pw.phylame.jem.core.Parser;
+import pw.phylame.jem.core.Cleanable;
+import pw.phylame.jem.core.AbstractParser;
 import pw.phylame.jem.util.JemException;
+
 import pw.phylame.tools.DateUtils;
-import pw.phylame.tools.TextObject;
 import pw.phylame.tools.ZLibUtils;
-import pw.phylame.tools.file.FileFactory;
+import pw.phylame.tools.TextObject;
 import pw.phylame.tools.file.FileObject;
+import pw.phylame.tools.file.FileFactory;
 
 import static pw.phylame.tools.ByteUtils.littleParser;
 
 import java.io.File;
+import java.io.Writer;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.io.Writer;
-import java.util.*;
+
+import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * <tt>Parser</tt> implement for UMD book.
  */
-public class UmdParser implements Parser {
+public class UmdParser extends AbstractParser {
     private static Log LOG = LogFactory.getLog(UmdParser.class);
 
     private RandomAccessFile source;
@@ -50,8 +58,8 @@ public class UmdParser implements Parser {
     private int umdType;
     private long contentLength;
     private int coverFormat, imageFormat;
-    private Map<Long, Integer> blockOwners = new HashMap<Long, Integer>();
-    private List<DataBlock> blocks = new ArrayList<DataBlock>();
+    private HashMap<Long, Integer> blockOwners = new HashMap<Long, Integer>();
+    private ArrayList<DataBlock> blocks = new ArrayList<DataBlock>();
 
     @Override
     public String getName() {
@@ -62,7 +70,7 @@ public class UmdParser implements Parser {
     public Book parse(final File file, Map<String, Object> kw) throws IOException, JemException {
         final RandomAccessFile in = new RandomAccessFile(file, "r");
         book = parse(in);
-        book.registerCleanup(new Part.Cleanable() {
+        book.registerCleanup(new Cleanable() {
             @Override
             public void clean(Part part) {
                 try {
@@ -446,25 +454,21 @@ class UmdSource extends TextObject {
     }
 
     @Override
-    public String[] getLines() throws IOException {
+    public List<String> getLines() throws IOException {
         if (fromUmd) {
-            return rawText().split(UMD.SYMBIAN_LINE_FEED);
+            return java.util.Arrays.asList(rawText().split(UMD.SYMBIAN_LINE_FEED));
         } else {
             return super.getLines();
         }
     }
 
     @Override
-    public long writeTo(Writer writer, long size) throws IOException {
+    public void writeTo(Writer writer) throws IOException {
         if (fromUmd) {
             String text = rawText();
-            if (size < 0) {
-                size = text.length();
-            }
-            writer.write(text, 0, (int) size);
-            return size;
+            writer.write(text);
         } else {
-            return super.writeTo(writer, size);
+            super.writeTo(writer);
         }
     }
 }

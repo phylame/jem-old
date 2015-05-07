@@ -23,7 +23,6 @@ import org.dom4j.DocumentHelper;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Maker;
 import pw.phylame.jem.util.JemException;
-import pw.phylame.tools.file.FileUtils;
 
 import java.io.*;
 
@@ -140,7 +139,7 @@ public class PmabMaker implements Maker {
 
     private void writeMIME(ZipOutputStream zipout) throws IOException {
         zipout.putNextEntry(new ZipEntry(PMAB.MIME_FILE));
-        FileUtils.writeText(zipout, PMAB.MT_PMAB, "UTF-8");
+        zipout.write(PMAB.MT_PMAB.getBytes("ASCII"));
         zipout.closeEntry();
     }
 

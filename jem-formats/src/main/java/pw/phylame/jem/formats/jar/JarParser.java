@@ -20,10 +20,7 @@ package pw.phylame.jem.formats.jar;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import pw.phylame.jem.core.Book;
-import pw.phylame.jem.core.Chapter;
-import pw.phylame.jem.core.Parser;
-import pw.phylame.jem.core.Part;
+import pw.phylame.jem.core.*;
 import pw.phylame.jem.util.JemException;
 import pw.phylame.tools.file.FileFactory;
 
@@ -35,7 +32,7 @@ import java.util.zip.ZipEntry;
 /**
  * <tt>Parser</tt> implement for JAR book.
  */
-public class JarParser implements Parser {
+public class JarParser extends AbstractParser {
     private static Log LOG = LogFactory.getLog(JarParser.class);
 
     @Override
@@ -47,7 +44,7 @@ public class JarParser implements Parser {
     public Book parse(File file, Map<String, Object> kw) throws IOException, JemException {
         final ZipFile jarFile = new ZipFile(file);
         Book book = parse(jarFile);
-        book.registerCleanup(new Part.Cleanable() {
+        book.registerCleanup(new Cleanable() {
             @Override
             public void clean(Part part) {
                 try {

@@ -42,17 +42,6 @@ public class Part extends Attributes implements Iterable<Part> {
     /** Key name for part title.*/
     public static final String TITLE = "title";
 
-    /**
-     * This interface is designed for cleaning part resource when destroys part.
-     */
-    public interface Cleanable {
-        /**
-         * Cleans the specified <tt>Part</tt>
-         * @param part the <tt>Part</tt> to be cleaned
-         */
-        void clean(Part part);
-    }
-
     /** Constructs part used empty title and content. */
     public Part() {
         this("", new TextObject());
@@ -151,22 +140,21 @@ public class Part extends Attributes implements Iterable<Part> {
 
     /**
      * Returns text content and split by line separator.
-     * @return array of lines
+     * @return list of lines
      * @throws IOException occurs IO errors when load text from text source
      */
-    public String[] getLines() throws IOException {
+    public List<String> getLines() throws IOException {
         return source.getLines();
     }
 
     /**
      * Writes some characters to output writer.
      * @param writer output <tt>Writer</tt>
-     * @param size number of characters to written, if <tt>0</tt> writes all text
-     * @return number of written characters
      * @throws java.io.IOException occurs IO errors when loading source or write IO device.
+     * @since 2.0.1
      */
-    public long writeTo(java.io.Writer writer, long size) throws IOException {
-        return source.writeTo(writer, size);
+    public void writeTo(java.io.Writer writer) throws IOException {
+        source.writeTo(writer);
     }
 
     // ************************

@@ -44,40 +44,16 @@ public final class Jem {
     /** Format of Pem default format */
     public static final String PMAB_FORMAT      = "pmab";
 
+    /** Key for source path, auto putted after parsing file */
+    public static final String SOURCE_PATH      = "_source_path";
+
     /** Key for source file, auto putted after parsing file */
-    public static final String SOURCE_FILE      = "source_file";
+    public static final String SOURCE_FILE      = "_source_file";
 
     /** Key for source format, auto putted after parsing file */
-    public static final String SOURCE_FORMAT    = "source_format";
+    public static final String SOURCE_FORMAT    = "_source_format";
 
-    /**
-     * Reads <tt>Book</tt> from book file.
-     * @param name path name of book file
-     * @param format format of the book file
-     * @param kw arguments to parser
-     * @return <tt>Book</tt> instance represents the book file
-     * @throws java.io.IOException occurs IO errors
-     * @throws pw.phylame.jem.util.JemException occurs errors when parsing book file
-     */
-    public static Book readBook(String name, String format, Map<String, Object> kw)
-            throws IOException, JemException {
-        return readBook(new File(name), format, kw);
-    }
-
-    /**
-     * Reads <tt>Book</tt> from book file.
-     * @param file book file to be read
-     * @param format format of the book file
-     * @param kw arguments to parser
-     * @return <tt>Book</tt> instance represents the book file
-     * @throws java.io.IOException occurs IO errors
-     * @throws pw.phylame.jem.util.JemException occurs errors when parsing book file
-     */
-    public static Book readBook(File file, String format, Map<String, Object> kw)
-            throws IOException, JemException {
-        if (file == null) {
-            throw new NullPointerException("file");
-        }
+    private static Parser getParser(String format) throws UnsupportedFormatException {
         if (format == null) {
             throw new NullPointerException("format");
         }
@@ -97,6 +73,46 @@ public final class Jem {
             LOG.debug("not registered Parser class", e);
             throw new UnsupportedFormatException(format, "Unsupported format: "+format);
         }
+
+        return parser;
+    }
+
+    /**
+     * Reads <tt>Book</tt> from book file.
+     * @param source path of book file
+     * @param format format of the book file
+     * @param kw arguments to parser   @return <tt>Book</tt> instance represents the book file
+     * @throws java.io.IOException occurs IO errors
+     * @throws pw.phylame.jem.util.JemException occurs errors when parsing book file
+     * @since 2.0.1
+     */
+    public static Book readBook(String source, String format, Map<String, Object> kw)
+            throws IOException, JemException {
+        if (source == null) {
+            throw new NullPointerException("path");
+        }
+        Parser parser = getParser(format);
+        Book book = parser.parse(source, kw);
+        book.setAttribute(SOURCE_PATH, source);
+        book.setAttribute(SOURCE_FORMAT, format);
+        return book;
+    }
+
+    /**
+     * Reads <tt>Book</tt> from book file.
+     * @param file book file to be read
+     * @param format format of the book file
+     * @param kw arguments to parser
+     * @return <tt>Book</tt> instance represents the book file
+     * @throws java.io.IOException occurs IO errors
+     * @throws pw.phylame.jem.util.JemException occurs errors when parsing book file
+     */
+    public static Book readBook(File file, String format, Map<String, Object> kw)
+            throws IOException, JemException {
+        if (file == null) {
+            throw new NullPointerException("file");
+        }
+        Parser parser = getParser(format);
         Book book = parser.parse(file, kw);
         book.setAttribute(SOURCE_FILE, file);
         book.setAttribute(SOURCE_FORMAT, format);
@@ -117,23 +133,7 @@ public final class Jem {
         writeBook(book, new File(output), format, kw);
     }
 
-    /**
-     * Writes <tt>Book</tt> to book with specified format.
-     * @param book the <tt>Book</tt> to be written
-     * @param output output book file
-     * @param format output format
-     * @param kw arguments to maker
-     * @throws java.io.IOException occurs IO errors
-     * @throws pw.phylame.jem.util.JemException occurs errors when making book file
-     */
-    public static void writeBook(Book book, File output, String format, Map<String, Object> kw)
-            throws IOException, JemException {
-        if (book == null) {
-            throw new NullPointerException("book");
-        }
-        if (output == null) {
-            throw new NullPointerException("output");
-        }
+    private static Maker getMaker(String format) throws UnsupportedFormatException {
         if (format == null) {
             throw new NullPointerException("format");
         }
@@ -153,6 +153,27 @@ public final class Jem {
             LOG.debug("not registered Maker class", e);
             throw new UnsupportedFormatException(format, "Unsupported format: "+format);
         }
+        return maker;
+    }
+
+    /**
+     * Writes <tt>Book</tt> to book with specified format.
+     * @param book the <tt>Book</tt> to be written
+     * @param output output book file
+     * @param format output format
+     * @param kw arguments to maker
+     * @throws java.io.IOException occurs IO errors
+     * @throws pw.phylame.jem.util.JemException occurs errors when making book file
+     */
+    public static void writeBook(Book book, File output, String format, Map<String, Object> kw)
+            throws IOException, JemException {
+        if (book == null) {
+            throw new NullPointerException("book");
+        }
+        if (output == null) {
+            throw new NullPointerException("output");
+        }
+        Maker maker = getMaker(format);
         maker.make(book, output, kw);
     }
 
@@ -215,18 +236,6 @@ public final class Jem {
     }
 
     /**
-     * This interface used for walking sub-parts.
-     */
-    public interface  Walker {
-        /**
-         * Watches the specified part.
-         * @param part the part to be watched
-         * @return <tt>false</tt> to stop walking
-         */
-        boolean watch(Part part);
-    }
-
-    /**
      * Walks <tt>Part</tt> sub-part tree (first order) .
      * @param part the <tt>Part</tt> to be watched
      * @param walker watch the part
@@ -246,7 +255,7 @@ public final class Jem {
         }
     }
 
-    private static java.util.Map<Class<?>, String> variantTypes = new java.util.HashMap<Class<?>, String>();
+    private static Map<Class<?>, String> variantTypes = new java.util.HashMap<Class<?>, String>();
     static {
         variantTypes.put(Character.class, "str");
         variantTypes.put(String.class, "str");

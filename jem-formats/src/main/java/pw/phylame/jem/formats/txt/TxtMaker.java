@@ -27,6 +27,7 @@ import pw.phylame.tools.TextObject;
 
 import java.io.*;
 import java.util.Map;
+import java.util.List;
 
 /**
  * <tt>Maker</tt> implement for TXT book.
@@ -108,17 +109,17 @@ public class TxtMaker implements Maker {
     }
 
     private void writeIntro(TextObject intro, Writer writer, TxtConfig config) throws IOException {
-        String[] lines = intro.getLines();
+        List<String> lines = intro.getLines();
         for (String line : lines) {
             writer.write(config.paragraphPrefix+line.trim()+config.lineSeparator);
         }
-        if (lines.length > 0) {
+        if (lines.size() > 0) {
             writer.write(config.introSeparator+config.lineSeparator);
         }
     }
 
     private void writeContent(Part part, Writer writer, TxtConfig config) throws IOException {
-        String[] lines = part.getLines();
+        List<String> lines = part.getLines();
         for (String line : lines) {
             writer.write(config.paragraphPrefix+line.trim()+config.lineSeparator);
         }

@@ -221,7 +221,7 @@ public final class FileFactory {
 
         @Override
         public String toString() {
-            return String.format("Area %s <offset=%d; size=%d>", getName(), offset, size);
+            return String.format("block %s <offset=%d; size=%d>", getName(), offset, size);
         }
     }
 

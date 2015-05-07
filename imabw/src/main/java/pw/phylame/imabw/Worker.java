@@ -21,18 +21,15 @@ package pw.phylame.imabw;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import pw.phylame.imabw.ui.dialog.ProgressDialog;
 import pw.phylame.ixin.IToolkit;
 import pw.phylame.imabw.ui.com.PartNode;
 
-import pw.phylame.jem.core.Book;
-import pw.phylame.jem.core.BookHelper;
-import pw.phylame.jem.core.Jem;
-import pw.phylame.jem.core.Part;
+import pw.phylame.jem.core.*;
 import pw.phylame.jem.util.JemException;
 import pw.phylame.tools.StringUtils;
 import pw.phylame.tools.file.FileFactory;
 import pw.phylame.tools.file.FileNameUtils;
-import pw.phylame.tools.file.FileUtils;
 
 import java.awt.Component;
 import javax.swing.UIManager;
@@ -149,7 +146,9 @@ public class Worker {
 
     public String selectLanguage(Component parent, String title, String tipText, String initLang) {
         com.toedter.components.JLocaleChooser localeChooser = new com.toedter.components.JLocaleChooser();
-        localeChooser.setLocale(Locale.forLanguageTag(initLang));
+        if (initLang != null) {
+            localeChooser.setLocale(Locale.forLanguageTag(initLang));
+        }
         Object[] message = new Object[]{tipText, localeChooser};
         int r = JOptionPane.showConfirmDialog(parent, message, title, JOptionPane.OK_CANCEL_OPTION,
                 JOptionPane.PLAIN_MESSAGE);
@@ -257,8 +256,10 @@ public class Worker {
     }
 
     public File selectOpenBook(Component parent, String title) {
-        String[] formats = BookHelper.supportedParsers().toArray(new String[0]);
-        return selectOpenFile(parent, title, makeFileExtensionFilters(formats), null, true, null);
+        ArrayList<String> formats = new ArrayList<>(BookHelper.supportedParsers());
+        formats.remove("online");
+        return selectOpenFile(parent, title, makeFileExtensionFilters(formats.toArray(
+                        new String[0])), null, true, null);
     }
 
     public File selectSaveBook(Component parent, String title, String format) {
@@ -266,7 +267,9 @@ public class Worker {
         if (format != null) {
             formats = new String[]{format};
         } else {
-            formats = BookHelper.supportedParsers().toArray(new String[0]);
+            ArrayList<String> fmt = new ArrayList<>(BookHelper.supportedParsers());
+            fmt.remove("online");
+            formats = fmt.toArray(new String[0]);
         }
         return selectSaveFile(parent, title, makeFileExtensionFilters(formats), null, false, null);
     }
@@ -340,22 +343,9 @@ public class Worker {
      * @param title title of open file dialog
      * @return the book
      */
-    public Task openBook(Component parent, File file, String title) {
-        // 1. select book file if not exist
-        if (file == null) {
-            file = selectOpenBook(parent, title);
-        }
-        if (file == null) {
-            return null;    // no selection
-        }
-
-        String format = FileNameUtils.extensionName(file.getPath());
-
-        // get parse arguments
-        HashMap<String, Object> kw = getParseArguments(format);
-
+    public Task openBook(Component parent, String title, File file, String format,
+                         HashMap<String, Object> kw) {
         Task task = Task.newBook(null);
-
         task.setSource(file);
         task.setFormat(format);
 
@@ -363,7 +353,7 @@ public class Worker {
             File cache = null;
             try {
                 cache = File.createTempFile("imabw_", ".itf");
-                FileUtils.copy(file, cache);
+                org.apache.commons.io.FileUtils.copyFile(file, cache);
             } catch (IOException e) {
                 if (cache != null) {
                     if (! cache.delete()) {
@@ -439,13 +429,13 @@ public class Worker {
     }
 
 
-    private HashMap<String, Object> getParseArguments(String format) {
+    public HashMap<String, Object> getParseArguments(String format) {
         HashMap<String, Object> kw = new HashMap<>();
 
         return kw;
     }
 
-    private HashMap<String, Object> getMakeArguments(String format) {
+    public HashMap<String, Object> getMakeArguments(String format) {
         HashMap<String, Object> kw = new HashMap<>();
 
         return kw;
@@ -513,10 +503,10 @@ public class Worker {
         }
     }
 
-    public List<Part> findParts(final Part part, String key) {
-        final List<Part> parts = new ArrayList<>();
+    public ArrayList<Part> findParts(final Part part, String key) {
+        final ArrayList<Part> parts = new ArrayList<>();
         final Pattern pattern = Pattern.compile(key);
-        Jem.walkPart(part, new Jem.Walker() {
+        Jem.walkPart(part, new Walker() {
             @Override
             public boolean watch(Part p) {
                 if (pattern.matcher(p.getTitle()).find()) {

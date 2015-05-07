@@ -220,7 +220,13 @@ public class Application extends IApplication implements Constants {
         return manager;
     }
 
-    public static void main(String[] args) {
-        new Application(args).start();
+    public static void main(final String[] args) {
+        final Application app = new Application(args);
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                app.start();
+            }
+        });
     }
 }

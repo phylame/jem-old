@@ -20,12 +20,16 @@ package pw.phylame.jem.formats.umd;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import pw.phylame.jem.core.*;
+
+import pw.phylame.jem.core.Part;
+import pw.phylame.jem.core.Book;
+import pw.phylame.jem.core.Maker;
+import pw.phylame.jem.core.Cleanable;
 import pw.phylame.jem.util.JemException;
+
 import pw.phylame.tools.ZLibUtils;
 import pw.phylame.tools.NumberUtils;
 import pw.phylame.tools.file.FileNameUtils;
-import pw.phylame.tools.file.FileUtils;
 import pw.phylame.tools.file.FileObject;
 
 import static pw.phylame.tools.ByteUtils.littleRender;
@@ -105,7 +109,7 @@ public class UmdMaker implements Maker {
 
         // prepare text
         final File cache = File.createTempFile("umd_", ".stf");
-        book.registerCleanup(new Part.Cleanable() {
+        book.registerCleanup(new Cleanable() {
             @Override
             public void clean(Part part) {
                 if (source != null) {
@@ -386,7 +390,7 @@ public class UmdMaker implements Maker {
     }
 
     private void findImages(Part part, List<FileObject> images) {
-        Object o = part.getAttribute(Chapter.COVER, null);
+        Object o = part.getAttribute(Book.COVER, null);
         if (o instanceof FileObject) {
             images.add((FileObject) o);
         }

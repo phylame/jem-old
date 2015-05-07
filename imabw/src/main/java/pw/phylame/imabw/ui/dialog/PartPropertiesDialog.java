@@ -60,7 +60,9 @@ public class PartPropertiesDialog extends JDialog {
                     Book.RIGHTS, Book.STATE, Book.SUBJECT, "source", "vendor")
     );
     private static ArrayList<String> IgnoredNames = new ArrayList<>(
-            Arrays.asList(Book.TITLE, Book.COVER, Book.INTRO, Jem.SOURCE_FILE, Jem.SOURCE_FORMAT));
+            Arrays.asList(Book.TITLE, Book.COVER, Book.INTRO, Jem.SOURCE_PATH, Jem.SOURCE_FILE,
+                    Jem
+                    .SOURCE_FORMAT));
 
     private static ArrayList<String> SupportedTypes = new ArrayList<>(
             Arrays.asList("str", "int", "datetime")
@@ -475,7 +477,11 @@ public class PartPropertiesDialog extends JDialog {
         Object value;
         switch (type) {
             case "str":
-                value = "";
+                if (key.equals(Book.LANGUAGE)) {
+                    value = "zh_CN";
+                } else {
+                    value = "";
+                }
                 break;
             case "int":
                 value = 0;
@@ -490,6 +496,13 @@ public class PartPropertiesDialog extends JDialog {
         if (! part.hasAttribute(key)) {
             part.setAttribute(key, value);
             tableModel.addName(key);
+            int rows = tableModel.getRowCount();
+            propertyTable.setRowSelectionInterval(rows-1, rows-1);
+
+            if (rows == 1) {        // firstly added
+                buttonNimus.setEnabled(true);
+                buttonModify.setEnabled(true);
+            }
         }
     }
 
@@ -564,8 +577,9 @@ public class PartPropertiesDialog extends JDialog {
             newValue = new TextObject(text);
         } else if (o instanceof String) {
             if (name.equals(Book.LANGUAGE)) {   // language
+                String lang = (String) o;
                 newValue = worker.selectLanguage(this, title,
-                        app.getText("Dialog.SelectLanguage.Tip"), (String) o);
+                        app.getText("Dialog.SelectLanguage.Tip"), lang.length() != 0 ? lang : null);
                 if (newValue == null) {
                     return;
                 }

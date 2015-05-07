@@ -34,7 +34,6 @@ import pw.phylame.tools.DateUtils;
 import pw.phylame.tools.TextObject;
 import pw.phylame.tools.file.FileNameUtils;
 import pw.phylame.tools.file.FileObject;
-import pw.phylame.tools.file.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -51,7 +50,8 @@ public class Writer {
     private static Log LOG = LogFactory.getLog(Writer.class);
     private static Set<String> IgnoredNames = new HashSet<String>();
     static {
-        IgnoredNames.addAll(java.util.Arrays.asList(Jem.SOURCE_FILE, Jem.SOURCE_FORMAT));
+        IgnoredNames.addAll(java.util.Arrays.asList(Jem.SOURCE_PATH, Jem.SOURCE_FILE, Jem
+                .SOURCE_FORMAT));
     }
 
     private static void makeHead(Element parent, Map<String, String> metaInfo) {

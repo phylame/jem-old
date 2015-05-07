@@ -27,9 +27,7 @@ import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import pw.phylame.jem.core.Book;
-import pw.phylame.jem.core.Parser;
-import pw.phylame.jem.core.Part;
+import pw.phylame.jem.core.*;
 import pw.phylame.jem.formats.pmab.v3.Reader;
 import pw.phylame.jem.util.JemException;
 
@@ -44,7 +42,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * <tt>Parser</tt> implement for PMAB book.
  */
-public class PmabParser implements Parser {
+public class PmabParser extends AbstractParser {
     private static Log LOG = LogFactory.getLog(PmabParser.class);
 
     /**
@@ -85,7 +83,7 @@ public class PmabParser implements Parser {
         Book book = new Book();
         readPBM(zipFile, book);
         readPBC(zipFile, book);
-        book.registerCleanup(new Part.Cleanable() {
+        book.registerCleanup(new Cleanable() {
             @Override
             public void clean(Part part) {
                 try {

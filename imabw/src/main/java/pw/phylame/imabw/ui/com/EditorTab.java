@@ -18,7 +18,6 @@
 
 package pw.phylame.imabw.ui.com;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.io.BufferedWriter;
@@ -28,6 +27,7 @@ import java.io.OutputStreamWriter;
 import pw.phylame.ixin.ITextEdit;
 
 import pw.phylame.jem.core.Part;
+import pw.phylame.jem.core.Cleanable;
 import pw.phylame.tools.file.FileFactory;
 
 import org.apache.commons.logging.Log;
@@ -83,7 +83,7 @@ public class EditorTab {
         try {
             if (file == null) {
                 file = File.createTempFile("imabw_", ".itf");
-                part.registerCleanup(new Part.Cleanable() {
+                part.registerCleanup(new Cleanable() {
                     @Override
                     public void clean(Part part) {
                         if (! file.delete()) {
@@ -92,7 +92,8 @@ public class EditorTab {
                     }
                 });
             }
-            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), CACHE_ENCODING));
+            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file),
+                    CACHE_ENCODING));
             textEdit.write(writer);
             part.getSource().setFile(FileFactory.fromFile(file, null), CACHE_ENCODING);
             modified = false;

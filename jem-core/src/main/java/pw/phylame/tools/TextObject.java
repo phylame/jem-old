@@ -16,12 +16,13 @@
 
 package pw.phylame.tools;
 
-import pw.phylame.tools.file.FileObject;
-import pw.phylame.tools.file.FileUtils;
+import java.util.List;
 
-import java.io.Reader;
 import java.io.Writer;
+import java.io.InputStream;
 import java.io.IOException;
+import org.apache.commons.io.IOUtils;
+import pw.phylame.tools.file.FileObject;
 
 /**
  * Provides unicode text.
@@ -32,10 +33,11 @@ import java.io.IOException;
  * </ul>
  */
 public class TextObject {
-    protected enum SourceType {
+    protected enum SourceProvider {
         TEXT, FILE
     }
 
+    /** Content type */
     public static final String PLAIN = "plain";
     public static final String HTML = "html";
 
@@ -61,7 +63,7 @@ public class TextObject {
     /**
      * Constructs object with specified file and encoding.
      * @param file file contains text content
-     * @param encoding encoding for the file, if <tt>null</tt> uses platform encoding
+     * @param encoding encoding for the file, if <tt>null</tt> means platform encoding
      */
     public TextObject(FileObject file, String encoding) {
         setType(PLAIN);
@@ -82,7 +84,7 @@ public class TextObject {
      */
     public void setRaw(String raw) {
         this.raw = raw != null ? raw : "";
-        sourceType = SourceType.TEXT;
+        sourceProvider = SourceProvider.TEXT;
     }
 
     /**
@@ -95,7 +97,7 @@ public class TextObject {
 
     /**
      * Returns the current encoding for the content file.
-     * @return the encoding or <tt>null</tt> that uses platform encoding
+     * @return the encoding or <tt>null</tt> that means platform encoding
      */
     public String getEncoding() {
         return encoding;
@@ -104,19 +106,49 @@ public class TextObject {
     /**
      * Sets text file and the encoding, changes source to text file.
      * @param file file contains text content
-     * @param encoding encoding for the file, if <tt>null</tt> uses platform encoding
+     * @param encoding encoding for the file, if <tt>null</tt> means platform encoding
      */
     public void setFile(FileObject file, String encoding) {
+        setFile(file, encoding, PLAIN);
+    }
+
+    /**
+     * Sets text file and the encoding, changes source to text file.
+     * @param file file contains text content
+     * @param encoding encoding for the file, if <tt>null</tt> means platform encoding
+     * @param type type of content text
+     * @since 2.0.1
+     */
+    public void setFile(FileObject file, String encoding, String type) {
         if (file == null) {
             throw new NullPointerException();
         }
         this.file = file;
         this.encoding = encoding;
-        sourceType = SourceType.FILE;
+        sourceProvider = SourceProvider.FILE;
+        setType(type);
     }
 
     /**
-     * Returns <tt>true</tt> if the text content is large.
+     * Returns content type.
+     * @return the type
+     * @since 2.0.1
+     */
+    public String getType() {
+        return contentType;
+    }
+
+    /**
+     * Sets type of text content
+     * @param type the type
+     * @since 2.0.1
+     */
+    public void setType(String type) {
+        this.contentType = type;
+    }
+
+    /**
+     * Returns <tt>true</tt> if the mount of text content is large.
      * @return <tt>true</tt> if large otherwise <tt>false</tt>
      */
     public boolean isLarge() {
@@ -129,41 +161,20 @@ public class TextObject {
      */
     protected long aboutSize() {
         long size;
-        switch (sourceType) {
+        switch (sourceProvider) {
             case FILE:
+                assert file != null;
                 try {
-                    size = getFile().available();
+                    size = file.available();
                 } catch (IOException e) {
                     size = LARGE_SIZE;
                 }
                 break;
             default:
-                size = getRaw().length();
+                size = raw.length();
                 break;
         }
         return size;
-    }
-
-    /**
-     * Opens a reader to read text if source is text file.
-     * @return the <tt>Reader</tt> or <tt>null</tt> if source is not text file
-     * @throws java.io.IOException cannot create reader
-     */
-    private Reader openReader() throws IOException {
-        assert file != null;
-        if (encoding != null) {
-            return new java.io.InputStreamReader(file.openInputStream(), encoding);
-        } else {
-            return new java.io.InputStreamReader(file.openInputStream());
-        }
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     /**
@@ -172,14 +183,15 @@ public class TextObject {
      * @throws java.io.IOException occurs IO errors when reading text file if source is text file.
      */
     public String getText() throws IOException {
-        switch (sourceType) {
+        switch (sourceProvider) {
             case FILE:
-                Reader reader = openReader();
-                String text = FileUtils.readText(reader);
-                getFile().reset();
+                assert file != null;
+                InputStream input = new java.io.BufferedInputStream(file.openInputStream());
+                String text = IOUtils.toString(input, encoding);
+                file.reset();
                 return text;
             default:
-                return getRaw();
+                return raw;
         }
     }
 
@@ -188,55 +200,41 @@ public class TextObject {
      * @return list of lines
      * @throws java.io.IOException occurs IO errors when reading text file if source is text file.
      */
-    public String[] getLines() throws IOException {
-        switch (sourceType) {
+    public List<String> getLines() throws IOException {
+        switch (sourceProvider) {
             case FILE:
-                Reader reader = openReader();
-                assert reader != null;
-                String[] lines = FileUtils.readLines(reader);
-                getFile().reset();
+                assert file != null;
+                InputStream input = new java.io.BufferedInputStream(file.openInputStream());
+                List<String> lines = IOUtils.readLines(input, encoding);
+                file.reset();
                 return lines;
             default:
-                return getRaw().split("(\\r\\n)|(\\r)|(\\n)");
+                return java.util.Arrays.asList(raw.split("(\\r\\n)|(\\r)|(\\n)"));
         }
     }
 
     /**
      * Writes all text content in this object to output writer.
      * @param writer output <tt>Writer</tt> to store text content
-     * @return the total number of written characters
      * @throws java.io.IOException occurs IO errors
+     * @since 2.0.1
      */
-    public long writeTo(Writer writer) throws IOException {
-        return writeTo(writer, -1);
-    }
-
-    /**
-     * Writes some number of characters in text content to output writer.
-     * @param writer output <tt>Writer</tt> to store characters
-     * @param size the maximum number of characters to be written, if <tt>-1</tt> copies all
-     * @return the total number of written characters
-     * @throws java.io.IOException occurs IO errors
-     */
-    public long writeTo(Writer writer, long size) throws IOException {
-        long total;
-        switch (sourceType) {
+    public void writeTo(Writer writer) throws IOException {
+        switch (sourceProvider) {
             case FILE:
-                Reader reader = openReader();
-                assert reader != null;
-                total = FileUtils.copy(reader, writer, size);
-                getFile().reset();
+                assert file != null;
+                InputStream input = new java.io.BufferedInputStream(file.openInputStream());
+                IOUtils.copy(input, writer, encoding);
+                file.reset();
                 break;
             default:
-                writer.write(getRaw());
-                total = getRaw().length();
+                writer.write(raw);
                 break;
         }
-        return total;
     }
 
-    /** content type */
-    private String type;
+    /** Content type */
+    private String contentType;
 
     /** Raw text */
     private String raw;
@@ -247,6 +245,6 @@ public class TextObject {
     /** Encoding of the text file */
     private String encoding;
 
-    /** Content type */
-    private SourceType sourceType;
+    /** Content contentType */
+    private SourceProvider sourceProvider;
 }

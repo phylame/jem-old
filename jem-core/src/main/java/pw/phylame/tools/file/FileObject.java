@@ -19,7 +19,9 @@ package pw.phylame.tools.file;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.ByteArrayOutputStream;
+import java.io.BufferedInputStream;
+
+import org.apache.commons.io.IOUtils;
 
 /**
  * Provides read only input source.
@@ -71,9 +73,9 @@ public abstract class FileObject {
      * @return the data in file
      */
     public byte[] readAll() throws IOException {
-        ByteArrayOutputStream o = new ByteArrayOutputStream();
-        copyTo(o);
-        return o.toByteArray();
+        byte[] bytes = IOUtils.toByteArray(new BufferedInputStream(openInputStream()));
+        reset();
+        return bytes;
     }
 
     /**
@@ -83,7 +85,9 @@ public abstract class FileObject {
      * @throws java.io.IOException occur IO errors
      */
     public long copyTo(OutputStream out) throws IOException {
-        return copyTo(out, -1);
+        long total = IOUtils.copy(new BufferedInputStream(openInputStream()), out);
+        reset();
+        return total;
     }
 
     /**
@@ -94,9 +98,7 @@ public abstract class FileObject {
      * @throws java.io.IOException occur IO errors
      */
     public long copyTo(OutputStream out, long size) throws IOException {
-        InputStream in = openInputStream();
-        assert in != null;
-        long total = FileUtils.copy(in, out, size);
+        long total = IOUtils.copyLarge(new BufferedInputStream(openInputStream()), out, 0, size);
         reset();
         return total;
     }

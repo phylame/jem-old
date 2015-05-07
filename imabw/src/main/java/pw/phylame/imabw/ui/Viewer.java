@@ -217,7 +217,7 @@ public class Viewer extends IFrame implements Constants {
                 if (e.getClickCount() != 2 || e.isMetaDown()) {
                     return;
                 }
-                viewSelectionNode();
+                app.getManager().onTreeAction(VIEW_CHAPTER);
             }
 
             @Override
@@ -245,7 +245,7 @@ public class Viewer extends IFrame implements Constants {
         tree.registerKeyboardAction(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                viewSelectionNode();
+                app.getManager().onTreeAction(VIEW_CHAPTER);
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
@@ -298,21 +298,6 @@ public class Viewer extends IFrame implements Constants {
             }
         }
         treeContextMenu.show(tree, x, y);
-    }
-
-    private void viewSelectionNode() {
-        TreePath[] paths = contentsTree.getSelectionPaths();
-        if (paths == null) {
-            return;
-        }
-        for (TreePath tp: paths) {
-            PartNode node = PartNode.getPartNode(tp);
-            assert node != null;
-            if (! node.isLeaf()) {
-                continue;
-            }
-            app.getManager().onTreeAction(VIEW_CHAPTER);
-        }
     }
 
     private void createEditorPopupMenu() {
@@ -466,6 +451,7 @@ public class Viewer extends IFrame implements Constants {
 
     public void focusToRoot() {
         contentsTree.setSelectionRow(0);
+        contentsTree.scrollToHead();
     }
 
     public void focusToPath(TreePath path) {
@@ -481,6 +467,32 @@ public class Viewer extends IFrame implements Constants {
         }
         tree.setSelectionRow(row + index + 1);
     }
+
+    public void updatedNode(PartNode node) {
+        treeModel.nodeChanged(node);
+    }
+
+    public void appendedNode(PartNode parent) {
+        insertedNode(parent, parent.getChildCount() - 1);
+    }
+
+    public void insertedNode(PartNode parent, int index) {
+        treeModel.nodesWereInserted(parent, new int[]{index});
+    }
+
+    public void insertedNodes(PartNode parent, int[] indexes) {
+        treeModel.nodesWereInserted(parent, indexes);
+    }
+
+    public void removedNode(PartNode parent, int index, PartNode node) {
+        treeModel.nodesWereRemoved(parent, new int[]{index}, new Object[]{node});
+    }
+
+    public void removedNodes(PartNode parent, int[] indexes, PartNode[] nodes) {
+        treeModel.nodesWereRemoved(parent, indexes, nodes);
+    }
+
+
 
     // ******************************
     // ** Editor operations

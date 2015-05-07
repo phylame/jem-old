@@ -26,6 +26,7 @@ import pw.phylame.imabw.ui.com.PartNode;
 import pw.phylame.imabw.ui.com.UIFactory;
 import pw.phylame.imabw.ui.dialog.PartPropertiesDialog;
 import pw.phylame.imabw.ui.dialog.PartSelectionDialog;
+import pw.phylame.imabw.ui.dialog.ProgressDialog;
 import pw.phylame.ixin.ITextEdit;
 import pw.phylame.ixin.IToolkit;
 import pw.phylame.jem.core.Book;
@@ -39,9 +40,9 @@ import javax.swing.*;
 import javax.swing.tree.TreePath;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashMap;
+import java.util.ArrayList;
 
 /**
  * The manager.
@@ -187,13 +188,34 @@ public class Manager implements Constants {
         if (! maybeSave(app.getText("Dialog.OpenBook.Title"))) {
             return false;
         }
-        Task task = worker.openBook(viewer, file, app.getText("Dialog.OpenBook.Title"));
+        String title = app.getText("Dialog.OpenBook.Title");
+        // 1. select book file if not exist
+        if (file == null) {
+            file = worker.selectOpenBook(viewer, title);
+        }
+        if (file == null) {
+            return false;    // no selection
+        }
+        String format = FileNameUtils.extensionName(file.getPath());
+
+        // 2. get parse arguments
+        HashMap<String, Object> kw = worker.getParseArguments(format);
+
+        // show progress dialog
+        ProgressDialog progressDialog = new ProgressDialog(viewer, title,
+                app.getText("Dialog.OpenBook.ProgressText", file.getPath()));
+        progressDialog.start();
+
+        Task task = worker.openBook(viewer, title, file, format, kw);
         if (task == null) {
+            progressDialog.stop();
             return false;
         }
 
         setTask(task);
         viewer.setStatusText(app.getText("Task.OpenedBook", this.task.getSource().getPath()));
+
+        progressDialog.stop();
         return true;
     }
 
@@ -418,17 +440,23 @@ public class Manager implements Constants {
     // **************************
     // ** Tree action function
     // **************************
-    private void viewPart() {
-        TreePath path = viewer.getSelectedPath();
-        if (path == null) {
+    private void viewChapter() {
+        TreePath[] paths = viewer.getSelectedPaths();
+        if (paths == null) {
             return;
         }
-        Part part = PartNode.getPartNode(path).getPart();
-        EditorTab tab = viewer.findTab(part);
-        if (tab == null) {
-            tab = viewer.newTab(part);
+        for (TreePath path: paths) {
+            PartNode node = PartNode.getPartNode(path);
+            if (! node.isLeaf()) {  // chapter section
+                continue;
+            }
+            Part part = node.getPart();
+            EditorTab tab = viewer.findTab(part);
+            if (tab == null) {
+                tab = viewer.newTab(part);
+            }
+            viewer.switchToTab(tab);
         }
-        viewer.switchToTab(tab);
     }
 
     private void newChapter() {
@@ -448,9 +476,8 @@ public class Manager implements Constants {
         if (sub == null) {
             return;
         }
-        viewer.refreshNode(node);
-        viewer.expandTreePath(treePath);
-        viewer.focusToRow(treePath, node.getChildCount() - 1);
+        viewer.appendedNode(node);
+        // TODO focus to new node
         notifyModified(app.getText("Task.CreatedChapter", sub.getPart().getTitle(), part.getTitle()));
     }
 
@@ -465,11 +492,10 @@ public class Manager implements Constants {
         }
         PartNode node = PartNode.getPartNode(path);
         PartNode parent = (PartNode) node.getParent();
-        TreePath parentPath = path.getParentPath();
         int index = parent.getIndex(node);
         parent.insertNode(sub, index);
-        viewer.refreshNode(parent);
-        viewer.focusToRow(parentPath, index);
+        viewer.insertedNode(parent, index);
+        // TODO focus to new node
         notifyModified(app.getText("Task.InsertedChapter", sub.getPart().getTitle(),
                 node.getPart().getTitle()));
     }
@@ -511,8 +537,7 @@ public class Manager implements Constants {
         }
 
         part.setTitle(newTitle);
-        viewer.refreshNode(node);
-        viewer.focusToPath(treePath);
+        viewer.updatedNode(node);
         notifyModified(app.getText("Task.RenamedChapter", oldTitle, newTitle));
     }
 
@@ -574,16 +599,16 @@ public class Manager implements Constants {
                 app.getText("Dialog.DeleteChapter.Tip", paths.length))) {
             return;
         }
+
         for (TreePath path: paths) {
             PartNode node = PartNode.getPartNode(path);
             PartNode parent = (PartNode) node.getParent();
-            TreePath parentPath = path.getParentPath();
 
             viewer.closeTab(node.getPart());
             parent.removeNode(node);
 
-            viewer.refreshNode(parent);
-            viewer.expandTreePath(parentPath);
+//            viewer.refreshNode(parent);
+//            viewer.expandTreePath(parentPath);
         }
         viewer.focusToRoot();
         notifyModified(app.getText("Task.DeletedChapter", paths.length));
@@ -660,14 +685,14 @@ public class Manager implements Constants {
             worker.showError(viewer, app.getText("Dialog.SearchChapter.Title"), app.getText("Dialog.SearchChapter.NoInput"));
             return;
         }
-        List<Part> results = worker.findParts(part, key);
+        ArrayList<Part> results = worker.findParts(part, key);
         System.out.println(results.size());
     }
 
     public void onTreeAction(Object actionID) {
         switch ((String) actionID) {
             case VIEW_CHAPTER:
-                viewPart();
+                viewChapter();
                 break;
             case NEW_CHAPTER:
                 newChapter();

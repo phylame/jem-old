@@ -20,9 +20,8 @@ package pw.phylame.jem.formats.txt;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import pw.phylame.jem.core.Book;
-import pw.phylame.jem.core.Parser;
-import pw.phylame.jem.core.Part;
+
+import pw.phylame.jem.core.*;
 import pw.phylame.jem.util.JemException;
 import pw.phylame.tools.TextObject;
 import pw.phylame.tools.file.FileFactory;
@@ -38,7 +37,7 @@ import java.util.regex.PatternSyntaxException;
 /**
  * <tt>Parser</tt> implement for TXT book.
  */
-public class TxtParser implements Parser {
+public class TxtParser extends AbstractParser {
     private static Log LOG = LogFactory.getLog(TxtParser.class);
 
     private static final String CACHED_TEXT_ENCODING = "UTF-16";
@@ -92,7 +91,7 @@ public class TxtParser implements Parser {
 
         Book book = new Book(title, "");
         final File cache = File.createTempFile("TXT", ".tmp");
-        book.registerCleanup(new Part.Cleanable() {
+        book.registerCleanup(new Cleanable() {
             @Override
             public void clean(Part part) {
                 if (source != null) {

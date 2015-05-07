@@ -20,14 +20,12 @@ package pw.phylame.jem.formats.pmab;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
 import pw.phylame.tools.TextObject;
 import pw.phylame.tools.file.FileObject;
-import pw.phylame.tools.file.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -53,7 +51,7 @@ public final class PMAB {
         InputStream stream = null;
         try {
             stream = zipFile.getInputStream(zipFile.getEntry(MIME_FILE));
-            String text = FileUtils.readText(new InputStreamReader(stream)).trim();
+            String text = org.apache.commons.io.IOUtils.toString(stream).trim();
             return MT_PMAB.equals(text);
         } catch (IOException e) {
             LOG.debug("cannot load "+MIME_FILE, e);

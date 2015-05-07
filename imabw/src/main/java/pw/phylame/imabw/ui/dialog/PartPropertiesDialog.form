@@ -56,7 +56,7 @@
               </grid>
             </constraints>
             <properties>
-              <dividerSize value="2"/>
+              <dividerSize value="5"/>
             </properties>
             <border type="none"/>
             <children>
@@ -150,7 +150,7 @@
                     <constraints border-constraint="Center"/>
                     <properties>
                       <dividerLocation value="275"/>
-                      <dividerSize value="2"/>
+                      <dividerSize value="5"/>
                       <orientation value="0"/>
                     </properties>
                     <border type="none"/>

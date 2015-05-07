@@ -33,7 +33,7 @@ public class FileNameUtils {
     /** Loads some known MIMEs from file. */
     static void initBuiltinMime() {
         java.util.Properties prop = new java.util.Properties();
-        InputStream in = FileUtils.class.getResourceAsStream("mime.properties");
+        InputStream in = FileNameUtils.class.getResourceAsStream("mime.properties");
         if (in == null) {       // not found file
             return;
         }

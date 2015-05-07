@@ -67,6 +67,24 @@ public class Book extends Chapter {
         setDate(new Date());
     }
 
+    /**
+     * Resets all attributes to default.
+     * @since 2.0.1
+     */
+    public void reset() {
+        setTitle("");
+        setCover(null);
+        setAuthor("");
+        setGenre("");
+        setState("");
+        setIntro("");
+        setDate(new Date());
+        setSubject("");
+        setPublisher("");
+        setRights("");
+        setLanguage("");
+    }
+
     public String getAuthor() {
         return stringAttribute(AUTHOR, "");
     }

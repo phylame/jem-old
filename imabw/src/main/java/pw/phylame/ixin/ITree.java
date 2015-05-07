@@ -68,7 +68,8 @@ public class ITree extends JPanel {
         titleLabel = new JLabel(title);
         titleBar.add(titleLabel, BorderLayout.WEST);
         add(titleBar, BorderLayout.NORTH);
-        add(new JScrollPane(jTree), BorderLayout.CENTER);
+        scrollPane = new JScrollPane(jTree);
+        add(scrollPane, BorderLayout.CENTER);
     }
 
     public JPanel getTitleBar() {
@@ -97,6 +98,16 @@ public class ITree extends JPanel {
 
     public void setSelectionRow(int row) {
         jTree.setSelectionRow(row);
+    }
+
+    public void scrollToHead() {
+        JScrollBar scrollBar = scrollPane.getVerticalScrollBar();
+        scrollBar.setValue(scrollBar.getMinimum());
+    }
+
+    public void scrollToTail() {
+        JScrollBar scrollBar = scrollPane.getVerticalScrollBar();
+        scrollBar.setValue(scrollBar.getMaximum());
     }
 
     public int getSelectionCount() {
@@ -144,4 +155,5 @@ public class ITree extends JPanel {
     private JPanel titleBar;
     private JLabel titleLabel;
     private JTree jTree;
+    private JScrollPane scrollPane;
 }
