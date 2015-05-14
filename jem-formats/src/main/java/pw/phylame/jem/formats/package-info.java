@@ -18,7 +18,14 @@
 
 /**
  * Implements of book parser and maker.
+ * <p>Implemented supported formats:</p>
+ * <ul>
+ *     <li>PMAB - Pem book archive</li>
+ *     <li>UMD - UMD document</li>
+ *     <li>TXT - Plain text file</li>
+ *     <li>JAR - Java ME book</li>
+ * </ul>
  * @author Peng Wan, PW
- * @version 2.0-SNAPSHOT
+ * @version 1.0.1
  */
 package pw.phylame.jem.formats;

@@ -202,20 +202,20 @@ public class Manager implements Constants {
         HashMap<String, Object> kw = worker.getParseArguments(format);
 
         // show progress dialog
-        ProgressDialog progressDialog = new ProgressDialog(viewer, title,
-                app.getText("Dialog.OpenBook.ProgressText", file.getPath()));
-        progressDialog.start();
+//        ProgressDialog progressDialog = new ProgressDialog(viewer, title,
+//                app.getText("Dialog.OpenBook.ProgressText", file.getPath()));
+//        progressDialog.start();
 
         Task task = worker.openBook(viewer, title, file, format, kw);
         if (task == null) {
-            progressDialog.stop();
+//            progressDialog.stop();
             return false;
         }
 
         setTask(task);
         viewer.setStatusText(app.getText("Task.OpenedBook", this.task.getSource().getPath()));
 
-        progressDialog.stop();
+//        progressDialog.stop();
         return true;
     }
 
@@ -460,6 +460,9 @@ public class Manager implements Constants {
     }
 
     private void newChapter() {
+        if (viewer.isContentsLocked()) {
+            return;
+        }
         TreePath treePath = viewer.getSelectedPath();
         if (treePath == null) {
             return;
@@ -482,6 +485,9 @@ public class Manager implements Constants {
     }
 
     private void insertChapter() {
+        if (viewer.isContentsLocked()) {
+            return;
+        }
         TreePath path = viewer.getSelectedPath();
         if (path == null || path.getPathCount() == 1) {     // no selection or root
             return;
@@ -522,6 +528,9 @@ public class Manager implements Constants {
     }
 
     private void renameChapter() {
+        if (viewer.isContentsLocked()) {
+            return;
+        }
         TreePath treePath = viewer.getSelectedPath();
         if (treePath == null) {
             return;
@@ -542,6 +551,9 @@ public class Manager implements Constants {
     }
 
     private void moveChapters() {
+        if (viewer.isContentsLocked()) {
+            return;
+        }
         TreePath[] paths = viewer.getSelectedPaths();
         if (paths == null || paths[0].getPathCount() == 1) {    // null or root
             return;
@@ -591,6 +603,9 @@ public class Manager implements Constants {
     }
 
     private void deleteChapters() {
+        if (viewer.isContentsLocked()) {
+            return;
+        }
         TreePath[] paths = viewer.getSelectedPaths();
         if (paths == null || paths[0].getPathCount() == 1) {    // null or root
             return;
@@ -603,18 +618,22 @@ public class Manager implements Constants {
         for (TreePath path: paths) {
             PartNode node = PartNode.getPartNode(path);
             PartNode parent = (PartNode) node.getParent();
+            TreePath parentPath = path.getParentPath();
 
             viewer.closeTab(node.getPart());
             parent.removeNode(node);
 
-//            viewer.refreshNode(parent);
-//            viewer.expandTreePath(parentPath);
+            viewer.refreshNode(parent);
+            viewer.expandTreePath(parentPath);
         }
         viewer.focusToRoot();
         notifyModified(app.getText("Task.DeletedChapter", paths.length));
     }
 
     private void mergeChapters() {
+        if (viewer.isContentsLocked()) {
+            return;
+        }
         TreePath[] paths = viewer.getSelectedPaths();
         if (paths == null || paths.length < 2 || paths[0].getPathCount() == 1) {    // null, one or root
             return;

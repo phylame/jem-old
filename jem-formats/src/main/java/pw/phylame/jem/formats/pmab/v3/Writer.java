@@ -50,26 +50,18 @@ public final class Writer {
                 .SOURCE_FORMAT));
     }
 
-    private static Byte[] toBytes(byte[] ary) {
-        Byte[] results = new Byte[ary.length];
-        for (int ix = 0; ix < ary.length; ++ix) {
-            results[ix] = ary[ix];
-        }
-        return results;
-    }
-
     private static void makeItem(Element parent, String name, Object value, ZipOutputStream zipout,
                                  PmabConfig config, String prefix) {
         if (value == null) {    // ignore null value
             return;
         }
         Element item = parent.addElement("item").addAttribute("name", name);
-        String text, type;
-        if (value instanceof FileObject) {
+        String text, type = Jem.variantType(value);
+        if ("file".equals(type)) {              // file object
             FileObject fb = (FileObject) value;
             type = fb.getMime();
             String baseName = prefix + name + "." + FileNameUtils.extensionName(fb.getName());
-            if (type.startsWith("image/")) {        // image file
+            if (type.startsWith("image/")) {            // image file
                 text = config.imageDir + "/" + baseName;
             } else {
                 text = config.extraDir + "/" + baseName;
@@ -79,9 +71,10 @@ public final class Writer {
             } catch (IOException ex) {
                 LOG.debug("cannot write file to PMAB: "+fb.getName(), ex);
             }
-        } else if (value instanceof TextObject) {
+        } else if ("text".equals(type)) {       // text object
             TextObject tb = (TextObject) value;
-            String encoding = config.textEncoding != null ? config.textEncoding : System.getProperty("file.encoding");
+            String encoding = config.textEncoding != null ? config.textEncoding :
+                    System.getProperty("file.encoding");
             type = "text/plain;encoding=" + encoding;
             String baseName = prefix + name + ".txt";
             if (name.equals("intro")) {
@@ -94,14 +87,13 @@ public final class Writer {
             } catch (IOException ex) {
                 LOG.debug("cannot write text to PMAB: "+text, ex);
             }
-        } else if (value instanceof Date) {
+        } else if ("datetime".equals(type)) {             // date
             type = "datetime;format=" + config.dateFormat;
             text = DateUtils.formatDate((Date) value, config.dateFormat);
-        } else if (value instanceof byte[]) {
+        } else if ("bytes".equals(type)) {           // bytes
             type = "bytes;sep=, ";
             text = java.util.Arrays.toString((byte[]) value);
         } else {
-            type = "str";
             text = String.valueOf(value);
         }
         item.addAttribute("type", type);
@@ -110,18 +102,19 @@ public final class Writer {
         }
     }
 
-    private static void makeHead(Element parent, Map<String, String> metaInfo) {
+    private static void makeHead(Element parent, Map<Object, Object> metaInfo) {
         Element head = parent.addElement("head");
-        for (String name: metaInfo.keySet()) {
-            String value = metaInfo.get(name);
+        for (Object key: metaInfo.keySet()) {
+            Object value = metaInfo.get(key);
             if (value != null) {
-                head.addElement("meta").addAttribute("name", name).addAttribute("value", value);
+                head.addElement("meta").addAttribute("name", String.valueOf(key)
+                                                    ).addAttribute("value", String.valueOf(value));
             }
         }
     }
 
-    private static void makeAttributes(Element parent, Part part, ZipOutputStream zipout, PmabConfig config,
-                                       String prefix)
+    private static void makeAttributes(Element parent, Part part, ZipOutputStream zipout,
+                                       PmabConfig config, String prefix)
             throws IOException {
         Element attributes = parent.addElement("attributes");
         for (String name: part.attributeNames()) {
@@ -156,7 +149,8 @@ public final class Writer {
         makeAttributes(item, part, zipout, config, base+"-");
         // TODO  content
         String href = config.textDir + "/"+ base + ".txt";
-        String encoding = config.textEncoding != null ? config.textEncoding : System.getProperty("file.encoding");
+        String encoding = config.textEncoding != null ? config.textEncoding :
+                System.getProperty("file.encoding");
         PMAB.writeText(part.getSource(), zipout, href, encoding);
         Element content = item.addElement("content");
         content.addAttribute("type", "text/plain;encoding="+encoding);

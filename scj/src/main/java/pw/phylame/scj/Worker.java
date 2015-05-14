@@ -50,7 +50,7 @@ public final class Worker {
     private static final String ITEM_REGEX = "^item\\$.*";
 
     private static URL detectURL(String url) throws IOException {
-        String href = null;
+        String href;
         if (url.matches("((http://)|(https://)|(ftp://)|(file://)).*")) {
             href = url;
         } else {
@@ -60,7 +60,7 @@ public final class Worker {
     }
 
     private static FileObject getPemCover() {
-        URL url = Worker.class.getResource("/cover.png");
+        URL url = Worker.class.getResource("/cover.png");   // from jem-formats
         if (url != null) {
             return FileFactory.fromURL(url, null);
         }
@@ -115,10 +115,7 @@ public final class Worker {
             book = Jem.readBook(input, format, kw);
         } catch (FileNotFoundException e) {
             SCI.error(SCI.getText("SCI_NOT_EXISTS", input));
-        } catch (IOException e) {
-            LOG.debug(String.format("failed to read '%s' with '%s'", input,
-                    format.toUpperCase()), e);
-        } catch (JemException e) {
+        } catch (IOException | JemException e) {
             LOG.debug(String.format("failed to read '%s' with '%s'", input,
                     format.toUpperCase()), e);
         }
@@ -129,14 +126,16 @@ public final class Worker {
         if (output.isDirectory()) {
             output = new File(output, String.format("%s.%s", book.getTitle(), format));
         }
+        if (kw != null && ! kw.containsKey("pmab_meta_data")) {
+            Map<Object, Object> metaInfo = new java.util.HashMap<>();
+            metaInfo.put("generator", SCI.Name+" v"+SCI.VERSION);
+            kw.put("pmab_meta_data", metaInfo);
+        }
         String path = null;
         try {
             Jem.writeBook(book, output, format, kw);
             path = output.getPath();
-        } catch (IOException e) {
-            LOG.debug(String.format("failed to write '%s' with '%s'", output.getPath(),
-                    format.toUpperCase()), e);
-        } catch (JemException e) {
+        } catch (IOException |JemException e) {
             LOG.debug(String.format("failed to write '%s' with '%s'", output.getPath(),
                     format.toUpperCase()), e);
         }
@@ -188,18 +187,18 @@ public final class Worker {
         return path;
     }
 
-    private static int[] parseIndexs(String indexs) {
-        List<Integer> parts = new java.util.ArrayList<Integer>();
-        for (String part: indexs.split("\\.")) {
+    private static int[] parseIndexes(String indexes) {
+        List<Integer> parts = new java.util.ArrayList<>();
+        for (String part: indexes.split("\\.")) {
             try {
                 int n = new Integer(part);
                 if (n == 0) {
-                    SCI.error(SCI.getText("SCI_INVALID_INDEXS", indexs));
+                    SCI.error(SCI.getText("SCI_INVALID_INDEXS", indexes));
                     return null;
                 }
                 parts.add(n);
             } catch(NumberFormatException ex) {
-                SCI.error(SCI.getText("SCI_INVALID_INDEXS", indexs));
+                SCI.error(SCI.getText("SCI_INVALID_INDEXS", indexes));
                 return null;
             }
         }
@@ -222,7 +221,7 @@ public final class Worker {
             SCI.error(SCI.getText("SCI_READ_FAILED", input));
             return null;
         }
-        int[] indexs = parseIndexs(index);
+        int[] indexs = parseIndexes(index);
         if (indexs == null) {
             return null;
         }
@@ -290,7 +289,7 @@ public final class Worker {
 
     private static void viewPart(Part part, String[] keys, String sep, boolean showBrackets,
             boolean ignoreEmpty) {
-        List<String> lines = new java.util.ArrayList<String>();
+        List<String> lines = new java.util.ArrayList<>();
         for (String key: keys) {
             if (key.equals("all")) {
                 viewPart(part, part.attributeNames().toArray(new String[0]), sep, showBrackets, true);
@@ -304,7 +303,7 @@ public final class Worker {
                     SCI.error(SCI.getText("SCI_LOAD_CONTENT_FAILED", part.getTitle()));
                 }
             } else if (key.equals("names")) {
-                List<String> names = new java.util.ArrayList<String>(part.attributeNames());
+                List<String> names = new java.util.ArrayList<>(part.attributeNames());
                 names.addAll(java.util.Arrays.asList("text", "size", "all"));
                 if (part instanceof Book) {
                     names.add("ext");
@@ -357,7 +356,7 @@ public final class Worker {
         if (parts.length > 1) {
             key = parts[1];
         }
-        int[] indexs = parseIndexs(index);
+        int[] indexs = parseIndexes(index);
         if (indexs == null) {
             return;
         }

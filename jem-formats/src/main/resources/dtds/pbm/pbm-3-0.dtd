@@ -1,10 +1,10 @@
 ﻿<!-- PBM 3.0 DTD 2015-3-12
 file: pbm-3-0.dtd
 
-  Author: Peng Wan
+  Author: Peng Wan, PW
   Revision: 2015-3-21
   Description: 
-    The Package Document Type Definition (DTD) for the PMAB's Book Metadata Version 3.0.
+    The Package Document Type Definition (DTD) for the PMAB Book Metadata Version 3.0.
     PBM document defines structure of book properties map and extensions list.
 -->
 

@@ -98,9 +98,7 @@ public class ProgressDialog extends JDialog {
     }
 
     public void stop() {
-        if (thread != null) {
-            setVisible(false);
-            thread.interrupt();
-        }
+        setVisible(false);
+        thread.interrupt();
     }
 }

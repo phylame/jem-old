@@ -123,7 +123,7 @@ public final class SCI {
     }
 
     private static Map<String, Object> parseArguments(java.util.Properties prop) {
-        Map<String, Object> map = new java.util.HashMap<String, Object>();
+        Map<String, Object> map = new java.util.HashMap<>();
         for (String key: prop.stringPropertyNames()) {
             map.put(key, prop.getProperty(key));
         }
@@ -155,11 +155,10 @@ public final class SCI {
 
     /**
      * Prints CLI errors.
-     * @param name SCI name
      * @param syntax SCI syntax
      * @param e the exception
      */
-    private static void cliError(String name, String syntax, ParseException e) {
+    private static void cliError(String syntax, ParseException e) {
         String msg;
         String clazz = e.getClass().getSimpleName();
         if ("UnrecognizedOptionException".equals(clazz)) {
@@ -190,7 +189,7 @@ public final class SCI {
         try {
             cmd = new PosixParser().parse(options, args);    // POSIX style
         } catch (ParseException e) {
-            cliError(name, SCJ_SYNTAX, e);
+            cliError(SCJ_SYNTAX, e);
             return -1;
         }
         if (cmd.hasOption("h")) {
@@ -241,7 +240,7 @@ public final class SCI {
         Map<String, Object> outKw = parseArguments(cmd.getOptionProperties("m"));
         Map<String, Object> attrs = parseArguments(cmd.getOptionProperties("a"));
 
-        ArrayList<String> inputs = new ArrayList<String>();
+        ArrayList<String> inputs = new ArrayList<>();
         // exit status
         int status = 0;
         for (String file: files) {

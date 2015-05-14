@@ -20,14 +20,15 @@ package pw.phylame.jem.formats.pmab;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
+
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Maker;
 import pw.phylame.jem.util.JemException;
 
 import java.io.*;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -109,13 +110,7 @@ public class PmabMaker implements Maker {
             o = kw.get("pmab_meta_data");
             if (o instanceof Map) {
                 Map map = (Map) o;
-                config.metaInfo = new HashMap<String, String>();
-                for (Object key: map.keySet()) {
-                    Object v = map.get(key);
-                    if (v != null) {
-                        config.metaInfo.put(String.valueOf(key), String.valueOf(v));
-                    }
-                }
+                config.metaInfo = new HashMap<Object, Object>(map);
             }
         }
         return config;
@@ -130,7 +125,8 @@ public class PmabMaker implements Maker {
         zipout.close();
     }
 
-    public void make(Book book, ZipOutputStream zipout, PmabConfig config) throws IOException, JemException {
+    public void make(Book book, ZipOutputStream zipout, PmabConfig config) throws IOException,
+            JemException {
         zipout.setComment(config.zipComment);
         writeMIME(zipout);
         writePBM(book, zipout, config);
@@ -143,7 +139,8 @@ public class PmabMaker implements Maker {
         zipout.closeEntry();
     }
 
-    private void writePBM(Book book, ZipOutputStream zipout, PmabConfig config) throws IOException, JemException {
+    private void writePBM(Book book, ZipOutputStream zipout, PmabConfig config) throws IOException,
+            JemException {
         Document doc = DocumentHelper.createDocument();
         if (config.pmabVersion.startsWith("3")) {
             pw.phylame.jem.formats.pmab.v3.Writer.writePBM(book, doc, zipout, config);
@@ -157,7 +154,8 @@ public class PmabMaker implements Maker {
         zipout.closeEntry();
     }
 
-    private void writePBC(Book book, ZipOutputStream zipout, PmabConfig config) throws IOException, JemException {
+    private void writePBC(Book book, ZipOutputStream zipout, PmabConfig config) throws IOException,
+            JemException {
         Document doc = DocumentHelper.createDocument();
         if (config.pmabVersion.startsWith("3")) {
             pw.phylame.jem.formats.pmab.v3.Writer.writePBC(book, doc, zipout, config);

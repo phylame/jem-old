@@ -54,6 +54,8 @@ import org.apache.commons.logging.LogFactory;
 
 public class PartPropertiesDialog extends JDialog {
     private static Log LOG = LogFactory.getLog(PartPropertiesDialog.class);
+    private static Point oldLocation = null;
+    private static Dimension oldSize = null;
 
     private static ArrayList<String> CommonNames  = new ArrayList<>(
             Arrays.asList(Book.AUTHOR, Book.DATE, Book.GENRE, Book.LANGUAGE, Book.PUBLISHER,
@@ -141,9 +143,14 @@ public class PartPropertiesDialog extends JDialog {
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
-        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-        setSize((int) (d.getWidth() * 0.7), (int) (d.getWidth() * 0.4)); // 16x9
-        setLocationRelativeTo(getOwner());
+        if (oldSize != null) {
+            setSize(oldSize);
+            setLocation(oldLocation);
+        } else {
+            Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+            setSize((int) (d.getWidth() * 0.7), (int) (d.getWidth() * 0.4)); // 16x9
+            setLocationRelativeTo(getOwner());
+        }
     }
 
     private void createCoverPane() {
@@ -651,6 +658,8 @@ public class PartPropertiesDialog extends JDialog {
         if (modified) {
             part.setAttribute(Book.INTRO, new TextObject(introEdit.getText()));
         }
+        oldLocation = getLocation();
+        oldSize = getSize();
         dispose();
     }
 

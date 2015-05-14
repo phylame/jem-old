@@ -31,7 +31,8 @@ public class PmabConfig {
     public String textDir = "text", imageDir = "images", extraDir = "extras";
 
     // XML style
-    public String xmlEncoding = "UTF-8", xmlIndent = "\t", xmlLineSeparator = System.getProperty("line.separator");
+    public String xmlEncoding = "UTF-8", xmlIndent = "\t", xmlLineSeparator =
+            System.getProperty("line.separator");
 
     // encoding for text content
     public String textEncoding = System.getProperty("file.encoding");
@@ -49,5 +50,5 @@ public class PmabConfig {
     public String dateFormat = "yyyy-M-d";
 
     // meta data
-    public Map<String, String> metaInfo = null;
+    public Map<Object, Object> metaInfo = null;
 }
