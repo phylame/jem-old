@@ -7,31 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0043f891-92fb-464c-9f2b-f79c198286c7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../jem-formats/.idea/codeStyleSettings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Manager.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Manager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/PartPropertiesDialog.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/PartPropertiesDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/PmabConfig.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/PmabConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/ProgressDialog.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/ProgressDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/scj/SCI.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/scj/SCI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/scj/Worker.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/scj/Worker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v2/Writer.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v2/Writer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v3/Writer.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v3/Writer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/resources/jem-makers.properties" afterPath="$PROJECT_DIR$/../jem-formats/src/main/resources/jem-makers.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/resources/jem-parsers.properties" afterPath="$PROJECT_DIR$/../jem-formats/src/main/resources/jem-parsers.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/package-info.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/package-info.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/resources/dtds/pbc/pbc-2-0.dtd" afterPath="$PROJECT_DIR$/../jem-formats/src/main/resources/dtds/pbc/pbc-2-0.dtd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/resources/dtds/pbc/pbc-3-0.dtd" afterPath="$PROJECT_DIR$/../jem-formats/src/main/resources/dtds/pbc/pbc-3-0.dtd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/resources/dtds/pbm/pbm-2-0.dtd" afterPath="$PROJECT_DIR$/../jem-formats/src/main/resources/dtds/pbm/pbm-2-0.dtd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/resources/dtds/pbm/pbm-3-0.dtd" afterPath="$PROJECT_DIR$/../jem-formats/src/main/resources/dtds/pbm/pbm-3-0.dtd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scj.iml" afterPath="$PROJECT_DIR$/scj.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../imabw/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../jem-core/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../jem-formats/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="scj.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -57,25 +33,10 @@
       <file leaf-file-name="Worker.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/scj/Worker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.37078652">
-              <caret line="289" column="24" selection-start-line="289" selection-start-column="24" selection-end-line="289" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.7037037">
+              <caret line="123" column="0" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
               <folding>
                 <element signature="docComment;class#Worker#0" expanded="false" />
-                <element signature="method#detectURL#0;class#Worker#0" expanded="false" />
-                <element signature="method#getPemCover#0;class#Worker#0" expanded="false" />
-                <element signature="method#setAttributes#0;class#Worker#0" expanded="false" />
-                <element signature="method#openBook#0;class#Worker#0" expanded="false" />
-                <element signature="method#saveBook#0;class#Worker#0" expanded="false" />
-                <element signature="method#convertBook#0;class#Worker#0" expanded="false" />
-                <element signature="method#joinBook#0;class#Worker#0" expanded="false" />
-                <element signature="method#parseIndexes#0;class#Worker#0" expanded="false" />
-                <element signature="method#extractBook#0;class#Worker#0" expanded="false" />
-                <element signature="method#formatVariant#0;class#Worker#0" expanded="false" />
-                <element signature="method#walkTree#0;class#Worker#0" expanded="false" />
-                <element signature="method#viewToc#0;class#Worker#0" expanded="false" />
-                <element signature="method#viewPart#0;class#Worker#0" expanded="false" />
-                <element signature="method#viewExtension#0;class#Worker#0" expanded="false" />
-                <element signature="method#viewChapter#0;class#Worker#0" expanded="false" />
                 <element signature="method#viewBook#0;class#Worker#0" expanded="false" />
               </folding>
             </state>
@@ -137,7 +98,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="PackagesPane" proportions="" version="1">
+    <navigator proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -148,33 +109,7 @@
       <autoscrollFromSource />
       <sortByType />
     </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scj" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scj" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scj" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
-      <pane id="PackagesPane">
-        <subPane />
-      </pane>
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
@@ -276,27 +211,6 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="" />
       <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="BashConfigurationType" factoryName="Bash">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="INTERPRETER_PATH" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <module name="" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="BatchConfigurationType" factoryName="Batch">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <module name="" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
       <method />
     </configuration>
     <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
@@ -513,15 +427,16 @@
       <workItem from="1431093650772" duration="814000" />
       <workItem from="1431094524395" duration="25000" />
       <workItem from="1431142116641" duration="161000" />
+      <workItem from="1431567992041" duration="89000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2734000" />
+    <option name="totallyTimeSpent" value="2823000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="81" y="25" width="1201" height="678" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -567,21 +482,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="docComment;class#Worker#0" expanded="false" />
-            <element signature="method#detectURL#0;class#Worker#0" expanded="false" />
-            <element signature="method#getPemCover#0;class#Worker#0" expanded="false" />
-            <element signature="method#setAttributes#0;class#Worker#0" expanded="false" />
-            <element signature="method#openBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#saveBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#convertBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#joinBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#parseIndexes#0;class#Worker#0" expanded="false" />
-            <element signature="method#extractBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#formatVariant#0;class#Worker#0" expanded="false" />
-            <element signature="method#walkTree#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewToc#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewPart#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewExtension#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewChapter#0;class#Worker#0" expanded="false" />
             <element signature="method#viewBook#0;class#Worker#0" expanded="false" />
           </folding>
         </state>
@@ -593,21 +493,17 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="docComment;class#Worker#0" expanded="false" />
-            <element signature="method#detectURL#0;class#Worker#0" expanded="false" />
-            <element signature="method#getPemCover#0;class#Worker#0" expanded="false" />
-            <element signature="method#setAttributes#0;class#Worker#0" expanded="false" />
-            <element signature="method#openBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#saveBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#convertBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#joinBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#parseIndexes#0;class#Worker#0" expanded="false" />
-            <element signature="method#extractBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#formatVariant#0;class#Worker#0" expanded="false" />
-            <element signature="method#walkTree#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewToc#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewPart#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewExtension#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewChapter#0;class#Worker#0" expanded="false" />
+            <element signature="method#viewBook#0;class#Worker#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/scj/Worker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="docComment;class#Worker#0" expanded="false" />
             <element signature="method#viewBook#0;class#Worker#0" expanded="false" />
           </folding>
         </state>
@@ -641,21 +537,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="docComment;class#Worker#0" expanded="false" />
-            <element signature="method#detectURL#0;class#Worker#0" expanded="false" />
-            <element signature="method#getPemCover#0;class#Worker#0" expanded="false" />
-            <element signature="method#setAttributes#0;class#Worker#0" expanded="false" />
-            <element signature="method#openBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#saveBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#convertBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#joinBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#parseIndexes#0;class#Worker#0" expanded="false" />
-            <element signature="method#extractBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#formatVariant#0;class#Worker#0" expanded="false" />
-            <element signature="method#walkTree#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewToc#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewPart#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewExtension#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewChapter#0;class#Worker#0" expanded="false" />
             <element signature="method#viewBook#0;class#Worker#0" expanded="false" />
           </folding>
         </state>
@@ -841,25 +722,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/scj/Worker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37078652">
-          <caret line="289" column="24" selection-start-line="289" selection-start-column="24" selection-end-line="289" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.7037037">
+          <caret line="123" column="0" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
           <folding>
             <element signature="docComment;class#Worker#0" expanded="false" />
-            <element signature="method#detectURL#0;class#Worker#0" expanded="false" />
-            <element signature="method#getPemCover#0;class#Worker#0" expanded="false" />
-            <element signature="method#setAttributes#0;class#Worker#0" expanded="false" />
-            <element signature="method#openBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#saveBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#convertBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#joinBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#parseIndexes#0;class#Worker#0" expanded="false" />
-            <element signature="method#extractBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#formatVariant#0;class#Worker#0" expanded="false" />
-            <element signature="method#walkTree#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewToc#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewPart#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewExtension#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewChapter#0;class#Worker#0" expanded="false" />
             <element signature="method#viewBook#0;class#Worker#0" expanded="false" />
           </folding>
         </state>
