@@ -22,12 +22,13 @@ import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.Maker;
 import pw.phylame.jem.core.Part;
+import pw.phylame.jem.formats.util.Texts;
 import pw.phylame.jem.util.JemException;
 import pw.phylame.tools.TextObject;
 
 import java.io.*;
-import java.util.List;
 import java.util.Map;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
@@ -97,7 +98,7 @@ public class JarMaker implements Maker {
         if (part.isSection()) {
             text = part.getTitle();
         } else {
-            text = part.getText();
+            text = Texts.plainText(part.getSource());
         }
         String name = String.valueOf(chapterCount++);
         zipout.putNextEntry(new ZipEntry(name));
@@ -134,7 +135,7 @@ public class JarMaker implements Maker {
         StringBuilder sb = new StringBuilder(book.getTitle());
         TextObject intro = book.getIntro();
         if (intro != null) {
-            List<String> lines = intro.getLines();
+            List<String> lines = Texts.plainLines(intro);
             for (String line : lines) {
                 sb.append(line).append("\n");
             }

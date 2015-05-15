@@ -96,7 +96,7 @@ public class Application extends IApplication implements Constants {
         // L&F
         str = prop.getProperty("ui.face.lafTheme");
         if (isEmpty(str)) {
-            str = "system";
+            str = "com.jgoodies.looks.plastic.PlasticLookAndFeel";
         }
         settings.put("ui.face.lafTheme", str);
         // Title bar decorated

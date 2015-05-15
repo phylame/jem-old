@@ -26,7 +26,6 @@ import pw.phylame.imabw.ui.com.PartNode;
 import pw.phylame.imabw.ui.com.UIFactory;
 import pw.phylame.imabw.ui.dialog.PartPropertiesDialog;
 import pw.phylame.imabw.ui.dialog.PartSelectionDialog;
-import pw.phylame.imabw.ui.dialog.ProgressDialog;
 import pw.phylame.ixin.ITextEdit;
 import pw.phylame.ixin.IToolkit;
 import pw.phylame.jem.core.Book;
@@ -40,8 +39,8 @@ import javax.swing.*;
 import javax.swing.tree.TreePath;
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.ArrayList;
 
 /**
@@ -199,7 +198,7 @@ public class Manager implements Constants {
         String format = FileNameUtils.extensionName(file.getPath());
 
         // 2. get parse arguments
-        HashMap<String, Object> kw = worker.getParseArguments(format);
+        Map<String, Object> kw = worker.getParseArguments(format);
 
         // show progress dialog
 //        ProgressDialog progressDialog = new ProgressDialog(viewer, title,

@@ -24,12 +24,12 @@
         <dependency>
             <groupId>pw-books</groupId>
             <artifactId>jem-core</artifactId>
-            <version>2.0.1</version>
+            <version>2.0.2</version>
         </dependency>
         <dependency>
             <groupId>pw-books</groupId>
             <artifactId>jem-formats</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.2</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>

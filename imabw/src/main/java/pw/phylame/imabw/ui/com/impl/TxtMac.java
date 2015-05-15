@@ -1,7 +1,7 @@
 /*
- * Copyright 2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2015 Peng Wan <phylame@163.com>
  *
- * This file is part of Jem.
+ * This file is part of Imabw.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,16 +16,15 @@
  * limitations under the License.
  */
 
-/**
- * Implements of book parser and maker.
- * <p>Implemented supported formats:</p>
- * <ul>
- *     <li>PMAB - Pem book archive</li>
- *     <li>UMD - UMD document</li>
- *     <li>TXT - Plain text file</li>
- *     <li>JAR - Java ME book</li>
- * </ul>
- * @author Peng Wan, PW
- * @version 1.0.1
- */
-package pw.phylame.jem.formats;
+package pw.phylame.imabw.ui.com.impl;
+
+import pw.phylame.imabw.ui.com.MakerArgumentsController;
+
+import java.util.Map;
+
+public class TxtMac implements MakerArgumentsController {
+    @Override
+    public Map<String, Object> getArguments() {
+        return null;
+    }
+}

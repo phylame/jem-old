@@ -62,13 +62,10 @@ public class PartPropertiesDialog extends JDialog {
                     Book.RIGHTS, Book.STATE, Book.SUBJECT, "source", "vendor")
     );
     private static ArrayList<String> IgnoredNames = new ArrayList<>(
-            Arrays.asList(Book.TITLE, Book.COVER, Book.INTRO, Jem.SOURCE_PATH, Jem.SOURCE_FILE,
-                    Jem
-                    .SOURCE_FORMAT));
+            Arrays.asList(Book.TITLE, Book.COVER, Book.INTRO));
 
     private static ArrayList<String> SupportedTypes = new ArrayList<>(
-            Arrays.asList("str", "int", "datetime")
-    );
+            Arrays.asList("str", "int", "datetime"));
 
     private static Application app    = Application.getApplication();
     private static Worker      worker = app.getWorker();

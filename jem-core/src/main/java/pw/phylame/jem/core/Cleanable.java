@@ -23,6 +23,7 @@ package pw.phylame.jem.core;
  * @since 2.0.1
  */
 public interface Cleanable {
+
     /**
      * Cleans the specified <tt>Part</tt>
      * @param part the <tt>Part</tt> to be cleaned

@@ -7,7 +7,7 @@
     <groupId>pw-books</groupId>
     <artifactId>jem-formats</artifactId>
     <name>jem-formats</name>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <description>Formats pack for Jem</description>
     <url>http://git.oschina.net/phylame/pw-books</url>
     <inceptionYear>2014</inceptionYear>

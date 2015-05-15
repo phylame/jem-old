@@ -21,9 +21,8 @@ package pw.phylame.imabw;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import pw.phylame.imabw.ui.dialog.ProgressDialog;
+import pw.phylame.imabw.ui.com.*;
 import pw.phylame.ixin.IToolkit;
-import pw.phylame.imabw.ui.com.PartNode;
 
 import pw.phylame.jem.core.*;
 import pw.phylame.jem.util.JemException;
@@ -42,6 +41,7 @@ import java.net.URL;
 import java.io.File;
 import java.io.IOException;
 
+import java.util.Map;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -259,7 +259,7 @@ public class Worker {
         ArrayList<String> formats = new ArrayList<>(BookHelper.supportedParsers());
         formats.remove("online");
         return selectOpenFile(parent, title, makeFileExtensionFilters(formats.toArray(
-                        new String[0])), null, true, null);
+                new String[0])), null, true, null);
     }
 
     public File selectSaveBook(Component parent, String title, String format) {
@@ -344,7 +344,7 @@ public class Worker {
      * @return the book
      */
     public Task openBook(Component parent, String title, File file, String format,
-                         HashMap<String, Object> kw) {
+                         Map<String, Object> kw) {
         Task task = Task.newBook(null);
         task.setSource(file);
         task.setFormat(format);
@@ -379,7 +379,7 @@ public class Worker {
     }
 
     public Book readBook(Component parent, String title, File file, String format,
-                         HashMap<String, Object> kw) {
+                         Map<String, Object> kw) {
         Book book = null;
 
         try {
@@ -429,16 +429,20 @@ public class Worker {
     }
 
 
-    public HashMap<String, Object> getParseArguments(String format) {
-        HashMap<String, Object> kw = new HashMap<>();
-
-        return kw;
+    public Map<String, Object> getParseArguments(String format) {
+        ParserArgumentsController pac = PacFactory.getPac(format);
+        if (pac != null) {
+            return pac.getArguments();
+        }
+        return null;
     }
 
-    public HashMap<String, Object> getMakeArguments(String format) {
-        HashMap<String, Object> kw = new HashMap<>();
-
-        return kw;
+    public Map<String, Object> getMakeArguments(String format) {
+        MakerArgumentsController mac = MacFactory.getMac(format);
+        if (mac != null) {
+            return mac.getArguments();
+        }
+        return null;
     }
 
     public boolean saveBook(Component parent, String title, Task task) {

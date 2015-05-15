@@ -1,0 +1,5 @@
+ChangeLog
+=========
+
+* v2.0.2
+  o. move SOURCE_* attributes to book extension after reading book file.

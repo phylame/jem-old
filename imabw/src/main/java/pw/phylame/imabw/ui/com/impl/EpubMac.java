@@ -1,7 +1,7 @@
 /*
  * Copyright 2014-2015 Peng Wan <phylame@163.com>
  *
- * This file is part of Jem.
+ * This file is part of Imabw.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,15 @@
  * limitations under the License.
  */
 
-/**
- * Defines utility classes for Jem.
- * @author Peng Wan, PW
- * @version 2.0
- */
-package pw.phylame.jem.util;
+package pw.phylame.imabw.ui.com.impl;
+
+import pw.phylame.imabw.ui.com.MakerArgumentsController;
+
+import java.util.Map;
+
+public class EpubMac implements MakerArgumentsController {
+    @Override
+    public Map<String, Object> getArguments() {
+        return null;
+    }
+}

@@ -37,10 +37,8 @@ import pw.phylame.tools.file.FileObject;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Date;
-import java.util.Set;
 import java.util.zip.ZipOutputStream;
 
 /**
@@ -48,11 +46,6 @@ import java.util.zip.ZipOutputStream;
  */
 public class Writer {
     private static Log LOG = LogFactory.getLog(Writer.class);
-    private static Set<String> IgnoredNames = new HashSet<String>();
-    static {
-        IgnoredNames.addAll(java.util.Arrays.asList(Jem.SOURCE_PATH, Jem.SOURCE_FILE, Jem
-                .SOURCE_FORMAT));
-    }
 
     private static void makeHead(Element parent, Map<Object, Object> metaInfo) {
         Element head = parent.addElement("head");
@@ -70,10 +63,6 @@ public class Writer {
         Element md = parent.addElement("metadata");
         int count = 0;
         for (String name: book.attributeNames()) {
-            if (IgnoredNames.contains(name)) {
-                continue;
-            }
-
             Object value = book.getAttribute(name, null);
             if (value == null) {
                 continue;

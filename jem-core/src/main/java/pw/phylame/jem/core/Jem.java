@@ -36,7 +36,7 @@ public final class Jem {
     private static Log LOG = LogFactory.getLog(Jem.class);
 
     /** Jem version */
-    public static final String VERSION          = "2.0.1";
+    public static final String VERSION          = "2.0.2";
 
     /** Jem vendor */
     public static final String VENDOR           = "PW";
@@ -93,8 +93,8 @@ public final class Jem {
         }
         Parser parser = getParser(format);
         Book book = parser.parse(source, kw);
-        book.setAttribute(SOURCE_PATH, source);
-        book.setAttribute(SOURCE_FORMAT, format);
+        book.setItem(SOURCE_PATH, source);
+        book.setItem(SOURCE_FORMAT, format);
         return book;
     }
 
@@ -114,8 +114,8 @@ public final class Jem {
         }
         Parser parser = getParser(format);
         Book book = parser.parse(file, kw);
-        book.setAttribute(SOURCE_FILE, file);
-        book.setAttribute(SOURCE_FORMAT, format);
+        book.setItem(SOURCE_FILE, file);
+        book.setItem(SOURCE_FORMAT, format);
         return book;
     }
 

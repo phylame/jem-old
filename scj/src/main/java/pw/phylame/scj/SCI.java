@@ -19,11 +19,11 @@
 package pw.phylame.scj;
 
 import java.io.File;
-import java.text.MessageFormat;
 import java.util.Map;
 import java.util.Locale;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.text.MessageFormat;
 
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
@@ -133,7 +133,7 @@ public final class SCI {
     private static void showVersion() {
         System.out.printf("SCI for Jem v%s on %s (%s)\n", VERSION, System.getProperty("os.name"),
                 System.getProperty("os.arch"));
-        System.out.printf("jem-core: %s by %s\n", Jem.VERSION, Jem.VENDOR);
+        System.out.printf("Jem: %s by %s\n", Jem.VERSION, Jem.VENDOR);
         System.out.printf("%s\n", getText("SCJ_COPYRIGHTS"));
     }
 

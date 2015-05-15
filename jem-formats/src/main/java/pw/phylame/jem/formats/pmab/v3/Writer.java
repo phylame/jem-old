@@ -33,10 +33,8 @@ import pw.phylame.tools.file.FileNameUtils;
 import pw.phylame.tools.file.FileObject;
 
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Date;
-import java.util.Set;
 import java.util.zip.ZipOutputStream;
 
 /**
@@ -44,11 +42,6 @@ import java.util.zip.ZipOutputStream;
  */
 public final class Writer {
     private static Log LOG = LogFactory.getLog(Writer.class);
-    private static Set<String> IgnoredNames = new HashSet<String>();
-    static {
-        IgnoredNames.addAll(java.util.Arrays.asList(Jem.SOURCE_FORMAT, Jem.SOURCE_FILE, Jem
-                .SOURCE_FORMAT));
-    }
 
     private static void makeItem(Element parent, String name, Object value, ZipOutputStream zipout,
                                  PmabConfig config, String prefix) {
@@ -118,9 +111,6 @@ public final class Writer {
             throws IOException {
         Element attributes = parent.addElement("attributes");
         for (String name: part.attributeNames()) {
-            if (IgnoredNames.contains(name)) {
-                continue;
-            }
             makeItem(attributes, name, part.getAttribute(name, null), zipout, config, prefix);
         }
     }

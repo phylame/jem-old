@@ -1,7 +1,7 @@
 /*
  * Copyright 2014-2015 Peng Wan <phylame@163.com>
  *
- * This file is part of Jem.
+ * This file is part of Imabw.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,21 +16,23 @@
  * limitations under the License.
  */
 
-package pw.phylame.jem.formats.txt;
+package pw.phylame.imabw.ui.com;
 
-/**
- * Configuration for making PMAB.
- */
-public class TxtConfig {
-    // encoding
-    public String encoding = System.getProperty("file.encoding");
+import pw.phylame.imabw.ui.com.impl.EpubMac;
+import pw.phylame.imabw.ui.com.impl.PmabMac;
+import pw.phylame.imabw.ui.com.impl.TxtMac;
 
-    // line separator
-    public String lineSeparator = System.getProperty("line.separator");
-
-    // paragraph prefix
-    public String paragraphPrefix = "    ";     // four spaces
-
-    // separator between intro and text
-    public String introSeparator = "------";
+public class MacFactory {
+    public static MakerArgumentsController getMac(String format) {
+        switch (format) {
+            case "pmab":
+                return new PmabMac();
+            case "txt":
+                return new TxtMac();
+            case "epub":
+                return new EpubMac();
+            default:
+                return null;
+        }
+    }
 }

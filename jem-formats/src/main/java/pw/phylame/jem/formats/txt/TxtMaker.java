@@ -22,6 +22,7 @@ import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Chapter;
 import pw.phylame.jem.core.Part;
 import pw.phylame.jem.core.Maker;
+import pw.phylame.jem.formats.util.Texts;
 import pw.phylame.jem.util.JemException;
 import pw.phylame.tools.TextObject;
 
@@ -38,8 +39,7 @@ public class TxtMaker implements Maker {
         return "txt";
     }
 
-    @Override
-    public void make(Book book, File file, Map<String, Object> kw) throws IOException, JemException {
+    protected TxtConfig parseConfig(Map<String, Object> kw) throws JemException {
         TxtConfig config = new TxtConfig();
         if (kw != null && kw.size() > 0) {
             Object o = kw.get("txt_encoding");
@@ -67,6 +67,12 @@ public class TxtMaker implements Maker {
                 }
             }
         }
+        return config;
+    }
+
+    @Override
+    public void make(Book book, File file, Map<String, Object> kw) throws IOException, JemException {
+        TxtConfig config = parseConfig(kw);
         OutputStream output = new BufferedOutputStream(new FileOutputStream(file));
         Writer writer = new BufferedWriter(new OutputStreamWriter(output, config.encoding));
         make(book, writer, config);
@@ -109,7 +115,7 @@ public class TxtMaker implements Maker {
     }
 
     private void writeIntro(TextObject intro, Writer writer, TxtConfig config) throws IOException {
-        List<String> lines = intro.getLines();
+        List<String> lines = Texts.plainLines(intro);
         for (String line : lines) {
             writer.write(config.paragraphPrefix+line.trim()+config.lineSeparator);
         }
@@ -119,7 +125,7 @@ public class TxtMaker implements Maker {
     }
 
     private void writeContent(Part part, Writer writer, TxtConfig config) throws IOException {
-        List<String> lines = part.getLines();
+        List<String> lines = Texts.plainLines(part.getSource());
         for (String line : lines) {
             writer.write(config.paragraphPrefix+line.trim()+config.lineSeparator);
         }

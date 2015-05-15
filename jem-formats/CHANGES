@@ -1,0 +1,7 @@
+ChangeLog
+=========
+
+* v1.0.2
+  o. move "text_head" extension to book intro attribute in TXT parser
+  o. parse HTML text if type of TextObject is HTML in TXT & JAR maker
+  o. paragraph prefix using four spaces in TXT maker

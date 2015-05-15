@@ -43,7 +43,8 @@ public class TxtParser extends AbstractParser {
     private static final String CACHED_TEXT_ENCODING = "UTF-16";
 
     public static String DEFAULT_CHAPTER_PATTERN = null;
-    static {
+
+    private static void loadConfig() {
         Properties prop = new Properties();
         InputStream in = TxtParser.class.getResourceAsStream("txt.properties");
         if (in != null) {
@@ -54,6 +55,10 @@ public class TxtParser extends AbstractParser {
                 LOG.debug("failed to load TXT parser configurations", e);
             }
         }
+    }
+
+    static {
+        loadConfig();
     }
 
     private RandomAccessFile source = null;
@@ -111,7 +116,8 @@ public class TxtParser extends AbstractParser {
         StringBuilder sb = new StringBuilder();
         try {
             char[] buf = new char[1024];
-            Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(cache), CACHED_TEXT_ENCODING));
+            Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(cache),
+                    CACHED_TEXT_ENCODING));
             int n;
             while ((n=reader.read(buf)) != -1) {
                 writer.write(buf, 0, n);
@@ -140,7 +146,7 @@ public class TxtParser extends AbstractParser {
         int start = offsetIt.next();
         if (start > 0) {    // no formatted head
             FileObject fb = FileFactory.fromBlock("text_head.txt", source, 0, start*2, null);
-            book.setItem("text_head", new TextObject(fb, CACHED_TEXT_ENCODING));
+            book.setIntro(new TextObject(fb, CACHED_TEXT_ENCODING));
         }
 
         while (partIt.hasNext()) {
