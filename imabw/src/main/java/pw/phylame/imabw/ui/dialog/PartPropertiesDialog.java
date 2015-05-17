@@ -178,9 +178,11 @@ public class PartPropertiesDialog extends JDialog {
         });
         Object o = part.getAttribute(Book.COVER);
         if (o instanceof FileObject) {
-            updateCover((FileObject) o);
+            FileObject fb = (FileObject) o;
+            ImageIcon cover = loadCover(fb);
+            updateCover(cover, fb.getMime());
         } else {
-            updateCover(null);
+            updateCover(null, null);
         }
     }
 
@@ -300,11 +302,7 @@ public class PartPropertiesDialog extends JDialog {
         introPane.add(introEdit, BorderLayout.CENTER);
     }
 
-    private void updateCover(FileObject fb) {
-        ImageIcon cover = null;
-        if (fb != null) {
-            cover = loadCover(fb);
-        }
+    private void updateCover(ImageIcon cover, String mime) {
         if (cover == null) {
             labelCover.setText(app.getText("Dialog.Properties.NoCover"));
             labelCover.setIcon(null);
@@ -314,7 +312,7 @@ public class PartPropertiesDialog extends JDialog {
         } else {
             labelCover.setText(null);
             labelCover.setIcon(cover);
-            setCoverInfo(cover.getIconWidth(), cover.getIconHeight(), fb.getMime());
+            setCoverInfo(cover.getIconWidth(), cover.getIconHeight(), mime);
             buttonSave.setEnabled(true);
             buttonRemove.setEnabled(true);
         }
@@ -325,7 +323,7 @@ public class PartPropertiesDialog extends JDialog {
         try {
             BufferedImage img = ImageIO.read(fb.openInputStream());
             icon = new ImageIcon(img);
-        } catch (IOException e) {
+        } catch (Exception e) {
             LOG.debug("cannot load cover image of "+part.getTitle(), e);
         }
         return icon;
@@ -345,14 +343,24 @@ public class PartPropertiesDialog extends JDialog {
         if (file == null) {
             return;
         }
+        FileObject fb = null;
         try {
-            FileObject fb = FileFactory.fromFile(file, null);
-            part.setAttribute(Book.COVER, fb);
-            updateCover(fb);
-            modified = true;
+            fb = FileFactory.fromFile(file, null);
         } catch (IOException e) {
             e.printStackTrace();    // nothing
         }
+        if (fb == null) {
+            return;
+        }
+        ImageIcon cover = loadCover(fb);
+        if (cover == null) {
+            worker.showError(this, app.getText("Dialog.Properties.OpenCover"),
+                    app.getText("Dialog.Properties.InvalidCover", file.getPath()));
+            return;
+        }
+        updateCover(cover, fb.getMime());
+        part.setAttribute(Book.COVER, fb);
+        modified = true;
     }
 
     private void saveCover() {
@@ -375,7 +383,7 @@ public class PartPropertiesDialog extends JDialog {
 
     private void removeCover() {
         part.setAttribute(Book.COVER, null);
-        updateCover(null);
+        updateCover(null, null);
         modified = true;
     }
 

@@ -52,10 +52,17 @@ public class SettingsDialog extends JDialog {
     private JTextField   textField1;
     private JTable       table1;
 
+    private static Point oldLocation = null;
+    private static Dimension oldSize = null;
+
     private Application app = Application.getApplication();
 
     public SettingsDialog(Frame owner) {
         super(owner, true);
+        init();
+    }
+
+    private void init() {
         setContentPane(contentPane);
         getRootPane().setDefaultButton(buttonOK);
 
@@ -87,9 +94,15 @@ public class SettingsDialog extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
         setTitle(app.getText("Dialog.Settings.Title"));
-        pack();
-        setSize((int)(getHeight()*1.7), getHeight());
-        setLocationRelativeTo(getOwner());
+
+        if (oldSize != null) {
+            setSize(oldSize);
+            setLocation(oldLocation);
+        } else {
+            pack();
+            setSize((int)(getHeight()*1.7), getHeight());
+            setLocationRelativeTo(getOwner());
+        }
     }
 
     private void setSettings(Map<String, Object> settings) {
@@ -98,11 +111,15 @@ public class SettingsDialog extends JDialog {
 
     private void onOK() {
         // add your code here
+        oldLocation = getLocation();
+        oldSize = getSize();
         dispose();
     }
 
     private void onCancel() {
         // add your code here if necessary
+        oldLocation = getLocation();
+        oldSize = getSize();
         dispose();
     }
 

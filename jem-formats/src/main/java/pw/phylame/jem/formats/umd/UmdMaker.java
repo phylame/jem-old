@@ -25,6 +25,7 @@ import pw.phylame.jem.core.Part;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Maker;
 import pw.phylame.jem.core.Cleanable;
+import pw.phylame.jem.formats.util.ExceptionFactory;
 import pw.phylame.jem.util.JemException;
 
 import pw.phylame.tools.ZLibUtils;
@@ -46,6 +47,8 @@ import java.util.Map;
 public class UmdMaker implements Maker {
     private static Log LOG = LogFactory.getLog(UmdMaker.class);
 
+    public static final String KEY_UMD_TYPE = "umd_type";
+
     private Book book;
     private int umdType;
     private OutputStream output;
@@ -63,7 +66,7 @@ public class UmdMaker implements Maker {
         OutputStream output = new BufferedOutputStream(new FileOutputStream(file));
         int umdType = UMD.TEXT;
         if (kw != null && kw.size() > 0) {
-            Object o = kw.get("umd_type");
+            Object o = kw.get(KEY_UMD_TYPE);
             if (o instanceof Integer) {
                 umdType = (Integer)o;
             } else if (o instanceof String) {
@@ -73,7 +76,7 @@ public class UmdMaker implements Maker {
                     LOG.debug("invalid UMD type: "+o, e);
                 }
             } else {
-                throw new JemException("Invalid UMD type: "+o+", required int or string");
+                throw ExceptionFactory.forInvalidIntegerArgument(KEY_UMD_TYPE);
             }
         }
         make(book, output, umdType);

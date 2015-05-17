@@ -45,13 +45,13 @@ public final class Jem {
     public static final String PMAB_FORMAT      = "pmab";
 
     /** Key for source path, auto putted after parsing file */
-    public static final String SOURCE_PATH      = "_source_path";
+    public static final String SOURCE_PATH      = "source_path";
 
     /** Key for source file, auto putted after parsing file */
-    public static final String SOURCE_FILE      = "_source_file";
+    public static final String SOURCE_FILE      = "source_file";
 
     /** Key for source format, auto putted after parsing file */
-    public static final String SOURCE_FORMAT    = "_source_format";
+    public static final String SOURCE_FORMAT    = "source_format";
 
     private static Parser getParser(String format) throws UnsupportedFormatException {
         if (format == null) {

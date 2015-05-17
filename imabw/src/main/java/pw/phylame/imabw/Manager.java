@@ -198,7 +198,10 @@ public class Manager implements Constants {
         String format = FileNameUtils.extensionName(file.getPath());
 
         // 2. get parse arguments
-        Map<String, Object> kw = worker.getParseArguments(format);
+        Map<String, Object> kw = worker.getParseArguments(viewer, format);
+        if (kw == null) {
+            return false;
+        }
 
         // show progress dialog
 //        ProgressDialog progressDialog = new ProgressDialog(viewer, title,
@@ -462,11 +465,11 @@ public class Manager implements Constants {
         if (viewer.isContentsLocked()) {
             return;
         }
-        TreePath treePath = viewer.getSelectedPath();
-        if (treePath == null) {
+        TreePath path = viewer.getSelectedPath();
+        if (path == null) {
             return;
         }
-        PartNode node = PartNode.getPartNode(treePath);
+        PartNode node = PartNode.getPartNode(path);
         Part part = node.getPart();
         if (! part.isSection() && node.getParent() != null) {   // not section and not root
             if (! worker.showConfirm(app.getViewer(), app.getText("Dialog.NewChapter.Title"),
@@ -480,6 +483,8 @@ public class Manager implements Constants {
         }
         viewer.appendedNode(node);
         // TODO focus to new node
+        viewer.expandPath(path.getParentPath());
+        viewer.focusToNode(path, sub);
         notifyModified(app.getText("Task.CreatedChapter", sub.getPart().getTitle(), part.getTitle()));
     }
 
@@ -501,28 +506,30 @@ public class Manager implements Constants {
         parent.insertNode(sub, index);
         viewer.insertedNode(parent, index);
         // TODO focus to new node
+        index = viewer.getRowForPath(path);
+        viewer.focusToRow(index-1);
         notifyModified(app.getText("Task.InsertedChapter", sub.getPart().getTitle(),
                 node.getPart().getTitle()));
     }
 
     private void saveAsPart() {
-        TreePath treePath = viewer.getSelectedPath();
-        if (treePath == null) {
+        TreePath path = viewer.getSelectedPath();
+        if (path == null) {
             return;
         }
         viewer.cacheAllTabs();
 
-        PartNode node = PartNode.getPartNode(treePath);
+        PartNode node = PartNode.getPartNode(path);
         Part part = node.getPart();
 
         Book book = Jem.toBook(part);
         if (! book.isSection()) {   // add new chapter with text
             book.newChapter(app.getText("Common.TextChapterTitle"), part.getSource());
         }
-        File path = worker.exportBook(viewer, app.getText("Dialog.SaveBook.Title"), book, task);
-        if (path != null) {
+        File file = worker.exportBook(viewer, app.getText("Dialog.SaveBook.Title"), book, task);
+        if (file != null) {
             worker.showMessage(viewer, app.getText("Dialog.SaveBook.Title"),
-                    app.getText("Task.SavedBook", part.getTitle(), path.getPath()));
+                    app.getText("Task.SavedBook", part.getTitle(), file.getPath()));
         }
     }
 
@@ -530,11 +537,11 @@ public class Manager implements Constants {
         if (viewer.isContentsLocked()) {
             return;
         }
-        TreePath treePath = viewer.getSelectedPath();
-        if (treePath == null) {
+        TreePath path = viewer.getSelectedPath();
+        if (path == null) {
             return;
         }
-        PartNode node = PartNode.getPartNode(treePath);
+        PartNode node = PartNode.getPartNode(path);
         Part part = node.getPart();
         String oldTitle = part.getTitle();
         String newTitle = worker.inputLoop(viewer, app.getText("Dialog.RenameChapter.Title", part.getTitle()),
@@ -581,16 +588,15 @@ public class Manager implements Constants {
                 continue;
             }
             PartNode parentNode = (PartNode) node.getParent();
+            int index = parentNode.getIndex(node);
             parentNode.removeNode(node);
+            viewer.removedNode(parentNode, index, node);
+
             destNode.appendNode(node);
-            /* refresh old parent */
-            viewer.refreshNode(parentNode);
+            viewer.appendedNode(destNode);
             ++count;
         }
-        /* refresh, expand and go to destination */
         viewer.closeTab(destNode.getPart());  // close dest part tab if opened
-        viewer.refreshNode(destNode);
-        viewer.expandTreePath(destPath);
         viewer.focusToPath(destPath);
         if (ignoredNodes.size() != 0) {     // has ignored item
             String sep = "\n  ";
@@ -617,15 +623,15 @@ public class Manager implements Constants {
         for (TreePath path: paths) {
             PartNode node = PartNode.getPartNode(path);
             PartNode parent = (PartNode) node.getParent();
-            TreePath parentPath = path.getParentPath();
 
+            int index = parent.getIndex(node);
             viewer.closeTab(node.getPart());
             parent.removeNode(node);
 
-            viewer.refreshNode(parent);
-            viewer.expandTreePath(parentPath);
+            viewer.removedNode(parent, index, node);
+
         }
-        viewer.focusToRoot();
+//        viewer.focusToRoot();
         notifyModified(app.getText("Task.DeletedChapter", paths.length));
     }
 
@@ -671,14 +677,15 @@ public class Manager implements Constants {
             if (cb.isSelected()) {
                 sb.append(part.getTitle()).append("\n");
             }
-            viewer.closeTab(part);    // cacheContent part content
+            int index = parent.getIndex(node);
+            viewer.closeTab(part);    // cache part content
             try {
                 sb.append(part.getText()).append("\n");
             } catch (IOException e) {
                 LOG.debug("cannot get text content of " + part.getTitle(), e);
             }
             parent.removeNode(node);
-            viewer.refreshNode(parent);
+            viewer.removedNode(parent, index, node);
             ++count;
         }
         EditorTab tab = viewer.findTab(destPart);

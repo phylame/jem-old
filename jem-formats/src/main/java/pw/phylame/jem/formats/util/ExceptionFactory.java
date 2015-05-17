@@ -1,7 +1,7 @@
 /*
  * Copyright 2014-2015 Peng Wan <phylame@163.com>
  *
- * This file is part of Imabw.
+ * This file is part of Jem.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,16 @@
  * limitations under the License.
  */
 
-package pw.phylame.imabw.ui.com.impl;
+package pw.phylame.jem.formats.util;
 
-import pw.phylame.imabw.ui.com.MakerArgumentsController;
+import pw.phylame.jem.util.JemException;
 
-import java.util.Map;
+public class ExceptionFactory {
+    public static JemException forInvalidStringArgument(String key, Object o) {
+        return new JemException("Invalid \"" + key + "\" string: "+o);
+    }
 
-public class TxtMac implements MakerArgumentsController {
-    @Override
-    public Map<String, Object> getArguments() {
-        return null;
+    public static JemException forInvalidIntegerArgument(String key) {
+        return new JemException(key+" require int or string of int");
     }
 }

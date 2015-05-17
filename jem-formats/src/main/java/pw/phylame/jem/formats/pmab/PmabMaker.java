@@ -18,11 +18,14 @@
 
 package pw.phylame.jem.formats.pmab;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Maker;
+import pw.phylame.jem.formats.util.ExceptionFactory;
 import pw.phylame.jem.util.JemException;
 
 import java.io.*;
@@ -36,6 +39,16 @@ import java.util.zip.ZipOutputStream;
  * <tt>Maker</tt> implement for PMAB book.
  */
 public class PmabMaker implements Maker {
+    private static Log LOG = LogFactory.getLog(PmabMaker.class);
+
+    public static final String KEY_PMAB_VERSION = "pmab_version";
+    public static final String KEY_TEXT_ENCODING = "pmab_text_encoding";
+    public static final String KEY_COMPRESS_METHOD = "pmab_compress_method";
+    public static final String KEY_COMPRESS_LEVEL = "pmab_compress_level";
+    public static final String KEY_COMMENT = "pmab_comment";
+    public static final String KEY_META_DATA = "pmab_meta_data";
+
+
     /**
      * Returns the format name(normally the extension name).
      */
@@ -61,23 +74,23 @@ public class PmabMaker implements Maker {
     private PmabConfig parseConfig(Map<String, Object> kw) throws JemException {
         PmabConfig config = new PmabConfig();
         if (kw != null && kw.size() != 0) {
-            Object o = kw.get("pmab_version");
+            Object o = kw.get(KEY_PMAB_VERSION);
             if (o != null) {
                 if (o instanceof String) {
                     config.pmabVersion = (String) o;
                 } else {
-                    throw new JemException("Invalid pmab_version string: " + o);
+                    throw ExceptionFactory.forInvalidStringArgument(KEY_PMAB_VERSION, o);
                 }
             }
-            o = kw.get("pmab_text_encoding");
+            o = kw.get(KEY_TEXT_ENCODING);
             if (o != null) {
                 if (o instanceof String) {
                     config.textEncoding = (String) o;
                 } else {
-                    throw new JemException("Invalid pmab_text_encoding: " + o);
+                    throw ExceptionFactory.forInvalidStringArgument(KEY_TEXT_ENCODING, o);
                 }
             }
-            o = kw.get("pmab_compress_method");
+            o = kw.get(KEY_COMPRESS_METHOD);
             if (o != null) {
                 if (o instanceof Integer) {
                     config.zipMethod = (Integer) o;
@@ -89,10 +102,10 @@ public class PmabMaker implements Maker {
                         throw new JemException("Invalid ZIP method: "+s, ex);
                     }
                 } else {
-                    throw new JemException("pmab_compress_method require int or str");
+                    throw ExceptionFactory.forInvalidIntegerArgument(KEY_COMPRESS_METHOD);
                 }
             }
-            o = kw.get("pmab_compress_level");
+            o = kw.get(KEY_COMPRESS_LEVEL);
             if (o != null) {
                 if (o instanceof Integer) {
                     config.zipLevel = (Integer) o;
@@ -104,13 +117,21 @@ public class PmabMaker implements Maker {
                         throw new JemException("Invalid ZIP level: "+s, ex);
                     }
                 } else {
-                    throw new JemException("pmab_compress_level require int or str");
+                    throw ExceptionFactory.forInvalidIntegerArgument(KEY_COMPRESS_LEVEL);
                 }
             }
-            o = kw.get("pmab_meta_data");
+            o = kw.get(KEY_COMMENT);
+            if (o instanceof String) {
+                config.zipComment = (String) o;
+            } else {
+                LOG.debug("invalid 'pmab_comment', required string");
+            }
+            o = kw.get(KEY_META_DATA);
             if (o instanceof Map) {
                 Map map = (Map) o;
                 config.metaInfo = new HashMap<Object, Object>(map);
+            } else {
+                LOG.debug("invalid 'pmab_meta_data', required map");
             }
         }
         return config;

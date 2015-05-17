@@ -18,21 +18,29 @@
 
 package pw.phylame.imabw.ui.com;
 
-import pw.phylame.imabw.ui.com.impl.EpubMac;
-import pw.phylame.imabw.ui.com.impl.PmabMac;
-import pw.phylame.imabw.ui.com.impl.TxtMac;
+import javax.swing.*;
+import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MacFactory {
-    public static MakerArgumentsController getMac(String format) {
+    public static MacProvider getMac(String format) {
         switch (format) {
-            case "pmab":
-                return new PmabMac();
-            case "txt":
-                return new TxtMac();
-            case "epub":
-                return new EpubMac();
             default:
                 return null;
         }
+    }
+
+    public static Map<String, Object> getArguments(Component parent, String title, String format) {
+        MacProvider mac = getMac(format);
+        if (mac == null) {
+            return new HashMap<>();     // no MAC returns default arguments (empty)
+        }
+        int opt = JOptionPane.showOptionDialog(parent, mac.getPane(), title,
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
+        if (opt != JOptionPane.OK_OPTION) {
+            return null;
+        }
+        return mac.getArguments();
     }
 }

@@ -420,8 +420,12 @@ public class Viewer extends IFrame implements Constants {
         contentsTree.requestFocus();
     }
 
-    public void expandTreePath(TreePath path) {
+    public void expandPath(TreePath path) {
         contentsTree.getTree().expandPath(path);
+    }
+
+    public void collapsePath(TreePath path) {
+        contentsTree.getTree().collapsePath(path);
     }
 
     public TreePath getSelectedPath() {
@@ -445,33 +449,47 @@ public class Viewer extends IFrame implements Constants {
         return (PartNode) treeModel.getRoot();
     }
 
+    public void focusToRoot() {
+        contentsTree.setSelectionRow(0);
+        contentsTree.scrollToHead();
+    }
+
     public void refreshNode(PartNode node) {
         treeModel.reload(node);
     }
 
-    public void focusToRoot() {
-        contentsTree.setSelectionRow(0);
-        contentsTree.scrollToHead();
+    public int getRowForPath(TreePath path) {
+        return contentsTree.getTree().getRowForPath(path);
     }
 
     public void focusToPath(TreePath path) {
         contentsTree.setSelectionPath(path);
     }
 
-    // focus to child node in parent, index is child index in parent
-    public void focusToRow(TreePath parent, int index) {
-        JTree tree = contentsTree.getTree();
-        int row = tree.getRowForPath(parent);
-        if (! tree.isExpanded(parent)) {
-            tree.expandPath(parent);
-        }
-        tree.setSelectionRow(row + index + 1);
+    public void focusToRow(int row) {
+        contentsTree.setSelectionRow(row);
     }
 
+    public void focusToNode(TreePath path, PartNode node) {
+        Object[] objects = new Object[path.getPathCount()+1];
+        System.arraycopy(path.getPath(), 0, objects, 0, objects.length-1);
+        objects[objects.length-1] = node;
+        TreePath childPath = new TreePath(objects);
+        focusToPath(childPath);
+    }
+
+    /**
+     * Notifies than the specified node has been updated.
+     * @param node the node
+     */
     public void updatedNode(PartNode node) {
         treeModel.nodeChanged(node);
     }
 
+    /**
+     * Notifies one node has been appened to the specified node.
+     * @param parent the parent node
+     */
     public void appendedNode(PartNode parent) {
         insertedNode(parent, parent.getChildCount() - 1);
     }
@@ -491,8 +509,6 @@ public class Viewer extends IFrame implements Constants {
     public void removedNodes(PartNode parent, int[] indexes, PartNode[] nodes) {
         treeModel.nodesWereRemoved(parent, indexes, nodes);
     }
-
-
 
     // ******************************
     // ** Editor operations
@@ -571,7 +587,7 @@ public class Viewer extends IFrame implements Constants {
             text = "";
         }
         EditorTab tab = new EditorTab(new ITextEdit(text, this), part,
-                (String) app.getSetting("jem.pmab.textEncoding"));
+                (String) app.getSetting("jem.ma.pmab.textEncoding"));
         initEditorTab(tab);
         editorTabs.add(tab);
         editorWindow.addTab(tab.getPart().getTitle(), tab.getTextEdit());

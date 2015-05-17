@@ -42,6 +42,9 @@ public class TxtParser extends AbstractParser {
 
     private static final String CACHED_TEXT_ENCODING = "UTF-16";
 
+    public static final String KEY_CHAPTER_PATTERN = "chapter_pattern";
+    public static final String KEY_TEXT_ENCODING = "txt_encoding";
+
     public static String DEFAULT_CHAPTER_PATTERN = null;
 
     private static void loadConfig() {
@@ -72,11 +75,11 @@ public class TxtParser extends AbstractParser {
     public Book parse(File file, Map<String, Object> kw) throws IOException, JemException {
         String encoding = System.getProperty("file.encoding"), chapterPattern = DEFAULT_CHAPTER_PATTERN;
         if (kw != null && kw.size() > 0) {
-            Object o = kw.get("txt_encoding");
+            Object o = kw.get(KEY_TEXT_ENCODING);
             if (o instanceof String) {
                 encoding = (String) o;
             }
-            o = kw.get("chapter_pattern");
+            o = kw.get(KEY_CHAPTER_PATTERN);
             if (o instanceof String) {
                 chapterPattern = (String) o;
             }

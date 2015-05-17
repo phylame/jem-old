@@ -16,15 +16,15 @@
  * limitations under the License.
  */
 
-package pw.phylame.imabw.ui.com.impl;
+package pw.phylame.imabw.ui.com;
 
-import pw.phylame.imabw.ui.com.MakerArgumentsController;
+import pw.phylame.ixin.com.IPaneRender;
 
 import java.util.Map;
 
-public class EpubMac implements MakerArgumentsController {
-    @Override
-    public Map<String, Object> getArguments() {
-        return null;
-    }
+/**
+ * Parser arguments controller provider.
+ */
+public interface PacProvider extends IPaneRender {
+    Map<String, Object> getArguments();
 }

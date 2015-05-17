@@ -21,6 +21,7 @@ import org.apache.commons.logging.LogFactory;
 import pw.phylame.imabw.ui.Viewer;
 import pw.phylame.ixin.IApplication;
 import pw.phylame.ixin.frame.IFrame;
+import pw.phylame.tools.StringUtils;
 
 import java.awt.Font;
 import java.awt.Color;
@@ -62,10 +63,6 @@ public class Application extends IApplication implements Constants {
         }
     }
 
-    public boolean isEmpty(String str) {
-        return str == null || str.length() == 0;
-    }
-
     /** Load configuration file */
     @Override
     protected void loadSettings() {
@@ -87,7 +84,7 @@ public class Application extends IApplication implements Constants {
         }
         // locale
         String str = prop.getProperty("app.locale");
-        if (! isEmpty(str)) {
+        if (! StringUtils.isEmpty(str)) {
             settings.put("locale", Locale.forLanguageTag(str.replace('_', '-')));
         } else {
             settings.put("locale", Locale.getDefault());
@@ -95,41 +92,41 @@ public class Application extends IApplication implements Constants {
 
         // L&F
         str = prop.getProperty("ui.face.lafTheme");
-        if (isEmpty(str)) {
+        if (StringUtils.isEmpty(str)) {
             str = "com.jgoodies.looks.plastic.PlasticLookAndFeel";
         }
         settings.put("ui.face.lafTheme", str);
         // Title bar decorated
         str = prop.getProperty("ui.face.decorateTitle");
-        settings.put("ui.face.decorateTitle", ! isEmpty(str) && Boolean.parseBoolean(str));
+        settings.put("ui.face.decorateTitle", ! StringUtils.isEmpty(str) && Boolean.parseBoolean(str));
         // Toolbar
         str = prop.getProperty("ui.window.showToolbar");
-        settings.put("ui.window.showToolbar", isEmpty(str) || Boolean.parseBoolean(str));
+        settings.put("ui.window.showToolbar", StringUtils.isEmpty(str) || Boolean.parseBoolean(str));
         // Lock toolbar
         str = prop.getProperty("ui.window.lockToolbar");
-        settings.put("ui.window.lockToolbar", isEmpty(str) || Boolean.parseBoolean(str));
+        settings.put("ui.window.lockToolbar", StringUtils.isEmpty(str) || Boolean.parseBoolean(str));
         // Sidebar
         str = prop.getProperty("ui.window.showSidebar");
-        settings.put("ui.window.showSidebar", isEmpty(str) || Boolean.parseBoolean(str));
+        settings.put("ui.window.showSidebar", StringUtils.isEmpty(str) || Boolean.parseBoolean(str));
         // Statusbar
         str = prop.getProperty("ui.window.showStatusbar");
-        settings.put("ui.window.showStatusbar", isEmpty(str) || Boolean.parseBoolean(str));
+        settings.put("ui.window.showStatusbar", StringUtils.isEmpty(str) || Boolean.parseBoolean(str));
         // global font
         str = prop.getProperty("ui.font.global");
 //        Font font = new Font(Font.SANS_SERIF, Font.PLAIN, 14);
         Font font = null;
-        if (! isEmpty(str)) {
+        if (! StringUtils.isEmpty(str)) {
             font = Font.decode(str);
         }
         settings.put("ui.font.global", font);
         // Anti aliasing font
         str = prop.getProperty("ui.font.aatext");
-        settings.put("ui.font.aatext", ! isEmpty(str) && Boolean.parseBoolean(str));
+        settings.put("ui.font.aatext", ! StringUtils.isEmpty(str) && Boolean.parseBoolean(str));
 
         // editor font
         str = prop.getProperty("editor.style.font");
         font = new Font(Font.SANS_SERIF, Font.PLAIN, 16);
-        if (! isEmpty(str)) {
+        if (! StringUtils.isEmpty(str)) {
             font = Font.decode(str);
         }
         settings.put("editor.style.font", font);
@@ -137,20 +134,28 @@ public class Application extends IApplication implements Constants {
         // editor color
         str = prop.getProperty("editor.style.background");
         Color color = Color.WHITE;
-        if (! isEmpty(str)) {
+        if (! StringUtils.isEmpty(str)) {
             color = Color.decode(str);
         }
         settings.put("editor.style.background", color);
         str = prop.getProperty("editor.style.foreground");
         color = Color.BLACK;
-        if (! isEmpty(str)) {
+        if (! StringUtils.isEmpty(str)) {
             color = Color.decode(str);
         }
         settings.put("editor.style.foreground", color);
 
+        // TXT parser
+        str = prop.getProperty("jem.pa.txt.chapterPattern");
+        settings.put("jem.pa.txt.chapterPattern", str);
+
+        str = prop.getProperty("jem.pa.txt.encoding");
+        settings.put("jem.pa.txt.encoding", str);
+
         // PMAB output encoding
-        str = prop.getProperty("jem.pmab.textEncoding");
-        settings.put("jem.pmab.textEncoding", str != null ? str : System.getProperty("file.encoding"));
+        str = prop.getProperty("jem.ma.pmab.textEncoding");
+        settings.put("jem.ma.pmab.textEncoding", ! StringUtils.isEmpty(str) ? str :
+                System.getProperty("file.encoding"));
     }
 
     /**

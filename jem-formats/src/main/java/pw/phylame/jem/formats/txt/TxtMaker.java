@@ -22,6 +22,7 @@ import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Chapter;
 import pw.phylame.jem.core.Part;
 import pw.phylame.jem.core.Maker;
+import pw.phylame.jem.formats.util.ExceptionFactory;
 import pw.phylame.jem.formats.util.Texts;
 import pw.phylame.jem.util.JemException;
 import pw.phylame.tools.TextObject;
@@ -34,6 +35,10 @@ import java.util.List;
  * <tt>Maker</tt> implement for TXT book.
  */
 public class TxtMaker implements Maker {
+    public static final String KEY_TEXT_ENCODING = "txt_encoding";
+    public static final String KEY_LINE_FEED = "txt_linefeed";
+    public static final String KEY_PARAGRAPH_PREFIX = "txt_para_prefix";
+
     @Override
     public String getName() {
         return "txt";
@@ -42,28 +47,28 @@ public class TxtMaker implements Maker {
     protected TxtConfig parseConfig(Map<String, Object> kw) throws JemException {
         TxtConfig config = new TxtConfig();
         if (kw != null && kw.size() > 0) {
-            Object o = kw.get("txt_encoding");
+            Object o = kw.get(KEY_TEXT_ENCODING);
             if (o != null) {
                 if (o instanceof String) {
                     config.encoding = (String) o;
                 } else {
-                    throw new JemException("Invalid txt_encoding string: " + o);
+                    throw ExceptionFactory.forInvalidStringArgument(KEY_TEXT_ENCODING, o);
                 }
             }
-            o = kw.get("txt_linefeed");
+            o = kw.get(KEY_LINE_FEED);
             if (o != null) {
                 if (o instanceof String) {
                     config.lineSeparator = (String) o;
                 } else {
-                    throw new JemException("Invalid txt_linefeed string: " + o);
+                    throw ExceptionFactory.forInvalidStringArgument(KEY_LINE_FEED, o);
                 }
             }
-            o = kw.get("txt_para_prefix");
+            o = kw.get(KEY_PARAGRAPH_PREFIX);
             if (o != null) {
                 if (o instanceof String) {
                     config.paragraphPrefix = (String) o;
                 } else {
-                    throw new JemException("Invalid txt_para_prefix string: " + o);
+                    throw ExceptionFactory.forInvalidStringArgument(KEY_PARAGRAPH_PREFIX, o);
                 }
             }
         }

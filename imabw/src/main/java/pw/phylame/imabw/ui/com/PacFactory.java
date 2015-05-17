@@ -18,15 +18,33 @@
 
 package pw.phylame.imabw.ui.com;
 
-import pw.phylame.imabw.ui.com.impl.TxtPac;
+import pw.phylame.imabw.ui.com.impl.TxtPacProvider;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PacFactory {
-    public static ParserArgumentsController getPac(String format) {
+    public static PacProvider getPac(String format) {
         switch (format) {
             case "txt":
-                return new TxtPac();
+                return new TxtPacProvider();
             default:
                 return null;
         }
+    }
+
+    public static Map<String, Object> getArguments(Component parent, String title, String format) {
+        PacProvider pac = getPac(format);
+        if (pac == null) {
+            return new HashMap<>();     // no PAC returns default arguments (empty)
+        }
+        int opt = JOptionPane.showOptionDialog(parent, pac.getPane(), title,
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
+        if (opt != JOptionPane.OK_OPTION) {
+            return null;
+        }
+        return pac.getArguments();
     }
 }
