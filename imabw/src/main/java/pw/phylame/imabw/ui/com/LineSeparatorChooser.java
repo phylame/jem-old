@@ -18,11 +18,13 @@
 
 package pw.phylame.imabw.ui.com;
 
-import java.util.Map;
+import javax.swing.*;
 
-/**
- * Maker arguments controller provider.
- */
-public interface MacProvider {
-    Map<String, Object> getArguments();
+public class LineSeparatorChooser {
+    private JComboBox<String> cbLS;
+    private JLabel            lbLS;
+
+    public LineSeparatorChooser() {
+
+    }
 }

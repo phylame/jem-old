@@ -18,7 +18,7 @@
 
 package pw.phylame.imabw.ui.com;
 
-import pw.phylame.imabw.Application;
+import pw.phylame.imabw.Imabw;
 import pw.phylame.ixin.com.IPaneRender;
 
 import javax.swing.*;
@@ -40,7 +40,7 @@ public class NewAttributePane implements IPaneRender {
     private boolean customized = false;
 
     public NewAttributePane(ArrayList<String> names, ArrayList<String> types) {
-        Application app = Application.getApplication();
+        Imabw app = Imabw.getApplication();
 
         labelName.setText(app.getText("Dialog.Properties.Attributes.Add.LabelName"));
         for (String name : names) {

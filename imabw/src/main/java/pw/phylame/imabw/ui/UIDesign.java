@@ -19,7 +19,7 @@
 package pw.phylame.imabw.ui;
 
 import pw.phylame.imabw.Constants;
-import pw.phylame.imabw.Application;
+import pw.phylame.imabw.Imabw;
 
 import pw.phylame.ixin.IToolkit;
 import pw.phylame.ixin.ITextEdit;
@@ -32,7 +32,7 @@ import pw.phylame.ixin.com.IMenuLabel;
  */
 public class UIDesign implements Constants {
 
-    private static Application app = Application.getApplication();
+    private static Imabw app = Imabw.getApplication();
 
     // *******************
     // ** Menu actions  **
@@ -66,7 +66,7 @@ public class UIDesign implements Constants {
                     app.getText("Menu.File.Exit.Mnemonic"), app.getText("Menu.File.Exit.Shortcut"),
                     app.getText("Menu.File.Exit.Tip")}
     };
-    public static Object[] FILE_MENU_MODEL = {
+    public static Object[]   FILE_MENU_MODEL   = {
             new IMenuLabel(app.getText("Menu.File"), null, app.getText("Menu.File.Mnemonic")),
             NEW_FILE, OPEN_FILE,
             null,
@@ -84,7 +84,7 @@ public class UIDesign implements Constants {
                     app.getText("Menu.Edit.Preference.Mnemonic"), app.getText("Menu.Edit.Preference.Shortcut"),
                     app.getText("Menu.Edit.Preference.Tip")}
     };
-    public static Object[] EDIT_MENU_MODEL = {
+    public static Object[]   EDIT_MENU_MODEL   = {
             new IMenuLabel(app.getText("Menu.Edit"), null, app.getText("Menu.Edit.Mnemonic")),
             ITextEdit.UNDO,
             ITextEdit.REDO,
@@ -114,7 +114,7 @@ public class UIDesign implements Constants {
                     app.getText("Menu.View.ShowSidebar.Mnemonic"), app.getText("Menu.View.ShowSidebar.Shortcut"),
                     app.getText("Menu.View.ShowSidebar.Tip")}
     };
-    public static Object[] VIEW_MENU_MODEL = {
+    public static Object[]   VIEW_MENU_MODEL   = {
             new IMenuLabel(app.getText("Menu.View"), null, app.getText("Menu.View.Mnemonic")),
             new IMenuModel(SHOW_TOOLBAR, IMenuModel.MenuType.CHECK, true),
             new IMenuModel(SHOW_STATUSBAR, IMenuModel.MenuType.CHECK, true),
@@ -144,7 +144,7 @@ public class UIDesign implements Constants {
                     app.getText("Menu.Search.Goto.Mnemonic"), app.getText("Menu.Search.Goto.Shortcut"),
                     app.getText("Menu.Search.Goto.Tip"), false}
     };
-    public static Object[] SEARCH_MENU_MODEL = {
+    public static Object[]   SEARCH_MENU_MODEL   = {
             new IMenuLabel(app.getText("Menu.Search"), null, app.getText("Menu.Search.Mnemonic")),
             FIND_TEXT, FIND_NEXT, FIND_PREVIOUS,
             null,
@@ -164,7 +164,7 @@ public class UIDesign implements Constants {
                     app.getText("Menu.Tools.Extra.Mnemonic"), app.getText("Menu.Tools.Extra.Shortcut"),
                     app.getText("Menu.Tools.Extra.Tip")}
     };
-    public static Object[] TOOLS_MENU_MODEL = {
+    public static Object[]   TOOLS_MENU_MODEL   = {
             new IMenuLabel(app.getText("Menu.Tools"), null, app.getText("Menu.Tools.Mnemonic")),
             BOOK_ATTRIBUTES,
             EXTRA_ITEMS
@@ -181,7 +181,7 @@ public class UIDesign implements Constants {
                     app.getText("Menu.Help.About.Mnemonic"), app.getText("Menu.Help.About.Shortcut"),
                     app.getText("Menu.Help.About.Tip")}
     };
-    public static Object[] HELP_MENU_MODEL = {
+    public static Object[]   HELP_MENU_MODEL   = {
             new IMenuLabel(app.getText("Menu.Help"), null, app.getText("Menu.Help.Mnemonic")),
             DO_ACTION,
             SHOW_ABOUT
@@ -335,7 +335,7 @@ public class UIDesign implements Constants {
 
     /* set text and icons for ITextEdit actions*/
     static {
-        Object[][] editModel = new Object[][] {
+        Object[][] editModel = new Object[][]{
                 {ITextEdit.UNDO, "Undo"},
                 {ITextEdit.REDO, "Redo"},
                 {ITextEdit.CUT, "Cut"},
@@ -344,9 +344,9 @@ public class UIDesign implements Constants {
                 {ITextEdit.DELETE, "Delete"},
                 {ITextEdit.SELECT_ALL, "SelectAll"},
         };
-        for (Object[] model: editModel) {
+        for (Object[] model : editModel) {
             IAction action = ITextEdit.getEditAction(model[0]);
-            String key = "Editor.Menu."+model[1];
+            String key = "Editor.Menu." + model[1];
             action.setText(app.getText(key));
             action.setIcon(pw.phylame.ixin.IToolkit.createImageIcon(app.getText(key + ".Icon")));
             action.setMnemonic(IToolkit.getMnemonic(app.getText(key + ".Mnemonic")));

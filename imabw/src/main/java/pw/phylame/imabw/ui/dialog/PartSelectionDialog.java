@@ -24,7 +24,7 @@ import javax.swing.*;
 import javax.swing.tree.*;
 import javax.swing.event.*;
 
-import pw.phylame.imabw.Application;
+import pw.phylame.imabw.Imabw;
 import pw.phylame.imabw.ui.com.PartNode;
 
 public class PartSelectionDialog extends JDialog {
@@ -57,7 +57,7 @@ public class PartSelectionDialog extends JDialog {
         setContentPane(contentPane);
         getRootPane().setDefaultButton(buttonOK);
 
-        Application app = Application.getApplication();
+        Imabw app = Imabw.getApplication();
 
         labelTip.setText(app.getText("Dialog.SelectPart.Tip"));
 

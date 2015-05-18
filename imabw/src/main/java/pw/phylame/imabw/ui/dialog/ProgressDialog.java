@@ -18,7 +18,7 @@
 
 package pw.phylame.imabw.ui.dialog;
 
-import pw.phylame.imabw.Application;
+import pw.phylame.imabw.Imabw;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -44,7 +44,7 @@ public class ProgressDialog extends JDialog {
         setContentPane(contentPane);
         getRootPane().setDefaultButton(buttonStop);
 
-        Application app = Application.getApplication();
+        Imabw app = Imabw.getApplication();
 
         progressBar.setString(message);
 

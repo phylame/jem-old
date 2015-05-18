@@ -17,62 +17,18 @@
 package pw.phylame.ixin;
 
 import javax.swing.UIManager;
+
+import pw.phylame.gaf.Application;
 import pw.phylame.ixin.frame.IFrame;
 
-import java.util.Map;
-import java.util.Locale;
-import java.text.MessageFormat;
-
 /**
- * The application descriptor.
+ * The GUI application model.
  */
-public abstract class IApplication {
-
-    /** The unique {@code IApplication} instance */
-    protected static IApplication instance = null;
-
-    /** Application name */
-    private String name;
-
-    /** The system arguments */
-    private String[] args;
-
-    /** Language resource */
-    private java.util.ResourceBundle bundle = null;
-
-    /** Mapped settings table */
-    protected Map<String, Object> settings = new java.util.HashMap<>();
+public abstract class IApplication extends Application {
 
     /** The constructor */
     protected IApplication(String name, String[] args) {
-        instance = this;
-        setName(name);
-        this.args = args;
-        loadSettings();
-    }
-
-    protected void loadSettings() {
-
-    }
-
-    protected void loadBundle(String path) throws java.util.MissingResourceException {
-        Locale locale;
-        Object o = settings.get("locale");
-        if (o instanceof Locale) {
-            locale = (Locale) o;
-        } else {
-            locale = Locale.getDefault();
-        }
-        loadBundle(path, locale);
-    }
-
-    /**
-     * Load language resource bundle.
-     * @param path path of bundle file
-     * @param locale used locale
-     */
-    protected void loadBundle(String path, Locale locale) throws java.util.MissingResourceException {
-        bundle = java.util.ResourceBundle.getBundle(path, locale);
+        super(name, args);
     }
 
     /**
@@ -139,63 +95,6 @@ public abstract class IApplication {
     }
 
     /**
-     * Gets application name.
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Sets application name.
-     * @param name the new name
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Gets system arguments.
-     * @return array of argument string
-     */
-    public String[] getArguments() {
-        return args;
-    }
-
-    /**
-     * Get translation string by its name.
-     * @exception RuntimeException if language bundle not initialized.
-     */
-    public String getText(String key, Object... args) {
-        if (bundle == null) {
-            throw new RuntimeException("Language bundle not initialized.");
-        }
-        return MessageFormat.format(bundle.getString(key), args);
-    }
-
-    /**
-     * Return mapped settings.
-     * <p>The settings is a key-value pair, the string key and value.</p>
-     */
-    public Map<String, Object> getSettings() {
-        return settings;
-    }
-
-    /**
-     * Returns setting item with specified key.
-     * @param key item key
-     * @return item value or <code>null</code> if <code>null</code> not found
-     */
-    public Object getSetting(String key) {
-        return settings.get(key);
-    }
-
-    /**
-     * Start application.
-     */
-    public abstract void start();
-
-    /**
      * Return the main frame of application.
      */
     public abstract IFrame getViewer();
@@ -204,12 +103,4 @@ public abstract class IApplication {
      * Execute a command identified with {@code cmd}.
      */
     public abstract void onCommand(Object cmd);
-
-    /**
-     * Exit application
-     * @param status exit status
-     */
-    public void exit(int status) {
-        System.exit(status);
-    }
 }

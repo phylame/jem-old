@@ -22,7 +22,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import pw.phylame.imabw.Application;
+import pw.phylame.imabw.Imabw;
+import pw.phylame.ixin.ISettings;
 
 import java.util.Map;
 
@@ -52,10 +53,10 @@ public class SettingsDialog extends JDialog {
     private JTextField   textField1;
     private JTable       table1;
 
-    private static Point oldLocation = null;
-    private static Dimension oldSize = null;
+    private static Point     oldLocation = null;
+    private static Dimension oldSize     = null;
 
-    private Application app = Application.getApplication();
+    private Imabw app = Imabw.getApplication();
 
     public SettingsDialog(Frame owner) {
         super(owner, true);
@@ -105,7 +106,7 @@ public class SettingsDialog extends JDialog {
         }
     }
 
-    private void setSettings(Map<String, Object> settings) {
+    private void setSettings(ISettings settings) {
 
     }
 
@@ -123,7 +124,7 @@ public class SettingsDialog extends JDialog {
         dispose();
     }
 
-    public static void editSettings(Frame owner, Map<String, Object> setting) {
+    public static void editSettings(Frame owner, ISettings setting) {
         SettingsDialog dialog = new SettingsDialog(owner);
         dialog.setSettings(setting);
         dialog.setVisible(true);

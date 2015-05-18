@@ -22,8 +22,8 @@ import java.awt.Frame;
 import java.awt.event.*;
 import javax.swing.*;
 
+import pw.phylame.imabw.Imabw;
 import pw.phylame.jem.core.Jem;
-import pw.phylame.imabw.Application;
 
 public class AboutDialog extends JDialog {
     private JPanel contentPane;
@@ -38,7 +38,7 @@ public class AboutDialog extends JDialog {
         setContentPane(contentPane);
         getRootPane().setDefaultButton(buttonClose);
 
-        final Application app = Application.getApplication();
+        final Imabw app = Imabw.getApplication();
 
         buttonClose.setText(app.getText("Dialog.About.ButtonClose"));
         buttonClose.setToolTipText(app.getText("Dialog.About.ButtonClose.Tip"));
@@ -64,7 +64,7 @@ public class AboutDialog extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
         labelMessage.setText(String.format("%s v%s on %s (%s)", app.getText("App.Name"),
-                Application.VERSION,
+                Imabw.VERSION,
                 System.getProperty("os.name"), System.getProperty("os.arch")));
         labelJem.setText(String.format("Jem core: %s by %s", Jem.VERSION, Jem.VENDOR));
         labelRights.setText(app.getText("App.Rights"));

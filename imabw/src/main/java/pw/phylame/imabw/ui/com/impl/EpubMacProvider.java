@@ -19,9 +19,7 @@
 package pw.phylame.imabw.ui.com.impl;
 
 import pw.phylame.imabw.Imabw;
-import pw.phylame.imabw.ui.com.PacProvider;
-import pw.phylame.jem.formats.txt.TxtParser;
-import pw.phylame.tools.StringUtils;
+import pw.phylame.imabw.ui.com.MacProvider;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,26 +27,22 @@ import java.awt.event.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TxtPacProvider extends JDialog implements PacProvider {
-    private JPanel     contentPane;
-    private JButton    buttonOK;
-    private JButton    buttonCancel;
-    private JTextField tfChapterPattern;
-    private JComboBox<String>  cbEncoding;
-    private JLabel     lbChapterPattern;
-    private JLabel     lbEncoding;
+public class EpubMacProvider extends JDialog implements MacProvider {
+    private JPanel  contentPane;
+    private JButton buttonOK;
+    private JButton buttonCancel;
 
     private boolean cancelled = false;
 
-    private static Point     location = null;
-    private static Dimension size     = null;
+    private static Point location = null;
+    private static Dimension size = null;
 
-    public TxtPacProvider(Frame owner, String title) {
+    public EpubMacProvider(Frame owner, String title) {
         super(owner, title, true);
         init();
     }
 
-    public TxtPacProvider(Dialog owner, String title) {
+    public EpubMacProvider(Dialog owner, String title) {
         super(owner, title, true);
         init();
     }
@@ -58,23 +52,6 @@ public class TxtPacProvider extends JDialog implements PacProvider {
         getRootPane().setDefaultButton(buttonOK);
 
         Imabw app = Imabw.getApplication();
-
-        lbChapterPattern.setText(app.getText("Dialog.TxtPac.LabelCP"));
-        lbEncoding.setText(app.getText("Dialog.TxtPac.LabelEncoding"));
-        tfChapterPattern.setText(app.getConfig().getTxtPaChapterPattern());
-        String str = app.getConfig().getTxtPaEncoding();
-        int index = -1, i = 0;
-        for (String encoding: app.getWorker().getEncodings()) {
-            cbEncoding.addItem(encoding);
-            ++i;
-            if (encoding.equals(str)) {   // contains in encodings
-                index = i;
-            }
-        }
-        if (index == -1) {  // not exists
-            cbEncoding.addItem(str);
-        }
-        cbEncoding.setSelectedItem(str);
 
         buttonOK.setText(app.getText("Dialog.ButtonOk"));
         buttonOK.addActionListener(new ActionListener() {
@@ -130,13 +107,11 @@ public class TxtPacProvider extends JDialog implements PacProvider {
 
     @Override
     public Map<String, Object> getArguments() {
-        setVisible(true);
+//        setVisible(true);
         if (cancelled) {
             return null;
         }
         HashMap<String, Object> map = new HashMap<>();
-        map.put(TxtParser.KEY_CHAPTER_PATTERN, tfChapterPattern.getText());
-        map.put(TxtParser.KEY_TEXT_ENCODING, cbEncoding.getSelectedItem());
         return map;
     }
 }

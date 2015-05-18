@@ -35,8 +35,8 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.*;
 
+import pw.phylame.imabw.Imabw;
 import pw.phylame.imabw.Worker;
-import pw.phylame.imabw.Application;
 
 import pw.phylame.imabw.ui.com.NewAttributePane;
 import pw.phylame.ixin.ITextEdit;
@@ -53,9 +53,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 public class PartPropertiesDialog extends JDialog {
-    private static Log LOG = LogFactory.getLog(PartPropertiesDialog.class);
-    private static Point oldLocation = null;
-    private static Dimension oldSize = null;
+    private static Log       LOG         = LogFactory.getLog(PartPropertiesDialog.class);
+    private static Point     oldLocation = null;
+    private static Dimension oldSize     = null;
 
     private static ArrayList<String> CommonNames  = new ArrayList<>(
             Arrays.asList(Book.AUTHOR, Book.DATE, Book.GENRE, Book.LANGUAGE, Book.PUBLISHER,
@@ -67,8 +67,8 @@ public class PartPropertiesDialog extends JDialog {
     private static ArrayList<String> SupportedTypes = new ArrayList<>(
             Arrays.asList("str", "int", "datetime"));
 
-    private static Application app    = Application.getApplication();
-    private static Worker      worker = app.getWorker();
+    private static Imabw  app    = Imabw.getApplication();
+    private static Worker worker = app.getWorker();
 
     private JPanel              contentPane;
     private JButton             buttonClose;

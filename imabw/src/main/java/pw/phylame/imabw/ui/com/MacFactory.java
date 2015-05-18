@@ -18,28 +18,52 @@
 
 package pw.phylame.imabw.ui.com;
 
-import javax.swing.*;
+import pw.phylame.imabw.ui.com.impl.EpubMacProvider;
+import pw.phylame.imabw.ui.com.impl.PmabMacProvider;
+import pw.phylame.imabw.ui.com.impl.TxtMacProvider;
+
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
 public class MacFactory {
-    public static MacProvider getMac(String format) {
+    public static MacProvider getMac(Frame owner, String title, String format) {
         switch (format) {
+            case "pmab":
+                return new PmabMacProvider(owner, title);
+            case "epub":
+                return new EpubMacProvider(owner, title);
+            case "txt":
+                return new TxtMacProvider(owner, title);
             default:
                 return null;
         }
     }
 
-    public static Map<String, Object> getArguments(Component parent, String title, String format) {
-        MacProvider mac = getMac(format);
+    public static MacProvider getMac(Dialog owner, String title, String format) {
+        switch (format) {
+            case "pmab":
+                return new PmabMacProvider(owner, title);
+            case "epub":
+                return new EpubMacProvider(owner, title);
+            case "txt":
+                return new TxtMacProvider(owner, title);
+            default:
+                return null;
+        }
+    }
+
+    public static Map<String, Object> getArguments(Window parent, String title, String format) {
+        MacProvider mac;
+        if (parent instanceof Frame) {
+            mac = getMac((Frame) parent, title, format);
+        } else if (parent instanceof Dialog) {
+            mac = getMac((Dialog) parent, title, format);
+        } else {
+            throw new IllegalArgumentException("parent required Frame or Dialog");
+        }
         if (mac == null) {
             return new HashMap<>();     // no MAC returns default arguments (empty)
-        }
-        int opt = JOptionPane.showOptionDialog(parent, mac.getPane(), title,
-                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
-        if (opt != JOptionPane.OK_OPTION) {
-            return null;
         }
         return mac.getArguments();
     }

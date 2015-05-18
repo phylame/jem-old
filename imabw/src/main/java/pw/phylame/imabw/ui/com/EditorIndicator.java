@@ -24,7 +24,7 @@ import javax.swing.JPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import pw.phylame.imabw.Application;
+import pw.phylame.imabw.Imabw;
 
 import pw.phylame.ixin.com.IPaneRender;
 import pw.phylame.tools.DateUtils;
@@ -40,7 +40,7 @@ public class EditorIndicator implements IPaneRender {
     private JLabel time;
 
     public EditorIndicator() {
-        Application app = Application.getApplication();
+        Imabw app = Imabw.getApplication();
         ruler.setToolTipText(app.getText("Frame.Statusbar.Ruler"));
         encoding.setToolTipText(app.getText("Frame.Statusbar.Encoding"));
         words.setToolTipText(app.getText("Frame.Statusbar.Words"));

@@ -59,7 +59,7 @@
                             <addClasspath>true</addClasspath>
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                             <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-                            <mainClass>pw.phylame.imabw.Application</mainClass>
+                            <mainClass>pw.phylame.imabw.Imabw</mainClass>
                         </manifest>
                         <manifestEntries>
                             <SplashScreen-Image>res/img/imabw_banner.png</SplashScreen-Image>

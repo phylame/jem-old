@@ -18,13 +18,11 @@
 
 package pw.phylame.imabw.ui.com;
 
-import pw.phylame.ixin.com.IPaneRender;
-
 import java.util.Map;
 
 /**
  * Parser arguments controller provider.
  */
-public interface PacProvider extends IPaneRender {
+public interface PacProvider {
     Map<String, Object> getArguments();
 }

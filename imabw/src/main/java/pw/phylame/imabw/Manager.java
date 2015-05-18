@@ -50,7 +50,7 @@ public class Manager implements Constants {
     private static Log LOG = LogFactory.getLog(Manager.class);
 
     /** The application */
-    private Application app = Application.getApplication();
+    private Imabw app = Imabw.getApplication();
 
     private Viewer viewer;
 
@@ -69,14 +69,14 @@ public class Manager implements Constants {
         viewer.setStatusText(app.getText("Frame.Statusbar.Ready"));
 
         String[] argv = app.getArguments();
-        if (argv.length < 1 || ! openFile(new File(argv[0]))) {
+        if (argv.length < 1 || !openFile(new File(argv[0]))) {
             newFile(app.getText("Common.NewBookTitle"));
         }
     }
 
     /** Stop manager works */
     public void stop() {
-        if (! maybeSave(app.getText("Dialog.Exit.Title"))) {
+        if (!maybeSave(app.getText("Dialog.Exit.Title"))) {
             return;
         }
         if (task != null) {
@@ -393,7 +393,7 @@ public class Manager implements Constants {
                 stop();
                 break;
             case EDIT_PREFERENCE:
-                pw.phylame.imabw.ui.dialog.SettingsDialog.editSettings(viewer, app.getSettings());
+                pw.phylame.imabw.ui.dialog.SettingsDialog.editSettings(viewer, app.getConfig());
                 break;
             case SHOW_TOOLBAR:
                 viewer.showOrHideToolBar();

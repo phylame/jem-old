@@ -18,7 +18,7 @@
 
 package pw.phylame.imabw.ui.dialog;
 
-import pw.phylame.imabw.Application;
+import pw.phylame.imabw.Imabw;
 import pw.phylame.ixin.ITextEdit;
 
 import javax.swing.*;
@@ -51,7 +51,7 @@ public class LongInputDialog extends JDialog {
         setContentPane(contentPane);
         getRootPane().setDefaultButton(buttonOK);
 
-        Application app = Application.getApplication();
+        Imabw app = Imabw.getApplication();
 
         labelTip.setText(tip);
 

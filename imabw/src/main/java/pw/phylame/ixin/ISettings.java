@@ -1,6 +1,8 @@
 /*
  * Copyright 2014-2015 Peng Wan <phylame@163.com>
  *
+ * This file is part of Imabw.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,43 +18,77 @@
 
 package pw.phylame.ixin;
 
-import java.net.URL;
-import java.util.Map;
-import java.util.HashMap;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
-import java.io.IOException;
-import java.io.OutputStream;
+import pw.phylame.gaf.Settings;
+
+import java.awt.Font;
+import java.awt.Color;
 
 /**
- * Provides common settings interface.
+ * Settings for GUI applications.
  */
-public class ISettings extends HashMap<String, Object> {
+public class ISettings extends Settings {
+    private static Log LOG = LogFactory.getLog(ISettings.class);
 
     public ISettings() {
         super();
     }
 
-    public ISettings(URL source) throws IOException {
-        load(source);
+    public ISettings(boolean loading) {
+        super(loading);
     }
 
-    public ISettings(Map<String, Object> m) {
-        if (m != null) {
-            putAll(m);
+    private static String toString(Font font) {
+        StringBuilder builder = new StringBuilder(font.getFamily());
+        builder.append("-");
+        switch (font.getStyle()) {
+            case Font.PLAIN:
+                builder.append("PLAIN");
+                break;
+            case Font.BOLD:
+                builder.append("BOLD");
+                break;
+            case Font.ITALIC:
+                builder.append("ITALIC");
+                break;
+        }
+        builder.append("-").append(font.getSize());
+        return builder.toString();
+    }
+
+    private static String toString(Color color) {
+        String str = String.format("%X", color.getRGB());
+        return "#"+str.substring(2);
+    }
+
+    public Font getFont(String key, Font defaultValue) {
+        String str = getProperty(key);
+        if (isEmpty(str)) {
+            return defaultValue;
+        }
+        return Font.decode(str);
+    }
+
+    public void setFont(String key, Font font, String comment) {
+        setProperty(key, toString(font), comment);
+    }
+
+    public Color getColor(String key, Color defaultValue) {
+        String str = getProperty(key);
+        if (isEmpty(str)) {
+            return defaultValue;
+        }
+        try {
+            return Color.decode(str);
+        } catch (NumberFormatException e) {
+            LOG.debug("invalid color format: "+str, e);
+            return defaultValue;
         }
     }
 
-    public void load(URL source) throws IOException {
-    }
-
-    public void store(OutputStream out) throws IOException {
-
-    }
-
-    /**
-     * Resets all value to the default.
-     */
-    public void reset() {
-
+    public void setColor(String key, Color color, String comment) {
+        setProperty(key, toString(color), comment);
     }
 }

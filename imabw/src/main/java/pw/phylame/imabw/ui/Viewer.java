@@ -26,7 +26,7 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
-import pw.phylame.imabw.Application;
+import pw.phylame.imabw.Imabw;
 import pw.phylame.imabw.Constants;
 import pw.phylame.imabw.ui.com.EditorIndicator;
 import pw.phylame.imabw.ui.com.EditorTab;
@@ -49,7 +49,7 @@ import java.util.Map;
  * Main frame board of Imabw.
  */
 public class Viewer extends IFrame implements Constants {
-    private Application app = Application.getApplication();
+    private Imabw app = Imabw.getApplication();
     private JPanel rootPane;
 
     // split pane
@@ -62,18 +62,18 @@ public class Viewer extends IFrame implements Constants {
     // ******************
     // ** Contents tree
     // ******************
-    private ITree contentsTree;
-    private DefaultTreeModel treeModel;
-    private JPopupMenu treeContextMenu;
+    private ITree                contentsTree;
+    private DefaultTreeModel     treeModel;
+    private JPopupMenu           treeContextMenu;
     private Map<Object, IAction> treeActions;
-    private TreeOptionsPane treeOptionsPane;
+    private TreeOptionsPane      treeOptionsPane;
     private boolean contentsLocked = false;
 
     // ******************
     // ** Tabbed editor
     // ******************
-    private JTabbedPane editorWindow;
-    private JPopupMenu tabContextMenu;
+    private JTabbedPane          editorWindow;
+    private JPopupMenu           tabContextMenu;
     private Map<Object, IAction> tabActions;
     private ArrayList<EditorTab> editorTabs = new ArrayList<>();
 
@@ -102,14 +102,14 @@ public class Viewer extends IFrame implements Constants {
             }
         });
 
-        getToolBar().setVisible((boolean) app.getSetting("ui.window.showToolbar"));
-        getToolBar().setFloatable(!(boolean) app.getSetting("ui.window.lockToolbar"));
-        getStatusBar().setVisible((boolean) app.getSetting("ui.window.showStatusbar"));
+        getToolBar().setVisible(app.getConfig().isShowToolbar());
+        getToolBar().setFloatable(! app.getConfig().isLockToolbar());
+        getStatusBar().setVisible(app.getConfig().isShowStatusbar());
 
         JMenu menu = getViewMenu();
         ((JCheckBoxMenuItem)menu.getItem(0)).setState(getToolBar().isVisible());
         ((JCheckBoxMenuItem)menu.getItem(1)).setState(getStatusBar().isVisible());
-        ((JCheckBoxMenuItem)menu.getItem(2)).setState((boolean) app.getSetting("ui.window.showSidebar"));
+        ((JCheckBoxMenuItem)menu.getItem(2)).setState(app.getConfig().isShowSidebar());
 
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
         setSize((int)(d.getWidth()*0.8), (int)(d.getWidth()*0.45)); // 16x9
@@ -138,7 +138,7 @@ public class Viewer extends IFrame implements Constants {
         editorIndicator = new EditorIndicator();
         getStatusBar().add(editorIndicator.getPane(), BorderLayout.EAST);
 
-        if (app.getSetting("ui.window.showSidebar").equals(false)) {
+        if (! app.getConfig().isShowSidebar()) {    // hide
             showOrHideSideBar();
         }
     }
@@ -587,7 +587,7 @@ public class Viewer extends IFrame implements Constants {
             text = "";
         }
         EditorTab tab = new EditorTab(new ITextEdit(text, this), part,
-                (String) app.getSetting("jem.ma.pmab.textEncoding"));
+                app.getConfig().getPmabMaTextEncoding());
         initEditorTab(tab);
         editorTabs.add(tab);
         editorWindow.addTab(tab.getPart().getTitle(), tab.getTextEdit());
@@ -647,10 +647,10 @@ public class Viewer extends IFrame implements Constants {
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
 
-        textArea.setFont((Font) app.getSetting("editor.style.font"));
+        textArea.setFont(app.getConfig().getEditorFont());
 
-        textArea.setBackground((Color) app.getSetting("editor.style.background"));
-        textArea.setForeground((Color) app.getSetting("editor.style.foreground"));
+        textArea.setBackground(app.getConfig().getEditorBackground());
+        textArea.setForeground(app.getConfig().getEditorForeground());
     }
 
     private void switchEditableMenus(boolean enable) {
