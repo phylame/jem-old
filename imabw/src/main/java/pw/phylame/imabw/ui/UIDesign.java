@@ -32,7 +32,7 @@ import pw.phylame.ixin.com.IMenuLabel;
  */
 public class UIDesign implements Constants {
 
-    private static Imabw app = Imabw.getApplication();
+    private static Imabw app = Imabw.getInstance();
 
     // *******************
     // ** Menu actions  **
@@ -167,7 +167,7 @@ public class UIDesign implements Constants {
     public static Object[]   TOOLS_MENU_MODEL   = {
             new IMenuLabel(app.getText("Menu.Tools"), null, app.getText("Menu.Tools.Mnemonic")),
             BOOK_ATTRIBUTES,
-            EXTRA_ITEMS
+//            EXTRA_ITEMS
     };
 
     /* Help */

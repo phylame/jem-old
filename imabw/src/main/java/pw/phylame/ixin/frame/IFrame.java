@@ -139,16 +139,17 @@ public abstract class IFrame extends JFrame implements IStatusTipListener {
             @Override
             public void mouseReleased(MouseEvent e) {
                 if (!e.isMetaDown()) {
+
                     return;
                 }
                 JPopupMenu popupMenu = new JPopupMenu();
                 JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(getText("Frame.Toolbar.LockToolbar"));
-                final boolean locked = !toolBar.isFloatable();
+                final boolean locked = isLockedToolBar();
                 menuItem.setState(locked);
                 menuItem.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        toolBar.setFloatable(locked);
+                        setLockToolBar(! locked);
                     }
                 });
                 popupMenu.add(menuItem);
@@ -182,8 +183,24 @@ public abstract class IFrame extends JFrame implements IStatusTipListener {
         return toolBar;
     }
 
+    public boolean isToolBarVisible() {
+        return toolBar.isVisible();
+    }
+
+    public void setToolBarVisible(boolean visible) {
+        toolBar.setVisible(visible);
+    }
+
     public void showOrHideToolBar() {
-        toolBar.setVisible(! toolBar.isVisible());
+        setToolBarVisible(! isToolBarVisible());
+    }
+
+    public boolean isLockedToolBar() {
+        return ! toolBar.isFloatable();
+    }
+
+    public void setLockToolBar(boolean locked) {
+        toolBar.setFloatable(! locked);
     }
 
     public IPaneRender getPaneRender() {
@@ -207,8 +224,16 @@ public abstract class IFrame extends JFrame implements IStatusTipListener {
         return statusBar;
     }
 
+    public boolean isStatusBarVisible() {
+        return statusBar.isVisible();
+    }
+
+    public void setStatusBarVisible(boolean visible) {
+        statusBar.setVisible(visible);
+    }
+
     public void showOrHideStatusBar() {
-        statusBar.setVisible(! statusBar.isVisible());
+        setStatusBarVisible(! isStatusBarVisible());
     }
 
     public String getStatusText() {

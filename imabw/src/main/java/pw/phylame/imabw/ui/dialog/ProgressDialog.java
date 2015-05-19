@@ -44,7 +44,7 @@ public class ProgressDialog extends JDialog {
         setContentPane(contentPane);
         getRootPane().setDefaultButton(buttonStop);
 
-        Imabw app = Imabw.getApplication();
+        Imabw app = Imabw.getInstance();
 
         progressBar.setString(message);
 

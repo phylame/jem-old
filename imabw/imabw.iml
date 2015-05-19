@@ -21,5 +21,6 @@
     <orderEntry type="library" name="Maven: com.toedter:jcalendar:1.4" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: com.jgoodies:jgoodies-looks:2.5.3" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: com.jgoodies:jgoodies-common:1.6.0" level="project" />
+    <orderEntry type="library" name="JFontChooser" level="project" />
   </component>
 </module>

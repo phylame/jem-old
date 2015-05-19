@@ -53,7 +53,7 @@ import java.util.regex.Pattern;
 public class Worker {
     private static Log LOG = LogFactory.getLog(Worker.class);
 
-    Imabw app = Imabw.getApplication();
+    Imabw app = Imabw.getInstance();
 
     private JFileChooser fileChooser = new JFileChooser();
 

@@ -38,7 +38,7 @@ public class AboutDialog extends JDialog {
         setContentPane(contentPane);
         getRootPane().setDefaultButton(buttonClose);
 
-        final Imabw app = Imabw.getApplication();
+        final Imabw app = Imabw.getInstance();
 
         buttonClose.setText(app.getText("Dialog.About.ButtonClose"));
         buttonClose.setToolTipText(app.getText("Dialog.About.ButtonClose.Tip"));

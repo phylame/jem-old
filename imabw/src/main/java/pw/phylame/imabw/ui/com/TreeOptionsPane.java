@@ -37,7 +37,7 @@ public class TreeOptionsPane implements IPaneRender {
     private JToggleButton buttonLock;
 
     public TreeOptionsPane() {
-        final Imabw app = Imabw.getApplication();
+        final Imabw app = Imabw.getInstance();
 
         buttonSearch.setToolTipText(app.getText("Frame.Tree.Search.Tip"));
         buttonSearch.addActionListener(new ActionListener() {

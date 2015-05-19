@@ -67,7 +67,7 @@ public class PartPropertiesDialog extends JDialog {
     private static ArrayList<String> SupportedTypes = new ArrayList<>(
             Arrays.asList("str", "int", "datetime"));
 
-    private static Imabw  app    = Imabw.getApplication();
+    private static Imabw  app    = Imabw.getInstance();
     private static Worker worker = app.getWorker();
 
     private JPanel              contentPane;
@@ -440,6 +440,9 @@ public class PartPropertiesDialog extends JDialog {
         } else if (name.equals(Book.LANGUAGE) && o instanceof String) {
             String str = ((String) o).replace('_', '-');
             return Locale.forLanguageTag(str).getDisplayName();
+        } else if (o instanceof byte[]) {
+            String str = Arrays.toString((byte[]) o);
+            return str.substring(1, str.length()-1);
         }
         return String.valueOf(o);
     }

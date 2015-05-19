@@ -19,7 +19,9 @@
 package pw.phylame.imabw.ui.com.impl;
 
 import pw.phylame.imabw.Imabw;
+import pw.phylame.imabw.ui.Utils;
 import pw.phylame.imabw.ui.com.MacProvider;
+import pw.phylame.jem.formats.txt.TxtMaker;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,15 +30,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TxtMacProvider extends JDialog implements MacProvider {
-    private JPanel     contentPane;
-    private JButton    buttonOK;
-    private JButton    buttonCancel;
-    private JComboBox<String>  cbEncoding;
-    private JComboBox<String>  cbLS;
-    private JTextField tfPP;
-    private JLabel     lbPP;
-    private JLabel     lbEncoding;
-    private JLabel     lbLS;
+    private JPanel            contentPane;
+    private JButton           buttonOK;
+    private JButton           buttonCancel;
+    private JComboBox<String> cbLS;
+    private JTextField        tfPP;
+    private JLabel            lbPP;
+    private JLabel            lbLS;
+    private JComboBox<String> cbEncodings;
+    private JLabel lbEncoding;
 
     private boolean cancelled = false;
 
@@ -57,32 +59,18 @@ public class TxtMacProvider extends JDialog implements MacProvider {
         setContentPane(contentPane);
         getRootPane().setDefaultButton(buttonOK);
 
-        Imabw app = Imabw.getApplication();
+        Imabw app = Imabw.getInstance();
 
-        String str = app.getConfig().getTxtMaEncoding();
-        int index = -1, i = 0;
-        for (String encoding: app.getWorker().getEncodings()) {
-            cbEncoding.addItem(encoding);
-            ++i;
-            if (encoding.equals(str)) {   // contains in encodings
-                index = i;
-            }
-        }
-        if (index == -1) {  // not exists
-            cbEncoding.addItem(str);
-        }
-        cbEncoding.setSelectedItem(str);
+        lbEncoding.setText(app.getText("Dialog.TxtMac.LabelEncoding"));
+        cbEncodings.setToolTipText(app.getText("Dialog.TxtMac.Encoding.Tip"));
+        Utils.initEncodings(cbEncodings, app.getConfig().getTxtMaEncoding());
 
-        index = 0;
-        String lf = app.getConfig().getTxtMaLineSeparator();
-        for (i = 0; i < cbLS.getItemCount(); ++i) {
-            if (cbLS.getItemAt(i).startsWith(lf)) {
-                index = i;
-                break;
-            }
-        }
-        cbLS.setSelectedIndex(index);
+        lbLS.setText(app.getText("Dialog.TxtMac.LabelLS"));
+        cbLS.setToolTipText(app.getText("Dialog.TxtMac.LineSeparator.Tip"));
+        Utils.initLineSeparators(cbLS, app.getConfig().getTxtMaLineSeparator());
 
+        lbPP.setText(app.getText("Dialog.TxtMac.LabelPP"));
+        tfPP.setToolTipText(app.getText("Dialog.TxtMac.PP.Tip"));
         tfPP.setText(app.getConfig().getTxtMaParagraphPrefix());
 
         buttonOK.setText(app.getText("Dialog.ButtonOk"));
@@ -144,6 +132,9 @@ public class TxtMacProvider extends JDialog implements MacProvider {
             return null;
         }
         HashMap<String, Object> map = new HashMap<>();
+        map.put(TxtMaker.KEY_TEXT_ENCODING, cbEncodings.getSelectedItem());
+        map.put(TxtMaker.KEY_LINE_FEED, Utils.getLineSeparator(cbLS.getSelectedIndex()));
+        map.put(TxtMaker.KEY_PARAGRAPH_PREFIX, tfPP.getText());
         return map;
     }
 }

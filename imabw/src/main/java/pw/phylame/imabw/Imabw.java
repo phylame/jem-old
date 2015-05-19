@@ -1,5 +1,7 @@
 /*
- * Copyright 2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2015 Peng Wan <phylame@163.com>
+ *
+ * This file is part of Imabw.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,10 +20,12 @@ package pw.phylame.imabw;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import pw.phylame.imabw.ui.Viewer;
 import pw.phylame.ixin.IApplication;
 import pw.phylame.ixin.frame.IFrame;
 
+import javax.swing.*;
 import java.awt.Font;
 
 /**
@@ -46,6 +50,7 @@ public class Imabw extends IApplication implements Constants {
         checkHome();
         config = new Config();
         if (config.settingCount() == 0) { // no config
+            LOG.trace("no config found, create new one");
             config.reset();     // save new config when exiting imabw
         }
         initApp();
@@ -73,18 +78,23 @@ public class Imabw extends IApplication implements Constants {
 
     /** Initialize Imabw */
     private void initApp() {
-        loadLanguage(I18N_PATH, config.getAppLocale());
-        setTheme(config.getLafTheme(), config.isDecoratedFrame());
+        setLocale(config.getAppLocale());
+        loadLanguage();
         setAAText(config.isAntiAliased());
         Font font = config.getGlobalFont();
         if (font != null) {
             setGeneralFonts(font);
         }
+        setTheme(config.getLafTheme(), config.isDecoratedFrame());
+    }
+
+    public void loadLanguage() {
+        loadLanguage(I18N_PATH);
     }
 
     /** Get the application instance */
-    public static Imabw getApplication() {
-        return (Imabw) instance;
+    public static Imabw getInstance() {
+        return (Imabw) getApplication();
     }
 
     @Override
@@ -132,7 +142,7 @@ public class Imabw extends IApplication implements Constants {
     }
 
     public static void main(final String[] args) {
-        final Imabw app = new Imabw(args);
+        Imabw app = new Imabw(args);
         javax.swing.SwingUtilities.invokeLater(app);
     }
 }

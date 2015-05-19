@@ -17,6 +17,7 @@
 package pw.phylame.ixin;
 
 import javax.swing.UIManager;
+import javax.swing.SwingUtilities;
 
 import pw.phylame.gaf.Application;
 import pw.phylame.ixin.frame.IFrame;
@@ -31,6 +32,10 @@ public abstract class IApplication extends Application {
         super(name, args);
     }
 
+    public void setTheme(String name) {
+        setTheme(name, IFrame.isDefaultLookAndFeelDecorated());
+    }
+
     /**
      * Set SWING L&F.
      * @param name class name of L&F class or brief name.
@@ -43,6 +48,10 @@ public abstract class IApplication extends Application {
         String theme = IToolkit.getLookAndFeel(name);
         try {
             UIManager.setLookAndFeel(theme);
+            IFrame frame = getViewer();
+            if (frame != null) {
+                SwingUtilities.updateComponentTreeUI(frame);
+            }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
                 javax.swing.UnsupportedLookAndFeelException e) {
             e.printStackTrace();

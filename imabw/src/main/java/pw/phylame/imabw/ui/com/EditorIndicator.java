@@ -40,7 +40,7 @@ public class EditorIndicator implements IPaneRender {
     private JLabel time;
 
     public EditorIndicator() {
-        Imabw app = Imabw.getApplication();
+        Imabw app = Imabw.getInstance();
         ruler.setToolTipText(app.getText("Frame.Statusbar.Ruler"));
         encoding.setToolTipText(app.getText("Frame.Statusbar.Encoding"));
         words.setToolTipText(app.getText("Frame.Statusbar.Words"));

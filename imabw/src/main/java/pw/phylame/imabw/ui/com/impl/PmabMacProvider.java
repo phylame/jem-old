@@ -51,7 +51,7 @@ public class PmabMacProvider extends JDialog implements MacProvider {
         setContentPane(contentPane);
         getRootPane().setDefaultButton(buttonOK);
 
-        Imabw app = Imabw.getApplication();
+        Imabw app = Imabw.getInstance();
 
         buttonOK.setText(app.getText("Dialog.ButtonOk"));
         buttonOK.addActionListener(new ActionListener() {

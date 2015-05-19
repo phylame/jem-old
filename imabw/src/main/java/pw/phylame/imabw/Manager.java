@@ -50,7 +50,7 @@ public class Manager implements Constants {
     private static Log LOG = LogFactory.getLog(Manager.class);
 
     /** The application */
-    private Imabw app = Imabw.getApplication();
+    private Imabw app = Imabw.getInstance();
 
     private Viewer viewer;
 
@@ -393,16 +393,19 @@ public class Manager implements Constants {
                 stop();
                 break;
             case EDIT_PREFERENCE:
-                pw.phylame.imabw.ui.dialog.SettingsDialog.editSettings(viewer, app.getConfig());
+                pw.phylame.imabw.ui.dialog.SettingsDialog.editSettings(viewer);
                 break;
             case SHOW_TOOLBAR:
                 viewer.showOrHideToolBar();
+                app.getConfig().setShowToolbar(viewer.isToolBarVisible());
                 break;
             case SHOW_STATUSBAR:
                 viewer.showOrHideStatusBar();
+                app.getConfig().settShowStatusbar(viewer.isStatusBarVisible());
                 break;
             case SHOW_SIDEBAR:
                 viewer.showOrHideSideBar();
+                app.getConfig().setShowSidebar(viewer.isSideBarVisible());
                 break;
             case FIND_TEXT:
                 findText(null, -1, false);

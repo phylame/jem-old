@@ -81,6 +81,10 @@ public abstract class Application implements Runnable {
         return arguments;
     }
 
+    public void setLocale(Locale locale) {
+        Locale.setDefault(locale);
+    }
+
     protected void loadLanguage(String path) throws MissingResourceException {
         languageBundle = ResourceBundle.getBundle(path);
     }

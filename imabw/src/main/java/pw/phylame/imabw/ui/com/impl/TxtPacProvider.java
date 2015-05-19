@@ -19,9 +19,9 @@
 package pw.phylame.imabw.ui.com.impl;
 
 import pw.phylame.imabw.Imabw;
+import pw.phylame.imabw.ui.Utils;
 import pw.phylame.imabw.ui.com.PacProvider;
 import pw.phylame.jem.formats.txt.TxtParser;
-import pw.phylame.tools.StringUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,8 +34,8 @@ public class TxtPacProvider extends JDialog implements PacProvider {
     private JButton    buttonOK;
     private JButton    buttonCancel;
     private JTextField tfChapterPattern;
-    private JComboBox<String>  cbEncoding;
     private JLabel     lbChapterPattern;
+    private JComboBox<String>  cbEncodings;
     private JLabel     lbEncoding;
 
     private boolean cancelled = false;
@@ -57,24 +57,15 @@ public class TxtPacProvider extends JDialog implements PacProvider {
         setContentPane(contentPane);
         getRootPane().setDefaultButton(buttonOK);
 
-        Imabw app = Imabw.getApplication();
+        Imabw app = Imabw.getInstance();
 
         lbChapterPattern.setText(app.getText("Dialog.TxtPac.LabelCP"));
-        lbEncoding.setText(app.getText("Dialog.TxtPac.LabelEncoding"));
         tfChapterPattern.setText(app.getConfig().getTxtPaChapterPattern());
-        String str = app.getConfig().getTxtPaEncoding();
-        int index = -1, i = 0;
-        for (String encoding: app.getWorker().getEncodings()) {
-            cbEncoding.addItem(encoding);
-            ++i;
-            if (encoding.equals(str)) {   // contains in encodings
-                index = i;
-            }
-        }
-        if (index == -1) {  // not exists
-            cbEncoding.addItem(str);
-        }
-        cbEncoding.setSelectedItem(str);
+        tfChapterPattern.setToolTipText(app.getText("Dialog.TxtPac.ChapterPattern.Tip"));
+
+        lbEncoding.setText(app.getText("Dialog.TxtPac.LabelEncoding"));
+        cbEncodings.setToolTipText(app.getText("Dialog.TxtPac.Encoding.Tip"));
+        Utils.initEncodings(cbEncodings, app.getConfig().getTxtPaEncoding());
 
         buttonOK.setText(app.getText("Dialog.ButtonOk"));
         buttonOK.addActionListener(new ActionListener() {
@@ -136,7 +127,7 @@ public class TxtPacProvider extends JDialog implements PacProvider {
         }
         HashMap<String, Object> map = new HashMap<>();
         map.put(TxtParser.KEY_CHAPTER_PATTERN, tfChapterPattern.getText());
-        map.put(TxtParser.KEY_TEXT_ENCODING, cbEncoding.getSelectedItem());
+        map.put(TxtParser.KEY_TEXT_ENCODING, cbEncodings.getSelectedItem());
         return map;
     }
 }

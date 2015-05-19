@@ -57,7 +57,7 @@ public class PartSelectionDialog extends JDialog {
         setContentPane(contentPane);
         getRootPane().setDefaultButton(buttonOK);
 
-        Imabw app = Imabw.getApplication();
+        Imabw app = Imabw.getInstance();
 
         labelTip.setText(app.getText("Dialog.SelectPart.Tip"));
 

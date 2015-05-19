@@ -40,7 +40,7 @@ public class NewAttributePane implements IPaneRender {
     private boolean customized = false;
 
     public NewAttributePane(ArrayList<String> names, ArrayList<String> types) {
-        Imabw app = Imabw.getApplication();
+        Imabw app = Imabw.getInstance();
 
         labelName.setText(app.getText("Dialog.Properties.Attributes.Add.LabelName"));
         for (String name : names) {

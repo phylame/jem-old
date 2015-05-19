@@ -40,7 +40,7 @@ public class ISettings extends Settings {
         super(loading);
     }
 
-    private static String toString(Font font) {
+    public static String toString(Font font) {
         StringBuilder builder = new StringBuilder(font.getFamily());
         builder.append("-");
         switch (font.getStyle()) {
@@ -53,12 +53,15 @@ public class ISettings extends Settings {
             case Font.ITALIC:
                 builder.append("ITALIC");
                 break;
+            case Font.BOLD|Font.ITALIC:
+                builder.append("BOLDITALIC");
+                break;
         }
         builder.append("-").append(font.getSize());
         return builder.toString();
     }
 
-    private static String toString(Color color) {
+    public static String toString(Color color) {
         String str = String.format("%X", color.getRGB());
         return "#"+str.substring(2);
     }

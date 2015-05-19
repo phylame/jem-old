@@ -21,13 +21,20 @@ package pw.phylame.imabw;
 import pw.phylame.ixin.ISettings;
 import pw.phylame.jem.formats.txt.TxtParser;
 
-import java.awt.*;
+import javax.swing.UIManager;
+import java.awt.Font;
+import java.awt.Color;
 import java.util.Locale;
 
 /**
  * Configurations for Imabw.
  */
 public class Config extends ISettings {
+    public Config() {
+        super();
+        UIManager.installLookAndFeel("JGoodise", "com.jgoodies.looks.plastic.PlasticLookAndFeel");
+    }
+
     public void reset() {
         clear();
         setAppLocale(getAppLocale());
@@ -52,6 +59,10 @@ public class Config extends ISettings {
     public void setAppLocale(Locale locale) {
         setLocale("app.locale", locale, "Imabw UI language");
     }
+
+    // *************
+    // ** UI face **
+    // *************
 
     public String getLafTheme() {
         return getString("ui.face.lafTheme", "com.jgoodies.looks.plastic.PlasticLookAndFeel");
@@ -164,6 +175,39 @@ public class Config extends ISettings {
         setColor("editor.style.foreground", color, "Content editor foreground color");
     }
 
+    public Color getEditorHighlight() {
+        return getColor("editor.style.highlight", Color.ORANGE);
+    }
+
+    public void setEditorHighlight(Color color) {
+        setColor("editor.style.highlight", color, "Content editor highlight color");
+    }
+
+
+    public boolean isEditorLineWarp() {
+        return getBoolean("editor.style.lineWarp", true);
+    }
+
+    public void setEditorLineWarp(boolean enable) {
+        setBoolean("editor.style.lineWarp", enable, "Warp line if content is too long");
+    }
+
+    public boolean isEditorWordWarp() {
+        return getBoolean("editor.style.wordWarp", true);
+    }
+
+    public void setEditorWordWarp(boolean enable) {
+        setBoolean("editor.style.wordWarp", enable, "Warp line if a word is too long");
+    }
+
+    public boolean isEditorShowLineNumber() {
+        return getBoolean("editor.style.showLineNumber", false);
+    }
+
+    public void setEditorShowLineNumber(boolean visible) {
+        setBoolean("editor.style.showLineNumber", visible, "Show line number in editor");
+    }
+
     private void resetEditor() {
         setEditorFont(getEditorFont());
         setEditorBackground(getEditorBackground());
@@ -224,7 +268,7 @@ public class Config extends ISettings {
         setString("jem.pa.txt.encoding", encoding, "Encoding for writing TXT book");
     }
 
-    private static String transLineSeparator(String lineSeparator) {
+    public static String transLineSeparator(String lineSeparator) {
         switch (lineSeparator) {
             case "\r\n":
                 return "CRLF";
@@ -235,13 +279,25 @@ public class Config extends ISettings {
         }
     }
 
-    public String getTxtMaLineSeparator() {
-        return getString("jem.pa.txt.lineSeparator",
-                transLineSeparator(System.getProperty("line.separator")));
+    public static String transLineStyle(String style) {
+        switch (style) {
+            case "CRLF":
+                return "\r\n";
+            case "CR":
+                return "\r";
+            default:
+                return "\n";
+        }
     }
 
-    public void setTxtMaLineSeparator(String style) {
-        setString("jem.pa.txt.lineSeparator", style, "Line separator for writing TXT book");
+    public String getTxtMaLineSeparator() {
+        String str = getString("jem.pa.txt.lineSeparator", null);
+        return ! isEmpty(str) ? transLineStyle(str) : System.getProperty("line.separator");
+    }
+
+    public void setTxtMaLineSeparator(String lineSeparator) {
+        setString("jem.pa.txt.lineSeparator", transLineSeparator(lineSeparator),
+                "Line separator for writing TXT book");
     }
 
     public String getTxtMaParagraphPrefix() {

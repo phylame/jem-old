@@ -49,7 +49,7 @@ import java.util.Map;
  * Main frame board of Imabw.
  */
 public class Viewer extends IFrame implements Constants {
-    private Imabw app = Imabw.getApplication();
+    private Imabw app = Imabw.getInstance();
     private JPanel rootPane;
 
     // split pane
@@ -103,7 +103,7 @@ public class Viewer extends IFrame implements Constants {
         });
 
         getToolBar().setVisible(app.getConfig().isShowToolbar());
-        getToolBar().setFloatable(! app.getConfig().isLockToolbar());
+        setLockToolBar(app.getConfig().isLockToolbar());
         getStatusBar().setVisible(app.getConfig().isShowStatusbar());
 
         JMenu menu = getViewMenu();
@@ -144,6 +144,12 @@ public class Viewer extends IFrame implements Constants {
     }
 
     @Override
+    public void setLockToolBar(boolean locked) {
+        super.setLockToolBar(locked);
+        app.getConfig().setLockToolbar(locked);
+    }
+
+    @Override
     public String getText(String key, Object... args) {
         return app.getText(key, args);
     }
@@ -180,9 +186,9 @@ public class Viewer extends IFrame implements Constants {
     private void setTreeStyle(final JTree tree) {
         // cell renderer
         tree.setCellRenderer(new DefaultTreeCellRenderer() {
-            Icon bookIcon = IToolkit.createImageIcon(":/res/img/tree/book.png");
-            Icon sectionIcon = IToolkit.createImageIcon(":/res/img/tree/section.png");
-            Icon chapterIcon = IToolkit.createImageIcon(":/res/img/tree/chapter.png");
+            Icon bookIcon = IToolkit.createImageIcon(app.getText("Frame.Tree.Book.Icon"));
+            Icon sectionIcon = IToolkit.createImageIcon(app.getText("Frame.Tree.Section.Icon"));
+            Icon chapterIcon = IToolkit.createImageIcon(app.getText("Frame.Tree.Chapter.Icon"));
 
             @Override
             public Component getTreeCellRendererComponent(JTree tree,
@@ -393,8 +399,12 @@ public class Viewer extends IFrame implements Constants {
     // ****************************************
     // ** Contents tree operation (The Sidebar)
     // ****************************************
-    public void showOrHideSideBar() {
-        boolean visible = ! contentsTree.isVisible();
+
+    public boolean isSideBarVisible() {
+        return contentsTree.isVisible();
+    }
+
+    public void setSideBarVisible(boolean visible) {
         if (! visible) {    // hide
             dividerLocation = splitPane.getDividerLocation();
             dividerSize = splitPane.getDividerSize();
@@ -405,6 +415,10 @@ public class Viewer extends IFrame implements Constants {
             splitPane.setDividerSize(dividerSize);
         }
         contentsTree.setVisible(visible);
+    }
+
+    public void showOrHideSideBar() {
+        setSideBarVisible(! isSideBarVisible());
     }
 
     public boolean isContentsLocked() {
@@ -644,8 +658,8 @@ public class Viewer extends IFrame implements Constants {
 
     private void setEditorStyle(ITextEdit textEdit) {
         JTextArea textArea = textEdit.getTextEditor();
-        textArea.setLineWrap(true);
-        textArea.setWrapStyleWord(true);
+        textArea.setLineWrap(app.getConfig().isEditorLineWarp());
+        textArea.setWrapStyleWord(app.getConfig().isEditorWordWarp());
 
         textArea.setFont(app.getConfig().getEditorFont());
 
