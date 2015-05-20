@@ -26,6 +26,8 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import pw.phylame.imabw.Imabw;
 import pw.phylame.imabw.Constants;
 import pw.phylame.imabw.ui.com.EditorIndicator;
@@ -49,6 +51,8 @@ import java.util.Map;
  * Main frame board of Imabw.
  */
 public class Viewer extends IFrame implements Constants {
+    private static Log LOG = LogFactory.getLog(Viewer.class);
+
     private Imabw app = Imabw.getInstance();
     private JPanel rootPane;
 
@@ -107,7 +111,7 @@ public class Viewer extends IFrame implements Constants {
         getStatusBar().setVisible(app.getConfig().isShowStatusbar());
 
         JMenu menu = getViewMenu();
-        ((JCheckBoxMenuItem)menu.getItem(0)).setState(getToolBar().isVisible());
+        ((JCheckBoxMenuItem) menu.getItem(0)).setState(getToolBar().isVisible());
         ((JCheckBoxMenuItem)menu.getItem(1)).setState(getStatusBar().isVisible());
         ((JCheckBoxMenuItem)menu.getItem(2)).setState(app.getConfig().isShowSidebar());
 
@@ -597,7 +601,7 @@ public class Viewer extends IFrame implements Constants {
         try {
             text = part.getText();
         } catch (java.io.IOException e) {
-            e.printStackTrace();
+            LOG.debug("cannot load text content of "+part.getTitle()+" in "+getRootNode(), e);
             text = "";
         }
         EditorTab tab = new EditorTab(new ITextEdit(text, this), part,

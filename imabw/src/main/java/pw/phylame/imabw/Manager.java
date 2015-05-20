@@ -20,6 +20,7 @@ package pw.phylame.imabw;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import pw.phylame.imabw.ui.Utils;
 import pw.phylame.imabw.ui.Viewer;
 import pw.phylame.imabw.ui.com.EditorTab;
 import pw.phylame.imabw.ui.com.PartNode;
@@ -199,7 +200,7 @@ public class Manager implements Constants {
 
         // 2. get parse arguments
         Map<String, Object> kw = worker.getParseArguments(viewer, format);
-        if (kw == null) {
+        if (kw == null) {   // cancel setting
             return false;
         }
 
@@ -348,7 +349,7 @@ public class Manager implements Constants {
 //        if (str == null || "".equals(str)) {
 //            return;
 //        }
-        System.out.println("Replace string");
+        System.out.println("do replacing string");
     }
 
     private void gotoLine() {
@@ -437,7 +438,7 @@ public class Manager implements Constants {
                 viewProperties(task.getBook());
                 break;
             default:
-                System.out.println("menu action: "+cmdID);
+                System.out.println("unknown menu action: "+cmdID);
                 break;
         }
     }
@@ -703,18 +704,22 @@ public class Manager implements Constants {
         notifyModified(app.getText("Task.MergedChapter", count, destPart.getTitle()));
     }
 
-    private void searchChapters(Part part) {
+    private void searchChapters(TreePath path) {
         String key = worker.inputText(viewer, app.getText("Dialog.SearchChapter.Title"),
                 app.getText("Dialog.SearchChapter.Tip"), null);
         if (key == null) {
             return;
         }
         if (key.length() == 0) {
-            worker.showError(viewer, app.getText("Dialog.SearchChapter.Title"), app.getText("Dialog.SearchChapter.NoInput"));
+            worker.showError(viewer, app.getText("Dialog.SearchChapter.Title"),
+                    app.getText("Dialog.SearchChapter.NoInput"));
             return;
         }
-        ArrayList<Part> results = worker.findParts(part, key);
-        System.out.println(results.size());
+        ArrayList<Part> results = worker.findParts(PartNode.getPartNode(path).getPart(), key);
+        // todo goto select chapters
+//        Part p = Utils.choosePart(viewer, app.getText("Dialog.SearchChapter.ResultTitle", results.size()),
+//                results, app.getText("Dialog.SearchChapter.ChooseTip"));
+//
     }
 
     public void onTreeAction(Object actionID) {
@@ -752,7 +757,7 @@ public class Manager implements Constants {
             case SEARCH_CHAPTER:
                 path = viewer.getSelectedPath();
                 if (path != null) {
-                    searchChapters(PartNode.getPartNode(path).getPart());
+                    searchChapters(path);
                 }
                 break;
             case REFRESH_CONTENTS:
@@ -762,7 +767,7 @@ public class Manager implements Constants {
                 viewer.setContentsLocked(!viewer.isContentsLocked());
                 break;
             default:
-                System.out.println("tree action: "+actionID);
+                System.out.println("unknown tree action: "+actionID);
                 break;
         }
     }
@@ -788,7 +793,7 @@ public class Manager implements Constants {
                 viewer.previousTab();
                 break;
             default:
-                System.out.println("tab action: "+actionID);
+                System.out.println("unknown tab action: "+actionID);
                 break;
         }
     }

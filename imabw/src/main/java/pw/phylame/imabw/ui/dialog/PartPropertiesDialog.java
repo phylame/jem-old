@@ -393,7 +393,7 @@ public class PartPropertiesDialog extends JDialog {
         try {
             return app.getText("Dialog.Properties.Attributes.Name." + name);
         } catch (MissingResourceException e) {
-            System.out.println(e.getKey());
+            System.out.println("unknown attribute name: "+e.getKey());
             return name;
         }
     }
@@ -403,7 +403,7 @@ public class PartPropertiesDialog extends JDialog {
         try {
             return app.getText("Dialog.Properties.Attributes.Type." + type);
         } catch (MissingResourceException e) {
-            System.out.println(e.getKey());
+            System.out.println("Unknown attribute type: "+e.getKey());
             return type;
         }
     }

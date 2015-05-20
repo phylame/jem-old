@@ -20,9 +20,15 @@ package pw.phylame.imabw.ui;
 
 import pw.phylame.imabw.Config;
 import pw.phylame.imabw.Imabw;
+import pw.phylame.imabw.ui.com.ListChooserPane;
+import pw.phylame.jem.core.Part;
 
+import java.awt.Component;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.DefaultComboBoxModel;
+
+import java.util.List;
 
 public class Utils {
     private static Imabw app = Imabw.getInstance();
@@ -78,5 +84,15 @@ public class Utils {
                 comboBox.setSelectedIndex(0);
                 break;
         }
+    }
+
+    public static Part choosePart(Component parent, String title, List<Part> parts, String tip) {
+        ListChooserPane pane = new ListChooserPane(parts, false, tip);
+        int opt = JOptionPane.showOptionDialog(parent, pane.getPane(), title,
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
+        if (opt != JOptionPane.OK_OPTION) {
+            return null;
+        }
+        return parts.get(pane.getSelectedIndex());
     }
 }

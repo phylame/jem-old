@@ -152,6 +152,8 @@ public class SettingsDialog extends JDialog {
         }
         Font font = fontChooser.getSelectedFont();
         app.getConfig().setEditorFont(font);
+        lbEditorFontDemo.setFont(font);
+        lbEditorFontDemo.setText(Config.toString(font));
         // todo update editors
     }
 
