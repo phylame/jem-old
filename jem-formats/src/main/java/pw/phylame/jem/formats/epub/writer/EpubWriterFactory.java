@@ -16,14 +16,14 @@
  * limitations under the License.
  */
 
-package pw.phylame.jem.formats.util;
+package pw.phylame.jem.formats.epub.writer;
 
-/**
- * Jem formats version message.
- */
-public final class Version {
-    public static final String VERSION = "1.1.0";
-    public static final String VENDOR = "PW";
-
-    private Version() {}
+public class EpubWriterFactory {
+    public static EpubWriter getWriter(String version) {
+        if (version.startsWith("2")) {
+            return new WriterV2();
+        } else {
+            return null;
+        }
+    }
 }

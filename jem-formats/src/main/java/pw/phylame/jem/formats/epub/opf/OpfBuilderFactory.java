@@ -16,14 +16,14 @@
  * limitations under the License.
  */
 
-package pw.phylame.jem.formats.util;
+package pw.phylame.jem.formats.epub.opf;
 
-/**
- * Jem formats version message.
- */
-public final class Version {
-    public static final String VERSION = "1.1.0";
-    public static final String VENDOR = "PW";
-
-    private Version() {}
+public class OpfBuilderFactory {
+    public static OpfBuilder getBuilder(String version) {
+        if ("2.0".equals(version)) {
+            return new Opf_2_0();
+        } else {
+            return null;
+        }
+    }
 }

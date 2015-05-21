@@ -16,14 +16,16 @@
  * limitations under the License.
  */
 
-package pw.phylame.jem.formats.util;
+package pw.phylame.jem.formats.epub.opf;
+
+import org.dom4j.Document;
+import pw.phylame.jem.core.Book;
+
+import java.util.zip.ZipOutputStream;
 
 /**
- * Jem formats version message.
+ * OPF builder.
  */
-public final class Version {
-    public static final String VERSION = "1.1.0";
-    public static final String VENDOR = "PW";
-
-    private Version() {}
+public interface OpfBuilder {
+    Document make(Book book, String uuid, ZipOutputStream zipout);
 }

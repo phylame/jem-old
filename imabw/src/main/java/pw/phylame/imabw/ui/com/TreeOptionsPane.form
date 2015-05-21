@@ -31,6 +31,7 @@
           <component id="99a39" class="javax.swing.JButton" binding="buttonSearch">
             <constraints/>
             <properties>
+              <enabled value="false"/>
               <icon value="res/img/tree/search-chapter.png"/>
               <text value=""/>
             </properties>

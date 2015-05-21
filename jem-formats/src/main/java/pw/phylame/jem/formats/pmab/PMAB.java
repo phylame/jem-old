@@ -67,29 +67,6 @@ public final class PMAB {
         }
     }
 
-    /**
-     * Makes XML {@code org.dom4j.io.OutputFormat}.
-     * @param encoding encoding for XML.
-     * @param indent indent line
-     * @param lineSeparator line separator
-     * @return {@code org.dom4j.io.OutputFormat}
-     */
-    private static org.dom4j.io.OutputFormat getXMLFormat(String encoding, String indent, String lineSeparator) {
-        org.dom4j.io.OutputFormat format = org.dom4j.io.OutputFormat.createPrettyPrint();
-        format.setEncoding(encoding);
-        format.setIndent(indent);
-        format.setLineSeparator(lineSeparator);
-        format.setTrimText(false);
-        return format;
-    }
-
-    public static void writeXML(org.dom4j.Document doc, java.io.OutputStream out,
-                                String encoding, String indent, String lineSeparator) throws IOException {
-        org.dom4j.io.XMLWriter xmlWriter = new org.dom4j.io.XMLWriter(out,
-                getXMLFormat(encoding, indent, lineSeparator));
-        xmlWriter.write(doc);
-    }
-
     public static void writeFile(FileObject fb, ZipOutputStream zipout, String href) throws IOException {
         zipout.putNextEntry(new ZipEntry(href));
         fb.copyTo(zipout);

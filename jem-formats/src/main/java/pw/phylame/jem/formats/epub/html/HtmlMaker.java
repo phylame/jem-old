@@ -16,14 +16,28 @@
  * limitations under the License.
  */
 
-package pw.phylame.jem.formats.util;
+package pw.phylame.jem.formats.epub.html;
+
+import org.dom4j.Element;
+import org.w3c.dom.Document;
 
 /**
- * Jem formats version message.
+ * Makes ePub HTML documents.
  */
-public final class Version {
-    public static final String VERSION = "1.1.0";
-    public static final String VENDOR = "PW";
+public class HtmlMaker {
+    public static Element makeCover() {
+        return null;
+    }
 
-    private Version() {}
+    public static Element makeIntro() {
+        return null;
+    }
+
+    public static Element makeInfo() {
+        return null;
+    }
+
+    public static Document makeHtml(String title) {
+        return null;
+    }
 }

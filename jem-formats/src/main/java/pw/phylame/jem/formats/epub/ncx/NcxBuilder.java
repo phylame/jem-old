@@ -16,28 +16,17 @@
  * limitations under the License.
  */
 
-package pw.phylame.jem.formats.epub;
+package pw.phylame.jem.formats.epub.ncx;
 
-import org.dom4j.Element;
-import org.w3c.dom.Document;
+import org.dom4j.Document;
+import pw.phylame.jem.core.Book;
+import pw.phylame.jem.formats.epub.EpubConfig;
+
+import java.util.zip.ZipOutputStream;
 
 /**
- * Makes ePub HTML documents.
+ * NCX builder.
  */
-public class HtmlMaker {
-    public static Element makeCover() {
-        return null;
-    }
-
-    public static Element makeIntro() {
-        return null;
-    }
-
-    public static Element makeInfo() {
-        return null;
-    }
-
-    public static Document makeHtml(String title) {
-        return null;
-    }
+public interface NcxBuilder {
+    Document make(Book book, String uuid, ZipOutputStream zipout, EpubConfig config);
 }

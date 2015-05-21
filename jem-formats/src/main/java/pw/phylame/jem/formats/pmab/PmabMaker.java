@@ -26,6 +26,7 @@ import org.dom4j.DocumentHelper;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Maker;
 import pw.phylame.jem.formats.util.ExceptionFactory;
+import pw.phylame.jem.formats.util.XmlUtils;
 import pw.phylame.jem.util.JemException;
 
 import java.io.*;
@@ -41,12 +42,12 @@ import java.util.zip.ZipOutputStream;
 public class PmabMaker implements Maker {
     private static Log LOG = LogFactory.getLog(PmabMaker.class);
 
-    public static final String KEY_PMAB_VERSION = "pmab_version";
-    public static final String KEY_TEXT_ENCODING = "pmab_text_encoding";
+    public static final String KEY_VERSION         = "pmab_version";
+    public static final String KEY_TEXT_ENCODING   = "pmab_text_encoding";
     public static final String KEY_COMPRESS_METHOD = "pmab_compress_method";
-    public static final String KEY_COMPRESS_LEVEL = "pmab_compress_level";
-    public static final String KEY_COMMENT = "pmab_comment";
-    public static final String KEY_META_DATA = "pmab_meta_data";
+    public static final String KEY_COMPRESS_LEVEL  = "pmab_compress_level";
+    public static final String KEY_COMMENT         = "pmab_comment";
+    public static final String KEY_META_DATA       = "pmab_meta_data";
 
 
     /**
@@ -74,12 +75,12 @@ public class PmabMaker implements Maker {
     private PmabConfig parseConfig(Map<String, Object> kw) throws JemException {
         PmabConfig config = new PmabConfig();
         if (kw != null && kw.size() != 0) {
-            Object o = kw.get(KEY_PMAB_VERSION);
+            Object o = kw.get(KEY_VERSION);
             if (o != null) {
                 if (o instanceof String) {
-                    config.pmabVersion = (String) o;
+                    config.version = (String) o;
                 } else {
-                    throw ExceptionFactory.forInvalidStringArgument(KEY_PMAB_VERSION, o);
+                    throw ExceptionFactory.forInvalidStringArgument(KEY_VERSION, o);
                 }
             }
             o = kw.get(KEY_TEXT_ENCODING);
@@ -163,30 +164,31 @@ public class PmabMaker implements Maker {
     private void writePBM(Book book, ZipOutputStream zipout, PmabConfig config) throws IOException,
             JemException {
         Document doc = DocumentHelper.createDocument();
-        if (config.pmabVersion.startsWith("3")) {
+        if (config.version.startsWith("3")) {
             pw.phylame.jem.formats.pmab.v3.Writer.writePBM(book, doc, zipout, config);
-        } else if (config.pmabVersion.startsWith("2")) {
+        } else if (config.version.startsWith("2")) {
             pw.phylame.jem.formats.pmab.v2.Writer.writePBM(book, doc, zipout, config);
         } else {
-            throw new JemException("Unsupported PMAB version: "+config.pmabVersion);
+            throw new JemException("Unsupported PMAB version: "+config.version);
         }
         zipout.putNextEntry(new ZipEntry(PMAB.PBM_FILE));
-        PMAB.writeXML(doc, zipout, config.xmlEncoding, config.xmlIndent, config.xmlLineSeparator);
+        XmlUtils.writeXML(doc, zipout, config.xmlEncoding, config.xmlIndent, config.xmlLineSeparator);
         zipout.closeEntry();
     }
 
     private void writePBC(Book book, ZipOutputStream zipout, PmabConfig config) throws IOException,
             JemException {
         Document doc = DocumentHelper.createDocument();
-        if (config.pmabVersion.startsWith("3")) {
+        if (config.version.startsWith("3")) {
             pw.phylame.jem.formats.pmab.v3.Writer.writePBC(book, doc, zipout, config);
-        } else if (config.pmabVersion.startsWith("2")) {
+        } else if (config.version.startsWith("2")) {
             pw.phylame.jem.formats.pmab.v2.Writer.writePBC(book, doc, zipout, config);
         } else {
-            throw new JemException("Unsupported PMAB version: "+config.pmabVersion);
+            throw new JemException("Unsupported PMAB version: "+config.version);
         }
         zipout.putNextEntry(new ZipEntry(PMAB.PBC_FILE));
-        PMAB.writeXML(doc, zipout, config.xmlEncoding, config.xmlIndent, config.xmlLineSeparator);
+        XmlUtils.writeXML(doc, zipout, config.xmlEncoding, config.xmlIndent,
+                config.xmlLineSeparator);
         zipout.closeEntry();
     }
 }
