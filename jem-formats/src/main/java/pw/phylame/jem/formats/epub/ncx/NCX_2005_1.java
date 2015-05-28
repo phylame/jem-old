@@ -38,6 +38,8 @@ public class Ncx_2005_1 implements NcxBuilder {
     public static final String VERSION   = "2005-1";
     public static final String NAMESPACE = "http://www.daisy.org/z3986/2005/ncx/";
 
+    private int playOrder = 1;
+
     @Override
     public Document make(Book book, String uuid, ZipOutputStream zipout, EpubConfig config) {
         Document doc = DocumentHelper.createDocument();
@@ -49,14 +51,51 @@ public class Ncx_2005_1 implements NcxBuilder {
         head.addElement("meta").addAttribute("name", "dtb:uid").addAttribute("content", uuid);
         head.addElement("meta").addAttribute("name", "dtb:depth").addAttribute("content",
                 Integer.toString(Jem.getDepth(book)));
-        head.addElement("meta").addAttribute("name", "dtb:totalPageCount ").addAttribute("content", "0");
-        head.addElement("meta").addAttribute("name", "dtb:maxPageNumber").addAttribute("content", "0");
+        Object o = book.getAttribute("pages", 0);   // page number
+        String str;
+        if (o instanceof Integer) {
+            str = Integer.toString((Integer) o);
+        } else {
+            str = "0";
+        }
+        head.addElement("meta").addAttribute("name", "dtb:totalPageCount").addAttribute("content",
+                str);
+        head.addElement("meta").addAttribute("name", "dtb:maxPageNumber").addAttribute("content",
+                "0");
 
         root.addElement("docTitle").addElement("text").setText(book.getTitle());
         if (!"".equals(book.getAuthor())) {
             root.addElement("docAuthor").addElement("text").setText(book.getAuthor());
         }
 
+        Element navMap = root.addElement("navMap");
+
+        // cover
+        // intro
+        // info
+        // toc
+        // content
+
         return doc;
+    }
+
+    private void writeBookCoverPage(Book book, ZipOutputStream zipout, EpubConfig config) {
+
+    }
+
+    private Element makeNavPoint(Element parent, String id, String label, String href) {
+        Element nvp = parent.addElement("navPoint");
+        nvp.addAttribute("id", id);
+        nvp.addAttribute("playOrder", Integer.toString(this.playOrder++));
+        nvp.addElement("navLabel").addElement("text").setText(label);
+        if (href != null) {
+            nvp.addElement("content").addAttribute("src", href);
+        }
+        return nvp;
+
+    }
+
+    private void makeChapter() {
+
     }
 }

@@ -25,15 +25,15 @@ import org.w3c.dom.Document;
  * Makes ePub HTML documents.
  */
 public class HtmlMaker {
-    public static Element makeCover() {
+    public static Element makeCoverPage() {
         return null;
     }
 
-    public static Element makeIntro() {
+    public static Element makeIntroPage() {
         return null;
     }
 
-    public static Element makeInfo() {
+    public static Element makeInfoPage() {
         return null;
     }
 

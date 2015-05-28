@@ -66,5 +66,4 @@ public class WriterV2 extends EpubWriter {
                 config.xmlLineSeparator);
         zipout.flush();
     }
-
 }
