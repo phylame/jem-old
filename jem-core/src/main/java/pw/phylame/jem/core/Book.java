@@ -21,6 +21,7 @@ package pw.phylame.jem.core;
 import java.util.Map;
 import java.util.Set;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * <tt>Book</tt> describes book structure.
@@ -50,6 +51,12 @@ public class Book extends Chapter {
     /** Key name for book publisher.*/
     public static final String PUBLISHER = "publisher";
 
+    /**
+     * Key name for book vendor.
+     * @since 2.0.2
+     */
+    public static final String VENDOR = "vendor";
+
     /** Key name for book rights.*/
     public static final String RIGHTS = "rights";
 
@@ -58,13 +65,12 @@ public class Book extends Chapter {
 
 
     public Book() {
-        this("", "");
+        reset();
     }
 
     public Book(String title, String author) {
         super(title, "");
         setAuthor(author);
-        setDate(new Date());
     }
 
     /**
@@ -81,8 +87,9 @@ public class Book extends Chapter {
         setDate(new Date());
         setSubject("");
         setPublisher("");
+        setVendor("");
         setRights("");
-        setLanguage("");
+        setLanguage(Locale.getDefault().toLanguageTag());
     }
 
     public String getAuthor() {
@@ -121,9 +128,8 @@ public class Book extends Chapter {
         Object o = getAttribute(DATE, null);
         if (o instanceof Date) {
             return (Date) o;
-        } else {
-            return new Date();
         }
+        return null;
     }
 
     public void setDate(Date date) {
@@ -136,6 +142,24 @@ public class Book extends Chapter {
 
     public void setPublisher(String publisher) {
         setAttribute(PUBLISHER, publisher);
+    }
+
+    /**
+     * Returns vendor of the book.
+     * @return the vendor string
+     * @since 2.0.2
+     */
+    public String getVendor() {
+        return stringAttribute(VENDOR, "");
+    }
+
+    /**
+     * Sets new vendor of the book.
+     * @param vendor the vendor string
+     * @since 2.0.2
+     */
+    public void setVendor(String vendor) {
+        setAttribute(VENDOR, vendor);
     }
 
     public String getRights() {

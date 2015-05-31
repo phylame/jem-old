@@ -328,7 +328,7 @@ public class Viewer extends IFrame implements Constants {
             @Override
             public void mouseReleased(MouseEvent e) {
                 // not meta key or empty editor
-                if (!e.isMetaDown() || editorWindow.getTabCount() == 0) {
+                if (!e.isMetaDown() || getTabCount() == 0) {
                     return;
                 }
                 tabContextMenu.show(editorWindow, e.getX(), e.getY());
@@ -538,6 +538,10 @@ public class Viewer extends IFrame implements Constants {
         }
     }
 
+    public int getTabCount() {
+        return editorTabs.size();
+    }
+
     public void closeTab(EditorTab tab) {
         tab.cacheContent();
         editorWindow.remove(tab.getTextEdit());
@@ -716,11 +720,11 @@ public class Viewer extends IFrame implements Constants {
     }
 
     public void nextTab() {
-        if (editorWindow.getTabCount() < 2) {
+        if (getTabCount() < 2) {
             return;
         }
         int index = editorWindow.getSelectedIndex();
-        if (index == editorWindow.getTabCount() - 1) {
+        if (index == getTabCount() - 1) {
             index = 0;
         } else {
             ++index;
@@ -729,12 +733,12 @@ public class Viewer extends IFrame implements Constants {
     }
 
     public void previousTab() {
-        if (editorWindow.getTabCount() < 2) {
+        if (getTabCount() < 2) {
             return;
         }
         int index = editorWindow.getSelectedIndex();
         if (index == 0) {
-            index = editorWindow.getTabCount() - 1;
+            index = getTabCount() - 1;
         } else {
             --index;
         }

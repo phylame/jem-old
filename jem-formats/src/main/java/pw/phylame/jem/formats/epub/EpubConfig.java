@@ -32,15 +32,21 @@ public class EpubConfig {
     public String version = "2.0";
 
     // directory
-    public String opsDir = "OEBPS";
+    public String opsDir = "oebps";
     public String textDir = "text", imageDir = "images", styleDir = "styles";
+
+    // common date format
+    public String dateFormat = "yyyy-M-d";
 
     // XML style
     public String xmlEncoding = "UTF-8", xmlIndent = "\t", xmlLineSeparator =
             System.getProperty("line.separator");
 
     // encoding for html content
-    public String htmlEncoding = System.getProperty("file.encoding");
+    public String htmlEncoding = "UTF-8";
+
+    // indent for html content
+    public String htmlIndent = "\t";
 
     public StyleProvider styleProvider = new DefaultStyleProvider();
 

@@ -2,4 +2,5 @@ ChangeLog
 =========
 
 * v2.0.2
-  o. move SOURCE_* attributes to book extension after reading book file.
+  o. not add SOURCE_* attributes when reading book file.
+  o. add vendor field to book attributes

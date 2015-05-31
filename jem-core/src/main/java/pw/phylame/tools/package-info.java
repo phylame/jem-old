@@ -16,14 +16,7 @@
  * limitations under the License.
  */
 
-package pw.phylame.jem.formats.epub.writer;
-
-public class EpubWriterFactory {
-    public static EpubWriter getWriter(String version) {
-        if (version.equals("2.0")) {
-            return new WriterV2();
-        } else {
-            return null;
-        }
-    }
-}
+/**
+ * Base classes and utilities for Jem framework.
+ */
+package pw.phylame.tools;

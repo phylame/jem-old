@@ -86,9 +86,13 @@ public class Manager implements Constants {
         app.exit(0);
     }
 
-    /** Update frame title */
     private void updateTitle() {
-        // book_title - [book_author] - [imported]? - [path]? - title version
+        updateTitle(null);
+    }
+
+    /** Update frame title */
+    private void updateTitle(String chapter) {
+        // book_title - [book_author] - [imported]? - [path]? - [chapter]? - title version
         StringBuilder sb = new StringBuilder(task.getBook().getTitle());
         if (task.isModified()) {
             sb.append("*");
@@ -104,6 +108,9 @@ public class Manager implements Constants {
         }
         if (task.getSource() != null) {
             sb.append(task.getSource().getPath()).append(" - ");
+        }
+        if (chapter != null) {
+            sb.append(chapter).append(" - ");
         }
         sb.append(app.getText("App.Name")).append(" ").append(VERSION);
         viewer.setTitle(sb.toString());
@@ -462,6 +469,7 @@ public class Manager implements Constants {
                 tab = viewer.newTab(part);
             }
             viewer.switchToTab(tab);
+//            updateTitle(part.getTitle());
         }
     }
 

@@ -21,6 +21,7 @@ import java.util.List;
 import java.io.Writer;
 import java.io.InputStream;
 import java.io.IOException;
+import java.io.BufferedInputStream;
 import org.apache.commons.io.IOUtils;
 import pw.phylame.tools.file.FileObject;
 
@@ -180,13 +181,13 @@ public class TextObject {
     /**
      * Returns text content in source of this object.
      * @return the string of text
-     * @throws java.io.IOException occurs IO errors when reading text file if source is text file.
+     * @throws IOException occurs IO errors when reading text file if source is text file.
      */
     public String getText() throws IOException {
         switch (sourceProvider) {
             case FILE:
                 assert file != null;
-                InputStream input = new java.io.BufferedInputStream(file.openInputStream());
+                InputStream input = new BufferedInputStream(file.openInputStream());
                 String text = IOUtils.toString(input, encoding);
                 file.reset();
                 return text;
@@ -198,13 +199,13 @@ public class TextObject {
     /**
      * Returns list of lines split from text content in this object.
      * @return list of lines
-     * @throws java.io.IOException occurs IO errors when reading text file if source is text file.
+     * @throws IOException occurs IO errors when reading text file if source is text file.
      */
     public List<String> getLines() throws IOException {
         switch (sourceProvider) {
             case FILE:
                 assert file != null;
-                InputStream input = new java.io.BufferedInputStream(file.openInputStream());
+                InputStream input = new BufferedInputStream(file.openInputStream());
                 List<String> lines = IOUtils.readLines(input, encoding);
                 file.reset();
                 return lines;
@@ -216,14 +217,14 @@ public class TextObject {
     /**
      * Writes all text content in this object to output writer.
      * @param writer output <tt>Writer</tt> to store text content
-     * @throws java.io.IOException occurs IO errors
+     * @throws IOException occurs IO errors
      * @since 2.0.1
      */
     public void writeTo(Writer writer) throws IOException {
         switch (sourceProvider) {
             case FILE:
                 assert file != null;
-                InputStream input = new java.io.BufferedInputStream(file.openInputStream());
+                InputStream input = new BufferedInputStream(file.openInputStream());
                 IOUtils.copy(input, writer, encoding);
                 file.reset();
                 break;

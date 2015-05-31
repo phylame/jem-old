@@ -25,7 +25,6 @@ import pw.phylame.imabw.ui.com.*;
 import pw.phylame.ixin.IToolkit;
 
 import pw.phylame.jem.core.*;
-import pw.phylame.jem.formats.pmab.PmabMaker;
 import pw.phylame.jem.util.JemException;
 import pw.phylame.tools.StringUtils;
 import pw.phylame.tools.file.FileFactory;
@@ -44,7 +43,6 @@ import java.io.File;
 import java.io.IOException;
 
 import java.util.*;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -265,8 +263,7 @@ public class Worker {
         if (format != null) {
             formats = new String[]{format};
         } else {
-            ArrayList<String> fmt = new ArrayList<>(BookHelper.supportedParsers());
-            fmt.remove("online");
+            ArrayList<String> fmt = new ArrayList<>(BookHelper.supportedMakers());
             formats = fmt.toArray(new String[0]);
         }
         return selectSaveFile(parent, title, makeFileExtensionFilters(formats), null, false, null);
@@ -341,8 +338,7 @@ public class Worker {
      * @param title title of open file dialog
      * @return the book
      */
-    public Task openBook(Component parent, String title, File file, String format,
-                         Map<String, Object> kw) {
+    public Task openBook(Component parent, String title, File file, String format, Map<String, Object> kw) {
         Task task = Task.newBook(null);
         task.setSource(file);
         task.setFormat(format);
@@ -376,8 +372,7 @@ public class Worker {
         return task;
     }
 
-    public Book readBook(Component parent, String title, File file, String format,
-                         Map<String, Object> kw) {
+    public Book readBook(Component parent, String title, File file, String format, Map<String, Object> kw) {
         Book book = null;
         try {
             book = Jem.readBook(file, format, kw);
@@ -498,10 +493,19 @@ public class Worker {
                 book.setCover(FileFactory.fromURL(url, null));
             }
         }
-        if ("".equals(book.stringAttribute("vendor", ""))) {
-            book.setAttribute("vendor", String.format("%s v%s", app.getText("App.Name"),
-                    Constants.VERSION));
+
+        if (book.getDate() == null) {
+            book.setDate(new Date());
         }
+
+        if ("".equals(book.getLanguage())) {
+            book.setLanguage(Locale.getDefault().toLanguageTag());
+        }
+
+        if ("".equals(book.getVendor())) {
+            book.setVendor(String.format("%s v%s", app.getText("App.Name"), Constants.VERSION));
+        }
+
         if ("".equals(book.getRights())) {
             book.setRights(String.format("(C) %d PW arts", Calendar.getInstance().get(Calendar.YEAR)));
         }

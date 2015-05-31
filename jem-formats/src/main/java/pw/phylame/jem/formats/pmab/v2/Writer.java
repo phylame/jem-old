@@ -30,6 +30,7 @@ import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.Part;
 import pw.phylame.jem.formats.pmab.PMAB;
 import pw.phylame.jem.formats.pmab.PmabConfig;
+import pw.phylame.jem.formats.util.ZipUtils;
 import pw.phylame.tools.DateUtils;
 import pw.phylame.tools.TextObject;
 import pw.phylame.tools.file.FileNameUtils;
@@ -77,7 +78,7 @@ public class Writer {
                     href = config.extraDir + "/" + file.getName();
                 }
                 try {
-                    PMAB.writeFile(fb, zipout, href);
+                    ZipUtils.writeFile(fb, zipout, href);
                 } catch (IOException ex) {
                     LOG.debug("cannot write file to PMAB: "+fb.getName(), ex);
                     continue;
@@ -115,7 +116,7 @@ public class Writer {
                 FileObject fb = (FileObject) value;
                 String href = config.extraDir + "/" + new File(fb.getName()).getName();
                 try {
-                    PMAB.writeFile(fb, zipout, href);
+                    ZipUtils.writeFile(fb, zipout, href);
                 } catch (IOException ex) {
                     LOG.debug("cannot write file to PMAB: "+fb.getName(), ex);
                     continue;
@@ -129,7 +130,7 @@ public class Writer {
                         System.getProperty("file.encoding");
                 String href = config.extraDir + "/" + tb.hashCode() + ".txt";
                 try {
-                    PMAB.writeText(tb, zipout, href, encoding);
+                    ZipUtils.writeText(tb, zipout, href, encoding);
                 } catch (IOException ex) {
                     LOG.debug("cannot write text to PMAB: "+href, ex);
                     continue;
@@ -181,7 +182,7 @@ public class Writer {
             String href = config.imageDir + "/" + base + "-cover." +
                     FileNameUtils.extensionName(fb.getName());
             try {
-                PMAB.writeFile(fb, zipout, href);
+                ZipUtils.writeFile(fb, zipout, href);
                 elem.addElement("cover").addAttribute("href", href).addAttribute("media-type",
                         fb.getMime());
             } catch (IOException ex) {
@@ -194,7 +195,7 @@ public class Writer {
             TextObject tb = (TextObject) o;
             String href = config.textDir + "/" + base + "-intro.txt";
             try {
-                PMAB.writeText(tb, zipout, href, encoding);
+                ZipUtils.writeText(tb, zipout, href, encoding);
                 elem.addElement("intro").addAttribute("href", href).addAttribute("encoding", encoding);
             } catch (IOException ex) {
                 LOG.debug("cannot write text to PMAB: "+href, ex);
@@ -204,7 +205,7 @@ public class Writer {
             TextObject tb = part.getSource();
             String href = config.textDir + "/" + base + ".txt";
             try {
-                PMAB.writeText(tb, zipout, href, encoding);
+                ZipUtils.writeText(tb, zipout, href, encoding);
                 elem.addAttribute("href", href).addAttribute("encoding", encoding);
             } catch (IOException ex) {
                 LOG.debug("cannot write text to PMAB: "+href, ex);

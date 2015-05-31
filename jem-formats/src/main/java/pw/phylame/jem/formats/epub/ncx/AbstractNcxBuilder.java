@@ -19,16 +19,22 @@
 package pw.phylame.jem.formats.epub.ncx;
 
 import org.dom4j.Document;
-import pw.phylame.jem.core.Book;
+import pw.phylame.jem.formats.epub.EPUB;
 import pw.phylame.jem.formats.epub.EpubConfig;
-import pw.phylame.jem.formats.epub.opf.OpfBuilder;
+import pw.phylame.jem.formats.util.XmlUtils;
 
 import java.io.IOException;
+import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 /**
- * NCX builder.
+ * Provides HTML writer.
  */
-public interface NcxBuilder {
-    Document make(Book book, String uuid, ZipOutputStream zipout, OpfBuilder opfBuilder, EpubConfig config) throws IOException;
+public abstract class AbstractNcxBuilder implements NcxBuilder {
+    public void writeHtmlPage(Document page, ZipOutputStream zipout, String href, EpubConfig config)
+            throws IOException {
+        zipout.putNextEntry(new ZipEntry(EPUB.getOpsPath(href, config)));
+        XmlUtils.writeXML(page, zipout, config.htmlEncoding, config.htmlIndent, "\r\n");
+        zipout.closeEntry();
+    }
 }

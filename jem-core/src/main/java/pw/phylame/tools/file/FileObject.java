@@ -26,7 +26,7 @@ import org.apache.commons.io.IOUtils;
 /**
  * Provides read only input source.
  * <p><tt>FileObject</tt> is designed for multiple uses,
- * so like <tt>openInputStream</tt> can be called any times.</p>
+ * so that <tt>openInputStream</tt> can be called any times.</p>
  */
 public abstract class FileObject {
     /** MIME type */
@@ -71,6 +71,7 @@ public abstract class FileObject {
     /**
      * Reads all bytes from file content.
      * @return the data in file
+     * @throws java.io.IOException occur IO errors
      */
     public byte[] readAll() throws IOException {
         byte[] bytes = IOUtils.toByteArray(new BufferedInputStream(openInputStream()));

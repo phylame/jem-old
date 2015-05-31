@@ -76,7 +76,7 @@ public class UmdMaker implements Maker {
                     LOG.debug("invalid UMD type: "+o, e);
                 }
             } else {
-                throw ExceptionFactory.forInvalidIntegerArgument(KEY_UMD_TYPE);
+                throw ExceptionFactory.forInvalidIntegerArgument(KEY_UMD_TYPE, o);
             }
         }
         make(book, output, umdType);
@@ -224,7 +224,7 @@ public class UmdMaker implements Maker {
                 Integer.toString(calendar.get(Calendar.DAY_OF_MONTH)).getBytes(UMD.TEXT_ENCODING));
         writeChunk(UMD.CDT_GENRE, false, book.getGenre().getBytes(UMD.TEXT_ENCODING));
         writeChunk(UMD.CDT_PUBLISHER, false, book.getPublisher().getBytes(UMD.TEXT_ENCODING));
-        writeChunk(UMD.CDT_VENDOR, false, book.stringAttribute("vendor", "").getBytes(UMD.TEXT_ENCODING));
+        writeChunk(UMD.CDT_VENDOR, false, book.getVendor().getBytes(UMD.TEXT_ENCODING));
     }
 
     // B

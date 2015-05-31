@@ -38,7 +38,8 @@ import java.text.SimpleDateFormat;
 public class Settings {
     private static Log LOG = LogFactory.getLog(Settings.class);
 
-    public static final String SETTINGS_FILE = Application.getUserHome().toLowerCase() + "/settings.pfc";
+    public static final String SETTINGS_FILE = Application.getUserHome().toLowerCase()
+            + "/settings.pfc";
 
     public static final String ENCODING = "UTF-8";
 

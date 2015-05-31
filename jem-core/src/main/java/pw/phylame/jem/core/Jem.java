@@ -44,15 +44,6 @@ public final class Jem {
     /** Format of Pem default format */
     public static final String PMAB_FORMAT      = "pmab";
 
-    /** Key for source path, auto putted after parsing file */
-    public static final String SOURCE_PATH      = "source_path";
-
-    /** Key for source file, auto putted after parsing file */
-    public static final String SOURCE_FILE      = "source_file";
-
-    /** Key for source format, auto putted after parsing file */
-    public static final String SOURCE_FORMAT    = "source_format";
-
     private static Parser getParser(String format) throws UnsupportedFormatException {
         if (format == null) {
             throw new NullPointerException("format");
@@ -93,8 +84,6 @@ public final class Jem {
         }
         Parser parser = getParser(format);
         Book book = parser.parse(source, kw);
-        book.setItem(SOURCE_PATH, source);
-        book.setItem(SOURCE_FORMAT, format);
         return book;
     }
 
@@ -114,8 +103,6 @@ public final class Jem {
         }
         Parser parser = getParser(format);
         Book book = parser.parse(file, kw);
-        book.setItem(SOURCE_FILE, file);
-        book.setItem(SOURCE_FORMAT, format);
         return book;
     }
 

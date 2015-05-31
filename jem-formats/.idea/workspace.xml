@@ -2,9 +2,68 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c6a5609f-7253-47fb-908f-8eec8dd23b4e" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/ncx/AbstractNcxBuilder.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/opf/AbstractOpfBuilder.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/gaf/Application.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/I18N.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/MakerException.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/ParserException.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/gaf/Settings.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/ZipUtils.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/jem/formats/messages.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/jem/formats/messages_zh_CN.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/tools/package-info.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/package-info.java" />
+      <change type="DELETED" beforePath="D:\code\pw-books\jem-formats\.idea\libraries\Maven__pw_books_jem_core_2_0_SNAPSHOT.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/gaf/Application.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/gaf/Application.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/core/Book.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/core/Book.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/CHANGES" afterPath="$PROJECT_DIR$/../jem-core/CHANGES" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CHANGES" afterPath="$PROJECT_DIR$/CHANGES" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/EpubConfig.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/EpubConfig.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/EpubMaker.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/EpubMaker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/writer/EpubWriter.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/writer/EpubWriter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/writer/EpubWriterFactory.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/writer/EpubWriterFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/ExceptionFactory.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/ExceptionFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/tools/file/FileObject.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/tools/file/FileObject.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/html/HtmlMaker.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/html/HtmlMaker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/ixin/IApplication.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/ixin/IApplication.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Imabw.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Imabw.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/core/Jem.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/core/Jem.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Manager.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Manager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/ncx/NcxBuilder.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/ncx/NcxBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/opf/OpfBuilder.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/opf/OpfBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/opf/Opf_2_0.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/opf/Opf_2_0.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PMAB.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PMAB.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/scj/SCI.java" afterPath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/scj/SCI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/gaf/Settings.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/gaf/Settings.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/tools/TextObject.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/tools/TextObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/umd/UmdMaker.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/umd/UmdMaker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/umd/UmdParser.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/umd/UmdParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/Viewer.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/Viewer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Worker.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Worker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/scj/Worker.java" afterPath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/scj/Worker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v2/Writer.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v2/Writer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v3/Writer.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v3/Writer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/writer/WriterV2.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/writer/WriterV2.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/jem/formats/epub/html/epub.css" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/jem/formats/epub/html/epub.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/imabw.iml" afterPath="$PROJECT_DIR$/../imabw/imabw.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/.idea/artifacts/imabw_jar.xml" afterPath="$PROJECT_DIR$/../imabw/.idea/artifacts/imabw_jar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jem-formats.iml" afterPath="$PROJECT_DIR$/jem-formats.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/resources/pw/phylame/tools/file/mime.properties" afterPath="$PROJECT_DIR$/../jem-core/src/main/resources/pw/phylame/tools/file/mime.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/.idea/misc.xml" afterPath="$PROJECT_DIR$/../jem-core/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/pom.xml" afterPath="$PROJECT_DIR$/../imabw/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../imabw/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../jem-core/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../scj/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="D:\code\pw-books\imabw\.idea\libraries\Maven__pw_books_jem_formats_1_0_2.xml" afterPath="$PROJECT_DIR$/../imabw/.idea/libraries/Maven__pw_books_jem_formats_1_1_0.xml" />
+      <change type="MOVED" beforePath="D:\code\pw-books\jem-formats\.idea\libraries\Maven__pw_books_jem_core_2_0_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__pw_books_jem_core_2_0_2.xml" />
+      <change type="MOVED" beforePath="D:\code\pw-books\jem-formats\src\main\java\pw\phylame\jem\formats\epub\Epub.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/EPUB.java" />
+      <change type="MOVED" beforePath="D:\code\pw-books\jem-formats\src\main\java\pw\phylame\jem\formats\epub\ncx\NCX_2005_1.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/ncx/Ncx_2005_1.java" />
     </list>
     <ignored path="format-pack.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,11 +87,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="WriterV2.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/writer/WriterV2.java">
+      <file leaf-file-name="EpubMaker.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/EpubMaker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="45" column="9" selection-start-line="45" selection-start-column="9" selection-end-line="45" selection-end-column="9" />
+            <state vertical-scroll-proportion="0.1724846">
+              <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -40,79 +99,55 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EpubWriter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/writer/EpubWriter.java">
+      <file leaf-file-name="UmdMaker.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/umd/UmdMaker.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="50" column="5" selection-start-line="50" selection-start-column="5" selection-end-line="50" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="XmlUtils.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/XmlUtils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="38" column="5" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EPUB.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/EPUB.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+              <caret line="78" column="80" selection-start-line="78" selection-start-column="80" selection-end-line="78" selection-end-column="80" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Ncx_2005_1.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/ncx/Ncx_2005_1.java">
+      <file leaf-file-name="PmabMaker.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3811395">
-              <caret line="81" column="88" selection-start-line="81" selection-start-column="88" selection-end-line="81" selection-end-column="88" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0">
+              <caret line="133" column="86" selection-start-line="133" selection-start-column="86" selection-end-line="133" selection-end-column="86" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HtmlMaker.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/html/HtmlMaker.java">
+      <file leaf-file-name="ExceptionFactory.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/ExceptionFactory.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="39" column="27" selection-start-line="39" selection-start-column="27" selection-end-line="39" selection-end-column="27" />
-              <folding>
-                <element signature="e#852#853#0" expanded="true" />
-                <element signature="e#879#880#0" expanded="true" />
-                <element signature="e#924#925#0" expanded="true" />
-                <element signature="e#951#952#0" expanded="true" />
-                <element signature="e#995#996#0" expanded="true" />
-                <element signature="e#1022#1023#0" expanded="true" />
-                <element signature="e#1075#1076#0" expanded="true" />
-                <element signature="e#1102#1103#0" expanded="true" />
-              </folding>
+              <caret line="24" column="83" selection-start-line="24" selection-start-column="83" selection-end-line="24" selection-end-column="83" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Opf_2_0.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/opf/Opf_2_0.java">
+      <file leaf-file-name="messages.properties" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/pw/phylame/jem/formats/messages.properties">
+          <provider editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+          <provider selected="true" editor-type-id="ResourceBundle">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EpubConfig.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/EpubConfig.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="55" column="19" selection-start-line="55" selection-start-column="19" selection-end-line="55" selection-end-column="19" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -124,6 +159,7 @@
       <list>
         <option value="Enum" />
         <option value="Interface" />
+        <option value="package-info" />
         <option value="Class" />
       </list>
     </option>
@@ -139,28 +175,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/online/OnlineParser.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/html/fetcher/BookFetcher.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/umd/UmdParser.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabParser.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/html/HtmlParser.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/jar/JarParser.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/jem-parsers.properties" />
-        <option value="$PROJECT_DIR$/src/main/resources/dtds/pbm/pbm-3-0.dtd" />
-        <option value="$PROJECT_DIR$/src/main/resources/dtds/pbm/pbm-2-0.dtd" />
-        <option value="$PROJECT_DIR$/src/main/resources/dtds/pbc/pbc-2-0.dtd" />
-        <option value="$PROJECT_DIR$/src/main/resources/dtds/pbc/pbc-3-0.dtd" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/txt/TxtConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/Texts.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v2/Writer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v3/Writer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/package-info.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/jar/JarMaker.java" />
         <option value="$PROJECT_DIR$/src/main/resources/pw/phylame/jem/formats/txt/txt.properties" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/txt/TxtParser.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/txt/TxtMaker.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/ExceptionFactory.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/umd/UmdMaker.java" />
         <option value="$PROJECT_DIR$/src/main/resources/jem-makers.properties" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/StyleProvider.java" />
@@ -170,26 +188,44 @@
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/NCXBuilder.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/NcxBuilder.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/impl/NCX_2005_1.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/EpubConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/writer/EpubWriterFactory.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/EpubMaker.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/ncx/NcxFactory.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/ncx/NcxBuilderFactory.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/opf/OpfBuilder.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/ncx/NcxBuilder.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/opf/OpfBuilderFactory.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/XmlUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PMAB.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/writer/EpubWriter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/EPUB.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/opf/Opf_2_0.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/CHANGES" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/Version.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PMAB.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/package-info.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/writer/EpubWriterFactory.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/writer/EpubWriter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/ncx/NcxBuilder.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/pw/phylame/jem/formats/epub/epubMessages.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/EpubConfig.java" />
+        <option value="$MAVEN_REPOSITORY$/pw-books/jem-core/2.0.2/jem-core-2.0.2-sources.jar!/pw/phylame/jem/core/Book.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/ParserException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/MakerException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/CommonParser.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/umd/UmdParser.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/CommonMaker.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/I18nSupport.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/pw/phylame/jem/formats/messages_zh_CN.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/I18N.java" />
+        <option value="$PROJECT_DIR$/CHANGES" />
+        <option value="$PROJECT_DIR$/src/main/resources/pw/phylame/jem/formats/epub/html/epub.css" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/opf/OpfBuilder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/opf/AbstractOpfBuilder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/opf/Opf_2_0.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/EPUB.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/ncx/AbstractNcxBuilder.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/writer/WriterV2.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/ZipUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/html/HtmlMaker.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/ncx/Ncx_2005_1.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/pw/phylame/jem/formats/messages.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/EpubMaker.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/ExceptionFactory.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/umd/UmdMaker.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java" />
       </list>
     </option>
   </component>
@@ -213,10 +249,10 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="72" />
-    <option name="y" value="74" />
-    <option name="width" value="1206" />
-    <option name="height" value="653" />
+    <option name="x" value="59" />
+    <option name="y" value="43" />
+    <option name="width" value="1246" />
+    <option name="height" value="631" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -231,7 +267,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="PackagesPane" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -242,7 +278,314 @@
       <autoscrollFromSource />
       <sortByType />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resource Bundle 'messages'" />
+              <option name="myItemType" value="com.intellij.lang.properties.projectView.ResourceBundleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pw.phylame.jem.formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resource Bundle 'messages'" />
+              <option name="myItemType" value="com.intellij.lang.properties.projectView.ResourceBundleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pw.phylame.jem.formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pw.phylame.jem.formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pw.phylame.jem.formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pmab" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pw.phylame.jem.formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="epub" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pw.phylame.jem.formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="epub" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="writer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pw.phylame.jem.formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="epub" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pw.phylame.jem.formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="epub" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ncx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pw.phylame.jem.formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="epub" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="html" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToClass.includeLibraries" value="false" />
@@ -254,19 +597,19 @@
     <property name="options.lastSelected" value="preferences.lookFeel" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/resources/pw/phylame/jem/formats" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/html" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="FullScreen" value="false" />
-    <property name="settings.editor.selected.configurable" value="File.Encoding" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="71" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
@@ -296,6 +639,9 @@
       <recent name="D:\code\pw-books\jem-formats\src\main\resources\" />
       <recent name="D:\code\pw-books\jem-formats\src\main\resources\pw\phylame\jem\formats\txt" />
       <recent name="D:\code\pw-books\jem-formats\src\main\java\pw\phylame\jem\formats\jar" />
+    </key>
+    <key name="MoveMembersDialog.RECENTS_KEY">
+      <recent name="pw.phylame.jem.formats.util.ZipUtils" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="pw.phylame.jem.formats.epub.ncx" />
@@ -694,28 +1040,41 @@
       <workItem from="1432187867457" duration="29000" />
       <workItem from="1432300641794" duration="298000" />
       <workItem from="1432347575899" duration="788000" />
+      <workItem from="1432901338253" duration="392000" />
+      <workItem from="1432952234868" duration="1958000" />
+      <workItem from="1432954234293" duration="5287000" />
+      <workItem from="1432970408535" duration="11265000" />
+      <workItem from="1432995435291" duration="329000" />
+      <workItem from="1433059499910" duration="982000" />
+      <workItem from="1433060670773" duration="183000" />
+      <workItem from="1433060894464" duration="213000" />
+      <workItem from="1433061137537" duration="14372000" />
+      <workItem from="1433076847716" duration="13000" />
+      <workItem from="1433078023748" duration="461000" />
+      <workItem from="1433078771833" duration="393000" />
+      <workItem from="1433081218243" duration="1578000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="111640000" />
+    <option name="totallyTimeSpent" value="149066000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="72" y="74" width="1206" height="653" extended-state="0" />
+    <frame x="59" y="43" width="1246" height="631" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32970452" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32846716" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294702" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37777779" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46138996" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22941177" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22845529" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24789916" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24743778" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -728,9 +1087,9 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3275862" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33278146" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3314815" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3257329" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32545203" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -784,387 +1143,396 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/dtds/pbc/pbc-3-0.dtd">
+    <entry file="jar://D:/devel/Java/jdk1.8.0_40/src.zip!/java/util/Locale.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24277456">
-          <caret line="6" column="59" selection-start-line="6" selection-start-column="59" selection-end-line="6" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/pw-books/jem-core/2.0.1/jem-core-2.0.1-sources.jar!/pw/phylame/jem/core/Jem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23497267">
-          <caret line="258" column="11" selection-start-line="258" selection-start-column="11" selection-end-line="258" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v3/Reader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="85" column="79" selection-start-line="85" selection-start-column="79" selection-end-line="85" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/pw-books/jem-core/2.0.1/jem-core-2.0.1-sources.jar!/pw/phylame/tools/TextObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.2199314">
-          <caret line="236" column="19" selection-start-line="236" selection-start-column="19" selection-end-line="236" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/Texts.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42439863">
-          <caret line="29" column="2" selection-start-line="29" selection-start-column="2" selection-end-line="29" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/txt/TxtConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.58762884">
-          <caret line="34" column="44" selection-start-line="34" selection-start-column="44" selection-end-line="34" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/cover.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v2/Writer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.1937172">
-          <caret line="40" column="22" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v3/Writer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14921466">
-          <caret line="34" column="27" selection-start-line="34" selection-start-column="27" selection-end-line="34" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/jem-parsers.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8041237">
-          <caret line="25" column="17" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/LICENSE">
-      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.79234976">
-          <caret line="202" column="0" selection-start-line="202" selection-start-column="0" selection-end-line="202" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/umd/UMD.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.7302405">
-          <caret line="23" column="19" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/jar/JAR.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31443298">
-          <caret line="26" column="10" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/html/fetcher/HtmlBook.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/html/fetcher/BookFetcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1305842">
-          <caret line="20" column="7" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36065573">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.9375">
-          <caret line="6" column="5" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/pw/phylame/jem/formats/txt/txt.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6939891">
-          <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/txt/TxtParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.75409836">
-          <caret line="85" column="9" selection-start-line="85" selection-start-column="9" selection-end-line="85" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/jar/JarMaker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.4918033">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.038251366">
-          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/ExceptionFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.420765">
-          <caret line="27" column="14" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/umd/UmdMaker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30091184">
-          <caret line="66" column="18" selection-start-line="66" selection-start-column="18" selection-end-line="66" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/txt/TxtMaker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="44" column="5" selection-start-line="44" selection-start-column="5" selection-end-line="44" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/html/StyleProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.4852653">
-          <caret line="52" column="11" selection-start-line="52" selection-start-column="11" selection-end-line="52" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5795678">
-          <caret line="37" column="24" selection-start-line="37" selection-start-column="24" selection-end-line="37" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar!/org/dom4j/Document.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35281837">
-          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar!/org/dom4j/DocumentHelper.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30897704">
-          <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+        <state vertical-scroll-proportion="1.8895348">
+          <caret line="1389" column="18" selection-start-line="1389" selection-start-column="18" selection-end-line="1389" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/html/DefaultStyleProvider.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5363458">
+        <state vertical-scroll-proportion="0.36627907">
           <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/EpubConfig.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/html/StyleProvider.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20628683">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+        <state vertical-scroll-proportion="-0.125">
+          <caret line="40" column="11" selection-start-line="40" selection-start-column="11" selection-end-line="40" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/EpubMaker.java">
+    <entry file="jar://D:/devel/Java/jdk1.8.0_40/src.zip!/java/text/MessageFormat.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6286837">
-          <caret line="73" column="42" selection-start-line="73" selection-start-column="42" selection-end-line="73" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/writer/EpubWriterFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5363458">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/devel/Java/jdk1.8.0_40/src.zip!/java/lang/String.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33202356">
-          <caret line="963" column="19" selection-start-line="963" selection-start-column="19" selection-end-line="963" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/ncx/NcxBuilderFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1237721">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/opf/OpfBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="3" selection-start-line="25" selection-start-column="3" selection-end-line="25" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PMAB.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.0019646">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45579568">
-          <caret line="177" column="0" selection-start-line="177" selection-start-column="0" selection-end-line="177" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/devel/Java/jdk1.8.0_40/src.zip!/java/util/zip/DeflaterOutputStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9508841">
-          <caret line="271" column="16" selection-start-line="271" selection-start-column="16" selection-end-line="271" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/jem-makers.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7524558">
-          <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CHANGES">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6196721">
-          <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/Version.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24262296">
-          <caret line="24" column="47" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47740668">
-          <caret line="14" column="16" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/writer/WriterV2.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="45" column="9" selection-start-line="45" selection-start-column="9" selection-end-line="45" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/opf/OpfBuilderFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1237721">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="838" column="25" selection-start-line="838" selection-start-column="25" selection-end-line="838" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/ncx/NcxBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41257367">
-          <caret line="26" column="3" selection-start-line="26" selection-start-column="3" selection-end-line="26" selection-end-column="3" />
+        <state vertical-scroll-proportion="0.2747093">
+          <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/opf/Opf_2_0.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v3/Reader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5247093">
+          <caret line="114" column="41" selection-start-line="114" selection-start-column="41" selection-end-line="114" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="55" column="19" selection-start-line="55" selection-start-column="19" selection-end-line="55" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/pw-books/jem-core/2.0.2/jem-core-2.0.2-sources.jar!/pw/phylame/jem/core/Chapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3326886">
+          <caret line="91" column="22" selection-start-line="91" selection-start-column="22" selection-end-line="91" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/devel/Java/jdk1.8.0_40/src.zip!/java/lang/Object.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3326886">
+          <caret line="234" column="18" selection-start-line="234" selection-start-column="18" selection-end-line="234" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/commons-io/commons-io/2.4/commons-io-2.4.jar!/org/apache/commons/io/FilenameUtils.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.633333">
+          <caret line="327" column="25" selection-start-line="327" selection-start-column="25" selection-end-line="327" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/commons-io/commons-io/2.4/commons-io-2.4-sources.jar!/org/apache/commons/io/FilenameUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.54651165">
+          <caret line="716" column="5" selection-start-line="716" selection-start-column="5" selection-end-line="716" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/pw-books/jem-core/2.0.2/jem-core-2.0.2-sources.jar!/pw/phylame/jem/core/Book.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33284885">
+          <caret line="48" column="31" selection-start-line="48" selection-start-column="31" selection-end-line="48" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/devel/Java/jdk1.8.0_40/src.zip!/java/util/Date.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33284885">
+          <caret line="948" column="19" selection-start-line="948" selection-start-column="19" selection-end-line="948" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/Version.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.39680234">
+          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/umd/UMD.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.030523255">
+          <caret line="23" column="19" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/ParserException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4505814">
+          <caret line="33" column="11" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/pw-books/jem-core/2.0.2/jem-core-2.0.2-sources.jar!/pw/phylame/jem/util/JemException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21366279">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/MakerException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24127907">
+          <caret line="25" column="39" selection-start-line="25" selection-start-column="39" selection-end-line="25" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/devel/Java/jdk1.8.0_40/src.zip!/java/util/ResourceBundle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27180234">
+          <caret line="765" column="42" selection-start-line="765" selection-start-column="18" selection-end-line="765" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/pw/phylame/jem/formats/messages_zh_CN.properties">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="19" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="ResourceBundle">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/I18N.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="36" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/umd/UmdParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.684593">
+          <caret line="283" column="83" selection-start-line="283" selection-start-column="83" selection-end-line="283" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/pw/phylame/jem/formats/epub/html/epub.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27180234">
+          <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/opf/OpfBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.75581396">
+          <caret line="31" column="3" selection-start-line="31" selection-start-column="3" selection-end-line="31" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/writer/WriterV2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.54215115">
+          <caret line="68" column="8" selection-start-line="68" selection-start-column="8" selection-end-line="68" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/Texts.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.042151164">
+          <caret line="29" column="2" selection-start-line="29" selection-start-column="2" selection-end-line="29" selection-end-column="2" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/XmlUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="5" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.73255813">
+          <caret line="45" column="1" selection-start-line="45" selection-start-column="1" selection-end-line="45" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PMAB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.09156977">
+          <caret line="46" column="23" selection-start-line="46" selection-start-column="23" selection-end-line="46" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/jar/JAR.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21366279">
+          <caret line="23" column="19" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/opf/AbstractOpfBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7252907">
+          <caret line="69" column="25" selection-start-line="69" selection-start-column="25" selection-end-line="69" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/ncx/AbstractNcxBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42732558">
+          <caret line="37" column="28" selection-start-line="37" selection-start-column="28" selection-end-line="37" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/pw-books/jem-core/2.0.2/jem-core-2.0.2-sources.jar!/pw/phylame/tools/TextObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33284885">
+          <caret line="102" column="18" selection-start-line="102" selection-start-column="18" selection-end-line="102" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/devel/Java/jdk1.8.0_40/src.zip!/java/io/OutputStreamWriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33284885">
+          <caret line="93" column="60" selection-start-line="93" selection-start-column="60" selection-end-line="93" selection-end-column="60" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/EPUB.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.007267442">
+          <caret line="61" column="51" selection-start-line="61" selection-start-column="51" selection-end-line="61" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/pw-books/jem-core/2.0.2/jem-core-2.0.2-sources.jar!/pw/phylame/jem/core/Part.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33284885">
+          <caret line="280" column="19" selection-start-line="280" selection-start-column="19" selection-end-line="280" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/devel/Java/jdk1.8.0_40/src.zip!/java/lang/String.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.60755813">
+          <caret line="2866" column="5" selection-start-line="2866" selection-start-column="5" selection-end-line="2866" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding />
+          <caret line="14" column="16" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/ZipUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5868853">
+          <caret line="42" column="33" selection-start-line="42" selection-start-column="33" selection-end-line="42" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CHANGES">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3442623">
+          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/html/HtmlMaker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="39" column="27" selection-start-line="39" selection-start-column="27" selection-end-line="39" selection-end-column="27" />
+          <caret line="81" column="101" selection-start-line="81" selection-start-column="101" selection-end-line="81" selection-end-column="101" />
           <folding>
-            <element signature="e#852#853#0" expanded="true" />
-            <element signature="e#879#880#0" expanded="true" />
-            <element signature="e#924#925#0" expanded="true" />
-            <element signature="e#951#952#0" expanded="true" />
-            <element signature="e#995#996#0" expanded="true" />
-            <element signature="e#1022#1023#0" expanded="true" />
-            <element signature="e#1075#1076#0" expanded="true" />
-            <element signature="e#1102#1103#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/writer/EpubWriter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="50" column="5" selection-start-line="50" selection-start-column="5" selection-end-line="50" selection-end-column="5" />
-          <folding>
+            <element signature="e#0#5745#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.7371663">
+          <caret line="44" column="13" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/EpubConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/writer/EpubWriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33264887">
+          <caret line="38" column="25" selection-start-line="38" selection-start-column="25" selection-end-line="38" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/opf/Opf_2_0.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3963039">
+          <caret line="128" column="0" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/ncx/Ncx_2005_1.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3811395">
-          <caret line="81" column="88" selection-start-line="81" selection-start-column="88" selection-end-line="81" selection-end-column="88" />
+        <state vertical-scroll-proportion="0.07392197">
+          <caret line="59" column="17" selection-start-line="59" selection-start-column="17" selection-end-line="59" selection-end-column="17" />
+          <folding>
+            <element signature="docComment;class#Ncx_2005_1#0" expanded="false" />
+            <element signature="method#getInfoLines#0;class#Ncx_2005_1#0" expanded="false" />
+            <element signature="method#writeBookCoverPage#0;class#Ncx_2005_1#0" expanded="false" />
+            <element signature="method#writeBookIntroPage#0;class#Ncx_2005_1#0" expanded="false" />
+            <element signature="method#writeBookInfoPage#0;class#Ncx_2005_1#0" expanded="false" />
+            <element signature="method#writePartCoverPage#0;class#Ncx_2005_1#0" expanded="false" />
+            <element signature="method#writeSectionPage#0;class#Ncx_2005_1#0" expanded="false" />
+            <element signature="method#writeChapterPage#0;class#Ncx_2005_1#0" expanded="false" />
+            <element signature="method#addNavPoint#0;class#Ncx_2005_1#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/ExceptionFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="83" selection-start-line="24" selection-start-column="83" selection-end-line="24" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/umd/UmdMaker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="78" column="80" selection-start-line="78" selection-start-column="80" selection-end-line="78" selection-end-column="80" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="133" column="86" selection-start-line="133" selection-start-column="86" selection-end-line="133" selection-end-column="86" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/pw/phylame/jem/formats/messages.properties">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="ResourceBundle">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/EpubMaker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1724846">
+          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1223,7 +1591,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>Android 4.0</last-edited>
+          <last-edited>JDK 1.8</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1260,7 +1628,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>Maven: pw-books:jem-core:2.0-SNAPSHOT</last-edited>
+          <last-edited>Maven: pw-books:jem-core:2.0.2</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

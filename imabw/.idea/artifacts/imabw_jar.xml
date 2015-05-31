@@ -17,9 +17,9 @@
       <element id="library" level="project" name="Maven: dom4j:dom4j:1.6.1" />
       <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.2" />
       <element id="library" level="project" name="Maven: commons-io:commons-io:2.4" />
-      <element id="library" level="project" name="Maven: pw-books:jem-formats:1.0.2" />
       <element id="library" level="project" name="Maven: pw-books:jem-core:2.0.2" />
       <element id="library" level="project" name="JFontChooser" />
+      <element id="library" level="project" name="Maven: pw-books:jem-formats:1.1.0" />
     </root>
   </artifact>
 </component>

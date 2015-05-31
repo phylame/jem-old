@@ -67,25 +67,4 @@ public final class PMAB {
         }
     }
 
-    public static void writeFile(FileObject fb, ZipOutputStream zipout, String href) throws IOException {
-        zipout.putNextEntry(new ZipEntry(href));
-        fb.copyTo(zipout);
-        zipout.closeEntry();
-    }
-
-    /**
-     * Writes text content in TextObject to PMAB archive.
-     * @param tb the TextObject
-     * @param zipout PMAB archive stream
-     * @param href name of entry to store text content
-     * @param encoding encoding to encode text
-     */
-    public static void writeText(TextObject tb, ZipOutputStream zipout, String href, String encoding)
-            throws IOException {
-        zipout.putNextEntry(new ZipEntry(href));
-        java.io.Writer writer = new java.io.OutputStreamWriter(zipout, encoding);
-        tb.writeTo(writer);
-        writer.flush();
-        zipout.closeEntry();
-    }
 }

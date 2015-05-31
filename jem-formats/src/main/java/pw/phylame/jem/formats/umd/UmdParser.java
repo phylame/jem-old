@@ -21,11 +21,8 @@ package pw.phylame.jem.formats.umd;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import pw.phylame.jem.core.Part;
-import pw.phylame.jem.core.Book;
-import pw.phylame.jem.core.Chapter;
-import pw.phylame.jem.core.Cleanable;
-import pw.phylame.jem.core.AbstractParser;
+import pw.phylame.jem.core.*;
+import pw.phylame.jem.formats.util.ParserException;
 import pw.phylame.jem.util.JemException;
 
 import pw.phylame.tools.DateUtils;
@@ -86,7 +83,7 @@ public class UmdParser extends AbstractParser {
     public Book parse(RandomAccessFile in) throws IOException, JemException {
         source = in;
         if (! isUmd()) {
-            throw new JemException("Invalid UMD file: magic number");
+            throw new ParserException("Invalid UMD file: magic number", getName());
         }
         book = new Book();
         int sep;
@@ -96,7 +93,7 @@ public class UmdParser extends AbstractParser {
             } else if (sep == UMD.ADDITION_SEPARATOR) {
                 readAddition();
             } else {
-                throw new JemException("Bad UMD file: unexpected separator: "+sep);
+                throw new ParserException("Bad UMD file: unexpected separator: "+sep, getName());
             }
         }
         return book;
@@ -161,7 +158,7 @@ public class UmdParser extends AbstractParser {
                 length = 0;
                 break;
             case UMD.CDT_VENDOR:
-                book.setAttribute("vendor", readString(length));
+                book.setVendor(readString(length));
                 length = 0;
                 break;
             case UMD.CDT_CONTENT_LENGTH:
@@ -188,7 +185,7 @@ public class UmdParser extends AbstractParser {
             case UMD.CDT_CDS_KEY:
                 byte[] bytes = new byte[length];
                 if (source.read(bytes) != length) {
-                    throw new JemException("Bad UMD file: CDS key");
+                    throw new ParserException("Bad UMD file: CDS key", getName());
                 }
                 book.setAttribute("cds_key", bytes);
                 length = 0;
@@ -196,7 +193,7 @@ public class UmdParser extends AbstractParser {
             case UMD.CDT_LICENSE_KEY:
                 bytes = new byte[length];
                 if (source.read(bytes) != length) {
-                    throw new JemException("Bad UMD file: license key");
+                    throw new ParserException("Bad UMD file: license key", getName());
                 }
                 book.setAttribute("license_key", bytes);
                 length = 0;
@@ -216,7 +213,7 @@ public class UmdParser extends AbstractParser {
                 break;
             case UMD.CDT_UMD_END:
                 if (readInt(source) != source.getFilePointer()) {
-                    throw new JemException("Bad UMD file: end position");
+                    throw new ParserException("Bad UMD file: end position", getName());
                 }
                 length -= 4;
                 break;
@@ -230,7 +227,7 @@ public class UmdParser extends AbstractParser {
     private String readString(int size) throws IOException, JemException {
         byte[] bytes = new byte[size];
         if (source.read(bytes) != size) {
-            throw new JemException("Bad UMD file: attributes");
+            throw new ParserException("Bad UMD file: attributes", getName());
         }
         return new String(bytes, UMD.TEXT_ENCODING);
     }
@@ -284,7 +281,7 @@ public class UmdParser extends AbstractParser {
             int size = source.read();
             byte[] bytes = new byte[size];
             if (source.read(bytes) != size) {
-                throw new JemException("Bad UMD file: chapter titles");
+                throw new ParserException("Bad UMD file: chapter titles", getName());
             }
             String title = new String(bytes, UMD.TEXT_ENCODING);
             try {
@@ -377,98 +374,99 @@ public class UmdParser extends AbstractParser {
         }
         return littleParser.getUint16(b, 0);
     }
-}
 
-class DataBlock {
-    public int offset, length;
+    static class DataBlock {
+        public int offset, length;
 
-    public DataBlock(int offset, int length) {
-        this.offset = offset;
-        this.length = length;
-    }
-}
-
-class UmdSource extends TextObject {
-    private RandomAccessFile in;
-    public long offset, size;
-    private boolean fromUmd = false;
-    private List<DataBlock> blocks;
-
-    public UmdSource(RandomAccessFile in, long offset, long size, List<DataBlock> blocks) {
-        super();
-        this.in = in;
-        this.offset = offset;
-        this.size = size;
-        this.blocks = blocks;
-        fromUmd = true;
-    }
-
-    @Override
-    public void setRaw(String raw) {
-        super.setRaw(raw);
-        fromUmd = false;
-    }
-
-    @Override
-    public void setFile(FileObject file, String encoding) {
-        super.setFile(file, encoding);
-        fromUmd = false;
-    }
-
-    @Override
-    protected long aboutSize() {
-        if (fromUmd) {
-            return size;
-        } else {
-            return super.aboutSize();
+        public DataBlock(int offset, int length) {
+            this.offset = offset;
+            this.length = length;
         }
     }
 
-    private String rawText() throws IOException {
-        int index = (int)(offset / UMD.BLOCK_SIZE);
-        int start = (int)(offset % UMD.BLOCK_SIZE);
-        int length = -start;
-        StringBuilder sb = new StringBuilder();
-        do {
-            DataBlock block = blocks.get(index++);
-            in.seek(block.offset);
-            byte[] bytes = new byte[block.length];
-            int n = in.read(bytes);
-            bytes = ZLibUtils.decompress(bytes, 0, n);
-            length += bytes.length;
-            sb.append(new String(bytes, UMD.TEXT_ENCODING));
-            if (size < length) {
-                return sb.substring(start / 2, start / 2 + (int) size / 2);
+    static class UmdSource extends TextObject {
+        private RandomAccessFile in;
+        public long offset, size;
+        private boolean fromUmd = false;
+        private List<DataBlock> blocks;
+
+        public UmdSource(RandomAccessFile in, long offset, long size, List<DataBlock> blocks) {
+            super();
+            this.in = in;
+            this.offset = offset;
+            this.size = size;
+            this.blocks = blocks;
+            fromUmd = true;
+        }
+
+        @Override
+        public void setRaw(String raw) {
+            super.setRaw(raw);
+            fromUmd = false;
+        }
+
+        @Override
+        public void setFile(FileObject file, String encoding) {
+            super.setFile(file, encoding);
+            fromUmd = false;
+        }
+
+        @Override
+        protected long aboutSize() {
+            if (fromUmd) {
+                return size;
+            } else {
+                return super.aboutSize();
             }
-        } while (true);
-
-    }
-
-    @Override
-    public String getText() throws IOException {
-        if (fromUmd) {
-            return rawText().replaceAll(UMD.SYMBIAN_LINE_FEED, System.getProperty("line.separator"));
-        } else {
-            return super.getText();
         }
-    }
 
-    @Override
-    public List<String> getLines() throws IOException {
-        if (fromUmd) {
-            return java.util.Arrays.asList(rawText().split(UMD.SYMBIAN_LINE_FEED));
-        } else {
-            return super.getLines();
+        private String rawText() throws IOException {
+            int           index  = (int) (offset / UMD.BLOCK_SIZE);
+            int           start  = (int) (offset % UMD.BLOCK_SIZE);
+            int           length = -start;
+            StringBuilder sb     = new StringBuilder();
+            do {
+                DataBlock block = blocks.get(index++);
+                in.seek(block.offset);
+                byte[] bytes = new byte[block.length];
+                int n = in.read(bytes);
+                bytes = ZLibUtils.decompress(bytes, 0, n);
+                length += bytes.length;
+                sb.append(new String(bytes, UMD.TEXT_ENCODING));
+                if (size < length) {
+                    return sb.substring(start / 2, start / 2 + (int) size / 2);
+                }
+            } while (true);
+
         }
-    }
 
-    @Override
-    public void writeTo(Writer writer) throws IOException {
-        if (fromUmd) {
-            String text = rawText();
-            writer.write(text);
-        } else {
-            super.writeTo(writer);
+        @Override
+        public String getText() throws IOException {
+            if (fromUmd) {
+                return rawText().replaceAll(UMD.SYMBIAN_LINE_FEED, System.getProperty("line.separator"));
+            } else {
+                return super.getText();
+            }
+        }
+
+        @Override
+        public List<String> getLines() throws IOException {
+            if (fromUmd) {
+                return java.util.Arrays.asList(rawText().split(UMD.SYMBIAN_LINE_FEED));
+            } else {
+                return super.getLines();
+            }
+        }
+
+        @Override
+        public void writeTo(Writer writer) throws IOException {
+            if (fromUmd) {
+                String text = rawText();
+                writer.write(text);
+            } else {
+                super.writeTo(writer);
+            }
         }
     }
 }
+

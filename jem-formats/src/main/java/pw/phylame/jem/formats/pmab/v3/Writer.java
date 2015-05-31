@@ -27,6 +27,7 @@ import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.Part;
 import pw.phylame.jem.formats.pmab.PMAB;
 import pw.phylame.jem.formats.pmab.PmabConfig;
+import pw.phylame.jem.formats.util.ZipUtils;
 import pw.phylame.tools.DateUtils;
 import pw.phylame.tools.TextObject;
 import pw.phylame.tools.file.FileNameUtils;
@@ -60,7 +61,7 @@ public final class Writer {
                 text = config.extraDir + "/" + baseName;
             }
             try {
-                PMAB.writeFile(fb, zipout, text);
+                ZipUtils.writeFile(fb, zipout, text);
             } catch (IOException ex) {
                 LOG.debug("cannot write file to PMAB: "+fb.getName(), ex);
             }
@@ -76,7 +77,7 @@ public final class Writer {
                 text = config.extraDir + "/" + baseName;
             }
             try {
-                PMAB.writeText(tb, zipout, text, encoding);
+                ZipUtils.writeText(tb, zipout, text, encoding);
             } catch (IOException ex) {
                 LOG.debug("cannot write text to PMAB: "+text, ex);
             }
@@ -141,7 +142,7 @@ public final class Writer {
         String href = config.textDir + "/"+ base + ".txt";
         String encoding = config.textEncoding != null ? config.textEncoding :
                 System.getProperty("file.encoding");
-        PMAB.writeText(part.getSource(), zipout, href, encoding);
+        ZipUtils.writeText(part.getSource(), zipout, href, encoding);
         Element content = item.addElement("content");
         content.addAttribute("type", "text/plain;encoding="+encoding);
         content.setText(href);

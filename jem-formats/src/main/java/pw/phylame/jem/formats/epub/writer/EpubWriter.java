@@ -47,6 +47,5 @@ public abstract class EpubWriter {
         rootfile.addAttribute("full-path", opfPath);
         rootfile.addAttribute("media-type", EPUB.MT_OPF);
         return doc;
-
     }
 }

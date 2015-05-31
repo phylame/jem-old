@@ -19,13 +19,30 @@
 package pw.phylame.jem.formats.epub.opf;
 
 import org.dom4j.Document;
-import pw.phylame.jem.core.Book;
+import org.dom4j.Element;
 
+import pw.phylame.jem.core.Book;
+import pw.phylame.jem.formats.epub.EpubConfig;
+
+import java.io.IOException;
 import java.util.zip.ZipOutputStream;
 
 /**
  * OPF builder.
  */
 public interface OpfBuilder {
-    Document make(Book book, String uuid, ZipOutputStream zipout);
+
+    Element addManifestItem(String id, String href, String mediaType);
+
+    Element addSpineItem(String idref, boolean linear, String properties);
+
+    Element addGuideItem(String href, String type, String title);
+
+    /**
+     * Returns the cover image href in OPS.
+     * @return the href
+     */
+    String getCover();
+
+    Document make(Book book, String uuid, ZipOutputStream zipout, EpubConfig config) throws IOException;
 }

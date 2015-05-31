@@ -16,14 +16,32 @@
  * limitations under the License.
  */
 
-package pw.phylame.jem.formats.epub.writer;
+package pw.phylame.jem.formats.util;
 
-public class EpubWriterFactory {
-    public static EpubWriter getWriter(String version) {
-        if (version.equals("2.0")) {
-            return new WriterV2();
-        } else {
-            return null;
-        }
+import pw.phylame.jem.util.JemException;
+
+/**
+ * Exception for Jem Parser errors.
+ */
+public class ParserException extends JemException {
+    private String format;
+
+    public ParserException(String message, String format) {
+        super(message);
+        this.format = format;
+    }
+
+    public ParserException(String message, Throwable cause, String format) {
+        super(message, cause);
+        this.format = format;
+    }
+
+    public ParserException(Throwable cause, String format) {
+        super(cause);
+        this.format = format;
+    }
+
+    public String getFormat() {
+        return format;
     }
 }

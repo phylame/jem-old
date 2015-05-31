@@ -33,6 +33,7 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.ParseException;
 
+import pw.phylame.gaf.Application;
 import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.BookHelper;
 import pw.phylame.tools.StringUtils;
@@ -41,51 +42,55 @@ import pw.phylame.tools.file.FileNameUtils;
 /**
  * SCI (Simple Console Interface) for Jem.
  */
-public final class SCI {
+public final class SCI extends Application {
 
     /** SCJ version message */
     public static final String VERSION = "1.0.3";
 
-    public static String Name = "scj";
+    public static String NAME = "scj";
 
-    private static ResourceBundle bundle = null;
+    public static final String I18N_PATH = "res/i18n/scj";
 
-    static {
-        String locale = System.getProperty("scj.locale");
-        if (locale == null) {
-            bundle = ResourceBundle.getBundle("res/i18n.scj", Locale.getDefault());
-        } else {
-            bundle = ResourceBundle.getBundle("res/i18n.scj", Locale.forLanguageTag(locale));
-        }
+    public SCI(String[] args) {
+        super(NAME, VERSION, args);
     }
 
-    public static String getText(String key, Object... objects) {
-        String pattern = bundle.getString(key);
-        return MessageFormat.format(pattern, objects);
+    public static SCI getInstance() {
+        return (SCI) getApplication();
+    }
+
+    @Override
+    protected void onStart() {
+        String str = System.getProperty("scj.locale");
+        if (str != null && str.length() != 0) {
+            Locale locale = Locale.forLanguageTag(str.replace("_", "-"));
+            setLocale(locale);
+        }
+        loadLanguage(I18N_PATH);
     }
 
     /**
      * Makes CLI options.
      * @return the options
      */
-    private static Options makeOptions() {
+    private Options makeOptions() {
         Options options = new Options();
         options.addOption("h", "help", false, getText("HELP_DESCRIPTION"));
-        options.addOption("v", "version",false, getText("HELP_VERSION"));
+        options.addOption("v", "version", false, getText("HELP_VERSION"));
         options.addOption("l", "list", false, getText("HELP_LIST"));
 
         // specified
         Option inFormat = OptionBuilder.withArgName(
                 getText("ARG_FORMAT")).hasArg().withDescription(
-                        getText("HELP_FROM_FORMAT")).create("f");
+                getText("HELP_FROM_FORMAT")).create("f");
 
         Option outFormat = OptionBuilder.withArgName(
                 getText("ARG_FORMAT")).hasArg().withDescription(
-                        getText("HELP_TO_FORMAT", Jem.PMAB_FORMAT.toUpperCase())).create("t");
+                getText("HELP_TO_FORMAT", Jem.PMAB_FORMAT.toUpperCase())).create("t");
 
         Option output = OptionBuilder.withArgName(
                 getText("ARG_PATH")).hasArg().withDescription(
-                        getText("HELP_OUTPUT")).create("o");
+                getText("HELP_OUTPUT")).create("o");
 
         options.addOption(inFormat).addOption(outFormat).addOption(output);
 
@@ -122,7 +127,7 @@ public final class SCI {
         return options;
     }
 
-    private static Map<String, Object> parseArguments(java.util.Properties prop) {
+    private Map<String, Object> parseArguments(java.util.Properties prop) {
         Map<String, Object> map = new java.util.HashMap<>();
         for (String key: prop.stringPropertyNames()) {
             map.put(key, prop.getProperty(key));
@@ -130,14 +135,14 @@ public final class SCI {
         return map;
     }
 
-    private static void showVersion() {
+    private void showVersion() {
         System.out.printf("SCI for Jem v%s on %s (%s)\n", VERSION, System.getProperty("os.name"),
                 System.getProperty("os.arch"));
         System.out.printf("Jem: %s by %s\n", Jem.VERSION, Jem.VENDOR);
         System.out.printf("%s\n", getText("SCJ_COPYRIGHTS"));
     }
 
-    private static void showSupported() {
+    private void showSupported() {
         System.out.println(getText("LIST_SUPPORTED_TITLE"));
         System.out.printf(" %s %s\n", getText("LIST_INPUT"),
                 StringUtils.join(BookHelper.supportedParsers(), " ").toUpperCase());
@@ -145,12 +150,12 @@ public final class SCI {
                 StringUtils.join(BookHelper.supportedMakers(), " ").toUpperCase());
     }
 
-    public static void error(String msg) {
-        System.err.println(Name + ": " + msg);
+    public void error(String msg) {
+        System.err.println(getName() + ": " + msg);
     }
 
-    public static void echo(String msg) {
-        System.out.println(Name + ": " + msg);
+    public void echo(String msg) {
+        System.out.println(getName() + ": " + msg);
     }
 
     /**
@@ -158,7 +163,7 @@ public final class SCI {
      * @param syntax SCI syntax
      * @param e the exception
      */
-    private static void cliError(String syntax, ParseException e) {
+    private void cliError(String syntax, ParseException e) {
         String msg;
         String clazz = e.getClass().getSimpleName();
         if ("UnrecognizedOptionException".equals(clazz)) {
@@ -177,17 +182,22 @@ public final class SCI {
         System.out.println(syntax);
     }
 
+    @Override
+    public void run() {
+        System.exit(exec());
+    }
+
     // command type
     enum Command {
         Convert, Join, Extract, View
     }
 
-    public static int exec(String name, String[] args) {
-        final String SCJ_SYNTAX = getText("SCI_SYNTAX", name);
+    public int exec() {
+        final String SCJ_SYNTAX = getText("SCI_SYNTAX", getName());
         Options options = makeOptions();
         CommandLine cmd;
         try {
-            cmd = new PosixParser().parse(options, args);    // POSIX style
+            cmd = new PosixParser().parse(options, getArguments());    // POSIX style
         } catch (ParseException e) {
             cliError(SCJ_SYNTAX, e);
             return -1;
@@ -292,6 +302,7 @@ public final class SCI {
     }
 
     public static void main(String[] args) {
-        System.exit(exec(Name, args));
+        SCI app = new SCI(args);
+        app.start();
     }
 }

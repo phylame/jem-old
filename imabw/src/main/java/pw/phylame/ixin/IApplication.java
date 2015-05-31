@@ -1,6 +1,8 @@
 /*
  * Copyright 2015 Peng Wan <phylame@163.com>
  *
+ * This file is part of IxIn.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,6 +18,7 @@
 
 package pw.phylame.ixin;
 
+import java.awt.Font;
 import javax.swing.UIManager;
 import javax.swing.SwingUtilities;
 
@@ -28,8 +31,8 @@ import pw.phylame.ixin.frame.IFrame;
 public abstract class IApplication extends Application {
 
     /** The constructor */
-    protected IApplication(String name, String[] args) {
-        super(name, args);
+    protected IApplication(String name, String version, String[] args) {
+        super(name, version, args);
     }
 
     public void setTheme(String name) {
@@ -58,16 +61,31 @@ public abstract class IApplication extends Application {
         }
     }
 
-    public void setGeneralFonts(java.awt.Font font) {
-        UIManager.put("ToolTip.font", font);
+    public void setButtonsFont(Font font) {
+        UIManager.put("Button.font", font);
+        UIManager.put("ToggleButton.font", font);
+        UIManager.put("RadioButton.font", font);
+    }
 
+    public void setMenuFont(Font font) {
+        UIManager.put("Menu.font", font);
+        UIManager.put("MenuItem.font", font);
+        UIManager.put("PopupMenu.font", font);
+        UIManager.put("MenuBar.font", font);
+        UIManager.put("CheckBoxMenuItem.font", font);
+        UIManager.put("RadioButtonMenuItem.font", font);
+    }
+
+    public void setTextFont(Font font) {
         UIManager.put("TextField.font", font);
         UIManager.put("PasswordField.font", font);
         UIManager.put("FormattedTextField.font", font);
         UIManager.put("TextArea.font", font);
         UIManager.put("TextPane.font", font);
         UIManager.put("EditorPane.font", font);
+    }
 
+    public void setComponentFont(Font font) {
         UIManager.put("Spinner.font", font);
         UIManager.put("ComboBox.font", font);
         UIManager.put("CheckBox.font", font);
@@ -77,22 +95,22 @@ public abstract class IApplication extends Application {
         UIManager.put("Tree.font", font);
         UIManager.put("Table.font", font);
         UIManager.put("TableHeader.font", font);
+        UIManager.put("ToolBar.font", font);
+        UIManager.put("ToolTip.font", font);
+    }
 
-        UIManager.put("Button.font", font);
-        UIManager.put("ToggleButton.font", font);
-        UIManager.put("RadioButton.font", font);
+    public void setGeneralFonts(Font font) {
+
+        setTextFont(font);
+
+        setComponentFont(font);
+
+        setButtonsFont(font);
 
         UIManager.put("DesktopIcon.font", font);
         UIManager.put("TitledBorder.font", font);
 
-        UIManager.put("Menu.font", font);
-        UIManager.put("MenuItem.font", font);
-        UIManager.put("PopupMenu.font", font);
-        UIManager.put("MenuBar.font", font);
-        UIManager.put("CheckBoxMenuItem.font", font);
-        UIManager.put("RadioButtonMenuItem.font", font);
-
-        UIManager.put("ToolBar.font", font);
+        setMenuFont(font);
 
         UIManager.put("TabbedPane.font", font);
         UIManager.put("OptionPane.messageFont", font);
@@ -101,6 +119,12 @@ public abstract class IApplication extends Application {
 
     public void setAAText(boolean enable) {
         System.setProperty("swing.aatext", String.valueOf(enable));
+    }
+
+    @Override
+    public void start() {
+        onStart();
+        SwingUtilities.invokeLater(this);
     }
 
     /**

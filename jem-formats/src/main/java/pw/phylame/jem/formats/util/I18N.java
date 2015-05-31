@@ -18,14 +18,32 @@
 
 package pw.phylame.jem.formats.util;
 
-import pw.phylame.jem.util.JemException;
+import java.text.MessageFormat;
+import java.util.ResourceBundle;
 
-public class ExceptionFactory {
-    public static JemException forInvalidStringArgument(String key, Object o) {
-        return new JemException(I18N.getText("Common.InvalidStringArgument", key, o));
+/**
+ * I18N for book parsers and makers.
+ */
+public final class I18N {
+    public static final String I18N_PATH = "pw/phylame/jem/formats/messages";
+    private static ResourceBundle bundle = null;
+
+    private I18N() {
     }
 
-    public static JemException forInvalidIntegerArgument(String key, Object o) {
-        return new JemException(I18N.getText("Common.InvalidIntegerArgument", key, o));
+    public static String getText(String key) {
+        return bundle.getString(key);
+    }
+
+    public static String getText(String key, Object... args) {
+        return MessageFormat.format(bundle.getString(key), args);
+    }
+
+    private static void loadBundle() {
+        bundle = ResourceBundle.getBundle(I18N_PATH);
+    }
+
+    static {
+        loadBundle();
     }
 }

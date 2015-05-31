@@ -25,7 +25,6 @@ import pw.phylame.imabw.ui.Viewer;
 import pw.phylame.ixin.IApplication;
 import pw.phylame.ixin.frame.IFrame;
 
-import javax.swing.*;
 import java.awt.Font;
 
 /**
@@ -46,11 +45,11 @@ public class Imabw extends IApplication implements Constants {
     private Config config;
 
     public Imabw(String[] args) {
-        super(INNER_NAME, args);
+        super(INNER_NAME, VERSION, args);
         checkHome();
         config = new Config();
         if (config.settingCount() == 0) { // no config
-            LOG.trace("no config found, create new one");
+            LOG.trace("no config found, create default config");
             config.reset();     // save new config when exiting imabw
         }
         initApp();
@@ -80,6 +79,7 @@ public class Imabw extends IApplication implements Constants {
     private void initApp() {
         setLocale(config.getAppLocale());
         loadLanguage();
+
         setAAText(config.isAntiAliased());
         Font font = config.getGlobalFont();
         if (font != null) {
@@ -114,16 +114,14 @@ public class Imabw extends IApplication implements Constants {
     }
 
     @Override
+    protected void onStart() {
+        viewer = new Viewer();
+        worker = new Worker();
+        manager = new Manager(viewer, worker);
+    }
+
+    @Override
     public void run() {
-        if (viewer == null) {
-            viewer = new Viewer();
-        }
-        if (worker == null) {
-            worker = new Worker();
-        }
-        if (manager == null) {
-            manager = new Manager(viewer, worker);
-        }
         // notify manager to work
         manager.begin();
     }
@@ -143,6 +141,6 @@ public class Imabw extends IApplication implements Constants {
 
     public static void main(final String[] args) {
         Imabw app = new Imabw(args);
-        javax.swing.SwingUtilities.invokeLater(app);
+        app.start();
     }
 }

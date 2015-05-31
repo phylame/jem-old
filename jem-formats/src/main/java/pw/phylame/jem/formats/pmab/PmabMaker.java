@@ -42,6 +42,7 @@ import java.util.zip.ZipOutputStream;
 public class PmabMaker implements Maker {
     private static Log LOG = LogFactory.getLog(PmabMaker.class);
 
+    public static final String KEY_CONFIG = "pmab_config";
     public static final String KEY_VERSION         = "pmab_version";
     public static final String KEY_TEXT_ENCODING   = "pmab_text_encoding";
     public static final String KEY_COMPRESS_METHOD = "pmab_compress_method";
@@ -74,67 +75,79 @@ public class PmabMaker implements Maker {
 
     private PmabConfig parseConfig(Map<String, Object> kw) throws JemException {
         PmabConfig config = new PmabConfig();
-        if (kw != null && kw.size() != 0) {
-            Object o = kw.get(KEY_VERSION);
-            if (o != null) {
-                if (o instanceof String) {
-                    config.version = (String) o;
-                } else {
-                    throw ExceptionFactory.forInvalidStringArgument(KEY_VERSION, o);
-                }
-            }
-            o = kw.get(KEY_TEXT_ENCODING);
-            if (o != null) {
-                if (o instanceof String) {
-                    config.textEncoding = (String) o;
-                } else {
-                    throw ExceptionFactory.forInvalidStringArgument(KEY_TEXT_ENCODING, o);
-                }
-            }
-            o = kw.get(KEY_COMPRESS_METHOD);
-            if (o != null) {
-                if (o instanceof Integer) {
-                    config.zipMethod = (Integer) o;
-                } else if (o instanceof String) {
-                    String s = (String) o;
-                    try {
-                        config.zipMethod = Integer.parseInt(s);
-                    } catch (NumberFormatException ex) {
-                        throw new JemException("Invalid ZIP method: "+s, ex);
-                    }
-                } else {
-                    throw ExceptionFactory.forInvalidIntegerArgument(KEY_COMPRESS_METHOD);
-                }
-            }
-            o = kw.get(KEY_COMPRESS_LEVEL);
-            if (o != null) {
-                if (o instanceof Integer) {
-                    config.zipLevel = (Integer) o;
-                } else if (o instanceof String) {
-                    String s = (String) o;
-                    try {
-                        config.zipLevel = Integer.parseInt(s);
-                    } catch (NumberFormatException ex) {
-                        throw new JemException("Invalid ZIP level: "+s, ex);
-                    }
-                } else {
-                    throw ExceptionFactory.forInvalidIntegerArgument(KEY_COMPRESS_LEVEL);
-                }
-            }
-            o = kw.get(KEY_COMMENT);
-            if (o instanceof String) {
-                config.zipComment = (String) o;
+        if (kw == null || kw.size() == 0) {
+            return config;
+        }
+
+        Object o = kw.get(KEY_CONFIG);
+        if (o != null) {
+            if (o instanceof PmabConfig) {
+                return (PmabConfig) o;
             } else {
-                LOG.debug("invalid 'pmab_comment', required string");
-            }
-            o = kw.get(KEY_META_DATA);
-            if (o instanceof Map) {
-                Map map = (Map) o;
-                config.metaInfo = new HashMap<Object, Object>(map);
-            } else {
-                LOG.debug("invalid 'pmab_meta_data', required map");
+                throw new JemException(KEY_CONFIG+" required PmabConfig, found "+o.getClass());
             }
         }
+
+        o = kw.get(KEY_VERSION);
+        if (o != null) {
+            if (o instanceof String) {
+                config.version = (String) o;
+            } else {
+                throw ExceptionFactory.forInvalidStringArgument(KEY_VERSION, o);
+            }
+        }
+        o = kw.get(KEY_TEXT_ENCODING);
+        if (o != null) {
+            if (o instanceof String) {
+                config.textEncoding = (String) o;
+            } else {
+                throw ExceptionFactory.forInvalidStringArgument(KEY_TEXT_ENCODING, o);
+            }
+        }
+        o = kw.get(KEY_COMPRESS_METHOD);
+        if (o != null) {
+            if (o instanceof Integer) {
+                config.zipMethod = (Integer) o;
+            } else if (o instanceof String) {
+                String s = (String) o;
+                try {
+                    config.zipMethod = Integer.parseInt(s);
+                } catch (NumberFormatException ex) {
+                    throw new JemException("Invalid ZIP method: "+s, ex);
+                }
+            } else {
+                throw ExceptionFactory.forInvalidIntegerArgument(KEY_COMPRESS_METHOD, o);
+            }
+        }
+        o = kw.get(KEY_COMPRESS_LEVEL);
+        if (o != null) {
+            if (o instanceof Integer) {
+                config.zipLevel = (Integer) o;
+            } else if (o instanceof String) {
+                String s = (String) o;
+                try {
+                    config.zipLevel = Integer.parseInt(s);
+                } catch (NumberFormatException ex) {
+                    throw new JemException("Invalid ZIP level: "+s, ex);
+                }
+            } else {
+                throw ExceptionFactory.forInvalidIntegerArgument(KEY_COMPRESS_LEVEL, o);
+            }
+        }
+        o = kw.get(KEY_COMMENT);
+        if (o instanceof String) {
+            config.zipComment = (String) o;
+        } else {
+            LOG.debug("invalid 'pmab_comment', required string");
+        }
+        o = kw.get(KEY_META_DATA);
+        if (o instanceof Map) {
+            Map map = (Map) o;
+            config.metaInfo = new HashMap<Object, Object>(map);
+        } else {
+            LOG.debug("invalid 'pmab_meta_data', required map");
+        }
+
         return config;
     }
 
