@@ -28,6 +28,7 @@ import pw.phylame.jem.core.Part;
 import pw.phylame.jem.formats.pmab.PMAB;
 import pw.phylame.jem.formats.pmab.PmabConfig;
 import pw.phylame.jem.formats.util.ZipUtils;
+
 import pw.phylame.tools.DateUtils;
 import pw.phylame.tools.TextObject;
 import pw.phylame.tools.file.FileNameUtils;
@@ -44,8 +45,8 @@ import java.util.zip.ZipOutputStream;
 public final class Writer {
     private static Log LOG = LogFactory.getLog(Writer.class);
 
-    private static void makeItem(Element parent, String name, Object value, ZipOutputStream zipout,
-                                 PmabConfig config, String prefix) {
+    private static void makeItem(Element parent, String name, Object value, ZipOutputStream zipout, PmabConfig config,
+                                 String prefix) {
         if (value == null) {    // ignore null value
             return;
         }
@@ -67,8 +68,7 @@ public final class Writer {
             }
         } else if ("text".equals(type)) {       // text object
             TextObject tb = (TextObject) value;
-            String encoding = config.textEncoding != null ? config.textEncoding :
-                    System.getProperty("file.encoding");
+            String encoding = config.textEncoding != null ? config.textEncoding : System.getProperty("file.encoding");
             type = "text/plain;encoding=" + encoding;
             String baseName = prefix + name + ".txt";
             if (name.equals("intro")) {
@@ -101,23 +101,21 @@ public final class Writer {
         for (Object key: metaInfo.keySet()) {
             Object value = metaInfo.get(key);
             if (value != null) {
-                head.addElement("meta").addAttribute("name", String.valueOf(key)
-                                                    ).addAttribute("value", String.valueOf(value));
+                head.addElement("meta").addAttribute("name", String.valueOf(key)).addAttribute("value",
+                        String.valueOf(value));
             }
         }
     }
 
-    private static void makeAttributes(Element parent, Part part, ZipOutputStream zipout,
-                                       PmabConfig config, String prefix)
-            throws IOException {
+    private static void makeAttributes(Element parent, Part part, ZipOutputStream zipout, PmabConfig config,
+                                       String prefix) throws IOException {
         Element attributes = parent.addElement("attributes");
         for (String name: part.attributeNames()) {
             makeItem(attributes, name, part.getAttribute(name, null), zipout, config, prefix);
         }
     }
 
-    public static void writePBM(Book book, Document doc, ZipOutputStream zipout, PmabConfig config)
-            throws IOException {
+    public static void writePBM(Book book, Document doc, ZipOutputStream zipout, PmabConfig config) throws IOException {
         doc.addDocType("pbm", null, null);
         Element root = doc.addElement("pbm", PMAB.PBM_XML_NS).addAttribute("version", "3.0");
         // head
@@ -133,15 +131,14 @@ public final class Writer {
         }
     }
 
-    private static void makeChapter(Element parent, Part part, ZipOutputStream zipout, PmabConfig config,
-                                    String suffix) throws IOException {
+    private static void makeChapter(Element parent, Part part, ZipOutputStream zipout, PmabConfig config, String suffix)
+            throws IOException {
         Element item = parent.addElement("chapter");
         String base = "chapter-" + suffix;
         makeAttributes(item, part, zipout, config, base+"-");
         // TODO  content
         String href = config.textDir + "/"+ base + ".txt";
-        String encoding = config.textEncoding != null ? config.textEncoding :
-                System.getProperty("file.encoding");
+        String encoding = config.textEncoding != null ? config.textEncoding : System.getProperty("file.encoding");
         ZipUtils.writeText(part.getSource(), zipout, href, encoding);
         Element content = item.addElement("content");
         content.addAttribute("type", "text/plain;encoding="+encoding);
@@ -154,8 +151,7 @@ public final class Writer {
         }
     }
 
-    public static void writePBC(Book book, Document doc, ZipOutputStream zipout, PmabConfig config)
-            throws IOException {
+    public static void writePBC(Book book, Document doc, ZipOutputStream zipout, PmabConfig config) throws IOException {
         doc.addDocType("pbc", null, null);
         Element root = doc.addElement("pbc", PMAB.PBC_XML_NS).addAttribute("version", "3.0");
 

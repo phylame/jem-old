@@ -20,15 +20,20 @@ package pw.phylame.jem.formats.pmab.v3;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import org.dom4j.Element;
 
-import java.io.IOException;
-import java.util.Iterator;
 import java.util.Map;
+import java.util.Iterator;
 import java.util.zip.ZipFile;
+
+import java.io.IOException;
+
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Part;
 import pw.phylame.jem.util.JemException;
+import pw.phylame.jem.formats.util.ParserException;
+
 import pw.phylame.tools.DateUtils;
 import pw.phylame.tools.TextObject;
 import pw.phylame.tools.file.FileFactory;
@@ -144,7 +149,7 @@ public class Reader {
     private static void readAttributes(Element parent, Part part, ZipFile zipFile) throws JemException {
         Element attrs = parent.element("attributes");
         if (attrs == null) {
-            throw new JemException("Not found 'attributes' in PBM");
+            throw new ParserException("Not found 'attributes' in PBM", "pmab");
         }
 
         for (Iterator it = attrs.elementIterator(); it.hasNext();) {
@@ -235,7 +240,7 @@ public class Reader {
     public static void readPBC(Element root, Book book, ZipFile zipFile) throws JemException {
         Element toc = root.element("toc");
         if (toc == null) {
-            throw new JemException("Not found 'toc' in PBC");
+            throw new ParserException("Not found 'toc' in PBC", "pmab");
         }
         for (Iterator it = toc.elementIterator("chapter"); it.hasNext(); ) {
             readChapter((Element) it.next(), book, zipFile);

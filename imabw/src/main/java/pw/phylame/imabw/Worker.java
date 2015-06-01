@@ -354,8 +354,7 @@ public class Worker {
                         LOG.debug("cannot delete PMAB cache "+cache.getAbsolutePath());
                     }
                 }
-                showError(parent, title, app.getText("Dialog.OpenBook.Error", file.getPath(),
-                        e.getMessage()));
+                showError(parent, title, app.getText("Dialog.OpenBook.Error", file.getPath(), e.getMessage()));
                 return null;
             }
             task.setCache(cache, true);
@@ -363,7 +362,7 @@ public class Worker {
         }
 
         // 2. read book
-        Book book = readBook(parent, title, file, format, kw);
+        Book book = readBook(parent, title, file, format, kw, task.getSource());
         if (book == null) {
             return null;
         }
@@ -372,14 +371,13 @@ public class Worker {
         return task;
     }
 
-    public Book readBook(Component parent, String title, File file, String format, Map<String, Object> kw) {
+    public Book readBook(Component parent, String title, File file, String format, Map<String, Object> kw, File source) {
         Book book = null;
         try {
             book = Jem.readBook(file, format, kw);
             addAttributes(book);
         } catch (IOException | JemException e) {
-            showError(parent, title, app.getText("Dialog.OpenBook.Error", file.getPath(),
-                    e.getMessage()));
+            showError(parent, title, app.getText("Dialog.OpenBook.Error", source.getPath(), e.getMessage()));
         }
 
         return book;

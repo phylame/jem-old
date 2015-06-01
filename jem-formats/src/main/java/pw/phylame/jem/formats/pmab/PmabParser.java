@@ -28,8 +28,9 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import pw.phylame.jem.core.*;
-import pw.phylame.jem.formats.pmab.v3.Reader;
 import pw.phylame.jem.util.JemException;
+import pw.phylame.jem.formats.pmab.v3.Reader;
+import pw.phylame.jem.formats.util.ParserException;
 
 import java.io.*;
 import java.util.Map;
@@ -78,7 +79,7 @@ public class PmabParser extends AbstractParser {
 
     public Book parse(final ZipFile zipFile) throws IOException, JemException {
         if (! PMAB.isPmab(zipFile)) {
-            throw new JemException("Invalid PMAB archive");
+            throw new ParserException("Invalid PMAB archive", getName());
         }
         Book book = new Book();
         readPBM(zipFile, book);
@@ -99,14 +100,13 @@ public class PmabParser extends AbstractParser {
     private void readPBM(ZipFile zipFile, Book book) throws IOException, JemException {
         ZipEntry zipEntry = zipFile.getEntry(PMAB.PBM_FILE);
         if (zipEntry == null) {
-            throw new IOException("Not found "+ PMAB.PBM_FILE+" in PMAB "+zipFile.getName());
+            throw new ParserException("Not found "+ PMAB.PBM_FILE+" in PMAB "+zipFile.getName(), getName());
         }
         InputStream stream = new BufferedInputStream(zipFile.getInputStream(zipEntry));
         SAXReader reader = new SAXReader();
-        reader.setEntityResolver(new EntityResolver() {
+        reader.setEntityResolver(new EntityResolver() { // ignore DTD checking
             @Override
-            public InputSource resolveEntity(String publicId, String systemId)
-                    throws SAXException, IOException {
+            public InputSource resolveEntity(String publicId, String systemId) throws SAXException, IOException {
                 return new InputSource(new ByteArrayInputStream("".getBytes()));
             }
         });
@@ -122,18 +122,18 @@ public class PmabParser extends AbstractParser {
         if ("pbm".equals(tag)) {
             // check DTD if present
             if (doc.getDocType() != null && ! doc.getDocType().getName().equals("pbm")) {
-                throw new JemException("Invalid PBC document: DTD is not pbm");
+                throw new ParserException("Invalid PBC document: DTD is not pbm", getName());
             }
             version = root.attributeValue("version");
         } else if ("package".equals(tag)) {
             // check DTD if present
             if (doc.getDocType() != null && ! doc.getDocType().getName().equals("package")) {
-                throw new JemException("Invalid PBC document: DTD is not package");
+                throw new ParserException("Invalid PBC document: DTD is not package", getName());
             }
             version = "1.0";
         } else {
             stream.close();
-            throw new JemException("Invalid PBM document: root is not pbm or package");
+            throw new ParserException("Invalid PBM document: root is not pbm or package", getName());
         }
         if ("2.0".equals(version)) {
             pw.phylame.jem.formats.pmab.v2.Reader.readPBM(root, book, zipFile);
@@ -143,7 +143,7 @@ public class PmabParser extends AbstractParser {
             pw.phylame.jem.formats.pmab.v1.Reader.readPBM(root, book, zipFile);
         } else {
             stream.close();
-            throw new JemException("Invalid PBM version: "+version);
+            throw new ParserException("Invalid PBM version: "+version, getName());
         }
         stream.close();
     }
@@ -151,14 +151,13 @@ public class PmabParser extends AbstractParser {
     private void readPBC(ZipFile zipFile, Book book) throws IOException, JemException {
         ZipEntry zipEntry = zipFile.getEntry(PMAB.PBC_FILE);
         if (zipEntry == null) {
-            throw new IOException("Not found "+ PMAB.PBC_FILE+" in PMAB "+zipFile.getName());
+            throw new ParserException("Not found "+ PMAB.PBC_FILE+" in PMAB "+zipFile.getName(), getName());
         }
         InputStream stream = new BufferedInputStream(zipFile.getInputStream(zipEntry));
         SAXReader reader = new SAXReader();
-        reader.setEntityResolver(new EntityResolver() {
+        reader.setEntityResolver(new EntityResolver() { // ignore DTD checking
             @Override
-            public InputSource resolveEntity(String publicId, String systemId)
-                    throws SAXException, IOException {
+            public InputSource resolveEntity(String publicId, String systemId) throws SAXException, IOException {
                 return new InputSource(new ByteArrayInputStream("".getBytes()));
             }
         });
@@ -166,7 +165,7 @@ public class PmabParser extends AbstractParser {
         try {
             doc = reader.read(stream);
         } catch (DocumentException e) {
-            throw new JemException("Invalid PBC document in "+zipFile.getName(), e);
+            throw new ParserException("Invalid PBC document in "+zipFile.getName(), e, getName());
         }
         Element root = doc.getRootElement();
         String version;
@@ -174,18 +173,18 @@ public class PmabParser extends AbstractParser {
         if ("pbc".equals(tag)) {
             // check DTD if present
             if (doc.getDocType() != null && ! doc.getDocType().getName().equals("pbc")) {
-                throw new JemException("Invalid PBC document: DTD is not pbc");
+                throw new ParserException("Invalid PBC document: DTD is not pbc", getName());
             }
             version = root.attributeValue("version");
         } else if ("container".equals(tag)) {
             // check DTD if present
             if (doc.getDocType() != null && ! doc.getDocType().getName().equals("container")) {
-                throw new JemException("Invalid PBC document: DTD is not container");
+                throw new ParserException("Invalid PBC document: DTD is not container", getName());
             }
             version = "1.0";
         } else {
             stream.close();
-            throw new JemException("Invalid PBC document: root is not pbc or container");
+            throw new ParserException("Invalid PBC document: root is not pbc or container", getName());
         }
         if ("2.0".equals(version)) {
             pw.phylame.jem.formats.pmab.v2.Reader.readPBC(root, book, zipFile);
@@ -195,7 +194,7 @@ public class PmabParser extends AbstractParser {
             pw.phylame.jem.formats.pmab.v1.Reader.readPBC(root, book, zipFile);
         } else {
             stream.close();
-            throw new JemException("Invalid PBC version: "+version);
+            throw new ParserException("Invalid PBC version: "+version, getName());
         }
         stream.close();
     }

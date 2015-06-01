@@ -74,7 +74,7 @@ public final class Worker {
             String raw = String.valueOf(attributes.get(key));
             Object value = null;
             if ("cover".equals(key)) {        // value is image path in disk
-                FileObject cover = null;
+                FileObject cover;
                 if ("_pem_cover_".equals(raw)) {
                     cover = getPemCover();
                 } else {
@@ -83,6 +83,7 @@ public final class Worker {
                     } catch (IOException e) {
                         LOG.debug("invalid cover file: "+raw, e);
                         app.error(app.getText("SCI_INVALID_COVER", raw));
+                        return false;
                     }
                 }
                 if (cover != null) {
@@ -108,6 +109,22 @@ public final class Worker {
         return true;
     }
 
+    public static void setExtension(Book book, Map<String, Object> items) {
+        for (String key: items.keySet()) {
+            Object o = items.get(key);
+            if (o == null) {
+                book.removeItem(key);
+            } else if (o instanceof String) {
+                String str = (String) o;
+                if (str.length() == 0) {
+                    book.removeItem(key);
+                }
+            } else {
+                book.setItem(key, o);
+            }
+        }
+    }
+
     public static Book openBook(String input, String format, Map<String, Object> kw) {
         if (format == null || "".equals(format)) {
             format = FileNameUtils.extensionName(input).toLowerCase();
@@ -118,8 +135,7 @@ public final class Worker {
         } catch (FileNotFoundException e) {
             app.error(app.getText("SCI_NOT_EXISTS", input));
         } catch (IOException | JemException e) {
-            LOG.debug(String.format("failed to read '%s' with '%s'", input,
-                    format.toUpperCase()), e);
+            LOG.debug(String.format("failed to read '%s' with '%s'", input, format.toUpperCase()), e);
         }
         return book;
     }
@@ -150,14 +166,14 @@ public final class Worker {
             Jem.writeBook(book, output, format, kw);
             path = output.getPath();
         } catch (IOException |JemException e) {
-            LOG.debug(String.format("failed to write '%s' with '%s'", output.getPath(),
-                    format.toUpperCase()), e);
+            LOG.debug(String.format("failed to write '%s' with '%s'", output.getPath(), format.toUpperCase()), e);
         }
         return path;
     }
 
     public static String convertBook(String input, String inFormat, Map<String, Object> inKw,
-            Map<String, Object> attributes, File output, String outFormat, Map<String, Object> outKw) {
+                                     Map<String, Object> attributes, Map<String, Object> items, File output,
+                                     String outFormat, Map<String, Object> outKw) {
         Book book = openBook(input, inFormat, inKw);
         if (book == null) {
             app.error(app.getText("SCI_READ_FAILED", input));
@@ -166,6 +182,9 @@ public final class Worker {
         if (! setAttributes(book, attributes)) {
             return null;
         }
+
+        setExtension(book, items);
+
         String path = saveBook(book, output, outFormat, outKw);
         if (path == null) {
             app.error(app.getText("SCI_CONVERT_FAILED", input, output.getAbsolutePath()));
@@ -175,8 +194,8 @@ public final class Worker {
         return path;
     }
 
-    public static String joinBook(String[] inputs, Map<String, Object> inKw,
-            Map<String, Object> attributes, File output, String outFormat, Map<String, Object> outKw) {
+    public static String joinBook(List<String> inputs, Map<String, Object> inKw, Map<String, Object> attributes,
+                                  Map<String, Object> items, File output, String outFormat, Map<String, Object> outKw) {
         Book book = new Book();
         for (String input: inputs) {
             Book sub = openBook(input, null, inKw);
@@ -189,6 +208,9 @@ public final class Worker {
         if (! setAttributes(book, attributes)) {
             return null;
         }
+
+        setExtension(book, items);
+
         String path = saveBook(book, output, outFormat, outKw);
         if (path == null) {
             app.error(app.getText("SCI_JOIN_FAILED", output.getAbsolutePath()));
@@ -228,8 +250,8 @@ public final class Worker {
     }
 
     public static String extractBook(String input, String inFormat, Map<String, Object> inKw,
-            Map<String, Object> attributes, String index, File output, String outFormat,
-            Map<String, Object> outKw) {
+                                     Map<String, Object> attributes, Map<String, Object> items, String index,
+                                     File output, String outFormat, Map<String, Object> outKw) {
         Book book = openBook(input, inFormat, inKw);
         if (book == null) {
             app.error(app.getText("SCI_READ_FAILED", input));
@@ -243,6 +265,9 @@ public final class Worker {
         if (! setAttributes(part, attributes)) {
             return null;
         }
+
+        setExtension(book, items);
+
         String path = saveBook(Jem.toBook(part), output, outFormat, outKw);
         if (path == null) {
             app.error(app.getText("SCI_EXTRACT_FAILED", index, output.getAbsolutePath()));
@@ -276,8 +301,8 @@ public final class Worker {
         return str;
     }
 
-    private static void walkTree(Part part, String prefix, String[] keys, boolean showAttributes,
-            boolean showOrder, String indent, boolean showBrackets) {
+    private static void walkTree(Part part, String prefix, String[] keys, boolean showAttributes, boolean showOrder,
+                                 String indent, boolean showBrackets) {
         System.out.print(prefix);
         if (showAttributes) {
             viewPart(part, keys, ", ", showBrackets, true);
@@ -295,14 +320,12 @@ public final class Worker {
         }
     }
 
-    private static void viewToc(Part part, String[] keys, String indent, boolean showOrder,
-            boolean showBrackets) {
+    private static void viewToc(Part part, String[] keys, String indent, boolean showOrder, boolean showBrackets) {
         System.out.println(app.getText("SCI_TOC_TITLE", part.getTitle()));
         walkTree(part, "", keys, false, showOrder, indent, showBrackets);
     }
 
-    private static void viewPart(Part part, String[] keys, String sep, boolean showBrackets,
-            boolean ignoreEmpty) {
+    private static void viewPart(Part part, String[] keys, String sep, boolean showBrackets, boolean ignoreEmpty) {
         List<String> lines = new java.util.ArrayList<>();
         for (String key: keys) {
             if (key.equals("all")) {
@@ -382,8 +405,8 @@ public final class Worker {
         }
     }
 
-    public static boolean viewBook(String input, String inFormat, Map<String, Object> inKw,
-            Map<String, Object> attributes, String[] keys) {
+    public static boolean viewBook(String input, String inFormat, Map<String, Object> inKw, Map<String, Object> attributes,
+                                   Map<String, Object> items, String[] keys) {
         Book book = openBook(input, inFormat, inKw);
         if (book == null) {
             app.error(app.getText("SCI_READ_FAILED", input));
@@ -392,6 +415,9 @@ public final class Worker {
         if (! setAttributes(book, attributes)) {
             return false;
         }
+
+        setExtension(book, items);
+
         for (String key: keys) {
             if (key.equals("ext")) {
                 viewExtension(book, book.itemNames().toArray(new String[0]));

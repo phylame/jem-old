@@ -21,12 +21,16 @@ package pw.phylame.jem.formats.txt;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import pw.phylame.jem.core.*;
+import pw.phylame.jem.core.Part;
+import pw.phylame.jem.core.Book;
+import pw.phylame.jem.core.Cleanable;
+import pw.phylame.jem.core.AbstractParser;
 import pw.phylame.jem.util.JemException;
+import pw.phylame.jem.formats.util.ParserException;
 import pw.phylame.tools.TextObject;
+import pw.phylame.tools.file.FileObject;
 import pw.phylame.tools.file.FileFactory;
 import pw.phylame.tools.file.FileNameUtils;
-import pw.phylame.tools.file.FileObject;
 
 import java.io.*;
 import java.util.*;
@@ -94,7 +98,7 @@ public class TxtParser extends AbstractParser {
         try {
             pattern = Pattern.compile(chapterPattern, Pattern.MULTILINE);
         } catch (PatternSyntaxException e) {
-            throw new JemException("Invalid chapter pattern: "+chapterPattern, e);
+            throw new ParserException("Invalid chapter pattern: "+chapterPattern, e, getName());
         }
 
         Book book = new Book(title, "");
@@ -119,8 +123,7 @@ public class TxtParser extends AbstractParser {
         StringBuilder sb = new StringBuilder();
         try {
             char[] buf = new char[1024];
-            Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(cache),
-                    CACHED_TEXT_ENCODING));
+            Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(cache), CACHED_TEXT_ENCODING));
             int n;
             while ((n=reader.read(buf)) != -1) {
                 writer.write(buf, 0, n);
@@ -139,7 +142,7 @@ public class TxtParser extends AbstractParser {
         Matcher matcher = pattern.matcher(raw);
         while (matcher.find()) {
             offsets.add(matcher.start());
-            book.newPart(matcher.group());
+            book.newChapter(matcher.group());
         }
         offsets.add(raw.length());
 
@@ -166,6 +169,7 @@ public class TxtParser extends AbstractParser {
             start = end;
         }
 
+        raw = null;
         System.gc();
 
         return book;

@@ -25,6 +25,7 @@ import org.dom4j.DocumentHelper;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.formats.epub.EPUB;
 import pw.phylame.jem.formats.epub.EpubConfig;
+import pw.phylame.jem.formats.util.ZipUtils;
 import pw.phylame.tools.DateUtils;
 import pw.phylame.tools.StringUtils;
 import pw.phylame.tools.TextObject;
@@ -37,7 +38,7 @@ import java.util.zip.ZipOutputStream;
 /**
  * OPF 2.0 implements.
  */
-public class Opf_2_0 extends AbstractOpfBuilder {
+public class OPF_2_0 extends AbstractOpfBuilder {
     public static final String OPF_XML_NS = "http://www.idpf.org/2007/opf";
     public static final String OPF_VERSION_2 = "2.0";
 
@@ -80,8 +81,9 @@ public class Opf_2_0 extends AbstractOpfBuilder {
 
         FileObject cover = book.getCover();
         if (cover != null) {
-            coverHref = String.format("%s/cover.%s", config.imageDir, FilenameUtils.getExtension(cover.getName()));
-            EPUB.writeToOps(cover, coverHref, zipout, config);
+            coverHref = String.format("%s/%s.%s", config.imageDir, EPUB.COVER_NAME,
+                    FilenameUtils.getExtension(cover.getName()));
+            ZipUtils.writeFile(cover, zipout, EPUB.getOpsPath(coverHref, config));
             addManifestItem(EPUB.COVER_FILE_ID, coverHref, cover.getMime());
             parent.addElement("meta").addAttribute("name", "cover").addAttribute("content", EPUB.COVER_FILE_ID);
         }
@@ -107,6 +109,7 @@ public class Opf_2_0 extends AbstractOpfBuilder {
         if (!StringUtils.isEmpty(str)) {
             parent.addElement("dc:rights").setText(str);
         }
+
         str = book.getVendor();
         if (!StringUtils.isEmpty(str)) {
             parent.addElement("dc:contributor").addAttribute("opf:role", "bkp").setText(str);

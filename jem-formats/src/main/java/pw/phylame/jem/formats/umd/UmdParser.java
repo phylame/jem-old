@@ -21,9 +21,12 @@ package pw.phylame.jem.formats.umd;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import pw.phylame.jem.core.*;
-import pw.phylame.jem.formats.util.ParserException;
+import pw.phylame.jem.core.Part;
+import pw.phylame.jem.core.Book;
+import pw.phylame.jem.core.Cleanable;
+import pw.phylame.jem.core.AbstractParser;
 import pw.phylame.jem.util.JemException;
+import pw.phylame.jem.formats.util.ParserException;
 
 import pw.phylame.tools.DateUtils;
 import pw.phylame.tools.ZLibUtils;
@@ -301,11 +304,11 @@ public class UmdParser extends AbstractParser {
         long length = readInt(source) - 9, last = 0;
         length /= 4;
 
-        Chapter chapter = null;
+        Part chapter = null;
         for (int ix = 0; ix < length; ++ix) {
             long offset = readInt(source);
             try {
-                chapter = (Chapter) book.get(ix);
+                chapter = book.get(ix);
             } catch (IndexOutOfBoundsException e) {
                 chapter = book.newChapter("");
             }

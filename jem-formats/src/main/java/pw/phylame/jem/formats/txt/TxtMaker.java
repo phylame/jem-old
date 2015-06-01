@@ -19,12 +19,11 @@
 package pw.phylame.jem.formats.txt;
 
 import pw.phylame.jem.core.Book;
-import pw.phylame.jem.core.Chapter;
 import pw.phylame.jem.core.Part;
 import pw.phylame.jem.core.Maker;
-import pw.phylame.jem.formats.util.ExceptionFactory;
-import pw.phylame.jem.formats.util.Texts;
 import pw.phylame.jem.util.JemException;
+import pw.phylame.jem.formats.util.Texts;
+import pw.phylame.jem.formats.util.ExceptionFactory;
 import pw.phylame.tools.TextObject;
 
 import java.io.*;
@@ -106,7 +105,7 @@ public class TxtMaker implements Maker {
 
     private void writeChapter(Part part, Writer writer, TxtConfig config) throws IOException {
         writer.write(config.lineSeparator+part.getTitle()+config.lineSeparator);
-        Object o = part.getAttribute(Chapter.INTRO, null);
+        Object o = part.getAttribute(Book.INTRO, null);
         if (o instanceof TextObject) {  // valid intro
             writeIntro((TextObject) o, writer, config);
         }

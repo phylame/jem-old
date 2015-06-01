@@ -16,6 +16,8 @@
 
 package pw.phylame.tools.file;
 
+import org.apache.commons.io.FilenameUtils;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -71,12 +73,7 @@ public class FileNameUtils {
      * @return string of extension. If not contain extension return {@code ""}.
      */
     public static String extensionName(String name) {
-        int index = name.lastIndexOf(".");
-        if (index >= 0) {
-            return name.substring(index + 1);
-        } else {
-            return "";
-        }
+        return FilenameUtils.getExtension(name);
     }
 
     /**
@@ -85,21 +82,6 @@ public class FileNameUtils {
      * @return the base name
      */
     public static String baseName(String name) {
-        int start = 0, end = name.length();
-
-        for (int ix = name.length()-1; ix >= 0; --ix) {
-            char c = name.charAt(ix);
-            if (c == '.') {
-                end = ix;
-            } else if (c == '/' || c == '\\') {
-                start = ix+1;
-                break;      // stop
-            }
-        }
-
-        if (end >= start) {
-            return name.substring(start, end);
-        }
-        return "";
+        return FilenameUtils.getBaseName(name);
     }
 }

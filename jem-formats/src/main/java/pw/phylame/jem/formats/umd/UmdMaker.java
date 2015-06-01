@@ -25,8 +25,9 @@ import pw.phylame.jem.core.Part;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Maker;
 import pw.phylame.jem.core.Cleanable;
-import pw.phylame.jem.formats.util.ExceptionFactory;
+import pw.phylame.jem.formats.util.MakerException;
 import pw.phylame.jem.util.JemException;
+import pw.phylame.jem.formats.util.ExceptionFactory;
 
 import pw.phylame.tools.ZLibUtils;
 import pw.phylame.tools.NumberUtils;
@@ -100,7 +101,7 @@ public class UmdMaker implements Maker {
                 makeComic();
                 break;
             default:
-                throw new JemException("Invalid UMD type: "+umdType);
+                throw new MakerException("Invalid UMD type: "+umdType, getName());
         }
     }
 
@@ -216,12 +217,9 @@ public class UmdMaker implements Maker {
         writeChunk(UMD.CDT_AUTHOR, false, book.getAuthor().getBytes(UMD.TEXT_ENCODING));
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(book.getDate());
-        writeChunk(UMD.CDT_YEAR, false,
-                Integer.toString(calendar.get(Calendar.YEAR)).getBytes(UMD.TEXT_ENCODING));
-        writeChunk(UMD.CDT_MONTH, false,
-                Integer.toString(calendar.get(Calendar.MONTH) + 1).getBytes(UMD.TEXT_ENCODING));
-        writeChunk(UMD.CDT_DAY, false,
-                Integer.toString(calendar.get(Calendar.DAY_OF_MONTH)).getBytes(UMD.TEXT_ENCODING));
+        writeChunk(UMD.CDT_YEAR, false, Integer.toString(calendar.get(Calendar.YEAR)).getBytes(UMD.TEXT_ENCODING));
+        writeChunk(UMD.CDT_MONTH, false, Integer.toString(calendar.get(Calendar.MONTH) + 1).getBytes(UMD.TEXT_ENCODING));
+        writeChunk(UMD.CDT_DAY, false, Integer.toString(calendar.get(Calendar.DAY_OF_MONTH)).getBytes(UMD.TEXT_ENCODING));
         writeChunk(UMD.CDT_GENRE, false, book.getGenre().getBytes(UMD.TEXT_ENCODING));
         writeChunk(UMD.CDT_PUBLISHER, false, book.getPublisher().getBytes(UMD.TEXT_ENCODING));
         writeChunk(UMD.CDT_VENDOR, false, book.getVendor().getBytes(UMD.TEXT_ENCODING));
@@ -349,8 +347,7 @@ public class UmdMaker implements Maker {
         writeChunk(UMD.CDT_UMD_END, false, littleRender.putUint32(length));
     }
 
-    private void cachePart(Part part, RandomAccessFile file, List<String> titles, List<Long> offsets)
-            throws IOException {
+    private void cachePart(Part part, RandomAccessFile file, List<String> titles, List<Long> offsets) throws IOException {
         titles.add(part.getTitle());
         offsets.add(file.getFilePointer());
         writeString(file, part.getTitle() + UMD.SYMBIAN_LINE_FEED);
@@ -364,8 +361,7 @@ public class UmdMaker implements Maker {
         }
     }
 
-    private void writeText(RandomAccessFile file, long contentLength, List<Long> blockChecks)
-            throws IOException {
+    private void writeText(RandomAccessFile file, long contentLength, List<Long> blockChecks) throws IOException {
         int count = (int) Math.ceil(contentLength / (double) UMD.BLOCK_SIZE);
         if (count == 1) {
             count = 2;

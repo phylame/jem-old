@@ -21,7 +21,7 @@ package pw.phylame.jem.formats.epub.ncx;
 public class NcxBuilderFactory {
     public static NcxBuilder getBuilder(String version) {
         if ("2005-1".equals(version)) {
-            return new Ncx_2005_1();
+            return new NCX_2005_1();
         } else {
             return null;
         }

@@ -24,16 +24,20 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.zip.ZipFile;
+
+import pw.phylame.jem.core.Part;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Chapter;
-import pw.phylame.jem.core.Part;
 import pw.phylame.jem.util.JemException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import pw.phylame.jem.formats.util.ParserException;
+
 import pw.phylame.tools.DateUtils;
 import pw.phylame.tools.TextObject;
 import pw.phylame.tools.file.FileFactory;
 import pw.phylame.tools.file.FileObject;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * PBM and PBC reader for PMAB 2.x.
@@ -56,7 +60,7 @@ public class Reader {
     private static void readMetadata(Element root, Book book, ZipFile zipFile) throws JemException {
         Element md = root.element("metadata");
         if (md == null) {
-            throw new JemException("Not found 'metadata' in PBM");
+            throw new ParserException("Not found 'metadata' in PBM", "pmab");
         }
         for (Iterator it = md.elementIterator(); it.hasNext(); ) {
             Element attr = (Element) it.next();
@@ -155,7 +159,7 @@ public class Reader {
     private static void readContents(Element elem, Part parent, ZipFile zipFile) throws JemException {
         Element title = elem.element("title");
         if (title == null) {
-            throw new JemException("Not found 'title' element in PBC contents");
+            throw new ParserException("Not found 'title' element in PBC contents", "pmab");
         }
         Chapter chapter = new Chapter(title.getText().trim(), "");
         parent.append(chapter);
@@ -220,7 +224,7 @@ public class Reader {
     public static void readPBC(Element root, Book book, ZipFile zipFile) throws JemException {
         Element contents = root.element("contents");
         if (contents == null) {
-            throw new JemException("Not found 'contents' element in PBC");
+            throw new ParserException("Not found 'contents' element in PBC", "pmab");
         }
         int count = parseNumber(contents.attributeValue("count"), -1);
         for (Iterator it = contents.elementIterator(); it.hasNext(); ) {

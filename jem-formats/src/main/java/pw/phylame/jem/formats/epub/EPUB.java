@@ -18,14 +18,6 @@
 
 package pw.phylame.jem.formats.epub;
 
-import pw.phylame.tools.file.FileObject;
-
-import java.io.IOException;
-import java.text.MessageFormat;
-import java.util.ResourceBundle;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
-
 /**
  * Constants and utilities for ePub.
  */
@@ -36,10 +28,10 @@ public class EPUB {
     // container.xml
     public static final String CONTAINER_FILE = "META-INF/container.xml";
 
-    // the Open Packaging Format (OPF)
+    // OPF (the Open Packaging Format)
     public static final String OPF_FILE = "content.opf";
 
-    // Dublin Core Metadata Initiative (DCMI)
+    // DCMI (the Dublin Core Metadata Initiative)
     public static final String DC_XML_NS = "http://purl.org/dc/elements/1.1/";
 
     // NCX (the Navigation Center eXtended)
@@ -55,36 +47,31 @@ public class EPUB {
     public static final String MT_CSS   = "text/css";
     public static final String MT_XHTML = "application/xhtml+xml";
 
+    // cover image
     public static final String COVER_NAME = "cover";
     public static final String COVER_FILE_ID = "cover-image";
 
+    // main CSS
     public static final String CSS_FILE = "style.css";
     public static final String CSS_FILE_ID = "main-css";
 
+    // for DuoKan reader full screen image
     public static final String DUOKAN_FULL_SCREEN = "duokan-page-fullscreen";
 
     // content
-    public static final String COVER_PAGE_FILE = "cover.xhtml";
     public static final String COVER_PAGE_ID   = "cover-page";
+    public static final String COVER_PAGE_FILE = "cover.xhtml";
 
-    public static final String INTRO_PAGE_FILE = "intro.xhtml";
     public static final String INTRO_PAGE_ID   = "intro-page";
+    public static final String INTRO_PAGE_FILE = "intro.xhtml";
 
-    public static final String INFO_PAGE_FILE = "info.xhtml";
     public static final String INFO_PAGE_ID   = "info-page";
+    public static final String INFO_PAGE_FILE = "info.xhtml";
 
-    public static final String TOC_PAGE_FILE = "toc.xhtml";
     public static final String TOC_PAGE_ID   = "toc-page";
+    public static final String TOC_PAGE_FILE = "toc.xhtml";
 
     public static String getOpsPath(String name, EpubConfig config) {
         return config.opsDir + "/" + name;
-    }
-
-    public static void writeToOps(FileObject fb, String href, ZipOutputStream zipout, EpubConfig config)
-            throws IOException {
-        String name = getOpsPath(href, config);
-        zipout.putNextEntry(new ZipEntry(name));
-        fb.copyTo(zipout);
-        zipout.closeEntry();
     }
 }

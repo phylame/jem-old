@@ -22,8 +22,12 @@ import java.io.File;
 import java.util.Map;
 import java.util.Locale;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
-import java.text.MessageFormat;
+
+import pw.phylame.gaf.Application;
+import pw.phylame.jem.core.Jem;
+import pw.phylame.jem.core.BookHelper;
+import pw.phylame.tools.StringUtils;
+import pw.phylame.tools.file.FileNameUtils;
 
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
@@ -32,12 +36,6 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.ParseException;
-
-import pw.phylame.gaf.Application;
-import pw.phylame.jem.core.Jem;
-import pw.phylame.jem.core.BookHelper;
-import pw.phylame.tools.StringUtils;
-import pw.phylame.tools.file.FileNameUtils;
 
 /**
  * SCI (Simple Console Interface) for Jem.
@@ -114,6 +112,10 @@ public final class SCI extends Application {
                 getText("ARG_KV")).hasArgs(2).withValueSeparator().withDescription(
                         getText("HELP_ATTRIBUTE")).create("a");
 
+        Option item = OptionBuilder.withArgName(
+                getText("ARG_KV")).hasArgs(2).withValueSeparator().withDescription(
+                getText("HELP_ITEM")).create("i");
+
         Option inKW = OptionBuilder.withArgName(
                 getText("ARG_KV")).hasArgs(2).withValueSeparator().withDescription(
                         getText("HELP_IN_ARGUMENT")).create("p");
@@ -122,7 +124,7 @@ public final class SCI extends Application {
                 getText("ARG_KV")).hasArgs(2).withValueSeparator().withDescription(
                         getText("HELP_OUT_ARGUMENT")).create("m");
 
-        options.addOption(attr).addOption(inKW).addOption(outKw);
+        options.addOption(attr).addOption(item).addOption(inKW).addOption(outKw);
 
         return options;
     }
@@ -136,7 +138,7 @@ public final class SCI extends Application {
     }
 
     private void showVersion() {
-        System.out.printf("SCI for Jem v%s on %s (%s)\n", VERSION, System.getProperty("os.name"),
+        System.out.printf("SCI for Jem v%s on %s (%s)\n", VERSION, System.getProperty("os.name"), 
                 System.getProperty("os.arch"));
         System.out.printf("Jem: %s by %s\n", Jem.VERSION, Jem.VENDOR);
         System.out.printf("%s\n", getText("SCJ_COPYRIGHTS"));
@@ -205,8 +207,7 @@ public final class SCI extends Application {
         if (cmd.hasOption("h")) {
             HelpFormatter hf = new HelpFormatter();
             hf.setSyntaxPrefix("");
-            hf.printHelp(80, SCJ_SYNTAX, getText("SCI_OPTIONS_PREFIX"), options,
-                    getText("SCJ_BUG_REPORT"));
+            hf.printHelp(80, SCJ_SYNTAX, getText("SCI_OPTIONS_PREFIX"), options, getText("SCJ_BUG_REPORT"));
             return 0;
         } else if (cmd.hasOption("v")) {
             showVersion();
@@ -217,7 +218,7 @@ public final class SCI extends Application {
         }
 
         String[] viewNames = {"all"};
-        String indexs = null;
+        String indexes = null;
         Command command = Command.View;
         if (cmd.hasOption("c")) {
             command = Command.Convert;
@@ -227,28 +228,34 @@ public final class SCI extends Application {
             command = Command.Join;
         } else if (cmd.hasOption("x")) {
             command = Command.Extract;
-            indexs = cmd.getOptionValue("x");
+            indexes = cmd.getOptionValue("x");
         }
+
+        // formats
         String inFormat = cmd.getOptionValue("f"), outFormat = cmd.getOptionValue("t");
         outFormat = outFormat == null ? Jem.PMAB_FORMAT : outFormat;
-        if (! BookHelper.supportedMakers().contains(outFormat)) {
-            error(getText("SCI_OUT_UNSUPPORTED", outFormat));
-            System.out.println(getText("SCI_UNSUPPORTED_HELP"));
-            return -1;
-        }
+
         // inputs
         String[] files = cmd.getArgs();
         if (files.length == 0) {
             error(getText("SCI_NO_INPUT"));
             return -1;
         }
+
         // output
         String out = cmd.getOptionValue("o");
         File output = new File(out == null ? "." : out);    // if not specified use current directory
 
+        if (! BookHelper.supportedMakers().contains(outFormat)) {
+            error(getText("SCI_OUT_UNSUPPORTED", outFormat));
+            System.out.println(getText("SCI_UNSUPPORTED_HELP"));
+            return -1;
+        }
+
         Map<String, Object> inKw = parseArguments(cmd.getOptionProperties("p"));
         Map<String, Object> outKw = parseArguments(cmd.getOptionProperties("m"));
         Map<String, Object> attrs = parseArguments(cmd.getOptionProperties("a"));
+        Map<String, Object> items = parseArguments(cmd.getOptionProperties("i"));
 
         ArrayList<String> inputs = new ArrayList<>();
         // exit status
@@ -267,20 +274,19 @@ public final class SCI extends Application {
             String result = null;
             switch (command) {
             case View:
-                if (! Worker.viewBook(file, inFmt, inKw, attrs, viewNames)) {
+                if (! Worker.viewBook(file, inFmt, inKw, attrs, items, viewNames)) {
                     status = -1;
                 }
                 break;
             case Convert:
-                result = Worker.convertBook(file, inFmt, inKw, attrs, output, outFormat, outKw);
+                result = Worker.convertBook(file, inFmt, inKw, attrs, items, output, outFormat, outKw);
                 status = Math.min(result != null ? 0 : 1, status);
                 break;
             case Join:
                 inputs.add(file);
                 break;
             case Extract:
-                result = Worker.extractBook(file, inFmt, inKw, attrs, indexs, output, outFormat,
-                        outKw);
+                result = Worker.extractBook(file, inFmt, inKw, attrs, items, indexes, output, outFormat, outKw);
                 status = Math.min(result != null ? 0 : 1, status);
                 break;
             }
@@ -290,8 +296,7 @@ public final class SCI extends Application {
         }
         // join books
         if (command == Command.Join) {
-            String result = Worker.joinBook(inputs.toArray(new String[0]), inKw, attrs, output,
-                    outFormat, outKw);
+            String result = Worker.joinBook(inputs, inKw, attrs, items, output, outFormat, outKw);
             if (result != null) {
                 System.out.println(result);
             } else {

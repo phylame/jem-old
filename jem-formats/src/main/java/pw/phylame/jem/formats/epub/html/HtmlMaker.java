@@ -21,8 +21,10 @@ package pw.phylame.jem.formats.epub.html;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.DocumentHelper;
-import pw.phylame.jem.formats.epub.EPUB;
+
 import pw.phylame.tools.TextObject;
+
+import pw.phylame.jem.formats.epub.EPUB;
 
 import java.util.List;
 import java.util.Locale;
@@ -72,14 +74,23 @@ public final class HtmlMaker {
         div = body.addElement("div").addAttribute("class", introStyle);
         div.addElement("h3").setText(title);
 
+        int i = 0;
         for (String line: lines) {
-            div.addElement("p").setText(line.trim());
+            line = line.trim();
+            if (line.length() == 0) {
+                continue;
+            }
+            div.addElement("p").setText(line);
+            ++i;
+        }
+        if (i == 0) {
+            return null;
         }
 
         return doc;
     }
 
-    public Document makeInfoPage(String title, String titleStyle, String[] lines, String infoStyle) {
+    public Document makeInfoPage(String title, String titleStyle, List<String> lines, String infoStyle) {
         Document doc = DocumentHelper.createDocument();
         Element body = initHtml(doc, title);
 
@@ -95,7 +106,7 @@ public final class HtmlMaker {
     }
 
     public Document makeContentsPage(String title, String titleStyle, TextObject intro, String introStyle,
-                                     String[] labels, String[] href, String tocStyle) throws IOException {
+                                     List<String> labels, List<String> href, String tocStyle) throws IOException {
         Document doc = DocumentHelper.createDocument();
         Element body = initHtml(doc, title);
 
@@ -113,8 +124,8 @@ public final class HtmlMaker {
 
         // contents
         div = body.addElement("div").addAttribute("class", tocStyle);
-        for (int i = 0; i < labels.length; ++i) {
-            div.addElement("p").addElement("a").addAttribute("href", href[i]).setText(labels[i]);
+        for (int i = 0; i < labels.size(); ++i) {
+            div.addElement("p").addElement("a").addAttribute("href", href.get(i)).setText(labels.get(i));
         }
 
         return doc;

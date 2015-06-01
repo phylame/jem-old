@@ -20,8 +20,15 @@ package pw.phylame.jem.formats.jar;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import pw.phylame.jem.core.*;
+
+import pw.phylame.jem.core.Part;
+import pw.phylame.jem.core.Book;
+import pw.phylame.jem.core.Chapter;
+import pw.phylame.jem.core.Cleanable;
+import pw.phylame.jem.core.AbstractParser;
 import pw.phylame.jem.util.JemException;
+
+import pw.phylame.jem.formats.util.ParserException;
 import pw.phylame.tools.file.FileFactory;
 
 import java.io.*;
@@ -66,12 +73,12 @@ public class JarParser extends AbstractParser {
     private void readMeta(Book book, ZipFile zipFile) throws IOException, JemException {
         ZipEntry entry = zipFile.getEntry("0");
         if (entry == null) {
-            throw new IOException("Not found '0' in JAR book");
+            throw new ParserException("Not found '0' in JAR book", getName());
         }
         InputStream stream = new BufferedInputStream(zipFile.getInputStream(entry));
         DataInput input = new DataInputStream(stream);
         if (input.readInt() != JAR.FILE_HEADER) {
-            throw new JemException("Unsupported JAR book: magic number");
+            throw new ParserException("Unsupported JAR book: magic number", getName());
         }
         int length = input.readByte();
         byte[] buf = new byte[length];
@@ -90,7 +97,7 @@ public class JarParser extends AbstractParser {
             String str = new String(buf, JAR.META_ENCODING);
             String[] items = str.split(",");
             if (items.length < 3) {
-                throw new JemException("Invalid JAR book: bad chapter item");
+                throw new ParserException("Invalid JAR book: bad chapter item", getName());
             }
             Chapter chapter = new Chapter(items[2], "");
             chapter.getSource().setFile(FileFactory.fromZip(zipFile, items[0], null), JAR.TEXT_ENCODING);

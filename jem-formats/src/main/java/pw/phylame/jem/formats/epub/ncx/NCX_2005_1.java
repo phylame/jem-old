@@ -37,6 +37,7 @@ import pw.phylame.tools.TextObject;
 import pw.phylame.tools.file.FileObject;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Date;
 import java.util.Locale;
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ import java.util.zip.ZipOutputStream;
 /**
  * NCX version 2005-1
  */
-public class Ncx_2005_1 extends AbstractNcxBuilder {
+public class NCX_2005_1 extends AbstractNcxBuilder {
     public static final String DT_TYPE = "ncx";
     public static final String DT_ID   = "-//NISO//DTD ncx 2005-1//EN";
     public static final String DT_URI  = "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd";
@@ -62,7 +63,7 @@ public class Ncx_2005_1 extends AbstractNcxBuilder {
         head.addElement("meta").addAttribute("name", "dtb:uid").addAttribute("content", uuid);
         head.addElement("meta").addAttribute("name", "dtb:depth").addAttribute("content",
                 Integer.toString(depth));
-        Object o = book.getAttribute("pages", 0);   // page number
+        Object o = book.getAttribute("pages", 0);   // total page number
         String str;
         if (o instanceof Integer) {
             str = Integer.toString((Integer) o);
@@ -132,8 +133,8 @@ public class Ncx_2005_1 extends AbstractNcxBuilder {
     private void writeBookInfoPage(Element parent, HtmlMaker htmlMaker, Book book, OpfBuilder opfBuilder,
                                    ZipOutputStream zipout, EpubConfig config) throws IOException {
         String href = config.textDir + "/" + EPUB.INFO_PAGE_FILE;
-        String[] lines = getInfoLines(book, config).toArray(new String[0]);
-        if (lines.length > 0) {
+        List<String> lines = getInfoLines(book, config);
+        if (lines.size() > 0) {
             String pageTitle = I18N.getText("Epub.Page.Info.Title");
             Document page = htmlMaker.makeInfoPage(pageTitle, config.styleProvider.getInfoTitleStyle(),
                     lines, config.styleProvider.getInfoContentStyle());
@@ -145,8 +146,8 @@ public class Ncx_2005_1 extends AbstractNcxBuilder {
         }
     }
 
-    private void writePartCoverPage(Element parent, HtmlMaker htmlMaker, Part part, String prefix,
-                                    OpfBuilder opfBuilder, ZipOutputStream zipout, EpubConfig config) throws IOException {
+    private void writePartCoverPage(HtmlMaker htmlMaker, Part part, String prefix, OpfBuilder opfBuilder,
+                                    ZipOutputStream zipout, EpubConfig config) throws IOException {
         Object o = part.getAttribute(Book.COVER, null);
         if (! (o instanceof FileObject)) {
             return;
@@ -155,7 +156,7 @@ public class Ncx_2005_1 extends AbstractNcxBuilder {
 
         // write cover image
         String href = config.imageDir + "/" + prefix + "." + FilenameUtils.getExtension(cover.getName());
-        EPUB.writeToOps(cover, href, zipout, config);
+        ZipUtils.writeFile(cover, zipout, EPUB.getOpsPath(href, config));
         String coverID = prefix+"-cover";
         opfBuilder.addManifestItem(coverID, href, cover.getMime());
 
@@ -175,7 +176,7 @@ public class Ncx_2005_1 extends AbstractNcxBuilder {
     private String writeSectionPage(Element parent, HtmlMaker htmlMaker, Part section, String prefix, String topHref,
                                     OpfBuilder opfBuilder, ZipOutputStream zipout, EpubConfig config) throws IOException {
         // cover
-        writePartCoverPage(parent, htmlMaker, section, prefix, opfBuilder, zipout, config);
+        writePartCoverPage(htmlMaker, section, prefix, opfBuilder, zipout, config);
 
         // items
         String base = prefix + ".xhtml";
@@ -214,8 +215,8 @@ public class Ncx_2005_1 extends AbstractNcxBuilder {
         }
 
         Document page = htmlMaker.makeContentsPage(pageTitle, config.styleProvider.getSectionTitleStyle(),
-                intro, config.styleProvider.getSectionIntroStyle(), titles.toArray(new String[0]),
-                links.toArray(new String[0]), config.styleProvider.getTocItemsStyle());
+                intro, config.styleProvider.getSectionIntroStyle(), titles, links,
+                config.styleProvider.getTocItemsStyle());
         writeHtmlPage(page, zipout, href, config);
 
         return base;
@@ -224,7 +225,7 @@ public class Ncx_2005_1 extends AbstractNcxBuilder {
     private String writeChapterPage(Element parent, HtmlMaker htmlMaker, Part chapter, String prefix,
                                     OpfBuilder opfBuilder, ZipOutputStream zipout, EpubConfig config) throws IOException {
         // cover
-        writePartCoverPage(parent, htmlMaker, chapter, prefix, opfBuilder, zipout, config);
+        writePartCoverPage(htmlMaker, chapter, prefix, opfBuilder, zipout, config);
 
         // text
         String base = prefix + ".xhtml";
@@ -275,7 +276,7 @@ public class Ncx_2005_1 extends AbstractNcxBuilder {
 
         // write CSS file
         String css = config.styleDir + "/" + EPUB.CSS_FILE;
-        EPUB.writeToOps(config.styleProvider.getCssFile(), css, zipout, config);
+        ZipUtils.writeFile(config.styleProvider.getCssFile(), zipout, EPUB.getOpsPath(css, config));
         opfBuilder.addManifestItem(EPUB.CSS_FILE_ID, css, EPUB.MT_CSS);
 
         // CSS link URL in HTML page
@@ -321,8 +322,7 @@ public class Ncx_2005_1 extends AbstractNcxBuilder {
 
         if (depth > 1) {
             Document page = htmlMaker.makeContentsPage(tocTitle, config.styleProvider.getTocTitleStyle(), null, null,
-                    titles.toArray(new String[0]), links.toArray(new String[0]),
-                    config.styleProvider.getTocItemsStyle());
+                    titles, links, config.styleProvider.getTocItemsStyle());
             writeHtmlPage(page, zipout, tocHref, config);
         }
         return doc;

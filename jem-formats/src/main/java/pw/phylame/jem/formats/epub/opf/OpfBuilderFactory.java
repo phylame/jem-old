@@ -21,7 +21,7 @@ package pw.phylame.jem.formats.epub.opf;
 public class OpfBuilderFactory {
     public static OpfBuilder getBuilder(String version) {
         if ("2.0".equals(version)) {
-            return new Opf_2_0();
+            return new OPF_2_0();
         } else {
             return null;
         }

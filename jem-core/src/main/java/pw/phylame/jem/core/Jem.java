@@ -83,8 +83,7 @@ public final class Jem {
             throw new NullPointerException("path");
         }
         Parser parser = getParser(format);
-        Book book = parser.parse(source, kw);
-        return book;
+        return parser.parse(source, kw);
     }
 
     /**
@@ -102,8 +101,7 @@ public final class Jem {
             throw new NullPointerException("file");
         }
         Parser parser = getParser(format);
-        Book book = parser.parse(file, kw);
-        return book;
+        return parser.parse(file, kw);
     }
 
     /**

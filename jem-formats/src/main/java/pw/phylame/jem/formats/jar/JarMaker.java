@@ -63,8 +63,7 @@ public class JarMaker implements Maker {
         copyTemplate(zipout);
         // MANIFEST
         zipout.putNextEntry(new ZipEntry(JAR.MF_FILE));
-        String mf = String.format(JAR.MF_TEMPLATE, "Jem", Jem.VERSION, book.getTitle(),
-                "PW", book.getTitle());
+        String mf = String.format(JAR.MF_TEMPLATE, "Jem", Jem.VERSION, book.getTitle(), "PW", book.getTitle());
         zipout.write(mf.getBytes(JAR.META_ENCODING));
         zipout.closeEntry();
         // contents

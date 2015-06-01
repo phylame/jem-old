@@ -24,17 +24,17 @@ import org.apache.commons.logging.LogFactory;
 import org.dom4j.Element;
 import org.dom4j.Document;
 
-import pw.phylame.jem.core.Book;
-import pw.phylame.jem.core.Chapter;
 import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.Part;
+import pw.phylame.jem.core.Book;
+import pw.phylame.jem.core.Chapter;
 import pw.phylame.jem.formats.pmab.PMAB;
 import pw.phylame.jem.formats.pmab.PmabConfig;
 import pw.phylame.jem.formats.util.ZipUtils;
 import pw.phylame.tools.DateUtils;
 import pw.phylame.tools.TextObject;
-import pw.phylame.tools.file.FileNameUtils;
 import pw.phylame.tools.file.FileObject;
+import pw.phylame.tools.file.FileNameUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -53,14 +53,13 @@ public class Writer {
         for (Object key: metaInfo.keySet()) {
             Object value = metaInfo.get(key);
             if (value != null) {
-                head.addElement("meta").addAttribute("name", String.valueOf(key)
-                                                    ).addAttribute("value", String.valueOf(value));
+                head.addElement("meta").addAttribute("name", String.valueOf(key)).addAttribute("value",
+                        String.valueOf(value));
             }
         }
     }
 
-    private static void makeMetadata(Element parent, Book book, ZipOutputStream zipout,
-                                     PmabConfig config) {
+    private static void makeMetadata(Element parent, Book book, ZipOutputStream zipout, PmabConfig config) {
         Element md = parent.addElement("metadata");
         int count = 0;
         for (String name: book.attributeNames()) {
@@ -126,8 +125,7 @@ public class Writer {
                 obj.addAttribute("media-type", fb.getMime());
             } else if (value instanceof TextObject) {
                 TextObject tb = (TextObject) value;
-                String encoding = config.textEncoding != null ? config.textEncoding :
-                        System.getProperty("file.encoding");
+                String encoding = config.textEncoding != null ? config.textEncoding : System.getProperty("file.encoding");
                 String href = config.extraDir + "/" + tb.hashCode() + ".txt";
                 try {
                     ZipUtils.writeText(tb, zipout, href, encoding);
@@ -136,8 +134,7 @@ public class Writer {
                     continue;
                 }
                 type = "file";
-                item.addElement("object").addAttribute("href", href).addAttribute("media-type",
-                        "text/plain");
+                item.addElement("object").addAttribute("href", href).addAttribute("media-type", "text/plain");
             } else if (value instanceof Integer) {
                 type = "number";
                 text = String.valueOf(value);
@@ -168,23 +165,19 @@ public class Writer {
         makeExtension(root, book, zipout, config);
     }
 
-    private static void makeChapter(Element parent, Part part, ZipOutputStream zipout,
-                                    PmabConfig config, String suffix) {
+    private static void makeChapter(Element parent, Part part, ZipOutputStream zipout, PmabConfig config, String suffix) {
         Element elem = parent.addElement("chapter");
         elem.addElement("title").setText(part.getTitle());
         String base = "chapter-" + suffix;
-        String encoding = config.textEncoding != null ? config.textEncoding :
-                System.getProperty("file.encoding");
+        String encoding = config.textEncoding != null ? config.textEncoding : System.getProperty("file.encoding");
         // cover
         Object o = part.getAttribute(Chapter.COVER, null);
         if (o instanceof FileObject) {
             FileObject fb = (FileObject) o;
-            String href = config.imageDir + "/" + base + "-cover." +
-                    FileNameUtils.extensionName(fb.getName());
+            String href = config.imageDir + "/" + base + "-cover." + FileNameUtils.extensionName(fb.getName());
             try {
                 ZipUtils.writeFile(fb, zipout, href);
-                elem.addElement("cover").addAttribute("href", href).addAttribute("media-type",
-                        fb.getMime());
+                elem.addElement("cover").addAttribute("href", href).addAttribute("media-type", fb.getMime());
             } catch (IOException ex) {
                 LOG.debug("cannot write file to PMAB: "+fb.getName(), ex);
             }
