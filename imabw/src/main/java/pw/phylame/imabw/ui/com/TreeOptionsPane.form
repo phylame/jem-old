@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="pw.phylame.imabw.ui.com.TreeOptionsPane">
-  <grid id="27dc6" binding="root" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-    <margin top="0" left="0" bottom="0" right="0"/>
+  <grid id="27dc6" binding="root" layout-manager="BorderLayout" hgap="0" vgap="0">
     <constraints>
       <xy x="20" y="256" width="500" height="35"/>
     </constraints>
@@ -9,11 +8,7 @@
     <border type="none"/>
     <children>
       <toolbar id="deca1">
-        <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="-1" height="20"/>
-          </grid>
-        </constraints>
+        <constraints border-constraint="Center"/>
         <properties>
           <borderPainted value="false"/>
           <floatable value="false"/>
@@ -32,21 +27,21 @@
             <constraints/>
             <properties>
               <enabled value="false"/>
-              <icon value="res/img/tree/search-chapter.png"/>
+              <icon value="res/gfx/tree/search-chapter.png"/>
               <text value=""/>
             </properties>
           </component>
           <component id="4089c" class="javax.swing.JButton" binding="buttonRefresh">
             <constraints/>
             <properties>
-              <icon value="res/img/tree/refresh-contents.png"/>
+              <icon value="res/gfx/tree/refresh-contents.png"/>
               <text value=""/>
             </properties>
           </component>
           <component id="2b64e" class="javax.swing.JToggleButton" binding="buttonLock">
             <constraints/>
             <properties>
-              <icon value="res/img/tree/contents-unloked.png"/>
+              <icon value="res/gfx/tree/contents-unloked.png"/>
             </properties>
           </component>
         </children>

@@ -19,7 +19,6 @@
 package pw.phylame.imabw.ui.com;
 
 import pw.phylame.imabw.Imabw;
-import pw.phylame.ixin.com.IPaneRender;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -27,7 +26,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
-public class NewAttributePane implements IPaneRender {
+public class NewAttributePane {
     private JPanel            root;
     private JComboBox<String> cbName;
     private JTextField        tfName;
@@ -92,11 +91,6 @@ public class NewAttributePane implements IPaneRender {
         return tfName.getText();
     }
 
-    @Override
-    public void destroy() {
-    }
-
-    @Override
     public JPanel getPane() {
         return root;
     }

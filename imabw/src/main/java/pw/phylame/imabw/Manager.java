@@ -20,15 +20,14 @@ package pw.phylame.imabw;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import pw.phylame.imabw.ui.Utils;
 import pw.phylame.imabw.ui.Viewer;
 import pw.phylame.imabw.ui.com.EditorTab;
 import pw.phylame.imabw.ui.com.PartNode;
 import pw.phylame.imabw.ui.com.UIFactory;
 import pw.phylame.imabw.ui.dialog.PartPropertiesDialog;
 import pw.phylame.imabw.ui.dialog.PartSelectionDialog;
-import pw.phylame.ixin.ITextEdit;
-import pw.phylame.ixin.IToolkit;
+import pw.phylame.imabw.ui.com.ITextEdit;
+import pw.pat.ixin.IToolkit;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.Part;
@@ -67,7 +66,7 @@ public class Manager implements Constants {
     /** Begin manager works */
     public void begin() {
         viewer.setVisible(true);
-        viewer.setStatusText(app.getText("Frame.Statusbar.Ready"));
+        viewer.setStatusText(app.getText("Viewer.Statusbar.Ready"));
 
         String[] argv = app.getArguments();
         if (argv.length < 1 || !openFile(new File(argv[0]))) {
@@ -77,7 +76,7 @@ public class Manager implements Constants {
 
     /** Stop manager works */
     public void stop() {
-        if (!maybeSave(app.getText("Dialog.Exit.Title"))) {
+        if (! maybeSave(app.getText("Dialog.Exit.Title"))) {
             return;
         }
         if (task != null) {
@@ -141,7 +140,7 @@ public class Manager implements Constants {
         int ret = JOptionPane.showOptionDialog(viewer, app.getText("Dialog.Save.LabelSaveTip"),
                 title,
                 JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
-                IToolkit.createImageIcon(":/res/img/dialog/save.png"),
+                IToolkit.createImageIcon(":/res/gfx/dialog/save.png"),
                 options, options[0]);
         switch (ret) {
             case JOptionPane.YES_OPTION:
@@ -167,9 +166,9 @@ public class Manager implements Constants {
         updateTitle();
 
         if (this.task.getSource() != null) {       // enable file details menu item
-            viewer.getMenuAction(FILE_DETAILS).setEnabled(true);
+            viewer.getAction(FILE_DETAILS).setEnabled(true);
         } else {
-            viewer.getMenuAction(FILE_DETAILS).setEnabled(false);
+            viewer.getAction(FILE_DETAILS).setEnabled(false);
         }
 
         viewer.setBook(this.task.getBook());
@@ -238,9 +237,9 @@ public class Manager implements Constants {
 
         updateTitle();
         if (this.task.getSource() != null) {       // enable file details menu item
-            viewer.getMenuAction(FILE_DETAILS).setEnabled(true);
+            viewer.getAction(FILE_DETAILS).setEnabled(true);
         } else {
-            viewer.getMenuAction(FILE_DETAILS).setEnabled(false);
+            viewer.getAction(FILE_DETAILS).setEnabled(false);
         }
 
         viewer.setStatusText(app.getText("Task.SavedBook", task.getBook().getTitle(),
@@ -310,15 +309,15 @@ public class Manager implements Constants {
         findText = str;
         if (index < 0) {
             if (reserved) {     // find previous
-                viewer.getMenuAction(FIND_PREVIOUS).setEnabled(false);
+                viewer.getAction(FIND_PREVIOUS).setEnabled(false);
             } else {            // find next
-                viewer.getMenuAction(FIND_NEXT).setEnabled(false);
+                viewer.getAction(FIND_NEXT).setEnabled(false);
             }
             worker.showWarning(viewer, app.getText("Dialog.Find.Title"),
                     app.getText("Dialog.Find.NotFound", str));
         } else {
-            viewer.getMenuAction(FIND_NEXT).setEnabled(true);
-            viewer.getMenuAction(FIND_PREVIOUS).setEnabled(true);
+            viewer.getAction(FIND_NEXT).setEnabled(true);
+            viewer.getAction(FIND_PREVIOUS).setEnabled(true);
             editor.setCaretPosition(index);
         }
     }
@@ -404,8 +403,12 @@ public class Manager implements Constants {
                 pw.phylame.imabw.ui.dialog.SettingsDialog.editSettings(viewer);
                 break;
             case SHOW_TOOLBAR:
-                viewer.showOrHideToolBar();
+                viewer.showOrHideToolbar();
                 app.getConfig().setShowToolbar(viewer.isToolBarVisible());
+                break;
+            case LOCK_TOOLBAR:
+                viewer.lockOrUnlockToolbar();
+                app.getConfig().setLockToolbar(viewer.isToolBarLocked());
                 break;
             case SHOW_STATUSBAR:
                 viewer.showOrHideStatusBar();
@@ -643,7 +646,7 @@ public class Manager implements Constants {
             viewer.removedNode(parent, index, node);
 
         }
-//        viewer.focusToRoot();
+        viewer.focusToRoot();
         notifyModified(app.getText("Task.DeletedChapter", paths.length));
     }
 

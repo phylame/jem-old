@@ -24,8 +24,10 @@ import javax.swing.*;
 import javax.swing.tree.*;
 import javax.swing.event.*;
 
+import pw.pat.ixin.IAction;
 import pw.phylame.imabw.Imabw;
 import pw.phylame.imabw.ui.com.PartNode;
+import pw.phylame.imabw.ui.com.PartTreeCellRender;
 
 public class PartSelectionDialog extends JDialog {
     /** Select chapter and section */
@@ -63,15 +65,22 @@ public class PartSelectionDialog extends JDialog {
 
         contentsTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         ((DefaultTreeModel) contentsTree.getModel()).setRoot(root);
-        contentsTree.setSelectionRow(0);
+        contentsTree.setCellRenderer(new PartTreeCellRender());
+
         contentsTree.requestFocus();
 
         if (mode == SECTION_ONLY || mode == CHAPTER_OR_SECTION) {
             buttonOK.setEnabled(true);
         }
+
         if (initPath != null) {
             contentsTree.setSelectionPath(initPath);
+            contentsTree.scrollPathToVisible(initPath);
+        } else {
+            contentsTree.setSelectionRow(0);
+            contentsTree.scrollRowToVisible(0);
         }
+
         contentsTree.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -123,21 +132,20 @@ public class PartSelectionDialog extends JDialog {
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
-        buttonOK.setText(app.getText("Dialog.SelectPart.ButtonSelect"));
-        buttonOK.setToolTipText(app.getText("Dialog.SelectPart.ButtonSelect.Tip"));
-        buttonOK.addActionListener(new ActionListener() {
+        buttonOK.setAction(new IAction(null, "Dialog.SelectPart.ButtonSelect", app) {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 onOK();
             }
         });
 
-        buttonCancel.setText(app.getText("Dialog.SelectPart.ButtonCancel"));
-        buttonCancel.setToolTipText(app.getText("Dialog.SelectPart.ButtonCancel.Tip"));
-        buttonCancel.addActionListener(new ActionListener() {
+        IAction cancelAction = new IAction(null, "Dialog.SelectPart.ButtonCancel", app) {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
-        });
+        };
+        buttonCancel.setAction(cancelAction);
 
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -148,11 +156,8 @@ public class PartSelectionDialog extends JDialog {
         });
 
         // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        contentPane.registerKeyboardAction(cancelAction, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
+                JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
         setSize(323, 471);
         setLocationRelativeTo(getOwner());

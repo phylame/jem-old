@@ -24,13 +24,10 @@ import javax.swing.JToggleButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import pw.pat.ixin.IToolkit;
 import pw.phylame.imabw.Imabw;
 
-import pw.phylame.ixin.IToolkit;
-import pw.phylame.ixin.com.IPaneRender;
-
-
-public class TreeOptionsPane implements IPaneRender {
+public class TreeOptionsPane {
     private JPanel root;
     private JButton buttonSearch;
     private JButton buttonRefresh;
@@ -56,7 +53,7 @@ public class TreeOptionsPane implements IPaneRender {
         });
 
         buttonLock.setToolTipText(app.getText("Frame.Tree.Lock.Tip"));
-        buttonLock.setSelectedIcon(IToolkit.createImageIcon(":/res/img/tree/contents-locked.png"));
+        buttonLock.setSelectedIcon(IToolkit.createImageIcon(":/res/gfx/tree/contents-locked.png"));
         buttonLock.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -74,12 +71,6 @@ public class TreeOptionsPane implements IPaneRender {
         buttonLock.setSelected(locked);
     }
 
-    @Override
-    public void destroy() {
-
-    }
-
-    @Override
     public JPanel getPane() {
         return root;
     }

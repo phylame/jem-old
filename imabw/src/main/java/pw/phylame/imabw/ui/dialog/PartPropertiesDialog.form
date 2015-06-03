@@ -178,21 +178,21 @@
                                 <constraints/>
                                 <properties>
                                   <hideActionText value="false"/>
-                                  <icon value="res/img/dialog/plus.png"/>
+                                  <icon value="res/gfx/dialog/plus.png"/>
                                   <text value=""/>
                                 </properties>
                               </component>
                               <component id="76f56" class="javax.swing.JButton" binding="buttonNimus">
                                 <constraints/>
                                 <properties>
-                                  <icon value="res/img/dialog/minus.png"/>
+                                  <icon value="res/gfx/dialog/minus.png"/>
                                   <text value=""/>
                                 </properties>
                               </component>
                               <component id="5f011" class="javax.swing.JButton" binding="buttonModify">
                                 <constraints/>
                                 <properties>
-                                  <icon value="res/img/dialog/modify.png"/>
+                                  <icon value="res/gfx/dialog/modify.png"/>
                                   <text value=""/>
                                 </properties>
                               </component>
@@ -200,7 +200,7 @@
                                 <constraints/>
                                 <properties>
                                   <enabled value="false"/>
-                                  <icon value="res/img/dialog/export.png"/>
+                                  <icon value="res/gfx/dialog/export.png"/>
                                   <text value=""/>
                                 </properties>
                               </component>

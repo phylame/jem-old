@@ -22,7 +22,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import pw.phylame.imabw.ui.com.*;
-import pw.phylame.ixin.IToolkit;
+import pw.pat.ixin.IToolkit;
 
 import pw.phylame.jem.core.*;
 import pw.phylame.jem.util.JemException;
@@ -99,22 +99,22 @@ public class Worker {
     public boolean showConfirm(Component parent, String title, Object message) {
         return JOptionPane.showConfirmDialog(parent, message, title, JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
-                IToolkit.createImageIcon(":/res/img/dialog/question.png")) == JOptionPane.YES_OPTION;
+                IToolkit.createImageIcon(":/res/gfx/dialog/question.png")) == JOptionPane.YES_OPTION;
     }
 
     public void showMessage(Component parent, String title, Object message) {
         JOptionPane.showMessageDialog(parent, message, title, JOptionPane.INFORMATION_MESSAGE,
-                IToolkit.createImageIcon(":/res/img/dialog/information.png"));
+                IToolkit.createImageIcon(":/res/gfx/dialog/information.png"));
     }
 
     public void showWarning(Component parent, String title, Object message) {
         JOptionPane.showMessageDialog(parent, message, title, JOptionPane.WARNING_MESSAGE,
-                IToolkit.createImageIcon(":/res/img/dialog/warning.png"));
+                IToolkit.createImageIcon(":/res/gfx/dialog/warning.png"));
     }
 
     public void showError(Component parent, String title, Object message) {
         JOptionPane.showMessageDialog(parent, message, title, JOptionPane.ERROR_MESSAGE,
-                IToolkit.createImageIcon(":/res/img/dialog/prohibit.png"));
+                IToolkit.createImageIcon(":/res/gfx/dialog/prohibit.png"));
     }
 
     public String inputLoop(Component parent, String title, String inputTip, String noInput, String initValue) {

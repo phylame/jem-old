@@ -39,7 +39,7 @@ import pw.phylame.imabw.Imabw;
 import pw.phylame.imabw.Worker;
 
 import pw.phylame.imabw.ui.com.NewAttributePane;
-import pw.phylame.ixin.ITextEdit;
+import pw.phylame.imabw.ui.com.ITextEdit;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.Part;
@@ -487,7 +487,6 @@ public class PartPropertiesDialog extends JDialog {
                 type = "str";
             }
         }
-        pane.destroy();
 
         Object value;
         switch (type) {

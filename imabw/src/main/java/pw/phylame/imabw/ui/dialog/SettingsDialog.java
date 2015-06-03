@@ -27,7 +27,6 @@ import javax.swing.border.TitledBorder;
 
 import pw.phylame.imabw.Config;
 import pw.phylame.imabw.Imabw;
-import pw.phylame.imabw.ui.Viewer;
 import say.swing.JFontChooser;
 
 public class SettingsDialog extends JDialog {
@@ -77,6 +76,7 @@ public class SettingsDialog extends JDialog {
     private JLabel            lbEditorColorBack;
     private JLabel            lbEditorColorHigh;
     private JButton           btnEditorFont;
+    private JCheckBox         cDecorateTitle;
 
     private static Point     oldLocation = null;
     private static Dimension oldSize     = null;
@@ -300,7 +300,7 @@ public class SettingsDialog extends JDialog {
         cShowToolbar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                app.getViewer().showOrHideToolBar();
+                app.getViewer().showOrHideToolbar();
                 app.getConfig().setShowToolbar(cShowToolbar.isSelected());
                 cLockToolbar.setEnabled(cShowToolbar.isSelected());
             }
@@ -310,7 +310,7 @@ public class SettingsDialog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean visible = cLockToolbar.isSelected();
-                app.getViewer().setLockToolBar(visible);
+                app.getViewer().setToolBarLocked(visible);
                 app.getConfig().setLockToolbar(visible);
             }
         });
@@ -318,7 +318,7 @@ public class SettingsDialog extends JDialog {
         cShowSidebar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ((Viewer)app.getViewer()).showOrHideSideBar();
+                (app.getViewer()).showOrHideSideBar();
                 app.getConfig().setShowSidebar(cShowSidebar.isSelected());
             }
         });
@@ -328,6 +328,15 @@ public class SettingsDialog extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 app.getViewer().showOrHideStatusBar();
                 app.getConfig().settShowStatusbar(cShowStatusbar.isSelected());
+            }
+        });
+        cDecorateTitle.setText(app.getText("Dialog.Settings.Face.Window.DecorateTitle"));
+        cDecorateTitle.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame.setDefaultLookAndFeelDecorated(cDecorateTitle.isSelected());
+                JDialog.setDefaultLookAndFeelDecorated(cDecorateTitle.isSelected());
+                app.getConfig().setDecoratedFrame(cDecorateTitle.isSelected());
             }
         });
     }
@@ -375,6 +384,7 @@ public class SettingsDialog extends JDialog {
         cLockToolbar.setSelected(app.getConfig().isLockToolbar());
         cShowSidebar.setSelected(app.getConfig().isShowSidebar());
         cShowStatusbar.setSelected(app.getConfig().isShowStatusbar());
+        cDecorateTitle.setSelected(app.getConfig().isDecoratedFrame());
     }
 
     private void initJem() {

@@ -18,13 +18,12 @@
 
 package pw.phylame.imabw.ui.com;
 
-import pw.phylame.ixin.com.IPaneRender;
 import pw.phylame.jem.core.Part;
 
 import javax.swing.*;
 import java.util.List;
 
-public class ListChooserPane implements IPaneRender {
+public class ListChooserPane {
     private JList<Part> list;
     private JPanel      root;
     private JLabel lbTip;
@@ -41,12 +40,6 @@ public class ListChooserPane implements IPaneRender {
         return list.getSelectedIndex();
     }
 
-    @Override
-    public void destroy() {
-
-    }
-
-    @Override
     public JPanel getPane() {
         return root;
     }

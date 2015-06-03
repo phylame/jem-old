@@ -18,21 +18,18 @@
 
 package pw.phylame.imabw;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import pw.phylame.imabw.ui.Viewer;
-import pw.phylame.ixin.IApplication;
-import pw.phylame.ixin.frame.IFrame;
-
 import java.awt.Font;
+import java.io.File;
+
+import pw.pat.ixin.IAction;
+import pw.pat.ixin.IApplication;
+import pw.phylame.imabw.ui.UIState;
+import pw.phylame.imabw.ui.Viewer;
 
 /**
  * The entry of Imabw.
  */
 public class Imabw extends IApplication implements Constants {
-    private static Log LOG = LogFactory.getLog(Imabw.class);
-
     /** The manager */
     private Manager manager = null;
 
@@ -42,41 +39,41 @@ public class Imabw extends IApplication implements Constants {
     /** The main frame */
     private Viewer viewer = null;
 
-    private Config config;
-
     public Imabw(String[] args) {
         super(INNER_NAME, VERSION, args);
-        checkHome();
-        config = new Config();
-        if (config.settingCount() == 0) { // no config
-            LOG.trace("no config found, create default config");
-            config.reset();     // save new config when exiting imabw
-        }
+        ensureHomeExisted();
         initApp();
     }
 
     /** Check and create user home directory for Imabw */
-    private void checkHome() {
-        java.io.File homeDir = new java.io.File(IMABW_HOME);
+    private void ensureHomeExisted() {
+        File homeDir = new File(IMABW_HOME);
         if (!homeDir.exists() && !homeDir.mkdirs()) {
             throw new RuntimeException("Cannot create Imabw home directory");
         }
     }
 
+
     public Config getConfig() {
-        return config;
+        return Config.getInstance();
     }
 
     @Override
     protected void onDestroy() {
+        Config config = getConfig();
+
         if (config.isChanged()) {
-            config.setComment("Configurations for Imabw v"+VERSION+", encoding: UTF-8");
             config.sync();
         }
+
+        viewer.destroy();
+        UIState.getInstance().sync();
     }
 
     /** Initialize Imabw */
     private void initApp() {
+        Config config = getConfig();
+
         setLocale(config.getAppLocale());
         loadLanguage();
 
@@ -86,6 +83,8 @@ public class Imabw extends IApplication implements Constants {
             setGeneralFonts(font);
         }
         setTheme(config.getLafTheme(), config.isDecoratedFrame());
+        IAction.smallIconSize = config.getSmallIconSize();
+        IAction.largeIconSize = config.getLargeIconSize();
     }
 
     public void loadLanguage() {
@@ -98,17 +97,17 @@ public class Imabw extends IApplication implements Constants {
     }
 
     @Override
-    public void onCommand(Object cmdID) {
+    public void onCommand(String command) {
         // send to manager
-        manager.onCommand(cmdID);
+        manager.onCommand(command);
     }
 
-    public void onTreeAction(Object actionID) {
+    public void onTreeAction(String actionID) {
         // send to manager
         manager.onTreeAction(actionID);
     }
 
-    public void onTabAction(Object actionID) {
+    public void onTabAction(String actionID) {
         // send to manager
         manager.onTabAction(actionID);
     }
@@ -126,8 +125,7 @@ public class Imabw extends IApplication implements Constants {
         manager.begin();
     }
 
-    @Override
-    public IFrame getViewer() {
+    public Viewer getViewer() {
         return viewer;
     }
 

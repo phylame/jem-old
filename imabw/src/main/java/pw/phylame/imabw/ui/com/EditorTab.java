@@ -24,8 +24,6 @@ import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 
-import pw.phylame.ixin.ITextEdit;
-
 import pw.phylame.jem.core.Part;
 import pw.phylame.jem.core.Cleanable;
 import pw.phylame.tools.file.FileFactory;

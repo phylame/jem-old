@@ -16,6 +16,8 @@
 
 package pw.phylame.imabw;
 
+import pw.pat.ixin.IFrame;
+
 /**
  * Constants for Imabw.
  */
@@ -53,9 +55,10 @@ public interface Constants {
     String EDIT_PREFERENCE = "edit-settings";
 
     /* View */
-    String SHOW_TOOLBAR   = "show-toolbar";
-    String SHOW_STATUSBAR = "show-statusbar";
-    String SHOW_SIDEBAR   = "show-sidebar";
+    String SHOW_TOOLBAR   = IFrame.SHOW_HIDE_TOOLBAR;
+    String LOCK_TOOLBAR   = IFrame.LOCK_UNLOCK_TOOLBAR;
+    String SHOW_STATUSBAR = IFrame.SHOW_HIDE_STATUSBAR;
+    String SHOW_SIDEBAR   = "show-hide-sidebar";
 
     /* Search */
     String FIND_TEXT        = "find-text";
@@ -69,8 +72,8 @@ public interface Constants {
     String EXTRA_ITEMS     = "extra-items";
 
     /* Help */
-    String DO_ACTION        = "do-action";
-    String SHOW_ABOUT       = "show-about";
+    String DO_ACTION  = "do-action";
+    String SHOW_ABOUT = "show-about";
 
     // ****************************
     // ** Contents tree commands **

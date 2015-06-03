@@ -18,14 +18,13 @@
 
 package pw.phylame.imabw.ui;
 
-import pw.phylame.imabw.Constants;
-import pw.phylame.imabw.Imabw;
+import pw.pat.ixin.IMenuLabel;
+import pw.pat.ixin.IMenuModel;
 
-import pw.phylame.ixin.IToolkit;
-import pw.phylame.ixin.ITextEdit;
-import pw.phylame.ixin.com.IAction;
-import pw.phylame.ixin.com.IMenuModel;
-import pw.phylame.ixin.com.IMenuLabel;
+import pw.phylame.imabw.Imabw;
+import pw.phylame.imabw.Constants;
+
+import pw.phylame.imabw.ui.com.ITextEdit;
 
 /**
  * UI design for Imabw.
@@ -41,33 +40,15 @@ public class UIDesign implements Constants {
 
     /* File */
     public static Object[][] FILE_MENU_ACTIONS = {
-            {NEW_FILE,
-                    app.getText("Menu.File.New"), app.getText("Menu.File.New.Icon"),
-                    app.getText("Menu.File.New.Mnemonic"), app.getText("Menu.File.New.Shortcut"),
-                    app.getText("Menu.File.New.Tip")},
-            {OPEN_FILE,
-                    app.getText("Menu.File.Open"), app.getText("Menu.File.Open.Icon"),
-                    app.getText("Menu.File.Open.Mnemonic"), app.getText("Menu.File.Open.Shortcut"),
-                    app.getText("Menu.File.Open.Tip")},
-            {SAVE_FILE,
-                    app.getText("Menu.File.Save"), app.getText("Menu.File.Save.Icon"),
-                    app.getText("Menu.File.Save.Mnemonic"), app.getText("Menu.File.Save.Shortcut"),
-                    app.getText("Menu.File.Save.Tip")},
-            {SAVE_AS_FILE,
-                    app.getText("Menu.File.SaveAs"), app.getText("Menu.File.SaveAs.Icon"),
-                    app.getText("Menu.File.SaveAs.Mnemonic"), app.getText("Menu.File.SaveAs.Shortcut"),
-                    app.getText("Menu.File.SaveAs.Tip")},
-            {FILE_DETAILS,
-                    app.getText("Menu.File.Details"), app.getText("Menu.File.Details.Icon"),
-                    app.getText("Menu.File.Details.Mnemonic"), app.getText("Menu.File.Details.Shortcut"),
-                    app.getText("Menu.File.Details.Tip"), false},
-            {EXIT_APP,
-                    app.getText("Menu.File.Exit"), app.getText("Menu.File.Exit.Icon"),
-                    app.getText("Menu.File.Exit.Mnemonic"), app.getText("Menu.File.Exit.Shortcut"),
-                    app.getText("Menu.File.Exit.Tip")}
+            {NEW_FILE, "Menu.File.New"},
+            {OPEN_FILE, "Menu.File.Open"},
+            {SAVE_FILE, "Menu.File.Save"},
+            {SAVE_AS_FILE, "Menu.File.SaveAs"},
+            {FILE_DETAILS, "Menu.File.Details"},
+            {EXIT_APP, "Menu.File.Exit"}
     };
     public static Object[]   FILE_MENU_MODEL   = {
-            new IMenuLabel(app.getText("Menu.File"), null, app.getText("Menu.File.Mnemonic")),
+            new IMenuLabel(app.getText("Menu.File"), null),
             NEW_FILE, OPEN_FILE,
             null,
             SAVE_FILE, SAVE_AS_FILE,
@@ -79,13 +60,10 @@ public class UIDesign implements Constants {
 
     /* Edit */
     public static Object[][] EDIT_MENU_ACTIONS = {
-            {EDIT_PREFERENCE,
-                    app.getText("Menu.Edit.Preference"), app.getText("Menu.Edit.Preference.Icon"),
-                    app.getText("Menu.Edit.Preference.Mnemonic"), app.getText("Menu.Edit.Preference.Shortcut"),
-                    app.getText("Menu.Edit.Preference.Tip")}
+            {EDIT_PREFERENCE, "Menu.Edit.Preference"}
     };
     public static Object[]   EDIT_MENU_MODEL   = {
-            new IMenuLabel(app.getText("Menu.Edit"), null, app.getText("Menu.Edit.Mnemonic")),
+            new IMenuLabel(app.getText("Menu.Edit"), null),
             ITextEdit.UNDO,
             ITextEdit.REDO,
             null,
@@ -101,21 +79,10 @@ public class UIDesign implements Constants {
 
     /* View */
     public static Object[][] VIEW_MENU_ACTIONS = {
-            {SHOW_TOOLBAR,
-                    app.getText("Menu.View.ShowToolbar"), app.getText("Menu.View.ShowToolbar.Icon"),
-                    app.getText("Menu.View.ShowToolbar.Mnemonic"), app.getText("Menu.View.ShowToolbar.Shortcut"),
-                    app.getText("Menu.View.ShowToolbar.Tip")},
-            {SHOW_STATUSBAR,
-                    app.getText("Menu.View.ShowStatusbar"), app.getText("Menu.View.ShowStatusbar.Icon"),
-                    app.getText("Menu.View.ShowStatusbar.Mnemonic"), app.getText("Menu.View.ShowStatusbar.Shortcut"),
-                    app.getText("Menu.View.ShowStatusbar.Tip")},
-            {SHOW_SIDEBAR,
-                    app.getText("Menu.View.ShowSidebar"), app.getText("Menu.View.ShowSidebar.Icon"),
-                    app.getText("Menu.View.ShowSidebar.Mnemonic"), app.getText("Menu.View.ShowSidebar.Shortcut"),
-                    app.getText("Menu.View.ShowSidebar.Tip")}
+            {SHOW_SIDEBAR, "Menu.View.ShowSidebar"}
     };
     public static Object[]   VIEW_MENU_MODEL   = {
-            new IMenuLabel(app.getText("Menu.View"), null, app.getText("Menu.View.Mnemonic")),
+            new IMenuLabel(app.getText("Menu.View"), null),
             new IMenuModel(SHOW_TOOLBAR, IMenuModel.MenuType.CHECK, true),
             new IMenuModel(SHOW_STATUSBAR, IMenuModel.MenuType.CHECK, true),
             new IMenuModel(SHOW_SIDEBAR, IMenuModel.MenuType.CHECK, true),
@@ -123,29 +90,14 @@ public class UIDesign implements Constants {
 
     /* Search */
     public static Object[][] SEARCH_MENU_ACTIONS = {
-            {FIND_TEXT,
-                    app.getText("Menu.Search.Find"), app.getText("Menu.Search.Find.Icon"),
-                    app.getText("Menu.Search.Find.Mnemonic"), app.getText("Menu.Search.Find.Shortcut"),
-                    app.getText("Menu.Search.Find.Tip"), false},
-            {FIND_NEXT,
-                    app.getText("Menu.Search.Next"), app.getText("Menu.Search.Next.Icon"),
-                    app.getText("Menu.Search.Next.Mnemonic"), app.getText("Menu.Search.Next.Shortcut"),
-                    app.getText("Menu.Search.Next.Tip"), false},
-            {FIND_PREVIOUS,
-                    app.getText("Menu.Search.Previous"), app.getText("Menu.Search.Previous.Icon"),
-                    app.getText("Menu.Search.Previous.Mnemonic"), app.getText("Menu.Search.Previous.Shortcut"),
-                    app.getText("Menu.Search.Previous.Tip"), false},
-            {FIND_AND_REPLACE,
-                    app.getText("Menu.Search.Replace"), app.getText("Menu.Search.Replace.Icon"),
-                    app.getText("Menu.Search.Replace.Mnemonic"), app.getText("Menu.Search.Replace.Shortcut"),
-                    app.getText("Menu.Search.Replace.Tip"), false},
-            {GO_TO_POSITION,
-                    app.getText("Menu.Search.Goto"), app.getText("Menu.Search.Goto.Icon"),
-                    app.getText("Menu.Search.Goto.Mnemonic"), app.getText("Menu.Search.Goto.Shortcut"),
-                    app.getText("Menu.Search.Goto.Tip"), false}
+            {FIND_TEXT, "Menu.Search.Find"},
+            {FIND_NEXT, "Menu.Search.Next"},
+            {FIND_PREVIOUS, "Menu.Search.Previous"},
+            {FIND_AND_REPLACE, "Menu.Search.Replace"},
+            {GO_TO_POSITION, "Menu.Search.Goto"}
     };
     public static Object[]   SEARCH_MENU_MODEL   = {
-            new IMenuLabel(app.getText("Menu.Search"), null, app.getText("Menu.Search.Mnemonic")),
+            new IMenuLabel(app.getText("Menu.Search"), null),
             FIND_TEXT, FIND_NEXT, FIND_PREVIOUS,
             null,
             FIND_AND_REPLACE,
@@ -155,34 +107,22 @@ public class UIDesign implements Constants {
 
     /* Tools */
     public static Object[][] TOOLS_MENU_ACTIONS = {
-            {BOOK_ATTRIBUTES,
-                    app.getText("Menu.Tools.Meta"), app.getText("Menu.Tools.Meta.Icon"),
-                    app.getText("Menu.Tools.Meta.Mnemonic"), app.getText("Menu.Tools.Meta.Shortcut"),
-                    app.getText("Menu.Tools.Meta.Tip")},
-            {EXTRA_ITEMS,
-                    app.getText("Menu.Tools.Extra"), app.getText("Menu.Tools.Extra.Icon"),
-                    app.getText("Menu.Tools.Extra.Mnemonic"), app.getText("Menu.Tools.Extra.Shortcut"),
-                    app.getText("Menu.Tools.Extra.Tip")}
+            {BOOK_ATTRIBUTES, "Menu.Tools.Meta"},
+            {EXTRA_ITEMS, "Menu.Tools.Extra"}
     };
     public static Object[]   TOOLS_MENU_MODEL   = {
-            new IMenuLabel(app.getText("Menu.Tools"), null, app.getText("Menu.Tools.Mnemonic")),
+            new IMenuLabel(app.getText("Menu.Tools"), null),
             BOOK_ATTRIBUTES,
 //            EXTRA_ITEMS
     };
 
     /* Help */
     public static Object[][] HELP_MENU_ACTIONS = {
-            {DO_ACTION,
-                    app.getText("Menu.Help.Action"), app.getText("Menu.Help.Action.Icon"),
-                    app.getText("Menu.Help.Action.Mnemonic"), app.getText("Menu.Help.Action.Shortcut"),
-                    app.getText("Menu.Help.Action.Tip")},
-            {SHOW_ABOUT,
-                    app.getText("Menu.Help.About"), app.getText("Menu.Help.About.Icon"),
-                    app.getText("Menu.Help.About.Mnemonic"), app.getText("Menu.Help.About.Shortcut"),
-                    app.getText("Menu.Help.About.Tip")}
+            {DO_ACTION, "Menu.Help.Action"},
+            {SHOW_ABOUT, "Menu.Help.About"}
     };
     public static Object[]   HELP_MENU_MODEL   = {
-            new IMenuLabel(app.getText("Menu.Help"), null, app.getText("Menu.Help.Mnemonic")),
+            new IMenuLabel(app.getText("Menu.Help"), null),
             DO_ACTION,
             SHOW_ABOUT
     };
@@ -199,7 +139,7 @@ public class UIDesign implements Constants {
     };
 
     /* Tool bar */
-    public static Object[] TOOL_BAR_MODEL = {
+    public static String[] TOOL_BAR_MODEL = {
             NEW_FILE, OPEN_FILE, SAVE_FILE,
             null,
             ITextEdit.UNDO, ITextEdit.REDO, null, ITextEdit.CUT, ITextEdit.COPY, ITextEdit.PASTE,
@@ -209,106 +149,16 @@ public class UIDesign implements Constants {
             BOOK_ATTRIBUTES
     };
 
-    /* Tab control */
+    /* Tab control actions */
     public static Object[][] TAB_POPUP_MENU_ACTIONS = {
-            {CLOSE_ACTIVE_TAB,
-                    app.getText("Frame.Tab.Menu.Close"),
-                    app.getText("Frame.Tab.Menu.Close.Icon"),
-                    app.getText("Frame.Tab.Menu.Close.Mnemonic"),
-                    app.getText("Frame.Tab.Menu.Close.Shortcut"),
-                    app.getText("Frame.Tab.Menu.Close.Tip")},
-            {CLOSE_OTHER_TABS,
-                    app.getText("Frame.Tab.Menu.CloseOthers"),
-                    app.getText("Frame.Tab.Menu.CloseOthers.Icon"),
-                    app.getText("Frame.Tab.Menu.CloseOthers.Mnemonic"),
-                    app.getText("Frame.Tab.Menu.CloseOthers.Shortcut"),
-                    app.getText("Frame.Tab.Menu.CloseOthers.Tip")},
-            {CLOSE_ALL_TABS,
-                    app.getText("Frame.Tab.Menu.CloseAll"),
-                    app.getText("Frame.Tab.Menu.CloseAll.Icon"),
-                    app.getText("Frame.Tab.Menu.CloseAll.Mnemonic"),
-                    app.getText("Frame.Tab.Menu.CloseAll.Shortcut"),
-                    app.getText("Frame.Tab.Menu.CloseAll.Tip")},
-            {CLOSE_UNMODIFIED_TABS,
-                    app.getText("Frame.Tab.Menu.CloseUnmodified"),
-                    app.getText("Frame.Tab.Menu.CloseUnmodified.Icon"),
-                    app.getText("Frame.Tab.Menu.CloseUnmodified.Mnemonic"),
-                    app.getText("Frame.Tab.Menu.CloseUnmodified.Shortcut"),
-                    app.getText("Frame.Tab.Menu.CloseUnmodified.Tip")},
-            {SELECT_NEXT_TAB,
-                    app.getText("Frame.Tab.Menu.SelectNext"),
-                    app.getText("Frame.Tab.Menu.SelectNext.Icon"),
-                    app.getText("Frame.Tab.Menu.SelectNext.Mnemonic"),
-                    app.getText("Frame.Tab.Menu.SelectNext.Shortcut"),
-                    app.getText("Frame.Tab.Menu.SelectNext.Tip")},
-            {SELECT_PREVIOUS_TAB,
-                    app.getText("Frame.Tab.Menu.SelectPrevious"),
-                    app.getText("Frame.Tab.Menu.SelectPrevious.Icon"),
-                    app.getText("Frame.Tab.Menu.SelectPrevious.Mnemonic"),
-                    app.getText("Frame.Tab.Menu.SelectPrevious.Shortcut"),
-                    app.getText("Frame.Tab.Menu.SelectPrevious.Tip")}
+            {CLOSE_ACTIVE_TAB, "Frame.Tab.Menu.Close"},
+            {CLOSE_OTHER_TABS, "Frame.Tab.Menu.CloseOthers"},
+            {CLOSE_ALL_TABS, "Frame.Tab.Menu.CloseAll"},
+            {CLOSE_UNMODIFIED_TABS, "Frame.Tab.Menu.CloseUnmodified"},
+            {SELECT_NEXT_TAB, "Frame.Tab.Menu.SelectNext"},
+            {SELECT_PREVIOUS_TAB, "Frame.Tab.Menu.SelectPrevious"}
     };
 
-    /* Tree options */
-    public static Object[][] TREE_POPUP_MENU_ACTIONS = {
-            {NEW_CHAPTER,
-                    app.getText("Frame.Tree.Menu.New"),
-                    app.getText("Frame.Tree.Menu.New.Icon"),
-                    app.getText("Frame.Tree.Menu.New.Mnemonic"),
-                    app.getText("Frame.Tree.Menu.New.Shortcut"),
-                    app.getText("Frame.Tree.Menu.New.Tip")},
-            {INSERT_CHAPTER,
-                    app.getText("Frame.Tree.Menu.Insert"),
-                    app.getText("Frame.Tree.Menu.Insert.Icon"),
-                    app.getText("Frame.Tree.Menu.Insert.Mnemonic"),
-                    app.getText("Frame.Tree.Menu.Insert.Shortcut"),
-                    app.getText("Frame.Tree.Menu.Insert.Tip")},
-            {RENAME_CHAPTER,
-                    app.getText("Frame.Tree.Menu.Rename"),
-                    app.getText("Frame.Tree.Menu.Rename.Icon"),
-                    app.getText("Frame.Tree.Menu.Rename.Mnemonic"),
-                    app.getText("Frame.Tree.Menu.Rename.Shortcut"),
-                    app.getText("Frame.Tree.Menu.Rename.Tip")},
-            {MOVE_CHAPTER,
-                    app.getText("Frame.Tree.Menu.Move"),
-                    app.getText("Frame.Tree.Menu.Move.Icon"),
-                    app.getText("Frame.Tree.Menu.Move.Mnemonic"),
-                    app.getText("Frame.Tree.Menu.Move.Shortcut"),
-                    app.getText("Frame.Tree.Menu.Move.Tip")},
-            {DELETE_CHAPTER,
-                    app.getText("Frame.Tree.Menu.Delete"),
-                    app.getText("Frame.Tree.Menu.Delete.Icon"),
-                    app.getText("Frame.Tree.Menu.Delete.Mnemonic"),
-                    app.getText("Frame.Tree.Menu.Delete.Shortcut"),
-                    app.getText("Frame.Tree.Menu.Delete.Tip")},
-            {MERGE_CHAPTER,
-                    app.getText("Frame.Tree.Menu.Merge"),
-                    app.getText("Frame.Tree.Menu.Merge.Icon"),
-                    app.getText("Frame.Tree.Menu.Merge.Mnemonic"),
-                    app.getText("Frame.Tree.Menu.Merge.Shortcut"),
-                    app.getText("Frame.Tree.Menu.Merge.Tip")},
-            {TREE_PROPERTIES,
-                    app.getText("Frame.Tree.Menu.Properties"),
-                    app.getText("Frame.Tree.Menu.Properties.Icon"),
-                    app.getText("Frame.Tree.Menu.Properties.Mnemonic"),
-                    app.getText("Frame.Tree.Menu.Properties.Shortcut"),
-                    app.getText("Frame.Tree.Menu.Properties.Tip")},
-            {SAVE_CHAPTER,
-                    app.getText("Frame.Tree.Menu.SaveAs"),
-                    app.getText("Frame.Tree.Menu.SaveAs.Icon"),
-                    app.getText("Frame.Tree.Menu.SaveAs.Mnemonic"),
-                    app.getText("Frame.Tree.Menu.SaveAs.Shortcut"),
-                    app.getText("Frame.Tree.Menu.SaveAs.Tip")},
-//            {IMPORT_CHAPTER,
-//                    app.getText("Frame.Tree.Menu.Import"),
-//                    app.getText("Frame.Tree.Menu.Import.Icon"),
-//                    app.getText("Frame.Tree.Menu.Import.Mnemonic"),
-//                    app.getText("Frame.Tree.Menu.Import.Shortcut"),
-//                    app.getText("Frame.Tree.Menu.Import.Tip")}
-    };
-
-
-    /* Tab control */
     public static Object[] TAB_POPUP_MENU_MODEL = {
             CLOSE_ACTIVE_TAB, CLOSE_OTHER_TABS, CLOSE_ALL_TABS, CLOSE_UNMODIFIED_TABS,
             null,
@@ -316,7 +166,19 @@ public class UIDesign implements Constants {
             SELECT_PREVIOUS_TAB
     };
 
-    /* Tree option */
+    /* Tree options actions */
+    public static Object[][] TREE_POPUP_MENU_ACTIONS = {
+            {NEW_CHAPTER, "Frame.Tree.Menu.New"},
+            {INSERT_CHAPTER, "Frame.Tree.Menu.Insert"},
+            {RENAME_CHAPTER, "Frame.Tree.Menu.Rename"},
+            {MOVE_CHAPTER, "Frame.Tree.Menu.Move"},
+            {DELETE_CHAPTER, "Frame.Tree.Menu.Delete"},
+            {MERGE_CHAPTER, "Frame.Tree.Menu.Merge"},
+            {TREE_PROPERTIES, "Frame.Tree.Menu.Properties"},
+            {SAVE_CHAPTER, "Frame.Tree.Menu.SaveAs"},
+//            {IMPORT_CHAPTER, "Frame.Tree.Menu.Import"}
+    };
+
     public static Object[] TREE_POPUP_MENU_MODEL = {
             NEW_CHAPTER,
             INSERT_CHAPTER,
@@ -332,26 +194,4 @@ public class UIDesign implements Constants {
             null,
             TREE_PROPERTIES
     };
-
-    /* set text and icons for ITextEdit actions*/
-    static {
-        Object[][] editModel = new Object[][]{
-                {ITextEdit.UNDO, "Undo"},
-                {ITextEdit.REDO, "Redo"},
-                {ITextEdit.CUT, "Cut"},
-                {ITextEdit.COPY, "Copy"},
-                {ITextEdit.PASTE, "Paste"},
-                {ITextEdit.DELETE, "Delete"},
-                {ITextEdit.SELECT_ALL, "SelectAll"},
-        };
-        for (Object[] model : editModel) {
-            IAction action = ITextEdit.getEditAction(model[0]);
-            String key = "Editor.Menu." + model[1];
-            action.setText(app.getText(key));
-            action.setIcon(pw.phylame.ixin.IToolkit.createImageIcon(app.getText(key + ".Icon")));
-            action.setMnemonic(IToolkit.getMnemonic(app.getText(key + ".Mnemonic")));
-            action.setAccelerator(IToolkit.getKeyStroke(app.getText(key + ".Shortcut")));
-            action.setStatusTip(app.getText(key + ".Tip"));
-        }
-    }
 }

@@ -18,42 +18,32 @@
 
 package pw.phylame.imabw.ui;
 
+import pw.pat.ixin.IFrame;
+import pw.pat.ixin.IAction;
+import pw.pat.ixin.IToolkit;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
-import javax.swing.tree.DefaultTreeCellRenderer;
-import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
+import javax.swing.tree.DefaultTreeModel;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import pw.phylame.imabw.Imabw;
 import pw.phylame.imabw.Constants;
-import pw.phylame.imabw.ui.com.EditorIndicator;
-import pw.phylame.imabw.ui.com.EditorTab;
-import pw.phylame.imabw.ui.com.PartNode;
-import pw.phylame.imabw.ui.com.TreeOptionsPane;
-import pw.phylame.ixin.ITextEdit;
-import pw.phylame.ixin.IToolkit;
-import pw.phylame.ixin.ITree;
-import pw.phylame.ixin.com.IAction;
-import pw.phylame.ixin.event.IActionEvent;
-import pw.phylame.ixin.event.IActionListener;
-import pw.phylame.ixin.frame.IFrame;
+import pw.phylame.imabw.ui.com.*;
 import pw.phylame.jem.core.Part;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Map;
+import java.util.Arrays;
+import java.util.ArrayList;
 
 /**
  * Main frame board of Imabw.
  */
 public class Viewer extends IFrame implements Constants {
-    private static Log LOG = LogFactory.getLog(Viewer.class);
+    private static Imabw app = Imabw.getInstance();
 
-    private Imabw app = Imabw.getInstance();
     private JPanel rootPane;
 
     // split pane
@@ -61,15 +51,13 @@ public class Viewer extends IFrame implements Constants {
     private Action nextWindowAction = null;
     private Action prevWindowAction = null;
 
-    // status
-    private int dividerLocation, dividerSize;
     // ******************
     // ** Contents tree
     // ******************
-    private ITree                contentsTree;
+    private NavigateTree                contentsTree;
     private DefaultTreeModel     treeModel;
     private JPopupMenu           treeContextMenu;
-    private Map<Object, IAction> treeActions;
+    private Map<String, IAction> treeActions;
     private TreeOptionsPane      treeOptionsPane;
     private boolean contentsLocked = false;
 
@@ -78,54 +66,43 @@ public class Viewer extends IFrame implements Constants {
     // ******************
     private JTabbedPane          editorWindow;
     private JPopupMenu           tabContextMenu;
-    private Map<Object, IAction> tabActions;
+    private Map<String, IAction> tabActions;
     private ArrayList<EditorTab> editorTabs = new ArrayList<>();
 
     private EditorIndicator editorIndicator;
 
-    // global menu and toolbar actions
-    static {
-        IFrame.setActionsModel(UIDesign.MENU_ACTIONS);
-        IFrame.setMenuBarModel(UIDesign.MENU_BAR_MODEL);
-        IFrame.setToolBarModel(UIDesign.TOOL_BAR_MODEL);
-    }
-
     public Viewer() {
-        super();
-
-        createComponents();
-
-        setTitle(app.getText("App.Name"));
+        super(app.getText("App.Name"), UIDesign.MENU_ACTIONS, UIDesign.MENU_BAR_MODEL, UIDesign.TOOL_BAR_MODEL);
         setIconImage(IToolkit.createImage(app.getText("App.Icon")));
 
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                onAction(Constants.EXIT_APP);
+                app.onCommand(Constants.EXIT_APP);
             }
         });
 
-        getToolBar().setVisible(app.getConfig().isShowToolbar());
-        setLockToolBar(app.getConfig().isLockToolbar());
-        getStatusBar().setVisible(app.getConfig().isShowStatusbar());
+        createComponents();
 
-        JMenu menu = getViewMenu();
-        ((JCheckBoxMenuItem) menu.getItem(0)).setState(getToolBar().isVisible());
-        ((JCheckBoxMenuItem)menu.getItem(1)).setState(getStatusBar().isVisible());
-        ((JCheckBoxMenuItem)menu.getItem(2)).setState(app.getConfig().isShowSidebar());
-
-        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-        setSize((int)(d.getWidth()*0.8), (int)(d.getWidth()*0.45)); // 16x9
-        setLocationRelativeTo(null);
+        updateState();
 
         focusToTreeWindow();
     }
 
     @Override
-    public void initialized() {
+    public void initializing() {
         // using ITextEdit edit actions
-        getMenuActions().putAll(ITextEdit.getContextActions());
+        getActions().putAll(ITextEdit.getContextActions());
+    }
+
+    public void destroy() {
+        UIState uiState = UIState.getInstance();
+        uiState.setViewerSize(getSize());
+        uiState.setViewerLocation(getLocation());
+
+        uiState.setDividerSize(splitPane.getDividerSize());
+        uiState.setDividerLocation(splitPane.getDividerLocation());
     }
 
     private void createComponents() {
@@ -141,16 +118,35 @@ public class Viewer extends IFrame implements Constants {
         // editor indicator
         editorIndicator = new EditorIndicator();
         getStatusBar().add(editorIndicator.getPane(), BorderLayout.EAST);
+    }
 
-        if (! app.getConfig().isShowSidebar()) {    // hide
-            showOrHideSideBar();
+    private void updateState() {
+        setToolBarVisible(app.getConfig().isShowToolbar());
+        setToolBarLocked(app.getConfig().isLockToolbar());
+        setStatusBarVisible(app.getConfig().isShowStatusbar());
+        setSideBarVisible(app.getConfig().isShowSidebar());
+
+        JMenu menu = getViewMenu();
+        menu.getItem(0).setSelected(getToolBar().isVisible());
+        menu.getItem(1).setSelected(getStatusBar().isVisible());
+        menu.getItem(2).setSelected(app.getConfig().isShowSidebar());
+        ((JCheckBoxMenuItem) getToolBar().getComponentPopupMenu().getComponent(0)).setSelected(
+                app.getConfig().isLockToolbar());
+
+        UIState uiState = UIState.getInstance();
+        setSize(uiState.getViewerSize()); // 16x9
+
+        Point location = uiState.getViewerLocation();
+        if (location != null) {
+            setLocation(location);
+        } else {
+            setLocationByPlatform(true);
         }
     }
 
     @Override
-    public void setLockToolBar(boolean locked) {
-        super.setLockToolBar(locked);
-        app.getConfig().setLockToolbar(locked);
+    public String getText(String key) {
+        return app.getText(key);
     }
 
     @Override
@@ -159,27 +155,28 @@ public class Viewer extends IFrame implements Constants {
     }
 
     @Override
-    public void onAction(Object actionID) {
-        app.onCommand(actionID);
+    public void actionPerformed(ActionEvent e) {
+        app.onCommand(e.getActionCommand());
     }
 
     private void createContentsPopupMenu() {
-        treeActions = IToolkit.createActions(UIDesign.TREE_POPUP_MENU_ACTIONS, new IActionListener() {
+        treeActions = IToolkit.createActions(UIDesign.TREE_POPUP_MENU_ACTIONS, new ActionListener() {
             @Override
-            public void actionPerformed(IActionEvent e) {
-                app.onTreeAction(e.getAction().getId());
+            public void actionPerformed(ActionEvent e) {
+                app.onTreeAction(e.getActionCommand());
             }
-        });
+        }, this);
         treeContextMenu = new JPopupMenu();
-        IToolkit.addMenuItem(treeContextMenu, UIDesign.TREE_POPUP_MENU_MODEL, treeActions, this);
+        IToolkit.addMenuItems(treeContextMenu, UIDesign.TREE_POPUP_MENU_MODEL, treeActions, this);
     }
 
     private void createContentsWindow() {
         createContentsPopupMenu();
 
         treeModel = new DefaultTreeModel(null);
-        contentsTree = new ITree(app.getText("Frame.Contents.Title")+" ", treeModel);
-        contentsTree.setTitleIcon(IToolkit.createImageIcon(app.getText("Frame.Contents.TitleIcon")));
+        contentsTree = new NavigateTree(app.getText("Frame.Contents.Title")+" ",
+                IToolkit.createImageIcon(app.getText("Frame.Contents.TitleIcon")), treeModel);
+//        contentsTree.setTitleIcon(IToolkit.createImageIcon(app.getText("Frame.Contents.TitleIcon")));
 
         treeOptionsPane = new TreeOptionsPane();
         contentsTree.getTitleBar().add(treeOptionsPane.getPane(), BorderLayout.CENTER);
@@ -189,36 +186,13 @@ public class Viewer extends IFrame implements Constants {
 
     private void setTreeStyle(final JTree tree) {
         // cell renderer
-        tree.setCellRenderer(new DefaultTreeCellRenderer() {
-            Icon bookIcon = IToolkit.createImageIcon(app.getText("Frame.Tree.Book.Icon"));
-            Icon sectionIcon = IToolkit.createImageIcon(app.getText("Frame.Tree.Section.Icon"));
-            Icon chapterIcon = IToolkit.createImageIcon(app.getText("Frame.Tree.Chapter.Icon"));
-
-            @Override
-            public Component getTreeCellRendererComponent(JTree tree,
-                                                          Object value,
-                                                          boolean selected,
-                                                          boolean expanded,
-                                                          boolean leaf,
-                                                          int row,
-                                                          boolean hasFocus) {
-                super.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, hasFocus);
-                PartNode node = (PartNode) value;
-                if (leaf) {
-                    setIcon(chapterIcon);
-                } else if (node.isRoot()) {
-                    setIcon(bookIcon);
-                } else {
-                    setIcon(sectionIcon);
-                }
-                return this;
-            }
-        });
+        tree.setCellRenderer(new PartTreeCellRender());
 
         // split action
         addSplitAction(tree);
+
         // add tree context actions to tree
-        IToolkit.addInputActions(tree, treeActions.values());
+        IToolkit.addKeyboardActions(tree, treeActions.values(), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
         tree.addMouseListener(new MouseAdapter() {
             @Override
@@ -272,7 +246,7 @@ public class Viewer extends IFrame implements Constants {
             action.setEnabled(false);
         }
 
-        java.util.List<Object> keys = new ArrayList<>();    // enable menu item
+        java.util.List<String> keys = new ArrayList<>();    // enable menu item
         switch (selectedPaths.length) {
             case 0:     // no selection disable all
                 break;
@@ -297,11 +271,11 @@ public class Viewer extends IFrame implements Constants {
         }
         if (tree.isPathSelected(tree.getPathForRow(0))) {       // selected root
             // root cannot insert, save, move, delete, merge
-            Object[] _keys = {INSERT_CHAPTER, SAVE_CHAPTER, MOVE_CHAPTER, DELETE_CHAPTER, MERGE_CHAPTER};
+            String[] _keys = {INSERT_CHAPTER, SAVE_CHAPTER, MOVE_CHAPTER, DELETE_CHAPTER, MERGE_CHAPTER};
             keys.removeAll(Arrays.asList(_keys));
         }
 
-        for (Object key: keys) {
+        for (String key: keys) {
             IAction action = treeActions.get(key);
             if (action != null) {
                 action.setEnabled(true);
@@ -311,29 +285,21 @@ public class Viewer extends IFrame implements Constants {
     }
 
     private void createEditorPopupMenu() {
-        tabActions = IToolkit.createActions(UIDesign.TAB_POPUP_MENU_ACTIONS, new IActionListener() {
+        tabActions = IToolkit.createActions(UIDesign.TAB_POPUP_MENU_ACTIONS, new ActionListener() {
             @Override
-            public void actionPerformed(IActionEvent e) {
-                app.onTabAction(e.getAction().getId());
+            public void actionPerformed(ActionEvent e) {
+                app.onTabAction(e.getActionCommand());
             }
-        });
+        }, this);
         tabContextMenu = new JPopupMenu();
-        IToolkit.addMenuItem(tabContextMenu, UIDesign.TAB_POPUP_MENU_MODEL, tabActions, this);
+        IToolkit.addMenuItems(tabContextMenu, UIDesign.TAB_POPUP_MENU_MODEL, tabActions, this);
     }
 
     private void createEditorWindow() {
         createEditorPopupMenu();
 
-        editorWindow.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                // not meta key or empty editor
-                if (!e.isMetaDown() || getTabCount() == 0) {
-                    return;
-                }
-                tabContextMenu.show(editorWindow, e.getX(), e.getY());
-            }
-        });
+        editorWindow.setComponentPopupMenu(tabContextMenu);
+
         editorWindow.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -400,21 +366,25 @@ public class Viewer extends IFrame implements Constants {
                 JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    // ****************************************
-    // ** Contents tree operation (The Sidebar)
-    // ****************************************
+    // *******************************************
+    // ** Contents tree operation (The Sidebar) **
+    // *******************************************
 
     public boolean isSideBarVisible() {
         return contentsTree.isVisible();
     }
 
     public void setSideBarVisible(boolean visible) {
-        if (! visible) {    // hide
-            dividerLocation = splitPane.getDividerLocation();
-            dividerSize = splitPane.getDividerSize();
+        UIState uiState = UIState.getInstance();
+        if (visible == isSideBarVisible()) {
+            return;
+        } else if (! visible) {    // hide
+            uiState.setDividerLocation(splitPane.getDividerLocation());
+            uiState.setDividerSize(splitPane.getDividerSize());
             splitPane.setDividerLocation(0);
             splitPane.setDividerSize(0);
         } else {
+            int dividerLocation = uiState.getDividerLocation(), dividerSize = uiState.getDividerSize();
             splitPane.setDividerLocation(dividerLocation);
             splitPane.setDividerSize(dividerSize);
         }
@@ -447,11 +417,11 @@ public class Viewer extends IFrame implements Constants {
     }
 
     public TreePath getSelectedPath() {
-        return contentsTree.getSelectionPath();
+        return contentsTree.getTree().getSelectionPath();
     }
 
     public TreePath[] getSelectedPaths() {
-        return contentsTree.getSelectionPaths();
+        return contentsTree.getTree().getSelectionPaths();
     }
 
     public PartNode getSelectedNode() {
@@ -468,8 +438,9 @@ public class Viewer extends IFrame implements Constants {
     }
 
     public void focusToRoot() {
-        contentsTree.setSelectionRow(0);
-        contentsTree.scrollToHead();
+        JTree tree = contentsTree.getTree();
+        tree.setSelectionRow(0);
+        tree.scrollRowToVisible(0);
     }
 
     public void refreshNode(PartNode node) {
@@ -481,11 +452,11 @@ public class Viewer extends IFrame implements Constants {
     }
 
     public void focusToPath(TreePath path) {
-        contentsTree.setSelectionPath(path);
+        contentsTree.getTree().setSelectionPath(path);
     }
 
     public void focusToRow(int row) {
-        contentsTree.setSelectionRow(row);
+        contentsTree.getTree().setSelectionRow(row);
     }
 
     public void focusToNode(TreePath path, PartNode node) {
@@ -605,14 +576,14 @@ public class Viewer extends IFrame implements Constants {
         try {
             text = part.getText();
         } catch (java.io.IOException e) {
-            LOG.debug("cannot load text content of "+part.getTitle()+" in "+getRootNode(), e);
             text = "";
         }
         EditorTab tab = new EditorTab(new ITextEdit(text, this), part,
                 app.getConfig().getPmabMaTextEncoding());
         initEditorTab(tab);
         editorTabs.add(tab);
-        editorWindow.addTab(tab.getPart().getTitle(), tab.getTextEdit());
+        editorWindow.addTab(tab.getPart().getTitle(),
+                IToolkit.createImageIcon(":/res/gfx/tree/chapter.png"), tab.getTextEdit());
 
         if (editorTabs.size() == 1) {   // first open tab activate search menus
             switchEditableMenus(true);
@@ -624,7 +595,8 @@ public class Viewer extends IFrame implements Constants {
     private void initEditorTab(final EditorTab tab) {
         final ITextEdit textEdit = tab.getTextEdit();
 
-        IToolkit.addInputActions(textEdit.getTextEditor(), tabActions.values());
+        IToolkit.addKeyboardActions(textEdit.getTextEditor(), tabActions.values(),
+                JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
         setEditorStyle(textEdit);
 
@@ -679,7 +651,7 @@ public class Viewer extends IFrame implements Constants {
         String[] keys = {FIND_TEXT, FIND_AND_REPLACE, GO_TO_POSITION};
         IAction action;
         for (String key: keys) {
-            action = getMenuAction(key);
+            action = getAction(key);
             if (action != null) {
                 action.setEnabled(enable);
             }

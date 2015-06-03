@@ -19,7 +19,7 @@
 package pw.phylame.imabw.ui.dialog;
 
 import pw.phylame.imabw.Imabw;
-import pw.phylame.ixin.ITextEdit;
+import pw.phylame.imabw.ui.com.ITextEdit;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;

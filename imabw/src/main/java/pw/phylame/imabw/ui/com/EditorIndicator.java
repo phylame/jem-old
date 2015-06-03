@@ -26,12 +26,11 @@ import java.awt.event.ActionListener;
 
 import pw.phylame.imabw.Imabw;
 
-import pw.phylame.ixin.com.IPaneRender;
 import pw.phylame.tools.DateUtils;
 
 import java.util.Date;
 
-public class EditorIndicator implements IPaneRender {
+public class EditorIndicator {
     private JPanel rootPanel;
 
     private JLabel ruler;
@@ -41,10 +40,10 @@ public class EditorIndicator implements IPaneRender {
 
     public EditorIndicator() {
         Imabw app = Imabw.getInstance();
-        ruler.setToolTipText(app.getText("Frame.Statusbar.Ruler"));
-        encoding.setToolTipText(app.getText("Frame.Statusbar.Encoding"));
-        words.setToolTipText(app.getText("Frame.Statusbar.Words"));
-        time.setToolTipText(app.getText("Frame.Statusbar.Time"));
+        ruler.setToolTipText(app.getText("Viewer.Statusbar.Ruler"));
+        encoding.setToolTipText(app.getText("Viewer.Statusbar.Encoding"));
+        words.setToolTipText(app.getText("Viewer.Statusbar.Words"));
+        time.setToolTipText(app.getText("Viewer.Statusbar.Time"));
 
         setRuler(-1, -1, 0);
         setEncoding(null);
@@ -60,11 +59,6 @@ public class EditorIndicator implements IPaneRender {
         }).start();
     }
 
-    @Override
-    public void destroy() {
-    }
-
-    @Override
     public JPanel getPane() {
         return rootPanel;
     }

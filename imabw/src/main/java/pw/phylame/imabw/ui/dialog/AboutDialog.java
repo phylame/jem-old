@@ -22,6 +22,8 @@ import java.awt.Frame;
 import java.awt.event.*;
 import javax.swing.*;
 
+import pw.pat.ixin.IAction;
+import pw.pat.ixin.IToolkit;
 import pw.phylame.imabw.Imabw;
 import pw.phylame.jem.core.Jem;
 
@@ -40,13 +42,14 @@ public class AboutDialog extends JDialog {
 
         final Imabw app = Imabw.getInstance();
 
-        buttonClose.setText(app.getText("Dialog.About.ButtonClose"));
-        buttonClose.setToolTipText(app.getText("Dialog.About.ButtonClose.Tip"));
-        buttonClose.addActionListener(new ActionListener() {
+        IAction closeAction = new IAction(null, "Dialog.About.ButtonClose", app) {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
             }
-        });
+        };
+
+        buttonClose.setAction(closeAction);
 
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -57,11 +60,8 @@ public class AboutDialog extends JDialog {
         });
 
         // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        contentPane.registerKeyboardAction(closeAction, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
+                JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
         labelMessage.setText(String.format("%s v%s on %s (%s)", app.getText("App.Name"),
                 Imabw.VERSION,

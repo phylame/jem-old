@@ -38,8 +38,7 @@ import java.text.SimpleDateFormat;
 public class Settings {
     private static Log LOG = LogFactory.getLog(Settings.class);
 
-    public static final String SETTINGS_FILE = Application.getUserHome().toLowerCase()
-            + "/settings.pfc";
+    public static final String SETTINGS_FILE = Application.getUserHome().toLowerCase() + "/settings.pfc";
 
     public static final String ENCODING = "UTF-8";
 
@@ -98,9 +97,15 @@ public class Settings {
     }
 
     protected void init() {
+        File file = new File(SETTINGS_FILE);
+        if (!file.exists()) {   // not exists, create new
+            reset();
+            sync();
+            return;
+        }
         FileInputStream in = null;
         try {
-            in = new FileInputStream(SETTINGS_FILE);
+            in = new FileInputStream(file);
             load(in);
         } catch (IOException e) {
             LOG.debug("load settings failed: " + SETTINGS_FILE, e);
@@ -118,7 +123,10 @@ public class Settings {
     protected void store(OutputStream out) throws IOException {
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, ENCODING));
         if (!isEmpty(comment)) {
-            writer.write(COMMENT_LABEL+" "+comment+LINE_SEPARATOR+LINE_SEPARATOR);
+            for (String line: comment.split("(\\r\\n)|(\\n)|(\\r)")) {
+                writer.write(COMMENT_LABEL+" "+line.trim()+LINE_SEPARATOR);
+            }
+            writer.write(LINE_SEPARATOR);
         }
         for (Map.Entry<String, SettingItem> entry: map.entrySet()) {
             SettingItem item = entry.getValue();
@@ -293,5 +301,9 @@ public class Settings {
 
     public void setLocale(String key, Locale locale, String comment) {
         setProperty(key, locale.toLanguageTag(), comment);
+    }
+
+    public void reset() {
+
     }
 }

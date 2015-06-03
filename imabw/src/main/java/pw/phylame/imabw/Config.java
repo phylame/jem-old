@@ -18,25 +18,37 @@
 
 package pw.phylame.imabw;
 
-import pw.phylame.ixin.ISettings;
+import pw.pat.ixin.ISettings;
 import pw.phylame.jem.formats.txt.TxtParser;
 
-import javax.swing.UIManager;
 import java.awt.Font;
 import java.awt.Color;
+import javax.swing.UIManager;
 import java.util.Locale;
 
 /**
  * Configurations for Imabw.
  */
-public class Config extends ISettings {
-    public Config() {
+public class Config extends ISettings implements Constants {
+    private static Config instance = null;
+
+    public static Config getInstance() {
+        if (instance == null) {
+            instance = new Config();
+        }
+        return instance;
+    }
+
+    private Config() {
         super();
         UIManager.installLookAndFeel("JGoodise", "com.jgoodies.looks.plastic.PlasticLookAndFeel");
     }
 
     public void reset() {
         clear();
+
+        setComment("Configurations for Imabw v" + VERSION + ", encoding: UTF-8");
+
         setAppLocale(getAppLocale());
 
         resetFace();
@@ -80,6 +92,24 @@ public class Config extends ISettings {
         setBoolean("ui.face.decorateTitle", enable, "Decorate frame border");
     }
 
+    public int getSmallIconSize() {
+        int size = 16;
+        return getInteger("ui.face.smallIconSize", size);
+    }
+
+    public void setSmallIconSize(int size) {
+        setInteger("ui.face.smallIconSize", size, "Size of small icon, ex: menu icon");
+    }
+
+    public int getLargeIconSize() {
+        int size = 24;
+        return getInteger("ui.face.largeIconSize", size);
+    }
+
+    public void setLargeIconSize(int size) {
+        setInteger("ui.face.largeIconSize", size, "Size of large icon, ex: toolbar icon");
+    }
+
     public Font getGlobalFont() {
         return getFont("ui.font.global", new Font(Font.SANS_SERIF, Font.PLAIN, 14));
     }
@@ -99,6 +129,8 @@ public class Config extends ISettings {
     private void resetFace() {
         setLafTheme(getLafTheme());
         setDecoratedFrame(isDecoratedFrame());
+        setSmallIconSize(getSmallIconSize());
+        setLargeIconSize(getLargeIconSize());
         setGlobalFont(getGlobalFont());
         setAntiAliased(isAntiAliased());
     }
