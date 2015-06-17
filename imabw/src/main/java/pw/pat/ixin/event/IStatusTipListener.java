@@ -22,6 +22,7 @@ package pw.pat.ixin.event;
  * Listener used for showing tooltip on status bar.
  */
 public interface IStatusTipListener {
+
     void showingTip(IStatusTipEvent e);
 
     void closingTip(IStatusTipEvent e);

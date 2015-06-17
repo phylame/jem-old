@@ -228,7 +228,7 @@ public class ITextEdit extends JScrollPane {
     private static JPopupMenu contextMenu = null;
 
     /** Context menu actions */
-    private static Map<String, IAction> contextActions = null;
+    private static Map<String, Action> contextActions = null;
 
     public static final String UNDO       = "undo";
     public static final String REDO       = "redo";
@@ -239,13 +239,13 @@ public class ITextEdit extends JScrollPane {
     public static final String SELECT_ALL = "select-all";
 
     private static Object[][] POPUP_MENU_ACTIONS = {
-            {UNDO, "Editor.Menu.Undo"},
-            {REDO, "Editor.Menu.Redo"},
-            {CUT, "Editor.Menu.Cut"},
-            {COPY, "Editor.Menu.Copy"},
-            {PASTE, "Editor.Menu.Paste"},
-            {DELETE, "Editor.Menu.Delete"},
-            {SELECT_ALL, "Editor.Menu.SelectAll"},
+            {UNDO, "Editor.Menu.Undo", false},
+            {REDO, "Editor.Menu.Redo", false},
+            {CUT, "Editor.Menu.Cut", false},
+            {COPY, "Editor.Menu.Copy", false},
+            {PASTE, "Editor.Menu.Paste", false},
+            {DELETE, "Editor.Menu.Delete", false},
+            {SELECT_ALL, "Editor.Menu.SelectAll", false},
     };
 
     private static final Object[] POPUP_MENU_MODEL = {
@@ -347,10 +347,10 @@ public class ITextEdit extends JScrollPane {
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_CONTEXT_MENU, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
-        IAction action = getEditAction(UNDO);
-        textArea.registerKeyboardAction(action, action.getAccelerator(), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        Action action = getEditAction(UNDO);
+        IToolkit.addKeyboardAction(textArea, action, JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
         action = getEditAction(REDO);
-        textArea.registerKeyboardAction(action, action.getAccelerator(), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        IToolkit.addKeyboardAction(textArea, action, JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
         /* meta mouse */
         textArea.addMouseListener(new MouseAdapter() {
@@ -369,7 +369,7 @@ public class ITextEdit extends JScrollPane {
     public static void updateContextMenu(ITextEdit textEdit) {
         currentInstance = textEdit;
         if (textEdit == null) {
-            for (IAction action : contextActions.values()) {
+            for (Action action : contextActions.values()) {
                 action.setEnabled(false);
             }
             return;
@@ -394,15 +394,15 @@ public class ITextEdit extends JScrollPane {
         contextActions.get(SELECT_ALL).setEnabled(true);
     }
 
-    public static Map<String, IAction> getContextActions() {
+    public static Map<String, Action> getContextActions() {
         return contextActions;
     }
 
-    public static IAction getEditAction(String id) {
-        IAction action = contextActions.get(id);
+    public static Action getEditAction(String id) {
+        Action action = contextActions.get(id);
         if (currentInstance != null) {
             if (action != null) {
-                switch ((String) action.getCommand()) {
+                switch ((String) action.getValue(Action.ACTION_COMMAND_KEY)) {
                     case UNDO:
                         action.setEnabled(currentInstance.canUndo());
                         break;

@@ -59,7 +59,7 @@ public class ISettings extends Settings {
             case Font.ITALIC:
                 builder.append("ITALIC");
                 break;
-            case Font.BOLD|Font.ITALIC:
+            case Font.BOLD | Font.ITALIC:
                 builder.append("BOLDITALIC");
                 break;
         }
@@ -120,7 +120,8 @@ public class ISettings extends Settings {
             return defaultValue;
         }
         try {
-            return new Point(Integer.decode(parts[0].trim()), Integer.decode(parts[1].trim()));
+            return new Point(Integer.decode(parts[0].trim()),
+                    Integer.decode(parts[1].trim()));
         } catch (NumberFormatException e) {
             LOG.debug("invalid point format: "+str+", require X-Y", e);
             return defaultValue;
@@ -142,7 +143,8 @@ public class ISettings extends Settings {
             return defaultValue;
         }
         try {
-            return new Dimension(Integer.decode(parts[0].trim()), Integer.decode(parts[1].trim()));
+            return new Dimension(Integer.decode(parts[0].trim()),
+                    Integer.decode(parts[1].trim()));
         } catch (NumberFormatException e) {
             LOG.debug("invalid dimension format: "+str+", require WIDTH-HEIGHT", e);
             return defaultValue;

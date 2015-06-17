@@ -35,6 +35,7 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.*;
 
+import pw.pat.ixin.IAction;
 import pw.phylame.imabw.Imabw;
 import pw.phylame.imabw.Worker;
 
@@ -116,14 +117,13 @@ public class PartPropertiesDialog extends JDialog {
         // intro
         createIntroPane();
 
-        buttonClose.setText(app.getText("Dialog.Properties.ButtonClose"));
-        buttonClose.setToolTipText(app.getText("Dialog.Properties.ButtonClose.Tip"));
-
-        buttonClose.addActionListener(new ActionListener() {
+        Action closeAction = new IAction("Dialog.Properties.ButtonClose", app) {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 onClose();
             }
-        });
+        };
+        buttonClose.setAction(closeAction);
 
         // call onClose() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -134,11 +134,9 @@ public class PartPropertiesDialog extends JDialog {
         });
 
         // call onClose() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onClose();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        contentPane.registerKeyboardAction(closeAction,
+                KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
+                JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
         if (oldSize != null) {
             setSize(oldSize);
@@ -152,30 +150,30 @@ public class PartPropertiesDialog extends JDialog {
 
     private void createCoverPane() {
         ((TitledBorder) coverPane.getBorder()).setTitle(app.getText("Dialog.Properties.Cover"));
-        buttonOpen.setText(app.getText("Dialog.Properties.ButtonOpen"));
-        buttonOpen.setToolTipText(app.getText("Dialog.Properties.ButtonOpen.Tip"));
-        buttonOpen.addActionListener(new ActionListener() {
+        Action action = new IAction("Dialog.Properties.ButtonOpen", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 openCover();
             }
-        });
-        buttonSave.setText(app.getText("Dialog.Properties.ButtonSave"));
-        buttonSave.setToolTipText(app.getText("Dialog.Properties.ButtonSave.Tip"));
-        buttonSave.addActionListener(new ActionListener() {
+        };
+        buttonOpen.setAction(action);
+
+        action = new IAction("Dialog.Properties.ButtonSave", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 saveCover();
             }
-        });
-        buttonRemove.setText(app.getText("Dialog.Properties.ButtonRemove"));
-        buttonRemove.setToolTipText(app.getText("Dialog.Properties.ButtonRemove.Tip"));
-        buttonRemove.addActionListener(new ActionListener() {
+        };
+        buttonSave.setAction(action);
+
+        action = new IAction("Dialog.Properties.ButtonRemove", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 removeCover();
             }
-        });
+        };
+        buttonRemove.setAction(action);
+
         Object o = part.getAttribute(Book.COVER);
         if (o instanceof FileObject) {
             FileObject fb = (FileObject) o;

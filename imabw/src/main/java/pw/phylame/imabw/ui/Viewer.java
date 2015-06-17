@@ -19,7 +19,6 @@
 package pw.phylame.imabw.ui;
 
 import pw.pat.ixin.IFrame;
-import pw.pat.ixin.IAction;
 import pw.pat.ixin.IToolkit;
 
 import java.awt.*;
@@ -44,8 +43,6 @@ import java.util.ArrayList;
 public class Viewer extends IFrame implements Constants {
     private static Imabw app = Imabw.getInstance();
 
-    private JPanel rootPane;
-
     // split pane
     private JSplitPane splitPane;
     private Action nextWindowAction = null;
@@ -54,19 +51,18 @@ public class Viewer extends IFrame implements Constants {
     // ******************
     // ** Contents tree
     // ******************
-    private NavigateTree                contentsTree;
-    private DefaultTreeModel     treeModel;
-    private JPopupMenu           treeContextMenu;
-    private Map<String, IAction> treeActions;
-    private TreeOptionsPane      treeOptionsPane;
+    private NavigateTree        contentsTree;
+    private DefaultTreeModel    treeModel;
+    private JPopupMenu          treeContextMenu;
+    private Map<String, Action> treeActions;
+    private TreeOptionsPane     treeOptionsPane;
     private boolean contentsLocked = false;
 
     // ******************
     // ** Tabbed editor
     // ******************
-    private JTabbedPane          editorWindow;
-    private JPopupMenu           tabContextMenu;
-    private Map<String, IAction> tabActions;
+    private JTabbedPane         tabbedEditor;
+    private Map<String, Action> tabActions;
     private ArrayList<EditorTab> editorTabs = new ArrayList<>();
 
     private EditorIndicator editorIndicator;
@@ -93,7 +89,7 @@ public class Viewer extends IFrame implements Constants {
     @Override
     public void initializing() {
         // using ITextEdit edit actions
-        getActions().putAll(ITextEdit.getContextActions());
+        getMenuActions().putAll(ITextEdit.getContextActions());
     }
 
     public void destroy() {
@@ -106,14 +102,17 @@ public class Viewer extends IFrame implements Constants {
     }
 
     private void createComponents() {
+        splitPane = new JSplitPane();
+
         // contents tree
         createContentsWindow();
         splitPane.setLeftComponent(contentsTree);
 
         // tabbed editor
         createEditorWindow();
+        splitPane.setRightComponent(tabbedEditor);
 
-        getContentArea().add(rootPane, BorderLayout.CENTER);
+        getContentArea().add(splitPane, BorderLayout.CENTER);
 
         // editor indicator
         editorIndicator = new EditorIndicator();
@@ -201,7 +200,7 @@ public class Viewer extends IFrame implements Constants {
                 if (e.getClickCount() != 2 || e.isMetaDown()) {
                     return;
                 }
-                app.getManager().onTreeAction(VIEW_CHAPTER);
+                app.onTreeAction(EDIT_CHAPTER);
             }
 
             @Override
@@ -229,7 +228,7 @@ public class Viewer extends IFrame implements Constants {
         tree.registerKeyboardAction(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                app.getManager().onTreeAction(VIEW_CHAPTER);
+                app.onTreeAction(EDIT_CHAPTER);
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
@@ -242,7 +241,7 @@ public class Viewer extends IFrame implements Constants {
         }
 
         // disable all
-        for (IAction action: treeActions.values()) {
+        for (Action action: treeActions.values()) {
             action.setEnabled(false);
         }
 
@@ -276,7 +275,7 @@ public class Viewer extends IFrame implements Constants {
         }
 
         for (String key: keys) {
-            IAction action = treeActions.get(key);
+            Action action = treeActions.get(key);
             if (action != null) {
                 action.setEnabled(true);
             }
@@ -284,36 +283,62 @@ public class Viewer extends IFrame implements Constants {
         treeContextMenu.show(tree, x, y);
     }
 
-    private void createEditorPopupMenu() {
+    private JPopupMenu createEditorPopupMenu() {
         tabActions = IToolkit.createActions(UIDesign.TAB_POPUP_MENU_ACTIONS, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 app.onTabAction(e.getActionCommand());
             }
         }, this);
-        tabContextMenu = new JPopupMenu();
+        JPopupMenu tabContextMenu = new JPopupMenu();
         IToolkit.addMenuItems(tabContextMenu, UIDesign.TAB_POPUP_MENU_MODEL, tabActions, this);
+        tabContextMenu.addPopupMenuListener(new PopupMenuListener() {
+            @Override
+            public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+                int count = tabbedEditor.getTabCount();
+                if (count == 1) {
+                    tabActions.get(CLOSE_OTHER_TABS).setEnabled(false);
+                    tabActions.get(SELECT_NEXT_TAB).setEnabled(false);
+                    tabActions.get(SELECT_PREVIOUS_TAB).setEnabled(false);
+                } else {
+                    tabActions.get(CLOSE_OTHER_TABS).setEnabled(true);
+                    tabActions.get(SELECT_NEXT_TAB).setEnabled(true);
+                    tabActions.get(SELECT_PREVIOUS_TAB).setEnabled(true);
+                }
+            }
+
+            @Override
+            public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+
+            }
+
+            @Override
+            public void popupMenuCanceled(PopupMenuEvent e) {
+
+            }
+        });
+        return tabContextMenu;
     }
 
     private void createEditorWindow() {
-        createEditorPopupMenu();
+        tabbedEditor = new JTabbedPane();
 
-        editorWindow.setComponentPopupMenu(tabContextMenu);
+        tabbedEditor.setComponentPopupMenu(createEditorPopupMenu());
 
-        editorWindow.addChangeListener(new ChangeListener() {
+        tabbedEditor.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                int index = editorWindow.getSelectedIndex();
+                int index = tabbedEditor.getSelectedIndex();
                 if (index == -1) {      // close all tabs
-                    updateEditorIndicator(null);
                     switchEditableMenus(false);
                     focusToTreeWindow();
                     ITextEdit.updateContextMenu(null);
                 } else {
                     EditorTab tab = editorTabs.get(index);
-                    updateEditorIndicator(tab);
                     ITextEdit.updateContextMenu(tab.getTextEdit());
                 }
+                updateViewerTitle();
+                updateEditorIndicator();
             }
         });
     }
@@ -391,10 +416,6 @@ public class Viewer extends IFrame implements Constants {
         contentsTree.setVisible(visible);
     }
 
-    public void showOrHideSideBar() {
-        setSideBarVisible(! isSideBarVisible());
-    }
-
     public boolean isContentsLocked() {
         return contentsLocked;
     }
@@ -438,9 +459,7 @@ public class Viewer extends IFrame implements Constants {
     }
 
     public void focusToRoot() {
-        JTree tree = contentsTree.getTree();
-        tree.setSelectionRow(0);
-        tree.scrollRowToVisible(0);
+        focusToRow(0);
     }
 
     public void refreshNode(PartNode node) {
@@ -452,11 +471,15 @@ public class Viewer extends IFrame implements Constants {
     }
 
     public void focusToPath(TreePath path) {
-        contentsTree.getTree().setSelectionPath(path);
+        JTree tree = contentsTree.getTree();
+        tree.setSelectionPath(path);
+        tree.scrollPathToVisible(path);
     }
 
     public void focusToRow(int row) {
-        contentsTree.getTree().setSelectionRow(row);
+        JTree tree = contentsTree.getTree();
+        tree.setSelectionRow(row);
+        tree.scrollRowToVisible(row);
     }
 
     public void focusToNode(TreePath path, PartNode node) {
@@ -503,7 +526,7 @@ public class Viewer extends IFrame implements Constants {
     // ** Editor operations
     // ******************************
     public void focusToEditorWindow() {
-        Component comp = editorWindow.getSelectedComponent();
+        Component comp = tabbedEditor.getSelectedComponent();
         if (comp != null) {
             comp.requestFocus();
         }
@@ -513,10 +536,22 @@ public class Viewer extends IFrame implements Constants {
         return editorTabs.size();
     }
 
+    private void updateViewerTitle() {
+        int index = tabbedEditor.getSelectedIndex();
+        String title = null;
+        if (index != -1) {
+            EditorTab tab = editorTabs.get(tabbedEditor.getSelectedIndex());
+            title = tab.getPart().getTitle();
+        }
+        app.getManager().updateTitle(title);
+    }
+
     public void closeTab(EditorTab tab) {
         tab.cacheContent();
-        editorWindow.remove(tab.getTextEdit());
+        tabbedEditor.remove(tab.getTextEdit());
         editorTabs.remove(tab);
+        updateViewerTitle();
+        updateEditorIndicator();
     }
 
     public void closeTab(Part part) {
@@ -527,12 +562,12 @@ public class Viewer extends IFrame implements Constants {
     }
 
     public void closeActiveTab() {
-        EditorTab tab = editorTabs.get(editorWindow.getSelectedIndex());
+        EditorTab tab = editorTabs.get(tabbedEditor.getSelectedIndex());
         closeTab(tab);
     }
 
     public void closeOtherTabs() {
-        EditorTab tab = editorTabs.get(editorWindow.getSelectedIndex());
+        EditorTab tab = editorTabs.get(tabbedEditor.getSelectedIndex());
         EditorTab[] tabs = editorTabs.toArray(new EditorTab[0]);
         for (EditorTab item: tabs) {
             if (item != tab) {
@@ -552,7 +587,7 @@ public class Viewer extends IFrame implements Constants {
 
     public void closeAllTabs() {
         cacheAllTabs();
-        editorWindow.removeAll();
+        tabbedEditor.removeAll();
         editorTabs.clear();
     }
 
@@ -564,25 +599,18 @@ public class Viewer extends IFrame implements Constants {
 
     public EditorTab getActiveTab() {
         try {
-            return editorTabs.get(editorWindow.getSelectedIndex());
+            return editorTabs.get(tabbedEditor.getSelectedIndex());
         } catch (IndexOutOfBoundsException e) {     // no tab opened
             return null;
         }
     }
 
     // add and view new tab
-    public EditorTab newTab(Part part) {
-        String text;
-        try {
-            text = part.getText();
-        } catch (java.io.IOException e) {
-            text = "";
-        }
-        EditorTab tab = new EditorTab(new ITextEdit(text, this), part,
-                app.getConfig().getPmabMaTextEncoding());
+    public EditorTab newTab(Part part, String text) {
+        EditorTab tab = new EditorTab(new ITextEdit(text, this), part);
         initEditorTab(tab);
         editorTabs.add(tab);
-        editorWindow.addTab(tab.getPart().getTitle(),
+        tabbedEditor.addTab(tab.getPart().getTitle(),
                 IToolkit.createImageIcon(":/res/gfx/tree/chapter.png"), tab.getTextEdit());
 
         if (editorTabs.size() == 1) {   // first open tab activate search menus
@@ -649,9 +677,9 @@ public class Viewer extends IFrame implements Constants {
 
     private void switchEditableMenus(boolean enable) {
         String[] keys = {FIND_TEXT, FIND_AND_REPLACE, GO_TO_POSITION};
-        IAction action;
+        Action action;
         for (String key: keys) {
-            action = getAction(key);
+            action = getMenuAction(key);
             if (action != null) {
                 action.setEnabled(enable);
             }
@@ -672,21 +700,20 @@ public class Viewer extends IFrame implements Constants {
 
     public void switchToTab(EditorTab tab) {
         ITextEdit textEdit = tab.getTextEdit();
-        editorWindow.setSelectedComponent(textEdit);
+        tabbedEditor.setSelectedComponent(textEdit);
         textEdit.requestFocus();
-        updateEditorIndicator(tab);
     }
 
-    private void updateEditorIndicator(EditorTab tab) {
-        if (tab != null) {
+    private void updateEditorIndicator() {
+        int index = tabbedEditor.getSelectedIndex();
+        if (index != -1) {
+            EditorTab tab = editorTabs.get(index);
             ITextEdit textEdit = tab.getTextEdit();
             editorIndicator.setRuler(textEdit.getCurrentRow() + 1, textEdit.getCurrentColumn() + 1,
                     textEdit.getSelectionCount());
-            editorIndicator.setEncoding(tab.getEncoding());
             editorIndicator.setWords(textEdit.getText().length());
         } else {
             editorIndicator.setRuler(-1, -1, 0);
-            editorIndicator.setEncoding(null);
             editorIndicator.setWords(-1);
         }
     }
@@ -695,26 +722,26 @@ public class Viewer extends IFrame implements Constants {
         if (getTabCount() < 2) {
             return;
         }
-        int index = editorWindow.getSelectedIndex();
+        int index = tabbedEditor.getSelectedIndex();
         if (index == getTabCount() - 1) {
             index = 0;
         } else {
             ++index;
         }
-        editorWindow.setSelectedIndex(index);
+        tabbedEditor.setSelectedIndex(index);
     }
 
     public void previousTab() {
         if (getTabCount() < 2) {
             return;
         }
-        int index = editorWindow.getSelectedIndex();
+        int index = tabbedEditor.getSelectedIndex();
         if (index == 0) {
             index = getTabCount() - 1;
         } else {
             --index;
         }
-        editorWindow.setSelectedIndex(index);
+        tabbedEditor.setSelectedIndex(index);
     }
 
     // *******************
@@ -733,7 +760,15 @@ public class Viewer extends IFrame implements Constants {
         return getJMenuBar().getMenu(2);
     }
 
-    public JMenu getToolsMenu() {
+    public JMenu getSearchMenu() {
         return getJMenuBar().getMenu(3);
+    }
+
+    public JMenu getToolsMenu() {
+        return getJMenuBar().getMenu(4);
+    }
+
+    public JMenu getHelpMenu() {
+        return getJMenuBar().getMenu(5);
     }
 }

@@ -48,7 +48,7 @@ public class TreeOptionsPane {
         buttonRefresh.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                app.getManager().onTreeAction(Imabw.REFRESH_CONTENTS);
+                app.getManager().onTreeAction(Imabw.REFRESH_CHAPTER);
             }
         });
 

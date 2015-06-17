@@ -85,12 +85,12 @@ public class Manager implements Constants {
         app.exit(0);
     }
 
-    private void updateTitle() {
+    public void updateTitle() {
         updateTitle(null);
     }
 
     /** Update frame title */
-    private void updateTitle(String chapter) {
+    public void updateTitle(String chapter) {
         // book_title - [book_author] - [imported]? - [path]? - [chapter]? - title version
         StringBuilder sb = new StringBuilder(task.getBook().getTitle());
         if (task.isModified()) {
@@ -111,7 +111,7 @@ public class Manager implements Constants {
         if (chapter != null) {
             sb.append(chapter).append(" - ");
         }
-        sb.append(app.getText("App.Name")).append(" ").append(VERSION);
+        sb.append(app.getText("App.Name")).append(" ").append(APP_VERSION);
         viewer.setTitle(sb.toString());
     }
 
@@ -166,9 +166,9 @@ public class Manager implements Constants {
         updateTitle();
 
         if (this.task.getSource() != null) {       // enable file details menu item
-            viewer.getAction(FILE_DETAILS).setEnabled(true);
+            viewer.getMenuAction(FILE_DETAILS).setEnabled(true);
         } else {
-            viewer.getAction(FILE_DETAILS).setEnabled(false);
+            viewer.getMenuAction(FILE_DETAILS).setEnabled(false);
         }
 
         viewer.setBook(this.task.getBook());
@@ -237,9 +237,9 @@ public class Manager implements Constants {
 
         updateTitle();
         if (this.task.getSource() != null) {       // enable file details menu item
-            viewer.getAction(FILE_DETAILS).setEnabled(true);
+            viewer.getMenuAction(FILE_DETAILS).setEnabled(true);
         } else {
-            viewer.getAction(FILE_DETAILS).setEnabled(false);
+            viewer.getMenuAction(FILE_DETAILS).setEnabled(false);
         }
 
         viewer.setStatusText(app.getText("Task.SavedBook", task.getBook().getTitle(),
@@ -309,15 +309,15 @@ public class Manager implements Constants {
         findText = str;
         if (index < 0) {
             if (reserved) {     // find previous
-                viewer.getAction(FIND_PREVIOUS).setEnabled(false);
+                viewer.getMenuAction(FIND_PREVIOUS).setEnabled(false);
             } else {            // find next
-                viewer.getAction(FIND_NEXT).setEnabled(false);
+                viewer.getMenuAction(FIND_NEXT).setEnabled(false);
             }
             worker.showWarning(viewer, app.getText("Dialog.Find.Title"),
                     app.getText("Dialog.Find.NotFound", str));
         } else {
-            viewer.getAction(FIND_NEXT).setEnabled(true);
-            viewer.getAction(FIND_PREVIOUS).setEnabled(true);
+            viewer.getMenuAction(FIND_NEXT).setEnabled(true);
+            viewer.getMenuAction(FIND_PREVIOUS).setEnabled(true);
             editor.setCaretPosition(index);
         }
     }
@@ -403,19 +403,19 @@ public class Manager implements Constants {
                 pw.phylame.imabw.ui.dialog.SettingsDialog.editSettings(viewer);
                 break;
             case SHOW_TOOLBAR:
-                viewer.showOrHideToolbar();
+                viewer.setToolBarVisible(! viewer.isToolBarVisible());
                 app.getConfig().setShowToolbar(viewer.isToolBarVisible());
                 break;
             case LOCK_TOOLBAR:
-                viewer.lockOrUnlockToolbar();
+                viewer.setToolBarLocked(! viewer.isToolBarLocked());
                 app.getConfig().setLockToolbar(viewer.isToolBarLocked());
                 break;
             case SHOW_STATUSBAR:
-                viewer.showOrHideStatusBar();
+                viewer.setStatusBarVisible(! viewer.isStatusBarVisible());
                 app.getConfig().settShowStatusbar(viewer.isStatusBarVisible());
                 break;
             case SHOW_SIDEBAR:
-                viewer.showOrHideSideBar();
+                viewer.setSideBarVisible(! viewer.isSideBarVisible());
                 app.getConfig().setShowSidebar(viewer.isSideBarVisible());
                 break;
             case FIND_TEXT:
@@ -456,7 +456,18 @@ public class Manager implements Constants {
     // **************************
     // ** Tree action function
     // **************************
-    private void viewChapter() {
+
+    private EditorTab viewChapter(Part part) {
+        String text = null;
+        try {
+            text = part.getText();
+        } catch (IOException e) {
+            LOG.debug("cannot load text of "+part, e);
+        }
+        return viewer.newTab(part, text);
+    }
+
+    private void editChapter() {
         TreePath[] paths = viewer.getSelectedPaths();
         if (paths == null) {
             return;
@@ -469,30 +480,31 @@ public class Manager implements Constants {
             Part part = node.getPart();
             EditorTab tab = viewer.findTab(part);
             if (tab == null) {
-                tab = viewer.newTab(part);
+                tab = viewChapter(part);
             }
             viewer.switchToTab(tab);
-//            updateTitle(part.getTitle());
         }
     }
 
     private void newChapter() {
-        if (viewer.isContentsLocked()) {
-            return;
-        }
+        assert ! viewer.isContentsLocked();
+
         TreePath path = viewer.getSelectedPath();
         if (path == null) {
             return;
         }
+
+        String title = app.getText("Dialog.NewChapter.Title");
+
         PartNode node = PartNode.getPartNode(path);
         Part part = node.getPart();
         if (! part.isSection() && node.getParent() != null) {   // not section and not root
-            if (! worker.showConfirm(app.getViewer(), app.getText("Dialog.NewChapter.Title"),
+            if (! worker.showConfirm(app.getViewer(), title,
                     app.getText("Dialog.NewChapter.NonSection", part.getTitle()))) {
                 return;
             }
         }
-        PartNode sub = worker.newChapter(viewer, node, app.getText("Dialog.NewChapter.Title"));
+        PartNode sub = worker.newChapter(viewer, node, title);
         if (sub == null) {
             return;
         }
@@ -500,18 +512,19 @@ public class Manager implements Constants {
         // TODO focus to new node
         viewer.expandPath(path.getParentPath());
         viewer.focusToNode(path, sub);
-        notifyModified(app.getText("Task.CreatedChapter", sub.getPart().getTitle(), part.getTitle()));
+        notifyModified(app.getText("Task.CreatedChapter",
+                sub.getPart().getTitle(), part.getTitle()));
     }
 
     private void insertChapter() {
-        if (viewer.isContentsLocked()) {
-            return;
-        }
+        assert ! viewer.isContentsLocked();
+
         TreePath path = viewer.getSelectedPath();
         if (path == null || path.getPathCount() == 1) {     // no selection or root
             return;
         }
-        PartNode sub = worker.newChapter(viewer, null, app.getText("Dialog.InsertChapter.Title"));
+        PartNode sub = worker.newChapter(viewer, null,
+                app.getText("Dialog.InsertChapter.Title"));
         if (sub == null) {
             return;
         }
@@ -523,8 +536,8 @@ public class Manager implements Constants {
         // TODO focus to new node
         index = viewer.getRowForPath(path);
         viewer.focusToRow(index-1);
-        notifyModified(app.getText("Task.InsertedChapter", sub.getPart().getTitle(),
-                node.getPart().getTitle()));
+        notifyModified(app.getText("Task.InsertedChapter",
+                sub.getPart().getTitle(), node.getPart().getTitle()));
     }
 
     private void saveAsPart() {
@@ -532,6 +545,9 @@ public class Manager implements Constants {
         if (path == null) {
             return;
         }
+
+        String title = app.getText("Dialog.SaveBook.Title");
+
         viewer.cacheAllTabs();
 
         PartNode node = PartNode.getPartNode(path);
@@ -541,17 +557,16 @@ public class Manager implements Constants {
         if (! book.isSection()) {   // add new chapter with text
             book.newChapter(app.getText("Common.TextChapterTitle"), part.getSource());
         }
-        File file = worker.exportBook(viewer, app.getText("Dialog.SaveBook.Title"), book, task);
+        File file = worker.exportBook(viewer, title, book, task);
         if (file != null) {
-            worker.showMessage(viewer, app.getText("Dialog.SaveBook.Title"),
+            worker.showMessage(viewer, title,
                     app.getText("Task.SavedBook", part.getTitle(), file.getPath()));
         }
     }
 
     private void renameChapter() {
-        if (viewer.isContentsLocked()) {
-            return;
-        }
+        assert ! viewer.isContentsLocked();
+
         TreePath path = viewer.getSelectedPath();
         if (path == null) {
             return;
@@ -559,7 +574,8 @@ public class Manager implements Constants {
         PartNode node = PartNode.getPartNode(path);
         Part part = node.getPart();
         String oldTitle = part.getTitle();
-        String newTitle = worker.inputLoop(viewer, app.getText("Dialog.RenameChapter.Title", part.getTitle()),
+        String newTitle = worker.inputLoop(viewer,
+                app.getText("Dialog.RenameChapter.Title", part.getTitle()),
                 app.getText("Dialog.RenameChapter.Tip"),
                 app.getText("Dialog.RenameChapter.NoInput"), oldTitle);
         if (newTitle == null) {
@@ -572,24 +588,26 @@ public class Manager implements Constants {
     }
 
     private void moveChapters() {
-        if (viewer.isContentsLocked()) {
-            return;
-        }
+        assert ! viewer.isContentsLocked();
+
         TreePath[] paths = viewer.getSelectedPaths();
         if (paths == null || paths[0].getPathCount() == 1) {    // null or root
             return;
         }
+
+        String title = app.getText("Dialog.MoveChapter.Title");
+
         // select destination
-        TreePath destPath = PartSelectionDialog.selectPart(viewer,
-                app.getText("Dialog.MoveChapter.Title"), PartSelectionDialog.CHAPTER_OR_SECTION,
-                viewer.getRootNode(), null);
+        TreePath destPath = PartSelectionDialog.selectPart(viewer, title,
+                PartSelectionDialog.CHAPTER_OR_SECTION, viewer.getRootNode(), null);
         if (destPath == null) {
             return;
         }
         PartNode destNode = PartNode.getPartNode(destPath);
         if (destNode.isLeaf()) {    // base chapter
-            if (! worker.showConfirm(viewer, app.getText("Dialog.MoveChapter.Title"),
-                    app.getText("Dialog.MoveChapter.EmptyChapter", destNode.getPart().getTitle()))) {
+            if (! worker.showConfirm(viewer, title,
+                    app.getText("Dialog.MoveChapter.EmptyChapter",
+                            destNode.getPart().getTitle()))) {
                 return;
             }
         }
@@ -598,7 +616,8 @@ public class Manager implements Constants {
         for (TreePath path: paths) {
             PartNode node = PartNode.getPartNode(path);
             // ignore: same one, already in, is ancestor
-            if (node == destNode || destNode.isNodeChild(node) || destNode.isNodeAncestor(node)) {
+            if (node == destNode || destNode.isNodeChild(node) ||
+                    destNode.isNodeAncestor(node)) {
                 ignoredNodes.add(node);
                 continue;
             }
@@ -616,16 +635,16 @@ public class Manager implements Constants {
         if (ignoredNodes.size() != 0) {     // has ignored item
             String sep = "\n  ";
             String str = sep+StringUtils.join(ignoredNodes, sep);
-            worker.showMessage(viewer, app.getText("Dialog.MoveChapter.Title"),
+            worker.showMessage(viewer, title,
                     app.getText("Dialog.MoveChapter.IgnoreTip", str));
         }
-        notifyModified(app.getText("Task.MovedChapter", count, destNode.getPart().getTitle()));
+        notifyModified(app.getText("Task.MovedChapter", count,
+                destNode.getPart().getTitle()));
     }
 
     private void deleteChapters() {
-        if (viewer.isContentsLocked()) {
-            return;
-        }
+        assert ! viewer.isContentsLocked();
+
         TreePath[] paths = viewer.getSelectedPaths();
         if (paths == null || paths[0].getPathCount() == 1) {    // null or root
             return;
@@ -651,33 +670,37 @@ public class Manager implements Constants {
     }
 
     private void mergeChapters() {
-        if (viewer.isContentsLocked()) {
-            return;
-        }
+        assert ! viewer.isContentsLocked();
+
         TreePath[] paths = viewer.getSelectedPaths();
         if (paths == null || paths.length < 2 || paths[0].getPathCount() == 1) {    // null, one or root
             return;
         }
+
+        String title = app.getText("Dialog.MergeChapter.Title");
+
         // select destination
-        TreePath destPath = PartSelectionDialog.selectPart(viewer,
-                app.getText("Dialog.MergeChapter.Title"), PartSelectionDialog.CHAPTER_ONLY,
-                viewer.getRootNode(), null);
+        TreePath destPath = PartSelectionDialog.selectPart(viewer, title,
+                PartSelectionDialog.CHAPTER_ONLY, viewer.getRootNode(), null);
         if (destPath == null) {
             return;
         }
         for (TreePath path: paths) {
             PartNode node = PartNode.getPartNode(path);
             if (! node.isLeaf()) {
-                worker.showWarning(viewer, app.getText("Dialog.MergeChapter.Title"),
-                        app.getText("Dialog.MergeChapter.IsSection", node.getPart().getTitle()));
+                worker.showWarning(viewer, title,
+                        app.getText("Dialog.MergeChapter.IsSection",
+                                node.getPart().getTitle()));
                 return;
             }
         }
         PartNode destNode = PartNode.getPartNode(destPath);
         Part destPart = destNode.getPart();
         JCheckBox cb = new JCheckBox(app.getText("Dialog.MergerChapter.WithTitle"));
-        Object[] msg = {app.getText("Dialog.MergeChapter.EmptyChapter", destPart.getTitle()), cb};
-        if (! worker.showConfirm(viewer, app.getText("Dialog.MergeChapter.Title"), msg)) {
+        Object[] msg = {
+                app.getText("Dialog.MergeChapter.EmptyChapter", destPart.getTitle()),
+                cb};
+        if (! worker.showConfirm(viewer, title, msg)) {
             return;
         }
         StringBuilder sb = new StringBuilder();
@@ -709,7 +732,7 @@ public class Manager implements Constants {
             viewer.switchToTab(tab);
         } else {
             destPart.getSource().setRaw(sb.toString());
-            viewer.newTab(destPart);
+            viewChapter(destPart);
         }
         viewer.focusToPath(destPath);
         notifyModified(app.getText("Task.MergedChapter", count, destPart.getTitle()));
@@ -735,8 +758,8 @@ public class Manager implements Constants {
 
     public void onTreeAction(Object actionID) {
         switch ((String) actionID) {
-            case VIEW_CHAPTER:
-                viewChapter();
+            case EDIT_CHAPTER:
+                editChapter();
                 break;
             case NEW_CHAPTER:
                 newChapter();
@@ -771,7 +794,7 @@ public class Manager implements Constants {
                     searchChapters(path);
                 }
                 break;
-            case REFRESH_CONTENTS:
+            case REFRESH_CHAPTER:
                 viewer.refreshNode(viewer.getSelectedNode());
                 break;
             case LOCK_CONTENTS:

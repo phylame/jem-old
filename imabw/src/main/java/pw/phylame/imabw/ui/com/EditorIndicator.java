@@ -34,19 +34,16 @@ public class EditorIndicator {
     private JPanel rootPanel;
 
     private JLabel ruler;
-    private JLabel encoding;
     private JLabel words;
     private JLabel time;
 
     public EditorIndicator() {
         Imabw app = Imabw.getInstance();
         ruler.setToolTipText(app.getText("Viewer.Statusbar.Ruler"));
-        encoding.setToolTipText(app.getText("Viewer.Statusbar.Encoding"));
         words.setToolTipText(app.getText("Viewer.Statusbar.Words"));
         time.setToolTipText(app.getText("Viewer.Statusbar.Time"));
 
         setRuler(-1, -1, 0);
-        setEncoding(null);
         setWords(-1);
 
         // per 30 seconds
@@ -74,14 +71,6 @@ public class EditorIndicator {
             }
         }
         ruler.setText(sb.toString());
-    }
-
-    public void setEncoding(String codec) {
-        if (codec == null) {
-            encoding.setText("n/a");
-        } else {
-            encoding.setText(codec);
-        }
     }
 
     public void setWords(int n) {

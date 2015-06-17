@@ -54,8 +54,8 @@ public abstract class IApplication extends Application {
         String theme = IToolkit.getLookAndFeel(name);
         try {
             UIManager.setLookAndFeel(theme);
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
-                UnsupportedLookAndFeelException e) {
+        } catch (ClassNotFoundException | InstantiationException |
+                IllegalAccessException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
     }

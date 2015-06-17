@@ -18,11 +18,6 @@
 
 package pw.pat.gaf;
 
-import java.util.Locale;
-import java.text.MessageFormat;
-import java.util.ResourceBundle;
-import java.util.MissingResourceException;
-
 /**
  * General application model.
  */
@@ -30,20 +25,6 @@ public abstract class Application implements Runnable, I18nSupport {
 
     /** Unique application instance */
     protected static Application instance = null;
-
-    public static Application getApplication() {
-        return instance;
-    }
-
-    /**
-     * User home directory for application.
-     * Location: ${login_user_home}/.${app_name}
-     */
-    private static String USER_HOME = null;
-
-    public static String getUserHome() {
-        return USER_HOME;
-    }
 
     /** Application name */
     private String name;
@@ -54,18 +35,38 @@ public abstract class Application implements Runnable, I18nSupport {
     /** Command line arguments */
     private String[] arguments;
 
-    /** Global language bundle */
-    private ResourceBundle languageBundle = null;
+    /** Installed translator */
+    private Translator translator = null;
+
+    /**
+     * User home directory for application.
+     * Location: ${login_user_home}/.${app_name}
+     */
+    private String home;
 
     protected Application(String name, String version, String[] args) {
         if (instance != null) {         // already created
             throw new RuntimeException("Application has been created");
         }
         instance = this;
+
+        if (name == null) {
+            throw new NullPointerException("name");
+        }
         this.name = name;
+
+        if (version == null) {
+            throw new NullPointerException("version");
+        }
         this.version = version;
+
         this.arguments = args;
-        USER_HOME = System.getProperty("user.home") + "/." + name.toLowerCase();
+
+        home = System.getProperty("user.home") + "/." + name.toLowerCase();
+    }
+
+    public static Application getApplication() {
+        return instance;
     }
 
     public String getName() {
@@ -80,36 +81,34 @@ public abstract class Application implements Runnable, I18nSupport {
         return arguments;
     }
 
-    public Locale getLocale() {
-        return Locale.getDefault();
+    public String getHome() {
+        return home;
     }
 
-    public void setLocale(Locale locale) {
-        Locale.setDefault(locale);
+    public void installTranslator(Translator translator) {
+        if (translator == null) {
+            throw new NullPointerException("translator");
+        }
+        this.translator = translator;
     }
 
-    protected void loadLanguage(String path) throws MissingResourceException {
-        languageBundle = ResourceBundle.getBundle(path);
-    }
-
-    protected void loadLanguage(String path, Locale locale) throws MissingResourceException {
-        languageBundle = ResourceBundle.getBundle(path, locale);
+    private void ensureTranslatorInstalled() {
+        if (translator == null) {
+            throw new RuntimeException("No translator initialized, " +
+                    "call installTranslator firstly.");
+        }
     }
 
     @Override
     public String getText(String key) {
-        if (languageBundle == null) {
-            throw new RuntimeException("No language bundle initialized, calls loadLanguage firstly");
-        }
-        return languageBundle.getString(key);
+        ensureTranslatorInstalled();
+        return translator.getText(key);
     }
 
     @Override
-    public String getText(String key, Object... args) {
-        if (languageBundle == null) {
-            throw new RuntimeException("No language bundle initialized, calls loadLanguage firstly");
-        }
-        return MessageFormat.format(languageBundle.getString(key), args);
+    public String getText(String key, Object ... args) {
+        ensureTranslatorInstalled();
+        return translator.getText(key, args);
     }
 
     protected void onStart() {

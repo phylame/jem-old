@@ -47,7 +47,7 @@ public class Config extends ISettings implements Constants {
     public void reset() {
         clear();
 
-        setComment("Configurations for Imabw v" + VERSION + ", encoding: UTF-8");
+        setComment("Configurations for Imabw v" + APP_VERSION + ", encoding: UTF-8");
 
         setAppLocale(getAppLocale());
 

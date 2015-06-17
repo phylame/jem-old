@@ -44,7 +44,7 @@ public class UIDesign implements Constants {
             {OPEN_FILE, "Menu.File.Open"},
             {SAVE_FILE, "Menu.File.Save"},
             {SAVE_AS_FILE, "Menu.File.SaveAs"},
-            {FILE_DETAILS, "Menu.File.Details"},
+            {FILE_DETAILS, "Menu.File.Details", false},
             {EXIT_APP, "Menu.File.Exit"}
     };
     public static Object[]   FILE_MENU_MODEL   = {
@@ -90,11 +90,11 @@ public class UIDesign implements Constants {
 
     /* Search */
     public static Object[][] SEARCH_MENU_ACTIONS = {
-            {FIND_TEXT, "Menu.Search.Find"},
-            {FIND_NEXT, "Menu.Search.Next"},
-            {FIND_PREVIOUS, "Menu.Search.Previous"},
-            {FIND_AND_REPLACE, "Menu.Search.Replace"},
-            {GO_TO_POSITION, "Menu.Search.Goto"}
+            {FIND_TEXT, "Menu.Search.Find", false},
+            {FIND_NEXT, "Menu.Search.Next", false},
+            {FIND_PREVIOUS, "Menu.Search.Previous", false},
+            {FIND_AND_REPLACE, "Menu.Search.Replace", false},
+            {GO_TO_POSITION, "Menu.Search.Goto", false}
     };
     public static Object[]   SEARCH_MENU_MODEL   = {
             new IMenuLabel(app.getText("Menu.Search"), null),
@@ -123,7 +123,7 @@ public class UIDesign implements Constants {
     };
     public static Object[]   HELP_MENU_MODEL   = {
             new IMenuLabel(app.getText("Menu.Help"), null),
-            DO_ACTION,
+//            DO_ACTION,
             SHOW_ABOUT
     };
 

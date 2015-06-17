@@ -32,7 +32,6 @@ import pw.phylame.tools.file.FileNameUtils;
 
 import java.awt.Component;
 import java.awt.Window;
-import javax.swing.UIManager;
 import javax.swing.JOptionPane;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
@@ -67,10 +66,10 @@ public class Worker {
             formatNames.put(fmt, String.format("%s (*.%s)", name, fmt));
         }
 
-        UIManager.put("OptionPane.okButtonText", app.getText("Dialog.ButtonOk"));
-        UIManager.put("OptionPane.cancelButtonText", app.getText("Dialog.ButtonCancel"));
-        UIManager.put("OptionPane.yesButtonText", app.getText("Dialog.ButtonYes"));
-        UIManager.put("OptionPane.noButtonText", app.getText("Dialog.ButtonNo"));
+//        UIManager.put("OptionPane.okButtonText", app.getText("Dialog.ButtonOk"));
+//        UIManager.put("OptionPane.cancelButtonText", app.getText("Dialog.ButtonCancel"));
+//        UIManager.put("OptionPane.yesButtonText", app.getText("Dialog.ButtonYes"));
+//        UIManager.put("OptionPane.noButtonText", app.getText("Dialog.ButtonNo"));
     }
 
     public Set<String> getEncodings() {
@@ -501,7 +500,7 @@ public class Worker {
         }
 
         if ("".equals(book.getVendor())) {
-            book.setVendor(String.format("%s v%s", app.getText("App.Name"), Constants.VERSION));
+            book.setVendor(String.format("%s v%s", app.getText("App.Name"), Constants.APP_VERSION));
         }
 
         if ("".equals(book.getRights())) {

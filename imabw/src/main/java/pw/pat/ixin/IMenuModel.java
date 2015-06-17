@@ -24,7 +24,7 @@ package pw.pat.ixin;
 public class IMenuModel {
 
     /** Menu item type */
-    public static enum MenuType {
+    public enum MenuType {
         PLAIN, RADIO, CHECK
     }
 
@@ -36,6 +36,10 @@ public class IMenuModel {
 
     /** State of this menu */
     private boolean state;
+
+    public IMenuModel(String actionID) {
+        this(actionID, MenuType.PLAIN, false);
+    }
 
     public IMenuModel(String actionID, MenuType menuType, boolean state) {
         this.actionID = actionID;

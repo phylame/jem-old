@@ -20,11 +20,18 @@ package pw.phylame.imabw.ui.dialog;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Locale;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
+import pw.pat.ixin.IAction;
+import pw.pat.ixin.IToolkit;
 import pw.phylame.imabw.Config;
 import pw.phylame.imabw.Imabw;
 import say.swing.JFontChooser;
@@ -111,13 +118,37 @@ public class SettingsDialog extends JDialog {
             setLocation(oldLocation);
         } else {
             pack();
-            setSize((int) (getHeight() * 1.7), getHeight());
+            setSize((int) (getWidth() * 1.4), (int) (getHeight() * 1.2));
             setLocationRelativeTo(getOwner());
         }
     }
 
+    private String[] loadSupportedLanguages() {
+        InputStream in = SettingsDialog.class.getResourceAsStream("/res/i18n/all.txt");
+        BufferedReader br = new BufferedReader(new InputStreamReader(in));
+        ArrayList<String> lang = new ArrayList<>();
+        String line;
+        try {
+            while ((line = br.readLine()) != null) {
+                line = line.trim();
+                if (line.length() != 0 && ! line.startsWith("#")) {
+                    lang.add(line.trim());
+                }
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return lang.toArray(new String[0]);
+    }
+
     private void initLanguages() {
-        final String[] languages = {"en-US", "zh-CN"};
+        final String[] languages = loadSupportedLanguages();
 
         for (String lang : languages) {
             Locale locale = Locale.forLanguageTag(lang);
@@ -134,7 +165,11 @@ public class SettingsDialog extends JDialog {
     }
 
     private void initGeneral() {
-        tabbedPane.setTitleAt(0, app.getText("Dialog.Settings.General.Title"));
+        Object[] parts =  IToolkit.parseTextMnemonic(
+                app.getText("Dialog.Settings.General.Title"));
+
+        tabbedPane.setTitleAt(0, (String) parts[0]);
+        tabbedPane.setMnemonicAt(0, (int) parts[1]);
 
         lbLanguage.setText(app.getText("Dialog.Settings.General.LabelLanguage"));
         initLanguages();
@@ -158,7 +193,11 @@ public class SettingsDialog extends JDialog {
     }
 
     public void initEditor() {
-        tabbedPane.setTitleAt(1, app.getText("Dialog.Settings.Editor.Title"));
+        Object[] parts =  IToolkit.parseTextMnemonic(
+                app.getText("Dialog.Settings.Editor.Title"));
+
+        tabbedPane.setTitleAt(1, (String) parts[0]);
+        tabbedPane.setMnemonicAt(1, (int) parts[1]);
 
         ((TitledBorder)jpEditorFont.getBorder()).setTitle(
                 app.getText("Dialog.Settings.Editor.Font.Title"));
@@ -181,33 +220,36 @@ public class SettingsDialog extends JDialog {
 
         ((TitledBorder) jpEditorStyle.getBorder()).setTitle(
                 app.getText("Dialog.Settings.Editor.Style.Title"));
-        cEditorStyleLW.setText(app.getText("Dialog.Settings.Editor.Style.LabelLineWarp"));
-        cEditorStyleLW.addActionListener(new ActionListener() {
+
+        Action action = new IAction("Dialog.Settings.Editor.Style.LabelLineWarp", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean enable = cEditorStyleLW.isSelected();
                 app.getConfig().setEditorLineWarp(enable);
                 // todo update editors
             }
-        });
-        cEditorStyleWW.setText(app.getText("Dialog.Settings.Editor.Style.LabelWordWarp"));
-        cEditorStyleWW.addActionListener(new ActionListener() {
+        };
+        cEditorStyleLW.setAction(action);
+
+        action = new IAction("Dialog.Settings.Editor.Style.LabelWordWarp", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean enable = cEditorStyleWW.isSelected();
                 app.getConfig().setEditorWordWarp(enable);
                 // todo update editors
             }
-        });
-        cEditorStyleLN.setText(app.getText("Dialog.Settings.Editor.Style.LabelLineNumber"));
-        cEditorStyleLN.addActionListener(new ActionListener() {
+        };
+        cEditorStyleWW.setAction(action);
+
+        action = new IAction("Dialog.Settings.Editor.Style.LabelLineNumber", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean enable = cEditorStyleLN.isSelected();
                 app.getConfig().setEditorShowLineNumber(enable);
                 // todo update editors
             }
-        });
+        };
+        cEditorStyleLN.setAction(action);
 
         btnEditorColorFore.addActionListener(new ActionListener() {
             @Override
@@ -296,53 +338,57 @@ public class SettingsDialog extends JDialog {
     private void initWindow() {
         ((TitledBorder) jpFaceWindow.getBorder()).setTitle(
                 app.getText("Dialog.Settings.Face.Window.Title"));
-        cShowToolbar.setText(app.getText("Dialog.Settings.Face.Window.ShowToolbar"));
-        cShowToolbar.addActionListener(new ActionListener() {
+
+        Action action = new IAction("Dialog.Settings.Face.Window.ShowToolbar", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
-                app.getViewer().showOrHideToolbar();
-                app.getConfig().setShowToolbar(cShowToolbar.isSelected());
+                app.onCommand(Imabw.SHOW_TOOLBAR);
                 cLockToolbar.setEnabled(cShowToolbar.isSelected());
             }
-        });
-        cLockToolbar.setText(app.getText("Dialog.Settings.Face.Window.LockToolbar"));
-        cLockToolbar.addActionListener(new ActionListener() {
+        };
+        cShowToolbar.setAction(action);
+
+        action = new IAction("Dialog.Settings.Face.Window.LockToolbar", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
-                boolean visible = cLockToolbar.isSelected();
-                app.getViewer().setToolBarLocked(visible);
-                app.getConfig().setLockToolbar(visible);
+                app.onCommand(Imabw.LOCK_TOOLBAR);
             }
-        });
-        cShowSidebar.setText(app.getText("Dialog.Settings.Face.Window.ShowSidebar"));
-        cShowSidebar.addActionListener(new ActionListener() {
+        };
+        cLockToolbar.setAction(action);
+
+        action = new IAction("Dialog.Settings.Face.Window.ShowSidebar", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
-                (app.getViewer()).showOrHideSideBar();
-                app.getConfig().setShowSidebar(cShowSidebar.isSelected());
+                app.onCommand(Imabw.SHOW_SIDEBAR);
             }
-        });
-        cShowStatusbar.setText(app.getText("Dialog.Settings.Face.Window.ShowStatusbar"));
-        cShowStatusbar.addActionListener(new ActionListener() {
+        };
+        cShowSidebar.setAction(action);
+
+        action = new IAction("Dialog.Settings.Face.Window.ShowStatusbar", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
-                app.getViewer().showOrHideStatusBar();
-                app.getConfig().settShowStatusbar(cShowStatusbar.isSelected());
+                app.onCommand(Imabw.SHOW_STATUSBAR);
             }
-        });
-        cDecorateTitle.setText(app.getText("Dialog.Settings.Face.Window.DecorateTitle"));
-        cDecorateTitle.addActionListener(new ActionListener() {
+        };
+        cShowStatusbar.setAction(action);
+
+        action = new IAction("Dialog.Settings.Face.Window.DecorateTitle", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame.setDefaultLookAndFeelDecorated(cDecorateTitle.isSelected());
                 JDialog.setDefaultLookAndFeelDecorated(cDecorateTitle.isSelected());
                 app.getConfig().setDecoratedFrame(cDecorateTitle.isSelected());
             }
-        });
+        };
+        cDecorateTitle.setAction(action);
     }
 
     private void initFace() {
-        tabbedPane.setTitleAt(2, app.getText("Dialog.Settings.Face.Title"));
+        Object[] parts =  IToolkit.parseTextMnemonic(
+                app.getText("Dialog.Settings.Face.Title"));
+
+        tabbedPane.setTitleAt(2, (String) parts[0]);
+        tabbedPane.setMnemonicAt(2, (int) parts[1]);
 
         // theme
         ((TitledBorder) jpFaceTheme.getBorder()).setTitle(
@@ -388,7 +434,12 @@ public class SettingsDialog extends JDialog {
     }
 
     private void initJem() {
-        tabbedPane.setTitleAt(3, app.getText("Dialog.Settings.Jem.Title"));
+        Object[] parts =  IToolkit.parseTextMnemonic(
+                app.getText("Dialog.Settings.Jem.Title"));
+
+        tabbedPane.setTitleAt(3, (String) parts[0]);
+        tabbedPane.setMnemonicAt(3, (int) parts[1]);
+
         tabbedPane.removeTabAt(3);
     }
 
@@ -399,21 +450,23 @@ public class SettingsDialog extends JDialog {
     }
 
     private void initButtons() {
-        buttonReset.setText(app.getText("Dialog.ButtonReset"));
-        buttonReset.addActionListener(new ActionListener() {
+        Action resetAction = new IAction("Dialog.Settings.ButtonReset", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 app.getConfig().reset();
                 updateSettings();
             }
-        });
+        };
+        buttonReset.setAction(resetAction);
 
-        buttonClose.setText(app.getText("Dialog.ButtonClose"));
-        buttonClose.addActionListener(new ActionListener() {
+        Action closeAction = new IAction("Dialog.Settings.ButtonClose", app) {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 onClose();
             }
-        });
+        };
+        buttonClose.setAction(closeAction);
+
         getRootPane().setDefaultButton(buttonClose);
 
         // call onCancel() when cross is clicked
@@ -425,11 +478,9 @@ public class SettingsDialog extends JDialog {
         });
 
         // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onClose();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        contentPane.registerKeyboardAction(closeAction,
+                KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
+                JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
     }
 

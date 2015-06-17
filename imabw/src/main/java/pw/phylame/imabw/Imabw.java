@@ -20,7 +20,9 @@ package pw.phylame.imabw;
 
 import java.awt.Font;
 import java.io.File;
+import java.util.Locale;
 
+import pw.pat.gaf.Translator;
 import pw.pat.ixin.IAction;
 import pw.pat.ixin.IApplication;
 import pw.phylame.imabw.ui.UIState;
@@ -30,24 +32,21 @@ import pw.phylame.imabw.ui.Viewer;
  * The entry of Imabw.
  */
 public class Imabw extends IApplication implements Constants {
-    /** The manager */
     private Manager manager = null;
 
-    /** The worker */
     private Worker worker = null;
 
-    /** The main frame */
     private Viewer viewer = null;
 
     public Imabw(String[] args) {
-        super(INNER_NAME, VERSION, args);
+        super(APP_NAME, APP_VERSION, args);
         ensureHomeExisted();
         initApp();
     }
 
     /** Check and create user home directory for Imabw */
     private void ensureHomeExisted() {
-        File homeDir = new File(IMABW_HOME);
+        File homeDir = new File(APP_HOME);
         if (!homeDir.exists() && !homeDir.mkdirs()) {
             throw new RuntimeException("Cannot create Imabw home directory");
         }
@@ -74,7 +73,7 @@ public class Imabw extends IApplication implements Constants {
     private void initApp() {
         Config config = getConfig();
 
-        setLocale(config.getAppLocale());
+        Locale.setDefault(config.getAppLocale());
         loadLanguage();
 
         setAAText(config.isAntiAliased());
@@ -88,7 +87,8 @@ public class Imabw extends IApplication implements Constants {
     }
 
     public void loadLanguage() {
-        loadLanguage(I18N_PATH);
+        Translator translator = new Translator(I18N_PATH);
+        installTranslator(translator);
     }
 
     /** Get the application instance */

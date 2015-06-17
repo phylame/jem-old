@@ -132,14 +132,14 @@ public class PartSelectionDialog extends JDialog {
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
-        buttonOK.setAction(new IAction(null, "Dialog.SelectPart.ButtonSelect", app) {
+        buttonOK.setAction(new IAction("Dialog.SelectPart.ButtonSelect", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 onOK();
             }
         });
 
-        IAction cancelAction = new IAction(null, "Dialog.SelectPart.ButtonCancel", app) {
+        IAction cancelAction = new IAction("Dialog.SelectPart.ButtonCancel", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 onCancel();

@@ -23,22 +23,19 @@ import pw.pat.ixin.IFrame;
  */
 public interface Constants {
     /** Inner name of Imabw */
-    String INNER_NAME = "imabw";
+    String APP_NAME = "imabw";
 
     /** Version of the Imabw */
-    String VERSION = "2.0.1";
+    String APP_VERSION = "2.0.2";
 
     /** Name of language {@code ResourceBundle} file */
     String I18N_PATH = "res/i18n/imabw";
 
     /** User home of Imabw */
-    String IMABW_HOME = String.format("%s/.imabw", System.getProperty("user.home"));
-
-    /** Settings file */
-    String SETTINGS_FILE = IMABW_HOME + "/settings.prop";
+    String APP_HOME = String.format("%s/.imabw", System.getProperty("user.home"));
 
     /** Plugins directory */
-    String PLUGINS_ROOT = IMABW_HOME + "/plugins";
+    String PLUGINS_HOME = APP_HOME + "/plugins";
 
     // **************************
     // ** Common menu commands **
@@ -79,19 +76,19 @@ public interface Constants {
     // ** Contents tree commands **
     // ****************************
 
-    String VIEW_CHAPTER     = "view-chapter";
-    String NEW_CHAPTER      = "new-chapter";
-    String INSERT_CHAPTER   = "insert-chapter";
-    String RENAME_CHAPTER   = "rename-chapter";
-    String MOVE_CHAPTER     = "move-chapter";
-    String DELETE_CHAPTER   = "delete-chapter";
-    String MERGE_CHAPTER    = "merge-chapter";
-    String TREE_PROPERTIES  = "tree-property";
-    String SAVE_CHAPTER     = "save-chapter";
-    String IMPORT_CHAPTER   = "import-chapter";
-    String SEARCH_CHAPTER   = "search-chapter";
-    String REFRESH_CONTENTS = "refresh-contents";
-    String LOCK_CONTENTS    = "lock-contents";
+    String SEARCH_CHAPTER  = "search-chapter";
+    String REFRESH_CHAPTER = "refresh-chapter";
+    String LOCK_CONTENTS   = "lock-contents";
+    String EDIT_CHAPTER    = "edit-chapter";
+    String NEW_CHAPTER     = "new-chapter";
+    String INSERT_CHAPTER  = "insert-chapter";
+    String RENAME_CHAPTER  = "rename-chapter";
+    String MOVE_CHAPTER    = "move-chapter";
+    String DELETE_CHAPTER  = "delete-chapter";
+    String MERGE_CHAPTER   = "merge-chapter";
+    String TREE_PROPERTIES = "tree-property";
+    String SAVE_CHAPTER    = "save-chapter";
+    String IMPORT_CHAPTER  = "import-chapter";
 
     // ****************************
     // ** Tabbed editor commands **

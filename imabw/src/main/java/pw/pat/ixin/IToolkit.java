@@ -26,33 +26,17 @@ import pw.pat.ixin.event.IStatusTipEvent;
 import pw.pat.ixin.event.IStatusTipListener;
 
 import java.awt.Image;
-import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.ActionListener;
 
-import javax.swing.Icon;
-import javax.swing.JMenu;
-import javax.swing.JButton;
-import javax.swing.JToolBar;
-import javax.swing.KeyStroke;
-import javax.swing.JMenuItem;
-import javax.swing.UIManager;
-import javax.swing.ImageIcon;
-import javax.swing.JPopupMenu;
-import javax.swing.JComponent;
-import javax.swing.ButtonGroup;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JRadioButtonMenuItem;
+import javax.swing.*;
 
 import java.net.URL;
 import java.net.MalformedURLException;
 
-import java.util.Map;
-import java.util.List;
-import java.util.HashMap;
-import java.util.Collection;
+import java.util.*;
 
 /**
  * The IxIn toolkit.
@@ -85,7 +69,8 @@ public final class IToolkit {
             lookAndFeel = UIManager.getSystemLookAndFeelClassName();
         } else if ("metal".equalsIgnoreCase(name)) {
             lookAndFeel = "javax.swing.plaf.metal.MetalLookAndFeel";
-        } else if ("motif".equalsIgnoreCase(name) || "cde/motif".equalsIgnoreCase(name)) {
+        } else if ("motif".equalsIgnoreCase(name) ||
+                "cde/motif".equalsIgnoreCase(name)) {
             lookAndFeel = "com.sun.java.swing.plaf.motif.MotifLookAndFeel";
         } else if ("nimbus".equalsIgnoreCase(name)) {
             lookAndFeel = "javax.swing.plaf.nimbus.NimbusLookAndFeel";
@@ -93,26 +78,6 @@ public final class IToolkit {
             lookAndFeel = name;
         }
         return lookAndFeel;
-    }
-
-    public static ImageIcon createImageIcon(String path) {
-        if (isEmpty(path)) {
-            return null;
-        }
-        URL url = null;
-        if (path.startsWith(":") || path.startsWith("!")) {
-            url = IToolkit.class.getResource(path.substring(1));
-        } else {
-            try {
-                url = new URL(path);
-            } catch (MalformedURLException e) {
-                LOG.debug("Malformed icon URL: " + path, e);
-            }
-        }
-        if (url == null) {
-            return null;
-        }
-        return new ImageIcon(url);
     }
 
     private static int indexParent(String path) {
@@ -133,9 +98,30 @@ public final class IToolkit {
         if (index == -1) {  // no parent
             path = Integer.toString(size) + "x/" + path;
         } else {
-            path = path.substring(0, index) + "/" + size + "x/" + path.substring(index+1);
+            path = path.substring(0, index) + "/" + size + "x/" +
+                    path.substring(index+1);
         }
         return createImageIcon(path);
+    }
+
+    public static ImageIcon createImageIcon(String path) {
+        if (isEmpty(path)) {
+            return null;
+        }
+        URL url = null;
+        if (path.startsWith(":") || path.startsWith("!")) {
+            url = IToolkit.class.getResource(path.substring(1));
+        } else {
+            try {
+                url = new URL(path);
+            } catch (MalformedURLException e) {
+                LOG.debug("Malformed icon URL: " + path, e);
+            }
+        }
+        if (url == null) {
+            return null;
+        }
+        return new ImageIcon(url);
     }
 
     public static Image createImage(Object source) {
@@ -206,27 +192,37 @@ public final class IToolkit {
         return new Object[]{text, mnemonic};
     }
 
-    public static void addKeyboardAction(JComponent comp, IAction action, int condition) {
-        comp.registerKeyboardAction(action, action.getCommand(), action.getAccelerator(), condition);
+    public static void addKeyboardAction(JComponent comp, Action action, int condition) {
+        comp.registerKeyboardAction(action,
+                (String) action.getValue(Action.ACTION_COMMAND_KEY),
+                (KeyStroke) action.getValue(Action.ACCELERATOR_KEY), condition);
     }
 
-    public static void addKeyboardActions(JComponent comp, Collection<IAction> actions, int condition) {
-        for (IAction action: actions) {
+    public static void addKeyboardActions(JComponent comp, Collection<Action> actions,
+                                          int condition) {
+        for (Action action: actions) {
             addKeyboardAction(comp, action, condition);
         }
     }
 
-    public static void addStatusTipListener(Component comp, final IAction action, final IStatusTipListener tipListener) {
+    public static void addStatusTipListener(JComponent comp, Action action,
+                                            IStatusTipListener tipListener) {
+        addStatusTipListener(comp, (String) action.getValue(IAction.STATUS_TIP), tipListener);
+    }
+
+    public static void addStatusTipListener(JComponent comp, final String text,
+                                            final IStatusTipListener tipListener) {
         if (tipListener== null) {
             throw new NullPointerException("tipListener");
         }
-        if (isEmpty(action.getStatusTip())) {
+
+        if (isEmpty(text)) {
             return;
         }
 
         comp.addMouseListener(new MouseAdapter() {
             private IStatusTipEvent createEvent(Object source) {
-                return new IStatusTipEvent(source, action.getStatusTip());
+                return new IStatusTipEvent(source, text);
             }
 
             @Override
@@ -245,12 +241,12 @@ public final class IToolkit {
             }
         });
 
-        /* hide default tool tip */
-        action.setToolTip(null);
+        comp.setToolTipText(null);
     }
 
     // key: action base key in resource bundle
-    public static IAction createAction(String command, String key, final ActionListener listener, I18nSupport i18n) {
+    public static IAction createAction(String command, String key,
+                                       final ActionListener listener, I18nSupport i18n) {
         return new IAction(command, key, i18n) {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -260,7 +256,8 @@ public final class IToolkit {
     }
 
     // command, name, iconName, accelerator, toolTip
-    public static IAction createAction(Object[] model, final ActionListener listener, I18nSupport i18n) {
+    public static IAction createAction(Object[] model, final ActionListener listener,
+                                       I18nSupport i18n) {
         return new IAction(model, i18n) {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -269,11 +266,53 @@ public final class IToolkit {
         };
     }
 
-    public static Map<String, IAction> createActions(Object[][] models, ActionListener listener, I18nSupport i18n) {
-        Map<String, IAction> actionMap = new HashMap<>();
+    public static void updateAction(Action action, String key, I18nSupport i18n) {
+        String name = i18n.getText(key);
+        Object[] pair = IToolkit.parseTextMnemonic(name);
+        String text = (String) pair[0];
+        int mnemonic = (int) pair[1];
+
+        action.putValue(Action.NAME, text);
+        action.putValue(Action.MNEMONIC_KEY, mnemonic);
+
+        String icon = null;
+        try {
+            icon = i18n.getText(key + ".Icon");
+        } catch (MissingResourceException e) {
+            LOG.debug("not found field for frame in bundle", e);
+        }
+        Icon smallIcon = null, largeIcon = null;
+        if (icon != null && icon.length() != 0) {
+            smallIcon = IToolkit.createImageIcon(icon, IAction.smallIconSize);
+            largeIcon = IToolkit.createImageIcon(icon, IAction.largeIconSize);
+        }
+        action.putValue(Action.SMALL_ICON, smallIcon);
+        action.putValue(Action.LARGE_ICON_KEY, largeIcon);
+
+        KeyStroke accelerator = null;
+        try {
+            accelerator = IToolkit.getKeyStroke(i18n.getText(key + ".Shortcut"));
+        } catch (MissingResourceException e) {
+            LOG.debug("not found field for frame in bundle", e);
+        }
+        action.putValue(Action.ACCELERATOR_KEY, accelerator);
+
+        String tipText = null;
+        try {
+            tipText = i18n.getText(key + ".Tip");
+        } catch (MissingResourceException e) {
+            LOG.debug("not found field for frame in bundle", e);
+        }
+        action.putValue(Action.SHORT_DESCRIPTION, tipText);
+        action.putValue(IAction.STATUS_TIP, tipText);
+    }
+
+    public static Map<String, Action> createActions(Object[][] models,
+                                                    ActionListener listener, I18nSupport i18n) {
+        Map<String, Action> actionMap = new HashMap<>();
         for (Object[] model: models) {
-            IAction action = createAction(model, listener, i18n);
-            actionMap.put(action.getCommand(), action);
+            Action action = createAction(model, listener, i18n);
+            actionMap.put((String) action.getValue(Action.ACTION_COMMAND_KEY), action);
         }
         return actionMap;
     }
@@ -285,7 +324,8 @@ public final class IToolkit {
      * @param tipListener tool tip action listener, if {@code null} do nothing
      * @return the menu item
      */
-    public static JMenuItem createMenuItem(IAction action, IMenuModel menuModel, IStatusTipListener tipListener) {
+    public static JMenuItem createMenuItem(Action action, IMenuModel menuModel,
+                                           IStatusTipListener tipListener) {
         if (action == null) {
             throw new NullPointerException("action");
         }
@@ -319,7 +359,8 @@ public final class IToolkit {
         menu.setMnemonic(menuLabel.getMnemonic());
     }
 
-    public static int addMenuItems(JComponent menu, Object[] model, Map<String, IAction> actionMap,
+    public static int addMenuItems(JComponent menu, Object[] model,
+                                   Map<String, Action> actionMap,
                                    IStatusTipListener tipListener) {
         if (isEmpty(model)) {
             return 0;
@@ -344,7 +385,7 @@ public final class IToolkit {
                 item = new JPopupMenu.Separator();
             } else if (key instanceof IMenuModel) { // menu model
                 IMenuModel menuModel = (IMenuModel) key;
-                IAction action = actionMap.get(menuModel.getID());
+                Action action = actionMap.get(menuModel.getID());
                 if (action != null) {
                     item = createMenuItem(action, menuModel, tipListener);
                     // radio menu
@@ -362,7 +403,7 @@ public final class IToolkit {
                 addMenuItems(subMenu, (Object[]) key, actionMap, tipListener);
                 item = subMenu;
             } else {                                // menu item
-                IAction action = actionMap.get(key);
+                Action action = actionMap.get(key);
                 if (action != null) {
                     item = createMenuItem(action, null, tipListener);
                 }
@@ -381,7 +422,7 @@ public final class IToolkit {
      * @param tipListener tool tip action listener
      * @return the {@code JButton} object
      */
-    public static JButton createButton(IAction action, IStatusTipListener tipListener) {
+    public static JButton createButton(Action action, IStatusTipListener tipListener) {
         if (action == null) {
             throw new NullPointerException("action");
         }
@@ -390,7 +431,8 @@ public final class IToolkit {
         return button;
     }
 
-    public static void addButton(JToolBar toolBar, IAction action, IStatusTipListener tipListener) {
+    public static void addButton(JToolBar toolBar, Action action,
+                                 IStatusTipListener tipListener) {
         if (action == null) {
             throw new NullPointerException("action");
         }
@@ -410,7 +452,8 @@ public final class IToolkit {
      * @param tipListener status tip listener
      * @return number of added buttons
      */
-    public static int addButtons(JToolBar toolBar, List<String> actionIDs, Map<String, IAction> actionMap,
+    public static int addButtons(JToolBar toolBar, List<String> actionIDs,
+                                 Map<String, Action> actionMap,
                                  IStatusTipListener tipListener) {
         if (isEmpty(actionIDs)) {
             return 0;
@@ -421,7 +464,7 @@ public final class IToolkit {
                 toolBar.addSeparator();
                 continue;
             }
-            IAction action = actionMap.get(id);
+            Action action = actionMap.get(id);
             if (action == null) {   // not found
                 continue;
             }

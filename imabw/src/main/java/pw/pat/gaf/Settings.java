@@ -75,7 +75,8 @@ public class Settings {
     }
 
     public Settings(boolean loading, String baseName) {
-        settingsFile = Application.getUserHome() + "/" + baseName + ".pfc";
+        settingsFile = Application.getApplication().getHome() + "/" +
+                baseName + ".pfc";
         if (loading) {
             init();
         }
@@ -83,7 +84,8 @@ public class Settings {
     }
 
     private void load(InputStream in) throws IOException {
-        BufferedReader reader        = new BufferedReader(new InputStreamReader(in, ENCODING));
+        BufferedReader reader        = new BufferedReader(
+                new InputStreamReader(in, ENCODING));
         String         line, comment = null;
         while ((line = reader.readLine()) != null) {
             if (line.startsWith(COMMENT_LABEL)) {   // comment
@@ -126,7 +128,8 @@ public class Settings {
     }
 
     protected void store(OutputStream out) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, ENCODING));
+        BufferedWriter writer = new BufferedWriter(
+                new OutputStreamWriter(out, ENCODING));
         if (!isEmpty(comment)) {
             for (String line: comment.split("(\\r\\n)|(\\n)|(\\r)")) {
                 writer.write(COMMENT_LABEL+" "+line.trim()+LINE_SEPARATOR);
@@ -139,7 +142,8 @@ public class Settings {
             if (hasComment) {
                 writer.write(COMMENT_LABEL+" "+item.comment+LINE_SEPARATOR);
             }
-            writer.write(entry.getKey()+KEY_VALUE_SEPARATOR+item.value+LINE_SEPARATOR);
+            writer.write(entry.getKey()+KEY_VALUE_SEPARATOR+item.value+
+                    LINE_SEPARATOR);
             if (hasComment) {
                 writer.write(LINE_SEPARATOR);
             }
@@ -151,7 +155,8 @@ public class Settings {
         File dir = new File(settingsFile).getParentFile();
         if (!dir.exists()) {
             if (!dir.mkdir()) {
-                throw new RuntimeException("Cannot create settings home: "+dir.getAbsolutePath());
+                throw new RuntimeException(
+                        "Cannot create settings home: "+dir.getAbsolutePath());
             }
         }
     }

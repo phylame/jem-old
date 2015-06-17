@@ -27,6 +27,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Action;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JMenu;
@@ -36,6 +37,8 @@ import javax.swing.JToolBar;
 import javax.swing.JSeparator;
 import javax.swing.JPopupMenu;
 import javax.swing.JCheckBoxMenuItem;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 
 import java.util.Map;
 import java.util.Arrays;
@@ -44,7 +47,8 @@ import java.util.HashMap;
 /**
  * Simple frame model.
  */
-public abstract class IFrame extends JFrame implements ActionListener, IStatusTipListener, I18nSupport {
+public abstract class IFrame extends JFrame implements ActionListener,
+        IStatusTipListener, I18nSupport {
     public static final String SHOW_HIDE_TOOLBAR   = "show-hide-toolbar";
     public static final String LOCK_UNLOCK_TOOLBAR = "lock-unlock-toolbar";
     public static final String SHOW_HIDE_STATUSBAR = "show-hide-status-bar";
@@ -53,7 +57,8 @@ public abstract class IFrame extends JFrame implements ActionListener, IStatusTi
         this(title, null, null, null);
     }
 
-    public IFrame(String title, Object[][][] actionModel, Object[][] menuBarModel, String[] toolBarModel) {
+    public IFrame(String title, Object[][][] actionModel, Object[][] menuBarModel,
+                  String[] toolBarModel) {
         super(title);
 
         initializing();
@@ -63,28 +68,31 @@ public abstract class IFrame extends JFrame implements ActionListener, IStatusTi
 
     /**
      * Initialize frame before creating components.
+     * NOTICE: no menu bar, tool bar, status bar created.
+     * Recommend: add menu actions or initialize JFrame
      */
     protected void initializing() {
     }
 
-    private void createComponents(Object[][][] actionModel, Object[][] menuBarModel, String[] toolBarModel) {
+    private void createComponents(Object[][][] actionModel, Object[][] menuBarModel,
+                                  String[] toolBarModel) {
         Container topPane = getContentPane();
 
-        createActions(actionModel);
+        createMenuActions(actionModel);
 
         createMenuBar(menuBarModel);
 
-        createToolBar(toolBarModel);
+        createToolPane(toolBarModel);
         topPane.add(toolBar, BorderLayout.NORTH);
 
         contentArea = new JPanel(new BorderLayout());
         topPane.add(contentArea, BorderLayout.CENTER);
 
-        createStatusBar();
+        createStatusPane();
         topPane.add(statusBar, BorderLayout.SOUTH);
     }
 
-    private void createActions(Object[][][] actionModel) {
+    private void createMenuActions(Object[][][] actionModel) {
         if (actionModel == null) {
             return;
         }
@@ -100,8 +108,7 @@ public abstract class IFrame extends JFrame implements ActionListener, IStatusTi
     }
 
     private void addInnerAction(String command, String key) {
-        IAction action = IToolkit.createAction(command, key, this, this);
-        addAction(action);
+        addMenuAction(IToolkit.createAction(command, key, this, this));
     }
 
     private void createMenuBar(Object[][] menuBarModel) {
@@ -118,7 +125,7 @@ public abstract class IFrame extends JFrame implements ActionListener, IStatusTi
         setJMenuBar(menuBar);
     }
 
-    private void createToolBar(String[] toolBarModel) {
+    private void createToolPane(String[] toolBarModel) {
         toolBar = new JToolBar();
 
         if (toolBarModel != null) {
@@ -129,33 +136,60 @@ public abstract class IFrame extends JFrame implements ActionListener, IStatusTi
         toolBar.setRollover(true);
 
         /* lock toolbar menu */
-        IAction action = getAction(LOCK_UNLOCK_TOOLBAR);
-        JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(action);
-        menuItem.setSelected(isToolBarLocked());
-        IToolkit.addStatusTipListener(menuItem, action, this);
+        final JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(
+                getMenuAction(LOCK_UNLOCK_TOOLBAR));
+
+        IToolkit.addStatusTipListener(menuItem,
+                (String) menuItem.getAction().getValue(IAction.STATUS_TIP), this);
 
         JPopupMenu popupMenu = new JPopupMenu();
+
+        popupMenu.addPopupMenuListener(new PopupMenuListener() {
+            @Override
+            public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+                menuItem.setSelected(isToolBarLocked());    // update menu state
+            }
+
+            @Override
+            public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+            }
+
+            @Override
+            public void popupMenuCanceled(PopupMenuEvent e) {
+            }
+        });
+
         popupMenu.add(menuItem);
         toolBar.setComponentPopupMenu(popupMenu);
     }
 
-    private void createStatusBar() {
+    private void createStatusPane() {
         statusBar = new JPanel(new BorderLayout());
         statusBar.add(new JSeparator(), BorderLayout.NORTH);
-        statusLabel = new JLabel();
-        statusBar.add(statusLabel, BorderLayout.WEST);
+
+        statusText = new JLabel();
+        statusBar.add(statusText, BorderLayout.WEST);
     }
 
-    public void addAction(IAction action) {
-        actions.put(action.getCommand(), action);
+    public void addMenuAction(Action action) {
+        actions.put((String) action.getValue(Action.ACTION_COMMAND_KEY), action);
     }
 
-    public Map<String, IAction> getActions() {
+    public Action getMenuAction(String id) {
+        return actions.get(id);
+    }
+
+    public Map<String, Action> getMenuActions() {
         return actions;
     }
 
-    public IAction getAction(String id) {
-        return actions.get(id);
+    public void invokeMenuAction(String id, Object source) {
+        Action action = getMenuAction(id);
+        if (action == null) {
+            throw new IllegalArgumentException("No such action: '" + id + "'");
+        }
+        action.actionPerformed(new ActionEvent(source, ActionEvent.ACTION_PERFORMED,
+                (String) action.getValue(Action.ACTION_COMMAND_KEY)));
     }
 
     public JToolBar getToolBar() {
@@ -170,20 +204,12 @@ public abstract class IFrame extends JFrame implements ActionListener, IStatusTi
         toolBar.setVisible(visible);
     }
 
-    public void showOrHideToolbar() {
-        setToolBarVisible(! isToolBarVisible());
-    }
-
     public boolean isToolBarLocked() {
         return ! toolBar.isFloatable();
     }
 
     public void setToolBarLocked(boolean locked) {
         toolBar.setFloatable(! locked);
-    }
-
-    public void lockOrUnlockToolbar() {
-        setToolBarLocked(! isToolBarLocked());
     }
 
     public JPanel getContentArea() {
@@ -211,52 +237,48 @@ public abstract class IFrame extends JFrame implements ActionListener, IStatusTi
         statusBar.setVisible(visible);
     }
 
-    public void showOrHideStatusBar() {
-        setStatusBarVisible(! isStatusBarVisible());
-    }
-
     public String getStatusText() {
-        return statusLabel.getText();
+        return statusText.getText();
     }
 
     public void setStatusText(String text) {
         oldStatusText = text;
-        statusLabel.setText(" "+text);
+        statusText.setText(" "+text);
     }
 
     @Override
     public void showingTip(IStatusTipEvent e) {
-        statusLabel.setText(" " + e.getStatusTip());
+        statusText.setText(" " + e.getStatusTip());
     }
 
     @Override
     public void closingTip(IStatusTipEvent e) {
-        statusLabel.setText(" "+oldStatusText);
+        statusText.setText(" "+oldStatusText);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case SHOW_HIDE_TOOLBAR:
-                showOrHideToolbar();
+                setToolBarVisible(!isToolBarVisible());
                 break;
             case LOCK_UNLOCK_TOOLBAR:
-                lockOrUnlockToolbar();
+                setToolBarLocked(!isToolBarLocked());
                 break;
             case SHOW_HIDE_STATUSBAR:
-                showOrHideStatusBar();
+                setStatusBarVisible(!isStatusBarVisible());
                 break;
         }
     }
 
     /** Actions map */
-    private Map<String, IAction> actions = new HashMap<>();
+    private Map<String, Action> actions = new HashMap<>();
 
     private JToolBar toolBar;
 
-    private JPanel   contentArea = null;
+    private JPanel contentArea = null;
 
     private JPanel statusBar;
-    private JLabel statusLabel;
+    private JLabel statusText;
     private String oldStatusText = null;
 }
