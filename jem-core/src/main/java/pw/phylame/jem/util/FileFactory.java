@@ -1,5 +1,7 @@
 /*
- * Copyright 2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2015 Peng Wan <phylame@163.com>
+ *
+ * This file is part of Jem.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +16,15 @@
  * limitations under the License.
  */
 
-package pw.phylame.tools.file;
+package pw.phylame.jem.util;
+
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.io.*;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -25,9 +32,63 @@ import java.util.zip.ZipFile;
  * Factory class to create <tt>FileObject</tt>.
  */
 public final class FileFactory {
-    private static String getMime(String path, String mime) {
+    private static Log                     LOG   = LogFactory.getLog(FileFactory.class);
+
+    /** Some known MIME types */
+    private static HashMap<String, String> MIMEs = new HashMap<String, String>();
+
+    /** File of builtin MIME mapping */
+    public static final String MIME_MAPPING_FILE = "mime.properties";
+
+    /** Loads some known MIMEs from file. */
+    static void loadBuiltinMime() {
+        java.util.Properties prop = new java.util.Properties();
+        InputStream in =
+                FileFactory.class.getResourceAsStream(MIME_MAPPING_FILE);
+        if (in == null) {       // not found file
+            LOG.trace("not found MIME mapping: "+MIME_MAPPING_FILE);
+            return;
+        }
+        try {
+            prop.load(in);
+        } catch (IOException e) {
+            LOG.debug("failed to load MIME mapping", e);
+        }
+        for (String fmt : prop.stringPropertyNames()) {
+            MIMEs.put(fmt, prop.getProperty(fmt));
+        }
+    }
+
+    static {
+        loadBuiltinMime();
+    }
+
+    /**
+     * Returns the MIME type of specified file name.
+     * @param name path name of file
+     * @return string of MIME.
+     */
+    public static String getMimeType(String name) {
+        if (name == null || name.equals("")) {
+            return "";
+        }
+        String mime = MIMEs.get(FilenameUtils.getExtension(name));
+        if (mime != null) {
+            return mime;
+        } else {
+            return new javax.activation.MimetypesFileTypeMap().getContentType(name);
+        }
+    }
+
+    /**
+     * Detects MIME type by file name if not specified mime.
+     * @param path path name of file
+     * @param mime given mime
+     * @return the mime type text
+     */
+    private static String getOrDetectMime(String path, String mime) {
         if (mime == null || "".equals(mime)) {
-            return FileNameUtils.getMimeType(path);
+            return getMimeType(path);
         }
         return mime;
     }
@@ -266,14 +327,14 @@ public final class FileFactory {
         if (file == null) {
             throw new NullPointerException("file");
         }
-        return new NormalFile(file, getMime(file.getPath(), mime));
+        return new NormalFile(file, getOrDetectMime(file.getPath(), mime));
     }
 
     public static FileObject fromZip(ZipFile zipFile, String entryName, String mime) throws IOException {
         if (entryName == null) {
             throw new NullPointerException("entryName");
         }
-        return new InnerZip(zipFile, entryName, getMime(entryName, mime));
+        return new InnerZip(zipFile, entryName, getOrDetectMime(entryName, mime));
     }
 
     public static FileObject fromBlock(String name, RandomAccessFile file, long offset, long size,
@@ -281,13 +342,13 @@ public final class FileFactory {
         if (name == null) {
             throw new NullPointerException("name");
         }
-        return new AreaFile(name, file, offset, size, getMime(name, mime));
+        return new AreaFile(name, file, offset, size, getOrDetectMime(name, mime));
     }
 
     public static FileObject fromURL(URL url, String mime) {
         if (url == null) {
             throw new NullPointerException("url");
         }
-        return new URLFile(url, getMime(url.getPath(), mime));
+        return new URLFile(url, getOrDetectMime(url.getPath(), mime));
     }
 }

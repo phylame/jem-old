@@ -1,5 +1,7 @@
 /*
- * Copyright 2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2015 Peng Wan <phylame@163.com>
+ *
+ * This file is part of Jem.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +16,9 @@
  * limitations under the License.
  */
 
-package pw.phylame.tools;
+package pw.phylame.jem.util;
 
+import java.util.Iterator;
 import java.util.List;
 
 import java.io.Writer;
@@ -23,7 +26,6 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.io.BufferedInputStream;
 import org.apache.commons.io.IOUtils;
-import pw.phylame.tools.file.FileObject;
 
 /**
  * Provides unicode text.
@@ -33,7 +35,7 @@ import pw.phylame.tools.file.FileObject;
  *     <li>text file with encoding: a file contains text content</li>
  * </ul>
  */
-public class TextObject {
+public class TextObject implements Iterable<String> {
     protected enum SourceProvider {
         TEXT, FILE
     }
@@ -212,6 +214,11 @@ public class TextObject {
             default:
                 return java.util.Arrays.asList(raw.split("(\\r\\n)|(\\r)|(\\n)"));
         }
+    }
+
+    @Override
+    public Iterator<String> iterator() {
+        return null;
     }
 
     /**

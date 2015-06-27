@@ -32,9 +32,9 @@ import pw.phylame.jem.util.JemException;
 import pw.phylame.jem.formats.util.ParserException;
 
 import pw.phylame.tools.DateUtils;
-import pw.phylame.tools.TextObject;
-import pw.phylame.tools.file.FileFactory;
-import pw.phylame.tools.file.FileObject;
+import pw.phylame.jem.util.TextObject;
+import pw.phylame.jem.util.FileFactory;
+import pw.phylame.jem.util.FileObject;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -57,7 +57,8 @@ public class Reader {
         }
     }
 
-    private static void readMetadata(Element root, Book book, ZipFile zipFile) throws JemException {
+    private static void readMetadata(Element root, Book book, ZipFile zipFile)
+            throws JemException {
         Element md = root.element("metadata");
         if (md == null) {
             throw new ParserException("Not found 'metadata' in PBM", "pmab");
@@ -82,7 +83,8 @@ public class Reader {
                     LOG.debug("not found cover source: "+value, e);
                 }
             } else if (name.equals("date") || name.equals("datetime")) {
-                book.setDate(DateUtils.parseDate(value, "yyyy-M-d H:m:s", new Date()));
+                book.setDate(
+                        DateUtils.parseDate(value, "yyyy-M-d H:m:s", new Date()));
             } else if (name.equals("intro")) {
                 book.setIntro(value);
             } else {
@@ -151,17 +153,19 @@ public class Reader {
         }
     }
 
-    public static void readPBM(Element root, Book book, ZipFile zipFile) throws JemException {
+    public static void readPBM(Element root, Book book, ZipFile zipFile)
+            throws JemException {
         readMetadata(root, book, zipFile);
         readExtension(root, book, zipFile);
     }
 
-    private static void readContents(Element elem, Part parent, ZipFile zipFile) throws JemException {
+    private static void readContents(Element elem, Part parent, ZipFile zipFile)
+            throws JemException {
         Element title = elem.element("title");
         if (title == null) {
             throw new ParserException("Not found 'title' element in PBC contents", "pmab");
         }
-        Chapter chapter = new Chapter(title.getText().trim(), "");
+        Chapter chapter = new Chapter(title.getText().trim());
         parent.append(chapter);
 
         int count = parseNumber(elem.attributeValue("count"), -1);
@@ -221,7 +225,8 @@ public class Reader {
         }
     }
 
-    public static void readPBC(Element root, Book book, ZipFile zipFile) throws JemException {
+    public static void readPBC(Element root, Book book, ZipFile zipFile)
+            throws JemException {
         Element contents = root.element("contents");
         if (contents == null) {
             throw new ParserException("Not found 'contents' element in PBC", "pmab");

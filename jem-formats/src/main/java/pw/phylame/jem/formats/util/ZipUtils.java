@@ -18,8 +18,8 @@
 
 package pw.phylame.jem.formats.util;
 
-import pw.phylame.tools.TextObject;
-import pw.phylame.tools.file.FileObject;
+import pw.phylame.jem.util.FileObject;
+import pw.phylame.jem.util.TextObject;
 
 import java.io.Writer;
 import java.io.IOException;
@@ -32,7 +32,8 @@ import java.util.zip.ZipOutputStream;
  * ZIP utilities.
  */
 public class ZipUtils {
-    public static void writeFile(FileObject file, ZipOutputStream zipout, String name) throws IOException {
+    public static void writeFile(FileObject file, ZipOutputStream zipout,
+                                 String name) throws IOException {
         zipout.putNextEntry(new ZipEntry(name));
         file.copyTo(zipout);
         zipout.closeEntry();
@@ -46,7 +47,8 @@ public class ZipUtils {
      * @param encoding encoding to encode text
      * @throws IOException occurs IO errors when writing text
      */
-    public static void writeText(TextObject text, ZipOutputStream zipout, String name, String encoding)
+    public static void writeText(TextObject text, ZipOutputStream zipout,
+                                 String name, String encoding)
             throws IOException {
         zipout.putNextEntry(new ZipEntry(name));
         if (encoding == null) {

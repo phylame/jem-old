@@ -22,7 +22,7 @@ import java.awt.Frame;
 import java.awt.event.*;
 import javax.swing.*;
 
-import pw.pat.ixin.IAction;
+import pw.phylame.pat.ixin.IAction;
 import pw.phylame.imabw.Imabw;
 import pw.phylame.jem.core.Jem;
 
@@ -41,7 +41,7 @@ public class AboutDialog extends JDialog {
 
         final Imabw app = Imabw.getInstance();
 
-        IAction closeAction = new IAction("Dialog.About.ButtonClose", app) {
+        IAction closeAction = new IAction(null, "Dialog.About.ButtonClose", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
@@ -65,7 +65,7 @@ public class AboutDialog extends JDialog {
         labelMessage.setText(String.format("%s v%s on %s (%s)", app.getText("App.Name"),
                 Imabw.APP_VERSION,
                 System.getProperty("os.name"), System.getProperty("os.arch")));
-        labelJem.setText(String.format("Jem core: %s by %s", Jem.VERSION, Jem.VENDOR));
+        labelJem.setText(String.format("Jem Core: %s by %s", Jem.VERSION, Jem.VENDOR));
         labelRights.setText(app.getText("App.Rights"));
 
         labelLicense.setText(String.format("<html><a href=\"%s\">%s</a></html>",

@@ -7,7 +7,7 @@
     <groupId>pw-books</groupId>
     <artifactId>imabw</artifactId>
     <name>imabw</name>
-    <version>2.0.1</version>
+    <version>2.0.2</version>
     <description>A GUI e-books editor based on SWING</description>
     <url>http://git.oschina.net/phylame/pw-books</url>
     <inceptionYear>2014</inceptionYear>
@@ -24,12 +24,17 @@
         <dependency>
             <groupId>pw-books</groupId>
             <artifactId>jem-core</artifactId>
-            <version>2.0.2</version>
+            <version>2.1.0</version>
         </dependency>
         <dependency>
             <groupId>pw-books</groupId>
             <artifactId>jem-formats</artifactId>
-            <version>1.1.0</version>
+            <version>1.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>pw-tools</groupId>
+            <artifactId>pat-core</artifactId>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.toedter</groupId>

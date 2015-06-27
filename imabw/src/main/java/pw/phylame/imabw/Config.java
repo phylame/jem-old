@@ -18,7 +18,7 @@
 
 package pw.phylame.imabw;
 
-import pw.pat.ixin.ISettings;
+import pw.phylame.pat.ixin.ISettings;
 import pw.phylame.jem.formats.txt.TxtParser;
 
 import java.awt.Font;

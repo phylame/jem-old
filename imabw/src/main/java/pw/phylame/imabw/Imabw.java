@@ -22,9 +22,9 @@ import java.awt.Font;
 import java.io.File;
 import java.util.Locale;
 
-import pw.pat.gaf.Translator;
-import pw.pat.ixin.IAction;
-import pw.pat.ixin.IApplication;
+import pw.phylame.pat.gaf.Translator;
+import pw.phylame.pat.ixin.IAction;
+import pw.phylame.pat.ixin.IApplication;
 import pw.phylame.imabw.ui.UIState;
 import pw.phylame.imabw.ui.Viewer;
 
@@ -43,15 +43,6 @@ public class Imabw extends IApplication implements Constants {
         ensureHomeExisted();
         initApp();
     }
-
-    /** Check and create user home directory for Imabw */
-    private void ensureHomeExisted() {
-        File homeDir = new File(APP_HOME);
-        if (!homeDir.exists() && !homeDir.mkdirs()) {
-            throw new RuntimeException("Cannot create Imabw home directory");
-        }
-    }
-
 
     public Config getConfig() {
         return Config.getInstance();

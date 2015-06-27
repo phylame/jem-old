@@ -25,11 +25,11 @@ import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 
 import pw.phylame.jem.core.Part;
-import pw.phylame.jem.core.Cleanable;
-import pw.phylame.tools.file.FileFactory;
+
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import pw.phylame.jem.util.FileFactory;
 
 public class EditorTab {
     private static Log LOG = LogFactory.getLog(EditorTab.class);
@@ -71,7 +71,7 @@ public class EditorTab {
         try {
             if (file == null) {
                 file = File.createTempFile("imabw_", ".itf");
-                part.registerCleanup(new Cleanable() {
+                part.registerCleanup(new Part.Cleanable() {
                     @Override
                     public void clean(Part part) {
                         if (! file.delete()) {

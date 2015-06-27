@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2015 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -19,15 +19,17 @@
 package pw.phylame.jem.core;
 
 import java.util.Map;
+import java.util.Date;
+import java.util.HashMap;
 import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import pw.phylame.jem.util.UnsupportedFormatException;
-import pw.phylame.tools.TextObject;
-import pw.phylame.tools.file.FileObject;
+import pw.phylame.jem.util.TextObject;
+import pw.phylame.jem.util.FileObject;
 import pw.phylame.jem.util.JemException;
+import pw.phylame.jem.util.UnsupportedFormatException;
 
 /**
  * This class contains utility methods for book operations.
@@ -36,7 +38,7 @@ public final class Jem {
     private static Log LOG = LogFactory.getLog(Jem.class);
 
     /** Jem version */
-    public static final String VERSION          = "2.0.2";
+    public static final String VERSION          = "2.1.0";
 
     /** Jem vendor */
     public static final String VENDOR           = "PW";
@@ -70,24 +72,6 @@ public final class Jem {
 
     /**
      * Reads <tt>Book</tt> from book file.
-     * @param source path of book file
-     * @param format format of the book file
-     * @param kw arguments to parser   @return <tt>Book</tt> instance represents the book file
-     * @throws java.io.IOException occurs IO errors
-     * @throws pw.phylame.jem.util.JemException occurs errors when parsing book file
-     * @since 2.0.1
-     */
-    public static Book readBook(String source, String format, Map<String, Object> kw)
-            throws IOException, JemException {
-        if (source == null) {
-            throw new NullPointerException("path");
-        }
-        Parser parser = getParser(format);
-        return parser.parse(source, kw);
-    }
-
-    /**
-     * Reads <tt>Book</tt> from book file.
      * @param file book file to be read
      * @param format format of the book file
      * @param kw arguments to parser
@@ -102,20 +86,6 @@ public final class Jem {
         }
         Parser parser = getParser(format);
         return parser.parse(file, kw);
-    }
-
-    /**
-     * Writes <tt>Book</tt> to book with specified format.
-     * @param book the <tt>Book</tt> to be written
-     * @param output path name of output book file
-     * @param format output format
-     * @param kw arguments to maker
-     * @throws java.io.IOException occurs IO errors
-     * @throws pw.phylame.jem.util.JemException occurs errors when making book file
-     */
-    public static void writeBook(Book book, String output, String format, Map<String, Object> kw)
-            throws IOException, JemException {
-        writeBook(book, new File(output), format, kw);
     }
 
     private static Maker getMaker(String format) throws UnsupportedFormatException {
@@ -168,7 +138,8 @@ public final class Jem {
      * @param orders list of index in sub-part tree
      * @param fromIndex begin position of index in {@code orders}
      * @return the <tt>Part</tt>
-     * @throws IndexOutOfBoundsException index in {@code orders} or {@code  fromIndex} is invalid
+     * @throws IndexOutOfBoundsException index in {@code orders} or
+     *          {@code fromIndex} is invalid
      */
     public static Part getPart(Part owner, int[] orders, int fromIndex) {
         int index = orders[fromIndex];
@@ -188,16 +159,24 @@ public final class Jem {
         }
     }
 
+    /**
+     * Converts specified part to <tt>Book</tt> instance.
+     * <p>Attributes and sub-parts of specified part will be copied to
+     *      the new book.</p>
+     * @param part the part to be converted
+     * @return the new book
+     */
     public static Book toBook(Part part) {
         Book book = new Book();
+
         // copy attributes
         book.updateAttributes(part);
+
         // copy sub-parts
         for (Part sub: part) {
             book.append(sub);
         }
-        // copy content
-        book.setSource(part.getSource());
+
         return book;
     }
 
@@ -220,8 +199,23 @@ public final class Jem {
         return depth + 1;
     }
 
+
     /**
-     * Walks <tt>Part</tt> sub-part tree (first order) .
+     * This interface used for walking sub-parts.
+     * @since 2.0.1
+     */
+    public static interface Walker {
+        /**
+         * Watches the specified part.
+         * @param part the part to be watched
+         * @return <tt>false</tt> to stop walking
+         */
+        boolean watch(Part part);
+    }
+
+    /**
+     * Walks <tt>Part</tt> sub-part tree (first order).
+     * <p>The specified part will be watched after walking all sub-parts.</p>
      * @param part the <tt>Part</tt> to be watched
      * @param walker watch the part
      */
@@ -240,11 +234,12 @@ public final class Jem {
         }
     }
 
-    private static Map<Class<?>, String> variantTypes = new java.util.HashMap<Class<?>, String>();
+    private static Map<Class<?>, String> variantTypes =
+            new HashMap<Class<?>, String>();
     static {
         variantTypes.put(Character.class, "str");
         variantTypes.put(String.class, "str");
-        variantTypes.put(java.util.Date.class, "datetime");
+        variantTypes.put(Date.class, "datetime");
         variantTypes.put(Byte.class, "int");
         variantTypes.put(Short.class, "int");
         variantTypes.put(Integer.class, "int");
@@ -257,9 +252,9 @@ public final class Jem {
     }
 
     /**
-     * Returns type name of attribute value format with PEM.
+     * Returns type name of attribute value format for PEM declaration.
      * @param o attribute value
-     * @return type name
+     * @return the type name
      */
     public static String variantType(Object o) {
         if (o == null) {

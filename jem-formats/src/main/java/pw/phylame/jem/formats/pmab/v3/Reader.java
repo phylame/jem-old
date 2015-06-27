@@ -30,14 +30,15 @@ import java.util.zip.ZipFile;
 import java.io.IOException;
 
 import pw.phylame.jem.core.Book;
+import pw.phylame.jem.core.Chapter;
 import pw.phylame.jem.core.Part;
 import pw.phylame.jem.util.JemException;
 import pw.phylame.jem.formats.util.ParserException;
 
 import pw.phylame.tools.DateUtils;
-import pw.phylame.tools.TextObject;
-import pw.phylame.tools.file.FileFactory;
-import pw.phylame.tools.file.FileObject;
+import pw.phylame.jem.util.TextObject;
+import pw.phylame.jem.util.FileFactory;
+import pw.phylame.jem.util.FileObject;
 
 /**
  * PBM and PBC reader for PMAB 3.x.
@@ -98,7 +99,8 @@ public class Reader {
             } catch (NumberFormatException ex) {
                 LOG.debug("invalid int data: "+data, ex);
             }
-        } else if (type.startsWith("datetime") || type.startsWith("date") || type.startsWith("time")) {
+        } else if (type.startsWith("datetime") || type.startsWith("date") ||
+                type.startsWith("time")) {
             String[] parts = type.split(";");
             String format = null;
             if (parts.length > 1) {
@@ -146,7 +148,8 @@ public class Reader {
         return value;
     }
 
-    private static void readAttributes(Element parent, Part part, ZipFile zipFile) throws JemException {
+    private static void readAttributes(Element parent, Part part, ZipFile zipFile)
+            throws JemException {
         Element attrs = parent.element("attributes");
         if (attrs == null) {
             throw new ParserException("Not found 'attributes' in PBM", "pmab");
@@ -171,7 +174,8 @@ public class Reader {
         }
     }
 
-    private static void readExtensions(Element parent, Book book, ZipFile zipFile) throws JemException {
+    private static void readExtensions(Element parent, Book book, ZipFile zipFile)
+            throws JemException {
         Element ext = parent.element("extensions");
         if (ext == null) {
             LOG.debug("no 'extensions' found in PBM");
@@ -197,14 +201,16 @@ public class Reader {
         }
     }
 
-    public static void readPBM(Element root, Book book, ZipFile zipFile) throws JemException {
+    public static void readPBM(Element root, Book book, ZipFile zipFile)
+            throws JemException {
         // ignore <head/>
         readAttributes(root, book, zipFile);
         readExtensions(root, book, zipFile);
     }
 
-    private static void readChapter(Element parent, Part owner, ZipFile zipFile) throws JemException {
-        Part chapter = new Part("", "");
+    private static void readChapter(Element parent, Part owner, ZipFile zipFile)
+            throws JemException {
+        Chapter chapter = new Chapter();
         readAttributes(parent, chapter, zipFile);
         Element content = parent.element("content");
         if (content != null) {
@@ -237,7 +243,8 @@ public class Reader {
         owner.append(chapter);
     }
 
-    public static void readPBC(Element root, Book book, ZipFile zipFile) throws JemException {
+    public static void readPBC(Element root, Book book, ZipFile zipFile)
+            throws JemException {
         Element toc = root.element("toc");
         if (toc == null) {
             throw new ParserException("Not found 'toc' in PBC", "pmab");

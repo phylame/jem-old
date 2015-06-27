@@ -18,17 +18,17 @@
 
 package pw.phylame.imabw;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import pw.phylame.imabw.ui.com.*;
-import pw.pat.ixin.IToolkit;
+import pw.phylame.jem.util.FileFactory;
+import pw.phylame.pat.ixin.IToolkit;
 
 import pw.phylame.jem.core.*;
 import pw.phylame.jem.util.JemException;
 import pw.phylame.tools.StringUtils;
-import pw.phylame.tools.file.FileFactory;
-import pw.phylame.tools.file.FileNameUtils;
 
 import java.awt.Component;
 import java.awt.Window;
@@ -201,12 +201,13 @@ public class Worker {
             /* Add file extension name if not given */
             String format = getSelectedFormat();
             if (format != null) {
-                if ("".equals(FileNameUtils.extensionName(file.getPath()))) {
+                if ("".equals(FilenameUtils.getExtension(file.getPath()))) {
                     file = new File(file.getPath() + "." + format);
                 }
             }
             if (file != null && file.exists()) {    // ask overwrite
-                if (! showConfirm(parent, title, app.getText("Dialog.SaveFile.Overwrite", file.getPath()))) {
+                if (! showConfirm(parent, title,
+                        app.getText("Dialog.SaveFile.Overwrite", file.getPath()))) {
                     file = null;
                     continue;
                 }
@@ -251,7 +252,7 @@ public class Worker {
     }
 
     public File selectOpenBook(Component parent, String title) {
-        ArrayList<String> formats = new ArrayList<>(BookHelper.supportedParsers());
+        ArrayList<String> formats = new ArrayList<>(Arrays.asList(BookHelper.supportedParsers()));
         formats.remove("online");
         return selectOpenFile(parent, title, makeFileExtensionFilters(formats.toArray(
                 new String[0])), null, true, null);
@@ -262,7 +263,7 @@ public class Worker {
         if (format != null) {
             formats = new String[]{format};
         } else {
-            ArrayList<String> fmt = new ArrayList<>(BookHelper.supportedMakers());
+            ArrayList<String> fmt = new ArrayList<>(Arrays.asList(BookHelper.supportedMakers()));
             formats = fmt.toArray(new String[0]);
         }
         return selectSaveFile(parent, title, makeFileExtensionFilters(formats), null, false, null);
@@ -325,7 +326,7 @@ public class Worker {
         }
         Book book = new Book(bookTitle, "");
         addAttributes(book);
-        book.newChapter(app.getText("Common.NewChapterTitle"));
+        book.append(new Chapter(app.getText("Common.NewChapterTitle")));
 
         return Task.newBook(book);
     }
@@ -395,7 +396,7 @@ public class Worker {
         if (text == null) {
             return null;
         }
-        PartNode node = new PartNode(new Part(text));
+        PartNode node = new PartNode(new Chapter(text));
         if (parentNode != null) {
             parentNode.appendNode(node);
         }
@@ -511,7 +512,7 @@ public class Worker {
     public ArrayList<Part> findParts(final Part part, String key) {
         final ArrayList<Part> parts = new ArrayList<>();
         final Pattern pattern = Pattern.compile(key);
-        Jem.walkPart(part, new Walker() {
+        Jem.walkPart(part, new Jem.Walker() {
             @Override
             public boolean watch(Part p) {
                 if (pattern.matcher(p.getTitle()).find()) {

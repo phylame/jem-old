@@ -33,8 +33,8 @@ import pw.phylame.jem.formats.util.I18N;
 import pw.phylame.jem.formats.util.ZipUtils;
 import pw.phylame.tools.DateUtils;
 import pw.phylame.tools.StringUtils;
-import pw.phylame.tools.TextObject;
-import pw.phylame.tools.file.FileObject;
+import pw.phylame.jem.util.TextObject;
+import pw.phylame.jem.util.FileObject;
 
 import java.io.IOException;
 import java.util.List;

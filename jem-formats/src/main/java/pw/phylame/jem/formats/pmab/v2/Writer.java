@@ -18,6 +18,7 @@
 
 package pw.phylame.jem.formats.pmab.v2;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -32,9 +33,8 @@ import pw.phylame.jem.formats.pmab.PMAB;
 import pw.phylame.jem.formats.pmab.PmabConfig;
 import pw.phylame.jem.formats.util.ZipUtils;
 import pw.phylame.tools.DateUtils;
-import pw.phylame.tools.TextObject;
-import pw.phylame.tools.file.FileObject;
-import pw.phylame.tools.file.FileNameUtils;
+import pw.phylame.jem.util.TextObject;
+import pw.phylame.jem.util.FileObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -53,13 +53,15 @@ public class Writer {
         for (Object key: metaInfo.keySet()) {
             Object value = metaInfo.get(key);
             if (value != null) {
-                head.addElement("meta").addAttribute("name", String.valueOf(key)).addAttribute("value",
+                head.addElement("meta").addAttribute("name",
+                        String.valueOf(key)).addAttribute("value",
                         String.valueOf(value));
             }
         }
     }
 
-    private static void makeMetadata(Element parent, Book book, ZipOutputStream zipout, PmabConfig config) {
+    private static void makeMetadata(Element parent, Book book,
+                                     ZipOutputStream zipout, PmabConfig config) {
         Element md = parent.addElement("metadata");
         int count = 0;
         for (String name: book.attributeNames()) {
@@ -82,12 +84,14 @@ public class Writer {
                     LOG.debug("cannot write file to PMAB: "+fb.getName(), ex);
                     continue;
                 }
-                Element item = md.addElement("attr").addAttribute("name", name).addAttribute("media-type", mime);
+                Element item = md.addElement("attr").addAttribute("name", name);
+                item.addAttribute("media-type", mime);
                 item.setText(href);
             } else if (value instanceof TextObject) {
                 TextObject tb = (TextObject) value;
                 try {
-                    md.addElement("attr").addAttribute("name", name).setText(tb.getText());
+                    md.addElement("attr").addAttribute("name", name);
+                    md.setText(tb.getText());
                 } catch (IOException e) {
                     LOG.debug("cannot write text to PMAB: "+name, e);
                     continue;
@@ -96,14 +100,16 @@ public class Writer {
                 String text = DateUtils.formatDate((Date) value, "yyyy-M-d H:m:s");
                 md.addElement("attr").addAttribute("name", name).setText(text);
             } else {
-                md.addElement("attr").addAttribute("name", name).setText(String.valueOf(value));
+                md.addElement("attr").addAttribute("name", name);
+                md.setText(String.valueOf(value));
             }
             ++count;
         }
         md.addAttribute("count", String.valueOf(count));
     }
 
-    private static void makeExtension(Element parent, Book book, ZipOutputStream zipout, PmabConfig config) {
+    private static void makeExtension(Element parent, Book book,
+                                      ZipOutputStream zipout, PmabConfig config) {
         Element ext = parent.addElement("extension");
         ext.addComment("The following data will be added to PMAB.");
         int count = 0;
@@ -125,7 +131,8 @@ public class Writer {
                 obj.addAttribute("media-type", fb.getMime());
             } else if (value instanceof TextObject) {
                 TextObject tb = (TextObject) value;
-                String encoding = config.textEncoding != null ? config.textEncoding : System.getProperty("file.encoding");
+                String encoding = config.textEncoding != null ?
+                        config.textEncoding : System.getProperty("file.encoding");
                 String href = config.extraDir + "/" + tb.hashCode() + ".txt";
                 try {
                     ZipUtils.writeText(tb, zipout, href, encoding);
@@ -134,7 +141,8 @@ public class Writer {
                     continue;
                 }
                 type = "file";
-                item.addElement("object").addAttribute("href", href).addAttribute("media-type", "text/plain");
+                item.addElement("object").addAttribute("href", href);
+                item.addAttribute("media-type", "text/plain");
             } else if (value instanceof Integer) {
                 type = "number";
                 text = String.valueOf(value);
@@ -152,9 +160,11 @@ public class Writer {
         ext.addAttribute("count", String.valueOf(count));
     }
 
-    public static void writePBM(Book book, Document doc, ZipOutputStream zipout, PmabConfig config) {
+    public static void writePBM(Book book, Document doc, ZipOutputStream zipout,
+                                PmabConfig config) {
         doc.addDocType("pbm", null, null);
-        Element root = doc.addElement("pbm", PMAB.PBM_XML_NS).addAttribute("version", "2.0");
+        Element root = doc.addElement("pbm", PMAB.PBM_XML_NS);
+        root.addAttribute("version", "2.0");
         // head
         if (config.metaInfo != null && config.metaInfo.size() > 0) {
             makeHead(root, config.metaInfo);
@@ -165,19 +175,23 @@ public class Writer {
         makeExtension(root, book, zipout, config);
     }
 
-    private static void makeChapter(Element parent, Part part, ZipOutputStream zipout, PmabConfig config, String suffix) {
+    private static void makeChapter(Element parent, Part part, ZipOutputStream zipout,
+                                    PmabConfig config, String suffix) {
         Element elem = parent.addElement("chapter");
         elem.addElement("title").setText(part.getTitle());
         String base = "chapter-" + suffix;
-        String encoding = config.textEncoding != null ? config.textEncoding : System.getProperty("file.encoding");
+        String encoding = config.textEncoding != null ?
+                config.textEncoding : System.getProperty("file.encoding");
         // cover
         Object o = part.getAttribute(Chapter.COVER, null);
         if (o instanceof FileObject) {
             FileObject fb = (FileObject) o;
-            String href = config.imageDir + "/" + base + "-cover." + FileNameUtils.extensionName(fb.getName());
+            String href = config.imageDir + "/" + base + "-cover." +
+                    FilenameUtils.getExtension(fb.getName());
             try {
                 ZipUtils.writeFile(fb, zipout, href);
-                elem.addElement("cover").addAttribute("href", href).addAttribute("media-type", fb.getMime());
+                elem.addElement("cover").addAttribute("href", href);
+                elem.addAttribute("media-type", fb.getMime());
             } catch (IOException ex) {
                 LOG.debug("cannot write file to PMAB: "+fb.getName(), ex);
             }
@@ -189,7 +203,8 @@ public class Writer {
             String href = config.textDir + "/" + base + "-intro.txt";
             try {
                 ZipUtils.writeText(tb, zipout, href, encoding);
-                elem.addElement("intro").addAttribute("href", href).addAttribute("encoding", encoding);
+                elem.addElement("intro").addAttribute("href", href);
+                elem.addAttribute("encoding", encoding);
             } catch (IOException ex) {
                 LOG.debug("cannot write text to PMAB: "+href, ex);
             }
@@ -212,9 +227,11 @@ public class Writer {
         }
     }
 
-    public static void writePBC(Book book, Document doc, ZipOutputStream zipout, PmabConfig config) {
+    public static void writePBC(Book book, Document doc, ZipOutputStream zipout,
+                                PmabConfig config) {
         doc.addDocType("pbc", null, null);
-        Element root = doc.addElement("pbc", PMAB.PBC_XML_NS).addAttribute("version", "2.0");
+        Element root = doc.addElement("pbc", PMAB.PBC_XML_NS);
+        root.addAttribute("version", "2.0");
         Element contents = root.addElement("contents");
         int count = 0;
         for (Part sub: book) {

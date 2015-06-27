@@ -29,7 +29,8 @@ import java.io.OutputStream;
  * XML utilities.
  */
 public class XmlUtils {
-    private static OutputFormat getXMLFormat(String encoding, String indent, String lineSeparator) {
+    private static OutputFormat getXMLFormat(String encoding, String indent,
+                                             String lineSeparator) {
         OutputFormat format = OutputFormat.createPrettyPrint();
         format.setEncoding(encoding);
         format.setIndent(indent);
@@ -38,9 +39,10 @@ public class XmlUtils {
         return format;
     }
 
-    public static void writeXML(Document doc, OutputStream out, String encoding, String indent,
-                                String lineSeparator) throws IOException {
-        XMLWriter xmlWriter = new XMLWriter(out, getXMLFormat(encoding, indent, lineSeparator));
+    public static void writeXML(Document doc, OutputStream out, String encoding,
+                                String indent, String lineSeparator) throws IOException {
+        XMLWriter xmlWriter = new XMLWriter(out,
+                getXMLFormat(encoding, indent, lineSeparator));
         xmlWriter.write(doc);
     }
 }

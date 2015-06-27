@@ -16,7 +16,7 @@
 
 package pw.phylame.imabw;
 
-import pw.pat.ixin.IFrame;
+import pw.phylame.pat.ixin.IFrame;
 
 /**
  * Constants for Imabw.
@@ -32,10 +32,10 @@ public interface Constants {
     String I18N_PATH = "res/i18n/imabw";
 
     /** User home of Imabw */
-    String APP_HOME = String.format("%s/.imabw", System.getProperty("user.home"));
+//    String APP_HOME = String.format("%s/.imabw", System.getProperty("user.home"));
 
     /** Plugins directory */
-    String PLUGINS_HOME = APP_HOME + "/plugins";
+//    String PLUGINS_HOME = APP_HOME + "/plugins";
 
     // **************************
     // ** Common menu commands **

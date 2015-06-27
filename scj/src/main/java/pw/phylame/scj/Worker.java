@@ -26,19 +26,19 @@ import java.util.Map;
 import java.util.List;
 import java.util.Date;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.Part;
 import pw.phylame.jem.core.Book;
+import pw.phylame.jem.util.FileFactory;
+import pw.phylame.jem.util.FileObject;
 import pw.phylame.jem.util.JemException;
+import pw.phylame.jem.util.TextObject;
 import pw.phylame.tools.DateUtils;
 import pw.phylame.tools.StringUtils;
-import pw.phylame.tools.TextObject;
-import pw.phylame.tools.file.FileNameUtils;
-import pw.phylame.tools.file.FileObject;
-import pw.phylame.tools.file.FileFactory;
 
 /**
  * Utility class for SCJ.
@@ -50,7 +50,7 @@ public final class Worker {
     private static final String ITEM_REGEX = "^item\\$.*";
 
     private static SCI app = SCI.getInstance();
-    
+
     private static URL detectURL(String url) throws IOException {
         String href;
         if (url.matches("((http://)|(https://)|(ftp://)|(file://)).*")) {
@@ -127,15 +127,16 @@ public final class Worker {
 
     public static Book openBook(String input, String format, Map<String, Object> kw) {
         if (format == null || "".equals(format)) {
-            format = FileNameUtils.extensionName(input).toLowerCase();
+            format = FilenameUtils.getExtension(input).toLowerCase();
         }
         Book book = null;
         try {
-            book = Jem.readBook(input, format, kw);
+            book = Jem.readBook(new File(input), format, kw);
         } catch (FileNotFoundException e) {
             app.error(app.getText("SCI_NOT_EXISTS", input));
         } catch (IOException | JemException e) {
-            LOG.debug(String.format("failed to read '%s' with '%s'", input, format.toUpperCase()), e);
+            LOG.debug(String.format("failed to read '%s' with '%s'", input,
+                    format.toUpperCase()), e);
         }
         return book;
     }
@@ -156,7 +157,8 @@ public final class Worker {
         }
     }
 
-    public static String saveBook(Book book, File output, String format, Map<String, Object> kw) {
+    public static String saveBook(Book book, File output, String format,
+                                  Map<String, Object> kw) {
         if (output.isDirectory()) {
             output = new File(output, String.format("%s.%s", book.getTitle(), format));
         }
@@ -166,14 +168,20 @@ public final class Worker {
             Jem.writeBook(book, output, format, kw);
             path = output.getPath();
         } catch (IOException |JemException e) {
-            LOG.debug(String.format("failed to write '%s' with '%s'", output.getPath(), format.toUpperCase()), e);
+            LOG.debug(String.format("failed to write '%s' with '%s'",
+                    output.getPath(), format.toUpperCase()), e);
         }
         return path;
     }
 
-    public static String convertBook(String input, String inFormat, Map<String, Object> inKw,
-                                     Map<String, Object> attributes, Map<String, Object> items, File output,
-                                     String outFormat, Map<String, Object> outKw) {
+    public static String convertBook(String input,
+                                     String inFormat,
+                                     Map<String, Object> inKw,
+                                     Map<String, Object> attributes,
+                                     Map<String, Object> items,
+                                     File output,
+                                     String outFormat,
+                                     Map<String, Object> outKw) {
         Book book = openBook(input, inFormat, inKw);
         if (book == null) {
             app.error(app.getText("SCI_READ_FAILED", input));
@@ -194,8 +202,13 @@ public final class Worker {
         return path;
     }
 
-    public static String joinBook(List<String> inputs, Map<String, Object> inKw, Map<String, Object> attributes,
-                                  Map<String, Object> items, File output, String outFormat, Map<String, Object> outKw) {
+    public static String joinBook(List<String> inputs,
+                                  Map<String, Object> inKw,
+                                  Map<String, Object> attributes,
+                                  Map<String, Object> items,
+                                  File output,
+                                  String outFormat,
+                                  Map<String, Object> outKw) {
         Book book = new Book();
         for (String input: inputs) {
             Book sub = openBook(input, null, inKw);
@@ -249,19 +262,25 @@ public final class Worker {
         return results;
     }
 
-    public static String extractBook(String input, String inFormat, Map<String, Object> inKw,
-                                     Map<String, Object> attributes, Map<String, Object> items, String index,
-                                     File output, String outFormat, Map<String, Object> outKw) {
+    public static String extractBook(String input,
+                                     String inFormat,
+                                     Map<String, Object> inKw,
+                                     Map<String, Object> attributes,
+                                     Map<String, Object> items,
+                                     String index,
+                                     File output,
+                                     String outFormat,
+                                     Map<String, Object> outKw) {
         Book book = openBook(input, inFormat, inKw);
         if (book == null) {
             app.error(app.getText("SCI_READ_FAILED", input));
             return null;
         }
-        int[] indexs = parseIndexes(index);
-        if (indexs == null) {
+        int[] indexes = parseIndexes(index);
+        if (indexes == null) {
             return null;
         }
-        Part part = Jem.getPart(book, indexs, 0);
+        Part part = Jem.getPart(book, indexes, 0);
         if (! setAttributes(part, attributes)) {
             return null;
         }
@@ -301,7 +320,8 @@ public final class Worker {
         return str;
     }
 
-    private static void walkTree(Part part, String prefix, String[] keys, boolean showAttributes, boolean showOrder,
+    private static void walkTree(Part part, String prefix, String[] keys,
+                                 boolean showAttributes, boolean showOrder,
                                  String indent, boolean showBrackets) {
         System.out.print(prefix);
         if (showAttributes) {
@@ -320,18 +340,22 @@ public final class Worker {
         }
     }
 
-    private static void viewToc(Part part, String[] keys, String indent, boolean showOrder, boolean showBrackets) {
+    private static void viewToc(Part part, String[] keys, String indent,
+                                boolean showOrder, boolean showBrackets) {
         System.out.println(app.getText("SCI_TOC_TITLE", part.getTitle()));
         walkTree(part, "", keys, false, showOrder, indent, showBrackets);
     }
 
-    private static void viewPart(Part part, String[] keys, String sep, boolean showBrackets, boolean ignoreEmpty) {
+    private static void viewPart(Part part, String[] keys, String sep,
+                                 boolean showBrackets, boolean ignoreEmpty) {
         List<String> lines = new java.util.ArrayList<>();
         for (String key: keys) {
             if (key.equals("all")) {
-                viewPart(part, part.attributeNames().toArray(new String[0]), sep, showBrackets, true);
+                viewPart(part, part.attributeNames().toArray(new String[0]),
+                        sep, showBrackets, true);
             } else if (key.equals("toc")) {
-                viewToc(part, new String[]{"title", "cover"}, app.getText("SCI_TOC_INDENT"), true, true);
+                viewToc(part, new String[]{"title", "cover"},
+                        app.getText("SCI_TOC_INDENT"), true, true);
             } else if (key.equals("text")) {
                 try {
                     System.out.println(part.getSource().getText());
@@ -382,7 +406,8 @@ public final class Worker {
                 app.echo(app.getText("SCI_NOT_FOUND_ITEM", name));
             } else {
                 String str = formatVariant(value);
-                System.out.println(app.getText("SCI_ITEM_FORMAT", name, Jem.variantType(value), str));
+                System.out.println(app.getText("SCI_ITEM_FORMAT",
+                        name, Jem.variantType(value), str));
             }
         }
     }
@@ -393,20 +418,25 @@ public final class Worker {
         if (parts.length > 1) {
             key = parts[1];
         }
-        int[] indexs = parseIndexes(index);
-        if (indexs == null) {
+        int[] indexes = parseIndexes(index);
+        if (indexes == null) {
             return;
         }
         try {
-            Part part = Jem.getPart(book, indexs, 0);
-            viewPart(part, new String[]{key}, System.getProperty("line.separator"), false, false);
+            Part part = Jem.getPart(book, indexes, 0);
+            viewPart(part, new String[]{key},
+                    System.getProperty("line.separator"), false, false);
         } catch (IndexOutOfBoundsException ex) {
             app.error(app.getText("SCI_NOT_FOUND_CHAPTER", index, book.getTitle()));
         }
     }
 
-    public static boolean viewBook(String input, String inFormat, Map<String, Object> inKw, Map<String, Object> attributes,
-                                   Map<String, Object> items, String[] keys) {
+    public static boolean viewBook(String input,
+                                   String inFormat,
+                                   Map<String, Object> inKw,
+                                   Map<String, Object> attributes,
+                                   Map<String, Object> items,
+                                   String[] keys) {
         Book book = openBook(input, inFormat, inKw);
         if (book == null) {
             app.error(app.getText("SCI_READ_FAILED", input));
@@ -426,7 +456,8 @@ public final class Worker {
             } else if (key.matches(ITEM_REGEX)) {
                 viewExtension(book, new String[]{key.replaceFirst("item\\$", "")});
             } else {
-                viewPart(book, new String[]{key}, System.getProperty("line.separator"), false, false);
+                viewPart(book, new String[]{key},
+                        System.getProperty("line.separator"), false, false);
             }
         }
 

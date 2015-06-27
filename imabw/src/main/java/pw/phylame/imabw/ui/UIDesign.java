@@ -18,8 +18,8 @@
 
 package pw.phylame.imabw.ui;
 
-import pw.pat.ixin.IMenuLabel;
-import pw.pat.ixin.IMenuModel;
+import pw.phylame.pat.ixin.IMenuLabel;
+import pw.phylame.pat.ixin.IMenuModel;
 
 import pw.phylame.imabw.Imabw;
 import pw.phylame.imabw.Constants;
@@ -48,7 +48,7 @@ public class UIDesign implements Constants {
             {EXIT_APP, "Menu.File.Exit"}
     };
     public static Object[]   FILE_MENU_MODEL   = {
-            new IMenuLabel(app.getText("Menu.File"), null),
+            new IMenuLabel("Menu.File", app),
             NEW_FILE, OPEN_FILE,
             null,
             SAVE_FILE, SAVE_AS_FILE,
@@ -63,7 +63,7 @@ public class UIDesign implements Constants {
             {EDIT_PREFERENCE, "Menu.Edit.Preference"}
     };
     public static Object[]   EDIT_MENU_MODEL   = {
-            new IMenuLabel(app.getText("Menu.Edit"), null),
+            new IMenuLabel("Menu.Edit", app),
             ITextEdit.UNDO,
             ITextEdit.REDO,
             null,
@@ -82,7 +82,7 @@ public class UIDesign implements Constants {
             {SHOW_SIDEBAR, "Menu.View.ShowSidebar"}
     };
     public static Object[]   VIEW_MENU_MODEL   = {
-            new IMenuLabel(app.getText("Menu.View"), null),
+            new IMenuLabel("Menu.View", app),
             new IMenuModel(SHOW_TOOLBAR, IMenuModel.MenuType.CHECK, true),
             new IMenuModel(SHOW_STATUSBAR, IMenuModel.MenuType.CHECK, true),
             new IMenuModel(SHOW_SIDEBAR, IMenuModel.MenuType.CHECK, true),
@@ -97,7 +97,7 @@ public class UIDesign implements Constants {
             {GO_TO_POSITION, "Menu.Search.Goto", false}
     };
     public static Object[]   SEARCH_MENU_MODEL   = {
-            new IMenuLabel(app.getText("Menu.Search"), null),
+            new IMenuLabel("Menu.Search", app),
             FIND_TEXT, FIND_NEXT, FIND_PREVIOUS,
             null,
             FIND_AND_REPLACE,
@@ -111,7 +111,7 @@ public class UIDesign implements Constants {
             {EXTRA_ITEMS, "Menu.Tools.Extra"}
     };
     public static Object[]   TOOLS_MENU_MODEL   = {
-            new IMenuLabel(app.getText("Menu.Tools"), null),
+            new IMenuLabel("Menu.Tools", app),
             BOOK_ATTRIBUTES,
 //            EXTRA_ITEMS
     };
@@ -122,7 +122,7 @@ public class UIDesign implements Constants {
             {SHOW_ABOUT, "Menu.Help.About"}
     };
     public static Object[]   HELP_MENU_MODEL   = {
-            new IMenuLabel(app.getText("Menu.Help"), null),
+            new IMenuLabel("Menu.Help", app),
 //            DO_ACTION,
             SHOW_ABOUT
     };

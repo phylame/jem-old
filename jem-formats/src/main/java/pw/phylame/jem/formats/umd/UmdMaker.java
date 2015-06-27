@@ -18,22 +18,20 @@
 
 package pw.phylame.jem.formats.umd;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import pw.phylame.jem.core.Part;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Maker;
-import pw.phylame.jem.core.Cleanable;
-import pw.phylame.jem.formats.util.MakerException;
+import pw.phylame.jem.util.FileObject;
 import pw.phylame.jem.util.JemException;
+import pw.phylame.jem.formats.util.MakerException;
 import pw.phylame.jem.formats.util.ExceptionFactory;
 
 import pw.phylame.tools.ZLibUtils;
 import pw.phylame.tools.NumberUtils;
-import pw.phylame.tools.file.FileNameUtils;
-import pw.phylame.tools.file.FileObject;
-
 import static pw.phylame.tools.ByteUtils.littleRender;
 
 import java.io.*;
@@ -63,7 +61,8 @@ public class UmdMaker implements Maker {
     }
 
     @Override
-    public void make(Book book, File file, Map<String, Object> kw) throws IOException, JemException {
+    public void make(Book book, File file, Map<String, Object> kw)
+            throws IOException, JemException {
         OutputStream output = new BufferedOutputStream(new FileOutputStream(file));
         int umdType = UMD.TEXT;
         if (kw != null && kw.size() > 0) {
@@ -84,7 +83,8 @@ public class UmdMaker implements Maker {
         output.close();
     }
 
-    public void make(Book book, OutputStream output, int umdType) throws IOException, JemException {
+    public void make(Book book, OutputStream output, int umdType)
+            throws IOException, JemException {
         this.output = output;
         this.umdType = umdType;
         this.book = book;
@@ -113,7 +113,7 @@ public class UmdMaker implements Maker {
 
         // prepare text
         final File cache = File.createTempFile("umd_", ".stf");
-        book.registerCleanup(new Cleanable() {
+        book.registerCleanup(new Part.Cleanable() {
             @Override
             public void clean(Part part) {
                 if (source != null) {
@@ -180,7 +180,8 @@ public class UmdMaker implements Maker {
 
     }
 
-    private void writeChunk(int id, boolean hasAddition, byte[] data) throws IOException {
+    private void writeChunk(int id, boolean hasAddition, byte[] data)
+            throws IOException {
         writeChunk(id, hasAddition ? 1 : 0, data);
     }
 
@@ -214,15 +215,28 @@ public class UmdMaker implements Maker {
     // 2-9
     private void writeAttributes() throws IOException{
         writeChunk(UMD.CDT_TITLE, false, book.getTitle().getBytes(UMD.TEXT_ENCODING));
+
         writeChunk(UMD.CDT_AUTHOR, false, book.getAuthor().getBytes(UMD.TEXT_ENCODING));
+
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(book.getDate());
-        writeChunk(UMD.CDT_YEAR, false, Integer.toString(calendar.get(Calendar.YEAR)).getBytes(UMD.TEXT_ENCODING));
-        writeChunk(UMD.CDT_MONTH, false, Integer.toString(calendar.get(Calendar.MONTH) + 1).getBytes(UMD.TEXT_ENCODING));
-        writeChunk(UMD.CDT_DAY, false, Integer.toString(calendar.get(Calendar.DAY_OF_MONTH)).getBytes(UMD.TEXT_ENCODING));
-        writeChunk(UMD.CDT_GENRE, false, book.getGenre().getBytes(UMD.TEXT_ENCODING));
-        writeChunk(UMD.CDT_PUBLISHER, false, book.getPublisher().getBytes(UMD.TEXT_ENCODING));
-        writeChunk(UMD.CDT_VENDOR, false, book.getVendor().getBytes(UMD.TEXT_ENCODING));
+        writeChunk(UMD.CDT_YEAR, false,
+                Integer.toString(calendar.get(Calendar.YEAR)).getBytes(UMD.TEXT_ENCODING));
+
+        writeChunk(UMD.CDT_MONTH, false,
+                Integer.toString(calendar.get(Calendar.MONTH) + 1).getBytes(UMD.TEXT_ENCODING));
+
+        writeChunk(UMD.CDT_DAY, false,
+                Integer.toString(calendar.get(Calendar.DAY_OF_MONTH)).getBytes(UMD.TEXT_ENCODING));
+
+        writeChunk(UMD.CDT_GENRE, false,
+                book.getGenre().getBytes(UMD.TEXT_ENCODING));
+
+        writeChunk(UMD.CDT_PUBLISHER, false,
+                book.getPublisher().getBytes(UMD.TEXT_ENCODING));
+
+        writeChunk(UMD.CDT_VENDOR, false,
+                book.getVendor().getBytes(UMD.TEXT_ENCODING));
     }
 
     // B
@@ -307,7 +321,7 @@ public class UmdMaker implements Maker {
         if (cover == null) {
             return;
         }
-        int type = UMD.getFormatOfName(FileNameUtils.extensionName(cover.getName()));
+        int type = UMD.getFormatOfName(FilenameUtils.getExtension(cover.getName()));
         int check = NumberUtils.randInteger(0x1000, 0x1FFF);
         byte[] data = new byte[5];
         data[0] = (byte) type;
@@ -347,7 +361,8 @@ public class UmdMaker implements Maker {
         writeChunk(UMD.CDT_UMD_END, false, littleRender.putUint32(length));
     }
 
-    private void cachePart(Part part, RandomAccessFile file, List<String> titles, List<Long> offsets) throws IOException {
+    private void cachePart(Part part, RandomAccessFile file, List<String> titles,
+                           List<Long> offsets) throws IOException {
         titles.add(part.getTitle());
         offsets.add(file.getFilePointer());
         writeString(file, part.getTitle() + UMD.SYMBIAN_LINE_FEED);
@@ -361,7 +376,8 @@ public class UmdMaker implements Maker {
         }
     }
 
-    private void writeText(RandomAccessFile file, long contentLength, List<Long> blockChecks) throws IOException {
+    private void writeText(RandomAccessFile file, long contentLength,
+                           List<Long> blockChecks) throws IOException {
         int count = (int) Math.ceil(contentLength / (double) UMD.BLOCK_SIZE);
         if (count == 1) {
             count = 2;
@@ -398,7 +414,8 @@ public class UmdMaker implements Maker {
         }
     }
 
-    private void writeImages(List<FileObject> images, List<Long> blockChecks) throws IOException {
+    private void writeImages(List<FileObject> images, List<Long> blockChecks)
+            throws IOException {
         if (images.size() == 0) {
             return;
         }

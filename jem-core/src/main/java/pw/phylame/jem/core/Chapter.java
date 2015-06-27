@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2015 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -18,18 +18,15 @@
 
 package pw.phylame.jem.core;
 
-import pw.phylame.tools.TextObject;
-import pw.phylame.tools.file.FileObject;
+import pw.phylame.jem.util.TextObject;
+import pw.phylame.jem.util.FileObject;
 
 /**
- * Common chapter in book.
+ * Common chapter model contained cover and intro attributes in book.
+ * A <tt>Chapter</tt> may be a simple chapter with text content or a section
+ *      with sub parts or chapters, using {@link #isSection()} to check it.
  */
 public class Chapter extends Part {
-    /** Key name for chapter cover.*/
-    public static final String COVER = "cover";
-
-    /** Key name for chapter intro.*/
-    public static final String INTRO = "intro";
 
     public Chapter() {
         this("", new TextObject(), null, null);
@@ -39,27 +36,12 @@ public class Chapter extends Part {
         this(title, new TextObject(), null, null);
     }
 
-    public Chapter(String title, String text) {
-        this(title, new TextObject(text), null, null);
-    }
-
-    public Chapter(String title, String text, FileObject cover, TextObject intro) {
-        this(title, new TextObject(text), cover, intro);
-    }
-
-    public Chapter(String title, FileObject file, String encoding) {
-        this(title, new TextObject(file, encoding), null, null);
-    }
-
-    public Chapter(String title, FileObject file, String encoding, FileObject cover, TextObject intro) {
-        this(title, new TextObject(file, encoding), cover, intro);
-    }
-
     public Chapter(String title, TextObject content) {
         this(title, content, null, null);
     }
 
-    public Chapter(String title, TextObject content, FileObject cover, TextObject intro) {
+    public Chapter(String title, TextObject content, FileObject cover,
+                   TextObject intro) {
         super(title, content);
         setCover(cover);
         setIntro(intro);
@@ -111,37 +93,5 @@ public class Chapter extends Part {
      */
     public void setIntro(String intro) {
         setIntro(new TextObject(intro));
-    }
-
-    public Chapter newChapter(String title) {
-        return newChapter(title, new TextObject(), null, null);
-    }
-
-    public Chapter newChapter(String title, String text) {
-        return newChapter(title, new TextObject(text), null, null);
-    }
-
-    public Chapter newChapter(String title, String text, FileObject cover, TextObject intro) {
-        return newChapter(title, new TextObject(text), cover, intro);
-    }
-
-    public Chapter newChapter(String title, FileObject file, String encoding) {
-        return newChapter(title, new TextObject(file, encoding), null, null);
-    }
-
-    public Chapter newChapter(String title, FileObject file, String encoding, FileObject cover,
-                              TextObject intro) {
-        return newChapter(title, new TextObject(file, encoding), cover, intro);
-    }
-
-    public Chapter newChapter(String title, TextObject content) {
-        return newChapter(title, content, null, null);
-    }
-
-    public Chapter newChapter(String title, TextObject content, FileObject cover,
-                              TextObject intro) {
-        Chapter sub = new Chapter(title, content, cover, intro);
-        append(sub);
-        return sub;
     }
 }

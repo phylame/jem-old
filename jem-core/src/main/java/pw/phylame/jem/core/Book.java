@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2015 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -24,52 +24,23 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * <tt>Book</tt> describes book structure.
- * <p>A book structure contains 3 parts:</p>
+ * Common <tt>Book</tt> model describes book structure.
+ * <p>A book structure contains the following parts:</p>
  * <ul>
  *     <li>attributes - meta attributes of book</li>
  *     <li>contents - table of contents</li>
- *     <li>extensions - extension data, like attributes but not included in book content</li>
+ *     <li>extensions - extension data, like attributes but not part of
+ *          book itself</li>
  * </ul>
  */
 public class Book extends Chapter {
-    /** Key name for book author.*/
-    public static final String AUTHOR = "author";
-
-    /** Key name for book genre.*/
-    public static final String GENRE = "genre";
-
-    /** Key name for book state.*/
-    public static final String STATE = "state";
-
-    /** Key name for book subject.*/
-    public static final String SUBJECT = "subject";
-
-    /** Key name for book date.*/
-    public static final String DATE = "date";
-
-    /** Key name for book publisher.*/
-    public static final String PUBLISHER = "publisher";
-
-    /**
-     * Key name for book vendor.
-     * @since 2.0.2
-     */
-    public static final String VENDOR = "vendor";
-
-    /** Key name for book rights.*/
-    public static final String RIGHTS = "rights";
-
-    /** Key name for book language.*/
-    public static final String LANGUAGE = "language";
-
 
     public Book() {
         reset();
     }
 
     public Book(String title, String author) {
-        super(title, "");
+        super(title);
         setAuthor(author);
     }
 
@@ -178,26 +149,40 @@ public class Book extends Chapter {
         setAttribute(LANGUAGE, language);
     }
 
+    // ********************
+    // ** Extension item **
+    // ********************
+
+    /** Extension mapping */
+    private Map<String, Object> extMap = new java.util.TreeMap<String, Object>();
+
     /**
      * Associates the specified value with the specified name in extensions.
-     * <p>If the {@code name} not exists add a new item, otherwise overwritten old value.</p>
+     * <p>If the {@code name} not exists add a new item, otherwise overwritten
+     *      old value.</p>
      * @param name name of the item
      * @param value value of the item
      */
     public void setItem(String name, Object value) {
-        extensions.put(name, value);
+        extMap.put(name, value);
     }
 
     /**
-     * Returns item value in extensions by its name, if not present returns {@code defaultValue}.
+     * Returns item value in extensions by its name, if not present
+     *      returns {@code defaultValue}.
      * @param name name of item
-     * @param defaultValue default value to returned if not found item with <tt>name</tt>
-     * @return item value associated with <tt>name</tt> or <tt>defaultValue</tt> if not
-     *          found item for <tt>name</tt>
+     * @param defaultValue default value to returned if not found item
+     *                     with <tt>name</tt>
+     * @return item value associated with <tt>name</tt> or
+     *          <tt>defaultValue</tt> if not found item for <tt>name</tt>
      */
     public Object getItem(String name, Object defaultValue) {
-        Object v = extensions.get(name);
-        return (v != null || extensions.containsKey(name)) ? v : defaultValue;
+        Object v = extMap.get(name);
+        if (v != null || extMap.containsKey(name)) {
+            return v;
+        } else {
+            return defaultValue;
+        }
     }
 
     /**
@@ -207,7 +192,7 @@ public class Book extends Chapter {
      *         <tt>null</tt> if there was item for <tt>name</tt>.
      */
     public Object removeItem(String name) {
-        return extensions.remove(name);
+        return extMap.remove(name);
     }
 
     /**
@@ -215,7 +200,7 @@ public class Book extends Chapter {
      * @return number of items
      */
     public int itemSize() {
-        return extensions.size();
+        return extMap.size();
     }
 
     /**
@@ -223,14 +208,14 @@ public class Book extends Chapter {
      * @return sequence of item names
      */
     public Set<String> itemNames() {
-        return extensions.keySet();
+        return extMap.keySet();
     }
 
     /**
      * Removes all items from extension map.
      */
     public void clearItems() {
-        extensions.clear();
+        extMap.clear();
     }
 
     @Override
@@ -238,7 +223,4 @@ public class Book extends Chapter {
         super.cleanup();
         clearItems();
     }
-
-    // extensions
-    private Map<String, Object> extensions = new java.util.TreeMap<String, Object>();
 }

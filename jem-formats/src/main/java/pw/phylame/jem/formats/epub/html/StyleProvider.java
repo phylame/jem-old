@@ -18,7 +18,7 @@
 
 package pw.phylame.jem.formats.epub.html;
 
-import pw.phylame.tools.file.FileObject;
+import pw.phylame.jem.util.FileObject;
 
 /**
  * Provider ePub HTML CSS content.

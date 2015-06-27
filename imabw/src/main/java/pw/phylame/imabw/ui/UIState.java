@@ -18,7 +18,7 @@
 
 package pw.phylame.imabw.ui;
 
-import pw.pat.ixin.ISettings;
+import pw.phylame.pat.ixin.ISettings;
 
 import java.awt.Point;
 import java.awt.Toolkit;

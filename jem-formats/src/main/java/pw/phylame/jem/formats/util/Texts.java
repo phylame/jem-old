@@ -18,10 +18,10 @@
 
 package pw.phylame.jem.formats.util;
 
-import pw.phylame.tools.TextObject;
+import pw.phylame.jem.util.TextObject;
 
-import java.io.IOException;
 import java.util.List;
+import java.io.IOException;
 
 /**
  * Operations for TextObject.

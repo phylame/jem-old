@@ -18,7 +18,7 @@
 
 package pw.phylame.imabw.ui.com;
 
-import pw.pat.ixin.IToolkit;
+import pw.phylame.pat.ixin.IToolkit;
 import pw.phylame.imabw.Imabw;
 
 import java.awt.Component;

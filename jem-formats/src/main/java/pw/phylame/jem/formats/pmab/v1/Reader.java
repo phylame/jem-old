@@ -33,9 +33,9 @@ import pw.phylame.jem.util.JemException;
 import pw.phylame.jem.formats.util.ParserException;
 
 import pw.phylame.tools.DateUtils;
-import pw.phylame.tools.TextObject;
-import pw.phylame.tools.file.FileObject;
-import pw.phylame.tools.file.FileFactory;
+import pw.phylame.jem.util.TextObject;
+import pw.phylame.jem.util.FileObject;
+import pw.phylame.jem.util.FileFactory;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -58,7 +58,8 @@ public class Reader {
         }
     }
 
-    private static void readMetadata(Element root, Book book, ZipFile zipFile) throws JemException {
+    private static void readMetadata(Element root, Book book, ZipFile zipFile)
+            throws JemException {
         Element md = root.element("metadata");
         if (md == null) {
             throw new ParserException("Not found 'title' element in PBC contents", "pmab");
@@ -88,7 +89,8 @@ public class Reader {
         }
     }
 
-    private static void readExtension(Element root, Book book, ZipFile zipFile) throws JemException {
+    private static void readExtension(Element root, Book book, ZipFile zipFile)
+            throws JemException {
         Element ext = root.element("extension");
         if (ext == null) {
             return;
@@ -136,13 +138,15 @@ public class Reader {
         }
     }
 
-    public static void readPBM(Element root, Book book, ZipFile zipFile) throws JemException {
+    public static void readPBM(Element root, Book book, ZipFile zipFile)
+            throws JemException {
         // ignore /package/head
         readMetadata(root, book, zipFile);
         readExtension(root, book, zipFile);
     }
 
-    private static String readChapters(Element root, ZipFile zipFile, HashMap<String, Chapter> chapters,
+    private static String readChapters(Element root, ZipFile zipFile,
+                                       HashMap<String, Chapter> chapters,
                                        LinkedList<String> chapterIDs) throws JemException {
         Element contents = root.element("contents");
         if (contents == null) {
@@ -172,7 +176,7 @@ public class Reader {
                 LOG.debug("ignore 'item' element without 'href' attribute in PBC");
                 continue;
             }
-            Chapter chapter = new Chapter(item.getText().trim(), "");
+            Chapter chapter = new Chapter(item.getText().trim());
             try {
                 FileObject fb = FileFactory.fromZip(zipFile, href, null);
                 chapter.getSource().setFile(fb, encoding);
@@ -202,7 +206,8 @@ public class Reader {
         return encoding;
     }
 
-    private static void readSections(Element root, ZipFile zipFile, String encoding, HashMap<String, Chapter> chapters,
+    private static void readSections(Element root, ZipFile zipFile,
+                                     String encoding, HashMap<String, Chapter> chapters,
                                      LinkedList<String> chapterIDs) throws JemException {
         Element sections = root.element("sections");
         if (sections == null) {
@@ -228,7 +233,7 @@ public class Reader {
                 LOG.debug("ignore 'section' element without 'title' attribute in PBC");
                 continue;
             }
-            Chapter chapter = new Chapter(title, "");
+            Chapter chapter = new Chapter(title);
             String intro = elem.attributeValue("intro");
             if (intro != null) {
                 try {
@@ -277,7 +282,8 @@ public class Reader {
         }
     }
 
-    public static void readPBC(Element root, Book book, ZipFile zipFile) throws JemException {
+    public static void readPBC(Element root, Book book, ZipFile zipFile)
+            throws JemException {
         HashMap<String, Chapter> chapters = new HashMap<String, Chapter>();
         LinkedList<String> chapterIDs = new LinkedList<String>();
         String encoding = readChapters(root, zipFile, chapters, chapterIDs);

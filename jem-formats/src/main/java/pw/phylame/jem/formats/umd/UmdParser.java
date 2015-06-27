@@ -21,19 +21,19 @@ package pw.phylame.jem.formats.umd;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import pw.phylame.jem.core.Chapter;
+import pw.phylame.jem.core.Parser;
 import pw.phylame.jem.core.Part;
 import pw.phylame.jem.core.Book;
-import pw.phylame.jem.core.Cleanable;
-import pw.phylame.jem.core.AbstractParser;
 import pw.phylame.jem.util.JemException;
 import pw.phylame.jem.formats.util.ParserException;
 
+import pw.phylame.jem.util.TextObject;
+import pw.phylame.jem.util.FileObject;
+import pw.phylame.jem.util.FileFactory;
+
 import pw.phylame.tools.DateUtils;
 import pw.phylame.tools.ZLibUtils;
-import pw.phylame.tools.TextObject;
-import pw.phylame.tools.file.FileObject;
-import pw.phylame.tools.file.FileFactory;
-
 import static pw.phylame.tools.ByteUtils.littleParser;
 
 import java.io.File;
@@ -50,7 +50,7 @@ import java.util.Calendar;
 /**
  * <tt>Parser</tt> implement for UMD book.
  */
-public class UmdParser extends AbstractParser {
+public class UmdParser implements Parser {
     private static Log LOG = LogFactory.getLog(UmdParser.class);
 
     private RandomAccessFile source;
@@ -67,10 +67,11 @@ public class UmdParser extends AbstractParser {
     }
 
     @Override
-    public Book parse(final File file, Map<String, Object> kw) throws IOException, JemException {
+    public Book parse(final File file, Map<String, Object> kw)
+            throws IOException, JemException {
         final RandomAccessFile in = new RandomAccessFile(file, "r");
         book = parse(in);
-        book.registerCleanup(new Cleanable() {
+        book.registerCleanup(new Part.Cleanable() {
             @Override
             public void clean(Part part) {
                 try {
@@ -96,7 +97,8 @@ public class UmdParser extends AbstractParser {
             } else if (sep == UMD.ADDITION_SEPARATOR) {
                 readAddition();
             } else {
-                throw new ParserException("Bad UMD file: unexpected separator: "+sep, getName());
+                throw new ParserException(
+                        "Bad UMD file: unexpected separator: "+sep, getName());
             }
         }
         return book;
@@ -107,7 +109,8 @@ public class UmdParser extends AbstractParser {
     }
 
     private void readChunk() throws IOException, JemException {
-        int chunkId = readShort(source), type = source.read(), length = source.read() - 5;
+        int chunkId = readShort(source), type = source.read(),
+                length = source.read() - 5;
 
         switch (chunkId) {
             case UMD.CDT_UMD_HEAD:
@@ -126,7 +129,8 @@ public class UmdParser extends AbstractParser {
                 String s = readString(length);
                 try {
                     int year = Integer.parseInt(s);
-                    book.setDate(DateUtils.modifyDate(book.getDate(), Calendar.YEAR, year));
+                    book.setDate(DateUtils.modifyDate(book.getDate(),
+                            Calendar.YEAR, year));
                 } catch (Exception e) {
                     LOG.debug("invalid UMD year: "+s, e);
                 }
@@ -136,7 +140,8 @@ public class UmdParser extends AbstractParser {
                 s = readString(length);
                 try {
                     int month = Integer.parseInt(s);
-                    book.setDate(DateUtils.modifyDate(book.getDate(), Calendar.MONTH, month));
+                    book.setDate(DateUtils.modifyDate(book.getDate(),
+                            Calendar.MONTH, month));
                 } catch (Exception e) {
                     LOG.debug("invalid UMD month: "+s, e);
                 }
@@ -146,7 +151,8 @@ public class UmdParser extends AbstractParser {
                 s = readString(length);
                 try {
                     int day = Integer.parseInt(s);
-                    book.setDate(DateUtils.modifyDate(book.getDate(), Calendar.DAY_OF_MONTH, day));
+                    book.setDate(DateUtils.modifyDate(book.getDate(),
+                            Calendar.DAY_OF_MONTH, day));
                 } catch (Exception e) {
                     LOG.debug("invalid UMD day: "+s, e);
                 }
@@ -290,7 +296,7 @@ public class UmdParser extends AbstractParser {
             try {
                 book.get(ix++).setTitle(title);
             } catch (IndexOutOfBoundsException e) {
-                book.newChapter(title);
+                book.append(new Chapter(title));
             }
         }
     }
@@ -310,7 +316,8 @@ public class UmdParser extends AbstractParser {
             try {
                 chapter = book.get(ix);
             } catch (IndexOutOfBoundsException e) {
-                chapter = book.newChapter("");
+                chapter = new Chapter();
+                book.append(chapter);
             }
             chapter.setSource(new UmdSource(source, offset, 0, blocks));
             if (ix > 0) {
@@ -332,8 +339,12 @@ public class UmdParser extends AbstractParser {
 
     private void readCoverImage() throws IOException {
         long length = readInt(source) - 9;
-        FileObject cover = FileFactory.fromBlock("cover."+UMD.getNameOfFormat(coverFormat), source,
-                source.getFilePointer(), length, null);
+        FileObject cover = FileFactory.fromBlock(
+                "cover."+UMD.getNameOfFormat(coverFormat),
+                source,
+                source.getFilePointer(),
+                length,
+                null);
         book.setCover(cover);
         source.skipBytes((int) length);
     }
@@ -352,9 +363,12 @@ public class UmdParser extends AbstractParser {
                 blocks.add(new DataBlock((int)source.getFilePointer(), (int)length));
                 break;
             case UMD.CARTOON:
-                String name = String.format("cartoon_%d.%s", book.size()+1, UMD.getNameOfFormat(imageFormat));
-                FileObject image = FileFactory.fromBlock(name, source, offset, length, null);
-                book.newChapter(String.valueOf(book.size() + 1), "", image, null);
+                String name = String.format("cartoon_%d.%s", book.size()+1,
+                        UMD.getNameOfFormat(imageFormat));
+                FileObject image = FileFactory.fromBlock(
+                        name, source, offset, length, null);
+                book.append(new Chapter(String.valueOf(book.size() + 1),
+                        new TextObject(), image, null));
                 break;
             case UMD.COMIC:
                 break;
@@ -393,7 +407,8 @@ public class UmdParser extends AbstractParser {
         private boolean fromUmd = false;
         private List<DataBlock> blocks;
 
-        public UmdSource(RandomAccessFile in, long offset, long size, List<DataBlock> blocks) {
+        public UmdSource(RandomAccessFile in, long offset, long size,
+                         List<DataBlock> blocks) {
             super();
             this.in = in;
             this.offset = offset;
@@ -446,7 +461,8 @@ public class UmdParser extends AbstractParser {
         @Override
         public String getText() throws IOException {
             if (fromUmd) {
-                return rawText().replaceAll(UMD.SYMBIAN_LINE_FEED, System.getProperty("line.separator"));
+                return rawText().replaceAll(UMD.SYMBIAN_LINE_FEED,
+                        System.getProperty("line.separator"));
             } else {
                 return super.getText();
             }

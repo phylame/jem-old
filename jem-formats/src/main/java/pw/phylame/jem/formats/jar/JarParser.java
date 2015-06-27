@@ -21,15 +21,14 @@ package pw.phylame.jem.formats.jar;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import pw.phylame.jem.core.Parser;
 import pw.phylame.jem.core.Part;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Chapter;
-import pw.phylame.jem.core.Cleanable;
-import pw.phylame.jem.core.AbstractParser;
 import pw.phylame.jem.util.JemException;
 
 import pw.phylame.jem.formats.util.ParserException;
-import pw.phylame.tools.file.FileFactory;
+import pw.phylame.jem.util.FileFactory;
 
 import java.io.*;
 import java.util.Map;
@@ -39,7 +38,7 @@ import java.util.zip.ZipEntry;
 /**
  * <tt>Parser</tt> implement for JAR book.
  */
-public class JarParser extends AbstractParser {
+public class JarParser implements Parser {
     private static Log LOG = LogFactory.getLog(JarParser.class);
 
     @Override
@@ -48,10 +47,11 @@ public class JarParser extends AbstractParser {
     }
 
     @Override
-    public Book parse(File file, Map<String, Object> kw) throws IOException, JemException {
+    public Book parse(File file, Map<String, Object> kw)
+            throws IOException, JemException {
         final ZipFile jarFile = new ZipFile(file);
         Book book = parse(jarFile);
-        book.registerCleanup(new Cleanable() {
+        book.registerCleanup(new Part.Cleanable() {
             @Override
             public void clean(Part part) {
                 try {
@@ -70,7 +70,8 @@ public class JarParser extends AbstractParser {
         return book;
     }
 
-    private void readMeta(Book book, ZipFile zipFile) throws IOException, JemException {
+    private void readMeta(Book book, ZipFile zipFile)
+            throws IOException, JemException {
         ZipEntry entry = zipFile.getEntry("0");
         if (entry == null) {
             throw new ParserException("Not found '0' in JAR book", getName());
@@ -97,10 +98,12 @@ public class JarParser extends AbstractParser {
             String str = new String(buf, JAR.META_ENCODING);
             String[] items = str.split(",");
             if (items.length < 3) {
-                throw new ParserException("Invalid JAR book: bad chapter item", getName());
+                throw new ParserException("Invalid JAR book: bad chapter item",
+                        getName());
             }
-            Chapter chapter = new Chapter(items[2], "");
-            chapter.getSource().setFile(FileFactory.fromZip(zipFile, items[0], null), JAR.TEXT_ENCODING);
+            Chapter chapter = new Chapter(items[2]);
+            chapter.getSource().setFile(
+                    FileFactory.fromZip(zipFile, items[0], null), JAR.TEXT_ENCODING);
             book.append(chapter);
         }
 

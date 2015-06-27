@@ -24,7 +24,7 @@ import pw.phylame.jem.core.Maker;
 import pw.phylame.jem.util.JemException;
 import pw.phylame.jem.formats.util.Texts;
 import pw.phylame.jem.formats.util.ExceptionFactory;
-import pw.phylame.tools.TextObject;
+import pw.phylame.jem.util.TextObject;
 
 import java.io.*;
 import java.util.Map;

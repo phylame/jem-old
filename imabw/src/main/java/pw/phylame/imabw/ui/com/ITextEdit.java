@@ -16,10 +16,10 @@
 
 package pw.phylame.imabw.ui.com;
 
-import pw.pat.ixin.IAction;
-import pw.pat.ixin.IToolkit;
-import pw.pat.ixin.event.IStatusTipEvent;
-import pw.pat.ixin.event.IStatusTipListener;
+import pw.phylame.pat.ixin.IAction;
+import pw.phylame.pat.ixin.IToolkit;
+import pw.phylame.pat.ixin.event.IStatusTipEvent;
+import pw.phylame.pat.ixin.event.IStatusTipListener;
 import pw.phylame.imabw.Imabw;
 
 import javax.swing.*;

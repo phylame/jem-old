@@ -18,6 +18,7 @@
 
 package pw.phylame.imabw;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import pw.phylame.imabw.ui.Viewer;
@@ -27,13 +28,13 @@ import pw.phylame.imabw.ui.com.UIFactory;
 import pw.phylame.imabw.ui.dialog.PartPropertiesDialog;
 import pw.phylame.imabw.ui.dialog.PartSelectionDialog;
 import pw.phylame.imabw.ui.com.ITextEdit;
-import pw.pat.ixin.IToolkit;
+import pw.phylame.jem.core.Chapter;
+import pw.phylame.pat.ixin.IToolkit;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.Part;
 import pw.phylame.tools.DateUtils;
 import pw.phylame.tools.StringUtils;
-import pw.phylame.tools.file.FileNameUtils;
 
 import javax.swing.*;
 import javax.swing.tree.TreePath;
@@ -202,7 +203,7 @@ public class Manager implements Constants {
         if (file == null) {
             return false;    // no selection
         }
-        String format = FileNameUtils.extensionName(file.getPath());
+        String format = FilenameUtils.getExtension(file.getPath());
 
         // 2. get parse arguments
         Map<String, Object> kw = worker.getParseArguments(viewer, format);
@@ -262,7 +263,7 @@ public class Manager implements Constants {
         info.add(new Object[]{app.getText("Dialog.FileDetails.Name"), file.getName()});
         info.add(new Object[]{app.getText("Dialog.FileDetails.Path"), file.getAbsoluteFile().getParent()});
         info.add(new Object[]{app.getText("Dialog.FileDetails.Format"),
-                FileNameUtils.extensionName(file.getPath()).toUpperCase()});
+                FilenameUtils.getExtension(file.getPath()).toUpperCase()});
         info.add(new Object[]{app.getText("Dialog.FileDetails.Size"), worker.formatSize(file.length())});
         info.add(new Object[]{app.getText("Dialog.FileDetails.Date"),
                 DateUtils.formatDate(new Date(file.lastModified()), "yyyy-M-d H:m:s")});
@@ -460,7 +461,7 @@ public class Manager implements Constants {
     private EditorTab viewChapter(Part part) {
         String text = null;
         try {
-            text = part.getText();
+            text = part.getSource().getText();
         } catch (IOException e) {
             LOG.debug("cannot load text of "+part, e);
         }
@@ -555,7 +556,8 @@ public class Manager implements Constants {
 
         Book book = Jem.toBook(part);
         if (! book.isSection()) {   // add new chapter with text
-            book.newChapter(app.getText("Common.TextChapterTitle"), part.getSource());
+            book.append(new Chapter(app.getText("Common.TextChapterTitle"),
+                    part.getSource()));
         }
         File file = worker.exportBook(viewer, title, book, task);
         if (file != null) {
@@ -718,7 +720,7 @@ public class Manager implements Constants {
             int index = parent.getIndex(node);
             viewer.closeTab(part);    // cache part content
             try {
-                sb.append(part.getText()).append("\n");
+                sb.append(part.getSource().getText()).append("\n");
             } catch (IOException e) {
                 LOG.debug("cannot get text content of " + part.getTitle(), e);
             }

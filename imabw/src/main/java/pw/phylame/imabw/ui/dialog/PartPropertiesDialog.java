@@ -35,7 +35,10 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.*;
 
-import pw.pat.ixin.IAction;
+import pw.phylame.jem.util.FileFactory;
+import pw.phylame.jem.util.FileObject;
+import pw.phylame.jem.util.TextObject;
+import pw.phylame.pat.ixin.IAction;
 import pw.phylame.imabw.Imabw;
 import pw.phylame.imabw.Worker;
 
@@ -46,9 +49,6 @@ import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.Part;
 import pw.phylame.tools.DateUtils;
 import pw.phylame.tools.StringUtils;
-import pw.phylame.tools.TextObject;
-import pw.phylame.tools.file.FileObject;
-import pw.phylame.tools.file.FileFactory;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -117,7 +117,7 @@ public class PartPropertiesDialog extends JDialog {
         // intro
         createIntroPane();
 
-        Action closeAction = new IAction("Dialog.Properties.ButtonClose", app) {
+        Action closeAction = new IAction(null, "Dialog.Properties.ButtonClose", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 onClose();
@@ -150,7 +150,7 @@ public class PartPropertiesDialog extends JDialog {
 
     private void createCoverPane() {
         ((TitledBorder) coverPane.getBorder()).setTitle(app.getText("Dialog.Properties.Cover"));
-        Action action = new IAction("Dialog.Properties.ButtonOpen", app) {
+        Action action = new IAction(null, "Dialog.Properties.ButtonOpen", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 openCover();
@@ -158,7 +158,7 @@ public class PartPropertiesDialog extends JDialog {
         };
         buttonOpen.setAction(action);
 
-        action = new IAction("Dialog.Properties.ButtonSave", app) {
+        action = new IAction(null, "Dialog.Properties.ButtonSave", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 saveCover();
@@ -166,7 +166,7 @@ public class PartPropertiesDialog extends JDialog {
         };
         buttonSave.setAction(action);
 
-        action = new IAction("Dialog.Properties.ButtonRemove", app) {
+        action = new IAction(null, "Dialog.Properties.ButtonRemove", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 removeCover();

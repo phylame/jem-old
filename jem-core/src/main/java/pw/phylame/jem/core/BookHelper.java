@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2015 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -18,7 +18,12 @@
 
 package pw.phylame.jem.core;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.TreeMap;
+import java.util.HashSet;
+import java.util.Properties;
+import java.util.Enumeration;
+
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 
@@ -29,6 +34,7 @@ import java.io.IOException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import pw.phylame.jem.util.UnsupportedFormatException;
 
 /**
@@ -44,26 +50,32 @@ import pw.phylame.jem.util.UnsupportedFormatException;
 public final class BookHelper {
     private static Log LOG = LogFactory.getLog(BookHelper.class);
 
+    /** File path of parser registration */
     public static final String PARSER_DEFINE_FILE = "jem-parsers.properties";
 
     /** Class path of registered book parsers */
-    private static Map<String, String> parsers = new java.util.TreeMap<String, String>();
+    private static TreeMap<String, String> parsers = new TreeMap<String, String>();
 
-    /** Loaded classes of parser */
-    private static Map<String, Class<? extends Parser>> cachedParsers = new java.util.TreeMap<String, Class<? extends Parser>>();
+    /** Caches loaded classes of parser */
+    private static TreeMap<String, Class<? extends Parser>> cachedParsers =
+            new TreeMap<String, Class<? extends Parser>>();
 
+    /** File path of maker registration */
     public static final String MAKER_DEFINE_FILE = "jem-makers.properties";
 
     /** Class path of registered book makers */
-    private static Map<String, String> makers = new java.util.TreeMap<String, String>();
+    private static TreeMap<String, String> makers = new TreeMap<String, String>();
 
-    /** Loaded classes of maker */
-    private static Map<String, Class<? extends Maker>> cachedMakers = new java.util.TreeMap<String, Class<? extends Maker>>();
+    /** Cached loaded classes of maker */
+    private static TreeMap<String, Class<? extends Maker>> cachedMakers =
+            new TreeMap<String, Class<? extends Maker>>();
 
     /**
      * Registers parser class with specified name.
-     * <p>If parser class with same name exists, replaces the old with new parser class.</p>
-     * @param name  name of the parser (normally the extension name of book file)
+     * <p>If parser class with same name exists, replaces the old with
+     *      the new parser class.</p>
+     * <p>NOTE: old parser and cached parser with the name will be removed.</p>
+     * @param name name of the parser (normally the extension name of book file)
      * @param classPath class path of the parser class
      */
     public static void registerParser(String name, String classPath) {
@@ -79,7 +91,8 @@ public final class BookHelper {
 
     /**
      * Registers parser class with specified name.
-     * <p>If parser class with same name exists, replaces the old with new parser class.</p>
+     * <p>If parser class with same name exists, replaces the old with
+     *      the new parser class.</p>
      * @param name name of the parser (normally the extension name of book file)
      * @param parser the <tt>Parser</tt> class
      */
@@ -120,8 +133,8 @@ public final class BookHelper {
      * @throws ClassNotFoundException if registered class path is invalid
      * @throws pw.phylame.jem.util.UnsupportedFormatException the parser is not registered
      */
-    public static Parser getParser(String name) throws IllegalAccessException, InstantiationException,
-            ClassNotFoundException, UnsupportedFormatException {
+    public static Parser getParser(String name) throws IllegalAccessException,
+            InstantiationException, ClassNotFoundException, UnsupportedFormatException {
         if (name == null) {
             throw new NullPointerException("name");
         }
@@ -145,15 +158,17 @@ public final class BookHelper {
      * Returns names of registered parser class.
      * @return sequence of format names
      */
-    public static Set<String> supportedParsers() {
-        Set<String> names = new HashSet<String>(cachedParsers.keySet());
+    public static String[] supportedParsers() {
+        HashSet<String> names = new HashSet<String>(cachedParsers.keySet());
         names.addAll(parsers.keySet());
-        return names;
+        return names.toArray(new String[0]);
     }
 
     /**
      * Registers maker class with specified name.
-     * <p>If maker class with same name exists, replaces the old with new maker class.</p>
+     * <p>If maker class with same name exists, replaces the old with
+     *      the new maker class.</p>
+     * <p>NOTE: old maker and cached maker with the name will be removed.</p>
      * @param name  name of the maker (normally the extension name of book file)
      * @param classPath class path of the maker class
      */
@@ -170,7 +185,8 @@ public final class BookHelper {
 
     /**
      * Registers maker class with specified name.
-     * <p>If maker class with same name exists, replaces the old with new maker class.</p>
+     * <p>If maker class with same name exists, replaces the old with
+     *      the new maker class.</p>
      * @param name name of the maker (normally the extension name of book file)
      * @param maker the <tt>Maker</tt> class
      */
@@ -211,8 +227,8 @@ public final class BookHelper {
      * @throws ClassNotFoundException if registered class path is invalid
      * @throws UnsupportedFormatException the maker is not registered
      */
-    public static Maker getMaker(String name) throws IllegalAccessException, InstantiationException,
-            ClassNotFoundException, UnsupportedFormatException {
+    public static Maker getMaker(String name) throws IllegalAccessException,
+            InstantiationException, ClassNotFoundException, UnsupportedFormatException {
         if (name == null) {
             throw new NullPointerException("name");
         }
@@ -236,10 +252,10 @@ public final class BookHelper {
      * Returns names of registered maker class.
      * @return sequence of format names
      */
-    public static Set<String> supportedMakers() {
-        Set<String> names = new HashSet<String>(cachedMakers.keySet());
+    public static String[] supportedMakers() {
+        HashSet<String> names = new HashSet<String>(cachedMakers.keySet());
         names.addAll(makers.keySet());
-        return names;
+        return names.toArray(new String[0]);
     }
 
     /**
@@ -251,7 +267,7 @@ public final class BookHelper {
      * the entire call stack must have the privilege before the call is
      * allowed.
      *
-     * @return the context classloader associated with the current thread,
+     * @return the context class loader associated with the current thread,
      *  or null if security doesn't allow it.
      */
     private static ClassLoader getContextClassLoaderInternal() {
@@ -316,7 +332,8 @@ public final class BookHelper {
      * hasMoreElements method returns false (ie an "empty" enumeration).
      * If resources could not be listed for some reason, null is returned.
      */
-    private static Enumeration<URL> getResources(final ClassLoader loader, final String name) {
+    private static Enumeration<URL> getResources(final ClassLoader loader,
+                                                 final String name) {
         PrivilegedAction<Enumeration<URL>> action =
                 new PrivilegedAction<Enumeration<URL>>() {
                     public Enumeration<URL> run() {
@@ -327,7 +344,8 @@ public final class BookHelper {
                                 return ClassLoader.getSystemResources(name);
                             }
                         } catch (IOException e) {
-                            LOG.debug("Exception while trying to find configuration file " +
+                            LOG.debug(
+                                    "Exception while trying to find configuration file " +
                                     name + ":" + e);
                             return null;
                         } catch (NoSuchMethodError e) {
@@ -376,7 +394,8 @@ public final class BookHelper {
                                     stream.close();
                                 } catch (IOException e) {
                                     // ignore exception; this should not happen
-                                    LOG.debug("Unable to close stream for URL " + url, e);
+                                    LOG.debug(
+                                            "Unable to close stream for URL " + url, e);
                                 }
                             }
                         }
@@ -387,8 +406,8 @@ public final class BookHelper {
         return AccessController.doPrivileged(action);
     }
 
-    private static Map<String, String> loadRegistrations(String fileName) {
-        Map<String, String> map = new java.util.HashMap<String, String>();
+    private static HashMap<String, String> loadRegistrations(String fileName) {
+        HashMap<String, String> map = new HashMap<String, String>();
 
         // Identify the class loader we will be using
         ClassLoader contextClassLoader = getContextClassLoaderInternal();
@@ -414,14 +433,16 @@ public final class BookHelper {
 
     /** Registers custom parser classes from config file. */
     private static void registerCustomParsers() {
-        for (Map.Entry<String, String> entry: loadRegistrations(PARSER_DEFINE_FILE).entrySet()) {
+        for (HashMap.Entry<String, String> entry:
+                loadRegistrations(PARSER_DEFINE_FILE).entrySet()) {
             registerParser(entry.getKey(), entry.getValue());
         }
     }
 
     /** Registers custom maker classes from config file. */
     private static void registerCustomMakers() {
-        for (Map.Entry<String, String> entry: loadRegistrations(MAKER_DEFINE_FILE).entrySet()) {
+        for (HashMap.Entry<String, String> entry:
+                loadRegistrations(MAKER_DEFINE_FILE).entrySet()) {
             registerMaker(entry.getKey(), entry.getValue());
         }
     }

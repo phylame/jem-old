@@ -30,8 +30,8 @@ import java.util.Locale;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
-import pw.pat.ixin.IAction;
-import pw.pat.ixin.IToolkit;
+import pw.phylame.pat.ixin.IAction;
+import pw.phylame.pat.ixin.IToolkit;
 import pw.phylame.imabw.Config;
 import pw.phylame.imabw.Imabw;
 import say.swing.JFontChooser;
@@ -221,7 +221,7 @@ public class SettingsDialog extends JDialog {
         ((TitledBorder) jpEditorStyle.getBorder()).setTitle(
                 app.getText("Dialog.Settings.Editor.Style.Title"));
 
-        Action action = new IAction("Dialog.Settings.Editor.Style.LabelLineWarp", app) {
+        Action action = new IAction(null, "Dialog.Settings.Editor.Style.LabelLineWarp", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean enable = cEditorStyleLW.isSelected();
@@ -231,7 +231,7 @@ public class SettingsDialog extends JDialog {
         };
         cEditorStyleLW.setAction(action);
 
-        action = new IAction("Dialog.Settings.Editor.Style.LabelWordWarp", app) {
+        action = new IAction(null, "Dialog.Settings.Editor.Style.LabelWordWarp", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean enable = cEditorStyleWW.isSelected();
@@ -241,7 +241,7 @@ public class SettingsDialog extends JDialog {
         };
         cEditorStyleWW.setAction(action);
 
-        action = new IAction("Dialog.Settings.Editor.Style.LabelLineNumber", app) {
+        action = new IAction(null, "Dialog.Settings.Editor.Style.LabelLineNumber", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean enable = cEditorStyleLN.isSelected();
@@ -339,7 +339,7 @@ public class SettingsDialog extends JDialog {
         ((TitledBorder) jpFaceWindow.getBorder()).setTitle(
                 app.getText("Dialog.Settings.Face.Window.Title"));
 
-        Action action = new IAction("Dialog.Settings.Face.Window.ShowToolbar", app) {
+        Action action = new IAction(null, "Dialog.Settings.Face.Window.ShowToolbar", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 app.onCommand(Imabw.SHOW_TOOLBAR);
@@ -348,7 +348,7 @@ public class SettingsDialog extends JDialog {
         };
         cShowToolbar.setAction(action);
 
-        action = new IAction("Dialog.Settings.Face.Window.LockToolbar", app) {
+        action = new IAction(null, "Dialog.Settings.Face.Window.LockToolbar", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 app.onCommand(Imabw.LOCK_TOOLBAR);
@@ -356,7 +356,7 @@ public class SettingsDialog extends JDialog {
         };
         cLockToolbar.setAction(action);
 
-        action = new IAction("Dialog.Settings.Face.Window.ShowSidebar", app) {
+        action = new IAction(null, "Dialog.Settings.Face.Window.ShowSidebar", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 app.onCommand(Imabw.SHOW_SIDEBAR);
@@ -364,7 +364,7 @@ public class SettingsDialog extends JDialog {
         };
         cShowSidebar.setAction(action);
 
-        action = new IAction("Dialog.Settings.Face.Window.ShowStatusbar", app) {
+        action = new IAction(null, "Dialog.Settings.Face.Window.ShowStatusbar", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 app.onCommand(Imabw.SHOW_STATUSBAR);
@@ -372,7 +372,7 @@ public class SettingsDialog extends JDialog {
         };
         cShowStatusbar.setAction(action);
 
-        action = new IAction("Dialog.Settings.Face.Window.DecorateTitle", app) {
+        action = new IAction(null, "Dialog.Settings.Face.Window.DecorateTitle", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame.setDefaultLookAndFeelDecorated(cDecorateTitle.isSelected());
@@ -450,7 +450,7 @@ public class SettingsDialog extends JDialog {
     }
 
     private void initButtons() {
-        Action resetAction = new IAction("Dialog.Settings.ButtonReset", app) {
+        Action resetAction = new IAction(null, "Dialog.Settings.ButtonReset", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 app.getConfig().reset();
@@ -459,7 +459,7 @@ public class SettingsDialog extends JDialog {
         };
         buttonReset.setAction(resetAction);
 
-        Action closeAction = new IAction("Dialog.Settings.ButtonClose", app) {
+        Action closeAction = new IAction(null, "Dialog.Settings.ButtonClose", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 onClose();

@@ -18,8 +18,8 @@
 
 package pw.phylame.jem.formats.epub.html;
 
-import pw.phylame.tools.file.FileFactory;
-import pw.phylame.tools.file.FileObject;
+import pw.phylame.jem.util.FileFactory;
+import pw.phylame.jem.util.FileObject;
 
 /**
  * Default ePub HTML style provider.

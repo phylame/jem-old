@@ -4,3 +4,14 @@ ChangeLog
 * v2.0.2
   o. not add SOURCE_* attributes when reading book file.
   o. add vendor field to book attributes
+
+* v2.1.0
+  o. move TextObject from pw.phylame.tools to pw.phylame.jem.util
+  o. move classes in pw.phylame.tools.file to pw.phylame.jem.util
+  o. remove class FileNameUtils and Attributes
+  o. remove utility package pw.phylame.tools
+  o. move attribute keys of Part, Chapter or Book to interface FieldConstants
+  o. move Cleanable to Part
+  o. move Walker to Jem
+  o. remove all newPart and newChapter methods in Part, Chapter
+  o. remove method parse(String path, Map<String, Object> kw) in interface Parse

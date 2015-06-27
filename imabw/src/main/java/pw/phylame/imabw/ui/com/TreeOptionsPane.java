@@ -24,7 +24,7 @@ import javax.swing.JToggleButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import pw.pat.ixin.IToolkit;
+import pw.phylame.pat.ixin.IToolkit;
 import pw.phylame.imabw.Imabw;
 
 public class TreeOptionsPane {

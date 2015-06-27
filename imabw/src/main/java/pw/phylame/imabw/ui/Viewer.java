@@ -18,8 +18,8 @@
 
 package pw.phylame.imabw.ui;
 
-import pw.pat.ixin.IFrame;
-import pw.pat.ixin.IToolkit;
+import pw.phylame.pat.ixin.IFrame;
+import pw.phylame.pat.ixin.IToolkit;
 
 import java.awt.*;
 import java.awt.event.*;

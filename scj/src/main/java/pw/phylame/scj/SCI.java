@@ -19,15 +19,14 @@
 package pw.phylame.scj;
 
 import java.io.File;
-import java.util.Map;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ArrayList;
 
-import pw.phylame.gaf.Application;
+import org.apache.commons.io.FilenameUtils;
+import pw.phylame.pat.gaf.Application;
 import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.BookHelper;
-import pw.phylame.tools.StringUtils;
-import pw.phylame.tools.file.FileNameUtils;
 
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
@@ -36,6 +35,8 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.ParseException;
+import pw.phylame.pat.gaf.Translator;
+import pw.phylame.tools.StringUtils;
 
 /**
  * SCI (Simple Console Interface) for Jem.
@@ -63,8 +64,9 @@ public final class SCI extends Application {
     protected void onStart() {
         config = new AppConfig();
 
-        setLocale(config.getAppLocale());
-        loadLanguage(I18N_PATH);
+        Locale.setDefault(config.getAppLocale());
+        Translator translator = new Translator(I18N_PATH);
+        installTranslator(translator);
     }
 
     /**
@@ -138,9 +140,13 @@ public final class SCI extends Application {
     }
 
     private void showVersion() {
-        System.out.printf("SCI for Jem v%s on %s (%s)\n", VERSION, System.getProperty("os.name"), 
+        System.out.printf("SCI for Jem v%s on %s (%s)\n",
+                VERSION, System.getProperty("os.name"),
                 System.getProperty("os.arch"));
-        System.out.printf("Jem: %s by %s\n", Jem.VERSION, Jem.VENDOR);
+        System.out.printf("Jem Core: %s by %s\n", Jem.VERSION, Jem.VENDOR);
+        System.out.printf("Jem Formats: %s by %s\n",
+                pw.phylame.jem.formats.util.Version.VERSION,
+                pw.phylame.jem.formats.util.Version.VENDOR);
         System.out.printf("%s\n", getText("SCJ_COPYRIGHTS"));
     }
 
@@ -189,6 +195,15 @@ public final class SCI extends Application {
         System.exit(exec());
     }
 
+    private static boolean contains(String[] seq, String str) {
+        for (String s: seq) {
+            if (s.equals(str)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     // command type
     enum Command {
         Convert, Join, Extract, View
@@ -207,7 +222,8 @@ public final class SCI extends Application {
         if (cmd.hasOption("h")) {
             HelpFormatter hf = new HelpFormatter();
             hf.setSyntaxPrefix("");
-            hf.printHelp(80, SCJ_SYNTAX, getText("SCI_OPTIONS_PREFIX"), options, getText("SCJ_BUG_REPORT"));
+            hf.printHelp(80, SCJ_SYNTAX, getText("SCI_OPTIONS_PREFIX"), options,
+                    getText("SCJ_BUG_REPORT"));
             return 0;
         } else if (cmd.hasOption("v")) {
             showVersion();
@@ -246,7 +262,7 @@ public final class SCI extends Application {
         String out = cmd.getOptionValue("o");
         File output = new File(out == null ? "." : out);    // if not specified use current directory
 
-        if (! BookHelper.supportedMakers().contains(outFormat)) {
+        if (!contains(BookHelper.supportedMakers(), outFormat)) {
             error(getText("SCI_OUT_UNSUPPORTED", outFormat));
             System.out.println(getText("SCI_UNSUPPORTED_HELP"));
             return -1;
@@ -263,9 +279,9 @@ public final class SCI extends Application {
         for (String file: files) {
             String inFmt = inFormat;
             if (inFmt == null) {
-                inFmt = FileNameUtils.extensionName(file);
+                inFmt = FilenameUtils.getExtension(file);
             }
-            if (! BookHelper.supportedParsers().contains(inFmt)) {
+            if (!contains(BookHelper.supportedParsers(), inFmt)) {
                 error(getText("SCI_IN_UNSUPPORTED", inFmt));
                 System.out.println(getText("SCI_UNSUPPORTED_HELP"));
                 status = -1;
@@ -279,14 +295,16 @@ public final class SCI extends Application {
                 }
                 break;
             case Convert:
-                result = Worker.convertBook(file, inFmt, inKw, attrs, items, output, outFormat, outKw);
+                result = Worker.convertBook(
+                        file, inFmt, inKw, attrs, items, output, outFormat, outKw);
                 status = Math.min(result != null ? 0 : 1, status);
                 break;
             case Join:
                 inputs.add(file);
                 break;
             case Extract:
-                result = Worker.extractBook(file, inFmt, inKw, attrs, items, indexes, output, outFormat, outKw);
+                result = Worker.extractBook(
+                        file, inFmt, inKw, attrs, items, indexes, output, outFormat, outKw);
                 status = Math.min(result != null ? 0 : 1, status);
                 break;
             }
@@ -296,7 +314,8 @@ public final class SCI extends Application {
         }
         // join books
         if (command == Command.Join) {
-            String result = Worker.joinBook(inputs, inKw, attrs, items, output, outFormat, outKw);
+            String result = Worker.joinBook(
+                    inputs, inKw, attrs, items, output, outFormat, outKw);
             if (result != null) {
                 System.out.println(result);
             } else {

@@ -22,7 +22,7 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.DocumentHelper;
 
-import pw.phylame.tools.TextObject;
+import pw.phylame.jem.util.TextObject;
 
 import pw.phylame.jem.formats.epub.EPUB;
 
