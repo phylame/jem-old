@@ -1,0 +1,28 @@
+<assembly>
+    <id>bin</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <dependencySets>
+        <dependencySet>
+            <useProjectArtifact>true</useProjectArtifact>
+            <outputDirectory>lib</outputDirectory>
+        </dependencySet>
+    </dependencySets>
+    <fileSets>
+        <fileSet>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>README.md</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <outputDirectory>/bin</outputDirectory>
+            <directory>src/main/scripts</directory>
+            <includes>
+                <include>jem.sh</include>
+                <include>jem.bat</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+</assembly>

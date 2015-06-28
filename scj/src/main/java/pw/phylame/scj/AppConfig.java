@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2015 Peng Wan <phylame@163.com>
  *
  * This file is part of SCJ.
  *
@@ -41,6 +41,7 @@ public class AppConfig extends Settings {
 
         setAppLocale(Locale.getDefault());
         setDefaultFormat(getDefaultFormat());
+        setTocIndent(getTocIndent());
     }
 
     public Locale getAppLocale() {
@@ -57,5 +58,13 @@ public class AppConfig extends Settings {
 
     public void setDefaultFormat(String format) {
         setString("jem.defaultFormat", format, "Default format using by Jem");
+    }
+
+    public String getTocIndent() {
+        return getString("scj.view.tocIndent", "  ");
+    }
+
+    public void setTocIndent(String indent) {
+        setString("scj.view.tocIndent", indent, "Indent of SCJ toc tree viewer");
     }
 }

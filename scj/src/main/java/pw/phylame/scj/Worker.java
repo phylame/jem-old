@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2015 Peng Wan <phylame@163.com>
  *
  * This file is part of SCJ.
  *
@@ -69,7 +69,7 @@ public final class Worker {
         return null;
     }
 
-    public static boolean setAttributes(Part part, Map<String, Object> attributes) {
+    static boolean setAttributes(Part part, Map<String, Object> attributes) {
         for (String key: attributes.keySet()) {
             String raw = String.valueOf(attributes.get(key));
             Object value = null;
@@ -109,7 +109,7 @@ public final class Worker {
         return true;
     }
 
-    public static void setExtension(Book book, Map<String, Object> items) {
+    static void setExtension(Book book, Map<String, Object> items) {
         for (String key: items.keySet()) {
             Object o = items.get(key);
             if (o == null) {
@@ -125,7 +125,7 @@ public final class Worker {
         }
     }
 
-    public static Book openBook(String input, String format, Map<String, Object> kw) {
+    static Book openBook(String input, String format, Map<String, Object> kw) {
         if (format == null || "".equals(format)) {
             format = FilenameUtils.getExtension(input).toLowerCase();
         }
@@ -157,7 +157,7 @@ public final class Worker {
         }
     }
 
-    public static String saveBook(Book book, File output, String format,
+    static String saveBook(Book book, File output, String format,
                                   Map<String, Object> kw) {
         if (output.isDirectory()) {
             output = new File(output, String.format("%s.%s", book.getTitle(), format));
@@ -174,7 +174,7 @@ public final class Worker {
         return path;
     }
 
-    public static String convertBook(String input,
+    static String convertBook(String input,
                                      String inFormat,
                                      Map<String, Object> inKw,
                                      Map<String, Object> attributes,
@@ -202,7 +202,7 @@ public final class Worker {
         return path;
     }
 
-    public static String joinBook(List<String> inputs,
+    static String joinBook(List<String> inputs,
                                   Map<String, Object> inKw,
                                   Map<String, Object> attributes,
                                   Map<String, Object> items,
@@ -262,7 +262,7 @@ public final class Worker {
         return results;
     }
 
-    public static String extractBook(String input,
+    static String extractBook(String input,
                                      String inFormat,
                                      Map<String, Object> inKw,
                                      Map<String, Object> attributes,
@@ -355,7 +355,7 @@ public final class Worker {
                         sep, showBrackets, true);
             } else if (key.equals("toc")) {
                 viewToc(part, new String[]{"title", "cover"},
-                        app.getText("SCI_TOC_INDENT"), true, true);
+                        app.getConfig().getTocIndent(), true, true);
             } else if (key.equals("text")) {
                 try {
                     System.out.println(part.getSource().getText());
@@ -431,7 +431,7 @@ public final class Worker {
         }
     }
 
-    public static boolean viewBook(String input,
+    static boolean viewBook(String input,
                                    String inFormat,
                                    Map<String, Object> inKw,
                                    Map<String, Object> attributes,

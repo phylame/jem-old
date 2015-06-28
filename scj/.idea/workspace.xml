@@ -7,12 +7,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0043f891-92fb-464c-9f2b-f79c198286c7" name="Default" comment="">
-      <change type="DELETED" beforePath="D:\code\pw-books\jem-formats\.idea\libraries\Maven__commons_io_commons_io_2_4.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\code\pw-books\jem-formats\.idea\libraries\Maven__commons_logging_commons_logging_1_2.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\code\pw-books\jem-formats\.idea\libraries\Maven__log4j_log4j_1_2_12.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/jem-formats.iml" afterPath="$PROJECT_DIR$/../jem-formats/jem-formats.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/copyright/ALv2.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../imabw/src/main/assembly/META-INF/MANIFEST.MF" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/Nanu.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/assembly/assembly.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/scripts/jem.bat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/scripts/jem.sh" />
+      <change type="DELETED" beforePath="D:\code\pw-books\scj\.idea\artifacts\scj_jar.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/scj/AppConfig.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/scj/AppConfig.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/scj/SCI.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/scj/SCI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/scj/Worker.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/scj/Worker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/.idea/artifacts/imabw_jar.xml" afterPath="$PROJECT_DIR$/../imabw/.idea/artifacts/imabw_jar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/log4j.properties" afterPath="$PROJECT_DIR$/src/main/resources/log4j.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/pom.xml" afterPath="$PROJECT_DIR$/../imabw/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/res/i18n/scj.properties" afterPath="$PROJECT_DIR$/src/main/resources/res/i18n/scj.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/res/i18n/scj_zh_CN.properties" afterPath="$PROJECT_DIR$/src/main/resources/res/i18n/scj_zh_CN.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../imabw/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../jem-core/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../jem-formats/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="scj.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -55,13 +69,16 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/gaf/Settings.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/gaf/Settings.java" />
+        <option value="$PROJECT_DIR$/src/main/assembly/assembly.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/scripts/jem.bat" />
+        <option value="$PROJECT_DIR$/src/main/scripts/jem.sh" />
         <option value="$PROJECT_DIR$/src/main/resources/res/i18n/scj_zh_CN.properties" />
         <option value="$PROJECT_DIR$/src/main/resources/res/i18n/scj.properties" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/gaf/Settings.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/scj/Worker.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/scj/SCI.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/scj/AppConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/scj/Worker.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/scj/SCI.java" />
       </list>
     </option>
   </component>
@@ -85,10 +102,10 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="72" />
-    <option name="y" value="11" />
-    <option name="width" value="1183" />
-    <option name="height" value="675" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="754" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -115,7 +132,7 @@
     <panes />
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="copyright.profiles" />
+    <property name="settings.editor.selected.configurable" value="copyright" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -148,6 +165,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\code\pw-books\scj\.idea\copyright" />
       <recent name="D:\code\pw-books\scj\src\main\java" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -260,7 +278,7 @@
       <option name="WORKING_DIRECTORY" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
-      <module name="" />
+      <module name="scj" />
       <option name="SCRIPT_NAME" value="" />
       <option name="PARAMETERS" value="" />
       <method />
@@ -511,40 +529,43 @@
       <workItem from="1435420966723" duration="849000" />
       <workItem from="1435422567823" duration="285000" />
       <workItem from="1435480589278" duration="219000" />
+      <workItem from="1435491820094" duration="3357000" />
+      <workItem from="1435495375110" duration="167000" />
+      <workItem from="1435497522158" duration="8000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12940000" />
+    <option name="totallyTimeSpent" value="16472000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="72" y="11" width="1183" height="675" extended-state="0" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32761312" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32961783" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.322807" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32853025" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32740214" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2796486" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2193659" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24978903" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32740214" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3202847" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32920355" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -572,92 +593,8 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/scj/Worker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="212" column="33" selection-start-line="212" selection-start-column="33" selection-end-line="212" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="docComment;class#Worker#0" expanded="false" />
-            <element signature="method#detectURL#0;class#Worker#0" expanded="false" />
-            <element signature="method#getPemCover#0;class#Worker#0" expanded="false" />
-            <element signature="method#setAttributes#0;class#Worker#0" expanded="false" />
-            <element signature="method#setExtension#0;class#Worker#0" expanded="false" />
-            <element signature="method#openBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#addPmabInfo#0;class#Worker#0" expanded="false" />
-            <element signature="method#saveBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#convertBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#parseIndexes#0;class#Worker#0" expanded="false" />
-            <element signature="method#extractBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#formatVariant#0;class#Worker#0" expanded="false" />
-            <element signature="method#walkTree#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewToc#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewPart#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewExtension#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewChapter#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewBook#0;class#Worker#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="26" selection-start-line="31" selection-start-column="26" selection-end-line="31" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/scj/Worker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="docComment;class#Worker#0" expanded="false" />
-            <element signature="method#detectURL#0;class#Worker#0" expanded="false" />
-            <element signature="method#getPemCover#0;class#Worker#0" expanded="false" />
-            <element signature="method#setAttributes#0;class#Worker#0" expanded="false" />
-            <element signature="method#setExtension#0;class#Worker#0" expanded="false" />
-            <element signature="method#openBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#addPmabInfo#0;class#Worker#0" expanded="false" />
-            <element signature="method#saveBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#convertBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#parseIndexes#0;class#Worker#0" expanded="false" />
-            <element signature="method#extractBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#formatVariant#0;class#Worker#0" expanded="false" />
-            <element signature="method#walkTree#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewToc#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewPart#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewExtension#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewChapter#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewBook#0;class#Worker#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/scj/SCI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="293" column="44" selection-start-line="293" selection-start-column="44" selection-end-line="293" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#11601#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-            <element signature="e#1635#1636#0" expanded="true" />
-            <element signature="e#1677#1678#0" expanded="true" />
-            <element signature="e#1716#1717#0" expanded="true" />
-            <element signature="e#1761#1762#0" expanded="true" />
-            <element signature="e#5841#5842#0" expanded="true" />
-            <element signature="e#5899#5900#0" expanded="true" />
-            <element signature="e#6919#6920#0" expanded="true" />
-            <element signature="e#6954#6955#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/scj/Worker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
           <caret line="134" column="64" selection-start-line="134" selection-start-column="64" selection-end-line="134" selection-end-column="64" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="docComment;class#Worker#0" expanded="false" />
             <element signature="method#detectURL#0;class#Worker#0" expanded="false" />
             <element signature="method#getPemCover#0;class#Worker#0" expanded="false" />
@@ -667,6 +604,7 @@
             <element signature="method#addPmabInfo#0;class#Worker#0" expanded="false" />
             <element signature="method#saveBook#0;class#Worker#0" expanded="false" />
             <element signature="method#convertBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#joinBook#0;class#Worker#0" expanded="false" />
             <element signature="method#parseIndexes#0;class#Worker#0" expanded="false" />
             <element signature="method#extractBook#0;class#Worker#0" expanded="false" />
             <element signature="method#formatVariant#0;class#Worker#0" expanded="false" />
@@ -685,16 +623,19 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="293" column="44" selection-start-line="293" selection-start-column="44" selection-end-line="293" selection-end-column="44" />
           <folding>
-            <element signature="e#0#11601#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-            <element signature="e#1635#1636#0" expanded="true" />
-            <element signature="e#1677#1678#0" expanded="true" />
-            <element signature="e#1716#1717#0" expanded="true" />
-            <element signature="e#1761#1762#0" expanded="true" />
-            <element signature="e#5841#5842#0" expanded="true" />
-            <element signature="e#5899#5900#0" expanded="true" />
-            <element signature="e#6919#6920#0" expanded="true" />
-            <element signature="e#6954#6955#0" expanded="true" />
+            <element signature="docComment;class#SCI#0" expanded="false" />
+            <element signature="docComment;field#VERSION#0;class#SCI#0" expanded="false" />
+            <element signature="method#onStart#0;class#SCI#0" expanded="false" />
+            <element signature="docComment;method#makeOptions#0;class#SCI#0" expanded="false" />
+            <element signature="method#makeOptions#0;class#SCI#0" expanded="false" />
+            <element signature="method#parseArguments#0;class#SCI#0" expanded="false" />
+            <element signature="method#showVersion#0;class#SCI#0" expanded="false" />
+            <element signature="method#showSupported#0;class#SCI#0" expanded="false" />
+            <element signature="docComment;method#cliError#0;class#SCI#0" expanded="false" />
+            <element signature="method#cliError#0;class#SCI#0" expanded="false" />
+            <element signature="method#contains#0;class#SCI#0" expanded="false" />
+            <element signature="class#Command#0;class#SCI#0" expanded="false" />
+            <element signature="method#main#0;class#SCI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -704,7 +645,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="docComment;class#Worker#0" expanded="false" />
             <element signature="method#detectURL#0;class#Worker#0" expanded="false" />
             <element signature="method#getPemCover#0;class#Worker#0" expanded="false" />
@@ -714,6 +654,7 @@
             <element signature="method#addPmabInfo#0;class#Worker#0" expanded="false" />
             <element signature="method#saveBook#0;class#Worker#0" expanded="false" />
             <element signature="method#convertBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#joinBook#0;class#Worker#0" expanded="false" />
             <element signature="method#parseIndexes#0;class#Worker#0" expanded="false" />
             <element signature="method#extractBook#0;class#Worker#0" expanded="false" />
             <element signature="method#formatVariant#0;class#Worker#0" expanded="false" />
@@ -732,16 +673,19 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="293" column="44" selection-start-line="293" selection-start-column="44" selection-end-line="293" selection-end-column="44" />
           <folding>
-            <element signature="e#0#11601#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-            <element signature="e#1635#1636#0" expanded="true" />
-            <element signature="e#1677#1678#0" expanded="true" />
-            <element signature="e#1716#1717#0" expanded="true" />
-            <element signature="e#1761#1762#0" expanded="true" />
-            <element signature="e#5841#5842#0" expanded="true" />
-            <element signature="e#5899#5900#0" expanded="true" />
-            <element signature="e#6919#6920#0" expanded="true" />
-            <element signature="e#6954#6955#0" expanded="true" />
+            <element signature="docComment;class#SCI#0" expanded="false" />
+            <element signature="docComment;field#VERSION#0;class#SCI#0" expanded="false" />
+            <element signature="method#onStart#0;class#SCI#0" expanded="false" />
+            <element signature="docComment;method#makeOptions#0;class#SCI#0" expanded="false" />
+            <element signature="method#makeOptions#0;class#SCI#0" expanded="false" />
+            <element signature="method#parseArguments#0;class#SCI#0" expanded="false" />
+            <element signature="method#showVersion#0;class#SCI#0" expanded="false" />
+            <element signature="method#showSupported#0;class#SCI#0" expanded="false" />
+            <element signature="docComment;method#cliError#0;class#SCI#0" expanded="false" />
+            <element signature="method#cliError#0;class#SCI#0" expanded="false" />
+            <element signature="method#contains#0;class#SCI#0" expanded="false" />
+            <element signature="class#Command#0;class#SCI#0" expanded="false" />
+            <element signature="method#main#0;class#SCI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -751,7 +695,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="docComment;class#Worker#0" expanded="false" />
             <element signature="method#detectURL#0;class#Worker#0" expanded="false" />
             <element signature="method#getPemCover#0;class#Worker#0" expanded="false" />
@@ -761,6 +704,7 @@
             <element signature="method#addPmabInfo#0;class#Worker#0" expanded="false" />
             <element signature="method#saveBook#0;class#Worker#0" expanded="false" />
             <element signature="method#convertBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#joinBook#0;class#Worker#0" expanded="false" />
             <element signature="method#parseIndexes#0;class#Worker#0" expanded="false" />
             <element signature="method#extractBook#0;class#Worker#0" expanded="false" />
             <element signature="method#formatVariant#0;class#Worker#0" expanded="false" />
@@ -779,16 +723,19 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="293" column="44" selection-start-line="293" selection-start-column="44" selection-end-line="293" selection-end-column="44" />
           <folding>
-            <element signature="e#0#11601#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-            <element signature="e#1635#1636#0" expanded="true" />
-            <element signature="e#1677#1678#0" expanded="true" />
-            <element signature="e#1716#1717#0" expanded="true" />
-            <element signature="e#1761#1762#0" expanded="true" />
-            <element signature="e#5841#5842#0" expanded="true" />
-            <element signature="e#5899#5900#0" expanded="true" />
-            <element signature="e#6919#6920#0" expanded="true" />
-            <element signature="e#6954#6955#0" expanded="true" />
+            <element signature="docComment;class#SCI#0" expanded="false" />
+            <element signature="docComment;field#VERSION#0;class#SCI#0" expanded="false" />
+            <element signature="method#onStart#0;class#SCI#0" expanded="false" />
+            <element signature="docComment;method#makeOptions#0;class#SCI#0" expanded="false" />
+            <element signature="method#makeOptions#0;class#SCI#0" expanded="false" />
+            <element signature="method#parseArguments#0;class#SCI#0" expanded="false" />
+            <element signature="method#showVersion#0;class#SCI#0" expanded="false" />
+            <element signature="method#showSupported#0;class#SCI#0" expanded="false" />
+            <element signature="docComment;method#cliError#0;class#SCI#0" expanded="false" />
+            <element signature="method#cliError#0;class#SCI#0" expanded="false" />
+            <element signature="method#contains#0;class#SCI#0" expanded="false" />
+            <element signature="class#Command#0;class#SCI#0" expanded="false" />
+            <element signature="method#main#0;class#SCI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -798,7 +745,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="docComment;class#Worker#0" expanded="false" />
             <element signature="method#detectURL#0;class#Worker#0" expanded="false" />
             <element signature="method#getPemCover#0;class#Worker#0" expanded="false" />
@@ -808,6 +754,7 @@
             <element signature="method#addPmabInfo#0;class#Worker#0" expanded="false" />
             <element signature="method#saveBook#0;class#Worker#0" expanded="false" />
             <element signature="method#convertBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#joinBook#0;class#Worker#0" expanded="false" />
             <element signature="method#parseIndexes#0;class#Worker#0" expanded="false" />
             <element signature="method#extractBook#0;class#Worker#0" expanded="false" />
             <element signature="method#formatVariant#0;class#Worker#0" expanded="false" />
@@ -833,16 +780,19 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="293" column="44" selection-start-line="293" selection-start-column="44" selection-end-line="293" selection-end-column="44" />
           <folding>
-            <element signature="e#0#11601#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-            <element signature="e#1635#1636#0" expanded="true" />
-            <element signature="e#1677#1678#0" expanded="true" />
-            <element signature="e#1716#1717#0" expanded="true" />
-            <element signature="e#1761#1762#0" expanded="true" />
-            <element signature="e#5841#5842#0" expanded="true" />
-            <element signature="e#5899#5900#0" expanded="true" />
-            <element signature="e#6919#6920#0" expanded="true" />
-            <element signature="e#6954#6955#0" expanded="true" />
+            <element signature="docComment;class#SCI#0" expanded="false" />
+            <element signature="docComment;field#VERSION#0;class#SCI#0" expanded="false" />
+            <element signature="method#onStart#0;class#SCI#0" expanded="false" />
+            <element signature="docComment;method#makeOptions#0;class#SCI#0" expanded="false" />
+            <element signature="method#makeOptions#0;class#SCI#0" expanded="false" />
+            <element signature="method#parseArguments#0;class#SCI#0" expanded="false" />
+            <element signature="method#showVersion#0;class#SCI#0" expanded="false" />
+            <element signature="method#showSupported#0;class#SCI#0" expanded="false" />
+            <element signature="docComment;method#cliError#0;class#SCI#0" expanded="false" />
+            <element signature="method#cliError#0;class#SCI#0" expanded="false" />
+            <element signature="method#contains#0;class#SCI#0" expanded="false" />
+            <element signature="class#Command#0;class#SCI#0" expanded="false" />
+            <element signature="method#main#0;class#SCI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -852,7 +802,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="docComment;class#Worker#0" expanded="false" />
             <element signature="method#detectURL#0;class#Worker#0" expanded="false" />
             <element signature="method#getPemCover#0;class#Worker#0" expanded="false" />
@@ -862,6 +811,7 @@
             <element signature="method#addPmabInfo#0;class#Worker#0" expanded="false" />
             <element signature="method#saveBook#0;class#Worker#0" expanded="false" />
             <element signature="method#convertBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#joinBook#0;class#Worker#0" expanded="false" />
             <element signature="method#parseIndexes#0;class#Worker#0" expanded="false" />
             <element signature="method#extractBook#0;class#Worker#0" expanded="false" />
             <element signature="method#formatVariant#0;class#Worker#0" expanded="false" />
@@ -880,7 +830,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="docComment;class#Worker#0" expanded="false" />
             <element signature="method#detectURL#0;class#Worker#0" expanded="false" />
             <element signature="method#getPemCover#0;class#Worker#0" expanded="false" />
@@ -890,6 +839,7 @@
             <element signature="method#addPmabInfo#0;class#Worker#0" expanded="false" />
             <element signature="method#saveBook#0;class#Worker#0" expanded="false" />
             <element signature="method#convertBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#joinBook#0;class#Worker#0" expanded="false" />
             <element signature="method#parseIndexes#0;class#Worker#0" expanded="false" />
             <element signature="method#extractBook#0;class#Worker#0" expanded="false" />
             <element signature="method#formatVariant#0;class#Worker#0" expanded="false" />
@@ -908,16 +858,19 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#11601#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-            <element signature="e#1635#1636#0" expanded="true" />
-            <element signature="e#1677#1678#0" expanded="true" />
-            <element signature="e#1716#1717#0" expanded="true" />
-            <element signature="e#1761#1762#0" expanded="true" />
-            <element signature="e#5841#5842#0" expanded="true" />
-            <element signature="e#5899#5900#0" expanded="true" />
-            <element signature="e#6919#6920#0" expanded="true" />
-            <element signature="e#6954#6955#0" expanded="true" />
+            <element signature="docComment;class#SCI#0" expanded="false" />
+            <element signature="docComment;field#VERSION#0;class#SCI#0" expanded="false" />
+            <element signature="method#onStart#0;class#SCI#0" expanded="false" />
+            <element signature="docComment;method#makeOptions#0;class#SCI#0" expanded="false" />
+            <element signature="method#makeOptions#0;class#SCI#0" expanded="false" />
+            <element signature="method#parseArguments#0;class#SCI#0" expanded="false" />
+            <element signature="method#showVersion#0;class#SCI#0" expanded="false" />
+            <element signature="method#showSupported#0;class#SCI#0" expanded="false" />
+            <element signature="docComment;method#cliError#0;class#SCI#0" expanded="false" />
+            <element signature="method#cliError#0;class#SCI#0" expanded="false" />
+            <element signature="method#contains#0;class#SCI#0" expanded="false" />
+            <element signature="class#Command#0;class#SCI#0" expanded="false" />
+            <element signature="method#main#0;class#SCI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -927,7 +880,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="docComment;class#Worker#0" expanded="false" />
             <element signature="method#detectURL#0;class#Worker#0" expanded="false" />
             <element signature="method#getPemCover#0;class#Worker#0" expanded="false" />
@@ -937,6 +889,7 @@
             <element signature="method#addPmabInfo#0;class#Worker#0" expanded="false" />
             <element signature="method#saveBook#0;class#Worker#0" expanded="false" />
             <element signature="method#convertBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#joinBook#0;class#Worker#0" expanded="false" />
             <element signature="method#parseIndexes#0;class#Worker#0" expanded="false" />
             <element signature="method#extractBook#0;class#Worker#0" expanded="false" />
             <element signature="method#formatVariant#0;class#Worker#0" expanded="false" />
@@ -955,7 +908,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="docComment;class#Worker#0" expanded="false" />
             <element signature="method#detectURL#0;class#Worker#0" expanded="false" />
             <element signature="method#getPemCover#0;class#Worker#0" expanded="false" />
@@ -965,6 +917,7 @@
             <element signature="method#addPmabInfo#0;class#Worker#0" expanded="false" />
             <element signature="method#saveBook#0;class#Worker#0" expanded="false" />
             <element signature="method#convertBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#joinBook#0;class#Worker#0" expanded="false" />
             <element signature="method#parseIndexes#0;class#Worker#0" expanded="false" />
             <element signature="method#extractBook#0;class#Worker#0" expanded="false" />
             <element signature="method#formatVariant#0;class#Worker#0" expanded="false" />
@@ -983,7 +936,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="docComment;class#Worker#0" expanded="false" />
             <element signature="method#detectURL#0;class#Worker#0" expanded="false" />
             <element signature="method#getPemCover#0;class#Worker#0" expanded="false" />
@@ -993,6 +945,7 @@
             <element signature="method#addPmabInfo#0;class#Worker#0" expanded="false" />
             <element signature="method#saveBook#0;class#Worker#0" expanded="false" />
             <element signature="method#convertBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#joinBook#0;class#Worker#0" expanded="false" />
             <element signature="method#parseIndexes#0;class#Worker#0" expanded="false" />
             <element signature="method#extractBook#0;class#Worker#0" expanded="false" />
             <element signature="method#formatVariant#0;class#Worker#0" expanded="false" />
@@ -1011,7 +964,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="docComment;class#Worker#0" expanded="false" />
             <element signature="method#detectURL#0;class#Worker#0" expanded="false" />
             <element signature="method#getPemCover#0;class#Worker#0" expanded="false" />
@@ -1021,6 +973,7 @@
             <element signature="method#addPmabInfo#0;class#Worker#0" expanded="false" />
             <element signature="method#saveBook#0;class#Worker#0" expanded="false" />
             <element signature="method#convertBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#joinBook#0;class#Worker#0" expanded="false" />
             <element signature="method#parseIndexes#0;class#Worker#0" expanded="false" />
             <element signature="method#extractBook#0;class#Worker#0" expanded="false" />
             <element signature="method#formatVariant#0;class#Worker#0" expanded="false" />
@@ -1039,16 +992,19 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="36" column="38" selection-start-line="36" selection-start-column="38" selection-end-line="36" selection-end-column="38" />
           <folding>
-            <element signature="e#0#11601#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-            <element signature="e#1635#1636#0" expanded="true" />
-            <element signature="e#1677#1678#0" expanded="true" />
-            <element signature="e#1716#1717#0" expanded="true" />
-            <element signature="e#1761#1762#0" expanded="true" />
-            <element signature="e#5841#5842#0" expanded="true" />
-            <element signature="e#5899#5900#0" expanded="true" />
-            <element signature="e#6919#6920#0" expanded="true" />
-            <element signature="e#6954#6955#0" expanded="true" />
+            <element signature="docComment;class#SCI#0" expanded="false" />
+            <element signature="docComment;field#VERSION#0;class#SCI#0" expanded="false" />
+            <element signature="method#onStart#0;class#SCI#0" expanded="false" />
+            <element signature="docComment;method#makeOptions#0;class#SCI#0" expanded="false" />
+            <element signature="method#makeOptions#0;class#SCI#0" expanded="false" />
+            <element signature="method#parseArguments#0;class#SCI#0" expanded="false" />
+            <element signature="method#showVersion#0;class#SCI#0" expanded="false" />
+            <element signature="method#showSupported#0;class#SCI#0" expanded="false" />
+            <element signature="docComment;method#cliError#0;class#SCI#0" expanded="false" />
+            <element signature="method#cliError#0;class#SCI#0" expanded="false" />
+            <element signature="method#contains#0;class#SCI#0" expanded="false" />
+            <element signature="class#Command#0;class#SCI#0" expanded="false" />
+            <element signature="method#main#0;class#SCI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1058,7 +1014,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="docComment;class#Worker#0" expanded="false" />
             <element signature="method#detectURL#0;class#Worker#0" expanded="false" />
             <element signature="method#getPemCover#0;class#Worker#0" expanded="false" />
@@ -1068,6 +1023,7 @@
             <element signature="method#addPmabInfo#0;class#Worker#0" expanded="false" />
             <element signature="method#saveBook#0;class#Worker#0" expanded="false" />
             <element signature="method#convertBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#joinBook#0;class#Worker#0" expanded="false" />
             <element signature="method#parseIndexes#0;class#Worker#0" expanded="false" />
             <element signature="method#extractBook#0;class#Worker#0" expanded="false" />
             <element signature="method#formatVariant#0;class#Worker#0" expanded="false" />
@@ -1203,36 +1159,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/LICENSE">
-      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/res/i18n/scj.properties">
-      <provider editor-type-id="ResourceBundle">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7352941">
-          <caret line="114" column="20" selection-start-line="114" selection-start-column="20" selection-end-line="114" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://D:/devel/Java/jdk1.8.0_40/src.zip!/java/io/FileInputStream.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33267716">
@@ -1258,50 +1184,61 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.0655738">
           <caret line="23" column="22" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
-          <folding>
-            <element signature="docComment;class#Application#0" expanded="false" />
-            <element signature="docComment;field#instance#0;class#Application#0" expanded="false" />
-            <element signature="docComment;field#name#0;class#Application#0" expanded="false" />
-            <element signature="docComment;field#version#0;class#Application#0" expanded="false" />
-            <element signature="docComment;field#arguments#0;class#Application#0" expanded="false" />
-            <element signature="docComment;field#translator#0;class#Application#0" expanded="false" />
-            <element signature="docComment;field#home#0;class#Application#0" expanded="false" />
-            <element signature="method#Application#0;class#Application#0" expanded="false" />
-            <element signature="method#ensureHomeExisted#0;class#Application#0" expanded="false" />
-            <element signature="method#installTranslator#0;class#Application#0" expanded="false" />
-            <element signature="method#ensureTranslatorInstalled#0;class#Application#0" expanded="false" />
-            <element signature="method#getText#0;class#Application#0" expanded="false" />
-            <element signature="method#getText#1;class#Application#0" expanded="false" />
-            <element signature="method#onStart#0;class#Application#0" expanded="false" />
-            <element signature="method#start#0;class#Application#0" expanded="false" />
-            <element signature="method#onDestroy#0;class#Application#0" expanded="false" />
-            <element signature="method#exit#1;class#Application#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/scj/AppConfig.java">
+    <entry file="file://$PROJECT_DIR$/.idea/copyright/ALv2.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4819672">
-          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="docComment;class#AppConfig#0" expanded="false" />
-            <element signature="method#reset#0;class#AppConfig#0" expanded="false" />
-            <element signature="method#getAppLocale#0;class#AppConfig#0" expanded="false" />
-            <element signature="method#setAppLocale#0;class#AppConfig#0" expanded="false" />
-            <element signature="method#getDefaultFormat#0;class#AppConfig#0" expanded="false" />
-            <element signature="method#setDefaultFormat#0;class#AppConfig#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.54709417">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/LICENSE">
+      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.78957915">
+          <caret line="200" column="33" selection-start-line="200" selection-start-column="33" selection-end-line="200" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/res/i18n/scj.properties">
+      <provider editor-type-id="ResourceBundle">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.747495">
+          <caret line="112" column="31" selection-start-line="112" selection-start-column="31" selection-end-line="112" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/res/i18n/scj_zh_CN.properties">
+      <provider editor-type-id="ResourceBundle">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.747495">
+          <caret line="110" column="23" selection-start-line="110" selection-start-column="23" selection-end-line="110" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/scj/Worker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="212" column="33" selection-start-line="212" selection-start-column="33" selection-end-line="212" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.552459">
+          <caret line="433" column="4" selection-start-line="433" selection-start-column="4" selection-end-line="433" selection-end-column="4" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="docComment;class#Worker#0" expanded="false" />
             <element signature="method#detectURL#0;class#Worker#0" expanded="false" />
             <element signature="method#getPemCover#0;class#Worker#0" expanded="false" />
@@ -1311,6 +1248,7 @@
             <element signature="method#addPmabInfo#0;class#Worker#0" expanded="false" />
             <element signature="method#saveBook#0;class#Worker#0" expanded="false" />
             <element signature="method#convertBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#joinBook#0;class#Worker#0" expanded="false" />
             <element signature="method#parseIndexes#0;class#Worker#0" expanded="false" />
             <element signature="method#extractBook#0;class#Worker#0" expanded="false" />
             <element signature="method#formatVariant#0;class#Worker#0" expanded="false" />
@@ -1324,40 +1262,67 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/res/i18n/scj_zh_CN.properties">
-      <provider editor-type-id="ResourceBundle">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/scj/AppConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.084812626">
-          <caret line="48" column="15" selection-start-line="48" selection-start-column="15" selection-end-line="48" selection-end-column="15" />
-          <folding />
+        <state vertical-scroll-proportion="0.34590164">
+          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+          <folding>
+            <element signature="docComment;class#AppConfig#0" expanded="false" />
+            <element signature="method#getAppLocale#0;class#AppConfig#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/scj/SCI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3116883">
-          <caret line="183" column="30" selection-start-line="183" selection-start-column="30" selection-end-line="183" selection-end-column="30" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="273" column="9" selection-start-line="273" selection-start-column="9" selection-end-line="273" selection-end-column="9" />
           <folding>
-            <element signature="e#0#11601#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-            <element signature="e#1635#1636#0" expanded="true" />
-            <element signature="e#1677#1678#0" expanded="true" />
-            <element signature="e#1716#1717#0" expanded="true" />
-            <element signature="e#1761#1762#0" expanded="true" />
-            <element signature="e#5841#5842#0" expanded="true" />
-            <element signature="e#5899#5900#0" expanded="true" />
-            <element signature="e#6919#6920#0" expanded="true" />
-            <element signature="e#6954#6955#0" expanded="true" />
+            <element signature="docComment;class#SCI#0" expanded="false" />
+            <element signature="docComment;field#VERSION#0;class#SCI#0" expanded="false" />
+            <element signature="method#onStart#0;class#SCI#0" expanded="false" />
+            <element signature="docComment;method#makeOptions#0;class#SCI#0" expanded="false" />
+            <element signature="method#makeOptions#0;class#SCI#0" expanded="false" />
+            <element signature="method#parseArguments#0;class#SCI#0" expanded="false" />
+            <element signature="method#showVersion#0;class#SCI#0" expanded="false" />
+            <element signature="method#showSupported#0;class#SCI#0" expanded="false" />
+            <element signature="docComment;method#cliError#0;class#SCI#0" expanded="false" />
+            <element signature="method#cliError#0;class#SCI#0" expanded="false" />
+            <element signature="method#contains#0;class#SCI#0" expanded="false" />
+            <element signature="class#Command#0;class#SCI#0" expanded="false" />
+            <element signature="method#main#0;class#SCI#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/assembly/assembly.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.48360655">
+          <caret line="18" column="17" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scripts/jem.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24262296">
+          <caret line="22" column="22" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scripts/jem.bat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20655738">
+          <caret line="6" column="43" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="26" selection-start-line="31" selection-start-column="26" selection-end-line="31" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.48360655">
+          <caret line="68" column="31" selection-start-line="68" selection-start-column="31" selection-end-line="68" selection-end-column="31" />
           <folding />
         </state>
       </provider>
@@ -1373,7 +1338,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>
@@ -1381,6 +1345,7 @@
       </state>
       <state key="Copyright.UI">
         <settings>
+          <last-edited>ALv2</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

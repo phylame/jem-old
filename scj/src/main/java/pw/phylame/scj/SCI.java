@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2015 Peng Wan <phylame@163.com>
  *
  * This file is part of SCJ.
  *
@@ -46,18 +46,22 @@ public final class SCI extends Application {
     /** SCJ version message */
     public static final String VERSION = "1.0.3";
 
-    public static String NAME = "jem";
+    public static final String NAME = "jem";
 
     public static final String I18N_PATH = "res/i18n/scj";
 
     private AppConfig config;
 
-    public SCI(String[] args) {
+    SCI(String[] args) {
         super(NAME, VERSION, args);
     }
 
-    public static SCI getInstance() {
+    static SCI getInstance() {
         return (SCI) getApplication();
+    }
+
+    AppConfig getConfig() {
+        return config;
     }
 
     @Override
@@ -158,11 +162,11 @@ public final class SCI extends Application {
                 StringUtils.join(BookHelper.supportedMakers(), " ").toUpperCase());
     }
 
-    public void error(String msg) {
+    void error(String msg) {
         System.err.println(getName() + ": " + msg);
     }
 
-    public void echo(String msg) {
+    void echo(String msg) {
         System.out.println(getName() + ": " + msg);
     }
 
@@ -205,11 +209,11 @@ public final class SCI extends Application {
     }
 
     // command type
-    enum Command {
+    enum Command  {
         Convert, Join, Extract, View
     }
 
-    public int exec() {
+    int exec() {
         final String SCJ_SYNTAX = getText("SCI_SYNTAX", getName());
         Options options = makeOptions();
         CommandLine cmd;
@@ -247,11 +251,11 @@ public final class SCI extends Application {
             indexes = cmd.getOptionValue("x");
         }
 
-        // formats
+        // input and output formats
         String inFormat = cmd.getOptionValue("f"), outFormat = cmd.getOptionValue("t");
         outFormat = outFormat == null ? config.getDefaultFormat() : outFormat;
 
-        // inputs
+        // input files
         String[] files = cmd.getArgs();
         if (files.length == 0) {
             error(getText("SCI_NO_INPUT"));
@@ -260,7 +264,8 @@ public final class SCI extends Application {
 
         // output
         String out = cmd.getOptionValue("o");
-        File output = new File(out == null ? "." : out);    // if not specified use current directory
+        // if not specified use current directory
+        File output = new File(out == null ? "." : out);
 
         if (!contains(BookHelper.supportedMakers(), outFormat)) {
             error(getText("SCI_OUT_UNSUPPORTED", outFormat));
