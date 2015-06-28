@@ -30,6 +30,7 @@ import java.util.Locale;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
+import pw.phylame.pat.gaf.Translator;
 import pw.phylame.pat.ixin.IAction;
 import pw.phylame.pat.ixin.IToolkit;
 import pw.phylame.imabw.Config;
@@ -92,8 +93,6 @@ public class SettingsDialog extends JDialog {
 
     private SettingsDialog currentDialog;
 
-    private HashSet<String> updateWorks = new HashSet<>();
-
     public SettingsDialog(Frame owner) {
         super(owner, true);
         currentDialog = this;
@@ -111,7 +110,6 @@ public class SettingsDialog extends JDialog {
         initButtons();
 
         updateSettings();
-        updateWorks.clear();
 
         if (oldSize != null) {
             setSize(oldSize);
@@ -123,32 +121,13 @@ public class SettingsDialog extends JDialog {
         }
     }
 
-    private String[] loadSupportedLanguages() {
-        InputStream in = SettingsDialog.class.getResourceAsStream("/res/i18n/all.txt");
-        BufferedReader br = new BufferedReader(new InputStreamReader(in));
-        ArrayList<String> lang = new ArrayList<>();
-        String line;
-        try {
-            while ((line = br.readLine()) != null) {
-                line = line.trim();
-                if (line.length() != 0 && ! line.startsWith("#")) {
-                    lang.add(line.trim());
-                }
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } finally {
-            try {
-                br.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return lang.toArray(new String[0]);
+    private void notifyRestart(String title) {
+        app.getWorker().showMessage(getOwner(), title,
+                app.getText("Dialog.Settings.RestartRequired"));
     }
 
     private void initLanguages() {
-        final String[] languages = loadSupportedLanguages();
+        final String[] languages = Translator.loadSupportedLanguages("/res/i18n/all.txt");
 
         for (String lang : languages) {
             Locale locale = Locale.forLanguageTag(lang);
@@ -160,6 +139,7 @@ public class SettingsDialog extends JDialog {
                 int index = cbLanguages.getSelectedIndex();
                 Locale locale = Locale.forLanguageTag(languages[index]);
                 app.getConfig().setAppLocale(locale);
+                notifyRestart(lbLanguage.getText());
             }
         });
     }
@@ -250,6 +230,7 @@ public class SettingsDialog extends JDialog {
             }
         };
         cEditorStyleLN.setAction(action);
+        cEditorStyleLN.setEnabled(false);
 
         btnEditorColorFore.addActionListener(new ActionListener() {
             @Override
@@ -321,16 +302,28 @@ public class SettingsDialog extends JDialog {
 
     private void initLafThemes() {
         final UIManager.LookAndFeelInfo[] feels = UIManager.getInstalledLookAndFeels();
-        for (UIManager.LookAndFeelInfo laf: feels) {
-            cbThemes.addItem(laf.getName());
+        int index = 0, i = 0;
+        String laf = app.getConfig().getLafTheme();
+        for (UIManager.LookAndFeelInfo feel: feels) {
+            cbThemes.addItem(feel.getName());
+            if (laf.equalsIgnoreCase(feel.getName()) || laf.equalsIgnoreCase(
+                    feel.getClassName())) {
+                index = i;
+            }
+            ++i;
         }
+
+        cbThemes.setSelectedIndex(index);
         cbThemes.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() != 2) {
+                    return;
+                }
                 int index = cbThemes.getSelectedIndex();
                 UIManager.LookAndFeelInfo feel = feels[index];
                 app.getConfig().setLafTheme(feel.getClassName());
-                updateWorks.add("update_theme");
+                notifyRestart(lbFaceThemeStyle.getText());
             }
         });
     }
@@ -409,18 +402,6 @@ public class SettingsDialog extends JDialog {
     }
 
     private void updateFace() {
-        String laf = app.getConfig().getLafTheme();
-        int index = 0, i = 0;
-        UIManager.LookAndFeelInfo[] feels = UIManager.getInstalledLookAndFeels();
-        for (UIManager.LookAndFeelInfo feel: feels) {
-            if (laf.equalsIgnoreCase(feel.getName()) || laf.equalsIgnoreCase(
-                    feel.getClassName())) {
-                index = i;
-            }
-            ++i;
-        }
-        cbThemes.setSelectedIndex(index);
-
         Font font = app.getConfig().getGlobalFont();
         lbFaceGlobalFontDemo.setFont(font);
         lbFaceGlobalFontDemo.setText(Config.toString(font));
@@ -484,21 +465,10 @@ public class SettingsDialog extends JDialog {
 
     }
 
-    private void dispatchWorks() {
-        for (String key: updateWorks) {
-            switch (key) {
-                case "update_theme":
-                    app.setTheme(app.getConfig().getLafTheme());
-                    break;
-            }
-        }
-    }
-
     private void onClose() {
         // add your code here
         oldLocation = getLocation();
         oldSize = getSize();
-        dispatchWorks();
         dispose();
     }
 
