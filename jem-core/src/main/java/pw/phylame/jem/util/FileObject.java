@@ -64,7 +64,7 @@ public abstract class FileObject {
     public abstract InputStream openInputStream() throws IOException;
 
     /**
-     * Resets file object status to last status.
+     * Resets file object status to last status for next reading.
      * The method should be used after using <tt>openInputStream</tt>.
      * @throws java.io.IOException occur IO errors
      */
@@ -88,7 +88,8 @@ public abstract class FileObject {
      * @throws java.io.IOException occur IO errors
      */
     public long copyTo(OutputStream out) throws IOException {
-        long total = IOUtils.copy(new BufferedInputStream(openInputStream()), out);
+        long total = IOUtils.copy(
+                new BufferedInputStream(openInputStream()), out);
         reset();
         return total;
     }
@@ -101,14 +102,15 @@ public abstract class FileObject {
      * @throws java.io.IOException occur IO errors
      */
     public long copyTo(OutputStream out, long size) throws IOException {
-        long total = IOUtils.copyLarge(new BufferedInputStream(openInputStream()), out, 0, size);
+        long total = IOUtils.copyLarge(
+                new BufferedInputStream(openInputStream()), out, 0, size);
         reset();
         return total;
     }
 
     /**
-     * Gets available bytes ti be read.
-     * @return the size or <tt>-1</tt> if unknown number of bytes
+     * Gets available bytes to be read.
+     * @return the size or <tt>-1</tt> if not supported
      * @throws java.io.IOException occur IO errors
      */
     public long available() throws IOException {

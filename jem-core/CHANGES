@@ -7,6 +7,7 @@ ChangeLog
 
 * v2.1.0
   o. move TextObject from pw.phylame.tools to pw.phylame.jem.util
+  o. add iterator of lines for TextObject
   o. move classes in pw.phylame.tools.file to pw.phylame.jem.util
   o. remove class FileNameUtils and Attributes
   o. remove utility package pw.phylame.tools

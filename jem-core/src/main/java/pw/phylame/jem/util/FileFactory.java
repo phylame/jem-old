@@ -25,13 +25,14 @@ import org.apache.commons.logging.LogFactory;
 import java.io.*;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Properties;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 /**
  * Factory class to create <tt>FileObject</tt>.
  */
-public final class FileFactory {
+public class FileFactory {
     private static Log                     LOG   = LogFactory.getLog(FileFactory.class);
 
     /** Some known MIME types */
@@ -42,7 +43,7 @@ public final class FileFactory {
 
     /** Loads some known MIMEs from file. */
     static void loadBuiltinMime() {
-        java.util.Properties prop = new java.util.Properties();
+        Properties prop = new Properties();
         InputStream in =
                 FileFactory.class.getResourceAsStream(MIME_MAPPING_FILE);
         if (in == null) {       // not found file
@@ -107,31 +108,16 @@ public final class FileFactory {
             this.file = file;
         }
 
-        /**
-         * Returns the name of file content.
-         */
         @Override
         public String getName() {
             return file.getPath();
         }
 
-        /**
-         * Gets available bytes ti be read.
-         *
-         * @return the size or <tt>-1</tt> if unknown number of bytes
-         * @throws IOException occur IO errors
-         */
         @Override
         public long available() throws IOException {
             return file.length();
         }
 
-        /**
-         * Opens an {@code InputStream} for reading file content.
-         *
-         * @return the <tt>InputStream</tt>
-         * @throws java.io.IOException occur IO errors
-         */
         @Override
         public InputStream openInputStream() throws IOException {
             return new FileInputStream(file);
@@ -162,22 +148,11 @@ public final class FileFactory {
             entryName = name;
         }
 
-        /**
-         * Returns the name of file content.
-         *
-         * @return the name
-         */
         @Override
         public String getName() {
             return entryName;
         }
 
-        /**
-         * Gets available bytes ti be read.
-         *
-         * @return the size or <tt>-1</tt> if unknown number of bytes
-         * @throws IOException occur IO errors
-         */
         @Override
         public long available() throws IOException {
             ZipEntry zipEntry = zipFile.getEntry(entryName);
@@ -185,12 +160,6 @@ public final class FileFactory {
             return zipEntry.getSize();
         }
 
-        /**
-         * Opens an {@code InputStream} for reading file content.
-         *
-         * @return the <tt>InputStream</tt>
-         * @throws java.io.IOException occur IO errors
-         */
         @Override
         public InputStream openInputStream() throws IOException {
             ZipEntry zipEntry = zipFile.getEntry(entryName);
@@ -226,22 +195,12 @@ public final class FileFactory {
             this.offset = offset;
             this.size = size;
         }
-        /**
-         * Returns the name of file content.
-         *
-         * @return the name
-         */
+
         @Override
         public String getName() {
             return name;
         }
 
-        /**
-         * Opens an {@code InputStream} for reading file content.
-         *
-         * @return the <tt>InputStream</tt>
-         * @throws java.io.IOException occur IO errors
-         */
         @Override
         public InputStream openInputStream() throws IOException {
             oldOffset = file.getFilePointer();
@@ -259,10 +218,6 @@ public final class FileFactory {
             };
         }
 
-        /**
-         * Resets file object status to last status.
-         * The method should be used after using <tt>openInputStream</tt>.
-         */
         @Override
         public void reset() throws IOException {
             if (oldOffset != -1) {
@@ -270,11 +225,6 @@ public final class FileFactory {
             }
         }
 
-        /**
-         * Gets available bytes ti be read.
-         *
-         * @return the size or <tt>-1</tt> if unknown
-         */
         @Override
         public long available() throws IOException {
             return size;
@@ -296,22 +246,12 @@ public final class FileFactory {
             }
             this.url = url;
         }
-        /**
-         * Returns the name of file content.
-         *
-         * @return the name
-         */
+
         @Override
         public String getName() {
             return url.getPath();
         }
 
-        /**
-         * Opens an {@code InputStream} for reading file content.
-         *
-         * @return the <tt>InputStream</tt>
-         * @throws java.io.IOException occur IO errors
-         */
         @Override
         public InputStream openInputStream() throws IOException {
             return url.openStream();
@@ -330,15 +270,17 @@ public final class FileFactory {
         return new NormalFile(file, getOrDetectMime(file.getPath(), mime));
     }
 
-    public static FileObject fromZip(ZipFile zipFile, String entryName, String mime) throws IOException {
+    public static FileObject fromZip(ZipFile zipFile, String entryName,
+                                     String mime) throws IOException {
         if (entryName == null) {
             throw new NullPointerException("entryName");
         }
         return new InnerZip(zipFile, entryName, getOrDetectMime(entryName, mime));
     }
 
-    public static FileObject fromBlock(String name, RandomAccessFile file, long offset, long size,
-                                     String mime) throws IOException {
+    public static FileObject fromBlock(String name, RandomAccessFile file,
+                                       long offset, long size,
+                                       String mime) throws IOException {
         if (name == null) {
             throw new NullPointerException("name");
         }

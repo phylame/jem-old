@@ -25,6 +25,7 @@ import javax.swing.*;
 import pw.phylame.pat.ixin.IAction;
 import pw.phylame.imabw.Imabw;
 import pw.phylame.jem.core.Jem;
+import pw.phylame.tools.StringUtils;
 
 public class AboutDialog extends JDialog {
     private JPanel contentPane;
@@ -64,7 +65,8 @@ public class AboutDialog extends JDialog {
 
         labelMessage.setText(String.format("%s v%s on %s (%s)", app.getText("App.Name"),
                 Imabw.APP_VERSION,
-                System.getProperty("os.name"), System.getProperty("os.arch")));
+                System.getProperty("os.name"),
+                StringUtils.toCapital(System.getProperty("os.arch"))));
         labelJem.setText(String.format("Jem Core: %s by %s", Jem.VERSION, Jem.VENDOR));
         labelRights.setText(app.getText("App.Rights"));
 

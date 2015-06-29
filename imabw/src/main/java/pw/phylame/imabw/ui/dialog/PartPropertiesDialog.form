@@ -182,7 +182,7 @@
                                   <text value=""/>
                                 </properties>
                               </component>
-                              <component id="76f56" class="javax.swing.JButton" binding="buttonNimus">
+                              <component id="76f56" class="javax.swing.JButton" binding="buttonMinus">
                                 <constraints/>
                                 <properties>
                                   <icon value="res/gfx/dialog/minus.png"/>

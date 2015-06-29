@@ -27,7 +27,7 @@ public final class UMD {
     public static final String TEXT_ENCODING        = "UTF-16LE";
 
     public static final int CHUNK_SEPARATOR         = 0x23;     // "#"
-    public static final int ADDITION_SEPARATOR      = 0x24;      // "$"
+    public static final int ADDITION_SEPARATOR      = 0x24;     // "$"
 
     public static final String SYMBIAN_LINE_FEED    = "\u2029";
 

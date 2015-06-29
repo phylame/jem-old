@@ -20,13 +20,15 @@ package pw.phylame.scj;
 
 import java.io.File;
 import java.util.Locale;
-import java.util.Map;
+import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Properties;
 
-import org.apache.commons.io.FilenameUtils;
+import pw.phylame.pat.gaf.Translator;
 import pw.phylame.pat.gaf.Application;
 import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.BookHelper;
+import pw.phylame.tools.StringUtils;
 
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
@@ -35,25 +37,26 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.ParseException;
-import pw.phylame.pat.gaf.Translator;
-import pw.phylame.tools.StringUtils;
+import org.apache.commons.io.FilenameUtils;
 
 /**
  * SCI (Simple Console Interface) for Jem.
  */
-public final class SCI extends Application {
-
-    /** SCJ version message */
-    public static final String VERSION = "1.0.3";
-
-    public static final String NAME = "jem";
-
-    public static final String I18N_PATH = "res/i18n/scj";
+public final class SCI extends Application implements Constants {
 
     private AppConfig config;
 
     SCI(String[] args) {
         super(NAME, VERSION, args);
+
+        ensureHomeExisted();
+
+        config = new AppConfig();
+
+        Locale.setDefault(config.getAppLocale());
+
+        Translator translator = new Translator(I18N_PATH);
+        installTranslator(translator);
     }
 
     static SCI getInstance() {
@@ -62,15 +65,6 @@ public final class SCI extends Application {
 
     AppConfig getConfig() {
         return config;
-    }
-
-    @Override
-    protected void onStart() {
-        config = new AppConfig();
-
-        Locale.setDefault(config.getAppLocale());
-        Translator translator = new Translator(I18N_PATH);
-        installTranslator(translator);
     }
 
     /**
@@ -135,8 +129,8 @@ public final class SCI extends Application {
         return options;
     }
 
-    private Map<String, Object> parseArguments(java.util.Properties prop) {
-        Map<String, Object> map = new java.util.HashMap<>();
+    private HashMap<String, Object> parseArguments(Properties prop) {
+        HashMap<String, Object> map = new HashMap<>();
         for (String key: prop.stringPropertyNames()) {
             map.put(key, prop.getProperty(key));
         }
@@ -144,9 +138,9 @@ public final class SCI extends Application {
     }
 
     private void showVersion() {
-        System.out.printf("SCI for Jem v%s on %s (%s)\n",
-                VERSION, System.getProperty("os.name"),
-                System.getProperty("os.arch"));
+        System.out.printf("SCI for Jem v%s on %s (%s)\n", Constants.VERSION,
+                System.getProperty("os.name"),
+                StringUtils.toCapital(System.getProperty("os.arch")));
         System.out.printf("Jem Core: %s by %s\n", Jem.VERSION, Jem.VENDOR);
         System.out.printf("Jem Formats: %s by %s\n",
                 pw.phylame.jem.formats.util.Version.VERSION,
@@ -171,7 +165,7 @@ public final class SCI extends Application {
     }
 
     /**
-     * Prints CLI errors.
+     * Prints CLI syntax errors to stderr.
      * @param syntax SCI syntax
      * @param e the exception
      */
@@ -199,17 +193,8 @@ public final class SCI extends Application {
         System.exit(exec());
     }
 
-    private static boolean contains(String[] seq, String str) {
-        for (String s: seq) {
-            if (s.equals(str)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     // command type
-    enum Command  {
+    enum Command {
         Convert, Join, Extract, View
     }
 
@@ -226,8 +211,8 @@ public final class SCI extends Application {
         if (cmd.hasOption("h")) {
             HelpFormatter hf = new HelpFormatter();
             hf.setSyntaxPrefix("");
-            hf.printHelp(80, SCJ_SYNTAX, getText("SCI_OPTIONS_PREFIX"), options,
-                    getText("SCJ_BUG_REPORT"));
+            hf.printHelp(80, SCJ_SYNTAX, getText("SCI_OPTIONS_PREFIX"),
+                    options, getText("SCJ_BUG_REPORT"));
             return 0;
         } else if (cmd.hasOption("v")) {
             showVersion();
@@ -264,19 +249,20 @@ public final class SCI extends Application {
 
         // output
         String out = cmd.getOptionValue("o");
+
         // if not specified use current directory
         File output = new File(out == null ? "." : out);
 
-        if (!contains(BookHelper.supportedMakers(), outFormat)) {
+        if (!BookHelper.hasMaker(outFormat)) {
             error(getText("SCI_OUT_UNSUPPORTED", outFormat));
             System.out.println(getText("SCI_UNSUPPORTED_HELP"));
             return -1;
         }
 
-        Map<String, Object> inKw = parseArguments(cmd.getOptionProperties("p"));
-        Map<String, Object> outKw = parseArguments(cmd.getOptionProperties("m"));
-        Map<String, Object> attrs = parseArguments(cmd.getOptionProperties("a"));
-        Map<String, Object> items = parseArguments(cmd.getOptionProperties("i"));
+        HashMap<String, Object> inKw = parseArguments(cmd.getOptionProperties("p"));
+        HashMap<String, Object> outKw = parseArguments(cmd.getOptionProperties("m"));
+        HashMap<String, Object> attrs = parseArguments(cmd.getOptionProperties("a"));
+        HashMap<String, Object> items = parseArguments(cmd.getOptionProperties("i"));
 
         ArrayList<String> inputs = new ArrayList<>();
         // exit status
@@ -286,7 +272,7 @@ public final class SCI extends Application {
             if (inFmt == null) {
                 inFmt = FilenameUtils.getExtension(file);
             }
-            if (!contains(BookHelper.supportedParsers(), inFmt)) {
+            if (! BookHelper.hasParser(inFmt)) {
                 error(getText("SCI_IN_UNSUPPORTED", inFmt));
                 System.out.println(getText("SCI_UNSUPPORTED_HELP"));
                 status = -1;
@@ -305,6 +291,7 @@ public final class SCI extends Application {
                 status = Math.min(result != null ? 0 : 1, status);
                 break;
             case Join:
+                // process this task later
                 inputs.add(file);
                 break;
             case Extract:

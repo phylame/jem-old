@@ -501,11 +501,13 @@ public class Worker {
         }
 
         if ("".equals(book.getVendor())) {
-            book.setVendor(String.format("%s v%s", app.getText("App.Name"), Constants.APP_VERSION));
+            book.setVendor(String.format("%s v%s", app.getText("App.Name"),
+                    Constants.APP_VERSION));
         }
 
         if ("".equals(book.getRights())) {
-            book.setRights(String.format("(C) %d PW arts", Calendar.getInstance().get(Calendar.YEAR)));
+            book.setRights(String.format("(C) %d PW arts",
+                    Calendar.getInstance().get(Calendar.YEAR)));
         }
     }
 

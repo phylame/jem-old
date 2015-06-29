@@ -60,7 +60,7 @@ public class PartPropertiesDialog extends JDialog {
 
     private static ArrayList<String> CommonNames  = new ArrayList<>(
             Arrays.asList(Book.AUTHOR, Book.DATE, Book.GENRE, Book.LANGUAGE, Book.PUBLISHER,
-                    Book.RIGHTS, Book.STATE, Book.SUBJECT, "source", "vendor")
+                    Book.RIGHTS, Book.STATE, Book.SUBJECT, "source", Book.VENDOR)
     );
     private static ArrayList<String> IgnoredNames = new ArrayList<>(
             Arrays.asList(Book.TITLE, Book.COVER, Book.INTRO));
@@ -77,7 +77,7 @@ public class PartPropertiesDialog extends JDialog {
     private JButton             buttonRemove;
     private JButton             buttonSave;
     private JButton             buttonPlus;
-    private JButton             buttonNimus;
+    private JButton             buttonMinus;
     private JButton             buttonModify;
     private AttributeTableModel tableModel;
     private JTable              propertyTable;
@@ -117,7 +117,7 @@ public class PartPropertiesDialog extends JDialog {
         // intro
         createIntroPane();
 
-        Action closeAction = new IAction(null, "Dialog.Properties.ButtonClose", app) {
+        Action closeAction = new IAction("Dialog.Properties.ButtonClose", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 onClose();
@@ -150,7 +150,7 @@ public class PartPropertiesDialog extends JDialog {
 
     private void createCoverPane() {
         ((TitledBorder) coverPane.getBorder()).setTitle(app.getText("Dialog.Properties.Cover"));
-        Action action = new IAction(null, "Dialog.Properties.ButtonOpen", app) {
+        Action action = new IAction("Dialog.Properties.ButtonOpen", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 openCover();
@@ -158,7 +158,7 @@ public class PartPropertiesDialog extends JDialog {
         };
         buttonOpen.setAction(action);
 
-        action = new IAction(null, "Dialog.Properties.ButtonSave", app) {
+        action = new IAction("Dialog.Properties.ButtonSave", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 saveCover();
@@ -166,7 +166,7 @@ public class PartPropertiesDialog extends JDialog {
         };
         buttonSave.setAction(action);
 
-        action = new IAction(null, "Dialog.Properties.ButtonRemove", app) {
+        action = new IAction("Dialog.Properties.ButtonRemove", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 removeCover();
@@ -220,8 +220,8 @@ public class PartPropertiesDialog extends JDialog {
         buttonPlus.setToolTipText(app.getText("Dialog.Properties.ButtonPlus.Tip"));
         buttonPlus.addActionListener(addAction);
 
-        buttonNimus.setToolTipText(app.getText("Dialog.Properties.ButtonNimus.Tip"));
-        buttonNimus.addActionListener(removeAction);
+        buttonMinus.setToolTipText(app.getText("Dialog.Properties.ButtonNimus.Tip"));
+        buttonMinus.addActionListener(removeAction);
 
         buttonModify.setToolTipText(app.getText("Dialog.Properties.ButtonModify.Tip"));
         buttonModify.addActionListener(modifyAction);
@@ -232,7 +232,7 @@ public class PartPropertiesDialog extends JDialog {
         if (tableModel.getRowCount() > 0) {
             propertyTable.setRowSelectionInterval(0, 0);
         } else {        // no item
-            buttonNimus.setEnabled(false);
+            buttonMinus.setEnabled(false);
             buttonModify.setEnabled(false);
             buttonExport.setEnabled(false);
         }
@@ -464,7 +464,8 @@ public class PartPropertiesDialog extends JDialog {
 
         NewAttributePane pane = new NewAttributePane(names, types);
         String title = app.getText("Dialog.Properties.Attributes.Add.Title");
-        int r = JOptionPane.showOptionDialog(this, pane.getPane(), title, JOptionPane.OK_CANCEL_OPTION,
+        int r = JOptionPane.showOptionDialog(this, pane.getPane(), title,
+                JOptionPane.OK_CANCEL_OPTION,
                 JOptionPane.PLAIN_MESSAGE, null, null, null);
         if (r != JOptionPane.OK_OPTION) {
             return;
@@ -473,7 +474,8 @@ public class PartPropertiesDialog extends JDialog {
         if (pane.isCustomized()) {
             key = pane.getInput();
             if (key.length() == 0) {
-                worker.showError(this, title, app.getText("Dialog.Properties.Attributes.Add.NoInputName"));
+                worker.showError(this, title,
+                        app.getText("Dialog.Properties.Attributes.Add.NoInputName"));
                 return;
             }
             type = SupportedTypes.get(pane.getType());
@@ -512,7 +514,7 @@ public class PartPropertiesDialog extends JDialog {
             propertyTable.setRowSelectionInterval(rows-1, rows-1);
 
             if (rows == 1) {        // firstly added
-                buttonNimus.setEnabled(true);
+                buttonMinus.setEnabled(true);
                 buttonModify.setEnabled(true);
             }
         }
@@ -525,8 +527,10 @@ public class PartPropertiesDialog extends JDialog {
         }
 
         String name = tableModel.getName(row);
-        if (! worker.showConfirm(this, app.getText("Dialog.Properties.Attributes.Remove.Title"),
-                app.getText("Dialog.Properties.Attributes.Remove.Tip", transAttributeName(name)))) {
+        if (! worker.showConfirm(this,
+                app.getText("Dialog.Properties.Attributes.Remove.Title"),
+                app.getText("Dialog.Properties.Attributes.Remove.Tip",
+                        transAttributeName(name)))) {
             return;
         }
         part.removeAttribute(name);
@@ -535,7 +539,7 @@ public class PartPropertiesDialog extends JDialog {
 
         int rows = tableModel.getRowCount();
         if (rows == 0) {
-            buttonNimus.setEnabled(false);
+            buttonMinus.setEnabled(false);
             buttonModify.setEnabled(false);
             buttonExport.setEnabled(false);
         } else {
@@ -555,9 +559,11 @@ public class PartPropertiesDialog extends JDialog {
 
         String name = tableModel.getName(row);
         Object o = part.getAttribute(name), newValue;
-        String title = app.getText("Dialog.Properties.Attributes.Modify", transAttributeName(name));
+        String title = app.getText("Dialog.Properties.Attributes.Modify",
+                transAttributeName(name));
         if (o instanceof Date) {
-            newValue = worker.selectDate(this, title, app.getText("Dialog.SelectDate.Tip"), (Date) o);
+            newValue = worker.selectDate(this, title,
+                    app.getText("Dialog.SelectDate.Tip"), (Date) o);
             if (newValue == null) {
                 return;
             }
@@ -591,19 +597,22 @@ public class PartPropertiesDialog extends JDialog {
             if (name.equals(Book.LANGUAGE)) {   // language
                 String lang = (String) o;
                 newValue = worker.selectLanguage(this, title,
-                        app.getText("Dialog.SelectLanguage.Tip"), lang.length() != 0 ? lang : null);
+                        app.getText("Dialog.SelectLanguage.Tip"),
+                        lang.length() != 0 ? lang : null);
                 if (newValue == null) {
                     return;
                 }
             } else {        // other
-                newValue = worker.inputLoop(this, title, app.getText("Dialog.InputText.Tip"),
+                newValue = worker.inputLoop(this, title,
+                        app.getText("Dialog.InputText.Tip"),
                         app.getText("Dialog.InputText.NoInput"), (String)o);
                 if (newValue == null) {
                     return;
                 }
             }
         } else if (o instanceof Number) {
-            String str = worker.inputLoop(this, title, app.getText("Dialog.InputNumber.Tip"),
+            String str = worker.inputLoop(this, title,
+                    app.getText("Dialog.InputNumber.Tip"),
                     app.getText("Dialog.InputText.NoInput"), String.valueOf(o));
             if (str == null) {
                 return;
@@ -631,7 +640,8 @@ public class PartPropertiesDialog extends JDialog {
 
         String name = tableModel.getName(row);
         Object o = part.getAttribute(name);
-        String title = app.getText("Dialog.Properties.Attributes.Export", transAttributeName(name));
+        String title = app.getText("Dialog.Properties.Attributes.Export",
+                transAttributeName(name));
         File file = worker.selectSaveFile(this, title, null, null, true, null);
         if (file == null) {
             return;
@@ -642,11 +652,13 @@ public class PartPropertiesDialog extends JDialog {
             out = new BufferedOutputStream(new FileOutputStream(file));
             fb.copyTo(out);
             worker.showMessage(this, title,
-                    app.getText("Dialog.Properties.Attributes.Export.Success", file.getPath()));
+                    app.getText("Dialog.Properties.Attributes.Export.Success",
+                            file.getPath()));
         } catch (IOException e) {
             LOG.debug("cannot save attribute "+name+" to "+file.getPath(), e);
             worker.showMessage(this, title,
-                    app.getText("Dialog.Properties.Attributes.Export.Failed", file.getPath()));
+                    app.getText("Dialog.Properties.Attributes.Export.Failed",
+                            file.getPath()));
         } finally {
             if (out != null) {
                 try {

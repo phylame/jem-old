@@ -18,11 +18,13 @@
 
 package pw.phylame.jem.core;
 
-import java.io.Writer;
-import java.util.Map;
 import java.util.Set;
+import java.util.Map;
 import java.util.List;
+import java.util.TreeMap;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.io.Writer;
 import java.io.IOException;
 
 import pw.phylame.jem.util.TextObject;
@@ -40,7 +42,7 @@ import pw.phylame.jem.util.TextObject;
  * </ul>
  *
  */
-public abstract class Part implements Iterable<Part>, FieldConstants {
+public class Part implements Iterable<Part>, FieldConstants {
 
     /** Constructs part used empty title and content. */
     public Part() {
@@ -70,7 +72,7 @@ public abstract class Part implements Iterable<Part>, FieldConstants {
     // ** Attributes supported **
     // **************************
 
-    private Map<String, Object> metaMap = new java.util.TreeMap<String, Object>();
+    private Map<String, Object> metaMap = new TreeMap<String, Object>();
 
     /**
      * Associates the specified value with the specified key in attributes map.
@@ -291,7 +293,7 @@ public abstract class Part implements Iterable<Part>, FieldConstants {
     // *************************
 
     /** Sub-parts */
-    private List<Part> subParts = new java.util.ArrayList<Part>();
+    private List<Part> subParts = new ArrayList<Part>();
 
     /**
      * Appends the specified part to the end of sub-part list.
@@ -418,7 +420,7 @@ public abstract class Part implements Iterable<Part>, FieldConstants {
     }
 
     /** Clean works */
-    private List<Cleanable> cleanWorks = new java.util.ArrayList<Cleanable>();
+    private List<Cleanable> cleanWorks = new ArrayList<Cleanable>();
 
     /**
      * Registers the specified <tt>Cleanable</tt> to clean works list.

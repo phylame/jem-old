@@ -18,8 +18,9 @@
 
 package pw.phylame.jem.util;
 
-import java.util.Iterator;
 import java.util.List;
+import java.util.Arrays;
+import java.util.Iterator;
 
 import java.io.Writer;
 import java.io.InputStream;
@@ -128,8 +129,8 @@ public class TextObject implements Iterable<String> {
         }
         this.file = file;
         this.encoding = encoding;
-        sourceProvider = SourceProvider.FILE;
         setType(type);
+        sourceProvider = SourceProvider.FILE;
     }
 
     /**
@@ -159,7 +160,7 @@ public class TextObject implements Iterable<String> {
     }
 
     /**
-     * Returns about text size in the source.
+     * Returns about text length in the source.
      * @return the size
      */
     protected long aboutSize() {
@@ -212,13 +213,53 @@ public class TextObject implements Iterable<String> {
                 file.reset();
                 return lines;
             default:
-                return java.util.Arrays.asList(raw.split("(\\r\\n)|(\\r)|(\\n)"));
+                return Arrays.asList(raw.split("(\\r\\n)|(\\r)|(\\n)"));
+        }
+    }
+
+    /**
+     * Generates an iterator of lines in text content.
+     * @return iterator of string
+     * @since 2.1.0
+     */
+    @Override
+    public Iterator<String> iterator() {
+        switch (sourceProvider) {
+            case FILE:
+                assert file != null;
+                Iterator<String> it;
+                try {
+                    InputStream input = new BufferedInputStream(file.openInputStream());
+                    it = IOUtils.lineIterator(input, encoding);
+                    file.reset();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    it = new Iterator<String>() {
+                        @Override
+                        public boolean hasNext() {
+                            return false;
+                        }
+
+                        @Override
+                        public String next() {
+                            return null;
+                        }
+                    };
+                }
+                return it;
+            default:
+                return Arrays.asList(raw.split("(\\r\\n)|(\\r)|(\\n)")).iterator();
         }
     }
 
     @Override
-    public Iterator<String> iterator() {
-        return null;
+    public String toString() {
+        try {
+            return getText();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 
     /**

@@ -56,7 +56,10 @@ public final class HtmlMaker {
         return doc;
     }
 
-    public Document makeIntroPage(String title, String bookTitle, String titleStyle, TextObject intro,
+    public Document makeIntroPage(String title,
+                                  String bookTitle,
+                                  String titleStyle,
+                                  TextObject intro,
                                   String introStyle) throws IOException {
         List<String> lines = intro.getLines();
         if (lines.size() == 0) {
@@ -90,7 +93,9 @@ public final class HtmlMaker {
         return doc;
     }
 
-    public Document makeInfoPage(String title, String titleStyle, List<String> lines, String infoStyle) {
+    public Document makeInfoPage(String title, String titleStyle,
+                                 List<String> lines,
+                                 String infoStyle) {
         Document doc = DocumentHelper.createDocument();
         Element body = initHtml(doc, title);
 
@@ -105,8 +110,13 @@ public final class HtmlMaker {
         return doc;
     }
 
-    public Document makeContentsPage(String title, String titleStyle, TextObject intro, String introStyle,
-                                     List<String> labels, List<String> href, String tocStyle) throws IOException {
+    public Document makeContentsPage(String title,
+                                     String titleStyle,
+                                     TextObject intro,
+                                     String introStyle,
+                                     List<String> labels,
+                                     List<String> href,
+                                     String tocStyle) throws IOException {
         Document doc = DocumentHelper.createDocument();
         Element body = initHtml(doc, title);
 
@@ -131,7 +141,11 @@ public final class HtmlMaker {
         return doc;
     }
 
-    public Document makeTextPage(String title, String titleStyle, TextObject text, String textStyle, TextObject intro,
+    public Document makeTextPage(String title,
+                                 String titleStyle,
+                                 TextObject text,
+                                 String textStyle,
+                                 TextObject intro,
                                  String introStyle)
             throws IOException {
         Document doc = DocumentHelper.createDocument();
