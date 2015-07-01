@@ -22,7 +22,7 @@ package pw.phylame.jem.core;
  * Declares key name of part attributes.
  * @since 2.1.0
  */
-public interface FieldConstants {
+public interface Attributes {
     /** Key name for book author.*/
     String AUTHOR    = "author";
 

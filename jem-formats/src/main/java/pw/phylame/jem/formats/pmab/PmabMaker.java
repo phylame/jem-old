@@ -86,7 +86,8 @@ public class PmabMaker implements Maker {
             if (o instanceof PmabConfig) {
                 return (PmabConfig) o;
             } else {
-                throw new JemException(I18N.getText("Pmab.Maker.InvalidConfig", KEY_CONFIG, o.getClass()));
+                throw new JemException(
+                        I18N.getText("Pmab.Maker.InvalidConfig", KEY_CONFIG, o.getClass()));
             }
         }
 

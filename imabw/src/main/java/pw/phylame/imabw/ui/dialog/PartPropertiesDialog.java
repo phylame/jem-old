@@ -450,7 +450,7 @@ public class PartPropertiesDialog extends JDialog {
         if (part instanceof Book) {
             keys.addAll(new ArrayList<>(CommonNames));
         }
-        keys.removeAll(part.attributeNames());
+        keys.removeAll(Arrays.asList(part.attributeNames()));
         ArrayList<String> names = new ArrayList<>();
         for (String key: keys) {
             names.add(transAttributeName(key));
@@ -698,7 +698,7 @@ public class PartPropertiesDialog extends JDialog {
         private ArrayList<String> names = new ArrayList<>();
 
         public AttributeTableModel() {
-            names.addAll(part.attributeNames());
+            Collections.addAll(names, part.attributeNames());
             names.removeAll(IgnoredNames);
             Collections.sort(names);
         }

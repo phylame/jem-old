@@ -24,7 +24,7 @@ package pw.phylame.scj;
 public interface Constants {
     String NAME           = "jem";
 
-    String VERSION        = "1.0.3";
+    String VERSION        = "1.0.4";
 
     String I18N_PATH = "res/i18n/scj";
 

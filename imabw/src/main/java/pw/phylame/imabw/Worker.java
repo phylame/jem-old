@@ -418,7 +418,6 @@ public class Worker {
         return path;
     }
 
-
     public Map<String, Object> getParseArguments(Window parent, String format) {
         return PacFactory.getArguments(parent, app.getText("Dialog.PacProvider.Title",
                 format.toUpperCase()), format);

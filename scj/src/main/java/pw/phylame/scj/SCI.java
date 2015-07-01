@@ -19,10 +19,7 @@
 package pw.phylame.scj;
 
 import java.io.File;
-import java.util.Locale;
-import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.Properties;
+import java.util.*;
 
 import pw.phylame.pat.gaf.Translator;
 import pw.phylame.pat.gaf.Application;
@@ -114,7 +111,7 @@ public final class SCI extends Application implements Constants {
 
         Option item = OptionBuilder.withArgName(
                 getText("ARG_KV")).hasArgs(2).withValueSeparator().withDescription(
-                getText("HELP_ITEM")).create("i");
+                getText("HELP_ITEM")).create("e");
 
         Option inKW = OptionBuilder.withArgName(
                 getText("ARG_KV")).hasArgs(2).withValueSeparator().withDescription(
@@ -129,7 +126,7 @@ public final class SCI extends Application implements Constants {
         return options;
     }
 
-    private HashMap<String, Object> parseArguments(Properties prop) {
+    private Map<String, Object> parseArguments(Properties prop) {
         HashMap<String, Object> map = new HashMap<>();
         for (String key: prop.stringPropertyNames()) {
             map.put(key, prop.getProperty(key));
@@ -139,8 +136,7 @@ public final class SCI extends Application implements Constants {
 
     private void showVersion() {
         System.out.printf("SCI for Jem v%s on %s (%s)\n", Constants.VERSION,
-                System.getProperty("os.name"),
-                StringUtils.toCapital(System.getProperty("os.arch")));
+                System.getProperty("os.name"), System.getProperty("os.arch"));
         System.out.printf("Jem Core: %s by %s\n", Jem.VERSION, Jem.VENDOR);
         System.out.printf("Jem Formats: %s by %s\n",
                 pw.phylame.jem.formats.util.Version.VERSION,
@@ -238,7 +234,7 @@ public final class SCI extends Application implements Constants {
 
         // input and output formats
         String inFormat = cmd.getOptionValue("f"), outFormat = cmd.getOptionValue("t");
-        outFormat = outFormat == null ? config.getDefaultFormat() : outFormat;
+        outFormat = (outFormat == null ? config.getDefaultFormat() : outFormat);
 
         // input files
         String[] files = cmd.getArgs();
@@ -259,44 +255,55 @@ public final class SCI extends Application implements Constants {
             return -1;
         }
 
-        HashMap<String, Object> inKw = parseArguments(cmd.getOptionProperties("p"));
-        HashMap<String, Object> outKw = parseArguments(cmd.getOptionProperties("m"));
-        HashMap<String, Object> attrs = parseArguments(cmd.getOptionProperties("a"));
-        HashMap<String, Object> items = parseArguments(cmd.getOptionProperties("i"));
+        Map<String, Object> inKw = parseArguments(cmd.getOptionProperties("p"));
+        Map<String, Object> outKw = parseArguments(cmd.getOptionProperties("m"));
+        Map<String, Object> attrs = parseArguments(cmd.getOptionProperties("a"));
+        Map<String, Object> items = parseArguments(cmd.getOptionProperties("e"));
 
-        ArrayList<String> inputs = new ArrayList<>();
+        ArrayList<File> inputs = new ArrayList<>();
         // exit status
         int status = 0;
-        for (String file: files) {
-            String inFmt = inFormat;
-            if (inFmt == null) {
-                inFmt = FilenameUtils.getExtension(file);
+        for (String path: files) {
+            File input = new File(path);
+
+            // check it exists
+            if (! input.exists()) {
+                error(getText("SCI_NOT_EXISTS", input));
+                status = -1;
+                continue;
             }
-            if (! BookHelper.hasParser(inFmt)) {
-                error(getText("SCI_IN_UNSUPPORTED", inFmt));
+
+            String format = inFormat;
+            if (format == null) {
+                format = FilenameUtils.getExtension(path);
+            }
+            if (! BookHelper.hasParser(format)) {
+                error(getText("SCI_IN_UNSUPPORTED", format, input));
                 System.out.println(getText("SCI_UNSUPPORTED_HELP"));
                 status = -1;
                 continue;
             }
+
             String result = null;
             switch (command) {
             case View:
-                if (! Worker.viewBook(file, inFmt, inKw, attrs, items, viewNames)) {
+                if (! Worker.viewBook(input,
+                        format, inKw, attrs, items, viewNames)) {
                     status = -1;
                 }
                 break;
             case Convert:
-                result = Worker.convertBook(
-                        file, inFmt, inKw, attrs, items, output, outFormat, outKw);
+                result = Worker.convertBook(input,
+                        format, inKw, attrs, items, output, outFormat, outKw);
                 status = Math.min(result != null ? 0 : 1, status);
                 break;
             case Join:
                 // process this task later
-                inputs.add(file);
+                inputs.add(input);
                 break;
             case Extract:
-                result = Worker.extractBook(
-                        file, inFmt, inKw, attrs, items, indexes, output, outFormat, outKw);
+                result = Worker.extractBook(input, format,
+                        inKw, attrs, items, indexes, output, outFormat, outKw);
                 status = Math.min(result != null ? 0 : 1, status);
                 break;
             }

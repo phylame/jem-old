@@ -18,11 +18,7 @@
 
 package pw.phylame.jem.core;
 
-import java.util.HashMap;
-import java.util.TreeMap;
-import java.util.HashSet;
-import java.util.Properties;
-import java.util.Enumeration;
+import java.util.*;
 
 import java.security.AccessController;
 import java.security.PrivilegedAction;
@@ -54,21 +50,21 @@ public final class BookHelper {
     public static final String PARSER_DEFINE_FILE = "jem-parsers.properties";
 
     /** Class path of registered book parsers */
-    private static TreeMap<String, String> parsers = new TreeMap<String, String>();
+    private static Map<String, String> parsers = new HashMap<String, String>();
 
     /** Caches loaded classes of parser */
-    private static TreeMap<String, Class<? extends Parser>> cachedParsers =
-            new TreeMap<String, Class<? extends Parser>>();
+    private static Map<String, Class<? extends Parser>> cachedParsers =
+            new HashMap<String, Class<? extends Parser>>();
 
     /** File path of maker registration */
     public static final String MAKER_DEFINE_FILE = "jem-makers.properties";
 
     /** Class path of registered book makers */
-    private static TreeMap<String, String> makers = new TreeMap<String, String>();
+    private static Map<String, String> makers = new HashMap<String, String>();
 
     /** Cached loaded classes of maker */
-    private static TreeMap<String, Class<? extends Maker>> cachedMakers =
-            new TreeMap<String, Class<? extends Maker>>();
+    private static Map<String, Class<? extends Maker>> cachedMakers =
+            new HashMap<String, Class<? extends Maker>>();
 
     /**
      * Registers parser class with specified name.
@@ -159,7 +155,7 @@ public final class BookHelper {
      * @return sequence of format names
      */
     public static String[] supportedParsers() {
-        HashSet<String> names = new HashSet<String>(cachedParsers.keySet());
+        Set<String> names = new HashSet<String>(cachedParsers.keySet());
         names.addAll(parsers.keySet());
         return names.toArray(new String[0]);
     }
@@ -253,7 +249,7 @@ public final class BookHelper {
      * @return sequence of format names
      */
     public static String[] supportedMakers() {
-        HashSet<String> names = new HashSet<String>(cachedMakers.keySet());
+        Set<String> names = new HashSet<String>(cachedMakers.keySet());
         names.addAll(makers.keySet());
         return names.toArray(new String[0]);
     }
@@ -406,8 +402,8 @@ public final class BookHelper {
         return AccessController.doPrivileged(action);
     }
 
-    private static HashMap<String, String> loadRegistrations(String fileName) {
-        HashMap<String, String> map = new HashMap<String, String>();
+    private static Map<String, String> loadRegistrations(String fileName) {
+        Map<String, String> map = new HashMap<String, String>();
 
         // Identify the class loader we will be using
         ClassLoader contextClassLoader = getContextClassLoaderInternal();
@@ -433,7 +429,7 @@ public final class BookHelper {
 
     /** Registers custom parser classes from config file. */
     private static void registerCustomParsers() {
-        for (HashMap.Entry<String, String> entry:
+        for (Map.Entry<String, String> entry:
                 loadRegistrations(PARSER_DEFINE_FILE).entrySet()) {
             registerParser(entry.getKey(), entry.getValue());
         }
@@ -441,7 +437,7 @@ public final class BookHelper {
 
     /** Registers custom maker classes from config file. */
     private static void registerCustomMakers() {
-        for (HashMap.Entry<String, String> entry:
+        for (Map.Entry<String, String> entry:
                 loadRegistrations(MAKER_DEFINE_FILE).entrySet()) {
             registerMaker(entry.getKey(), entry.getValue());
         }

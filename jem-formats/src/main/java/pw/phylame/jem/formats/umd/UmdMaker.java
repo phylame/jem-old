@@ -67,16 +67,18 @@ public class UmdMaker implements Maker {
         int umdType = UMD.TEXT;
         if (kw != null && kw.size() > 0) {
             Object o = kw.get(KEY_UMD_TYPE);
-            if (o instanceof Integer) {
-                umdType = (Integer)o;
-            } else if (o instanceof String) {
-                try {
-                    umdType = Integer.parseInt((String)o);
-                } catch (NumberFormatException e) {
-                    LOG.debug("invalid UMD type: "+o, e);
+            if (o != null) {
+                if (o instanceof Integer) {
+                    umdType = (Integer) o;
+                } else if (o instanceof String) {
+                    try {
+                        umdType = Integer.parseInt((String) o);
+                    } catch (NumberFormatException e) {
+                        LOG.debug("invalid UMD type: " + o, e);
+                    }
+                } else {
+                    throw ExceptionFactory.forInvalidIntegerArgument(KEY_UMD_TYPE, o);
                 }
-            } else {
-                throw ExceptionFactory.forInvalidIntegerArgument(KEY_UMD_TYPE, o);
             }
         }
         make(book, output, umdType);
@@ -366,7 +368,7 @@ public class UmdMaker implements Maker {
         titles.add(part.getTitle());
         offsets.add(file.getFilePointer());
         writeString(file, part.getTitle() + UMD.SYMBIAN_LINE_FEED);
-        String text = part.getText();
+        String text = part.getSource().getText();
         if (text.length() != 0) {
             text = text.replaceAll("(\\r\\n)|(\\n)|(\\r)", UMD.SYMBIAN_LINE_FEED);
             writeString(file, text+UMD.SYMBIAN_LINE_FEED);

@@ -64,7 +64,8 @@ public class EpubMaker implements Maker {
             if (o instanceof EpubConfig) {
                 return (EpubConfig) o;
             } else {
-                throw new JemException(I18N.getText("Epub.Maker.InvalidConfig", KEY_CONFIG, o.getClass()));
+                throw new JemException(
+                        I18N.getText("Epub.Maker.InvalidConfig", KEY_CONFIG, o.getClass()));
             }
         }
 
@@ -115,10 +116,12 @@ public class EpubMaker implements Maker {
             }
         }
         o = kw.get(KEY_COMMENT);
-        if (o instanceof String) {
-            config.zipComment = (String) o;
-        } else {
-            LOG.debug("invalid 'epub_comment', required string");
+        if (o != null) {
+            if (o instanceof String) {
+                config.zipComment = (String) o;
+            } else {
+                LOG.debug("invalid 'epub_comment', required string");
+            }
         }
 
         return config;

@@ -2,7 +2,7 @@
   <artifact name="scj:jar">
     <output-path>$PROJECT_DIR$/target/artifacts</output-path>
     <root id="root">
-      <element id="archive" name="scj-1.0.3.jar">
+      <element id="archive" name="scj-1.0.4.jar">
         <element id="directory" name="META-INF">
           <element id="file-copy" path="$PROJECT_DIR$/src/main/assembly/META-INF/MANIFEST.MF" />
         </element>

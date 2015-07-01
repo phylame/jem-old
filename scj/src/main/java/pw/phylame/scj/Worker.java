@@ -20,17 +20,14 @@ package pw.phylame.scj;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.FileNotFoundException;
 import java.net.URL;
-import java.util.Date;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.ArrayList;
+
+import java.util.*;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.commons.io.FilenameUtils;
 
+import pw.phylame.jem.core.Chapter;
 import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.Part;
 import pw.phylame.jem.core.Book;
@@ -68,7 +65,7 @@ public final class Worker implements Constants {
         return null;
     }
 
-    static boolean setAttributes(Part part, HashMap<String, Object> attributes) {
+    static boolean setAttributes(Part part, Map<String, Object> attributes) {
         for (String key: attributes.keySet()) {
             String raw = String.valueOf(attributes.get(key));
             Object value = null;
@@ -109,7 +106,7 @@ public final class Worker implements Constants {
         return true;
     }
 
-    static void setExtension(Book book, HashMap<String, Object> items) {
+    static void setExtension(Book book, Map<String, Object> items) {
         for (String key: items.keySet()) {
             Object o = items.get(key);
             if (o == null) {
@@ -119,21 +116,17 @@ public final class Worker implements Constants {
                 if (str.length() == 0) {
                     book.removeItem(key);
                 }
+                book.setItem(key, str);
             } else {
                 book.setItem(key, o);
             }
         }
     }
 
-    static Book openBook(String input, String format, HashMap<String, Object> kw) {
-        if (format == null || "".equals(format)) {
-            format = FilenameUtils.getExtension(input).toLowerCase();
-        }
+    static Book openBook(File input, String format, Map<String, Object> kw) {
         Book book = null;
         try {
-            book = Jem.readBook(new File(input), format, kw);
-        } catch (FileNotFoundException e) {
-            app.error(app.getText("SCI_NOT_EXISTS", input));
+            book = Jem.readBook(input, format, kw);
         } catch (IOException | JemException e) {
             LOG.debug(String.format("failed to read '%s' with '%s'", input,
                     format.toUpperCase()), e);
@@ -141,7 +134,7 @@ public final class Worker implements Constants {
         return book;
     }
 
-    private static void addPmabInfo(HashMap<String, Object> kw) {
+    private static void addPmabInfo(Map<String, Object> kw) {
         if (kw == null) {
             return;
         }
@@ -158,10 +151,9 @@ public final class Worker implements Constants {
     }
 
     static String saveBook(Book book, File output, String format,
-                                  HashMap<String, Object> kw) {
+                           Map<String, Object> kw) {
         if (output.isDirectory()) {
-            output = new File(output,
-                    String.format("%s.%s", book.getTitle(), format));
+            output = new File(output, String.format("%s.%s", book.getTitle(), format));
         }
         addPmabInfo(kw);
         String path = null;
@@ -175,14 +167,14 @@ public final class Worker implements Constants {
         return path;
     }
 
-    static String convertBook(String input,
+    static String convertBook(File input,
                               String inFormat,
-                              HashMap<String, Object> inKw,
-                              HashMap<String, Object> attributes,
-                              HashMap<String, Object> items,
+                              Map<String, Object> inKw,
+                              Map<String, Object> attributes,
+                              Map<String, Object> items,
                               File output,
                               String outFormat,
-                              HashMap<String, Object> outKw) {
+                              Map<String, Object> outKw) {
         Book book = openBook(input, inFormat, inKw);
         if (book == null) {
             app.error(app.getText("SCI_READ_FAILED", input));
@@ -203,15 +195,15 @@ public final class Worker implements Constants {
         return path;
     }
 
-    static String joinBook(ArrayList<String> inputs,
-                           HashMap<String, Object> inKw,
-                           HashMap<String, Object> attributes,
-                           HashMap<String, Object> items,
+    static String joinBook(List<File> inputs,
+                           Map<String, Object> inKw,
+                           Map<String, Object> attributes,
+                           Map<String, Object> items,
                            File output,
                            String outFormat,
-                           HashMap<String, Object> outKw) {
+                           Map<String, Object> outKw) {
         Book book = new Book();
-        for (String input: inputs) {
+        for (File input: inputs) {
             Book sub = openBook(input, null, inKw);
             if (sub == null) {
                 app.error(app.getText("SCI_READ_FAILED", input));
@@ -263,15 +255,15 @@ public final class Worker implements Constants {
         return results;
     }
 
-    static String extractBook(String input,
+    static String extractBook(File input,
                               String inFormat,
-                              HashMap<String, Object> inKw,
-                              HashMap<String, Object> attributes,
-                              HashMap<String, Object> items,
+                              Map<String, Object> inKw,
+                              Map<String, Object> attributes,
+                              Map<String, Object> items,
                               String index,
                               File output,
                               String outFormat,
-                              HashMap<String, Object> outKw) {
+                              Map<String, Object> outKw) {
         Book book = openBook(input, inFormat, inKw);
         if (book == null) {
             app.error(app.getText("SCI_READ_FAILED", input));
@@ -286,13 +278,19 @@ public final class Worker implements Constants {
             return null;
         }
 
-        setExtension(book, items);
+        Book dest = Jem.toBook(part);
+        if (! part.isSection()) {
+            dest.append(new Chapter(app.getText("SCI_MAIN_CHAPTER_TITLE"),
+                    part.getSource()));
+        }
+        setExtension(dest, items);
 
-        String path = saveBook(Jem.toBook(part), output, outFormat, outKw);
+        String path = saveBook(dest, output, outFormat, outKw);
         if (path == null) {
             app.error(app.getText("SCI_EXTRACT_FAILED", index, output.getAbsolutePath()));
         }
 
+        dest.cleanup();
         book.cleanup();
         return path;
     }
@@ -362,8 +360,7 @@ public final class Worker implements Constants {
         ArrayList<String> lines = new ArrayList<>();
         for (String key: keys) {
             if (key.equals(VIEW_KEY_ALL)) {
-                viewPart(part, part.attributeNames().toArray(new String[0]),
-                        sep, showBrackets, true);
+                viewPart(part, part.attributeNames(), sep, showBrackets, true);
             } else if (key.equals(VIEW_KEY_TOC)) {
                 viewToc(part, new String[]{Part.TITLE, Part.COVER},
                         app.getConfig().getTocIndent(), true, true);
@@ -376,8 +373,9 @@ public final class Worker implements Constants {
                     app.error(app.getText("SCI_LOAD_CONTENT_FAILED", part.getTitle()));
                 }
             } else if (key.equals(VIEW_KEY_NAMES)) {
-                ArrayList<String> names = new ArrayList<>(part.attributeNames());
-                names.addAll(Arrays.asList(VIEW_KEY_TEXT, VIEW_KEY_SIZE, VIEW_KEY_ALL));
+                ArrayList<String> names = new ArrayList<>();
+                Collections.addAll(names, part.attributeNames());
+                Collections.addAll(names, VIEW_KEY_TEXT, VIEW_KEY_SIZE, VIEW_KEY_ALL);
                 if (part instanceof Book) {
                     names.add(VIEW_KEY_EXTENSION);
                 }
@@ -442,12 +440,12 @@ public final class Worker implements Constants {
         }
     }
 
-    static boolean viewBook(String input,
-                                   String inFormat,
-                                   HashMap<String, Object> inKw,
-                                   HashMap<String, Object> attributes,
-                                   HashMap<String, Object> items,
-                                   String[] keys) {
+    static boolean viewBook(File input,
+                            String inFormat,
+                            Map<String, Object> inKw,
+                            Map<String, Object> attributes,
+                            Map<String, Object> items,
+                            String[] keys) {
         Book book = openBook(input, inFormat, inKw);
         if (book == null) {
             app.error(app.getText("SCI_READ_FAILED", input));
@@ -461,7 +459,7 @@ public final class Worker implements Constants {
 
         for (String key: keys) {
             if (key.equals(VIEW_KEY_EXTENSION)) {
-                viewExtension(book, book.itemNames().toArray(new String[0]));
+                viewExtension(book, book.itemNames());
             } else if (key.matches(CHAPTER_REGEX)) {
                 viewChapter(book, key);
             } else if (key.matches(ITEM_REGEX)) {

@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Date;
 import java.util.Locale;
+import java.util.HashMap;
 
 /**
  * Common <tt>Book</tt> model describes book structure.
@@ -36,7 +37,7 @@ import java.util.Locale;
 public class Book extends Chapter {
 
     public Book() {
-        reset();
+        this("", "");
     }
 
     public Book(String title, String author) {
@@ -45,7 +46,7 @@ public class Book extends Chapter {
     }
 
     /**
-     * Resets all attributes to default.
+     * Resets all default attributes to initialized value.
      * @since 2.0.1
      */
     public void reset() {
@@ -154,7 +155,7 @@ public class Book extends Chapter {
     // ********************
 
     /** Extension mapping */
-    private Map<String, Object> extMap = new java.util.TreeMap<String, Object>();
+    private Map<String, Object> extMap = new HashMap<String, Object>();
 
     /**
      * Associates the specified value with the specified name in extensions.
@@ -207,8 +208,8 @@ public class Book extends Chapter {
      * Returns all names of item in extensions.
      * @return sequence of item names
      */
-    public Set<String> itemNames() {
-        return extMap.keySet();
+    public String[] itemNames() {
+        return extMap.keySet().toArray(new String[0]);
     }
 
     /**
@@ -220,7 +221,7 @@ public class Book extends Chapter {
 
     @Override
     public void cleanup() {
-        super.cleanup();
         clearItems();
+        super.cleanup();
     }
 }

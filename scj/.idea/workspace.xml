@@ -7,40 +7,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0043f891-92fb-464c-9f2b-f79c198286c7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/scj/Constants.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/assembly/META-INF/MANIFEST.MF" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../jem-formats/.idea/libraries/Maven__commons_io_commons_io_2_4.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../jem-formats/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../jem-formats/.idea/libraries/Maven__log4j_log4j_1_2_12.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/scj_jar.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/package-info.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/meb/MebMaker.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__pw_books_jem_formats_1_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__pw_books_jem_formats_1_2_0.xml" />
+      <change type="MOVED" beforePath="C:\Users\Nanu\OneDrive\works\pw-books\jem-core\src\main\java\pw\phylame\jem\core\FieldConstants.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/core/Attributes.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/AboutDialog.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/AboutDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/CHANGES" afterPath="$PROJECT_DIR$/../jem-core/CHANGES" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/CHANGES" afterPath="$PROJECT_DIR$/../jem-formats/CHANGES" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/util/FileFactory.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/util/FileFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/util/FileObject.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/util/FileObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/epub/html/HtmlMaker.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/epub/html/HtmlMaker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/core/Book.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/core/Book.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/core/BookHelper.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/core/BookHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/scj/Constants.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/scj/Constants.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/epub/EpubMaker.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/epub/EpubMaker.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/core/Part.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/core/Part.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/PartPropertiesDialog.form" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/PartPropertiesDialog.form" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/PartPropertiesDialog.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/dialog/PartPropertiesDialog.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/scj/SCI.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/scj/SCI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/util/TextObject.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/util/TextObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/umd/UMD.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/umd/UMD.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/umd/UmdMaker.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/umd/UmdMaker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/umd/UmdParser.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/umd/UmdParser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Worker.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Worker.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/scj/Worker.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/scj/Worker.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/.idea/compiler.xml" afterPath="$PROJECT_DIR$/../imabw/.idea/compiler.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/.idea/compiler.xml" afterPath="$PROJECT_DIR$/../jem-core/.idea/compiler.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/.idea/compiler.xml" afterPath="$PROJECT_DIR$/../jem-formats/.idea/compiler.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/jem-core.iml" afterPath="$PROJECT_DIR$/../jem-core/jem-core.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/jem-formats.iml" afterPath="$PROJECT_DIR$/../jem-formats/jem-formats.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/resources/jem-makers.properties" afterPath="$PROJECT_DIR$/../jem-formats/src/main/resources/jem-makers.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/resources/jem-parsers.properties" afterPath="$PROJECT_DIR$/../jem-formats/src/main/resources/jem-parsers.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/pom.xml" afterPath="$PROJECT_DIR$/../jem-formats/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scj.iml" afterPath="$PROJECT_DIR$/scj.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/res/i18n/scj.properties" afterPath="$PROJECT_DIR$/src/main/resources/res/i18n/scj.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/scj_jar.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/scj_jar.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/res/i18n/scj_zh_CN.properties" afterPath="$PROJECT_DIR$/src/main/resources/res/i18n/scj_zh_CN.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../imabw/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../jem-core/.idea/workspace.xml" />
@@ -72,30 +58,52 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/scj/Constants.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+              <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SCI.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SCI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/scj/SCI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.3112745">
+              <caret line="161" column="0" selection-start-line="161" selection-start-column="0" selection-end-line="161" selection-end-column="0" />
               <folding>
-                <element signature="e#0#11360#0" expanded="true" />
                 <element signature="imports" expanded="true" />
+                <element signature="docComment;class#SCI#0" expanded="false" />
+                <element signature="method#SCI#0;class#SCI#0" expanded="false" />
+                <element signature="docComment;method#makeOptions#0;class#SCI#0" expanded="false" />
+                <element signature="method#makeOptions#0;class#SCI#0" expanded="false" />
+                <element signature="method#parseArguments#0;class#SCI#0" expanded="false" />
+                <element signature="method#showSupported#0;class#SCI#0" expanded="false" />
+                <element signature="docComment;method#cliError#0;class#SCI#0" expanded="false" />
+                <element signature="class#Command#0;class#SCI#0" expanded="false" />
+                <element signature="method#exec#0;class#SCI#0" expanded="false" />
+                <element signature="method#main#0;class#SCI#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Worker.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="scj_zh_CN.properties" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/res/i18n/scj_zh_CN.properties">
+          <provider editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+          <provider selected="true" editor-type-id="ResourceBundle">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Worker.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/scj/Worker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.48346055">
-              <caret line="42" column="28" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="28" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="376" column="3" selection-start-line="376" selection-start-column="3" selection-end-line="376" selection-end-column="3" />
               <folding>
                 <element signature="docComment;class#Worker#0" expanded="false" />
                 <element signature="method#detectURL#0;class#Worker#0" expanded="false" />
@@ -111,8 +119,9 @@
                 <element signature="method#extractBook#0;class#Worker#0" expanded="false" />
                 <element signature="method#formatVariant#0;class#Worker#0" expanded="false" />
                 <element signature="method#walkTree#0;class#Worker#0" expanded="false" />
+                <element signature="method#viewToc#0;class#Worker#0" expanded="false" />
                 <element signature="method#viewExtension#0;class#Worker#0" expanded="false" />
-                <element signature="method#viewBook#0;class#Worker#0" expanded="false" />
+                <element signature="method#viewChapter#0;class#Worker#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -148,12 +157,13 @@
         <option value="$PROJECT_DIR$/src/main/scripts/jem.sh" />
         <option value="$PROJECT_DIR$/src/main/resources/res/i18n/scj.properties" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/scj/AppConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/res/i18n/scj_zh_CN.properties" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/scj/O.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/scj/Constants.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/res/i18n/scj_zh_CN.properties" />
+        <option value="$MAVEN_REPOSITORY$/pw-books/jem-formats/1.2.0/jem-formats-1.2.0-sources.jar!/pw/phylame/jem/formats/pmab/PmabMaker.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/scj/SCI.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/scj/Worker.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -177,10 +187,10 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="57" />
-    <option name="y" value="68" />
-    <option name="width" value="1222" />
-    <option name="height" value="672" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="754" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -209,7 +219,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
+    <navigator proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -220,81 +230,13 @@
       <autoscrollFromSource />
       <sortByType />
     </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scj" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scj" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scj" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scj" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scj" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scj" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scj" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scj" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../pw-utils" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
@@ -344,7 +286,7 @@
       </extension>
       <option name="MAIN_CLASS_NAME" value="pw.phylame.scj.SCI" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="-l" />
+      <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" value="" />
@@ -610,19 +552,6 @@
       <listeners />
       <method />
     </configuration>
-    <configuration default="true" type="executeSpecs" factoryName="Gauge Execution">
-      <setting name="environment" value="" />
-      <setting name="specsToExecute" value="" />
-      <setting name="tags" value="" />
-      <setting name="parallelNodes" value="" />
-      <setting name="execInParallel" value="false" />
-      <setting name="programParameters" value="" />
-      <setting name="workingDirectory" value="" />
-      <setting name="moduleName" value="" />
-      <envMap />
-      <setting name="rowsRange" value="" />
-      <method />
-    </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <node-options />
       <gulpfile />
@@ -713,14 +642,18 @@
       <workItem from="1435543837697" duration="592000" />
       <workItem from="1435548832553" duration="370000" />
       <workItem from="1435550320582" duration="109000" />
+      <workItem from="1435593278005" duration="78000" />
+      <workItem from="1435676922144" duration="3879000" />
+      <workItem from="1435681515067" duration="56000" />
+      <workItem from="1435755147616" duration="244000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21721000" />
+    <option name="totallyTimeSpent" value="25978000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="57" y="68" width="1222" height="672" extended-state="0" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -731,10 +664,10 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32961783" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31672025" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32740214" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31513262" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32605305" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21767594" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21656601" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24959083" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -746,7 +679,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3279743" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3263889" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -774,49 +707,6 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/scj/Worker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-          <folding>
-            <element signature="docComment;class#Worker#0" expanded="false" />
-            <element signature="method#detectURL#0;class#Worker#0" expanded="false" />
-            <element signature="method#getPemCover#0;class#Worker#0" expanded="false" />
-            <element signature="method#setAttributes#0;class#Worker#0" expanded="false" />
-            <element signature="method#setExtension#0;class#Worker#0" expanded="false" />
-            <element signature="method#openBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#addPmabInfo#0;class#Worker#0" expanded="false" />
-            <element signature="method#saveBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#convertBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#joinBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#parseIndexes#0;class#Worker#0" expanded="false" />
-            <element signature="method#extractBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#formatVariant#0;class#Worker#0" expanded="false" />
-            <element signature="method#walkTree#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewExtension#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewBook#0;class#Worker#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/scj/SCI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="293" column="44" selection-start-line="293" selection-start-column="44" selection-end-line="293" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#11360#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/scj/Worker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="docComment;class#Worker#0" expanded="false" />
@@ -833,33 +723,9 @@
             <element signature="method#extractBook#0;class#Worker#0" expanded="false" />
             <element signature="method#formatVariant#0;class#Worker#0" expanded="false" />
             <element signature="method#walkTree#0;class#Worker#0" expanded="false" />
+            <element signature="method#viewToc#0;class#Worker#0" expanded="false" />
             <element signature="method#viewExtension#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewBook#0;class#Worker#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/scj/Worker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="docComment;class#Worker#0" expanded="false" />
-            <element signature="method#detectURL#0;class#Worker#0" expanded="false" />
-            <element signature="method#getPemCover#0;class#Worker#0" expanded="false" />
-            <element signature="method#setAttributes#0;class#Worker#0" expanded="false" />
-            <element signature="method#setExtension#0;class#Worker#0" expanded="false" />
-            <element signature="method#openBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#addPmabInfo#0;class#Worker#0" expanded="false" />
-            <element signature="method#saveBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#convertBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#joinBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#parseIndexes#0;class#Worker#0" expanded="false" />
-            <element signature="method#extractBook#0;class#Worker#0" expanded="false" />
-            <element signature="method#formatVariant#0;class#Worker#0" expanded="false" />
-            <element signature="method#walkTree#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewExtension#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#viewChapter#0;class#Worker#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -869,8 +735,17 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#11360#0" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="docComment;class#SCI#0" expanded="false" />
+            <element signature="method#SCI#0;class#SCI#0" expanded="false" />
+            <element signature="docComment;method#makeOptions#0;class#SCI#0" expanded="false" />
+            <element signature="method#makeOptions#0;class#SCI#0" expanded="false" />
+            <element signature="method#parseArguments#0;class#SCI#0" expanded="false" />
+            <element signature="method#showSupported#0;class#SCI#0" expanded="false" />
+            <element signature="docComment;method#cliError#0;class#SCI#0" expanded="false" />
+            <element signature="class#Command#0;class#SCI#0" expanded="false" />
+            <element signature="method#exec#0;class#SCI#0" expanded="false" />
+            <element signature="method#main#0;class#SCI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -894,8 +769,9 @@
             <element signature="method#extractBook#0;class#Worker#0" expanded="false" />
             <element signature="method#formatVariant#0;class#Worker#0" expanded="false" />
             <element signature="method#walkTree#0;class#Worker#0" expanded="false" />
+            <element signature="method#viewToc#0;class#Worker#0" expanded="false" />
             <element signature="method#viewExtension#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#viewChapter#0;class#Worker#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -919,8 +795,9 @@
             <element signature="method#extractBook#0;class#Worker#0" expanded="false" />
             <element signature="method#formatVariant#0;class#Worker#0" expanded="false" />
             <element signature="method#walkTree#0;class#Worker#0" expanded="false" />
+            <element signature="method#viewToc#0;class#Worker#0" expanded="false" />
             <element signature="method#viewExtension#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#viewChapter#0;class#Worker#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -944,8 +821,9 @@
             <element signature="method#extractBook#0;class#Worker#0" expanded="false" />
             <element signature="method#formatVariant#0;class#Worker#0" expanded="false" />
             <element signature="method#walkTree#0;class#Worker#0" expanded="false" />
+            <element signature="method#viewToc#0;class#Worker#0" expanded="false" />
             <element signature="method#viewExtension#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#viewChapter#0;class#Worker#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -969,8 +847,9 @@
             <element signature="method#extractBook#0;class#Worker#0" expanded="false" />
             <element signature="method#formatVariant#0;class#Worker#0" expanded="false" />
             <element signature="method#walkTree#0;class#Worker#0" expanded="false" />
+            <element signature="method#viewToc#0;class#Worker#0" expanded="false" />
             <element signature="method#viewExtension#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#viewChapter#0;class#Worker#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -980,8 +859,17 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="36" column="38" selection-start-line="36" selection-start-column="38" selection-end-line="36" selection-end-column="38" />
           <folding>
-            <element signature="e#0#11360#0" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="docComment;class#SCI#0" expanded="false" />
+            <element signature="method#SCI#0;class#SCI#0" expanded="false" />
+            <element signature="docComment;method#makeOptions#0;class#SCI#0" expanded="false" />
+            <element signature="method#makeOptions#0;class#SCI#0" expanded="false" />
+            <element signature="method#parseArguments#0;class#SCI#0" expanded="false" />
+            <element signature="method#showSupported#0;class#SCI#0" expanded="false" />
+            <element signature="docComment;method#cliError#0;class#SCI#0" expanded="false" />
+            <element signature="class#Command#0;class#SCI#0" expanded="false" />
+            <element signature="method#exec#0;class#SCI#0" expanded="false" />
+            <element signature="method#main#0;class#SCI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1005,8 +893,9 @@
             <element signature="method#extractBook#0;class#Worker#0" expanded="false" />
             <element signature="method#formatVariant#0;class#Worker#0" expanded="false" />
             <element signature="method#walkTree#0;class#Worker#0" expanded="false" />
+            <element signature="method#viewToc#0;class#Worker#0" expanded="false" />
             <element signature="method#viewExtension#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#viewChapter#0;class#Worker#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1033,13 +922,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/res/i18n/scj.properties">
-      <provider editor-type-id="ResourceBundle">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="66" column="14" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="14" />
         </state>
+      </provider>
+      <provider editor-type-id="ResourceBundle">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/scj/SCI.java">
@@ -1168,13 +1057,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/res/i18n/scj.properties">
-      <provider editor-type-id="ResourceBundle">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.747495">
           <caret line="112" column="31" selection-start-line="112" selection-start-column="31" selection-end-line="112" selection-end-column="31" />
         </state>
+      </provider>
+      <provider editor-type-id="ResourceBundle">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/assembly/assembly.xml">
@@ -1212,41 +1101,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///usr/java/jdk1.8.0_45/src.zip!/java/util/Properties.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3322034">
-          <caret line="967" column="18" selection-start-line="967" selection-start-column="18" selection-end-line="967" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/pw-books/jem-core/2.1.0/jem-core-2.1.0-sources.jar!/pw/phylame/jem/core/BookHelper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3322034">
           <caret line="216" column="26" selection-start-line="216" selection-start-column="26" selection-end-line="216" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/java/jdk1.8.0_45/src.zip!/java/lang/String.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3644068">
-          <caret line="3086" column="27" selection-start-line="3086" selection-start-column="27" selection-end-line="3086" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/java/jdk1.8.0_45/src.zip!/java/lang/Integer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3">
-          <caret line="1433" column="4" selection-start-line="1433" selection-start-column="4" selection-end-line="1433" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/res/i18n/scj_zh_CN.properties">
-      <provider selected="true" editor-type-id="ResourceBundle">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="86" column="22" selection-start-line="86" selection-start-column="22" selection-end-line="86" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -1257,86 +1115,977 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/scj/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/scj/SCI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#11360#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/pw-books/jem-core/2.1.0/jem-core-2.1.0-sources.jar!/pw/phylame/jem/core/Part.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.2174687">
-          <caret line="235" column="22" selection-start-line="235" selection-start-column="22" selection-end-line="235" selection-end-column="22" />
-          <folding>
-            <element signature="e#6938#6939#0" expanded="true" />
-            <element signature="e#6967#6968#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/pw-books/jem-core/2.1.0/jem-core-2.1.0-sources.jar!/pw/phylame/jem/util/TextObject.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.27629232">
           <caret line="188" column="18" selection-start-line="188" selection-start-column="18" selection-end-line="188" selection-end-column="18" />
-          <folding>
-            <element signature="docComment;class#TextObject#0" expanded="false" />
-            <element signature="class#SourceProvider#0;class#TextObject#0" expanded="false" />
-            <element signature="docComment;field#PLAIN#0;class#TextObject#0" expanded="false" />
-            <element signature="docComment;field#LARGE_SIZE#0;class#TextObject#0" expanded="false" />
-            <element signature="docComment;method#TextObject#0;class#TextObject#0" expanded="false" />
-            <element signature="docComment;method#TextObject#1;class#TextObject#0" expanded="false" />
-            <element signature="docComment;method#TextObject#2;class#TextObject#0" expanded="false" />
-            <element signature="method#TextObject#2;class#TextObject#0" expanded="false" />
-            <element signature="docComment;method#getRaw#0;class#TextObject#0" expanded="false" />
-            <element signature="docComment;method#setRaw#0;class#TextObject#0" expanded="false" />
-            <element signature="docComment;method#getFile#0;class#TextObject#0" expanded="false" />
-            <element signature="docComment;method#getEncoding#0;class#TextObject#0" expanded="false" />
-            <element signature="docComment;method#setFile#0;class#TextObject#0" expanded="false" />
-            <element signature="docComment;method#setFile#1;class#TextObject#0" expanded="false" />
-            <element signature="method#setFile#1;class#TextObject#0" expanded="false" />
-            <element signature="docComment;method#getType#0;class#TextObject#0" expanded="false" />
-            <element signature="docComment;method#setType#0;class#TextObject#0" expanded="false" />
-            <element signature="docComment;method#isLarge#0;class#TextObject#0" expanded="false" />
-            <element signature="docComment;method#aboutSize#0;class#TextObject#0" expanded="false" />
-            <element signature="docComment;method#getText#0;class#TextObject#0" expanded="false" />
-            <element signature="method#getLines#0;class#TextObject#0" expanded="false" />
-            <element signature="method#iterator#0;class#TextObject#0" expanded="false" />
-            <element signature="docComment;method#writeTo#0;class#TextObject#0" expanded="false" />
-            <element signature="method#writeTo#0;class#TextObject#0" expanded="false" />
-            <element signature="docComment;field#contentType#0;class#TextObject#0" expanded="false" />
-            <element signature="docComment;field#raw#0;class#TextObject#0" expanded="false" />
-            <element signature="docComment;field#file#0;class#TextObject#0" expanded="false" />
-            <element signature="docComment;field#encoding#0;class#TextObject#0" expanded="false" />
-            <element signature="docComment;field#sourceProvider#0;class#TextObject#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5318066">
-          <caret line="26" column="26" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.22385322">
+          <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/devel/Java/jdk1.8.0_40/src.zip!/java/io/File.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33211008">
+          <caret line="2140" column="18" selection-start-line="2140" selection-start-column="18" selection-end-line="2140" selection-end-column="18" />
+          <folding>
+            <element signature="e#91558#91559#0" expanded="true" />
+            <element signature="e#91590#91591#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/devel/Java/jdk1.8.0_40/src.zip!/java/util/Map.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33211008">
+          <caret line="324" column="11" selection-start-line="324" selection-start-column="11" selection-end-line="324" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/pw-books/jem-core/2.1.0/jem-core-2.1.0-sources.jar!/pw/phylame/jem/core/Part.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37064222">
+          <caret line="198" column="26" selection-start-line="198" selection-start-column="26" selection-end-line="198" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/pw-books/jem-core/2.1.0/jem-core-2.1.0-sources.jar!/pw/phylame/jem/core/Book.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5761468">
+          <caret line="222" column="16" selection-start-line="222" selection-start-column="16" selection-end-line="222" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/pw-books/jem-core/2.1.0/jem-core-2.1.0-sources.jar!/pw/phylame/jem/core/Jem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33211008">
+          <caret line="168" column="23" selection-start-line="168" selection-start-column="23" selection-end-line="168" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/res/i18n/scj_zh_CN.properties">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="ResourceBundle">
+        <state />
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/pw-books/jem-formats/1.2.0/jem-formats-1.2.0-sources.jar!/pw/phylame/jem/formats/pmab/PmabMaker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5247706">
+          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/scj/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/commons-cli/commons-cli/1.2/commons-cli-1.2-sources.jar!/org/apache/commons/cli/ParseException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3442623">
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/devel/Java/jdk1.8.0_40/src.zip!/java/util/Collections.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3327869">
+          <caret line="5397" column="30" selection-start-line="5397" selection-start-column="30" selection-end-line="5397" selection-end-column="30" />
+          <folding>
+            <element signature="docComment;class#Collections#0" expanded="false" />
+            <element signature="method#Collections#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#sort#0;class#Collections#0" expanded="false" />
+            <element signature="method#sort#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#sort#1;class#Collections#0" expanded="false" />
+            <element signature="method#sort#1;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#binarySearch#0;class#Collections#0" expanded="false" />
+            <element signature="method#binarySearch#0;class#Collections#0" expanded="false" />
+            <element signature="method#indexedBinarySearch#0;class#Collections#0" expanded="false" />
+            <element signature="method#iteratorBinarySearch#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#get#0;class#Collections#0" expanded="false" />
+            <element signature="method#get#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#binarySearch#1;class#Collections#0" expanded="false" />
+            <element signature="method#binarySearch#1;class#Collections#0" expanded="false" />
+            <element signature="method#indexedBinarySearch#1;class#Collections#0" expanded="false" />
+            <element signature="method#iteratorBinarySearch#1;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#reverse#0;class#Collections#0" expanded="false" />
+            <element signature="method#reverse#0;class#Collections#0" expanded="false" />
+            <element signature="e#15632#15693#0" expanded="false" />
+            <element signature="docComment;method#shuffle#0;class#Collections#0" expanded="false" />
+            <element signature="method#shuffle#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#shuffle#1;class#Collections#0" expanded="false" />
+            <element signature="method#shuffle#1;class#Collections#0" expanded="false" />
+            <element signature="e#19513#19541#0" expanded="false" />
+            <element signature="docComment;method#swap#0;class#Collections#0" expanded="false" />
+            <element signature="method#swap#0;class#Collections#0" expanded="false" />
+            <element signature="e#20607#20668#0" expanded="false" />
+            <element signature="docComment;method#swap#1;class#Collections#0" expanded="false" />
+            <element signature="method#swap#1;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#fill#0;class#Collections#0" expanded="false" />
+            <element signature="method#fill#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#copy#0;class#Collections#0" expanded="false" />
+            <element signature="method#copy#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#min#0;class#Collections#0" expanded="false" />
+            <element signature="method#min#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#min#1;class#Collections#0" expanded="false" />
+            <element signature="method#min#1;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#max#0;class#Collections#0" expanded="false" />
+            <element signature="method#max#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#max#1;class#Collections#0" expanded="false" />
+            <element signature="method#max#1;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#rotate#0;class#Collections#0" expanded="false" />
+            <element signature="method#rotate#0;class#Collections#0" expanded="false" />
+            <element signature="method#rotate1#0;class#Collections#0" expanded="false" />
+            <element signature="method#rotate2#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#replaceAll#0;class#Collections#0" expanded="false" />
+            <element signature="method#replaceAll#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#indexOfSubList#0;class#Collections#0" expanded="false" />
+            <element signature="method#indexOfSubList#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#lastIndexOfSubList#0;class#Collections#0" expanded="false" />
+            <element signature="method#lastIndexOfSubList#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#unmodifiableCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#unmodifiableCollection#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#UnmodifiableCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#UnmodifiableCollection#0;class#UnmodifiableCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#size#0;class#UnmodifiableCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#isEmpty#0;class#UnmodifiableCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#contains#0;class#UnmodifiableCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#toArray#0;class#UnmodifiableCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#toArray#1;class#UnmodifiableCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#toString#0;class#UnmodifiableCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#iterator#0;class#UnmodifiableCollection#0;class#Collections#0" expanded="false" />
+            <element signature="class#43999:44563" expanded="false" />
+            <element signature="method#hasNext#0;class#43999:44563" expanded="false" />
+            <element signature="method#next#0;class#43999:44563" expanded="false" />
+            <element signature="method#remove#0;class#43999:44563" expanded="false" />
+            <element signature="method#forEachRemaining#0;class#43999:44563" expanded="false" />
+            <element signature="method#remove#0;class#UnmodifiableCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#containsAll#0;class#UnmodifiableCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#addAll#0;class#UnmodifiableCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#removeAll#0;class#UnmodifiableCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#retainAll#0;class#UnmodifiableCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#removeIf#0;class#UnmodifiableCollection#0;class#Collections#0" expanded="false" />
+            <element signature="e#45674#45704#0" expanded="false" />
+            <element signature="method#spliterator#0;class#UnmodifiableCollection#0;class#Collections#0" expanded="false" />
+            <element signature="e#45839#45869#0" expanded="false" />
+            <element signature="e#45984#46014#0" expanded="false" />
+            <element signature="method#parallelStream#0;class#UnmodifiableCollection#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#unmodifiableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#unmodifiableSet#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#UnmodifiableSet#0;class#Collections#0" expanded="false" />
+            <element signature="class#UnmodifiableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#UnmodifiableSet#0;class#UnmodifiableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#equals#0;class#UnmodifiableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#hashCode#0;class#UnmodifiableSet#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#unmodifiableSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#unmodifiableSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#UnmodifiableSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="class#UnmodifiableSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#UnmodifiableSortedSet#0;class#UnmodifiableSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#comparator#0;class#UnmodifiableSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#subSet#0;class#UnmodifiableSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#headSet#0;class#UnmodifiableSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#tailSet#0;class#UnmodifiableSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#first#0;class#UnmodifiableSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#last#0;class#UnmodifiableSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#unmodifiableNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#unmodifiableNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#UnmodifiableNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="class#UnmodifiableNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#EmptyNavigableSet#0;class#UnmodifiableNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="class#EmptyNavigableSet#0;class#UnmodifiableNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#readResolve#0;class#EmptyNavigableSet#0;class#UnmodifiableNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;field#ns#0;class#UnmodifiableNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#UnmodifiableNavigableSet#0;class#UnmodifiableNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#lower#0;class#UnmodifiableNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#floor#0;class#UnmodifiableNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#ceiling#0;class#UnmodifiableNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#higher#0;class#UnmodifiableNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#pollFirst#0;class#UnmodifiableNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#pollLast#0;class#UnmodifiableNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#descendingSet#0;class#UnmodifiableNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#descendingIterator#0;class#UnmodifiableNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#subSet#0;class#UnmodifiableNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#headSet#0;class#UnmodifiableNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#tailSet#0;class#UnmodifiableNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#unmodifiableList#0;class#Collections#0" expanded="false" />
+            <element signature="method#unmodifiableList#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#UnmodifiableList#0;class#Collections#0" expanded="false" />
+            <element signature="method#UnmodifiableList#0;class#UnmodifiableList#0;class#Collections#0" expanded="false" />
+            <element signature="method#equals#0;class#UnmodifiableList#0;class#Collections#0" expanded="false" />
+            <element signature="method#hashCode#0;class#UnmodifiableList#0;class#Collections#0" expanded="false" />
+            <element signature="method#get#0;class#UnmodifiableList#0;class#Collections#0" expanded="false" />
+            <element signature="method#set#0;class#UnmodifiableList#0;class#Collections#0" expanded="false" />
+            <element signature="method#add#0;class#UnmodifiableList#0;class#Collections#0" expanded="false" />
+            <element signature="method#remove#0;class#UnmodifiableList#0;class#Collections#0" expanded="false" />
+            <element signature="method#indexOf#0;class#UnmodifiableList#0;class#Collections#0" expanded="false" />
+            <element signature="method#lastIndexOf#0;class#UnmodifiableList#0;class#Collections#0" expanded="false" />
+            <element signature="method#addAll#0;class#UnmodifiableList#0;class#Collections#0" expanded="false" />
+            <element signature="method#replaceAll#0;class#UnmodifiableList#0;class#Collections#0" expanded="false" />
+            <element signature="method#sort#0;class#UnmodifiableList#0;class#Collections#0" expanded="false" />
+            <element signature="method#listIterator#0;class#UnmodifiableList#0;class#Collections#0" expanded="false" />
+            <element signature="method#listIterator#1;class#UnmodifiableList#0;class#Collections#0" expanded="false" />
+            <element signature="class#55857:56938" expanded="false" />
+            <element signature="method#hasNext#0;class#55857:56938" expanded="false" />
+            <element signature="method#next#0;class#55857:56938" expanded="false" />
+            <element signature="method#hasPrevious#0;class#55857:56938" expanded="false" />
+            <element signature="method#previous#0;class#55857:56938" expanded="false" />
+            <element signature="method#nextIndex#0;class#55857:56938" expanded="false" />
+            <element signature="method#previousIndex#0;class#55857:56938" expanded="false" />
+            <element signature="method#remove#0;class#55857:56938" expanded="false" />
+            <element signature="method#set#0;class#55857:56938" expanded="false" />
+            <element signature="method#add#0;class#55857:56938" expanded="false" />
+            <element signature="method#forEachRemaining#0;class#55857:56938" expanded="false" />
+            <element signature="method#subList#0;class#UnmodifiableList#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#readResolve#0;class#UnmodifiableList#0;class#Collections#0" expanded="false" />
+            <element signature="method#readResolve#0;class#UnmodifiableList#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#UnmodifiableRandomAccessList#0;class#Collections#0" expanded="false" />
+            <element signature="class#UnmodifiableRandomAccessList#0;class#Collections#0" expanded="false" />
+            <element signature="method#subList#0;class#UnmodifiableRandomAccessList#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#writeReplace#0;class#UnmodifiableRandomAccessList#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#unmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#unmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#UnmodifiableMap#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#size#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#isEmpty#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#containsKey#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#containsValue#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#get#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#put#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#remove#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#putAll#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#keySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#entrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#values#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#equals#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#hashCode#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#toString#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="e#61896#61905#0" expanded="false" />
+            <element signature="method#getOrDefault#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#forEach#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#replaceAll#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#putIfAbsent#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#remove#1;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#replace#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#replace#1;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#computeIfAbsent#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#computeIfPresent#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#compute#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#merge#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#UnmodifiableEntrySet#0;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#entryConsumer#0;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#forEach#0;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="class#UnmodifiableEntrySetSpliterator#0;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#UnmodifiableEntrySetSpliterator#0;class#UnmodifiableEntrySetSpliterator#0;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#tryAdvance#0;class#UnmodifiableEntrySetSpliterator#0;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#forEachRemaining#0;class#UnmodifiableEntrySetSpliterator#0;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#trySplit#0;class#UnmodifiableEntrySetSpliterator#0;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#getExactSizeIfKnown#0;class#UnmodifiableEntrySetSpliterator#0;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#hasCharacteristics#0;class#UnmodifiableEntrySetSpliterator#0;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#getComparator#0;class#UnmodifiableEntrySetSpliterator#0;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#spliterator#0;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#stream#0;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#parallelStream#0;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#iterator#0;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="class#67504:68043" expanded="false" />
+            <element signature="method#next#0;class#67504:68043" expanded="false" />
+            <element signature="method#remove#0;class#67504:68043" expanded="false" />
+            <element signature="method#toArray#0;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#toArray#1;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="e#68471#68522#0" expanded="false" />
+            <element signature="docComment;method#contains#0;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#contains#0;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#containsAll#0;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#containsAll#0;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#equals#0;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#UnmodifiableEntry#0;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="class#UnmodifiableEntry#0;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#UnmodifiableEntry#0;class#UnmodifiableEntry#0;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#getKey#0;class#UnmodifiableEntry#0;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#getValue#0;class#UnmodifiableEntry#0;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#setValue#0;class#UnmodifiableEntry#0;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#hashCode#0;class#UnmodifiableEntry#0;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#equals#0;class#UnmodifiableEntry#0;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#toString#0;class#UnmodifiableEntry#0;class#UnmodifiableEntrySet#0;class#UnmodifiableMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#unmodifiableSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#unmodifiableSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#UnmodifiableSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="class#UnmodifiableSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#UnmodifiableSortedMap#0;class#UnmodifiableSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#comparator#0;class#UnmodifiableSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#subMap#0;class#UnmodifiableSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#headMap#0;class#UnmodifiableSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#tailMap#0;class#UnmodifiableSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#firstKey#0;class#UnmodifiableSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#lastKey#0;class#UnmodifiableSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#unmodifiableNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#unmodifiableNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#UnmodifiableNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="class#UnmodifiableNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#EmptyNavigableMap#0;class#UnmodifiableNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="class#EmptyNavigableMap#0;class#UnmodifiableNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#EmptyNavigableMap#0;class#EmptyNavigableMap#0;class#UnmodifiableNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#navigableKeySet#0;class#EmptyNavigableMap#0;class#UnmodifiableNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#readResolve#0;class#EmptyNavigableMap#0;class#UnmodifiableNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;field#EMPTY_NAVIGABLE_MAP#0;class#UnmodifiableNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;field#nm#0;class#UnmodifiableNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#UnmodifiableNavigableMap#0;class#UnmodifiableNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#lowerKey#0;class#UnmodifiableNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#floorKey#0;class#UnmodifiableNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#ceilingKey#0;class#UnmodifiableNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#higherKey#0;class#UnmodifiableNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#lowerEntry#0;class#UnmodifiableNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#floorEntry#0;class#UnmodifiableNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#ceilingEntry#0;class#UnmodifiableNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#higherEntry#0;class#UnmodifiableNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#firstEntry#0;class#UnmodifiableNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#lastEntry#0;class#UnmodifiableNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#pollFirstEntry#0;class#UnmodifiableNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#pollLastEntry#0;class#UnmodifiableNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#descendingMap#0;class#UnmodifiableNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#navigableKeySet#0;class#UnmodifiableNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#descendingKeySet#0;class#UnmodifiableNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#subMap#0;class#UnmodifiableNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#headMap#0;class#UnmodifiableNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#tailMap#0;class#UnmodifiableNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#synchronizedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#synchronizedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#synchronizedCollection#1;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#SynchronizedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#SynchronizedCollection#0;class#SynchronizedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#SynchronizedCollection#1;class#SynchronizedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#contains#0;class#SynchronizedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#toArray#1;class#SynchronizedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#iterator#0;class#SynchronizedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#remove#0;class#SynchronizedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#containsAll#0;class#SynchronizedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#removeAll#0;class#SynchronizedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#retainAll#0;class#SynchronizedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#forEach#0;class#SynchronizedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#removeIf#0;class#SynchronizedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#spliterator#0;class#SynchronizedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#stream#0;class#SynchronizedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#parallelStream#0;class#SynchronizedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#writeObject#0;class#SynchronizedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#synchronizedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#synchronizedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#synchronizedSet#1;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#SynchronizedSet#0;class#Collections#0" expanded="false" />
+            <element signature="class#SynchronizedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#equals#0;class#SynchronizedSet#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#synchronizedSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#synchronizedSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#SynchronizedSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="class#SynchronizedSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#SynchronizedSortedSet#0;class#SynchronizedSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#SynchronizedSortedSet#1;class#SynchronizedSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#comparator#0;class#SynchronizedSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#subSet#0;class#SynchronizedSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#headSet#0;class#SynchronizedSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#tailSet#0;class#SynchronizedSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#synchronizedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#synchronizedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#SynchronizedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="class#SynchronizedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#SynchronizedNavigableSet#0;class#SynchronizedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#SynchronizedNavigableSet#1;class#SynchronizedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#lower#0;class#SynchronizedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#floor#0;class#SynchronizedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#ceiling#0;class#SynchronizedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#higher#0;class#SynchronizedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#pollFirst#0;class#SynchronizedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#pollLast#0;class#SynchronizedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#descendingSet#0;class#SynchronizedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#descendingIterator#0;class#SynchronizedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#subSet#0;class#SynchronizedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#headSet#0;class#SynchronizedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#tailSet#0;class#SynchronizedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#subSet#1;class#SynchronizedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#headSet#1;class#SynchronizedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#tailSet#1;class#SynchronizedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#synchronizedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#synchronizedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#synchronizedList#1;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#SynchronizedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#SynchronizedList#0;class#SynchronizedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#SynchronizedList#1;class#SynchronizedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#equals#0;class#SynchronizedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#get#0;class#SynchronizedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#set#0;class#SynchronizedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#add#0;class#SynchronizedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#remove#0;class#SynchronizedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#indexOf#0;class#SynchronizedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#lastIndexOf#0;class#SynchronizedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#addAll#0;class#SynchronizedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#listIterator#0;class#SynchronizedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#listIterator#1;class#SynchronizedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#subList#0;class#SynchronizedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#replaceAll#0;class#SynchronizedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#sort#0;class#SynchronizedList#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#readResolve#0;class#SynchronizedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#readResolve#0;class#SynchronizedList#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#SynchronizedRandomAccessList#0;class#Collections#0" expanded="false" />
+            <element signature="class#SynchronizedRandomAccessList#0;class#Collections#0" expanded="false" />
+            <element signature="method#SynchronizedRandomAccessList#1;class#SynchronizedRandomAccessList#0;class#Collections#0" expanded="false" />
+            <element signature="method#subList#0;class#SynchronizedRandomAccessList#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#writeReplace#0;class#SynchronizedRandomAccessList#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#synchronizedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#synchronizedMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#SynchronizedMap#0;class#Collections#0" expanded="false" />
+            <element signature="class#SynchronizedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#SynchronizedMap#0;class#SynchronizedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#SynchronizedMap#1;class#SynchronizedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#containsKey#0;class#SynchronizedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#containsValue#0;class#SynchronizedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#put#0;class#SynchronizedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#remove#0;class#SynchronizedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#putAll#0;class#SynchronizedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#keySet#0;class#SynchronizedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#entrySet#0;class#SynchronizedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#values#0;class#SynchronizedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#equals#0;class#SynchronizedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#getOrDefault#0;class#SynchronizedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#forEach#0;class#SynchronizedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#replaceAll#0;class#SynchronizedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#putIfAbsent#0;class#SynchronizedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#remove#1;class#SynchronizedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#replace#0;class#SynchronizedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#replace#1;class#SynchronizedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#computeIfAbsent#0;class#SynchronizedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#computeIfPresent#0;class#SynchronizedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#compute#0;class#SynchronizedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#merge#0;class#SynchronizedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#writeObject#0;class#SynchronizedMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#synchronizedSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#synchronizedSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#SynchronizedSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="class#SynchronizedSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#SynchronizedSortedMap#0;class#SynchronizedSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#SynchronizedSortedMap#1;class#SynchronizedSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#comparator#0;class#SynchronizedSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#subMap#0;class#SynchronizedSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#headMap#0;class#SynchronizedSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#tailMap#0;class#SynchronizedSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#synchronizedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#synchronizedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#SynchronizedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="class#SynchronizedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#SynchronizedNavigableMap#0;class#SynchronizedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#SynchronizedNavigableMap#1;class#SynchronizedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#lowerEntry#0;class#SynchronizedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#lowerKey#0;class#SynchronizedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#floorEntry#0;class#SynchronizedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#floorKey#0;class#SynchronizedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#ceilingEntry#0;class#SynchronizedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#ceilingKey#0;class#SynchronizedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#higherEntry#0;class#SynchronizedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#higherKey#0;class#SynchronizedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#firstEntry#0;class#SynchronizedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#lastEntry#0;class#SynchronizedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#pollFirstEntry#0;class#SynchronizedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#pollLastEntry#0;class#SynchronizedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#descendingMap#0;class#SynchronizedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#navigableKeySet#0;class#SynchronizedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#descendingKeySet#0;class#SynchronizedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#subMap#0;class#SynchronizedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#headMap#0;class#SynchronizedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#tailMap#0;class#SynchronizedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#subMap#1;class#SynchronizedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#headMap#1;class#SynchronizedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#tailMap#1;class#SynchronizedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#checkedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#checkedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#zeroLengthArray#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#CheckedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="class#CheckedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#typeCheck#0;class#CheckedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#badElementMsg#0;class#CheckedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#CheckedCollection#0;class#CheckedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#size#0;class#CheckedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#isEmpty#0;class#CheckedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#contains#0;class#CheckedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#toArray#0;class#CheckedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#toArray#1;class#CheckedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#toString#0;class#CheckedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#remove#0;class#CheckedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#clear#0;class#CheckedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#containsAll#0;class#CheckedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#removeAll#0;class#CheckedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#retainAll#0;class#CheckedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#iterator#0;class#CheckedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="e#121780#121836#0" expanded="false" />
+            <element signature="class#121955:122165" expanded="false" />
+            <element signature="method#hasNext#0;class#121955:122165" expanded="false" />
+            <element signature="method#next#0;class#121955:122165" expanded="false" />
+            <element signature="method#remove#0;class#121955:122165" expanded="false" />
+            <element signature="method#add#0;class#CheckedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#zeroLengthElementArray#0;class#CheckedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#checkedCopyOf#0;class#CheckedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="e#123009#123053#0" expanded="false" />
+            <element signature="method#addAll#0;class#CheckedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="e#123655#123716#0" expanded="false" />
+            <element signature="method#forEach#0;class#CheckedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#removeIf#0;class#CheckedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#spliterator#0;class#CheckedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#stream#0;class#CheckedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="method#parallelStream#0;class#CheckedCollection#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#checkedQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#checkedQueue#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#CheckedQueue#0;class#Collections#0" expanded="false" />
+            <element signature="class#CheckedQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#CheckedQueue#0;class#CheckedQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#element#0;class#CheckedQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#equals#0;class#CheckedQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#hashCode#0;class#CheckedQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#peek#0;class#CheckedQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#poll#0;class#CheckedQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#remove#0;class#CheckedQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#offer#0;class#CheckedQueue#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#checkedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#checkedSet#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#CheckedSet#0;class#Collections#0" expanded="false" />
+            <element signature="class#CheckedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#CheckedSet#0;class#CheckedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#equals#0;class#CheckedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#hashCode#0;class#CheckedSet#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#checkedSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#checkedSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#CheckedSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="class#CheckedSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#CheckedSortedSet#0;class#CheckedSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#comparator#0;class#CheckedSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#first#0;class#CheckedSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#last#0;class#CheckedSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#subSet#0;class#CheckedSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#headSet#0;class#CheckedSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#tailSet#0;class#CheckedSortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#checkedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#checkedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#CheckedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="class#CheckedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#CheckedNavigableSet#0;class#CheckedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#lower#0;class#CheckedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#floor#0;class#CheckedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#ceiling#0;class#CheckedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#higher#0;class#CheckedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#pollFirst#0;class#CheckedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#pollLast#0;class#CheckedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#descendingSet#0;class#CheckedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#descendingIterator#0;class#CheckedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#subSet#0;class#CheckedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#headSet#0;class#CheckedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#tailSet#0;class#CheckedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#subSet#1;class#CheckedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#headSet#1;class#CheckedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#tailSet#1;class#CheckedNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#checkedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#checkedList#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#CheckedList#0;class#Collections#0" expanded="false" />
+            <element signature="class#CheckedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#CheckedList#0;class#CheckedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#equals#0;class#CheckedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#hashCode#0;class#CheckedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#get#0;class#CheckedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#remove#0;class#CheckedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#indexOf#0;class#CheckedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#lastIndexOf#0;class#CheckedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#set#0;class#CheckedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#add#0;class#CheckedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#addAll#0;class#CheckedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#listIterator#0;class#CheckedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#listIterator#1;class#CheckedList#0;class#Collections#0" expanded="false" />
+            <element signature="class#137924:138815" expanded="false" />
+            <element signature="method#hasNext#0;class#137924:138815" expanded="false" />
+            <element signature="method#next#0;class#137924:138815" expanded="false" />
+            <element signature="method#hasPrevious#0;class#137924:138815" expanded="false" />
+            <element signature="method#previous#0;class#137924:138815" expanded="false" />
+            <element signature="method#nextIndex#0;class#137924:138815" expanded="false" />
+            <element signature="method#previousIndex#0;class#137924:138815" expanded="false" />
+            <element signature="method#remove#0;class#137924:138815" expanded="false" />
+            <element signature="method#forEachRemaining#0;class#137924:138815" expanded="false" />
+            <element signature="method#subList#0;class#CheckedList#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#replaceAll#0;class#CheckedList#0;class#Collections#0" expanded="false" />
+            <element signature="method#replaceAll#0;class#CheckedList#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#CheckedRandomAccessList#0;class#Collections#0" expanded="false" />
+            <element signature="class#CheckedRandomAccessList#0;class#Collections#0" expanded="false" />
+            <element signature="method#CheckedRandomAccessList#0;class#CheckedRandomAccessList#0;class#Collections#0" expanded="false" />
+            <element signature="method#subList#0;class#CheckedRandomAccessList#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#checkedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#checkedMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#typeCheck#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#typeCheck#1;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#badKeyMsg#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#badValueMsg#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#CheckedMap#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#size#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#isEmpty#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#containsKey#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#containsValue#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#get#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#remove#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#clear#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#keySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#values#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#equals#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#hashCode#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#toString#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#put#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#putAll#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="e#144972#145003#0" expanded="false" />
+            <element signature="method#entrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#forEach#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#replaceAll#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#putIfAbsent#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#remove#1;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#replace#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#replace#1;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#computeIfAbsent#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#computeIfPresent#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#compute#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#merge#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#CheckedEntrySet#0;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#size#0;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#isEmpty#0;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#toString#0;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#hashCode#0;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#clear#0;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#add#0;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#addAll#0;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#iterator#0;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="class#149640:149956" expanded="false" />
+            <element signature="method#hasNext#0;class#149640:149956" expanded="false" />
+            <element signature="method#remove#0;class#149640:149956" expanded="false" />
+            <element signature="method#next#0;class#149640:149956" expanded="false" />
+            <element signature="method#toArray#0;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#toArray#1;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="e#150818#150869#0" expanded="false" />
+            <element signature="docComment;method#contains#0;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#contains#0;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#containsAll#0;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#containsAll#0;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#remove#0;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#removeAll#0;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#retainAll#0;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#batchRemove#0;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#equals#0;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#checkedEntry#0;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#CheckedEntry#0;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="class#CheckedEntry#0;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#CheckedEntry#0;class#CheckedEntry#0;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#getKey#0;class#CheckedEntry#0;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#getValue#0;class#CheckedEntry#0;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#hashCode#0;class#CheckedEntry#0;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#toString#0;class#CheckedEntry#0;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#setValue#0;class#CheckedEntry#0;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#badValueMsg#0;class#CheckedEntry#0;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#equals#0;class#CheckedEntry#0;class#CheckedEntrySet#0;class#CheckedMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#checkedSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#checkedSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#CheckedSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="class#CheckedSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#CheckedSortedMap#0;class#CheckedSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#comparator#0;class#CheckedSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#firstKey#0;class#CheckedSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#lastKey#0;class#CheckedSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#subMap#0;class#CheckedSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#headMap#0;class#CheckedSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#tailMap#0;class#CheckedSortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#checkedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#checkedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#CheckedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="class#CheckedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#CheckedNavigableMap#0;class#CheckedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#comparator#0;class#CheckedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#firstKey#0;class#CheckedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#lastKey#0;class#CheckedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#lowerEntry#0;class#CheckedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#lowerKey#0;class#CheckedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#floorEntry#0;class#CheckedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#floorKey#0;class#CheckedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#ceilingEntry#0;class#CheckedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#ceilingKey#0;class#CheckedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#higherEntry#0;class#CheckedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#higherKey#0;class#CheckedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#firstEntry#0;class#CheckedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#lastEntry#0;class#CheckedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#pollFirstEntry#0;class#CheckedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#pollLastEntry#0;class#CheckedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#descendingMap#0;class#CheckedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#navigableKeySet#0;class#CheckedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#descendingKeySet#0;class#CheckedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#subMap#0;class#CheckedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#headMap#0;class#CheckedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#tailMap#0;class#CheckedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#subMap#1;class#CheckedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#headMap#1;class#CheckedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#tailMap#1;class#CheckedNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#emptyIterator#0;class#Collections#0" expanded="false" />
+            <element signature="method#emptyIterator#0;class#Collections#0" expanded="false" />
+            <element signature="class#EmptyIterator#0;class#Collections#0" expanded="false" />
+            <element signature="method#hasNext#0;class#EmptyIterator#0;class#Collections#0" expanded="false" />
+            <element signature="method#next#0;class#EmptyIterator#0;class#Collections#0" expanded="false" />
+            <element signature="method#remove#0;class#EmptyIterator#0;class#Collections#0" expanded="false" />
+            <element signature="method#forEachRemaining#0;class#EmptyIterator#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#emptyListIterator#0;class#Collections#0" expanded="false" />
+            <element signature="method#emptyListIterator#0;class#Collections#0" expanded="false" />
+            <element signature="class#EmptyListIterator#0;class#Collections#0" expanded="false" />
+            <element signature="method#hasPrevious#0;class#EmptyListIterator#0;class#Collections#0" expanded="false" />
+            <element signature="method#previous#0;class#EmptyListIterator#0;class#Collections#0" expanded="false" />
+            <element signature="method#nextIndex#0;class#EmptyListIterator#0;class#Collections#0" expanded="false" />
+            <element signature="method#previousIndex#0;class#EmptyListIterator#0;class#Collections#0" expanded="false" />
+            <element signature="method#set#0;class#EmptyListIterator#0;class#Collections#0" expanded="false" />
+            <element signature="method#add#0;class#EmptyListIterator#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#emptyEnumeration#0;class#Collections#0" expanded="false" />
+            <element signature="method#emptyEnumeration#0;class#Collections#0" expanded="false" />
+            <element signature="class#EmptyEnumeration#0;class#Collections#0" expanded="false" />
+            <element signature="method#hasMoreElements#0;class#EmptyEnumeration#0;class#Collections#0" expanded="false" />
+            <element signature="method#nextElement#0;class#EmptyEnumeration#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;field#EMPTY_SET#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#emptySet#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#EmptySet#0;class#Collections#0" expanded="false" />
+            <element signature="class#EmptySet#0;class#Collections#0" expanded="false" />
+            <element signature="method#iterator#0;class#EmptySet#0;class#Collections#0" expanded="false" />
+            <element signature="method#size#0;class#EmptySet#0;class#Collections#0" expanded="false" />
+            <element signature="method#isEmpty#0;class#EmptySet#0;class#Collections#0" expanded="false" />
+            <element signature="method#contains#0;class#EmptySet#0;class#Collections#0" expanded="false" />
+            <element signature="method#containsAll#0;class#EmptySet#0;class#Collections#0" expanded="false" />
+            <element signature="method#toArray#0;class#EmptySet#0;class#Collections#0" expanded="false" />
+            <element signature="method#toArray#1;class#EmptySet#0;class#Collections#0" expanded="false" />
+            <element signature="method#forEach#0;class#EmptySet#0;class#Collections#0" expanded="false" />
+            <element signature="method#removeIf#0;class#EmptySet#0;class#Collections#0" expanded="false" />
+            <element signature="method#spliterator#0;class#EmptySet#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#emptySortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#emptySortedSet#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#emptyNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#emptyNavigableSet#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;field#EMPTY_LIST#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#emptyList#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#EmptyList#0;class#Collections#0" expanded="false" />
+            <element signature="class#EmptyList#0;class#Collections#0" expanded="false" />
+            <element signature="method#size#0;class#EmptyList#0;class#Collections#0" expanded="false" />
+            <element signature="method#isEmpty#0;class#EmptyList#0;class#Collections#0" expanded="false" />
+            <element signature="method#contains#0;class#EmptyList#0;class#Collections#0" expanded="false" />
+            <element signature="method#containsAll#0;class#EmptyList#0;class#Collections#0" expanded="false" />
+            <element signature="method#toArray#0;class#EmptyList#0;class#Collections#0" expanded="false" />
+            <element signature="method#toArray#1;class#EmptyList#0;class#Collections#0" expanded="false" />
+            <element signature="method#get#0;class#EmptyList#0;class#Collections#0" expanded="false" />
+            <element signature="method#equals#0;class#EmptyList#0;class#Collections#0" expanded="false" />
+            <element signature="method#hashCode#0;class#EmptyList#0;class#Collections#0" expanded="false" />
+            <element signature="method#removeIf#0;class#EmptyList#0;class#Collections#0" expanded="false" />
+            <element signature="method#replaceAll#0;class#EmptyList#0;class#Collections#0" expanded="false" />
+            <element signature="method#sort#0;class#EmptyList#0;class#Collections#0" expanded="false" />
+            <element signature="method#forEach#0;class#EmptyList#0;class#Collections#0" expanded="false" />
+            <element signature="method#spliterator#0;class#EmptyList#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;field#EMPTY_MAP#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#emptyMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#emptyMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#emptySortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#emptySortedMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#emptyNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#emptyNavigableMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#EmptyMap#0;class#Collections#0" expanded="false" />
+            <element signature="class#EmptyMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#size#0;class#EmptyMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#isEmpty#0;class#EmptyMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#containsKey#0;class#EmptyMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#containsValue#0;class#EmptyMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#get#0;class#EmptyMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#keySet#0;class#EmptyMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#values#0;class#EmptyMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#entrySet#0;class#EmptyMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#equals#0;class#EmptyMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#hashCode#0;class#EmptyMap#0;class#Collections#0" expanded="false" />
+            <element signature="e#180817#180826#0" expanded="false" />
+            <element signature="method#forEach#0;class#EmptyMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#replaceAll#0;class#EmptyMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#putIfAbsent#0;class#EmptyMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#remove#0;class#EmptyMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#replace#0;class#EmptyMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#replace#1;class#EmptyMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#computeIfAbsent#0;class#EmptyMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#computeIfPresent#0;class#EmptyMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#compute#0;class#EmptyMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#merge#0;class#EmptyMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#singleton#0;class#Collections#0" expanded="false" />
+            <element signature="method#singletonIterator#0;class#Collections#0" expanded="false" />
+            <element signature="class#183278:184031" expanded="false" />
+            <element signature="method#next#0;class#183278:184031" expanded="false" />
+            <element signature="method#forEachRemaining#0;class#183278:184031" expanded="false" />
+            <element signature="docComment;method#singletonSpliterator#0;class#Collections#0" expanded="false" />
+            <element signature="method#singletonSpliterator#0;class#Collections#0" expanded="false" />
+            <element signature="class#184303:185385" expanded="false" />
+            <element signature="method#tryAdvance#0;class#184303:185385" expanded="false" />
+            <element signature="method#forEachRemaining#0;class#184303:185385" expanded="false" />
+            <element signature="method#characteristics#0;class#184303:185385" expanded="false" />
+            <element signature="docComment;class#SingletonSet#0;class#Collections#0" expanded="false" />
+            <element signature="class#SingletonSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#SingletonSet#0;class#SingletonSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#size#0;class#SingletonSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#contains#0;class#SingletonSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#forEach#0;class#SingletonSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#spliterator#0;class#SingletonSet#0;class#Collections#0" expanded="false" />
+            <element signature="method#removeIf#0;class#SingletonSet#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#singletonList#0;class#Collections#0" expanded="false" />
+            <element signature="method#singletonList#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#SingletonList#0;class#Collections#0" expanded="false" />
+            <element signature="class#SingletonList#0;class#Collections#0" expanded="false" />
+            <element signature="method#SingletonList#0;class#SingletonList#0;class#Collections#0" expanded="false" />
+            <element signature="method#size#0;class#SingletonList#0;class#Collections#0" expanded="false" />
+            <element signature="method#contains#0;class#SingletonList#0;class#Collections#0" expanded="false" />
+            <element signature="method#get#0;class#SingletonList#0;class#Collections#0" expanded="false" />
+            <element signature="method#forEach#0;class#SingletonList#0;class#Collections#0" expanded="false" />
+            <element signature="method#removeIf#0;class#SingletonList#0;class#Collections#0" expanded="false" />
+            <element signature="method#replaceAll#0;class#SingletonList#0;class#Collections#0" expanded="false" />
+            <element signature="method#sort#0;class#SingletonList#0;class#Collections#0" expanded="false" />
+            <element signature="method#spliterator#0;class#SingletonList#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#singletonMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#singletonMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#SingletonMap#0;class#Collections#0" expanded="false" />
+            <element signature="class#SingletonMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#SingletonMap#0;class#SingletonMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#size#0;class#SingletonMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#isEmpty#0;class#SingletonMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#containsKey#0;class#SingletonMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#containsValue#0;class#SingletonMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#get#0;class#SingletonMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#keySet#0;class#SingletonMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#entrySet#0;class#SingletonMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#values#0;class#SingletonMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#getOrDefault#0;class#SingletonMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#forEach#0;class#SingletonMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#replaceAll#0;class#SingletonMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#putIfAbsent#0;class#SingletonMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#remove#0;class#SingletonMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#replace#0;class#SingletonMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#replace#1;class#SingletonMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#computeIfAbsent#0;class#SingletonMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#computeIfPresent#0;class#SingletonMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#compute#0;class#SingletonMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#merge#0;class#SingletonMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#nCopies#0;class#Collections#0" expanded="false" />
+            <element signature="method#nCopies#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#CopiesList#0;class#Collections#0" expanded="false" />
+            <element signature="class#CopiesList#0;class#Collections#0" expanded="false" />
+            <element signature="method#CopiesList#0;class#CopiesList#0;class#Collections#0" expanded="false" />
+            <element signature="method#contains#0;class#CopiesList#0;class#Collections#0" expanded="false" />
+            <element signature="method#get#0;class#CopiesList#0;class#Collections#0" expanded="false" />
+            <element signature="method#toArray#0;class#CopiesList#0;class#Collections#0" expanded="false" />
+            <element signature="method#toArray#1;class#CopiesList#0;class#Collections#0" expanded="false" />
+            <element signature="method#subList#0;class#CopiesList#0;class#Collections#0" expanded="false" />
+            <element signature="method#stream#0;class#CopiesList#0;class#Collections#0" expanded="false" />
+            <element signature="method#parallelStream#0;class#CopiesList#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#reverseOrder#0;class#Collections#0" expanded="false" />
+            <element signature="method#reverseOrder#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#ReverseComparator#0;class#Collections#0" expanded="false" />
+            <element signature="class#ReverseComparator#0;class#Collections#0" expanded="false" />
+            <element signature="method#compare#0;class#ReverseComparator#0;class#Collections#0" expanded="false" />
+            <element signature="method#readResolve#0;class#ReverseComparator#0;class#Collections#0" expanded="false" />
+            <element signature="method#reversed#0;class#ReverseComparator#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#reverseOrder#1;class#Collections#0" expanded="false" />
+            <element signature="method#reverseOrder#1;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#ReverseComparator2#0;class#Collections#0" expanded="false" />
+            <element signature="class#ReverseComparator2#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;field#cmp#0;class#ReverseComparator2#0;class#Collections#0" expanded="false" />
+            <element signature="method#ReverseComparator2#0;class#ReverseComparator2#0;class#Collections#0" expanded="false" />
+            <element signature="method#equals#0;class#ReverseComparator2#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#enumeration#0;class#Collections#0" expanded="false" />
+            <element signature="method#enumeration#0;class#Collections#0" expanded="false" />
+            <element signature="class#200525:200792" expanded="false" />
+            <element signature="docComment;method#list#0;class#Collections#0" expanded="false" />
+            <element signature="method#list#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#eq#0;class#Collections#0" expanded="false" />
+            <element signature="method#eq#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#frequency#0;class#Collections#0" expanded="false" />
+            <element signature="method#frequency#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;method#disjoint#0;class#Collections#0" expanded="false" />
+            <element signature="method#disjoint#0;class#Collections#0" expanded="false" />
+            <element signature="e#205002#205069#0" expanded="false" />
+            <element signature="e#205184#205253#0" expanded="false" />
+            <element signature="e#205573#205623#0" expanded="false" />
+            <element signature="e#205892#205959#0" expanded="false" />
+            <element signature="e#206102#206164#0" expanded="false" />
+            <element signature="docComment;method#addAll#0;class#Collections#0" expanded="false" />
+            <element signature="method#newSetFromMap#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#SetFromMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#SetFromMap#0;class#SetFromMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#clear#0;class#SetFromMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#size#0;class#SetFromMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#isEmpty#0;class#SetFromMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#contains#0;class#SetFromMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#remove#0;class#SetFromMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#add#0;class#SetFromMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#iterator#0;class#SetFromMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#toArray#0;class#SetFromMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#toArray#1;class#SetFromMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#toString#0;class#SetFromMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#hashCode#0;class#SetFromMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#equals#0;class#SetFromMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#containsAll#0;class#SetFromMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#removeAll#0;class#SetFromMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#retainAll#0;class#SetFromMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#removeIf#0;class#SetFromMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#spliterator#0;class#SetFromMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#stream#0;class#SetFromMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#parallelStream#0;class#SetFromMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#readObject#0;class#SetFromMap#0;class#Collections#0" expanded="false" />
+            <element signature="method#asLifoQueue#0;class#Collections#0" expanded="false" />
+            <element signature="docComment;class#AsLIFOQueue#0;class#Collections#0" expanded="false" />
+            <element signature="class#AsLIFOQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#AsLIFOQueue#0;class#AsLIFOQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#add#0;class#AsLIFOQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#offer#0;class#AsLIFOQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#poll#0;class#AsLIFOQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#remove#0;class#AsLIFOQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#peek#0;class#AsLIFOQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#element#0;class#AsLIFOQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#clear#0;class#AsLIFOQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#size#0;class#AsLIFOQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#isEmpty#0;class#AsLIFOQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#contains#0;class#AsLIFOQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#remove#1;class#AsLIFOQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#iterator#0;class#AsLIFOQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#toArray#0;class#AsLIFOQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#toArray#1;class#AsLIFOQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#toString#0;class#AsLIFOQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#containsAll#0;class#AsLIFOQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#removeAll#0;class#AsLIFOQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#retainAll#0;class#AsLIFOQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#forEach#0;class#AsLIFOQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#removeIf#0;class#AsLIFOQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#spliterator#0;class#AsLIFOQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#stream#0;class#AsLIFOQueue#0;class#Collections#0" expanded="false" />
+            <element signature="method#parallelStream#0;class#AsLIFOQueue#0;class#Collections#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/scj/Worker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48346055">
-          <caret line="42" column="28" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="28" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="376" column="3" selection-start-line="376" selection-start-column="3" selection-end-line="376" selection-end-column="3" />
           <folding>
             <element signature="docComment;class#Worker#0" expanded="false" />
             <element signature="method#detectURL#0;class#Worker#0" expanded="false" />
@@ -1352,8 +2101,29 @@
             <element signature="method#extractBook#0;class#Worker#0" expanded="false" />
             <element signature="method#formatVariant#0;class#Worker#0" expanded="false" />
             <element signature="method#walkTree#0;class#Worker#0" expanded="false" />
+            <element signature="method#viewToc#0;class#Worker#0" expanded="false" />
             <element signature="method#viewExtension#0;class#Worker#0" expanded="false" />
-            <element signature="method#viewBook#0;class#Worker#0" expanded="false" />
+            <element signature="method#viewChapter#0;class#Worker#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/scj/SCI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3112745">
+          <caret line="161" column="0" selection-start-line="161" selection-start-column="0" selection-end-line="161" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;class#SCI#0" expanded="false" />
+            <element signature="method#SCI#0;class#SCI#0" expanded="false" />
+            <element signature="docComment;method#makeOptions#0;class#SCI#0" expanded="false" />
+            <element signature="method#makeOptions#0;class#SCI#0" expanded="false" />
+            <element signature="method#parseArguments#0;class#SCI#0" expanded="false" />
+            <element signature="method#showSupported#0;class#SCI#0" expanded="false" />
+            <element signature="docComment;method#cliError#0;class#SCI#0" expanded="false" />
+            <element signature="class#Command#0;class#SCI#0" expanded="false" />
+            <element signature="method#exec#0;class#SCI#0" expanded="false" />
+            <element signature="method#main#0;class#SCI#0" expanded="false" />
           </folding>
         </state>
       </provider>

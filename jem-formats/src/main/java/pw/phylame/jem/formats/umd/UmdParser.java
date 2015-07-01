@@ -41,11 +41,7 @@ import java.io.Writer;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
-import java.util.Map;
-import java.util.List;
-import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.*;
 
 /**
  * <tt>Parser</tt> implement for UMD book.
@@ -90,6 +86,7 @@ public class UmdParser implements Parser {
             throw new ParserException("Invalid UMD file: magic number", getName());
         }
         book = new Book();
+        book.setDate(new Date());
         int sep;
         while ((sep=source.read()) != -1) {
             if (sep == UMD.CHUNK_SEPARATOR) {

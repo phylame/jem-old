@@ -21,7 +21,7 @@ package pw.phylame.jem.core;
 import java.util.Set;
 import java.util.Map;
 import java.util.List;
-import java.util.TreeMap;
+import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.io.Writer;
@@ -42,7 +42,7 @@ import pw.phylame.jem.util.TextObject;
  * </ul>
  *
  */
-public class Part implements Iterable<Part>, FieldConstants {
+public class Part implements Iterable<Part>, Attributes {
 
     /** Constructs part used empty title and content. */
     public Part() {
@@ -60,19 +60,18 @@ public class Part implements Iterable<Part>, FieldConstants {
     /**
      * Constructs part with specified title and content source.
      * @param title title of part
-     * @param content text content provider
+     * @param source text content provider
      */
-    public Part(String title, TextObject content) {
-        super();
+    public Part(String title, TextObject source) {
         setTitle(title);
-        setSource(content);
+        setSource(source);
     }
 
     // **************************
     // ** Attributes supported **
     // **************************
 
-    private Map<String, Object> metaMap = new TreeMap<String, Object>();
+    private Map<String, Object> metaMap = new HashMap<String, Object>();
 
     /**
      * Associates the specified value with the specified key in attributes map.
@@ -87,10 +86,10 @@ public class Part implements Iterable<Part>, FieldConstants {
 
     /**
      * Updates attributes with specified map.
-     * @param metaMap the source map
+     * @param map the source map
      */
-    public void updateAttributes(Map<String, Object> metaMap) {
-        this.metaMap.putAll(metaMap);
+    public void updateAttributes(Map<String, Object> map) {
+        metaMap.putAll(map);
     }
 
     /**
@@ -98,7 +97,7 @@ public class Part implements Iterable<Part>, FieldConstants {
      * @param other another part
      */
     public void updateAttributes(Part other) {
-        updateAttributes(other.metaMap);
+        metaMap.putAll(other.metaMap);
     }
 
     /**
@@ -195,8 +194,8 @@ public class Part implements Iterable<Part>, FieldConstants {
      * Returns all names in attributes map.
      * @return sequence of attribute names
      */
-    public Set<String> attributeNames() {
-        return metaMap.keySet();
+    public String[] attributeNames() {
+        return metaMap.keySet().toArray(new String[0]);
     }
 
     // ********************************
