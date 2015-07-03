@@ -85,6 +85,7 @@ public class SettingsDialog extends JDialog {
     private JLabel            lbEditorColorHigh;
     private JButton           btnEditorFont;
     private JCheckBox         cDecorateTitle;
+    private JCheckBox         cAAFont;
 
     private static Point     oldLocation = null;
     private static Dimension oldSize     = null;
@@ -188,6 +189,13 @@ public class SettingsDialog extends JDialog {
                 newEditorFont();
             }
         });
+        Action action = new IAction("Dialog.Settings.Editor.Font.AAFont") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                app.getConfig().setAntiAliased(cAAFont.isSelected());
+            }
+        };
+        cAAFont.setAction(action);
 
         ((TitledBorder)jpEditorColor.getBorder()).setTitle(
                 app.getText("Dialog.Settings.Editor.Color.Title"));
@@ -201,7 +209,7 @@ public class SettingsDialog extends JDialog {
         ((TitledBorder) jpEditorStyle.getBorder()).setTitle(
                 app.getText("Dialog.Settings.Editor.Style.Title"));
 
-        Action action = new IAction(null, "Dialog.Settings.Editor.Style.LabelLineWarp", app) {
+        action = new IAction(null, "Dialog.Settings.Editor.Style.LabelLineWarp", app) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean enable = cEditorStyleLW.isSelected();
@@ -276,6 +284,7 @@ public class SettingsDialog extends JDialog {
         Font font = app.getConfig().getEditorFont();
         lbEditorFontDemo.setFont(font);
         lbEditorFontDemo.setText(Config.toString(font));
+        cAAFont.setSelected(app.getConfig().isAntiAliased());
 
         lbEditorColorForeDemo.setBackground(app.getConfig().getEditorForeground());
         lbEditorColorBackDemo.setBackground(app.getConfig().getEditorBackground());

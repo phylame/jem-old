@@ -144,16 +144,6 @@ public class Viewer extends IFrame implements Constants {
     }
 
     @Override
-    public String getText(String key) {
-        return app.getText(key);
-    }
-
-    @Override
-    public String getText(String key, Object... args) {
-        return app.getText(key, args);
-    }
-
-    @Override
     public void actionPerformed(ActionEvent e) {
         app.onCommand(e.getActionCommand());
     }

@@ -24,13 +24,11 @@ import java.net.URL;
 
 import java.util.*;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import pw.phylame.jem.core.Chapter;
-import pw.phylame.jem.core.Jem;
-import pw.phylame.jem.core.Part;
-import pw.phylame.jem.core.Book;
+import pw.phylame.jem.core.*;
 import pw.phylame.jem.util.FileFactory;
 import pw.phylame.jem.util.FileObject;
 import pw.phylame.jem.util.JemException;
@@ -196,6 +194,7 @@ public final class Worker implements Constants {
     }
 
     static String joinBook(List<File> inputs,
+                           String inFormat,
                            Map<String, Object> inKw,
                            Map<String, Object> attributes,
                            Map<String, Object> items,
@@ -204,7 +203,23 @@ public final class Worker implements Constants {
                            Map<String, Object> outKw) {
         Book book = new Book();
         for (File input: inputs) {
-            Book sub = openBook(input, null, inKw);
+            // check it exists
+            if (! input.exists()) {
+                app.error(app.getText("SCI_NOT_EXISTS", input));
+                continue;
+            }
+
+            String format = inFormat;
+            if (format == null) {
+                format = FilenameUtils.getExtension(input.getPath());
+            }
+            if (! BookHelper.hasParser(format)) {
+                app.error(app.getText("SCI_IN_UNSUPPORTED", format, input));
+                System.out.println(app.getText("SCI_UNSUPPORTED_HELP"));
+                continue;
+            }
+
+            Book sub = openBook(input, format, inKw);
             if (sub == null) {
                 app.error(app.getText("SCI_READ_FAILED", input));
             } else {
@@ -222,9 +237,6 @@ public final class Worker implements Constants {
             app.error(app.getText("SCI_JOIN_FAILED", output.getAbsolutePath()));
         }
 
-        for (Part sub: book) {
-            sub.cleanup();
-        }
         book.cleanup();
         return path;
     }
@@ -376,6 +388,9 @@ public final class Worker implements Constants {
                 ArrayList<String> names = new ArrayList<>();
                 Collections.addAll(names, part.attributeNames());
                 Collections.addAll(names, VIEW_KEY_TEXT, VIEW_KEY_SIZE, VIEW_KEY_ALL);
+                if (part.isSection()) {
+                    names.add(VIEW_KEY_TOC);
+                }
                 if (part instanceof Book) {
                     names.add(VIEW_KEY_EXTENSION);
                 }

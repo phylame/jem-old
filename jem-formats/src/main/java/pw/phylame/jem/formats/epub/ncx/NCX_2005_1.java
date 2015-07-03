@@ -99,6 +99,10 @@ public class NCX_2005_1 extends AbstractNcxBuilder {
 
     private void writeBookCoverPage(HtmlMaker htmlMaker, OpfBuilder opfBuilder, ZipOutputStream zipout, EpubConfig config)
             throws IOException {
+        String cover = opfBuilder.getCover();
+        if (cover == null) {
+            return;
+        }
         String href = config.textDir + "/" + EPUB.COVER_PAGE_FILE;
         Document page = htmlMaker.makeCoverPage(I18N.getText("Epub.Page.Cover.Title"), "../"+opfBuilder.getCover(),
                 config.styleProvider.getBookCoverStyle());
@@ -320,6 +324,7 @@ public class NCX_2005_1 extends AbstractNcxBuilder {
             ++i;
         }
 
+        // main TOC
         if (depth > 1) {
             Document page = htmlMaker.makeContentsPage(tocTitle, config.styleProvider.getTocTitleStyle(), null, null,
                     titles, links, config.styleProvider.getTocItemsStyle());

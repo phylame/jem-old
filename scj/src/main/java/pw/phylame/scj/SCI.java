@@ -21,19 +21,13 @@ package pw.phylame.scj;
 import java.io.File;
 import java.util.*;
 
+import org.apache.commons.cli.*;
 import pw.phylame.pat.gaf.Translator;
 import pw.phylame.pat.gaf.Application;
 import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.BookHelper;
 import pw.phylame.tools.StringUtils;
 
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.PosixParser;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.OptionBuilder;
-import org.apache.commons.cli.ParseException;
 import org.apache.commons.io.FilenameUtils;
 
 /**
@@ -165,21 +159,21 @@ public final class SCI extends Application implements Constants {
      * @param syntax SCI syntax
      * @param e the exception
      */
-    private void cliError(String syntax, ParseException e) {
+    private void printCLIError(String syntax, ParseException e) {
         String msg;
-        String clazz = e.getClass().getSimpleName();
-        if ("UnrecognizedOptionException".equals(clazz)) {
+        if (e instanceof UnrecognizedOptionException) {
             msg = getText("SCI_UNRECOGNIZED_OPTION",
-                    ((org.apache.commons.cli.UnrecognizedOptionException)e).getOption());
-        } else if ("MissingOptionException".equals(clazz)) {
+                    ((UnrecognizedOptionException)e).getOption());
+        } else if (e instanceof MissingOptionException) {
             msg = getText("SCI_MISSING_OPTION",
-                    ((org.apache.commons.cli.MissingOptionException)e).getMissingOptions());
-        } else if ("MissingArgumentException".equals(clazz)) {
+                    ((MissingOptionException)e).getMissingOptions());
+        } else if (e instanceof MissingArgumentException) {
             msg = getText("SCI_MISSING_ARGUMENT",
-                    "-" + ((org.apache.commons.cli.MissingArgumentException)e).getOption().getOpt());
+                    "-" + ((MissingArgumentException)e).getOption().getOpt());
         } else {
             msg = e.getMessage();
         }
+
         error(msg);
         System.out.println(syntax);
     }
@@ -190,25 +184,25 @@ public final class SCI extends Application implements Constants {
     }
 
     // command type
-    enum Command {
+    private enum Command {
         Convert, Join, Extract, View
     }
 
     int exec() {
-        final String SCJ_SYNTAX = getText("SCI_SYNTAX", getName());
+        String SCJ_SYNTAX = getText("SCI_SYNTAX", getName());
         Options options = makeOptions();
         CommandLine cmd;
         try {
             cmd = new PosixParser().parse(options, getArguments());    // POSIX style
         } catch (ParseException e) {
-            cliError(SCJ_SYNTAX, e);
+            printCLIError(SCJ_SYNTAX, e);
             return -1;
         }
         if (cmd.hasOption("h")) {
             HelpFormatter hf = new HelpFormatter();
             hf.setSyntaxPrefix("");
-            hf.printHelp(80, SCJ_SYNTAX, getText("SCI_OPTIONS_PREFIX"),
-                    options, getText("SCJ_BUG_REPORT"));
+            hf.printHelp(80, SCJ_SYNTAX, getText("SCI_OPTIONS_PREFIX"), options,
+                    getText("SCJ_BUG_REPORT"));
             return 0;
         } else if (cmd.hasOption("v")) {
             showVersion();
@@ -314,7 +308,7 @@ public final class SCI extends Application implements Constants {
         // join books
         if (command == Command.Join) {
             String result = Worker.joinBook(
-                    inputs, inKw, attrs, items, output, outFormat, outKw);
+                    inputs, inFormat, inKw, attrs, items, output, outFormat, outKw);
             if (result != null) {
                 System.out.println(result);
             } else {

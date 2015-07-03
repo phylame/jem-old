@@ -2,7 +2,8 @@ Manifest-Version: 1.0
 Class-Path: commons-io-2.4.jar jcalendar-1.4.jar pw-utils-1.0.0.jar do
  m4j-1.6.1.jar log4j-1.2.12.jar pat-core-1.0.0.jar jfontchooser-1.0.5.
  jar jem-core-2.1.0.jar jgoodies-looks-2.5.3.jar xml-apis-1.0.b2.jar j
- goodies-common-1.6.0.jar commons-logging-1.2.jar jem-formats-1.1.1.ja
+ goodies-common-1.6.0.jar commons-logging-1.2.jar jem-formats-1.2.0.ja
  r
 Main-Class: pw.phylame.imabw.Imabw
 SplashScreen-Image: res/gfx/imabw_banner.png
+
