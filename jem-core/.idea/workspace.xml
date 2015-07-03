@@ -5,16 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="43c239c1-c0d7-481c-9eb1-894ad8728ebf" name="Default" comment="Import Commons IO">
-      <change type="MOVED" beforePath="C:\Users\Nanu\OneDrive\works\pw-books\imabw\.idea\libraries\Maven__pw_books_jem_formats_1_1_1.xml" afterPath="$PROJECT_DIR$/../imabw/.idea/libraries/Maven__pw_books_jem_formats_1_2_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/assembly/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/../imabw/src/main/assembly/META-INF/MANIFEST.MF" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/epub/ncx/NCX_2005_1.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/epub/ncx/NCX_2005_1.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/PMAB.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/PMAB.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/scj/SCI.java" afterPath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/scj/SCI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Task.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Task.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/scj/Worker.java" afterPath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/scj/Worker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/imabw.iml" afterPath="$PROJECT_DIR$/../imabw/imabw.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/.idea/artifacts/imabw_jar.xml" afterPath="$PROJECT_DIR$/../imabw/.idea/artifacts/imabw_jar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/pom.xml" afterPath="$PROJECT_DIR$/../imabw/pom.xml" />
+      <change type="DELETED" beforePath="D:\code\pw-books\online-parsers\.idea\.name" afterPath="" />
+      <change type="DELETED" beforePath="D:\code\pw-books\online-parsers\.idea\compiler.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\code\pw-books\online-parsers\.idea\copyright\ALv2.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\code\pw-books\online-parsers\.idea\copyright\profiles_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\code\pw-books\online-parsers\.idea\dictionaries\Nanu.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\code\pw-books\online-parsers\.idea\encodings.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\code\pw-books\online-parsers\.idea\libraries\Maven__commons_logging_commons_logging_1_2.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\code\pw-books\online-parsers\.idea\libraries\Maven__dom4j_dom4j_1_6_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\code\pw-books\online-parsers\.idea\libraries\Maven__log4j_log4j_1_2_12.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\code\pw-books\online-parsers\.idea\libraries\Maven__pw_books_jem_core_2_0_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\code\pw-books\online-parsers\.idea\libraries\Maven__pw_books_jem_formats_1_0_SNAPSHOT.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\code\pw-books\online-parsers\.idea\libraries\Maven__xml_apis_xml_apis_1_0_b2.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\code\pw-books\online-parsers\.idea\misc.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\code\pw-books\online-parsers\.idea\modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\code\pw-books\online-parsers\.idea\vcs.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\code\pw-books\online-parsers\.idea\workspace.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\code\pw-books\online-parsers\online-parsers.iml" afterPath="" />
+      <change type="DELETED" beforePath="D:\code\pw-books\online-parsers\pom.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../imabw/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../jem-formats/.idea/workspace.xml" />
@@ -40,7 +48,154 @@
     <favorites_list name="jem-core" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="Attributes.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Attributes.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="24" column="17" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Book.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Book.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BookHelper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/BookHelper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="404" column="22" selection-start-line="404" selection-start-column="22" selection-end-line="404" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Chapter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Chapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Jem.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="258" column="47" selection-start-line="258" selection-start-column="47" selection-end-line="258" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Parser.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Parser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="28" column="17" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Maker.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Maker.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="28" column="17" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Part.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Part.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="2.0092764">
+              <caret line="199" column="0" selection-start-line="199" selection-start-column="0" selection-end-line="199" selection-end-column="0" />
+              <folding>
+                <element signature="docComment;class#Part#0" expanded="false" />
+                <element signature="docComment;method#Part#0;class#Part#0" expanded="false" />
+                <element signature="docComment;method#Part#1;class#Part#0" expanded="false" />
+                <element signature="docComment;method#Part#2;class#Part#0" expanded="false" />
+                <element signature="method#Part#2;class#Part#0" expanded="false" />
+                <element signature="e#2045#2074#0" expanded="false" />
+                <element signature="docComment;method#setAttribute#0;class#Part#0" expanded="false" />
+                <element signature="method#setAttribute#0;class#Part#0" expanded="false" />
+                <element signature="docComment;method#updateAttributes#0;class#Part#0" expanded="false" />
+                <element signature="method#updateAttributes#0;class#Part#0" expanded="false" />
+                <element signature="docComment;method#updateAttributes#1;class#Part#0" expanded="false" />
+                <element signature="docComment;method#hasAttribute#0;class#Part#0" expanded="false" />
+                <element signature="docComment;method#getAttribute#0;class#Part#0" expanded="false" />
+                <element signature="method#getAttribute#0;class#Part#0" expanded="false" />
+                <element signature="docComment;method#getAttribute#1;class#Part#0" expanded="false" />
+                <element signature="docComment;method#stringAttribute#0;class#Part#0" expanded="false" />
+                <element signature="method#stringAttribute#0;class#Part#0" expanded="false" />
+                <element signature="docComment;method#stringAttribute#1;class#Part#0" expanded="false" />
+                <element signature="method#stringAttribute#1;class#Part#0" expanded="false" />
+                <element signature="docComment;method#removeAttribute#0;class#Part#0" expanded="false" />
+                <element signature="docComment;method#clearAttributes#0;class#Part#0" expanded="false" />
+                <element signature="docComment;method#attributeSize#0;class#Part#0" expanded="false" />
+                <element signature="docComment;method#attributeNames#0;class#Part#0" expanded="false" />
+                <element signature="method#attributeNames#0;class#Part#0" expanded="false" />
+                <element signature="e#6054#6089#0" expanded="false" />
+                <element signature="docComment;method#setTitle#0;class#Part#0" expanded="false" />
+                <element signature="docComment;method#getTitle#0;class#Part#0" expanded="false" />
+                <element signature="e#6631#6662#0" expanded="false" />
+                <element signature="docComment;field#source#0;class#Part#0" expanded="false" />
+                <element signature="docComment;method#getSource#0;class#Part#0" expanded="false" />
+                <element signature="docComment;method#setSource#0;class#Part#0" expanded="false" />
+                <element signature="method#setSource#0;class#Part#0" expanded="false" />
+                <element signature="docComment;method#getText#0;class#Part#0" expanded="false" />
+                <element signature="method#getText#0;class#Part#0" expanded="false" />
+                <element signature="docComment;method#getLines#0;class#Part#0" expanded="false" />
+                <element signature="method#getLines#0;class#Part#0" expanded="false" />
+                <element signature="docComment;method#writeTo#0;class#Part#0" expanded="false" />
+                <element signature="method#writeTo#0;class#Part#0" expanded="false" />
+                <element signature="e#8459#8487#0" expanded="false" />
+                <element signature="docComment;field#subParts#0;class#Part#0" expanded="false" />
+                <element signature="docComment;method#append#0;class#Part#0" expanded="false" />
+                <element signature="method#append#0;class#Part#0" expanded="false" />
+                <element signature="docComment;method#insert#0;class#Part#0" expanded="false" />
+                <element signature="method#insert#0;class#Part#0" expanded="false" />
+                <element signature="docComment;method#remove#0;class#Part#0" expanded="false" />
+                <element signature="docComment;method#remove#1;class#Part#0" expanded="false" />
+                <element signature="docComment;method#set#0;class#Part#0" expanded="false" />
+                <element signature="method#set#0;class#Part#0" expanded="false" />
+                <element signature="docComment;method#get#0;class#Part#0" expanded="false" />
+                <element signature="docComment;method#clear#0;class#Part#0" expanded="false" />
+                <element signature="docComment;method#size#0;class#Part#0" expanded="false" />
+                <element signature="docComment;method#isSection#0;class#Part#0" expanded="false" />
+                <element signature="docComment;method#iterator#0;class#Part#0" expanded="false" />
+                <element signature="docComment;method#partList#0;class#Part#0" expanded="false" />
+                <element signature="e#11566#11586#0" expanded="false" />
+                <element signature="docComment;class#Cleanable#0;class#Part#0" expanded="false" />
+                <element signature="class#Cleanable#0;class#Part#0" expanded="false" />
+                <element signature="docComment;method#clean#0;class#Cleanable#0;class#Part#0" expanded="false" />
+                <element signature="docComment;field#cleanWorks#0;class#Part#0" expanded="false" />
+                <element signature="docComment;method#registerCleanup#0;class#Part#0" expanded="false" />
+                <element signature="method#registerCleanup#0;class#Part#0" expanded="false" />
+                <element signature="docComment;method#removeCleanup#0;class#Part#0" expanded="false" />
+                <element signature="method#removeCleanup#0;class#Part#0" expanded="false" />
+                <element signature="docComment;method#cleanup#0;class#Part#0" expanded="false" />
+                <element signature="method#cleanup#0;class#Part#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -159,7 +314,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="PackagesPane" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -170,7 +325,66 @@
       <autoscrollFromSource />
       <sortByType />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pw.phylame.jem" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pw.phylame.jem" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToClass.includeLibraries" value="false" />
@@ -179,7 +393,7 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../jem-formats" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../scj" />
     <property name="options.lastSelected" value="preferences.lookFeel" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
@@ -607,15 +821,17 @@
       <workItem from="1435753289694" duration="1366000" />
       <workItem from="1435923434153" duration="78000" />
       <workItem from="1435923977408" duration="651000" />
+      <workItem from="1435936611731" duration="37000" />
+      <workItem from="1435936651821" duration="17000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49387000" />
+    <option name="totallyTimeSpent" value="49441000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="77" y="31" width="1199" height="683" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -626,7 +842,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33385336" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2035139" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20287405" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24011713" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -676,7 +892,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="63" column="32" selection-start-line="63" selection-start-column="32" selection-end-line="63" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -684,9 +899,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -694,7 +906,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="63" column="32" selection-start-line="63" selection-start-column="32" selection-end-line="63" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -702,9 +913,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -761,7 +969,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -769,7 +976,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -777,7 +983,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -785,7 +990,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -916,13 +1120,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/LICENSE">
+      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
-        <state />
       </provider>
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/commons-io/commons-io/2.4/commons-io-2.4.jar!/org/apache/commons/io/LineIterator.class">
@@ -950,7 +1154,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="2.1406517">
           <caret line="69" column="30" selection-start-line="69" selection-start-column="30" selection-end-line="69" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -975,156 +1178,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Part.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.019672">
-          <caret line="199" column="0" selection-start-line="199" selection-start-column="0" selection-end-line="199" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#13338#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-            <element signature="e#1556#1557#0" expanded="true" />
-            <element signature="e#1598#1599#0" expanded="true" />
-            <element signature="e#1726#1727#0" expanded="true" />
-            <element signature="e#1771#1772#0" expanded="true" />
-            <element signature="e#2197#2213#0" expanded="true" />
-            <element signature="e#2931#2932#0" expanded="true" />
-            <element signature="e#2976#2977#0" expanded="true" />
-            <element signature="e#3241#3242#0" expanded="true" />
-            <element signature="e#3288#3289#0" expanded="true" />
-            <element signature="e#4247#4248#0" expanded="true" />
-            <element signature="e#4293#4294#0" expanded="true" />
-            <element signature="e#5510#5511#0" expanded="true" />
-            <element signature="e#5552#5553#0" expanded="true" />
-            <element signature="e#5649#5650#0" expanded="true" />
-            <element signature="e#5680#5681#0" expanded="true" />
-            <element signature="e#5805#5806#0" expanded="true" />
-            <element signature="e#5842#5843#0" expanded="true" />
-            <element signature="e#6303#6304#0" expanded="true" />
-            <element signature="e#6345#6346#0" expanded="true" />
-            <element signature="e#6496#6497#0" expanded="true" />
-            <element signature="e#6545#6546#0" expanded="true" />
-            <element signature="e#6591#6592#0" expanded="true" />
-            <element signature="e#6624#6625#0" expanded="true" />
-            <element signature="e#6915#6916#0" expanded="true" />
-            <element signature="e#6944#6945#0" expanded="true" />
-            <element signature="e#8623#8629#0" expanded="true" />
-            <element signature="e#9565#9566#0" expanded="true" />
-            <element signature="e#9610#9611#0" expanded="true" />
-            <element signature="e#9864#9865#0" expanded="true" />
-            <element signature="e#9908#9909#0" expanded="true" />
-            <element signature="e#10562#10563#0" expanded="true" />
-            <element signature="e#10604#10605#0" expanded="true" />
-            <element signature="e#10692#10693#0" expanded="true" />
-            <element signature="e#10724#10725#0" expanded="true" />
-            <element signature="e#10838#10839#0" expanded="true" />
-            <element signature="e#10876#10877#0" expanded="true" />
-            <element signature="e#11127#11128#0" expanded="true" />
-            <element signature="e#11161#11162#0" expanded="true" />
-            <element signature="e#11315#11316#0" expanded="true" />
-            <element signature="e#11357#11358#0" expanded="true" />
-            <element signature="e#11528#11529#0" expanded="true" />
-            <element signature="e#11559#11560#0" expanded="true" />
-            <element signature="e#12029#12040#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Chapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.409836">
-          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#2712#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-            <element signature="e#1046#1047#0" expanded="true" />
-            <element signature="e#1100#1101#0" expanded="true" />
-            <element signature="e#1136#1137#0" expanded="true" />
-            <element signature="e#1193#1194#0" expanded="true" />
-            <element signature="e#1948#1949#0" expanded="true" />
-            <element signature="e#1990#1991#0" expanded="true" />
-            <element signature="e#2473#2474#0" expanded="true" />
-            <element signature="e#2515#2516#0" expanded="true" />
-            <element signature="e#2661#2662#0" expanded="true" />
-            <element signature="e#2708#2709#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Attributes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.48032787">
-          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Book.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.1032786">
-          <caret line="227" column="0" selection-start-line="227" selection-start-column="0" selection-end-line="227" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Parser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41311476">
-          <caret line="28" column="17" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Maker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13770492">
-          <caret line="20" column="7" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/BookHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7229508">
-          <caret line="404" column="22" selection-start-line="404" selection-start-column="22" selection-end-line="404" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7245902">
-          <caret line="258" column="47" selection-start-line="258" selection-start-column="47" selection-end-line="258" selection-end-column="47" />
-          <folding>
-            <element signature="docComment;class#Jem#0" expanded="false" />
-            <element signature="docComment;field#VERSION#0;class#Jem#0" expanded="false" />
-            <element signature="docComment;field#VENDOR#0;class#Jem#0" expanded="false" />
-            <element signature="docComment;field#PMAB_FORMAT#0;class#Jem#0" expanded="false" />
-            <element signature="method#getParser#0;class#Jem#0" expanded="false" />
-            <element signature="docComment;method#readBook#0;class#Jem#0" expanded="false" />
-            <element signature="method#readBook#0;class#Jem#0" expanded="false" />
-            <element signature="method#getMaker#0;class#Jem#0" expanded="false" />
-            <element signature="docComment;method#writeBook#0;class#Jem#0" expanded="false" />
-            <element signature="method#writeBook#0;class#Jem#0" expanded="false" />
-            <element signature="docComment;method#getPart#0;class#Jem#0" expanded="false" />
-            <element signature="method#getPart#0;class#Jem#0" expanded="false" />
-            <element signature="docComment;method#toBook#0;class#Jem#0" expanded="false" />
-            <element signature="method#toBook#0;class#Jem#0" expanded="false" />
-            <element signature="docComment;method#getDepth#0;class#Jem#0" expanded="false" />
-            <element signature="method#getDepth#0;class#Jem#0" expanded="false" />
-            <element signature="docComment;class#Walker#0;class#Jem#0" expanded="false" />
-            <element signature="class#Walker#0;class#Jem#0" expanded="false" />
-            <element signature="docComment;method#watch#0;class#Walker#0;class#Jem#0" expanded="false" />
-            <element signature="docComment;method#walkPart#0;class#Jem#0" expanded="false" />
-            <element signature="method#walkPart#0;class#Jem#0" expanded="false" />
-            <element signature="initializer##0;class#Jem#0" expanded="false" />
-            <element signature="docComment;method#variantType#0;class#Jem#0" expanded="false" />
-            <element signature="method#variantType#0;class#Jem#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/TextObject.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5992579">
           <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1132,7 +1189,136 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="63" column="32" selection-start-line="63" selection-start-column="32" selection-end-line="63" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Attributes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="17" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Book.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/BookHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="404" column="22" selection-start-line="404" selection-start-column="22" selection-end-line="404" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Chapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="258" column="47" selection-start-line="258" selection-start-column="47" selection-end-line="258" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Parser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="17" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Maker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="17" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Part.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.0092764">
+          <caret line="199" column="0" selection-start-line="199" selection-start-column="0" selection-end-line="199" selection-end-column="0" />
+          <folding>
+            <element signature="docComment;class#Part#0" expanded="false" />
+            <element signature="docComment;method#Part#0;class#Part#0" expanded="false" />
+            <element signature="docComment;method#Part#1;class#Part#0" expanded="false" />
+            <element signature="docComment;method#Part#2;class#Part#0" expanded="false" />
+            <element signature="method#Part#2;class#Part#0" expanded="false" />
+            <element signature="e#2045#2074#0" expanded="false" />
+            <element signature="docComment;method#setAttribute#0;class#Part#0" expanded="false" />
+            <element signature="method#setAttribute#0;class#Part#0" expanded="false" />
+            <element signature="docComment;method#updateAttributes#0;class#Part#0" expanded="false" />
+            <element signature="method#updateAttributes#0;class#Part#0" expanded="false" />
+            <element signature="docComment;method#updateAttributes#1;class#Part#0" expanded="false" />
+            <element signature="docComment;method#hasAttribute#0;class#Part#0" expanded="false" />
+            <element signature="docComment;method#getAttribute#0;class#Part#0" expanded="false" />
+            <element signature="method#getAttribute#0;class#Part#0" expanded="false" />
+            <element signature="docComment;method#getAttribute#1;class#Part#0" expanded="false" />
+            <element signature="docComment;method#stringAttribute#0;class#Part#0" expanded="false" />
+            <element signature="method#stringAttribute#0;class#Part#0" expanded="false" />
+            <element signature="docComment;method#stringAttribute#1;class#Part#0" expanded="false" />
+            <element signature="method#stringAttribute#1;class#Part#0" expanded="false" />
+            <element signature="docComment;method#removeAttribute#0;class#Part#0" expanded="false" />
+            <element signature="docComment;method#clearAttributes#0;class#Part#0" expanded="false" />
+            <element signature="docComment;method#attributeSize#0;class#Part#0" expanded="false" />
+            <element signature="docComment;method#attributeNames#0;class#Part#0" expanded="false" />
+            <element signature="method#attributeNames#0;class#Part#0" expanded="false" />
+            <element signature="e#6054#6089#0" expanded="false" />
+            <element signature="docComment;method#setTitle#0;class#Part#0" expanded="false" />
+            <element signature="docComment;method#getTitle#0;class#Part#0" expanded="false" />
+            <element signature="e#6631#6662#0" expanded="false" />
+            <element signature="docComment;field#source#0;class#Part#0" expanded="false" />
+            <element signature="docComment;method#getSource#0;class#Part#0" expanded="false" />
+            <element signature="docComment;method#setSource#0;class#Part#0" expanded="false" />
+            <element signature="method#setSource#0;class#Part#0" expanded="false" />
+            <element signature="docComment;method#getText#0;class#Part#0" expanded="false" />
+            <element signature="method#getText#0;class#Part#0" expanded="false" />
+            <element signature="docComment;method#getLines#0;class#Part#0" expanded="false" />
+            <element signature="method#getLines#0;class#Part#0" expanded="false" />
+            <element signature="docComment;method#writeTo#0;class#Part#0" expanded="false" />
+            <element signature="method#writeTo#0;class#Part#0" expanded="false" />
+            <element signature="e#8459#8487#0" expanded="false" />
+            <element signature="docComment;field#subParts#0;class#Part#0" expanded="false" />
+            <element signature="docComment;method#append#0;class#Part#0" expanded="false" />
+            <element signature="method#append#0;class#Part#0" expanded="false" />
+            <element signature="docComment;method#insert#0;class#Part#0" expanded="false" />
+            <element signature="method#insert#0;class#Part#0" expanded="false" />
+            <element signature="docComment;method#remove#0;class#Part#0" expanded="false" />
+            <element signature="docComment;method#remove#1;class#Part#0" expanded="false" />
+            <element signature="docComment;method#set#0;class#Part#0" expanded="false" />
+            <element signature="method#set#0;class#Part#0" expanded="false" />
+            <element signature="docComment;method#get#0;class#Part#0" expanded="false" />
+            <element signature="docComment;method#clear#0;class#Part#0" expanded="false" />
+            <element signature="docComment;method#size#0;class#Part#0" expanded="false" />
+            <element signature="docComment;method#isSection#0;class#Part#0" expanded="false" />
+            <element signature="docComment;method#iterator#0;class#Part#0" expanded="false" />
+            <element signature="docComment;method#partList#0;class#Part#0" expanded="false" />
+            <element signature="e#11566#11586#0" expanded="false" />
+            <element signature="docComment;class#Cleanable#0;class#Part#0" expanded="false" />
+            <element signature="class#Cleanable#0;class#Part#0" expanded="false" />
+            <element signature="docComment;method#clean#0;class#Cleanable#0;class#Part#0" expanded="false" />
+            <element signature="docComment;field#cleanWorks#0;class#Part#0" expanded="false" />
+            <element signature="docComment;method#registerCleanup#0;class#Part#0" expanded="false" />
+            <element signature="method#registerCleanup#0;class#Part#0" expanded="false" />
+            <element signature="docComment;method#removeCleanup#0;class#Part#0" expanded="false" />
+            <element signature="method#removeCleanup#0;class#Part#0" expanded="false" />
+            <element signature="docComment;method#cleanup#0;class#Part#0" expanded="false" />
+            <element signature="method#cleanup#0;class#Part#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
