@@ -24,12 +24,12 @@ import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Jem;
-import pw.phylame.jem.core.Part;
+import pw.phylame.jem.core.Chapter;
 import pw.phylame.jem.formats.epub.EPUB;
 import pw.phylame.jem.formats.epub.EpubConfig;
 import pw.phylame.jem.formats.epub.html.HtmlMaker;
 import pw.phylame.jem.formats.epub.opf.OpfBuilder;
-import pw.phylame.jem.formats.util.I18N;
+import pw.phylame.jem.formats.util.I18nMessage;
 import pw.phylame.jem.formats.util.ZipUtils;
 import pw.phylame.tools.DateUtils;
 import pw.phylame.tools.StringUtils;
@@ -89,7 +89,7 @@ public class NCX_2005_1 extends AbstractNcxBuilder {
                     str = o.toString();
                 }
                 if (str.length() != 0) {
-                    String line = I18N.getText("Epub.Page.Info." + StringUtils.toCapital(name), str);
+                    String line = I18nMessage.getText("Epub.Page.Info." + StringUtils.toCapital(name), str);
                     lines.add(line);
                 }
             }
@@ -104,7 +104,7 @@ public class NCX_2005_1 extends AbstractNcxBuilder {
             return;
         }
         String href = config.textDir + "/" + EPUB.COVER_PAGE_FILE;
-        Document page = htmlMaker.makeCoverPage(I18N.getText("Epub.Page.Cover.Title"), "../"+opfBuilder.getCover(),
+        Document page = htmlMaker.makeCoverPage(I18nMessage.getText("Epub.Page.Cover.Title"), "../"+opfBuilder.getCover(),
                 config.styleProvider.getBookCoverStyle());
         writeHtmlPage(page, zipout, href, config);
         opfBuilder.addManifestItem(EPUB.COVER_PAGE_ID, href, EPUB.MT_XHTML);
@@ -120,7 +120,7 @@ public class NCX_2005_1 extends AbstractNcxBuilder {
             return;
         }
 
-        String pageTitle = I18N.getText("Epub.Page.Intro.Title");
+        String pageTitle = I18nMessage.getText("Epub.Page.Intro.Title");
         Document page = htmlMaker.makeIntroPage(pageTitle, book.getTitle(),
                 config.styleProvider.getIntroTitleStyle(), intro, config.styleProvider.getIntroContentStyle());
         if (page == null) {
@@ -139,7 +139,7 @@ public class NCX_2005_1 extends AbstractNcxBuilder {
         String href = config.textDir + "/" + EPUB.INFO_PAGE_FILE;
         List<String> lines = getInfoLines(book, config);
         if (lines.size() > 0) {
-            String pageTitle = I18N.getText("Epub.Page.Info.Title");
+            String pageTitle = I18nMessage.getText("Epub.Page.Info.Title");
             Document page = htmlMaker.makeInfoPage(pageTitle, config.styleProvider.getInfoTitleStyle(),
                     lines, config.styleProvider.getInfoContentStyle());
             writeHtmlPage(page, zipout, href, config);
@@ -150,7 +150,7 @@ public class NCX_2005_1 extends AbstractNcxBuilder {
         }
     }
 
-    private void writePartCoverPage(HtmlMaker htmlMaker, Part part, String prefix, OpfBuilder opfBuilder,
+    private void writePartCoverPage(HtmlMaker htmlMaker, Chapter part, String prefix, OpfBuilder opfBuilder,
                                     ZipOutputStream zipout, EpubConfig config) throws IOException {
         Object o = part.getAttribute(Book.COVER, null);
         if (! (o instanceof FileObject)) {
@@ -177,7 +177,7 @@ public class NCX_2005_1 extends AbstractNcxBuilder {
         opfBuilder.addSpineItem(pageID, true, EPUB.DUOKAN_FULL_SCREEN);
     }
 
-    private String writeSectionPage(Element parent, HtmlMaker htmlMaker, Part section, String prefix, String topHref,
+    private String writeSectionPage(Element parent, HtmlMaker htmlMaker, Chapter section, String prefix, String topHref,
                                     OpfBuilder opfBuilder, ZipOutputStream zipout, EpubConfig config) throws IOException {
         // cover
         writePartCoverPage(htmlMaker, section, prefix, opfBuilder, zipout, config);
@@ -195,7 +195,7 @@ public class NCX_2005_1 extends AbstractNcxBuilder {
         ArrayList<String> titles = new ArrayList<String>();
 
         int i = 1;
-        for (Part sub: section) {
+        for (Chapter sub: section) {
             String link;
             if (sub.isSection()) {
                 link = writeSectionPage(navPoint, htmlMaker, sub, prefix+"-"+i, base, opfBuilder, zipout, config);
@@ -209,7 +209,7 @@ public class NCX_2005_1 extends AbstractNcxBuilder {
 
         if (topHref != null) {
             links.add(topHref);
-            titles.add(I18N.getText("Epub.Page.Contents.GoToTop"));
+            titles.add(I18nMessage.getText("Epub.Page.Contents.GoToTop"));
         }
 
         TextObject intro = null;
@@ -226,7 +226,7 @@ public class NCX_2005_1 extends AbstractNcxBuilder {
         return base;
     }
 
-    private String writeChapterPage(Element parent, HtmlMaker htmlMaker, Part chapter, String prefix,
+    private String writeChapterPage(Element parent, HtmlMaker htmlMaker, Chapter chapter, String prefix,
                                     OpfBuilder opfBuilder, ZipOutputStream zipout, EpubConfig config) throws IOException {
         // cover
         writePartCoverPage(htmlMaker, chapter, prefix, opfBuilder, zipout, config);
@@ -238,7 +238,7 @@ public class NCX_2005_1 extends AbstractNcxBuilder {
         TextObject text = chapter.getSource();
 
         if (text.getType().equals(TextObject.HTML)) {       // content is HTML
-            ZipUtils.writeText(text, zipout, href, text.getEncoding());
+            ZipUtils.writeText(text, zipout, href, config.htmlEncoding);
         } else {
             TextObject intro = null;
             Object o = chapter.getAttribute(Book.INTRO, null);
@@ -298,7 +298,7 @@ public class NCX_2005_1 extends AbstractNcxBuilder {
 
         // toc page
         String tocHref = config.textDir + "/" + EPUB.TOC_PAGE_FILE;
-        String tocTitle = I18N.getText("Epub.Page.Toc.Title");
+        String tocTitle = I18nMessage.getText("Epub.Page.Toc.Title");
         // main contents, only book depth > 1
         if (depth > 1) {
             addNavPoint(navMap, EPUB.TOC_PAGE_ID, tocTitle, tocHref);
@@ -311,7 +311,7 @@ public class NCX_2005_1 extends AbstractNcxBuilder {
         ArrayList<String> titles = new ArrayList<String>();
 
         int i = 1;
-        for (Part sub: book) {
+        for (Chapter sub: book) {
             String href;
             if (sub.isSection()) {
                 String topHref = depth > 1 ? EPUB.TOC_PAGE_FILE : null;

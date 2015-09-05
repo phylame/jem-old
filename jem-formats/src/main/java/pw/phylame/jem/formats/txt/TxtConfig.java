@@ -26,7 +26,7 @@ public class TxtConfig {
     public String encoding = System.getProperty("file.encoding");
 
     // line separator
-    public String lineSeparator = System.getProperty("line.separator");
+    public String lineSeparator = System.lineSeparator();
 
     // paragraph prefix
     public String paragraphPrefix = "    ";     // four spaces

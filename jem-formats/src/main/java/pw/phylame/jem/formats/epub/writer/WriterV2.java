@@ -20,7 +20,7 @@ package pw.phylame.jem.formats.epub.writer;
 
 import org.dom4j.Document;
 import pw.phylame.jem.core.Book;
-import pw.phylame.jem.formats.util.I18N;
+import pw.phylame.jem.formats.util.I18nMessage;
 import pw.phylame.jem.util.JemException;
 import pw.phylame.jem.formats.epub.EPUB;
 import pw.phylame.jem.formats.epub.EpubConfig;
@@ -56,14 +56,14 @@ public class WriterV2 extends EpubWriter {
         // make OPF document
         OpfBuilder opfBuilder = OpfBuilderFactory.getBuilder("2.0");
         if (opfBuilder == null) {
-            throw new MakerException(I18N.getText("Epub.WriterV2.NoOpf_2_0"), "epub");
+            throw new MakerException(I18nMessage.getText("Epub.WriterV2.NoOpf_2_0"), "epub");
         }
         Document opfDocument = opfBuilder.make(book, uuid, zipout, config);
 
         // make and write NCX document
         NcxBuilder ncxBuilder = NcxBuilderFactory.getBuilder("2005-1");
         if (ncxBuilder == null) {
-            throw new MakerException(I18N.getText("Epub.WriterV2.NoNcx_2005_1"), "epub");
+            throw new MakerException(I18nMessage.getText("Epub.WriterV2.NoNcx_2005_1"), "epub");
         }
 
         opfBuilder.addManifestItem(EPUB.NCX_FILE_ID, EPUB.NCX_FILE, EPUB.MT_NCX);

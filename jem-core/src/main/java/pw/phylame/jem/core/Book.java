@@ -19,7 +19,6 @@
 package pw.phylame.jem.core;
 
 import java.util.Map;
-import java.util.Set;
 import java.util.Date;
 import java.util.Locale;
 import java.util.HashMap;
@@ -55,7 +54,7 @@ public class Book extends Chapter {
         setAuthor("");
         setGenre("");
         setState("");
-        setIntro("");
+        setIntro(null);
         setDate(new Date());
         setSubject("");
         setPublisher("");
@@ -150,12 +149,12 @@ public class Book extends Chapter {
         setAttribute(LANGUAGE, language);
     }
 
-    // ********************
-    // ** Extension item **
-    // ********************
+    // *********************
+    // ** Extension items **
+    // *********************
 
     /** Extension mapping */
-    private Map<String, Object> extMap = new HashMap<String, Object>();
+    private Map<String, Object> mExtension = new HashMap<String, Object>();
 
     /**
      * Associates the specified value with the specified name in extensions.
@@ -165,7 +164,7 @@ public class Book extends Chapter {
      * @param value value of the item
      */
     public void setItem(String name, Object value) {
-        extMap.put(name, value);
+        mExtension.put(name, value);
     }
 
     /**
@@ -178,8 +177,8 @@ public class Book extends Chapter {
      *          <tt>defaultValue</tt> if not found item for <tt>name</tt>
      */
     public Object getItem(String name, Object defaultValue) {
-        Object v = extMap.get(name);
-        if (v != null || extMap.containsKey(name)) {
+        Object v = mExtension.get(name);
+        if (v != null || mExtension.containsKey(name)) {
             return v;
         } else {
             return defaultValue;
@@ -193,7 +192,7 @@ public class Book extends Chapter {
      *         <tt>null</tt> if there was item for <tt>name</tt>.
      */
     public Object removeItem(String name) {
-        return extMap.remove(name);
+        return mExtension.remove(name);
     }
 
     /**
@@ -201,7 +200,7 @@ public class Book extends Chapter {
      * @return number of items
      */
     public int itemSize() {
-        return extMap.size();
+        return mExtension.size();
     }
 
     /**
@@ -209,19 +208,19 @@ public class Book extends Chapter {
      * @return sequence of item names
      */
     public String[] itemNames() {
-        return extMap.keySet().toArray(new String[0]);
+        return mExtension.keySet().toArray(new String[0]);
     }
 
     /**
      * Removes all items from extension map.
      */
     public void clearItems() {
-        extMap.clear();
+        mExtension.clear();
     }
 
     @Override
     public void cleanup() {
-        clearItems();
         super.cleanup();
+        clearItems();
     }
 }

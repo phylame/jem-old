@@ -22,10 +22,10 @@ import pw.phylame.jem.util.JemException;
 
 public class ExceptionFactory {
     public static JemException forInvalidStringArgument(String key, Object o) {
-        return new JemException(I18N.getText("Common.InvalidStringArgument", key, o));
+        return new JemException(I18nMessage.getText("Error.InvalidStringArgument", key, o));
     }
 
     public static JemException forInvalidIntegerArgument(String key, Object o) {
-        return new JemException(I18N.getText("Common.InvalidIntegerArgument", key, o));
+        return new JemException(I18nMessage.getText("Error.InvalidIntegerArgument", key, o));
     }
 }

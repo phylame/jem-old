@@ -20,14 +20,14 @@ package pw.phylame.jem.core;
 
 import java.util.Map;
 import java.util.Date;
+import java.util.Objects;
 import java.util.HashMap;
 import java.io.File;
 import java.io.IOException;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import pw.phylame.jem.util.TextObject;
 import pw.phylame.jem.util.FileObject;
+import pw.phylame.jem.util.TextObject;
 import pw.phylame.jem.util.JemException;
 import pw.phylame.jem.util.UnsupportedFormatException;
 
@@ -38,7 +38,7 @@ public final class Jem {
     private static Log LOG = LogFactory.getLog(Jem.class);
 
     /** Jem version */
-    public static final String VERSION          = "2.1.0";
+    public static final String VERSION          = "2.2.0";
 
     /** Jem vendor */
     public static final String VENDOR           = "PW";
@@ -46,24 +46,27 @@ public final class Jem {
     /** Format of Pem default format */
     public static final String PMAB_FORMAT      = "pmab";
 
-    private static Parser getParser(String format) throws UnsupportedFormatException {
-        if (format == null) {
-            throw new NullPointerException("format");
-        }
+    public static Parser getParser(String format) throws UnsupportedFormatException {
+        format = Objects.requireNonNull(format);
+
         Parser parser;
         try {
             parser = BookHelper.getParser(format);
         } catch (IllegalAccessException e) {
-            LOG.debug("cannot access Parser class", e);
+            format = format.toUpperCase();
+            LOG.debug("cannot access parser class for "+format, e);
             throw new UnsupportedFormatException(format, "Unsupported format: "+format);
         } catch (InstantiationException e) {
-            LOG.debug("cannot create Parser instance", e);
+            format = format.toUpperCase();
+            LOG.debug("cannot create parser instance for "+format, e);
             throw new UnsupportedFormatException(format, "Unsupported format: "+format);
         } catch (ClassNotFoundException e) {
-            LOG.debug("not found Parser class", e);
+            format = format.toUpperCase();
+            LOG.debug("not found parser class for "+format, e);
             throw new UnsupportedFormatException(format, "Unsupported format: "+format);
         } catch (UnsupportedFormatException e) {
-            LOG.debug("not registered Parser class", e);
+            format = format.toUpperCase();
+            LOG.debug("no registered parser class for "+format, e);
             throw new UnsupportedFormatException(format, "Unsupported format: "+format);
         }
 
@@ -81,33 +84,34 @@ public final class Jem {
      */
     public static Book readBook(File file, String format, Map<String, Object> kw)
             throws IOException, JemException {
-        if (file == null) {
-            throw new NullPointerException("file");
-        }
         Parser parser = getParser(format);
-        return parser.parse(file, kw);
+        return parser.parse(Objects.requireNonNull(file), kw);
     }
 
-    private static Maker getMaker(String format) throws UnsupportedFormatException {
-        if (format == null) {
-            throw new NullPointerException("format");
-        }
+    public static Maker getMaker(String format) throws UnsupportedFormatException {
+        format = Objects.requireNonNull(format);
+
         Maker maker;
         try {
             maker = BookHelper.getMaker(format);
         } catch (IllegalAccessException e) {
-            LOG.debug("cannot access Maker class", e);
+            format = format.toUpperCase();
+            LOG.debug("cannot access maker class for "+format, e);
             throw new UnsupportedFormatException(format, "Unsupported format: "+format);
         } catch (InstantiationException e) {
-            LOG.debug("cannot create Maker instance", e);
+            format = format.toUpperCase();
+            LOG.debug("cannot create maker instance for "+format, e);
             throw new UnsupportedFormatException(format, "Unsupported format: "+format);
         } catch (ClassNotFoundException e) {
-            LOG.debug("not found Maker class", e);
+            format = format.toUpperCase();
+            LOG.debug("not found maker class for "+format, e);
             throw new UnsupportedFormatException(format, "Unsupported format: "+format);
         } catch (UnsupportedFormatException e) {
-            LOG.debug("not registered Maker class", e);
+            format = format.toUpperCase();
+            LOG.debug("no registered maker class for "+format, e);
             throw new UnsupportedFormatException(format, "Unsupported format: "+format);
         }
+
         return maker;
     }
 
@@ -122,58 +126,52 @@ public final class Jem {
      */
     public static void writeBook(Book book, File output, String format, Map<String, Object> kw)
             throws IOException, JemException {
-        if (book == null) {
-            throw new NullPointerException("book");
-        }
-        if (output == null) {
-            throw new NullPointerException("output");
-        }
         Maker maker = getMaker(format);
-        maker.make(book, output, kw);
+        maker.make(Objects.requireNonNull(book), Objects.requireNonNull(output), kw);
     }
 
     /**
-     * Gets child part with specified index from part sub-part tree.
-     * @param owner the <tt>Part</tt> to be indexed
-     * @param orders list of index in sub-part tree
+     * Finds child chapter with specified index from chapter sub-chapter tree.
+     * @param owner the <tt>Chapter</tt> to be indexed
+     * @param orders list of index in sub-chapter tree
      * @param fromIndex begin position of index in {@code orders}
-     * @return the <tt>Part</tt>
-     * @throws IndexOutOfBoundsException index in {@code orders} or
+     * @return the <tt>Chapter</tt>
+     * @throws IndexOutOfBoundsException if index in {@code orders} or
      *          {@code fromIndex} is invalid
      */
-    public static Part getPart(Part owner, int[] orders, int fromIndex) {
+    public static Chapter findChapter(Chapter owner, int[] orders, int fromIndex) {
         int index = orders[fromIndex];
         if (index >= owner.size()) {
             throw new IndexOutOfBoundsException("Index out of range: "+index);
         }
-        Part part;
+        Chapter chapter;
         if (index < 0) {
-            part = owner.get(owner.size()+index);
+            chapter = owner.get(owner.size()+index);
         } else {
-            part = owner.get(index);
+            chapter = owner.get(index);
         }
         if (fromIndex == orders.length-1) {   // last one
-            return part;
+            return chapter;
         } else {
-            return getPart(part, orders, fromIndex+1);
+            return findChapter(chapter, orders, fromIndex + 1);
         }
     }
 
     /**
-     * Converts specified part to <tt>Book</tt> instance.
-     * <p>Attributes and sub-parts of specified part will be copied to
+     * Converts specified chapter to <tt>Book</tt> instance.
+     * <p>Attributes and sub-parts of specified chapter will be copied to
      *      the new book.</p>
-     * @param part the part to be converted
+     * @param chapter the chapter to be converted
      * @return the new book
      */
-    public static Book toBook(Part part) {
+    public static Book toBook(Chapter chapter) {
         Book book = new Book();
 
         // copy attributes
-        book.updateAttributes(part);
+        book.updateAttributes(chapter);
 
         // copy sub-parts
-        for (Part sub: part) {
+        for (Chapter sub: chapter) {
             book.append(sub);
         }
 
@@ -181,21 +179,23 @@ public final class Jem {
     }
 
     /**
-     * Returns the depth of sub-parts tree.
-     * @param part the part
-     * @return depth of the part
+     * Returns the depth of sub-parts tree in specified chapter.
+     * @param chapter the chapter
+     * @return depth of the chapter
      */
-    public static int getDepth(Part part) {
-        if (part == null || part.size() == 0) {
+    public static int getDepth(Chapter chapter) {
+        if (chapter == null || ! chapter.isSection()) {
             return 0;
         }
+
         int depth = 0;
-        for (Part sub: part) {
+        for (Chapter sub: chapter) {
             int d = getDepth(sub);
             if (d > depth) {
                 depth = d;
             }
         }
+
         return depth + 1;
     }
 
@@ -206,31 +206,27 @@ public final class Jem {
      */
     public static interface Walker {
         /**
-         * Watches the specified part.
-         * @param part the part to be watched
+         * Watches the specified chapter.
+         * @param chapter the chapter to be watched
          * @return <tt>false</tt> to stop walking
          */
-        boolean watch(Part part);
+        boolean watch(Chapter chapter);
     }
 
     /**
-     * Walks <tt>Part</tt> sub-part tree (first order).
-     * <p>The specified part will be watched after walking all sub-parts.</p>
-     * @param part the <tt>Part</tt> to be watched
-     * @param walker watch the part
+     * Walks <tt>Chapter</tt> sub-chapter tree (first order).
+     * <p>The specified chapter will be watched after walking all sub-parts.</p>
+     * @param chapter the <tt>Chapter</tt> to be watched
+     * @param walker watch the chapter
      */
-    public static void walkPart(Part part, Walker walker) {
-        if (part == null) {
-            throw new NullPointerException("part");
-        }
-        if (walker == null) {
-            throw new NullPointerException("walker");
-        }
-        if (! walker.watch(part)) {
+    public static void walkChapter(Chapter chapter, Walker walker) {
+        walker = Objects.requireNonNull(walker);
+        chapter = Objects.requireNonNull(chapter);
+        if (! walker.watch(chapter)) {
             return;
         }
-        for (Part sub: part) {
-            walkPart(sub, walker);
+        for (Chapter sub: chapter) {
+            walkChapter(sub, walker);
         }
     }
 
@@ -257,15 +253,13 @@ public final class Jem {
      * @return the type name
      */
     public static String variantType(Object o) {
-        if (o == null) {
-            throw new NullPointerException("o");
-        }
+        o = Objects.requireNonNull(o);
         if (o instanceof FileObject) {
             return "file";
         } else if (o instanceof TextObject) {
             return "text";
-        } else if (o instanceof Part) {
-            return "part";
+        } else if (o instanceof Chapter) {
+            return "chapter";
         } else {
             String name = variantTypes.get(o.getClass());
             if (name == null) {

@@ -59,6 +59,6 @@ public interface Attributes {
     /** Key name for book vendor. */
     String VENDOR    = "vendor";
 
-    /** Key name for word number of part, chapter. */
+    /** Key name for word number of chapter. */
     String WORDS     = "words";
 }

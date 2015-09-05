@@ -19,16 +19,15 @@
 package pw.phylame.jem.formats.txt;
 
 import pw.phylame.jem.core.Book;
-import pw.phylame.jem.core.Part;
+import pw.phylame.jem.core.Chapter;
 import pw.phylame.jem.core.Maker;
 import pw.phylame.jem.util.JemException;
-import pw.phylame.jem.formats.util.Texts;
+import pw.phylame.jem.formats.util.TextUtilities;
 import pw.phylame.jem.formats.util.ExceptionFactory;
 import pw.phylame.jem.util.TextObject;
 
 import java.io.*;
 import java.util.Map;
-import java.util.List;
 
 /**
  * <tt>Maker</tt> implement for TXT book.
@@ -94,7 +93,7 @@ public class TxtMaker implements Maker {
             writeIntro(intro, writer, config);
         }
         if (book.isSection()) {
-            for (Part sub: book) {
+            for (Chapter sub: book) {
                 writeChapter(sub, writer, config);
             }
         } else {        // book has not sub-parts, then save its content
@@ -103,7 +102,7 @@ public class TxtMaker implements Maker {
         writer.flush();
     }
 
-    private void writeChapter(Part part, Writer writer, TxtConfig config) throws IOException {
+    private void writeChapter(Chapter part, Writer writer, TxtConfig config) throws IOException {
         writer.write(config.lineSeparator+part.getTitle()+config.lineSeparator);
         Object o = part.getAttribute(Book.INTRO, null);
         if (o instanceof TextObject) {  // valid intro
@@ -112,24 +111,30 @@ public class TxtMaker implements Maker {
         if (! part.isSection()) {
             writeContent(part, writer, config);
         } else {
-            for (Part sub: part) {
+            for (Chapter sub: part) {
                 writeChapter(sub, writer, config);
             }
         }
     }
 
     private void writeIntro(TextObject intro, Writer writer, TxtConfig config) throws IOException {
-        List<String> lines = Texts.plainLines(intro);
+        String[] lines = TextUtilities.plainLines(intro);
+        if (lines == null) {
+            return;
+        }
         for (String line : lines) {
             writer.write(config.paragraphPrefix+line.trim()+config.lineSeparator);
         }
-        if (lines.size() > 0) {
+        if (lines.length > 0) {
             writer.write(config.introSeparator+config.lineSeparator);
         }
     }
 
-    private void writeContent(Part part, Writer writer, TxtConfig config) throws IOException {
-        List<String> lines = Texts.plainLines(part.getSource());
+    private void writeContent(Chapter part, Writer writer, TxtConfig config) throws IOException {
+        String[] lines = TextUtilities.plainLines(part.getSource());
+        if (lines == null) {
+            return;
+        }
         for (String line : lines) {
             writer.write(config.paragraphPrefix+line.trim()+config.lineSeparator);
         }

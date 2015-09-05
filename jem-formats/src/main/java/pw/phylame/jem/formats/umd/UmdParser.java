@@ -23,14 +23,9 @@ import org.apache.commons.logging.LogFactory;
 
 import pw.phylame.jem.core.Chapter;
 import pw.phylame.jem.core.Parser;
-import pw.phylame.jem.core.Part;
 import pw.phylame.jem.core.Book;
-import pw.phylame.jem.util.JemException;
+import pw.phylame.jem.util.*;
 import pw.phylame.jem.formats.util.ParserException;
-
-import pw.phylame.jem.util.TextObject;
-import pw.phylame.jem.util.FileObject;
-import pw.phylame.jem.util.FileFactory;
 
 import pw.phylame.tools.DateUtils;
 import pw.phylame.tools.ZLibUtils;
@@ -67,9 +62,9 @@ public class UmdParser implements Parser {
             throws IOException, JemException {
         final RandomAccessFile in = new RandomAccessFile(file, "r");
         book = parse(in);
-        book.registerCleanup(new Part.Cleanable() {
+        book.registerCleanup(new Chapter.Cleanable() {
             @Override
-            public void clean(Part part) {
+            public void clean(Chapter part) {
                 try {
                     in.close();
                 } catch (IOException e) {
@@ -307,7 +302,7 @@ public class UmdParser implements Parser {
         long length = readInt(source) - 9, last = 0;
         length /= 4;
 
-        Part chapter = null;
+        Chapter chapter = null;
         for (int ix = 0; ix < length; ++ix) {
             long offset = readInt(source);
             try {
@@ -319,13 +314,13 @@ public class UmdParser implements Parser {
             chapter.setSource(new UmdSource(source, offset, 0, blocks));
             if (ix > 0) {
                 long size = offset - last;
-                Part prev = book.get(ix-1);
-                ((UmdSource)prev.getSource()).size = size;
+                Chapter prev = book.get(ix-1);
+                ((UmdSource)prev.getSource()).mSize = size;
             }
             last = offset;
         }
         if (contentLength > 0 && chapter != null) {
-            ((UmdSource)chapter.getSource()).size = contentLength - last;
+            ((UmdSource)chapter.getSource()).mSize = contentLength - last;
         }
     }
 
@@ -365,7 +360,7 @@ public class UmdParser implements Parser {
                 FileObject image = FileFactory.fromBlock(
                         name, source, offset, length, null);
                 book.append(new Chapter(String.valueOf(book.size() + 1),
-                        new TextObject(), image, null));
+                        TextFactory.fromString(""), image, null));
                 break;
             case UMD.COMIC:
                 break;
@@ -398,90 +393,67 @@ public class UmdParser implements Parser {
         }
     }
 
-    static class UmdSource extends TextObject {
-        private RandomAccessFile in;
-        public long offset, size;
-        private boolean fromUmd = false;
-        private List<DataBlock> blocks;
+    static class UmdSource implements TextObject {
+        private RandomAccessFile mFile;
+        long mOffset, mSize;
+        private List<DataBlock> mBlocks;
 
-        public UmdSource(RandomAccessFile in, long offset, long size,
+        public UmdSource(RandomAccessFile file, long offset, long size,
                          List<DataBlock> blocks) {
-            super();
-            this.in = in;
-            this.offset = offset;
-            this.size = size;
-            this.blocks = blocks;
-            fromUmd = true;
+            mFile = Objects.requireNonNull(file);
+            mOffset = offset;
+            mSize = size;
+            mBlocks = blocks;
         }
 
         @Override
-        public void setRaw(String raw) {
-            super.setRaw(raw);
-            fromUmd = false;
-        }
-
-        @Override
-        public void setFile(FileObject file, String encoding) {
-            super.setFile(file, encoding);
-            fromUmd = false;
-        }
-
-        @Override
-        protected long aboutSize() {
-            if (fromUmd) {
-                return size;
-            } else {
-                return super.aboutSize();
-            }
+        public String getType() {
+            return PLAIN;
         }
 
         private String rawText() throws IOException {
-            int           index  = (int) (offset / UMD.BLOCK_SIZE);
-            int           start  = (int) (offset % UMD.BLOCK_SIZE);
+            int           index  = (int) (mOffset / UMD.BLOCK_SIZE);
+            int           start  = (int) (mOffset % UMD.BLOCK_SIZE);
             int           length = -start;
             StringBuilder sb     = new StringBuilder();
             do {
-                DataBlock block = blocks.get(index++);
-                in.seek(block.offset);
+                DataBlock block = mBlocks.get(index++);
+                mFile.seek(block.offset);
                 byte[] bytes = new byte[block.length];
-                int n = in.read(bytes);
+                int n = mFile.read(bytes);
                 bytes = ZLibUtils.decompress(bytes, 0, n);
                 length += bytes.length;
                 sb.append(new String(bytes, UMD.TEXT_ENCODING));
-                if (size < length) {
-                    return sb.substring(start / 2, start / 2 + (int) size / 2);
+                if (mSize < length) {
+                    return sb.substring(start / 2, start / 2 + (int) mSize / 2);
                 }
             } while (true);
-
         }
 
         @Override
-        public String getText() throws IOException {
-            if (fromUmd) {
+        public String getText() {
+            try {
                 return rawText().replaceAll(UMD.SYMBIAN_LINE_FEED,
-                        System.getProperty("line.separator"));
-            } else {
-                return super.getText();
+                        System.lineSeparator());
+            } catch (IOException e) {
+                LOG.debug(e);
+                return null;
             }
         }
 
         @Override
-        public List<String> getLines() throws IOException {
-            if (fromUmd) {
-                return java.util.Arrays.asList(rawText().split(UMD.SYMBIAN_LINE_FEED));
-            } else {
-                return super.getLines();
+        public String[] getLines() {
+            try {
+                return rawText().split(UMD.SYMBIAN_LINE_FEED);
+            } catch (IOException e) {
+                LOG.debug(e);
+                return null;
             }
         }
 
         @Override
         public void writeTo(Writer writer) throws IOException {
-            if (fromUmd) {
-                String text = rawText();
-                writer.write(text);
-            } else {
-                super.writeTo(writer);
-            }
+            writer.write(rawText());
         }
     }
 }

@@ -20,8 +20,9 @@ package pw.phylame.jem.formats.pmab;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -44,10 +45,14 @@ public final class PMAB {
     public static final String PBC_XML_NS = "http://phylame.pw/format/pmab/pbc";
 
     public static boolean isPmab(ZipFile zipFile) {
+        ZipEntry entry = zipFile.getEntry(MIME_FILE);
+        if (entry == null) {
+            return false;
+        }
         InputStream stream = null;
         try {
-            stream = zipFile.getInputStream(zipFile.getEntry(MIME_FILE));
-            String text = org.apache.commons.io.IOUtils.toString(stream).trim();
+            stream = zipFile.getInputStream(entry);
+            String text = IOUtils.toString(stream).trim();
             return MT_PMAB.equals(text);
         } catch (IOException e) {
             LOG.debug("cannot load "+MIME_FILE, e);

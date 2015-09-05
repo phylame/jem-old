@@ -26,7 +26,6 @@ import org.dom4j.Element;
 import org.dom4j.Document;
 
 import pw.phylame.jem.core.Jem;
-import pw.phylame.jem.core.Part;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Chapter;
 import pw.phylame.jem.formats.pmab.PMAB;
@@ -89,13 +88,8 @@ public class Writer {
                 item.setText(href);
             } else if (value instanceof TextObject) {
                 TextObject tb = (TextObject) value;
-                try {
-                    md.addElement("attr").addAttribute("name", name);
-                    md.setText(tb.getText());
-                } catch (IOException e) {
-                    LOG.debug("cannot write text to PMAB: "+name, e);
-                    continue;
-                }
+                md.addElement("attr").addAttribute("name", name);
+                md.setText(tb.getText());
             } else if (value instanceof Date) {
                 String text = DateUtils.formatDate((Date) value, "yyyy-M-d H:m:s");
                 md.addElement("attr").addAttribute("name", name).setText(text);
@@ -175,7 +169,7 @@ public class Writer {
         makeExtension(root, book, zipout, config);
     }
 
-    private static void makeChapter(Element parent, Part part, ZipOutputStream zipout,
+    private static void makeChapter(Element parent, Chapter part, ZipOutputStream zipout,
                                     PmabConfig config, String suffix) {
         Element elem = parent.addElement("chapter");
         elem.addElement("title").setText(part.getTitle());
@@ -220,7 +214,7 @@ public class Writer {
             }
         } else {
             int count = 0;
-            for (Part sub: part) {
+            for (Chapter sub: part) {
                 makeChapter(elem, sub, zipout, config, suffix + "-" + (++count));
             }
             elem.addAttribute("count", String.valueOf(count));
@@ -234,7 +228,7 @@ public class Writer {
         root.addAttribute("version", "2.0");
         Element contents = root.addElement("contents");
         int count = 0;
-        for (Part sub: book) {
+        for (Chapter sub: book) {
             makeChapter(contents, sub, zipout, config, ++count + "");
         }
         contents.addAttribute("count", String.valueOf(count));

@@ -18,25 +18,26 @@
 
 package pw.phylame.jem.formats.pmab;
 
+import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+import java.io.File;
+import java.io.IOException;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
 import org.dom4j.Element;
 import org.dom4j.Document;
 import org.dom4j.io.SAXReader;
 import org.dom4j.DocumentException;
-
-import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-
-import pw.phylame.jem.core.*;
+import org.xml.sax.EntityResolver;
+import pw.phylame.jem.core.Book;
+import pw.phylame.jem.core.Parser;
+import pw.phylame.jem.core.Chapter;
 import pw.phylame.jem.util.JemException;
 import pw.phylame.jem.formats.pmab.v3.Reader;
 import pw.phylame.jem.formats.util.ParserException;
-
-import java.io.*;
-import java.util.Map;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -85,9 +86,9 @@ public class PmabParser implements Parser {
         Book book = new Book();
         readPBM(zipFile, book);
         readPBC(zipFile, book);
-        book.registerCleanup(new Part.Cleanable() {
+        book.registerCleanup(new Book.Cleanable() {
             @Override
-            public void clean(Part part) {
+            public void clean(Chapter part) {
                 try {
                     zipFile.close();
                 } catch (IOException e) {
@@ -104,7 +105,7 @@ public class PmabParser implements Parser {
             throw new ParserException("Not found "+ PMAB.PBM_FILE+" in PMAB "+
                     zipFile.getName(), getName());
         }
-        InputStream stream = new BufferedInputStream(zipFile.getInputStream(zipEntry));
+        BufferedInputStream stream = new BufferedInputStream(zipFile.getInputStream(zipEntry));
         SAXReader reader = new SAXReader();
         reader.setEntityResolver(new EntityResolver() { // ignore DTD checking
             @Override
@@ -157,7 +158,7 @@ public class PmabParser implements Parser {
             throw new ParserException("Not found "+ PMAB.PBC_FILE+" in PMAB "+
                     zipFile.getName(), getName());
         }
-        InputStream stream = new BufferedInputStream(zipFile.getInputStream(zipEntry));
+        BufferedInputStream stream = new BufferedInputStream(zipFile.getInputStream(zipEntry));
         SAXReader reader = new SAXReader();
         reader.setEntityResolver(new EntityResolver() { // ignore DTD checking
             @Override

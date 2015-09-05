@@ -36,4 +36,4 @@ if [ -z "$JEM_HOME" -o ! -d "$JEM_HOME" ]; then
 fi
 
 # Run Jem CLI
-java -jar "$JEM_HOME/lib/scj-1.0.3.jar" "$@"
+java -jar "$JEM_HOME/lib/scj-1.1.0.jar" "$@"

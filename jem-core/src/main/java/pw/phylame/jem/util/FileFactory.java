@@ -18,23 +18,27 @@
 
 package pw.phylame.jem.util;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.FileInputStream;
+import java.io.RandomAccessFile;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Objects;
+import java.util.Properties;
+import java.util.zip.ZipFile;
+import java.util.zip.ZipEntry;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import java.io.*;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Properties;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
-
 /**
- * Factory class to create <tt>FileObject</tt>.
+ * Factory class for creating <tt>FileObject</tt>.
  */
 public class FileFactory {
-    private static Log                     LOG   = LogFactory.getLog(FileFactory.class);
-
+    private static Log LOG = LogFactory.getLog(FileFactory.class);
+    
     /** Some known MIME types */
     private static HashMap<String, String> MIMEs = new HashMap<String, String>();
 
@@ -42,12 +46,11 @@ public class FileFactory {
     public static final String MIME_MAPPING_FILE = "mime.properties";
 
     /** Loads some known MIMEs from file. */
-    static void loadBuiltinMime() {
+    private static void loadBuiltinMime() {
         Properties prop = new Properties();
-        InputStream in =
-                FileFactory.class.getResourceAsStream(MIME_MAPPING_FILE);
+        InputStream in = FileFactory.class.getResourceAsStream(MIME_MAPPING_FILE);
         if (in == null) {       // not found file
-            LOG.trace("not found MIME mapping: "+MIME_MAPPING_FILE);
+            LOG.debug("not found MIME mapping: " + MIME_MAPPING_FILE);
             return;
         }
         try {
@@ -69,7 +72,7 @@ public class FileFactory {
      * @param name path name of file
      * @return string of MIME.
      */
-    public static String getMimeType(String name) {
+    private static String getMimeType(String name) {
         if (name == null || name.equals("")) {
             return "";
         }
@@ -94,203 +97,157 @@ public class FileFactory {
         return mime;
     }
 
-    private static class NormalFile extends FileObject {
-        private File file;
-
-        public NormalFile(File file, String mime) throws IOException {
+    private static class NormalFile extends AbstractFileObject {
+        private File mFile;
+        
+        NormalFile(File file, String mime) throws IOException {
             super(mime);
-            if (file == null) {
-                throw new NullPointerException("file");
+            mFile = Objects.requireNonNull(file);
+            if (! mFile.exists()) {
+                throw new IOException("Not such file or directory: "+mFile.getPath());
             }
-            if (! file.exists()) {
-                throw new IOException("Not such file or directory: "+file.getPath());
-            }
-            this.file = file;
         }
-
+        
         @Override
         public String getName() {
-            return file.getPath();
+            return mFile.getPath();
         }
 
         @Override
-        public long available() throws IOException {
-            return file.length();
-        }
-
-        @Override
-        public InputStream openInputStream() throws IOException {
-            return new FileInputStream(file);
+        public InputStream openStream() throws IOException {
+            return new FileInputStream(mFile);
         }
 
         @Override
         public String toString() {
-            return "file:///" + file.getAbsolutePath();
+            return "file:///" + mFile.getAbsolutePath();
         }
     }
-
-    private static class InnerZip extends FileObject {
-        private ZipFile zipFile;
-        private String entryName;
-
-        public InnerZip(ZipFile zipFile, String name, String mime) throws IOException {
+    
+    private static class InnerZip extends AbstractFileObject {
+        private ZipFile mZip;
+        private String mName;
+        
+        InnerZip(ZipFile zipFile, String entryName, String mime) throws IOException {
             super(mime);
-            if (zipFile == null) {
-                throw new NullPointerException("zipFile");
+            mZip = Objects.requireNonNull(zipFile);
+            mName = Objects.requireNonNull(entryName);
+            if (mZip.getEntry(mName) == null) {
+                throw new IOException("Not such entry in ZIP: "+mName);
             }
-            if (name == null) {
-                throw new NullPointerException("name");
-            }
-            if (zipFile.getEntry(name) == null) {
-                throw new IOException("Not found entry "+name+" in ZIP");
-            }
-            this.zipFile = zipFile;
-            entryName = name;
         }
-
+        
         @Override
         public String getName() {
-            return entryName;
+            return mName;
         }
 
         @Override
-        public long available() throws IOException {
-            ZipEntry zipEntry = zipFile.getEntry(entryName);
-            assert zipEntry != null;
-            return zipEntry.getSize();
-        }
-
-        @Override
-        public InputStream openInputStream() throws IOException {
-            ZipEntry zipEntry = zipFile.getEntry(entryName);
-            assert zipEntry != null;
-            return zipFile.getInputStream(zipEntry);
+        public InputStream openStream() throws IOException {
+            ZipEntry entry = mZip.getEntry(mName);
+            assert entry != null;
+            return mZip.getInputStream(entry);
         }
 
         @Override
         public String toString() {
-            return "zip://"+zipFile.getName()+"!"+getName();
+            return "zip://" + mZip.getName() + "!" + mName;
         }
     }
 
-    private static class AreaFile extends FileObject {
-        private String name;
-        private RandomAccessFile file;
-        private long offset, size, oldOffset = -1;
+    private static class FileBlock extends AbstractFileObject {
+        private String mName;
+        private RandomAccessFile mFile;
+        private long mOffset, mSize, mOldOffset = -1;
 
-        public AreaFile(String name, RandomAccessFile file, long offset, long size, String mime)
+        FileBlock(String name, RandomAccessFile file, long offset, long size, String mime)
                 throws IOException {
             super(mime);
-            if (file == null) {
-                throw new NullPointerException("file");
+            mName = Objects.requireNonNull(name);
+            mFile = Objects.requireNonNull(file);
+            mOffset = offset;
+            mSize = size;
+            if (mSize > (mFile.length() - mOffset)) {
+                throw new IOException("Available size lesser than " + mSize);
             }
-            if (offset <0 || offset >= file.length()) {
-                throw new IOException("Invalid offset: "+offset);
-            }
-            if (size > (file.length() - offset)) {
-                throw new IOException("Available size lesser than "+size);
-            }
-            this.name = name;
-            this.file = file;
-            this.offset = offset;
-            this.size = size;
         }
 
         @Override
         public String getName() {
-            return name;
+            return mName;
         }
 
         @Override
-        public InputStream openInputStream() throws IOException {
-            oldOffset = file.getFilePointer();
-            file.seek(offset);
+        public InputStream openStream() throws IOException {
+            mOldOffset = mFile.getFilePointer();
+            mFile.seek(mOffset);
             return new InputStream() {
                 private long readBytes = 0;
 
                 @Override
                 public int read() throws IOException {
-                    if (readBytes++ >= size) {
+                    if (readBytes++ >= mSize) {
                         return -1;
                     }
-                    return file.read();
+                    return mFile.read();
                 }
             };
         }
 
         @Override
         public void reset() throws IOException {
-            if (oldOffset != -1) {
-                file.seek(oldOffset);
+            if (mOldOffset != -1) {
+                mFile.seek(mOldOffset);
             }
-        }
-
-        @Override
-        public long available() throws IOException {
-            return size;
+            mOldOffset = -1;
         }
 
         @Override
         public String toString() {
-            return String.format("block %s <offset=%d; size=%d>", getName(), offset, size);
+            return String.format("block %s <offset=%d; size=%d>", getName(), mOffset, mSize);
         }
     }
 
-    private static class URLFile extends FileObject {
-        private URL url;
+    private static class URLFile extends AbstractFileObject {
+        private URL mUrl;
 
-        public URLFile(URL url, String mime) {
+        URLFile(URL url, String mime) {
             super(mime);
-            if (url == null) {
-                throw new NullPointerException("url");
-            }
-            this.url = url;
+            mUrl = Objects.requireNonNull(url);
         }
 
         @Override
         public String getName() {
-            return url.getPath();
+            return mUrl.getPath();
         }
 
         @Override
-        public InputStream openInputStream() throws IOException {
-            return url.openStream();
+        public InputStream openStream() throws IOException {
+            return mUrl.openStream();
         }
 
         @Override
         public String toString() {
-            return url.toString();
+            return mUrl.toString();
         }
     }
 
     public static FileObject fromFile(File file, String mime) throws IOException {
-        if (file == null) {
-            throw new NullPointerException("file");
-        }
         return new NormalFile(file, getOrDetectMime(file.getPath(), mime));
     }
 
     public static FileObject fromZip(ZipFile zipFile, String entryName,
-                                     String mime) throws IOException {
-        if (entryName == null) {
-            throw new NullPointerException("entryName");
-        }
+                                      String mime) throws IOException {
         return new InnerZip(zipFile, entryName, getOrDetectMime(entryName, mime));
     }
 
     public static FileObject fromBlock(String name, RandomAccessFile file,
-                                       long offset, long size,
-                                       String mime) throws IOException {
-        if (name == null) {
-            throw new NullPointerException("name");
-        }
-        return new AreaFile(name, file, offset, size, getOrDetectMime(name, mime));
+                                        long offset, long size,
+                                        String mime) throws IOException {
+        return new FileBlock(name, file, offset, size, getOrDetectMime(name, mime));
     }
 
     public static FileObject fromURL(URL url, String mime) {
-        if (url == null) {
-            throw new NullPointerException("url");
-        }
         return new URLFile(url, getOrDetectMime(url.getPath(), mime));
     }
 }

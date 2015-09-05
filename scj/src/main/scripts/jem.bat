@@ -19,4 +19,4 @@ REM Get the Jem home directory
 if "%JEM_HOME%" == "" (set "JEM_HOME=%~dp0..")
 
 REM Run Jem CLI
-java -jar "%JEM_HOME%\lib\scj-1.0.3.jar" %*
+java -jar "%JEM_HOME%\lib\scj-1.1.0.jar" %*

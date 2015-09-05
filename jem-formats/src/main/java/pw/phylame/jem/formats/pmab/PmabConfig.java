@@ -18,10 +18,9 @@
 
 package pw.phylame.jem.formats.pmab;
 
-import pw.phylame.jem.core.Jem;
-
 import java.util.Map;
 import java.util.zip.Deflater;
+import pw.phylame.jem.core.Jem;
 
 /**
  * Configuration for making PMAB.
@@ -32,7 +31,7 @@ public class PmabConfig {
 
     // XML style
     public String xmlEncoding = "UTF-8", xmlIndent = "\t", xmlLineSeparator =
-            System.getProperty("line.separator");
+            System.lineSeparator();
 
     // encoding for text content
     public String textEncoding = System.getProperty("file.encoding");

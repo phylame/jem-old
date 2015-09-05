@@ -31,14 +31,10 @@ import java.io.IOException;
 
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Chapter;
-import pw.phylame.jem.core.Part;
-import pw.phylame.jem.util.JemException;
+import pw.phylame.jem.util.*;
 import pw.phylame.jem.formats.util.ParserException;
 
 import pw.phylame.tools.DateUtils;
-import pw.phylame.jem.util.TextObject;
-import pw.phylame.jem.util.FileFactory;
-import pw.phylame.jem.util.FileObject;
 
 /**
  * PBM and PBC reader for PMAB 3.x.
@@ -82,7 +78,7 @@ public class Reader {
             if (encoding != null && encoding.equals("")) {
                 encoding = null;
             }
-            ret = new TextObject(fb, encoding);
+            ret = TextFactory.fromFile(fb, encoding);
         } else {
             ret = fb;
         }
@@ -148,7 +144,7 @@ public class Reader {
         return value;
     }
 
-    private static void readAttributes(Element parent, Part part, ZipFile zipFile)
+    private static void readAttributes(Element parent, Chapter part, ZipFile zipFile)
             throws JemException {
         Element attrs = parent.element("attributes");
         if (attrs == null) {
@@ -208,7 +204,7 @@ public class Reader {
         readExtensions(root, book, zipFile);
     }
 
-    private static void readChapter(Element parent, Part owner, ZipFile zipFile)
+    private static void readChapter(Element parent, Chapter owner, ZipFile zipFile)
             throws JemException {
         Chapter chapter = new Chapter();
         readAttributes(parent, chapter, zipFile);
@@ -216,7 +212,7 @@ public class Reader {
         if (content != null) {
             String type = content.attributeValue("type");
             if (type == null || type.equals("str")) {
-                chapter.getSource().setRaw(content.getText());
+                chapter.setSource(TextFactory.fromString(content.getText()));
             } else {
                 String[] parts = type.split(";");
                 String mime = parts[0], encoding = null;
@@ -229,7 +225,7 @@ public class Reader {
                 }
                 try {
                     FileObject fb = FileFactory.fromZip(zipFile, content.getText(), mime);
-                    chapter.getSource().setFile(fb, encoding);
+                    chapter.setSource(TextFactory.fromFile(fb, encoding));
                 } catch (IOException e) {
                     LOG.debug("cannot load text content: "+content.getText(), e);
                 }

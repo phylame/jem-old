@@ -28,9 +28,9 @@ public final class JAR {
 
     static final String TEXT_ENCODING = "UTF-16LE";
 
-    static final String MF_FILE = "META-INF/MANIFEST.MF";
+    static final String MANIFEST_FILE = "META-INF/MANIFEST.MF";
 
-    static String MF_TEMPLATE = "Manifest-Version: 1.0\n" +
+    static String MANIFEST_TEMPLATE = "Manifest-Version: 1.0\n" +
             "Created-By: %s v%s\n" +
             "MIDlet-1: %s,/jm.PNG,JavaBook\n" +
             "MIDlet-Vendor: %s\n" +

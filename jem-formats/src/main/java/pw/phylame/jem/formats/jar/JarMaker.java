@@ -21,8 +21,8 @@ package pw.phylame.jem.formats.jar;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.Maker;
-import pw.phylame.jem.core.Part;
-import pw.phylame.jem.formats.util.Texts;
+import pw.phylame.jem.core.Chapter;
+import pw.phylame.jem.formats.util.TextUtilities;
 import pw.phylame.jem.util.JemException;
 import pw.phylame.jem.util.TextObject;
 
@@ -62,13 +62,13 @@ public class JarMaker implements Maker {
         // template
         copyTemplate(zipout);
         // MANIFEST
-        zipout.putNextEntry(new ZipEntry(JAR.MF_FILE));
-        String mf = String.format(JAR.MF_TEMPLATE, "Jem", Jem.VERSION, book.getTitle(), "PW", book.getTitle());
+        zipout.putNextEntry(new ZipEntry(JAR.MANIFEST_FILE));
+        String mf = String.format(JAR.MANIFEST_TEMPLATE, "Jem", Jem.VERSION, book.getTitle(), "PW", book.getTitle());
         zipout.write(mf.getBytes(JAR.META_ENCODING));
         zipout.closeEntry();
         // contents
         List<Item> items = new java.util.ArrayList<Item>();
-        for (Part sub: book) {
+        for (Chapter sub: book) {
             writeChapter(sub, zipout, items);
         }
         // navigation
@@ -92,12 +92,12 @@ public class JarMaker implements Maker {
         stream.close();
     }
 
-    private void writeChapter(Part part, ZipOutputStream zipout, List<Item> items) throws IOException {
+    private void writeChapter(Chapter part, ZipOutputStream zipout, List<Item> items) throws IOException {
         String text;
         if (part.isSection()) {
             text = part.getTitle();
         } else {
-            text = Texts.plainText(part.getSource());
+            text = TextUtilities.plainText(part.getSource());
         }
         String name = String.valueOf(chapterCount++);
         zipout.putNextEntry(new ZipEntry(name));
@@ -107,7 +107,7 @@ public class JarMaker implements Maker {
 
         items.add(new Item(name, b.length+2, part.getTitle()));
 
-        for (Part sub: part) {
+        for (Chapter sub: part) {
             writeChapter(sub, zipout, items);
         }
     }
@@ -134,7 +134,7 @@ public class JarMaker implements Maker {
         StringBuilder sb = new StringBuilder(book.getTitle());
         TextObject intro = book.getIntro();
         if (intro != null) {
-            List<String> lines = Texts.plainLines(intro);
+            String[] lines = TextUtilities.plainLines(intro);
             for (String line : lines) {
                 sb.append(line).append("\n");
             }

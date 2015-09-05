@@ -24,12 +24,8 @@ import org.apache.commons.logging.LogFactory;
 
 import pw.phylame.jem.core.Chapter;
 import pw.phylame.jem.core.Parser;
-import pw.phylame.jem.core.Part;
 import pw.phylame.jem.core.Book;
-import pw.phylame.jem.util.TextObject;
-import pw.phylame.jem.util.FileObject;
-import pw.phylame.jem.util.FileFactory;
-import pw.phylame.jem.util.JemException;
+import pw.phylame.jem.util.*;
 import pw.phylame.jem.formats.util.ParserException;
 
 import java.io.*;
@@ -108,9 +104,9 @@ public class TxtParser implements Parser {
 
         Book book = new Book(title, "");
         final File cache = File.createTempFile("TXT", ".tmp");
-        book.registerCleanup(new Part.Cleanable() {
+        book.registerCleanup(new Chapter.Cleanable() {
             @Override
-            public void clean(Part part) {
+            public void clean(Chapter part) {
                 if (source != null) {
                     try {
                         source.close();
@@ -153,17 +149,17 @@ public class TxtParser implements Parser {
         offsets.add(raw.length());
 
         Iterator<Integer> offsetIt = offsets.iterator();
-        Iterator<Part> partIt = book.iterator();
+        Iterator<Chapter> partIt = book.iterator();
 
         int start = offsetIt.next();
         if (start > 0) {    // no formatted head
             FileObject fb = FileFactory.fromBlock("text_head.txt",
                     source, 0, start*2, null);
-            book.setIntro(new TextObject(fb, CACHED_TEXT_ENCODING));
+            book.setIntro(TextFactory.fromFile(fb, CACHED_TEXT_ENCODING));
         }
 
         while (partIt.hasNext()) {
-            Part part = partIt.next();
+            Chapter part = partIt.next();
             title = part.getTitle();
             int end = offsetIt.next();
             start += title.length();
@@ -172,7 +168,7 @@ public class TxtParser implements Parser {
             part.setTitle(title.trim());
             FileObject fb = FileFactory.fromBlock(start + ".txt",
                     source, start * 2, length * 2, null);
-            part.setSource(new TextObject(fb, CACHED_TEXT_ENCODING));
+            part.setSource(TextFactory.fromFile(fb, CACHED_TEXT_ENCODING));
 
             start = end;
         }

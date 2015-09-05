@@ -35,7 +35,7 @@ public class ZipUtils {
     public static void writeFile(FileObject file, ZipOutputStream zipout,
                                  String name) throws IOException {
         zipout.putNextEntry(new ZipEntry(name));
-        file.copyTo(zipout);
+        file.writeTo(zipout);
         zipout.closeEntry();
     }
 

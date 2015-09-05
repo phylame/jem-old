@@ -18,282 +18,46 @@
 
 package pw.phylame.jem.util;
 
-import java.util.List;
-import java.util.Arrays;
-import java.util.Iterator;
-
 import java.io.Writer;
-import java.io.InputStream;
 import java.io.IOException;
-import java.io.BufferedInputStream;
-import org.apache.commons.io.IOUtils;
 
 /**
- * Provides unicode text.
- * <p><tt>TextObject</tt> uses some text source:</p>
- * <ul>
- *     <li>raw text: normal text content</li>
- *     <li>text file with encoding: a file contains text content</li>
- * </ul>
+ * <tt>TextObject</tt> provides unicode source.
  */
-public class TextObject implements Iterable<String> {
-    protected enum SourceProvider {
-        TEXT, FILE
-    }
-
-    /** Content type */
-    public static final String PLAIN = "plain";
-    public static final String HTML = "html";
-
-    /** More than this size of content is large. */
-    public static int LARGE_SIZE = 4096;
+public interface TextObject {
 
     /**
-     * Constructs object with empty content.
+     * Type for plain text.
      */
-    public TextObject() {
-        this("");
-    }
+    String PLAIN = "plain";
 
     /**
-     * Constructs object with specified raw text.
-     * @param raw the raw text
+     * Type for HTML text.
      */
-    public TextObject(String raw) {
-        setType(PLAIN);
-        setRaw(raw);
-    }
+    String HTML = "html";
 
     /**
-     * Constructs object with specified file and encoding.
-     * @param file file contains text content
-     * @param encoding encoding for the file, if <tt>null</tt> means platform encoding
-     */
-    public TextObject(FileObject file, String encoding) {
-        setType(PLAIN);
-        setFile(file, encoding);
-    }
-
-    /**
-     * Returns the previous raw text of the object.
-     * @return the raw string
-     */
-    public String getRaw() {
-        return raw;
-    }
-
-    /**
-     * Sets raw text and changes source to raw text.
-     * @param raw the raw text
-     */
-    public void setRaw(String raw) {
-        this.raw = raw != null ? raw : "";
-        sourceProvider = SourceProvider.TEXT;
-    }
-
-    /**
-     * Returns the previous text file of the object.
-     * @return the file contains text content or <tt>null</tt> if not present.
-     */
-    public FileObject getFile() {
-        return file;
-    }
-
-    /**
-     * Returns the current encoding for the content file.
-     * @return the encoding or <tt>null</tt> that means platform encoding
-     */
-    public String getEncoding() {
-        return encoding;
-    }
-
-    /**
-     * Sets text file and the encoding, changes source to text file.
-     * @param file file contains text content
-     * @param encoding encoding for the file, if <tt>null</tt> means platform encoding
-     */
-    public void setFile(FileObject file, String encoding) {
-        setFile(file, encoding, PLAIN);
-    }
-
-    /**
-     * Sets text file and the encoding, changes source to text file.
-     * @param file file contains text content
-     * @param encoding encoding for the file, if <tt>null</tt> means platform encoding
-     * @param type type of content text
-     * @since 2.0.1
-     */
-    public void setFile(FileObject file, String encoding, String type) {
-        if (file == null) {
-            throw new NullPointerException();
-        }
-        this.file = file;
-        this.encoding = encoding;
-        setType(type);
-        sourceProvider = SourceProvider.FILE;
-    }
-
-    /**
-     * Returns content type.
+     * Returns type of text content.
      * @return the type
-     * @since 2.0.1
      */
-    public String getType() {
-        return contentType;
-    }
+    String getType();
 
     /**
-     * Sets type of text content
-     * @param type the type
-     * @since 2.0.1
+     * Returns text content of this object.
+     * @return the string of text or <tt>null</tt> if failed.
      */
-    public void setType(String type) {
-        this.contentType = type;
-    }
+    String getText();
 
     /**
-     * Returns <tt>true</tt> if the mount of text content is large.
-     * @return <tt>true</tt> if large otherwise <tt>false</tt>
+     * Returns array of lines split from text content in this object.
+     * @return array of lines or <tt>null</tt> if failed.
      */
-    public boolean isLarge() {
-        return aboutSize() >= LARGE_SIZE;
-    }
-
-    /**
-     * Returns about text length in the source.
-     * @return the size
-     */
-    protected long aboutSize() {
-        long size;
-        switch (sourceProvider) {
-            case FILE:
-                assert file != null;
-                try {
-                    size = file.available();
-                } catch (IOException e) {
-                    size = LARGE_SIZE;
-                }
-                break;
-            default:
-                size = raw.length();
-                break;
-        }
-        return size;
-    }
-
-    /**
-     * Returns text content in source of this object.
-     * @return the string of text
-     * @throws IOException occurs IO errors when reading text file if source is text file.
-     */
-    public String getText() throws IOException {
-        switch (sourceProvider) {
-            case FILE:
-                assert file != null;
-                InputStream input = new BufferedInputStream(file.openInputStream());
-                String text = IOUtils.toString(input, encoding);
-                file.reset();
-                return text;
-            default:
-                return raw;
-        }
-    }
-
-    /**
-     * Returns list of lines split from text content in this object.
-     * @return list of lines
-     * @throws IOException occurs IO errors when reading text file if source is text file.
-     */
-    public List<String> getLines() throws IOException {
-        switch (sourceProvider) {
-            case FILE:
-                assert file != null;
-                InputStream input = new BufferedInputStream(file.openInputStream());
-                List<String> lines = IOUtils.readLines(input, encoding);
-                file.reset();
-                return lines;
-            default:
-                return Arrays.asList(raw.split("(\\r\\n)|(\\r)|(\\n)"));
-        }
-    }
-
-    /**
-     * Generates an iterator of lines in text content.
-     * @return iterator of string
-     * @since 2.1.0
-     */
-    @Override
-    public Iterator<String> iterator() {
-        switch (sourceProvider) {
-            case FILE:
-                assert file != null;
-                Iterator<String> it;
-                try {
-                    InputStream input = new BufferedInputStream(file.openInputStream());
-                    it = IOUtils.lineIterator(input, encoding);
-                    file.reset();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                    it = new Iterator<String>() {
-                        @Override
-                        public boolean hasNext() {
-                            return false;
-                        }
-
-                        @Override
-                        public String next() {
-                            return null;
-                        }
-                    };
-                }
-                return it;
-            default:
-                return Arrays.asList(raw.split("(\\r\\n)|(\\r)|(\\n)")).iterator();
-        }
-    }
-
-    @Override
-    public String toString() {
-        try {
-            return getText();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
+    String[] getLines();
 
     /**
      * Writes all text content in this object to output writer.
      * @param writer output <tt>Writer</tt> to store text content
      * @throws IOException occurs IO errors
-     * @since 2.0.1
      */
-    public void writeTo(Writer writer) throws IOException {
-        switch (sourceProvider) {
-            case FILE:
-                assert file != null;
-                InputStream input = new BufferedInputStream(file.openInputStream());
-                IOUtils.copy(input, writer, encoding);
-                file.reset();
-                break;
-            default:
-                writer.write(raw);
-                break;
-        }
-    }
-
-    /** Content type */
-    private String contentType;
-
-    /** Raw text */
-    private String raw;
-
-    /** Text file */
-    private FileObject file;
-
-    /** Encoding of the text file */
-    private String encoding;
-
-    /** Content contentType */
-    private SourceProvider sourceProvider;
+    void writeTo(Writer writer) throws IOException;
 }

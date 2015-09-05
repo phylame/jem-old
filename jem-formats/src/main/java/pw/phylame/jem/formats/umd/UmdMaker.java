@@ -22,7 +22,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import pw.phylame.jem.core.Part;
+import pw.phylame.jem.core.Chapter;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Maker;
 import pw.phylame.jem.util.FileObject;
@@ -115,9 +115,9 @@ public class UmdMaker implements Maker {
 
         // prepare text
         final File cache = File.createTempFile("umd_", ".stf");
-        book.registerCleanup(new Part.Cleanable() {
+        book.registerCleanup(new Chapter.Cleanable() {
             @Override
-            public void clean(Part part) {
+            public void clean(Chapter part) {
                 if (source != null) {
                     try {
                         source.close();
@@ -131,7 +131,7 @@ public class UmdMaker implements Maker {
             }
         });
         source = new RandomAccessFile(cache, "rw");
-        for (Part sub: book) {
+        for (Chapter sub: book) {
             cachePart(sub, source, titles, offsets);
         }
         long contentLength = source.getFilePointer();
@@ -164,7 +164,7 @@ public class UmdMaker implements Maker {
         String imageFormat = "jpg";
 
         // prepare images
-        for (Part sub: book) {
+        for (Chapter sub: book) {
             findImages(sub, images);
         }
         writeImageFormat(imageFormat);
@@ -363,7 +363,7 @@ public class UmdMaker implements Maker {
         writeChunk(UMD.CDT_UMD_END, false, littleRender.putUint32(length));
     }
 
-    private void cachePart(Part part, RandomAccessFile file, List<String> titles,
+    private void cachePart(Chapter part, RandomAccessFile file, List<String> titles,
                            List<Long> offsets) throws IOException {
         titles.add(part.getTitle());
         offsets.add(file.getFilePointer());
@@ -373,7 +373,7 @@ public class UmdMaker implements Maker {
             text = text.replaceAll("(\\r\\n)|(\\n)|(\\r)", UMD.SYMBIAN_LINE_FEED);
             writeString(file, text+UMD.SYMBIAN_LINE_FEED);
         }
-        for (Part sub: part) {
+        for (Chapter sub: part) {
             cachePart(sub, file, titles, offsets);
         }
     }
@@ -406,12 +406,12 @@ public class UmdMaker implements Maker {
         file.write(data);
     }
 
-    private void findImages(Part part, List<FileObject> images) {
+    private void findImages(Chapter part, List<FileObject> images) {
         Object o = part.getAttribute(Book.COVER, null);
         if (o instanceof FileObject) {
             images.add((FileObject) o);
         }
-        for (Part sub: part) {
+        for (Chapter sub: part) {
             findImages(sub, images);
         }
     }

@@ -18,12 +18,10 @@
 
 package pw.phylame.jem.formats.epub;
 
+import java.util.zip.Deflater;
 import pw.phylame.jem.core.Jem;
-
 import pw.phylame.jem.formats.epub.html.StyleProvider;
 import pw.phylame.jem.formats.epub.html.DefaultStyleProvider;
-
-import java.util.zip.Deflater;
 
 /**
  * Configuration for making ePub.
@@ -40,7 +38,7 @@ public class EpubConfig {
 
     // XML style
     public String xmlEncoding = "UTF-8", xmlIndent = "\t", xmlLineSeparator =
-            System.getProperty("line.separator");
+            System.lineSeparator();
 
     // encoding for html content
     public String htmlEncoding = "UTF-8";

@@ -23,8 +23,8 @@ import org.apache.commons.logging.LogFactory;
 
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Maker;
+import pw.phylame.jem.formats.util.I18nMessage;
 import pw.phylame.jem.util.JemException;
-import pw.phylame.jem.formats.util.I18N;
 import pw.phylame.jem.formats.util.MakerException;
 import pw.phylame.jem.formats.util.ExceptionFactory;
 import pw.phylame.jem.formats.epub.writer.EpubWriter;
@@ -65,7 +65,7 @@ public class EpubMaker implements Maker {
                 return (EpubConfig) o;
             } else {
                 throw new JemException(
-                        I18N.getText("Epub.Maker.InvalidConfig", KEY_CONFIG, o.getClass()));
+                        I18nMessage.getText("Epub.Maker.InvalidConfig", KEY_CONFIG, o.getClass()));
             }
         }
 
@@ -94,7 +94,7 @@ public class EpubMaker implements Maker {
                 try {
                     config.zipMethod = Integer.parseInt(s);
                 } catch (NumberFormatException ex) {
-                    throw new JemException(I18N.getText("Epub.Maker.InvalidZipMethod", s), ex);
+                    throw new JemException(I18nMessage.getText("Epub.Maker.InvalidZipMethod", s), ex);
                 }
             } else {
                 throw ExceptionFactory.forInvalidIntegerArgument(KEY_COMPRESS_METHOD, o);
@@ -109,7 +109,7 @@ public class EpubMaker implements Maker {
                 try {
                     config.zipLevel = Integer.parseInt(s);
                 } catch (NumberFormatException ex) {
-                    throw new JemException(I18N.getText("Epub.Maker.InvalidZipLevel", s), ex);
+                    throw new JemException(I18nMessage.getText("Epub.Maker.InvalidZipLevel", s), ex);
                 }
             } else {
                 throw ExceptionFactory.forInvalidIntegerArgument(KEY_COMPRESS_LEVEL, o);
@@ -144,7 +144,7 @@ public class EpubMaker implements Maker {
     public void make(Book book, ZipOutputStream zipout, EpubConfig config) throws IOException, JemException {
         EpubWriter writer = EpubWriterFactory.getWriter(config.version);
         if (writer == null) {
-            throw new MakerException(I18N.getText("Epub.UnsupportedVersion", config.version), getName());
+            throw new MakerException(I18nMessage.getText("Epub.UnsupportedVersion", config.version), getName());
         }
         writer.make(book, zipout, config);
         writeMIME(zipout);

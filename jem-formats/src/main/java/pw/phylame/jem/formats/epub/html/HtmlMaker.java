@@ -18,37 +18,41 @@
 
 package pw.phylame.jem.formats.epub.html;
 
-import org.dom4j.Document;
 import org.dom4j.Element;
+import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 
 import pw.phylame.jem.util.TextObject;
-
 import pw.phylame.jem.formats.epub.EPUB;
 
 import java.util.List;
 import java.util.Locale;
-import java.io.IOException;
 
 /**
  * Makes ePub HTML documents.
  */
 public final class HtmlMaker {
-    public static final String DT_ID = "-//W3C//DTD XHTML 1.1//EN";
-    public static final String DT_URI = "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd";
+    public static final String DT_ID     = "-//W3C//DTD XHTML 1.1//EN";
+    public static final String DT_URI    = "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd";
     public static final String NAMESPACE = "http://www.w3.org/1999/xhtml";
 
-    private String css;
-    private String encoding;
+    private String mCssHref;
+    private String mCharset;
+    private Locale mLocale;
 
-    public HtmlMaker(String css, String encoding) {
-        this.css = css;
-        this.encoding = encoding;
+    public HtmlMaker(String css, String charset) {
+        this(css, charset, Locale.getDefault());
+    }
+
+    public HtmlMaker(String css, String charset, Locale locale) {
+        mCssHref = css;
+        mCharset = charset;
+        mLocale = locale;
     }
 
     public Document makeCoverPage(String title, String cover, String imageStyle) {
-        Document doc = DocumentHelper.createDocument();
-        Element body = initHtml(doc, title);
+        Document doc  = DocumentHelper.createDocument();
+        Element  body = initHtml(doc, title);
 
         Element div = body.addElement("div").addAttribute("class", imageStyle);
         div.addElement("img").addAttribute("src", cover);
@@ -60,14 +64,14 @@ public final class HtmlMaker {
                                   String bookTitle,
                                   String titleStyle,
                                   TextObject intro,
-                                  String introStyle) throws IOException {
-        List<String> lines = intro.getLines();
-        if (lines.size() == 0) {
+                                  String introStyle) {
+        String[] lines = intro.getLines();
+        if (lines == null || lines.length == 0) {
             return null;
         }
 
-        Document doc = DocumentHelper.createDocument();
-        Element body = initHtml(doc, title);
+        Document doc  = DocumentHelper.createDocument();
+        Element  body = initHtml(doc, title);
 
         // book title
         Element div = body.addElement("div").addAttribute("class", titleStyle);
@@ -116,7 +120,7 @@ public final class HtmlMaker {
                                      String introStyle,
                                      List<String> labels,
                                      List<String> href,
-                                     String tocStyle) throws IOException {
+                                     String tocStyle) {
         Document doc = DocumentHelper.createDocument();
         Element body = initHtml(doc, title);
 
@@ -146,8 +150,7 @@ public final class HtmlMaker {
                                  TextObject text,
                                  String textStyle,
                                  TextObject intro,
-                                 String introStyle)
-            throws IOException {
+                                 String introStyle) {
         Document doc = DocumentHelper.createDocument();
         Element body = initHtml(doc, title);
 
@@ -175,16 +178,16 @@ public final class HtmlMaker {
     public Element initHtml(Document doc, String title) {
         doc.addDocType("html", DT_ID, DT_URI);
         Element html = doc.addElement("html", NAMESPACE);
-        html.addAttribute("xml:lang", Locale.getDefault().toLanguageTag());
+        html.addAttribute("xml:lang", mLocale.toLanguageTag());
 
         Element head = html.addElement("head");
 
         Element meta = head.addElement("meta");
-        meta.addAttribute("http-equiv", "charset").addAttribute("content", encoding);
+        meta.addAttribute("http-equiv", "charset").addAttribute("content", mCharset);
 
         // CSS
         Element link = head.addElement("link").addAttribute("rel", "stylesheet");
-        link.addAttribute("type", EPUB.MT_CSS).addAttribute("href", css);
+        link.addAttribute("type", EPUB.MT_CSS).addAttribute("href", mCssHref);
 
         // title
         head.addElement("title").setText(title);

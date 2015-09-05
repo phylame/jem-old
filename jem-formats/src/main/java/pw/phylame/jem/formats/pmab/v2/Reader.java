@@ -18,24 +18,19 @@
 
 package pw.phylame.jem.formats.pmab.v2;
 
-import org.dom4j.Element;
-
 import java.io.IOException;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.zip.ZipFile;
-
-import pw.phylame.jem.core.Part;
+import org.dom4j.Element;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Chapter;
+import pw.phylame.jem.util.FileObject;
+import pw.phylame.jem.util.FileFactory;
+import pw.phylame.jem.util.TextFactory;
 import pw.phylame.jem.util.JemException;
 import pw.phylame.jem.formats.util.ParserException;
-
 import pw.phylame.tools.DateUtils;
-import pw.phylame.jem.util.TextObject;
-import pw.phylame.jem.util.FileFactory;
-import pw.phylame.jem.util.FileObject;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -86,7 +81,7 @@ public class Reader {
                 book.setDate(
                         DateUtils.parseDate(value, "yyyy-M-d H:m:s", new Date()));
             } else if (name.equals("intro")) {
-                book.setIntro(value);
+                book.setIntro(TextFactory.fromString(value));
             } else {
                 book.setAttribute(name, value);
             }
@@ -159,7 +154,7 @@ public class Reader {
         readExtension(root, book, zipFile);
     }
 
-    private static void readContents(Element elem, Part parent, ZipFile zipFile)
+    private static void readContents(Element elem, Chapter parent, ZipFile zipFile)
             throws JemException {
         Element title = elem.element("title");
         if (title == null) {
@@ -175,7 +170,7 @@ public class Reader {
         if (href != null) { // base chapter
             try {
                 FileObject fb = FileFactory.fromZip(zipFile, href, null);
-                chapter.getSource().setFile(fb, encoding);
+                chapter.setSource(TextFactory.fromFile(fb, encoding));
             } catch (IOException e) {
                 LOG.debug("not found text source: "+href+" in PBC", e);
             }
@@ -217,7 +212,7 @@ public class Reader {
 
                 try {
                     FileObject fb = FileFactory.fromZip(zipFile, href, null);
-                    chapter.setIntro(new TextObject(fb, encoding));
+                    chapter.setIntro(TextFactory.fromFile(fb, encoding));
                 } catch (IOException e) {
                     LOG.debug("not found intro source: "+href, e);
                 }

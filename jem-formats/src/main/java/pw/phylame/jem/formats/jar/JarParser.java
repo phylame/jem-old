@@ -22,13 +22,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import pw.phylame.jem.core.Parser;
-import pw.phylame.jem.core.Part;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Chapter;
+import pw.phylame.jem.util.FileObject;
 import pw.phylame.jem.util.JemException;
 
 import pw.phylame.jem.formats.util.ParserException;
 import pw.phylame.jem.util.FileFactory;
+import pw.phylame.jem.util.TextFactory;
 
 import java.io.*;
 import java.util.Map;
@@ -51,9 +52,9 @@ public class JarParser implements Parser {
             throws IOException, JemException {
         final ZipFile jarFile = new ZipFile(file);
         Book book = parse(jarFile);
-        book.registerCleanup(new Part.Cleanable() {
+        book.registerCleanup(new Chapter.Cleanable() {
             @Override
-            public void clean(Part part) {
+            public void clean(Chapter part) {
                 try {
                     jarFile.close();
                 } catch (IOException e) {
@@ -102,14 +103,14 @@ public class JarParser implements Parser {
                         getName());
             }
             Chapter chapter = new Chapter(items[2]);
-            chapter.getSource().setFile(
-                    FileFactory.fromZip(zipFile, items[0], null), JAR.TEXT_ENCODING);
+            FileObject fb = FileFactory.fromZip(zipFile, items[0], null);
+            chapter.setSource(TextFactory.fromFile(fb, JAR.TEXT_ENCODING));
             book.append(chapter);
         }
 
         length = input.readShort();
         buf = new byte[length];
         input.readFully(buf);
-        book.setIntro(new String(buf, JAR.META_ENCODING));
+        book.setIntro(TextFactory.fromString(new String(buf, JAR.META_ENCODING)));
     }
 }

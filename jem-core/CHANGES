@@ -16,3 +16,8 @@ ChangeLog
   o. move Walker to Jem
   o. remove all newPart and newChapter methods in Part, Chapter
   o. remove method parse(String path, Map<String, Object> kw) in interface Parse
+
+* v2.2.0
+  o. merge class Part and Chapter to single class Chapter
+  o. change TextObject and FileObject to interface, using XxxFactory to create instance.
+  o. rename register files to META-INF/pw-jem/makers.properties and META-INF/pw-jem/parsers.properties

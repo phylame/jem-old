@@ -25,7 +25,7 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Jem;
-import pw.phylame.jem.core.Part;
+import pw.phylame.jem.core.Chapter;
 import pw.phylame.jem.formats.pmab.PMAB;
 import pw.phylame.jem.formats.pmab.PmabConfig;
 import pw.phylame.jem.formats.util.ZipUtils;
@@ -110,7 +110,7 @@ public final class Writer {
         }
     }
 
-    private static void makeAttributes(Element parent, Part part,
+    private static void makeAttributes(Element parent, Chapter part,
                                        ZipOutputStream zipout, PmabConfig config,
                                        String prefix) throws IOException {
         Element attributes = parent.addElement("attributes");
@@ -136,7 +136,7 @@ public final class Writer {
         }
     }
 
-    private static void makeChapter(Element parent, Part part, ZipOutputStream zipout,
+    private static void makeChapter(Element parent, Chapter part, ZipOutputStream zipout,
                                     PmabConfig config, String suffix)
             throws IOException {
         Element item = parent.addElement("chapter");
@@ -152,7 +152,7 @@ public final class Writer {
         content.setText(href);
 
         int count = 1;
-        for (Part sub: part) {
+        for (Chapter sub: part) {
             makeChapter(item, sub, zipout, config, suffix + "-" + count);
             ++count;
         }
@@ -165,7 +165,7 @@ public final class Writer {
 
         Element toc = root.addElement("toc");
         int count = 1;
-        for (Part part: book) {
+        for (Chapter part: book) {
             makeChapter(toc, part, zipout, config, count + "");
             ++count;
         }

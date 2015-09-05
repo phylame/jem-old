@@ -18,36 +18,36 @@
 
 package pw.phylame.jem.core;
 
-import java.util.*;
-
-import java.security.AccessController;
-import java.security.PrivilegedAction;
-
 import java.net.URL;
-import java.net.URLConnection;
-import java.io.InputStream;
-import java.io.IOException;
-
+import java.util.Set;
+import java.util.Map;
+import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Properties;
+import java.util.Enumeration;
+import pw.phylame.jem.util.JemUtilities;
+import pw.phylame.jem.util.UnsupportedFormatException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import pw.phylame.jem.util.UnsupportedFormatException;
 
 /**
  * This class manages the parsers and makers.
  * <p>The parser or maker should be registered firstly before reading or writing.</p>
  * <p>To extend formats to Jem, add name and class path to the following files:</p>
  * <ul>
- *     <li>jem-parsers.properties - declares Parser class, ex: txt=foo.bar.TxtParser</li>
- *     <li>jem-makers.properties - declares Maker class, ex: txt=foo.bar.TxtMaker</li>
+ *     <li><tt>PARSER_DEFINE_FILE</tt> - declares Parser classes and
+ *          supported file extension name. <br/>
+ *          ex: "txt=foo.bar.TxtParser;txt abc", a parser for file with extension .txt .abc<br/>
+ *          ex: "xyz=foo.bar.XyzParser", a parser for file with extension .xyz, the parser name is as extension
+ *          </li>
+ *     <li><tt>MAKER_DEFINE_FILE</tt> - declares Maker classes, ex: txt=foo.bar.TxtMaker</li>
  * </ul>
  * The properties files must be stored in valid class path.
  */
 public final class BookHelper {
-    private static Log LOG = LogFactory.getLog(BookHelper.class);
-
+    private static      Log    LOG                = LogFactory.getLog(BookHelper.class);
     /** File path of parser registration */
-    public static final String PARSER_DEFINE_FILE = "jem-parsers.properties";
+    public static final String PARSER_DEFINE_FILE = "META-INF/pw-jem/parsers.properties";
 
     /** Class path of registered book parsers */
     private static Map<String, String> parsers = new HashMap<String, String>();
@@ -57,7 +57,7 @@ public final class BookHelper {
             new HashMap<String, Class<? extends Parser>>();
 
     /** File path of maker registration */
-    public static final String MAKER_DEFINE_FILE = "jem-makers.properties";
+    public static final String MAKER_DEFINE_FILE = "META-INF/pw-jem/makers.properties";
 
     /** Class path of registered book makers */
     private static Map<String, String> makers = new HashMap<String, String>();
@@ -65,6 +65,14 @@ public final class BookHelper {
     /** Cached loaded classes of maker */
     private static Map<String, Class<? extends Maker>> cachedMakers =
             new HashMap<String, Class<? extends Maker>>();
+
+    private static final String NAME_EXTENSION_SEPARATOR = ";";
+    private static final String EXTENSION_SEPARATOR      = " ";
+
+    /**
+     * Mapping parser and maker name to file extension name
+     */
+    private static Map<String, String[]> nameMap = new HashMap<String, String[]>();
 
     /**
      * Registers parser class with specified name.
@@ -127,24 +135,25 @@ public final class BookHelper {
      * @throws IllegalAccessException cannot access the parser class
      * @throws InstantiationException cannot create new instance of parser class
      * @throws ClassNotFoundException if registered class path is invalid
-     * @throws pw.phylame.jem.util.UnsupportedFormatException the parser is not registered
+     * @throws UnsupportedFormatException if the parser is not registered
      */
     public static Parser getParser(String name) throws IllegalAccessException,
             InstantiationException, ClassNotFoundException, UnsupportedFormatException {
         if (name == null) {
             throw new NullPointerException("name");
         }
+        // get if cached
         Class<? extends Parser> parser = cachedParsers.get(name);
         if (parser != null) {
             return parser.newInstance();
         }
         String path = parsers.get(name);
         if (path == null) {
-            throw new UnsupportedFormatException(name, "not found parser");
+            throw new UnsupportedFormatException(name, "Not found book parser: "+name);
         }
         Class<?> clazz = Class.forName(path);
         if (! Parser.class.isAssignableFrom(clazz)) {
-            throw new UnsupportedFormatException(name, "class not extend Parser");
+            throw new UnsupportedFormatException(name, "Class not extend Parser: "+path);
         }
         cachedParsers.put(name, (Class<Parser>) clazz);
         return (Parser) clazz.newInstance();
@@ -221,24 +230,25 @@ public final class BookHelper {
      * @throws IllegalAccessException cannot access the maker class
      * @throws InstantiationException cannot create new instance of maker class
      * @throws ClassNotFoundException if registered class path is invalid
-     * @throws UnsupportedFormatException the maker is not registered
+     * @throws UnsupportedFormatException if the maker is not registered
      */
     public static Maker getMaker(String name) throws IllegalAccessException,
             InstantiationException, ClassNotFoundException, UnsupportedFormatException {
         if (name == null) {
             throw new NullPointerException("name");
         }
+        // get if cached
         Class<? extends Maker> maker = cachedMakers.get(name);
         if (maker != null) {
             return maker.newInstance();
         }
         String path = makers.get(name);
         if (path == null) {
-            throw new UnsupportedFormatException(name, "not found maker");
+            throw new UnsupportedFormatException(name, "Not found book maker: "+name);
         }
         Class<?> clazz = Class.forName(path);
         if (! Maker.class.isAssignableFrom(clazz)) {
-            throw new UnsupportedFormatException(name, "class not extend Maker");
+            throw new UnsupportedFormatException(name, "Class not extend Maker: "+path);
         }
         cachedMakers.put(name, (Class<Maker>) clazz);
         return (Maker) clazz.newInstance();
@@ -254,171 +264,27 @@ public final class BookHelper {
         return names.toArray(new String[0]);
     }
 
-    /**
-     * Calls directGetContextClassLoader under the control of an
-     * AccessController class. This means that java code running under a
-     * security manager that forbids access to ClassLoaders will still work
-     * if this class is given appropriate privileges, even when the caller
-     * doesn't have such privileges. Without using an AccessController, the
-     * the entire call stack must have the privilege before the call is
-     * allowed.
-     *
-     * @return the context class loader associated with the current thread,
-     *  or null if security doesn't allow it.
-     */
-    private static ClassLoader getContextClassLoaderInternal() {
-        return AccessController.doPrivileged(
-                new PrivilegedAction<ClassLoader>() {
-                    public ClassLoader run() {
-                        return directGetContextClassLoader();
-                    }
-                });
-    }
-
-    /**
-     * Return the thread context class loader if available; otherwise return null.
-     * <p>
-     * Most/all code should call getContextClassLoaderInternal rather than
-     * calling this method directly.
-     * <p>
-     * The thread context class loader is available for JDK 1.2
-     * or later, if certain security conditions are met.
-     * <p>
-     * Note that no internal logging is done within this method because
-     * this method is called every time LogFactory.getLogger() is called,
-     * and we don't want too much output generated here.
-     *
-     * @return the thread's context classloader or {@code null} if the java security
-     *  policy forbids access to the context classloader from one of the classes
-     *  in the current call stack.
-     * @since 1.1
-     */
-    protected static ClassLoader directGetContextClassLoader() {
-        ClassLoader classLoader = null;
-
-        try {
-            classLoader = Thread.currentThread().getContextClassLoader();
-        } catch (SecurityException ex) {
-            /**
-             * getContextClassLoader() throws SecurityException when
-             * the context class loader isn't an ancestor of the
-             * calling class's class loader, or if security
-             * permissions are restricted.
-             *
-             * We ignore this exception to be consistent with the previous
-             * behavior (e.g. 1.1.3 and earlier).
-             */
-            // ignore
-        }
-
-        // Return the selected class loader
-        return classLoader;
-    }
-
-    /**
-     * Given a filename, return an enumeration of URLs pointing to
-     * all the occurrences of that filename in the classpath.
-     * <p>
-     * This is just like ClassLoader.getResources except that the
-     * operation is done under an AccessController so that this method will
-     * succeed when this jar file is privileged but the caller is not.
-     * This method must therefore remain private to avoid security issues.
-     * <p>
-     * If no instances are found, an Enumeration is returned whose
-     * hasMoreElements method returns false (ie an "empty" enumeration).
-     * If resources could not be listed for some reason, null is returned.
-     */
-    private static Enumeration<URL> getResources(final ClassLoader loader,
-                                                 final String name) {
-        PrivilegedAction<Enumeration<URL>> action =
-                new PrivilegedAction<Enumeration<URL>>() {
-                    public Enumeration<URL> run() {
-                        try {
-                            if (loader != null) {
-                                return loader.getResources(name);
-                            } else {
-                                return ClassLoader.getSystemResources(name);
-                            }
-                        } catch (IOException e) {
-                            LOG.debug(
-                                    "Exception while trying to find configuration file " +
-                                    name + ":" + e);
-                            return null;
-                        } catch (NoSuchMethodError e) {
-                            // we must be running on a 1.1 JVM which doesn't support
-                            // ClassLoader.getSystemResources; just return null in
-                            // this case.
-                            return null;
-                        }
-                    }
-                };
-        return AccessController.doPrivileged(action);
-    }
-
-    /**
-     * Given a URL that refers to a .properties file, load that file.
-     * This is done under an AccessController so that this method will
-     * succeed when this jar file is privileged but the caller is not.
-     * This method must therefore remain private to avoid security issues.
-     * <p>
-     * {@code Null} is returned if the URL cannot be opened.
-     */
-    private static Properties getProperties(final URL url) {
-        PrivilegedAction<Properties> action =
-                new PrivilegedAction<Properties>() {
-                    public Properties run() {
-                        InputStream stream = null;
-                        try {
-                            // We must ensure that useCaches is set to false, as the
-                            // default behaviour of java is to cache file handles, and
-                            // this "locks" files, preventing hot-redeploy on windows.
-                            URLConnection connection = url.openConnection();
-                            connection.setUseCaches(false);
-                            stream = connection.getInputStream();
-                            if (stream != null) {
-                                Properties props = new Properties();
-                                props.load(stream);
-                                stream.close();
-                                stream = null;
-                                return props;
-                            }
-                        } catch (IOException e) {
-                            LOG.debug("Unable to read URL " + url, e);
-                        } finally {
-                            if (stream != null) {
-                                try {
-                                    stream.close();
-                                } catch (IOException e) {
-                                    // ignore exception; this should not happen
-                                    LOG.debug(
-                                            "Unable to close stream for URL " + url, e);
-                                }
-                            }
-                        }
-
-                        return null;
-                    }
-                };
-        return AccessController.doPrivileged(action);
+    public static String[] getExtensions(String name) {
+        return nameMap.get(name);
     }
 
     private static Map<String, String> loadRegistrations(String fileName) {
         Map<String, String> map = new HashMap<String, String>();
 
         // Identify the class loader we will be using
-        ClassLoader contextClassLoader = getContextClassLoaderInternal();
+        ClassLoader contextClassLoader = JemUtilities.getContextClassLoaderInternal();
 
-        Enumeration<URL> urls = getResources(contextClassLoader, fileName);
+        Enumeration<URL> urls = JemUtilities.getResources(contextClassLoader, fileName);
         if (urls == null) {
             return map;
         }
         while (urls.hasMoreElements()) {
             URL url = urls.nextElement();
-            Properties prop = getProperties(url);
+            Properties prop = JemUtilities.getProperties(url);
             if (prop != null) {
                 for (String name: prop.stringPropertyNames()) {
                     String clazz = prop.getProperty(name);
-                    if (clazz != null && ! "".equals(clazz)) {
+                    if (clazz != null && ! clazz.isEmpty()) {
                         map.put(name, clazz);
                     }
                 }
@@ -431,7 +297,18 @@ public final class BookHelper {
     private static void registerCustomParsers() {
         for (Map.Entry<String, String> entry:
                 loadRegistrations(PARSER_DEFINE_FILE).entrySet()) {
-            registerParser(entry.getKey(), entry.getValue());
+            String name = entry.getKey();
+            String[] parts = entry.getValue().split(NAME_EXTENSION_SEPARATOR, 2);
+            if (parts.length == 0) {
+                LOG.debug("declared parser class path of "+name+" is empty");
+                continue;
+            }
+            registerParser(name, parts[0]);
+            if (parts.length > 1) {
+                nameMap.put(name, parts[1].split(EXTENSION_SEPARATOR));
+            } else {
+                nameMap.put(name, new String[]{name});
+            }
         }
     }
 
