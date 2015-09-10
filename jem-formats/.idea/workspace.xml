@@ -2,97 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c6a5609f-7253-47fb-908f-8eec8dd23b4e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/util/AbstractFileObject.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/AbstractParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/ucnovel/ChapterWatcher.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/util/JemUtilities.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__org_xerial_sqlite_jdbc_3_8_11_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__pw_books_jem_core_2_2_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__pw_books_jem_core_2_2_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__pw_books_ucnovel_jdbc_reader_1_0_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__pw_tools_pw_gaf_1_0_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/util/TextFactory.java" />
-      <change type="DELETED" beforePath="D:\code\pw-books\jem-core\.idea\libraries\Maven__log4j_log4j_1_2_12.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\code\pw-books\jem-core\jem-core.eml" afterPath="" />
-      <change type="DELETED" beforePath="D:\code\pw-books\jem-formats\.idea\libraries\Maven__log4j_log4j_1_2_12.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\code\pw-books\jem-formats\.idea\libraries\Maven__pw_books_jem_core_2_1_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\code\pw-books\jem-formats\src\main\resources\cover.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\code\pw-books\scj\.idea\libraries\Maven__pw_books_jem_core_2_1_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\code\pw-books\scj\.idea\libraries\Maven__pw_tools_pat_core_1_0_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\code\pw-books\scj\src\main\resources\res\i18n\scj.properties" afterPath="" />
-      <change type="DELETED" beforePath="D:\code\pw-books\scj\src\main\resources\res\i18n\scj_zh_CN.properties" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/core/Attributes.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/core/Attributes.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/core/Book.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/core/Book.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/core/BookHelper.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/core/BookHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/CHANGES" afterPath="$PROJECT_DIR$/../jem-core/CHANGES" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CHANGES" afterPath="$PROJECT_DIR$/CHANGES" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/EpubConfig.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/EpubConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/EpubMaker.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/EpubMaker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/ExceptionFactory.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/ExceptionFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/util/FileFactory.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/util/FileFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/util/FileObject.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/util/FileObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/html/HtmlMaker.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/html/HtmlMaker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/jar/JAR.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/jar/JAR.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/jar/JarMaker.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/jar/JarMaker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/jar/JarParser.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/jar/JarParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/core/Jem.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/core/Jem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/resources/LICENSE" afterPath="$PROJECT_DIR$/../jem-core/src/main/resources/LICENSE" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/src/main/assembly/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/../scj/src/main/assembly/META-INF/MANIFEST.MF" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Manager.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Manager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__log4j_log4j_1_2_12.xml" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__log4j_log4j_1_2_12.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__pw_tools_pw_utils_1_0_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__pw_tools_pw_utils_1_0_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__pw_tools_pw_utils_1_0_0.xml" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__pw_tools_pw_utils_1_0_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__xml_apis_xml_apis_1_0_b2.xml" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__xml_apis_xml_apis_1_0_b2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/ncx/NCX_2005_1.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/ncx/NCX_2005_1.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PMAB.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PMAB.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabConfig.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabParser.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/README.md" afterPath="$PROJECT_DIR$/../jem-core/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v1/Reader.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v1/Reader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v2/Reader.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v2/Reader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v3/Reader.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v3/Reader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/html/StyleProvider.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/html/StyleProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/util/TextObject.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/util/TextObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/txt/TxtConfig.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/txt/TxtConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/txt/TxtMaker.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/txt/TxtMaker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/txt/TxtParser.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/txt/TxtParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/umd/UmdMaker.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/umd/UmdMaker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/umd/UmdParser.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/umd/UmdParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/Version.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/Version.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/Viewer.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/Viewer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v2/Writer.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v2/Writer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v3/Writer.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v3/Writer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/writer/WriterV2.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/epub/writer/WriterV2.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/ZipUtils.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/ZipUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/jem-core.iml" afterPath="$PROJECT_DIR$/../jem-core/jem-core.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jem-formats.iml" afterPath="$PROJECT_DIR$/jem-formats.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/src/main/scripts/jem.bat" afterPath="$PROJECT_DIR$/../scj/src/main/scripts/jem.bat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/src/main/scripts/jem.sh" afterPath="$PROJECT_DIR$/../scj/src/main/scripts/jem.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/jem/formats/messages.properties" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/jem/formats/messages.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/jem/formats/messages_zh_CN.properties" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/jem/formats/messages_zh_CN.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/resources/pw/phylame/jem/util/mime.properties" afterPath="$PROJECT_DIR$/../jem-core/src/main/resources/pw/phylame/jem/util/mime.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/pom.xml" afterPath="$PROJECT_DIR$/../jem-core/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/pom.xml" afterPath="$PROJECT_DIR$/../scj/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/scj.iml" afterPath="$PROJECT_DIR$/../scj/scj.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/.idea/artifacts/scj_jar.xml" afterPath="$PROJECT_DIR$/../scj/.idea/artifacts/scj_jar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/jem/formats/txt/txt.properties" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/jem/formats/txt/txt.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../imabw/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../jem-core/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../scj/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="D:\code\pw-books\jem-core\src\main\java\pw\phylame\jem\core\Part.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/core/Chapter.java" />
-      <change type="MOVED" beforePath="D:\code\pw-books\jem-formats\src\main\java\pw\phylame\jem\formats\util\I18N.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/I18nMessage.java" />
-      <change type="MOVED" beforePath="D:\code\pw-books\jem-formats\src\main\java\pw\phylame\jem\formats\util\Texts.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/util/TextUtilities.java" />
-      <change type="MOVED" beforePath="D:\code\pw-books\jem-formats\src\main\resources\jem-makers.properties" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/pw-jem/makers.properties" />
-      <change type="MOVED" beforePath="D:\code\pw-books\jem-formats\src\main\resources\jem-parsers.properties" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/pw-jem/parsers.properties" />
-      <change type="MOVED" beforePath="D:\code\pw-books\scj\.idea\libraries\Maven__pw_books_jem_formats_1_2_0.xml" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__pw_books_jem_formats_1_3_0.xml" />
-      <change type="MOVED" beforePath="D:\code\pw-books\scj\src\main\java\pw\phylame\scj\AppConfig.java" afterPath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/jem/scj/app/AppConfig.java" />
-      <change type="MOVED" beforePath="D:\code\pw-books\scj\src\main\java\pw\phylame\scj\Constants.java" afterPath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/jem/scj/app/Constants.java" />
-      <change type="MOVED" beforePath="D:\code\pw-books\scj\src\main\java\pw\phylame\scj\SCI.java" afterPath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/jem/scj/app/SCI.java" />
-      <change type="MOVED" beforePath="D:\code\pw-books\scj\src\main\java\pw\phylame\scj\Worker.java" afterPath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/jem/scj/app/Worker.java" />
     </list>
     <ignored path="format-pack.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -116,21 +26,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PMAB.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PMAB.java">
+      <file leaf-file-name="Writer.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v3/Writer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="63" column="8" selection-start-line="63" selection-start-column="8" selection-end-line="63" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="parsers.properties" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/META-INF/pw-jem/parsers.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7819672">
-              <caret line="26" column="69" selection-start-line="26" selection-start-column="69" selection-end-line="26" selection-end-column="69" />
+            <state vertical-scroll-proportion="1.8245902">
+              <caret line="90" column="30" selection-start-line="90" selection-start-column="30" selection-end-line="90" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -263,6 +163,20 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jem-formats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="Scope">
         <subPane subId="Project Files">
           <PATH>
@@ -311,66 +225,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-formats" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-formats" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-formats" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-formats" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pw.phylame.jem.formats" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-formats" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-formats" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pw.phylame.jem.formats" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="umd" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-formats" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jem-formats" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="META-INF.pw-jem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -856,15 +710,16 @@
       <workItem from="1441338247535" duration="161000" />
       <workItem from="1441338467475" duration="3000" />
       <workItem from="1441420921222" duration="160000" />
+      <workItem from="1441803471141" duration="45000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="172568000" />
+    <option name="totallyTimeSpent" value="172613000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -875,7 +730,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294702" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.45503598" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2203514" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2203514" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24597365" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1141,13 +996,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v3/Writer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1557377">
-          <caret line="92" column="4" selection-start-line="92" selection-start-column="4" selection-end-line="92" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3114754">
@@ -1311,8 +1159,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/META-INF/pw-jem/parsers.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7819672">
+        <state vertical-scroll-proportion="0.7590164">
           <caret line="26" column="69" selection-start-line="26" selection-start-column="69" selection-end-line="26" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/formats/pmab/v3/Writer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.8245902">
+          <caret line="90" column="30" selection-start-line="90" selection-start-column="30" selection-end-line="90" selection-end-column="30" />
           <folding />
         </state>
       </provider>

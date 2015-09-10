@@ -5,97 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="43c239c1-c0d7-481c-9eb1-894ad8728ebf" name="Default" comment="Import Commons IO">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/AbstractFileObject.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/util/AbstractParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/ucnovel/ChapterWatcher.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/JemUtilities.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__org_xerial_sqlite_jdbc_3_8_11_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../jem-formats/.idea/libraries/Maven__pw_books_jem_core_2_2_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__pw_books_jem_core_2_2_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__pw_books_ucnovel_jdbc_reader_1_0_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__pw_tools_pw_gaf_1_0_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/TextFactory.java" />
-      <change type="DELETED" beforePath="D:\code\pw-books\jem-core\.idea\libraries\Maven__log4j_log4j_1_2_12.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\code\pw-books\jem-core\jem-core.eml" afterPath="" />
-      <change type="DELETED" beforePath="D:\code\pw-books\jem-formats\.idea\libraries\Maven__log4j_log4j_1_2_12.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\code\pw-books\jem-formats\.idea\libraries\Maven__pw_books_jem_core_2_1_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\code\pw-books\jem-formats\src\main\resources\cover.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\code\pw-books\scj\.idea\libraries\Maven__pw_books_jem_core_2_1_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\code\pw-books\scj\.idea\libraries\Maven__pw_tools_pat_core_1_0_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\code\pw-books\scj\src\main\resources\res\i18n\scj.properties" afterPath="" />
-      <change type="DELETED" beforePath="D:\code\pw-books\scj\src\main\resources\res\i18n\scj_zh_CN.properties" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Attributes.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Attributes.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Book.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Book.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/BookHelper.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/BookHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CHANGES" afterPath="$PROJECT_DIR$/CHANGES" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/CHANGES" afterPath="$PROJECT_DIR$/../jem-formats/CHANGES" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/epub/EpubConfig.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/epub/EpubConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/epub/EpubMaker.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/epub/EpubMaker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/util/ExceptionFactory.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/util/ExceptionFactory.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/FileFactory.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/FileFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/FileObject.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/FileObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/epub/html/HtmlMaker.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/epub/html/HtmlMaker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/jar/JAR.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/jar/JAR.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/jar/JarMaker.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/jar/JarMaker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/jar/JarParser.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/jar/JarParser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/LICENSE" afterPath="$PROJECT_DIR$/src/main/resources/LICENSE" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/src/main/assembly/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/../scj/src/main/assembly/META-INF/MANIFEST.MF" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Manager.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/Manager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__log4j_log4j_1_2_12.xml" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__log4j_log4j_1_2_12.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/.idea/libraries/Maven__pw_tools_pw_utils_1_0_0.xml" afterPath="$PROJECT_DIR$/../jem-formats/.idea/libraries/Maven__pw_tools_pw_utils_1_0_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__pw_tools_pw_utils_1_0_0.xml" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__pw_tools_pw_utils_1_0_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__xml_apis_xml_apis_1_0_b2.xml" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__xml_apis_xml_apis_1_0_b2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/epub/ncx/NCX_2005_1.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/epub/ncx/NCX_2005_1.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/PMAB.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/PMAB.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/PmabConfig.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/PmabConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/PmabMaker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/PmabParser.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/PmabParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v1/Reader.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v1/Reader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v2/Reader.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v2/Reader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v3/Reader.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v3/Reader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/epub/html/StyleProvider.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/epub/html/StyleProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/TextObject.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/TextObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/txt/TxtConfig.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/txt/TxtConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/txt/TxtMaker.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/txt/TxtMaker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/txt/TxtParser.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/txt/TxtParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/umd/UmdMaker.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/umd/UmdMaker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/umd/UmdParser.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/umd/UmdParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/util/Version.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/util/Version.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/Viewer.java" afterPath="$PROJECT_DIR$/../imabw/src/main/java/pw/phylame/imabw/ui/Viewer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v2/Writer.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v2/Writer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v3/Writer.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/pmab/v3/Writer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/epub/writer/WriterV2.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/epub/writer/WriterV2.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/util/ZipUtils.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/util/ZipUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jem-core.iml" afterPath="$PROJECT_DIR$/jem-core.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/jem-formats.iml" afterPath="$PROJECT_DIR$/../jem-formats/jem-formats.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/src/main/scripts/jem.bat" afterPath="$PROJECT_DIR$/../scj/src/main/scripts/jem.bat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/src/main/scripts/jem.sh" afterPath="$PROJECT_DIR$/../scj/src/main/scripts/jem.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/resources/pw/phylame/jem/formats/messages.properties" afterPath="$PROJECT_DIR$/../jem-formats/src/main/resources/pw/phylame/jem/formats/messages.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/resources/pw/phylame/jem/formats/messages_zh_CN.properties" afterPath="$PROJECT_DIR$/../jem-formats/src/main/resources/pw/phylame/jem/formats/messages_zh_CN.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/jem/util/mime.properties" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/jem/util/mime.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/pom.xml" afterPath="$PROJECT_DIR$/../jem-formats/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/pom.xml" afterPath="$PROJECT_DIR$/../scj/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/scj.iml" afterPath="$PROJECT_DIR$/../scj/scj.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/.idea/artifacts/scj_jar.xml" afterPath="$PROJECT_DIR$/../scj/.idea/artifacts/scj_jar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/src/main/resources/pw/phylame/jem/formats/txt/txt.properties" afterPath="$PROJECT_DIR$/../jem-formats/src/main/resources/pw/phylame/jem/formats/txt/txt.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imabw/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../imabw/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-formats/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../jem-formats/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../scj/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="D:\code\pw-books\jem-core\src\main\java\pw\phylame\jem\core\Part.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Chapter.java" />
-      <change type="MOVED" beforePath="D:\code\pw-books\jem-formats\src\main\java\pw\phylame\jem\formats\util\I18N.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/util/I18nMessage.java" />
-      <change type="MOVED" beforePath="D:\code\pw-books\jem-formats\src\main\java\pw\phylame\jem\formats\util\Texts.java" afterPath="$PROJECT_DIR$/../jem-formats/src/main/java/pw/phylame/jem/formats/util/TextUtilities.java" />
-      <change type="MOVED" beforePath="D:\code\pw-books\jem-formats\src\main\resources\jem-makers.properties" afterPath="$PROJECT_DIR$/../jem-formats/src/main/resources/META-INF/pw-jem/makers.properties" />
-      <change type="MOVED" beforePath="D:\code\pw-books\jem-formats\src\main\resources\jem-parsers.properties" afterPath="$PROJECT_DIR$/../jem-formats/src/main/resources/META-INF/pw-jem/parsers.properties" />
-      <change type="MOVED" beforePath="D:\code\pw-books\scj\.idea\libraries\Maven__pw_books_jem_formats_1_2_0.xml" afterPath="$PROJECT_DIR$/../scj/.idea/libraries/Maven__pw_books_jem_formats_1_3_0.xml" />
-      <change type="MOVED" beforePath="D:\code\pw-books\scj\src\main\java\pw\phylame\scj\AppConfig.java" afterPath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/jem/scj/app/AppConfig.java" />
-      <change type="MOVED" beforePath="D:\code\pw-books\scj\src\main\java\pw\phylame\scj\Constants.java" afterPath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/jem/scj/app/Constants.java" />
-      <change type="MOVED" beforePath="D:\code\pw-books\scj\src\main\java\pw\phylame\scj\SCI.java" afterPath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/jem/scj/app/SCI.java" />
-      <change type="MOVED" beforePath="D:\code\pw-books\scj\src\main\java\pw\phylame\scj\Worker.java" afterPath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/jem/scj/app/Worker.java" />
     </list>
     <ignored path="jem-core.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -118,10 +32,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="BookHelper.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BookHelper.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/BookHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.68524593">
+            <state vertical-scroll-proportion="0.0">
               <caret line="312" column="5" selection-start-line="312" selection-start-column="5" selection-end-line="312" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -138,6 +52,71 @@
                 <element signature="docComment;method#registerCustomMakers#0;class#BookHelper#0" expanded="true" />
                 <element signature="method#registerCustomMakers#0;class#BookHelper#0" expanded="false" />
                 <element signature="initializer##0;class#BookHelper#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Jem.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="267" column="45" selection-start-line="267" selection-start-column="45" selection-end-line="267" selection-end-column="45" />
+              <folding>
+                <element signature="e#0#9702#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="docComment;class#Jem#0" expanded="true" />
+                <element signature="docComment;field#VERSION#0;class#Jem#0" expanded="true" />
+                <element signature="docComment;field#VENDOR#0;class#Jem#0" expanded="true" />
+                <element signature="docComment;field#PMAB_FORMAT#0;class#Jem#0" expanded="true" />
+                <element signature="docComment;method#readBook#0;class#Jem#0" expanded="true" />
+                <element signature="docComment;method#writeBook#0;class#Jem#0" expanded="true" />
+                <element signature="docComment;method#findChapter#0;class#Jem#0" expanded="true" />
+                <element signature="docComment;method#toBook#0;class#Jem#0" expanded="true" />
+                <element signature="docComment;method#getDepth#0;class#Jem#0" expanded="true" />
+                <element signature="docComment;class#Walker#0;class#Jem#0" expanded="true" />
+                <element signature="docComment;method#watch#0;class#Walker#0;class#Jem#0" expanded="true" />
+                <element signature="docComment;method#walkChapter#0;class#Jem#0" expanded="true" />
+                <element signature="docComment;method#variantType#0;class#Jem#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FileFactory.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/FileFactory.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.71967214">
+              <caret line="280" column="61" selection-start-line="280" selection-start-column="61" selection-end-line="280" selection-end-column="61" />
+              <folding>
+                <element signature="method#loadBuiltinMime#0;class#FileFactory#0" expanded="false" />
+                <element signature="initializer##0;class#FileFactory#0" expanded="false" />
+                <element signature="method#getMimeType#0;class#FileFactory#0" expanded="false" />
+                <element signature="method#getOrDetectMime#0;class#FileFactory#0" expanded="false" />
+                <element signature="class#NormalFile#0;class#FileFactory#0" expanded="false" />
+                <element signature="method#NormalFile#0;class#NormalFile#0;class#FileFactory#0" expanded="false" />
+                <element signature="method#openStream#0;class#NormalFile#0;class#FileFactory#0" expanded="false" />
+                <element signature="method#toString#0;class#NormalFile#0;class#FileFactory#0" expanded="false" />
+                <element signature="class#InnerZip#0;class#FileFactory#0" expanded="false" />
+                <element signature="method#InnerZip#0;class#InnerZip#0;class#FileFactory#0" expanded="false" />
+                <element signature="method#openStream#0;class#InnerZip#0;class#FileFactory#0" expanded="false" />
+                <element signature="method#toString#0;class#InnerZip#0;class#FileFactory#0" expanded="false" />
+                <element signature="class#FileBlock#0;class#FileFactory#0" expanded="false" />
+                <element signature="method#FileBlock#0;class#FileBlock#0;class#FileFactory#0" expanded="false" />
+                <element signature="method#openStream#0;class#FileBlock#0;class#FileFactory#0" expanded="false" />
+                <element signature="class#5694:6013" expanded="false" />
+                <element signature="method#read#0;class#5694:6013" expanded="false" />
+                <element signature="method#reset#0;class#FileBlock#0;class#FileFactory#0" expanded="false" />
+                <element signature="method#toString#0;class#FileBlock#0;class#FileFactory#0" expanded="false" />
+                <element signature="class#URLFile#0;class#FileFactory#0" expanded="false" />
+                <element signature="method#URLFile#0;class#URLFile#0;class#FileFactory#0" expanded="false" />
+                <element signature="method#openStream#0;class#URLFile#0;class#FileFactory#0" expanded="false" />
+                <element signature="class#EmptyFile#0;class#FileFactory#0" expanded="false" />
+                <element signature="method#EmptyFile#0;class#EmptyFile#0;class#FileFactory#0" expanded="false" />
+                <element signature="method#openStream#0;class#EmptyFile#0;class#FileFactory#0" expanded="false" />
+                <element signature="method#fromFile#0;class#FileFactory#0" expanded="false" />
+                <element signature="method#fromZip#0;class#FileFactory#0" expanded="false" />
+                <element signature="method#fromBlock#0;class#FileFactory#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -213,14 +192,14 @@
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/FileObject.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/TextObject.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/FileFactory.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/TextFactory.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/AbstractFileObject.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Book.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/JemUtilities.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Chapter.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/BookHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/FileFactory.java" />
       </list>
     </option>
   </component>
@@ -274,7 +253,7 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -325,7 +304,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -808,11 +787,14 @@
       <workItem from="1441419731753" duration="1206000" />
       <workItem from="1441421242071" duration="7000" />
       <workItem from="1441422014644" duration="70000" />
+      <workItem from="1441803527207" duration="218000" />
+      <workItem from="1441886989048" duration="445000" />
+      <workItem from="1441890304326" duration="13000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63951000" />
+    <option name="totallyTimeSpent" value="64627000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
@@ -873,27 +855,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://D:/devel/Java/jdk1.8.0_51/src.zip!/java/util/logging/Level.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="7" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/devel/Java/jdk1.8.0_51/jre/lib/rt.jar!/com/sun/activation/registries/LogSupport.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.0666666">
-          <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/devel/Java/jdk1.8.0_51/src.zip!/java/util/logging/Logger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.6307979">
-          <caret line="331" column="4" selection-start-line="331" selection-start-column="4" selection-end-line="331" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://D:/devel/Java/jdk1.8.0_51/src.zip!/java/net/URLConnection.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5640074">
@@ -996,13 +957,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3320965">
           <caret line="222" column="18" selection-start-line="222" selection-start-column="18" selection-end-line="222" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/devel/Java/jdk1.8.0_51/src.zip!/java/io/FilterInputStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.6697588">
-          <caret line="60" column="14" selection-start-line="60" selection-start-column="14" selection-end-line="60" selection-end-column="14" />
         </state>
       </provider>
     </entry>
@@ -1129,13 +1083,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/FileFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21803279">
-          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/FileObject.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.21803279">
@@ -1178,21 +1125,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://D:/devel/Java/jdk1.8.0_51/src.zip!/java/lang/Class.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2704918">
-          <caret line="1291" column="0" selection-start-line="1291" selection-start-column="0" selection-end-line="1291" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="MarkdownPreviewEditor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CHANGES">
@@ -1227,24 +1167,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.40819672">
           <caret line="392" column="5" selection-start-line="392" selection-start-column="5" selection-end-line="392" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6885246">
-          <caret line="143" column="26" selection-start-line="143" selection-start-column="26" selection-end-line="143" selection-end-column="26" />
-          <folding>
-            <element signature="method#getParser#0;class#Jem#0" expanded="false" />
-            <element signature="method#readBook#0;class#Jem#0" expanded="false" />
-            <element signature="method#getMaker#0;class#Jem#0" expanded="false" />
-            <element signature="method#writeBook#0;class#Jem#0" expanded="false" />
-            <element signature="method#toBook#0;class#Jem#0" expanded="false" />
-            <element signature="class#Walker#0;class#Jem#0" expanded="false" />
-            <element signature="method#walkChapter#0;class#Jem#0" expanded="false" />
-            <element signature="initializer##0;class#Jem#0" expanded="false" />
-            <element signature="method#variantType#0;class#Jem#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1339,7 +1261,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/BookHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.68524593">
+        <state vertical-scroll-proportion="0.0">
           <caret line="312" column="5" selection-start-line="312" selection-start-column="5" selection-end-line="312" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1356,6 +1278,268 @@
             <element signature="docComment;method#registerCustomMakers#0;class#BookHelper#0" expanded="true" />
             <element signature="method#registerCustomMakers#0;class#BookHelper#0" expanded="false" />
             <element signature="initializer##0;class#BookHelper#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/devel/Java/jdk1.8.0_51/src.zip!/java/lang/Character.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27540985">
+          <caret line="122" column="6" selection-start-line="122" selection-start-column="6" selection-end-line="122" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/devel/Java/jdk1.8.0_51/src.zip!/java/lang/Double.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2409836">
+          <caret line="48" column="19" selection-start-line="48" selection-start-column="19" selection-end-line="48" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/devel/Java/jdk1.8.0_51/src.zip!/java/lang/Class.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3327869">
+          <caret line="1381" column="18" selection-start-line="1381" selection-start-column="18" selection-end-line="1381" selection-end-column="18" />
+          <folding>
+            <element signature="initializer##0;class#Class#0" expanded="false" />
+            <element signature="method#Class#0;class#Class#0" expanded="false" />
+            <element signature="e#4399#4479#0" expanded="false" />
+            <element signature="method#toString#0;class#Class#0" expanded="false" />
+            <element signature="method#toGenericString#0;class#Class#0" expanded="false" />
+            <element signature="method#forName#0;class#Class#0" expanded="false" />
+            <element signature="method#forName#1;class#Class#0" expanded="false" />
+            <element signature="e#12531#12606#0" expanded="false" />
+            <element signature="method#newInstance#0;class#Class#0" expanded="false" />
+            <element signature="e#15633#15694#0" expanded="false" />
+            <element signature="e#16168#16218#0" expanded="false" />
+            <element signature="class#16484:16724" expanded="false" />
+            <element signature="method#run#0;class#16484:16724" expanded="false" />
+            <element signature="method#getName#0;class#Class#0" expanded="false" />
+            <element signature="method#getClassLoader#0;class#Class#0" expanded="false" />
+            <element signature="method#getClassLoader0#0;class#Class#0" expanded="false" />
+            <element signature="method#getTypeParameters#0;class#Class#0" expanded="false" />
+            <element signature="method#getGenericSuperclass#0;class#Class#0" expanded="false" />
+            <element signature="e#31562#31589#0" expanded="false" />
+            <element signature="method#getInterfaces#0;class#Class#0" expanded="false" />
+            <element signature="method#getGenericInterfaces#0;class#Class#0" expanded="false" />
+            <element signature="method#getEnclosingMethod#0;class#Class#0" expanded="false" />
+            <element signature="e#42463#42515#0" expanded="false" />
+            <element signature="method#getEnclosingMethodInfo#0;class#Class#0" expanded="false" />
+            <element signature="class#EnclosingMethodInfo#0;class#Class#0" expanded="false" />
+            <element signature="method#EnclosingMethodInfo#0;class#EnclosingMethodInfo#0;class#Class#0" expanded="false" />
+            <element signature="e#44997#45045#0" expanded="false" />
+            <element signature="e#45225#45277#0" expanded="false" />
+            <element signature="e#45397#45449#0" expanded="false" />
+            <element signature="method#isPartial#0;class#EnclosingMethodInfo#0;class#Class#0" expanded="false" />
+            <element signature="method#isConstructor#0;class#EnclosingMethodInfo#0;class#Class#0" expanded="false" />
+            <element signature="method#isMethod#0;class#EnclosingMethodInfo#0;class#Class#0" expanded="false" />
+            <element signature="method#getEnclosingClass#0;class#EnclosingMethodInfo#0;class#Class#0" expanded="false" />
+            <element signature="method#getName#0;class#EnclosingMethodInfo#0;class#Class#0" expanded="false" />
+            <element signature="method#getDescriptor#0;class#EnclosingMethodInfo#0;class#Class#0" expanded="false" />
+            <element signature="method#toClass#0;class#Class#0" expanded="false" />
+            <element signature="method#getEnclosingConstructor#0;class#Class#0" expanded="false" />
+            <element signature="e#48886#48938#0" expanded="false" />
+            <element signature="method#getDeclaringClass#0;class#Class#0" expanded="false" />
+            <element signature="method#getEnclosingClass#0;class#Class#0" expanded="false" />
+            <element signature="e#52430#52481#0" expanded="false" />
+            <element signature="method#getSimpleName#0;class#Class#0" expanded="false" />
+            <element signature="e#54606#54667#0" expanded="false" />
+            <element signature="method#getTypeName#0;class#Class#0" expanded="false" />
+            <element signature="method#isLocalClass#0;class#Class#0" expanded="false" />
+            <element signature="method#isMemberClass#0;class#Class#0" expanded="false" />
+            <element signature="method#getSimpleBinaryName#0;class#Class#0" expanded="false" />
+            <element signature="method#isLocalOrAnonymousClass#0;class#Class#0" expanded="false" />
+            <element signature="e#59768#59823#0" expanded="false" />
+            <element signature="method#getClasses#0;class#Class#0" expanded="false" />
+            <element signature="e#61299#61365#0" expanded="false" />
+            <element signature="class#61737:62511" expanded="false" />
+            <element signature="method#run#0;class#61737:62511" expanded="false" />
+            <element signature="method#getFields#0;class#Class#0" expanded="false" />
+            <element signature="method#getMethods#0;class#Class#0" expanded="false" />
+            <element signature="method#getConstructors#0;class#Class#0" expanded="false" />
+            <element signature="method#getField#0;class#Class#0" expanded="false" />
+            <element signature="method#getMethod#0;class#Class#0" expanded="false" />
+            <element signature="method#getConstructor#0;class#Class#0" expanded="false" />
+            <element signature="method#getDeclaredClasses#0;class#Class#0" expanded="false" />
+            <element signature="method#getDeclaredFields#0;class#Class#0" expanded="false" />
+            <element signature="method#getDeclaredMethods#0;class#Class#0" expanded="false" />
+            <element signature="method#getDeclaredConstructors#0;class#Class#0" expanded="false" />
+            <element signature="method#getDeclaredField#0;class#Class#0" expanded="false" />
+            <element signature="method#getDeclaredMethod#0;class#Class#0" expanded="false" />
+            <element signature="method#getDeclaredConstructor#0;class#Class#0" expanded="false" />
+            <element signature="method#getResourceAsStream#0;class#Class#0" expanded="false" />
+            <element signature="method#getResource#0;class#Class#0" expanded="false" />
+            <element signature="method#getProtectionDomain#0;class#Class#0" expanded="false" />
+            <element signature="method#checkMemberAccess#0;class#Class#0" expanded="false" />
+            <element signature="method#checkPackageAccess#0;class#Class#0" expanded="false" />
+            <element signature="method#resolveName#0;class#Class#0" expanded="false" />
+            <element signature="class#Atomic#0;class#Class#0" expanded="false" />
+            <element signature="initializer##0;class#Atomic#0;class#Class#0" expanded="false" />
+            <element signature="method#objectFieldOffset#0;class#Atomic#0;class#Class#0" expanded="false" />
+            <element signature="method#casReflectionData#0;class#Atomic#0;class#Class#0" expanded="false" />
+            <element signature="method#casAnnotationType#0;class#Atomic#0;class#Class#0" expanded="false" />
+            <element signature="method#casAnnotationData#0;class#Atomic#0;class#Class#0" expanded="false" />
+            <element signature="class#ReflectionData#0;class#Class#0" expanded="false" />
+            <element signature="method#ReflectionData#0;class#ReflectionData#0;class#Class#0" expanded="false" />
+            <element signature="method#reflectionData#0;class#Class#0" expanded="false" />
+            <element signature="e#105269#105342#0" expanded="false" />
+            <element signature="method#newReflectionData#0;class#Class#0" expanded="false" />
+            <element signature="method#getFactory#0;class#Class#0" expanded="false" />
+            <element signature="method#getGenericInfo#0;class#Class#0" expanded="false" />
+            <element signature="method#getExecutableTypeAnnotationBytes#0;class#Class#0" expanded="false" />
+            <element signature="e#107634#107636#0" expanded="false" />
+            <element signature="method#privateGetDeclaredFields#0;class#Class#0" expanded="false" />
+            <element signature="method#privateGetPublicFields#0;class#Class#0" expanded="false" />
+            <element signature="e#109023#109079#0" expanded="false" />
+            <element signature="method#addAll#0;class#Class#0" expanded="false" />
+            <element signature="e#110257#110259#0" expanded="false" />
+            <element signature="method#privateGetDeclaredConstructors#0;class#Class#0" expanded="false" />
+            <element signature="e#111426#111428#0" expanded="false" />
+            <element signature="method#privateGetDeclaredMethods#0;class#Class#0" expanded="false" />
+            <element signature="class#MethodArray#0;class#Class#0" expanded="false" />
+            <element signature="method#MethodArray#1;class#MethodArray#0;class#Class#0" expanded="false" />
+            <element signature="method#add#0;class#MethodArray#0;class#Class#0" expanded="false" />
+            <element signature="method#addAll#0;class#MethodArray#0;class#Class#0" expanded="false" />
+            <element signature="method#addAll#1;class#MethodArray#0;class#Class#0" expanded="false" />
+            <element signature="method#addIfNotPresent#0;class#MethodArray#0;class#Class#0" expanded="false" />
+            <element signature="method#addAllIfNotPresent#0;class#MethodArray#0;class#Class#0" expanded="false" />
+            <element signature="method#addInterfaceMethods#0;class#MethodArray#0;class#Class#0" expanded="false" />
+            <element signature="method#getFirst#0;class#MethodArray#0;class#Class#0" expanded="false" />
+            <element signature="method#removeByNameAndDescriptor#0;class#MethodArray#0;class#Class#0" expanded="false" />
+            <element signature="method#remove#0;class#MethodArray#0;class#Class#0" expanded="false" />
+            <element signature="method#matchesNameAndDescriptor#0;class#MethodArray#0;class#Class#0" expanded="false" />
+            <element signature="method#compactAndTrim#0;class#MethodArray#0;class#Class#0" expanded="false" />
+            <element signature="method#removeLessSpecifics#0;class#MethodArray#0;class#Class#0" expanded="false" />
+            <element signature="method#hasMoreSpecificClass#0;class#MethodArray#0;class#Class#0" expanded="false" />
+            <element signature="method#privateGetPublicMethods#0;class#Class#0" expanded="false" />
+            <element signature="e#117978#118034#0" expanded="false" />
+            <element signature="e#118258#118314#0" expanded="false" />
+            <element signature="e#118901#118946#0" expanded="false" />
+            <element signature="e#119370#119417#0" expanded="false" />
+            <element signature="e#120111#120113#0" expanded="false" />
+            <element signature="method#searchFields#0;class#Class#0" expanded="false" />
+            <element signature="method#getField0#0;class#Class#0" expanded="false" />
+            <element signature="e#120605#120666#0" expanded="false" />
+            <element signature="method#searchMethods#0;class#Class#0" expanded="false" />
+            <element signature="method#getMethod0#0;class#Class#0" expanded="false" />
+            <element signature="method#privateGetMethodRecursive#0;class#Class#0" expanded="false" />
+            <element signature="e#123201#123262#0" expanded="false" />
+            <element signature="method#getConstructor0#0;class#Class#0" expanded="false" />
+            <element signature="e#125621#125623#0" expanded="false" />
+            <element signature="method#arrayContentsEq#0;class#Class#0" expanded="false" />
+            <element signature="method#copyFields#0;class#Class#0" expanded="false" />
+            <element signature="method#copyMethods#0;class#Class#0" expanded="false" />
+            <element signature="method#copyConstructors#0;class#Class#0" expanded="false" />
+            <element signature="method#argumentTypesToString#0;class#Class#0" expanded="false" />
+            <element signature="method#desiredAssertionStatus#0;class#Class#0" expanded="false" />
+            <element signature="e#130401#130462#0" expanded="false" />
+            <element signature="method#isEnum#0;class#Class#0" expanded="false" />
+            <element signature="e#131183#131243#0" expanded="false" />
+            <element signature="method#getReflectionFactory#0;class#Class#0" expanded="false" />
+            <element signature="method#checkInitted#0;class#Class#0" expanded="false" />
+            <element signature="class#132125:133355" expanded="false" />
+            <element signature="method#run#0;class#132125:133355" expanded="false" />
+            <element signature="e#132208#132263#0" expanded="false" />
+            <element signature="method#getEnumConstants#0;class#Class#0" expanded="false" />
+            <element signature="method#getEnumConstantsShared#0;class#Class#0" expanded="false" />
+            <element signature="class#134420:134665" expanded="false" />
+            <element signature="method#run#0;class#134420:134665" expanded="false" />
+            <element signature="e#134860#134916#0" expanded="false" />
+            <element signature="method#enumConstantDirectory#0;class#Class#0" expanded="false" />
+            <element signature="method#cast#0;class#Class#0" expanded="false" />
+            <element signature="method#cannotCastMsg#0;class#Class#0" expanded="false" />
+            <element signature="method#asSubclass#0;class#Class#0" expanded="false" />
+            <element signature="method#getAnnotation#0;class#Class#0" expanded="false" />
+            <element signature="method#isAnnotationPresent#0;class#Class#0" expanded="false" />
+            <element signature="method#getAnnotationsByType#0;class#Class#0" expanded="false" />
+            <element signature="method#getAnnotations#0;class#Class#0" expanded="false" />
+            <element signature="e#139715#139724#0" expanded="false" />
+            <element signature="method#getDeclaredAnnotation#0;class#Class#0" expanded="false" />
+            <element signature="method#getDeclaredAnnotationsByType#0;class#Class#0" expanded="false" />
+            <element signature="method#getDeclaredAnnotations#0;class#Class#0" expanded="false" />
+            <element signature="class#AnnotationData#0;class#Class#0" expanded="false" />
+            <element signature="method#AnnotationData#0;class#AnnotationData#0;class#Class#0" expanded="false" />
+            <element signature="method#annotationData#0;class#Class#0" expanded="false" />
+            <element signature="method#createAnnotationData#0;class#Class#0" expanded="false" />
+            <element signature="method#casAnnotationType#0;class#Class#0" expanded="false" />
+            <element signature="method#getDeclaredAnnotationMap#0;class#Class#0" expanded="false" />
+            <element signature="method#getAnnotatedSuperclass#0;class#Class#0" expanded="false" />
+            <element signature="method#getAnnotatedInterfaces#0;class#Class#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/core/Jem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="267" column="45" selection-start-line="267" selection-start-column="45" selection-end-line="267" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#9702#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;class#Jem#0" expanded="true" />
+            <element signature="docComment;field#VERSION#0;class#Jem#0" expanded="true" />
+            <element signature="docComment;field#VENDOR#0;class#Jem#0" expanded="true" />
+            <element signature="docComment;field#PMAB_FORMAT#0;class#Jem#0" expanded="true" />
+            <element signature="docComment;method#readBook#0;class#Jem#0" expanded="true" />
+            <element signature="docComment;method#writeBook#0;class#Jem#0" expanded="true" />
+            <element signature="docComment;method#findChapter#0;class#Jem#0" expanded="true" />
+            <element signature="docComment;method#toBook#0;class#Jem#0" expanded="true" />
+            <element signature="docComment;method#getDepth#0;class#Jem#0" expanded="true" />
+            <element signature="docComment;class#Walker#0;class#Jem#0" expanded="true" />
+            <element signature="docComment;method#watch#0;class#Walker#0;class#Jem#0" expanded="true" />
+            <element signature="docComment;method#walkChapter#0;class#Jem#0" expanded="true" />
+            <element signature="docComment;method#variantType#0;class#Jem#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/devel/Java/jdk1.8.0_51/src.zip!/java/io/FilterInputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3327869">
+          <caret line="60" column="14" selection-start-line="60" selection-start-column="14" selection-end-line="60" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/devel/Java/jdk1.8.0_51/src.zip!/java/io/InputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1557377">
+          <caret line="44" column="22" selection-start-line="44" selection-start-column="22" selection-end-line="44" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/jem/util/FileFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.71967214">
+          <caret line="280" column="61" selection-start-line="280" selection-start-column="61" selection-end-line="280" selection-end-column="61" />
+          <folding>
+            <element signature="method#loadBuiltinMime#0;class#FileFactory#0" expanded="false" />
+            <element signature="initializer##0;class#FileFactory#0" expanded="false" />
+            <element signature="method#getMimeType#0;class#FileFactory#0" expanded="false" />
+            <element signature="method#getOrDetectMime#0;class#FileFactory#0" expanded="false" />
+            <element signature="class#NormalFile#0;class#FileFactory#0" expanded="false" />
+            <element signature="method#NormalFile#0;class#NormalFile#0;class#FileFactory#0" expanded="false" />
+            <element signature="method#openStream#0;class#NormalFile#0;class#FileFactory#0" expanded="false" />
+            <element signature="method#toString#0;class#NormalFile#0;class#FileFactory#0" expanded="false" />
+            <element signature="class#InnerZip#0;class#FileFactory#0" expanded="false" />
+            <element signature="method#InnerZip#0;class#InnerZip#0;class#FileFactory#0" expanded="false" />
+            <element signature="method#openStream#0;class#InnerZip#0;class#FileFactory#0" expanded="false" />
+            <element signature="method#toString#0;class#InnerZip#0;class#FileFactory#0" expanded="false" />
+            <element signature="class#FileBlock#0;class#FileFactory#0" expanded="false" />
+            <element signature="method#FileBlock#0;class#FileBlock#0;class#FileFactory#0" expanded="false" />
+            <element signature="method#openStream#0;class#FileBlock#0;class#FileFactory#0" expanded="false" />
+            <element signature="class#5694:6013" expanded="false" />
+            <element signature="method#read#0;class#5694:6013" expanded="false" />
+            <element signature="method#reset#0;class#FileBlock#0;class#FileFactory#0" expanded="false" />
+            <element signature="method#toString#0;class#FileBlock#0;class#FileFactory#0" expanded="false" />
+            <element signature="class#URLFile#0;class#FileFactory#0" expanded="false" />
+            <element signature="method#URLFile#0;class#URLFile#0;class#FileFactory#0" expanded="false" />
+            <element signature="method#openStream#0;class#URLFile#0;class#FileFactory#0" expanded="false" />
+            <element signature="class#EmptyFile#0;class#FileFactory#0" expanded="false" />
+            <element signature="method#EmptyFile#0;class#EmptyFile#0;class#FileFactory#0" expanded="false" />
+            <element signature="method#openStream#0;class#EmptyFile#0;class#FileFactory#0" expanded="false" />
+            <element signature="method#fromFile#0;class#FileFactory#0" expanded="false" />
+            <element signature="method#fromZip#0;class#FileFactory#0" expanded="false" />
+            <element signature="method#fromBlock#0;class#FileFactory#0" expanded="false" />
           </folding>
         </state>
       </provider>

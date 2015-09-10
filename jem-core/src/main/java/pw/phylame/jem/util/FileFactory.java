@@ -232,22 +232,52 @@ public class FileFactory {
         }
     }
 
+    private static class EmptyFile extends AbstractFileObject {
+        private String mName;
+
+        private static InputStream input = new InputStream() {
+            @Override
+            public int read() throws IOException {
+                return -1;
+            }
+        };
+
+        protected EmptyFile(String name, String mime) {
+            super(mime);
+            mName = name;
+        }
+
+        @Override
+        public String getName() {
+            return mName;
+        }
+
+        @Override
+        public InputStream openStream() throws IOException {
+            return input;
+        }
+    }
+
     public static FileObject fromFile(File file, String mime) throws IOException {
         return new NormalFile(file, getOrDetectMime(file.getPath(), mime));
     }
 
     public static FileObject fromZip(ZipFile zipFile, String entryName,
-                                      String mime) throws IOException {
+                                     String mime) throws IOException {
         return new InnerZip(zipFile, entryName, getOrDetectMime(entryName, mime));
     }
 
     public static FileObject fromBlock(String name, RandomAccessFile file,
-                                        long offset, long size,
-                                        String mime) throws IOException {
+                                       long offset, long size,
+                                       String mime) throws IOException {
         return new FileBlock(name, file, offset, size, getOrDetectMime(name, mime));
     }
 
     public static FileObject fromURL(URL url, String mime) {
         return new URLFile(url, getOrDetectMime(url.getPath(), mime));
+    }
+
+    public static FileObject emptyFile(String name, String mime) {
+        return new EmptyFile(name, getOrDetectMime(name, mime));
     }
 }

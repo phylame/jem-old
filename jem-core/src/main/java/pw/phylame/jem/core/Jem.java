@@ -230,11 +230,12 @@ public final class Jem {
         }
     }
 
-    private static Map<Class<?>, String> variantTypes =
+    public static final Map<Class<?>, String> variantTypes =
             new HashMap<Class<?>, String>();
     static {
         variantTypes.put(Character.class, "str");
         variantTypes.put(String.class, "str");
+        variantTypes.put(CharSequence.class, "str");
         variantTypes.put(Date.class, "datetime");
         variantTypes.put(Byte.class, "int");
         variantTypes.put(Short.class, "int");
@@ -245,6 +246,7 @@ public final class Jem {
         variantTypes.put(Byte[].class, "bytes");
         variantTypes.put(Float.class, "real");
         variantTypes.put(Double.class, "real");
+        variantTypes.put(Number.class, "real");
     }
 
     /**
@@ -263,7 +265,7 @@ public final class Jem {
         } else {
             String name = variantTypes.get(o.getClass());
             if (name == null) {
-                name = o.getClass().getSimpleName();
+                name = o.getClass().getName();
             }
             return name;
         }
