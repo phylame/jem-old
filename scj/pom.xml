@@ -34,7 +34,7 @@
         <dependency>
             <groupId>pw-tools</groupId>
             <artifactId>pw-gaf</artifactId>
-            <version>1.0.0</version>
+            <version>1.1.0</version>
         </dependency>
         <dependency>
             <groupId>commons-cli</groupId>
