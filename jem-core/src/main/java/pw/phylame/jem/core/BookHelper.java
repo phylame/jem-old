@@ -74,6 +74,8 @@ public final class BookHelper {
      */
     private static Map<String, String[]> nameMap = new HashMap<String, String[]>();
 
+    private static Map<String, String> extMap = new HashMap<String, String>();
+
     /**
      * Registers parser class with specified name.
      * <p>If parser class with same name exists, replaces the old with
@@ -268,6 +270,10 @@ public final class BookHelper {
         return nameMap.get(name);
     }
 
+    public static String getFormat(String ext) {
+        return extMap.get(ext);
+    }
+
     private static Map<String, String> loadRegistrations(String fileName) {
         Map<String, String> map = new HashMap<String, String>();
 
@@ -304,10 +310,15 @@ public final class BookHelper {
                 continue;
             }
             registerParser(name, parts[0]);
+            String[] ext;
             if (parts.length > 1) {
-                nameMap.put(name, parts[1].split(EXTENSION_SEPARATOR));
+                ext = parts[1].split(EXTENSION_SEPARATOR);
             } else {
-                nameMap.put(name, new String[]{name});
+                ext = new String[]{name};
+            }
+            nameMap.put(name, ext);
+            for (String e : ext) {
+                extMap.put(e, name);
             }
         }
     }

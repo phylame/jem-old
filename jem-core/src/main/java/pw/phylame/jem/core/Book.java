@@ -19,8 +19,6 @@
 package pw.phylame.jem.core;
 
 import java.util.Map;
-import java.util.Date;
-import java.util.Locale;
 import java.util.HashMap;
 
 /**
@@ -41,112 +39,7 @@ public class Book extends Chapter {
 
     public Book(String title, String author) {
         super(title);
-        setAuthor(author);
-    }
-
-    /**
-     * Resets all default attributes to initialized value.
-     * @since 2.0.1
-     */
-    public void reset() {
-        setTitle("");
-        setCover(null);
-        setAuthor("");
-        setGenre("");
-        setState("");
-        setIntro(null);
-        setDate(new Date());
-        setSubject("");
-        setPublisher("");
-        setVendor("");
-        setRights("");
-        setLanguage(Locale.getDefault().toLanguageTag());
-    }
-
-    public String getAuthor() {
-        return stringAttribute(AUTHOR, "");
-    }
-
-    public void setAuthor(String author) {
         setAttribute(AUTHOR, author);
-    }
-
-    public String getGenre() {
-        return stringAttribute(GENRE, "");
-    }
-
-    public void setGenre(String genre) {
-        setAttribute(GENRE, genre);
-    }
-
-    public String getState() {
-        return stringAttribute(STATE, "");
-    }
-
-    public void setState(String state) {
-        setAttribute(STATE, state);
-    }
-
-    public String getSubject() {
-        return stringAttribute(SUBJECT, "");
-    }
-
-    public void setSubject(String subject) {
-        setAttribute(SUBJECT, subject);
-    }
-
-    public Date getDate() {
-        Object o = getAttribute(DATE, null);
-        if (o instanceof Date) {
-            return (Date) o;
-        }
-        return null;
-    }
-
-    public void setDate(Date date) {
-        setAttribute(DATE, date);
-    }
-
-    public String getPublisher() {
-        return stringAttribute(PUBLISHER, "");
-    }
-
-    public void setPublisher(String publisher) {
-        setAttribute(PUBLISHER, publisher);
-    }
-
-    /**
-     * Returns vendor of the book.
-     * @return the vendor string
-     * @since 2.0.2
-     */
-    public String getVendor() {
-        return stringAttribute(VENDOR, "");
-    }
-
-    /**
-     * Sets new vendor of the book.
-     * @param vendor the vendor string
-     * @since 2.0.2
-     */
-    public void setVendor(String vendor) {
-        setAttribute(VENDOR, vendor);
-    }
-
-    public String getRights() {
-        return stringAttribute(RIGHTS, "");
-    }
-
-    public void setRights(String rights) {
-        setAttribute(RIGHTS, rights);
-    }
-
-    public String getLanguage() {
-        return stringAttribute(LANGUAGE, "");
-    }
-
-    public void setLanguage(String language) {
-        setAttribute(LANGUAGE, language);
     }
 
     // *********************
@@ -154,7 +47,7 @@ public class Book extends Chapter {
     // *********************
 
     /** Extension mapping */
-    private Map<String, Object> mExtension = new HashMap<String, Object>();
+    private Map<String, Object> extension = new HashMap<String, Object>();
 
     /**
      * Associates the specified value with the specified name in extensions.
@@ -164,7 +57,7 @@ public class Book extends Chapter {
      * @param value value of the item
      */
     public void setItem(String name, Object value) {
-        mExtension.put(name, value);
+        extension.put(name, value);
     }
 
     /**
@@ -177,8 +70,8 @@ public class Book extends Chapter {
      *          <tt>defaultValue</tt> if not found item for <tt>name</tt>
      */
     public Object getItem(String name, Object defaultValue) {
-        Object v = mExtension.get(name);
-        if (v != null || mExtension.containsKey(name)) {
+        Object v = extension.get(name);
+        if (v != null || extension.containsKey(name)) {
             return v;
         } else {
             return defaultValue;
@@ -192,7 +85,7 @@ public class Book extends Chapter {
      *         <tt>null</tt> if there was item for <tt>name</tt>.
      */
     public Object removeItem(String name) {
-        return mExtension.remove(name);
+        return extension.remove(name);
     }
 
     /**
@@ -200,7 +93,7 @@ public class Book extends Chapter {
      * @return number of items
      */
     public int itemSize() {
-        return mExtension.size();
+        return extension.size();
     }
 
     /**
@@ -208,14 +101,14 @@ public class Book extends Chapter {
      * @return sequence of item names
      */
     public String[] itemNames() {
-        return mExtension.keySet().toArray(new String[0]);
+        return extension.keySet().toArray(new String[0]);
     }
 
     /**
      * Removes all items from extension map.
      */
     public void clearItems() {
-        mExtension.clear();
+        extension.clear();
     }
 
     @Override

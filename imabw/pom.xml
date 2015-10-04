@@ -6,61 +6,55 @@
 
     <groupId>pw-books</groupId>
     <artifactId>imabw</artifactId>
-    <name>imabw</name>
-    <version>2.0.2</version>
-    <description>A GUI ebooks editor based on SWING</description>
+    <version>2.1.0</version>
+    <description>A GUI e-book editor based on Swing</description>
     <url>http://git.oschina.net/phylame/pw-books</url>
     <inceptionYear>2014</inceptionYear>
-    <organization>
-        <name>PW</name>
-        <url>https://git.oschina.net/phylame</url>
-    </organization>
+    <modules>
+        <module>resources</module>
+    </modules>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    <packaging>pom</packaging>
 
     <dependencies>
         <dependency>
             <groupId>pw-books</groupId>
-            <artifactId>jem-core</artifactId>
-            <version>2.1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>pw-books</groupId>
             <artifactId>jem-formats</artifactId>
-            <version>1.2.0</version>
+            <version>1.5.0</version>
         </dependency>
         <dependency>
             <groupId>pw-tools</groupId>
-            <artifactId>pat-core</artifactId>
-            <version>1.0.0</version>
+            <artifactId>pw-gaf</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.12</version>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.toedter</groupId>
             <artifactId>jcalendar</artifactId>
             <version>1.4</version>
         </dependency>
-        <!--
-            JGoodies Look & Feel
-        -->
-        <dependency>
-            <groupId>com.jgoodies</groupId>
-            <artifactId>jgoodies-looks</artifactId>
-            <version>2.5.3</version>
-            <scope>runtime</scope>
-        </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.2</version>
+                <artifactId>maven-resources-plugin</artifactId>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
         </plugins>

@@ -73,15 +73,15 @@ public class Reader {
             if (name.equals("cover")) {
                 String mime = attr.attributeValue("media-type");
                 try {
-                    book.setCover(FileFactory.fromZip(zipFile, value, mime));
+                    book.setAttribute(Book.COVER, FileFactory.fromZip(zipFile, value, mime));
                 } catch (IOException e) {
                     LOG.debug("not found cover source: "+value, e);
                 }
             } else if (name.equals("date") || name.equals("datetime")) {
-                book.setDate(
+                book.setAttribute(Book.DATE,
                         DateUtils.parseDate(value, "yyyy-M-d H:m:s", new Date()));
             } else if (name.equals("intro")) {
-                book.setIntro(TextFactory.fromString(value));
+                book.setAttribute(Book.INTRO, TextFactory.fromString(value));
             } else {
                 book.setAttribute(name, value);
             }
@@ -195,7 +195,7 @@ public class Reader {
                     LOG.debug("found 'cover' element without 'media-type' in PBC");
                 }
                 try {
-                    chapter.setCover(FileFactory.fromZip(zipFile, href, mt));
+                    chapter.setAttribute(Book.COVER, FileFactory.fromZip(zipFile, href, mt));
                 } catch (IOException e) {
                     LOG.debug("not found cover source: "+href+"in PBC", e);
                 }
@@ -212,7 +212,7 @@ public class Reader {
 
                 try {
                     FileObject fb = FileFactory.fromZip(zipFile, href, null);
-                    chapter.setIntro(TextFactory.fromFile(fb, encoding));
+                    chapter.setAttribute(Book.INTRO, TextFactory.fromFile(fb, encoding));
                 } catch (IOException e) {
                     LOG.debug("not found intro source: "+href, e);
                 }

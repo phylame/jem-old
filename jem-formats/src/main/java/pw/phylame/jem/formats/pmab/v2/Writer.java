@@ -172,7 +172,7 @@ public class Writer {
     private static void makeChapter(Element parent, Chapter part, ZipOutputStream zipout,
                                     PmabConfig config, String suffix) {
         Element elem = parent.addElement("chapter");
-        elem.addElement("title").setText(part.getTitle());
+        elem.addElement("title").setText(part.stringAttribute(Book.TITLE));
         String base = "chapter-" + suffix;
         String encoding = config.textEncoding != null ?
                 config.textEncoding : System.getProperty("file.encoding");

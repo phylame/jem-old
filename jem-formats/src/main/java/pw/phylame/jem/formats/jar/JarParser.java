@@ -85,7 +85,7 @@ public class JarParser implements Parser {
         int length = input.readByte();
         byte[] buf = new byte[length];
         input.readFully(buf);
-        book.setTitle(new String(buf, JAR.META_ENCODING));
+        book.setAttribute(Book.TITLE, new String(buf, JAR.META_ENCODING));
 
         length = input.readShort();
         buf = new byte[length];
@@ -111,6 +111,6 @@ public class JarParser implements Parser {
         length = input.readShort();
         buf = new byte[length];
         input.readFully(buf);
-        book.setIntro(TextFactory.fromString(new String(buf, JAR.META_ENCODING)));
+        book.setAttribute(Book.INTRO, TextFactory.fromString(new String(buf, JAR.META_ENCODING)));
     }
 }

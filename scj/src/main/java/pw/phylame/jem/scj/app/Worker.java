@@ -148,7 +148,7 @@ public final class Worker implements Constants {
     static String saveBook(Book book, File output, String format,
                            Map<String, Object> kw) {
         if (output.isDirectory()) {
-            output = new File(output, String.format("%s.%s", book.getTitle(), format));
+            output = new File(output, String.format("%s.%s", book.stringAttribute(Book.TITLE), format));
         }
         addPmabInfo(kw);
         String path = null;
@@ -353,7 +353,7 @@ public final class Worker implements Constants {
                                 String[] keys,
                                 String indent,
                                 boolean showOrder, boolean showBrackets) {
-        System.out.println(app.getText("SCI_TOC_TITLE", part.getTitle()));
+        System.out.println(app.getText("SCI_TOC_TITLE", part.stringAttribute(Book.TITLE)));
         walkTree(part, "", keys, false, showOrder, indent, showBrackets);
     }
 
@@ -437,7 +437,7 @@ public final class Worker implements Constants {
             Chapter part = Jem.findChapter(book, indexes, 0);
             viewPart(part, new String[]{key}, LINE_SEPARATOR, false, false);
         } catch (IndexOutOfBoundsException ex) {
-            app.error(app.getText("SCI_NOT_FOUND_CHAPTER", index, book.getTitle()));
+            app.error(app.getText("SCI_NOT_FOUND_CHAPTER", index, book.stringAttribute(Book.TITLE)));
         }
     }
 

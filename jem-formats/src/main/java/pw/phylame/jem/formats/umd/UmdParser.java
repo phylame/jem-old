@@ -68,7 +68,7 @@ public class UmdParser implements Parser {
                 try {
                     in.close();
                 } catch (IOException e) {
-                    LOG.debug("cannot close UMD source: "+file.getPath(), e);
+                    LOG.debug("cannot close UMD source: "+file.getAbsolutePath(), e);
                 }
             }
         });
@@ -81,7 +81,7 @@ public class UmdParser implements Parser {
             throw new ParserException("Invalid UMD file: magic number", getName());
         }
         book = new Book();
-        book.setDate(new Date());
+        book.setAttribute(Book.DATE, new Date());
         int sep;
         while ((sep=source.read()) != -1) {
             if (sep == UMD.CHUNK_SEPARATOR) {
@@ -110,18 +110,19 @@ public class UmdParser implements Parser {
                 --length;
                 break;
             case UMD.CDT_TITLE:
-                book.setTitle(readString(length));
+                book.setAttribute(Book.TITLE, readString(length));
                 length = 0;
                 break;
             case UMD.CDT_AUTHOR:
-                book.setAuthor(readString(length));
+                book.setAttribute(Book.AUTHOR, readString(length));
                 length = 0;
                 break;
             case UMD.CDT_YEAR:
                 String s = readString(length);
                 try {
                     int year = Integer.parseInt(s);
-                    book.setDate(DateUtils.modifyDate(book.getDate(),
+                    book.setAttribute(Book.DATE,
+                            DateUtils.modifyDate((Date)book.getAttribute(Book.DATE),
                             Calendar.YEAR, year));
                 } catch (Exception e) {
                     LOG.debug("invalid UMD year: "+s, e);
@@ -132,7 +133,8 @@ public class UmdParser implements Parser {
                 s = readString(length);
                 try {
                     int month = Integer.parseInt(s);
-                    book.setDate(DateUtils.modifyDate(book.getDate(),
+                    book.setAttribute(Book.DATE,
+                            DateUtils.modifyDate((Date)book.getAttribute(Book.DATE),
                             Calendar.MONTH, month));
                 } catch (Exception e) {
                     LOG.debug("invalid UMD month: "+s, e);
@@ -143,7 +145,8 @@ public class UmdParser implements Parser {
                 s = readString(length);
                 try {
                     int day = Integer.parseInt(s);
-                    book.setDate(DateUtils.modifyDate(book.getDate(),
+                    book.setAttribute(Book.DATE,
+                            DateUtils.modifyDate((Date)book.getAttribute(Book.DATE),
                             Calendar.DAY_OF_MONTH, day));
                 } catch (Exception e) {
                     LOG.debug("invalid UMD day: "+s, e);
@@ -151,15 +154,15 @@ public class UmdParser implements Parser {
                 length = 0;
                 break;
             case UMD.CDT_GENRE:
-                book.setGenre(readString(length));
+                book.setAttribute(Book.GENRE, readString(length));
                 length = 0;
                 break;
             case UMD.CDT_PUBLISHER:
-                book.setPublisher(readString(length));
+                book.setAttribute(Book.PUBLISHER, readString(length));
                 length = 0;
                 break;
             case UMD.CDT_VENDOR:
-                book.setVendor(readString(length));
+                book.setAttribute(Book.VENDOR, readString(length));
                 length = 0;
                 break;
             case UMD.CDT_CONTENT_LENGTH:
@@ -286,7 +289,7 @@ public class UmdParser implements Parser {
             }
             String title = new String(bytes, UMD.TEXT_ENCODING);
             try {
-                book.get(ix++).setTitle(title);
+                book.get(ix++).setAttribute(Book.TITLE, title);
             } catch (IndexOutOfBoundsException e) {
                 book.append(new Chapter(title));
             }
@@ -337,7 +340,7 @@ public class UmdParser implements Parser {
                 source.getFilePointer(),
                 length,
                 null);
-        book.setCover(cover);
+        book.setAttribute(Book.COVER, cover);
         source.skipBytes((int) length);
     }
 
@@ -424,7 +427,7 @@ public class UmdParser implements Parser {
                 bytes = ZLibUtils.decompress(bytes, 0, n);
                 length += bytes.length;
                 sb.append(new String(bytes, UMD.TEXT_ENCODING));
-                if (mSize < length) {
+                if (mSize <= length) {
                     return sb.substring(start / 2, start / 2 + (int) mSize / 2);
                 }
             } while (true);

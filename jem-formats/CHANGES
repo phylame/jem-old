@@ -19,3 +19,6 @@ ChangeLog
 * v1.3.0
   o. adapted to jem-core 2.2.0
   o. add UC Browser Novel parser
+
+* v1.4.0
+  o. add EBK support

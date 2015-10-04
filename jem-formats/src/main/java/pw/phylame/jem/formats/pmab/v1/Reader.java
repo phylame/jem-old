@@ -66,19 +66,19 @@ public class Reader {
             String value = item.getText().trim();
             if (name.equals("cover")) {
                 try {
-                    book.setCover(FileFactory.fromZip(zipFile, value, null));
+                    book.setAttribute(Book.COVER, FileFactory.fromZip(zipFile, value, null));
                 } catch (IOException e) {
                     LOG.debug("not found cover source: "+value, e);
                 }
             } else if (name.equals("date") || name.equals("datetime")) {
                 Date date = DateUtils.parseDate(value, "yyyy-M-d H:m:s", null);
                 if (date != null) {
-                    book.setDate(date);
+                    book.setAttribute(Book.DATE, date);
                 } else {
                     LOG.debug("invalid date format: "+value);
                 }
             } else if (name.equals("intro") || name.equals("description")) {
-                book.setIntro(TextFactory.fromString(value));
+                book.setAttribute(Book.INTRO, TextFactory.fromString(value));
             } else {
                 book.setAttribute(name, value);
             }
@@ -183,7 +183,7 @@ public class Reader {
             if (intro != null) {
                 try {
                     FileObject fb = FileFactory.fromZip(zipFile, intro, null);
-                    chapter.setIntro(TextFactory.fromFile(fb, encoding));
+                    chapter.setAttribute(Book.INTRO, TextFactory.fromFile(fb, encoding));
                 } catch (IOException e) {
                     LOG.debug("not found intro source: "+intro, e);
                 }
@@ -191,7 +191,7 @@ public class Reader {
             String cover = item.attributeValue("cover");
             if (cover != null) {
                 try {
-                    chapter.setCover(FileFactory.fromZip(zipFile, cover, null));
+                    chapter.setAttribute(Book.COVER, FileFactory.fromZip(zipFile, cover, null));
                 } catch (IOException e) {
                     LOG.debug("not found cover source: "+cover, e);
                 }
@@ -234,7 +234,7 @@ public class Reader {
             if (intro != null) {
                 try {
                     FileObject fb = FileFactory.fromZip(zipFile, intro, null);
-                    chapter.setIntro(TextFactory.fromFile(fb, encoding));
+                    chapter.setAttribute(Book.INTRO, TextFactory.fromFile(fb, encoding));
                 } catch (IOException e) {
                     LOG.debug("not found intro source: "+intro, e);
                 }
@@ -242,7 +242,7 @@ public class Reader {
             String cover = elem.attributeValue("cover");
             if (cover != null) {
                 try {
-                    chapter.setCover(FileFactory.fromZip(zipFile, cover, null));
+                    chapter.setAttribute(Book.COVER, FileFactory.fromZip(zipFile, cover, null));
                 } catch (IOException e) {
                     LOG.debug("not found cover source: "+cover, e);
                 }

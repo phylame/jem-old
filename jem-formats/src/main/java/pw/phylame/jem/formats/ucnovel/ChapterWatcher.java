@@ -18,7 +18,6 @@
 
 package pw.phylame.jem.formats.ucnovel;
 
-import java.io.IOException;
 import pw.phylame.jem.util.JemException;
 
 public interface ChapterWatcher {

@@ -22,27 +22,27 @@ package pw.phylame.jem.scj.app;
  * Constants for SCJ.
  */
 public interface Constants {
-    String NAME           = "jem";
+    String NAME                 = "jem";
 
-    String VERSION        = "1.1.0";
+    String VERSION              = "1.2.0";
 
-    String I18N_NAME = "scj";
+    String I18N_NAME            = "scj";
 
-    String CHAPTER_REGEX = "^chapter([\\-\\d\\.]+)(\\$.*)?";
+    String CHAPTER_REGEX        = "^chapter([\\-\\d\\.]+)(\\$.*)?";
 
-    String ITEM_REGEX = "^item\\$.*";
+    String ITEM_REGEX           = "^item\\$.*";
 
-    String VIEW_KEY_ALL = "all";
+    String VIEW_KEY_ALL         = "all";
 
-    String VIEW_KEY_TOC = "toc";
+    String VIEW_KEY_TOC         = "toc";
 
-    String VIEW_KEY_EXTENSION = "ext";
+    String VIEW_KEY_EXTENSION   = "ext";
 
-    String VIEW_KEY_NAMES = "names";
+    String VIEW_KEY_NAMES       = "names";
 
-    String VIEW_KEY_TEXT = "text";
+    String VIEW_KEY_TEXT        = "text";
 
-    String VIEW_KEY_SIZE = "size";
+    String VIEW_KEY_SIZE        = "size";
 
-    String LINE_SEPARATOR = System.getProperty("line.separator");
+    String LINE_SEPARATOR       = System.lineSeparator();
 }

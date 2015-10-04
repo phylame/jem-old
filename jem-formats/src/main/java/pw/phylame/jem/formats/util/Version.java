@@ -22,6 +22,6 @@ package pw.phylame.jem.formats.util;
  * Jem formats version message.
  */
 public final class Version {
-    public static final String VERSION = "1.3.0";
+    public static final String VERSION = "1.5.0";
     public static final String VENDOR = "PW";
 }

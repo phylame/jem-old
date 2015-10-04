@@ -115,13 +115,13 @@ public class NCX_2005_1 extends AbstractNcxBuilder {
     private void writeBookIntroPage(Element parent, HtmlMaker htmlMaker, Book book, OpfBuilder opfBuilder,
                                     ZipOutputStream zipout, EpubConfig config) throws IOException {
         String href = config.textDir + "/" + EPUB.INTRO_PAGE_FILE;
-        TextObject intro = book.getIntro();
+        TextObject intro = (TextObject) book.getAttribute(Book.INTRO);
         if (intro == null) {
             return;
         }
 
         String pageTitle = I18nMessage.getText("Epub.Page.Intro.Title");
-        Document page = htmlMaker.makeIntroPage(pageTitle, book.getTitle(),
+        Document page = htmlMaker.makeIntroPage(pageTitle, book.stringAttribute(Book.TITLE),
                 config.styleProvider.getIntroTitleStyle(), intro, config.styleProvider.getIntroContentStyle());
         if (page == null) {
             return;
@@ -165,7 +165,7 @@ public class NCX_2005_1 extends AbstractNcxBuilder {
         opfBuilder.addManifestItem(coverID, href, cover.getMime());
 
         // write cover page
-        String pageTitle = part.getTitle();
+        String pageTitle = part.stringAttribute(Book.TITLE);
         String coverStyle = part.isSection() ? config.styleProvider.getSectionCoverStyle() :
                 config.styleProvider.getChapterCoverStyle();
         Document page = htmlMaker.makeCoverPage(pageTitle, "../"+href, coverStyle);
@@ -185,7 +185,7 @@ public class NCX_2005_1 extends AbstractNcxBuilder {
         // items
         String base = prefix + ".xhtml";
         String href = config.textDir + "/" + base;
-        String pageTitle = section.getTitle();
+        String pageTitle = section.stringAttribute(Book.TITLE);
 
         opfBuilder.addManifestItem(prefix, href, EPUB.MT_XHTML);
         opfBuilder.addSpineItem(prefix, true, null);
@@ -203,7 +203,7 @@ public class NCX_2005_1 extends AbstractNcxBuilder {
                 link = writeChapterPage(navPoint, htmlMaker, sub, prefix+"-"+i, opfBuilder, zipout, config);
             }
             links.add(link);
-            titles.add(sub.getTitle());
+            titles.add(sub.stringAttribute(Book.TITLE));
             ++i;
         }
 
@@ -234,7 +234,7 @@ public class NCX_2005_1 extends AbstractNcxBuilder {
         // text
         String base = prefix + ".xhtml";
         String href = config.textDir + "/" + base;
-        String pageTitle= chapter.getTitle();
+        String pageTitle= chapter.stringAttribute(Book.TITLE);
         TextObject text = chapter.getSource();
 
         if (text.getType().equals(TextObject.HTML)) {       // content is HTML
@@ -271,9 +271,10 @@ public class NCX_2005_1 extends AbstractNcxBuilder {
         // head
         addHead(root, uuid, book, depth);
 
-        root.addElement("docTitle").addElement("text").setText(book.getTitle());
-        if (!"".equals(book.getAuthor())) {
-            root.addElement("docAuthor").addElement("text").setText(book.getAuthor());
+        root.addElement("docTitle").addElement("text").setText(book.stringAttribute(Book.TITLE));
+        String author = book.stringAttribute(Book.AUTHOR);
+        if (!"".equals(author)) {
+            root.addElement("docAuthor").addElement("text").setText(author);
         }
 
         Element navMap = root.addElement("navMap");
@@ -320,7 +321,7 @@ public class NCX_2005_1 extends AbstractNcxBuilder {
                 href = writeChapterPage(navMap, htmlMaker, sub, "chapter-"+i, opfBuilder, zipout, config);
             }
             links.add(href);
-            titles.add(sub.getTitle());
+            titles.add(sub.stringAttribute(Book.TITLE));
             ++i;
         }
 

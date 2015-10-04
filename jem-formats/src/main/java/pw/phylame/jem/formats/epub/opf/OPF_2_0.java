@@ -49,24 +49,24 @@ public class OPF_2_0 extends AbstractOpfBuilder {
         Element elem = parent.addElement("dc:identifier").addAttribute("id", EPUB.BOOK_ID_NAME);
         elem.addAttribute("opf:scheme", "uuid").setText(uuid);
 
-        parent.addElement("dc:title").setText(book.getTitle());
+        parent.addElement("dc:title").setText(book.stringAttribute(Book.TITLE));
 
-        String str = book.getAuthor();
+        String str = book.stringAttribute(Book.AUTHOR);
         if (!StringUtils.isEmpty(str)) {
             parent.addElement("dc:creator").addAttribute("opf:role", "aut").setText(str);
         }
 
-        str = book.getGenre();
+        str = book.stringAttribute(Book.GENRE);
         if (!StringUtils.isEmpty(str)) {
             parent.addElement("dc:type").setText(str);
         }
 
-        str = book.getSubject();
+        str = book.stringAttribute(Book.SUBJECT);
         if (!StringUtils.isEmpty(str)) {
             parent.addElement("dc:subject").setText(str);
         }
 
-        TextObject intro = book.getIntro();
+        TextObject intro = (TextObject)book.getAttribute(Book.INTRO);
         if (intro != null) {
             String text = intro.getText();
             if (text.length() > 0) {
@@ -74,12 +74,12 @@ public class OPF_2_0 extends AbstractOpfBuilder {
             }
         }
 
-        str = book.getPublisher();
+        str = book.stringAttribute(Book.PUBLISHER);
         if (!StringUtils.isEmpty(str)) {
             parent.addElement("dc:publisher").setText(str);
         }
 
-        FileObject cover = book.getCover();
+        FileObject cover = (FileObject)book.getAttribute(Book.COVER);
         if (cover != null) {
             coverHref = String.format("%s/%s.%s", config.imageDir, EPUB.COVER_NAME,
                     FilenameUtils.getExtension(cover.getName()));
@@ -88,7 +88,7 @@ public class OPF_2_0 extends AbstractOpfBuilder {
             parent.addElement("meta").addAttribute("name", "cover").addAttribute("content", EPUB.COVER_FILE_ID);
         }
 
-        Date date = book.getDate();
+        Date date = (Date)book.getAttribute(Book.DATE);
         if (date != null) {
             elem = parent.addElement("dc:date").addAttribute("opf:event", "creation");
             elem.setText(DateUtils.formatDate(date, config.dateFormat));
@@ -100,17 +100,17 @@ public class OPF_2_0 extends AbstractOpfBuilder {
             }
         }
 
-        str = book.getLanguage();
+        str = book.stringAttribute(Book.LANGUAGE);
         if (!StringUtils.isEmpty(str)) {
             parent.addElement("dc:language").setText(str);
         }
 
-        str = book.getRights();
+        str = book.stringAttribute(Book.RIGHTS);
         if (!StringUtils.isEmpty(str)) {
             parent.addElement("dc:rights").setText(str);
         }
 
-        str = book.getVendor();
+        str = book.stringAttribute(Book.VENDOR);
         if (!StringUtils.isEmpty(str)) {
             parent.addElement("dc:contributor").addAttribute("opf:role", "bkp").setText(str);
         }

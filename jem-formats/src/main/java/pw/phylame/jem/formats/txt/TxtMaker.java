@@ -83,12 +83,12 @@ public class TxtMaker implements Maker {
     }
 
     public void make(Book book, Writer writer, TxtConfig config) throws IOException {
-        writer.write(book.getTitle()+config.lineSeparator);
-        String author = book.getAuthor();
+        writer.write(book.stringAttribute(Book.TITLE)+config.lineSeparator);
+        String author = book.stringAttribute(Book.AUTHOR);
         if (! "".equals(author)) {
             writer.write(author+config.lineSeparator);
         }
-        TextObject intro = book.getIntro();
+        TextObject intro = (TextObject) book.getAttribute(Book.INTRO);
         if (intro != null) {
             writeIntro(intro, writer, config);
         }
@@ -103,7 +103,7 @@ public class TxtMaker implements Maker {
     }
 
     private void writeChapter(Chapter part, Writer writer, TxtConfig config) throws IOException {
-        writer.write(config.lineSeparator+part.getTitle()+config.lineSeparator);
+        writer.write(config.lineSeparator+part.stringAttribute(Book.TITLE)+config.lineSeparator);
         Object o = part.getAttribute(Book.INTRO, null);
         if (o instanceof TextObject) {  // valid intro
             writeIntro((TextObject) o, writer, config);

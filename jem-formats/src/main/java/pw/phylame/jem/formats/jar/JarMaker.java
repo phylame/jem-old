@@ -63,7 +63,8 @@ public class JarMaker implements Maker {
         copyTemplate(zipout);
         // MANIFEST
         zipout.putNextEntry(new ZipEntry(JAR.MANIFEST_FILE));
-        String mf = String.format(JAR.MANIFEST_TEMPLATE, "Jem", Jem.VERSION, book.getTitle(), "PW", book.getTitle());
+        String title = book.stringAttribute(Book.TITLE);
+        String mf = String.format(JAR.MANIFEST_TEMPLATE, "Jem", Jem.VERSION, title, "PW", title);
         zipout.write(mf.getBytes(JAR.META_ENCODING));
         zipout.closeEntry();
         // contents
@@ -94,8 +95,9 @@ public class JarMaker implements Maker {
 
     private void writeChapter(Chapter part, ZipOutputStream zipout, List<Item> items) throws IOException {
         String text;
+        String title = part.stringAttribute(Chapter.TITLE);
         if (part.isSection()) {
-            text = part.getTitle();
+            text = title;
         } else {
             text = TextUtilities.plainText(part.getSource());
         }
@@ -105,7 +107,7 @@ public class JarMaker implements Maker {
         zipout.write(b);
         zipout.closeEntry();
 
-        items.add(new Item(name, b.length+2, part.getTitle()));
+        items.add(new Item(name, b.length+2, title));
 
         for (Chapter sub: part) {
             writeChapter(sub, zipout, items);
@@ -116,7 +118,8 @@ public class JarMaker implements Maker {
         zipout.putNextEntry(new ZipEntry("0"));
         DataOutput output = new DataOutputStream(zipout);
         output.writeInt(JAR.FILE_HEADER);
-        byte[] b = book.getTitle().getBytes(JAR.META_ENCODING);
+        String title = book.stringAttribute(Book.TITLE);
+        byte[] b = title.getBytes(JAR.META_ENCODING);
         output.writeByte(b.length);
         output.write(b);
 
@@ -131,8 +134,8 @@ public class JarMaker implements Maker {
             output.write(b);
         }
         output.writeShort(0);  // what?
-        StringBuilder sb = new StringBuilder(book.getTitle());
-        TextObject intro = book.getIntro();
+        StringBuilder sb = new StringBuilder(title);
+        TextObject intro = (TextObject) book.getAttribute(Book.INTRO);
         if (intro != null) {
             String[] lines = TextUtilities.plainLines(intro);
             for (String line : lines) {

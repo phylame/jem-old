@@ -30,3 +30,6 @@ out/
 
 ### Linux template
 *~
+
+# output artifacts
+dist/

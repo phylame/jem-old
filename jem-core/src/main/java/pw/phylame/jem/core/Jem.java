@@ -38,7 +38,7 @@ public final class Jem {
     private static Log LOG = LogFactory.getLog(Jem.class);
 
     /** Jem version */
-    public static final String VERSION          = "2.2.0";
+    public static final String VERSION          = "2.3.0";
 
     /** Jem vendor */
     public static final String VENDOR           = "PW";

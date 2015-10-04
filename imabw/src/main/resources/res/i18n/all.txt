@@ -1,6 +1,0 @@
-# List all supported languages
-# using "#" for comment line
-#
-
-# Simplified Chinese
-zh-CN

@@ -36,7 +36,6 @@ import org.apache.commons.io.FilenameUtils;
 public final class SCI extends Application implements Constants {
     private Map<String, Object> mContext;
 
-
     SCI(String[] args) {
         super(NAME, VERSION, args);
 

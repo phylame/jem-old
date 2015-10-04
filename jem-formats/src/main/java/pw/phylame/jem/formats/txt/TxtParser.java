@@ -155,17 +155,17 @@ public class TxtParser implements Parser {
         if (start > 0) {    // no formatted head
             FileObject fb = FileFactory.fromBlock("text_head.txt",
                     source, 0, start*2, null);
-            book.setIntro(TextFactory.fromFile(fb, CACHED_TEXT_ENCODING));
+            book.setAttribute(Book.INTRO, TextFactory.fromFile(fb, CACHED_TEXT_ENCODING));
         }
 
         while (partIt.hasNext()) {
             Chapter part = partIt.next();
-            title = part.getTitle();
+            title = part.stringAttribute(Book.TITLE);
             int end = offsetIt.next();
             start += title.length();
             int length = end - start;
 
-            part.setTitle(title.trim());
+            part.setAttribute(Book.TITLE, title.trim());
             FileObject fb = FileFactory.fromBlock(start + ".txt",
                     source, start * 2, length * 2, null);
             part.setSource(TextFactory.fromFile(fb, CACHED_TEXT_ENCODING));

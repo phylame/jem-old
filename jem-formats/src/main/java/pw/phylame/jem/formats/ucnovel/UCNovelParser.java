@@ -126,9 +126,9 @@ public class UCNovelParser extends AbstractParser implements ChapterWatcher {
 
     private NovelDetails readDetails() throws JemException {
         NovelDetails details = mDbReader.fetchDetails();
-        mBook.setTitle(details.getName());
-        mBook.setAuthor(details.getAuthor());
-        mBook.setDate(details.getExpired());
+        mBook.setAttribute(Book.TITLE, details.getName());
+        mBook.setAttribute(Book.AUTHOR, details.getAuthor());
+        mBook.setAttribute(Book.DATE, details.getExpired());
         mBook.setAttribute("update_time", details.getUpdated());
         return details;
     }

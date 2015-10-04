@@ -8,7 +8,6 @@
     </JAVADOC>
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/com/toedter/jcalendar/1.4/jcalendar-1.4-sources.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/com/toedter/jcalendar/1.4/jcalendar-1.4-sources.jar!/src" />
     </SOURCES>
   </library>
 </component>

@@ -38,6 +38,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -216,12 +217,12 @@ public class UmdMaker implements Maker {
 
     // 2-9
     private void writeAttributes() throws IOException{
-        writeChunk(UMD.CDT_TITLE, false, book.getTitle().getBytes(UMD.TEXT_ENCODING));
+        writeChunk(UMD.CDT_TITLE, false, book.stringAttribute(Book.TITLE).getBytes(UMD.TEXT_ENCODING));
 
-        writeChunk(UMD.CDT_AUTHOR, false, book.getAuthor().getBytes(UMD.TEXT_ENCODING));
+        writeChunk(UMD.CDT_AUTHOR, false, book.stringAttribute(Book.AUTHOR).getBytes(UMD.TEXT_ENCODING));
 
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(book.getDate());
+        calendar.setTime((Date) book.getAttribute(Book.DATE));
         writeChunk(UMD.CDT_YEAR, false,
                 Integer.toString(calendar.get(Calendar.YEAR)).getBytes(UMD.TEXT_ENCODING));
 
@@ -232,13 +233,13 @@ public class UmdMaker implements Maker {
                 Integer.toString(calendar.get(Calendar.DAY_OF_MONTH)).getBytes(UMD.TEXT_ENCODING));
 
         writeChunk(UMD.CDT_GENRE, false,
-                book.getGenre().getBytes(UMD.TEXT_ENCODING));
+                book.stringAttribute(Book.GENRE).getBytes(UMD.TEXT_ENCODING));
 
         writeChunk(UMD.CDT_PUBLISHER, false,
-                book.getPublisher().getBytes(UMD.TEXT_ENCODING));
+                book.stringAttribute(Book.PUBLISHER).getBytes(UMD.TEXT_ENCODING));
 
         writeChunk(UMD.CDT_VENDOR, false,
-                book.getVendor().getBytes(UMD.TEXT_ENCODING));
+                book.stringAttribute(Book.VENDOR).getBytes(UMD.TEXT_ENCODING));
     }
 
     // B
@@ -319,7 +320,7 @@ public class UmdMaker implements Maker {
 
     // 82
     private void writeCoverImage() throws IOException {
-        FileObject cover = book.getCover();
+        FileObject cover = (FileObject) book.getAttribute(Book.COVER);
         if (cover == null) {
             return;
         }
@@ -365,9 +366,10 @@ public class UmdMaker implements Maker {
 
     private void cachePart(Chapter part, RandomAccessFile file, List<String> titles,
                            List<Long> offsets) throws IOException {
-        titles.add(part.getTitle());
+        String title = part.stringAttribute(Book.TITLE);
+        titles.add(title);
         offsets.add(file.getFilePointer());
-        writeString(file, part.getTitle() + UMD.SYMBIAN_LINE_FEED);
+        writeString(file, title + UMD.SYMBIAN_LINE_FEED);
         String text = part.getSource().getText();
         if (text.length() != 0) {
             text = text.replaceAll("(\\r\\n)|(\\n)|(\\r)", UMD.SYMBIAN_LINE_FEED);
