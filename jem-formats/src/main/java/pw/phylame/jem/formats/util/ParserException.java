@@ -24,24 +24,16 @@ import pw.phylame.jem.util.JemException;
  * Exception for Jem Parser errors.
  */
 public class ParserException extends JemException {
-    private String format;
 
-    public ParserException(String message, String format) {
+    public ParserException(String message) {
         super(message);
-        this.format = format;
     }
 
-    public ParserException(String message, Throwable cause, String format) {
+    public ParserException(String message, Throwable cause) {
         super(message, cause);
-        this.format = format;
     }
 
-    public ParserException(Throwable cause, String format) {
+    public ParserException(Throwable cause) {
         super(cause);
-        this.format = format;
-    }
-
-    public String getFormat() {
-        return format;
     }
 }

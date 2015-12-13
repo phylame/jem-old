@@ -21,3 +21,9 @@ ChangeLog
   o. merge class Part and Chapter to single class Chapter
   o. change TextObject and FileObject to interface, using XxxFactory to create instance.
   o. rename register files to META-INF/pw-jem/makers.properties and META-INF/pw-jem/parsers.properties
+
+* v2.3
+  o. Chapter.setAttribute and Book.setItem prohibit null value
+  o. some convenience accessors for chapter and book attribute
+  o. Rename xxxItem methods in Book to xxxExtension
+  o. optimize and bugfix

@@ -19,124 +19,76 @@
 package pw.phylame.jem.formats.txt;
 
 import pw.phylame.jem.core.Book;
-import pw.phylame.jem.core.Chapter;
-import pw.phylame.jem.core.Maker;
-import pw.phylame.jem.util.JemException;
-import pw.phylame.jem.formats.util.TextUtilities;
-import pw.phylame.jem.formats.util.ExceptionFactory;
 import pw.phylame.jem.util.TextObject;
+import pw.phylame.jem.formats.common.CommonMaker;
+import pw.phylame.jem.formats.util.MakerException;
+import pw.phylame.jem.formats.util.text.TextUtils;
+import pw.phylame.jem.formats.util.text.TextRender;
 
 import java.io.*;
-import java.util.Map;
 
 /**
  * <tt>Maker</tt> implement for TXT book.
  */
-public class TxtMaker implements Maker {
-    public static final String KEY_TEXT_ENCODING = "txt_encoding";
-    public static final String KEY_LINE_FEED = "txt_linefeed";
-    public static final String KEY_PARAGRAPH_PREFIX = "txt_para_prefix";
-
-    @Override
-    public String getName() {
-        return "txt";
-    }
-
-    protected TxtConfig parseConfig(Map<String, Object> kw) throws JemException {
-        TxtConfig config = new TxtConfig();
-        if (kw != null && kw.size() > 0) {
-            Object o = kw.get(KEY_TEXT_ENCODING);
-            if (o != null) {
-                if (o instanceof String) {
-                    config.encoding = (String) o;
-                } else {
-                    throw ExceptionFactory.forInvalidStringArgument(KEY_TEXT_ENCODING, o);
-                }
-            }
-            o = kw.get(KEY_LINE_FEED);
-            if (o != null) {
-                if (o instanceof String) {
-                    config.lineSeparator = (String) o;
-                } else {
-                    throw ExceptionFactory.forInvalidStringArgument(KEY_LINE_FEED, o);
-                }
-            }
-            o = kw.get(KEY_PARAGRAPH_PREFIX);
-            if (o != null) {
-                if (o instanceof String) {
-                    config.paragraphPrefix = (String) o;
-                } else {
-                    throw ExceptionFactory.forInvalidStringArgument(KEY_PARAGRAPH_PREFIX, o);
-                }
-            }
-        }
-        return config;
+public class TxtMaker extends CommonMaker<TxtMakeConfig> {
+    public TxtMaker() {
+        super("txt", TxtMakeConfig.class, TxtMakeConfig.CONFIG_SELF);
     }
 
     @Override
-    public void make(Book book, File file, Map<String, Object> kw) throws IOException, JemException {
-        TxtConfig config = parseConfig(kw);
-        OutputStream output = new BufferedOutputStream(new FileOutputStream(file));
-        Writer writer = new BufferedWriter(new OutputStreamWriter(output, config.encoding));
-        make(book, writer, config);
-        writer.close();
+    public void make(Book book, OutputStream output, TxtMakeConfig config)
+            throws IOException, MakerException {
+        if (config == null) {
+            config = new TxtMakeConfig();
+        }
+        Writer writer = new OutputStreamWriter(output, config.encoding);
+        try {
+            writer = new BufferedWriter(writer);
+            make(book, writer, config);
+        } finally {
+            writer.close();
+        }
     }
 
-    public void make(Book book, Writer writer, TxtConfig config) throws IOException {
-        writer.write(book.stringAttribute(Book.TITLE)+config.lineSeparator);
-        String author = book.stringAttribute(Book.AUTHOR);
-        if (! "".equals(author)) {
-            writer.write(author+config.lineSeparator);
+    public void make(Book book, Writer writer, TxtMakeConfig config)
+            throws IOException {
+        if (config == null) {
+            config = new TxtMakeConfig();
         }
-        TextObject intro = (TextObject) book.getAttribute(Book.INTRO);
-        if (intro != null) {
-            writeIntro(intro, writer, config);
+        if (!(writer instanceof BufferedWriter)) {
+            writer = new BufferedWriter(writer);
         }
-        if (book.isSection()) {
-            for (Chapter sub: book) {
-                writeChapter(sub, writer, config);
+        String lineSeparator = config.textConfig.lineSeparator;
+        if (TextUtils.isValid(config.headerText)) {
+            writer.write(config.headerText + lineSeparator);
+        }
+        writer.write(book.getTitle() + lineSeparator);
+        String author = book.getAuthor();
+        if (!author.isEmpty()) {
+            writer.write(author + lineSeparator);
+        }
+        TxtRender txtRender = new TxtRender(writer, config.additionLine,
+                lineSeparator);
+        try {
+            TextObject intro = book.getIntro();
+            if (intro != null) {
+                if (TextRender.renderText(intro, txtRender, config.textConfig)) {
+                    writer.write(lineSeparator);
+                }
             }
-        } else {        // book has not sub-parts, then save its content
-            writeContent(book, writer, config);
+            writer.write(lineSeparator);
+            if (book.isSection()) {
+                TextRender.renderBook(book, txtRender, config.textConfig);
+            } else {        // book has not sub-parts, then save its content
+                TextRender.renderText(book.getContent(), txtRender,
+                        config.textConfig);
+            }
+        } catch (Exception e) {
+            throw new IOException(e);
+        }
+        if (TextUtils.isValid(config.footerText)) {
+            writer.write(config.footerText);
         }
         writer.flush();
-    }
-
-    private void writeChapter(Chapter part, Writer writer, TxtConfig config) throws IOException {
-        writer.write(config.lineSeparator+part.stringAttribute(Book.TITLE)+config.lineSeparator);
-        Object o = part.getAttribute(Book.INTRO, null);
-        if (o instanceof TextObject) {  // valid intro
-            writeIntro((TextObject) o, writer, config);
-        }
-        if (! part.isSection()) {
-            writeContent(part, writer, config);
-        } else {
-            for (Chapter sub: part) {
-                writeChapter(sub, writer, config);
-            }
-        }
-    }
-
-    private void writeIntro(TextObject intro, Writer writer, TxtConfig config) throws IOException {
-        String[] lines = TextUtilities.plainLines(intro);
-        if (lines == null) {
-            return;
-        }
-        for (String line : lines) {
-            writer.write(config.paragraphPrefix+line.trim()+config.lineSeparator);
-        }
-        if (lines.length > 0) {
-            writer.write(config.introSeparator+config.lineSeparator);
-        }
-    }
-
-    private void writeContent(Chapter part, Writer writer, TxtConfig config) throws IOException {
-        String[] lines = TextUtilities.plainLines(part.getSource());
-        if (lines == null) {
-            return;
-        }
-        for (String line : lines) {
-            writer.write(config.paragraphPrefix+line.trim()+config.lineSeparator);
-        }
     }
 }

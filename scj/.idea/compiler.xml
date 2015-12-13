@@ -18,7 +18,7 @@
         <processorPath useClasspath="true" />
       </profile>
       <profile default="false" name="Annotation profile for scj" enabled="true">
-        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
@@ -26,7 +26,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="scj" target="1.7" />
+      <module name="scj" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

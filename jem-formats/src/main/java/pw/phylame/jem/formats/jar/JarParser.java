@@ -18,99 +18,79 @@
 
 package pw.phylame.jem.formats.jar;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import pw.phylame.jem.core.Parser;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Chapter;
 import pw.phylame.jem.util.FileObject;
-import pw.phylame.jem.util.JemException;
-
-import pw.phylame.jem.formats.util.ParserException;
 import pw.phylame.jem.util.FileFactory;
 import pw.phylame.jem.util.TextFactory;
+import pw.phylame.jem.formats.util.ZipUtils;
+import pw.phylame.jem.formats.util.ParserException;
+import pw.phylame.jem.formats.common.NonConfig;
+import pw.phylame.jem.formats.common.ZipBookParser;
 
 import java.io.*;
-import java.util.Map;
 import java.util.zip.ZipFile;
-import java.util.zip.ZipEntry;
 
 /**
  * <tt>Parser</tt> implement for JAR book.
  */
-public class JarParser implements Parser {
-    private static Log LOG = LogFactory.getLog(JarParser.class);
-
-    @Override
-    public String getName() {
-        return "txt";
+public class JarParser extends ZipBookParser<NonConfig> {
+    public JarParser() {
+        super("jar");
     }
 
     @Override
-    public Book parse(File file, Map<String, Object> kw)
-            throws IOException, JemException {
-        final ZipFile jarFile = new ZipFile(file);
-        Book book = parse(jarFile);
-        book.registerCleanup(new Chapter.Cleanable() {
-            @Override
-            public void clean(Chapter part) {
-                try {
-                    jarFile.close();
-                } catch (IOException e) {
-                    LOG.debug("cannot close JAR source: "+jarFile.getName(), e);
-                }
-            }
-        });
-        return book;
+    public Book parse(ZipFile input, NonConfig config) throws IOException,
+            ParserException {
+        return parse(input);
     }
 
-    public Book parse(ZipFile zipFile) throws IOException, JemException {
+    public Book parse(ZipFile zipFile) throws IOException, ParserException {
         Book book = new Book();
         readMeta(book, zipFile);
         return book;
     }
 
-    private void readMeta(Book book, ZipFile zipFile)
-            throws IOException, JemException {
-        ZipEntry entry = zipFile.getEntry("0");
-        if (entry == null) {
-            throw new ParserException("Not found '0' in JAR book", getName());
+    private void readMeta(Book book, ZipFile zipFile) throws IOException,
+            ParserException {
+        InputStream stream = new BufferedInputStream(ZipUtils.openStream(zipFile, "0"));
+        try {
+            DataInput input = new DataInputStream(stream);
+            if (input.readInt() != JAR.FILE_HEADER) {
+                throw parserException("jar.parse.invalidMeta", zipFile.getName());
+            }
+            int length = input.readByte();
+            byte[] buf = new byte[length];
+            input.readFully(buf);
+            book.setTitle(new String(buf, JAR.META_ENCODING));
+
+            int chapterCount = Integer.parseInt(readString(input));
+            for (int i = 0; i < chapterCount; ++i) {
+                String str = readString(input);
+                String[] items = str.split(",");
+                if (items.length < 3) {
+                    throw parserException("jar.parse.invalidMeta", zipFile.getName());
+                }
+                FileObject fb = FileFactory.fromZip(zipFile, items[0], "text/plain");
+                Chapter chapter = new Chapter(items[2],
+                        TextFactory.fromFile(fb, JAR.TEXT_ENCODING));
+                book.append(chapter);
+            }
+
+            input.skipBytes(2); // what ?
+            String str = readString(input);
+            if (!str.isEmpty()) {
+                book.setIntro(TextFactory.fromString(str));
+            }
+        } finally {
+            stream.close();
         }
-        InputStream stream = new BufferedInputStream(zipFile.getInputStream(entry));
-        DataInput input = new DataInputStream(stream);
-        if (input.readInt() != JAR.FILE_HEADER) {
-            throw new ParserException("Unsupported JAR book: magic number", getName());
-        }
-        int length = input.readByte();
+    }
+
+    private String readString(DataInput input) throws IOException {
+        int length = input.readShort();
         byte[] buf = new byte[length];
         input.readFully(buf);
-        book.setAttribute(Book.TITLE, new String(buf, JAR.META_ENCODING));
-
-        length = input.readShort();
-        buf = new byte[length];
-        input.readFully(buf);
-        int chapterCount = Integer.parseInt(new String(buf, JAR.META_ENCODING));
-
-        for (int i = 0; i < chapterCount; ++i) {
-            length = input.readShort();
-            buf = new byte[length];
-            input.readFully(buf);
-            String str = new String(buf, JAR.META_ENCODING);
-            String[] items = str.split(",");
-            if (items.length < 3) {
-                throw new ParserException("Invalid JAR book: bad chapter item",
-                        getName());
-            }
-            Chapter chapter = new Chapter(items[2]);
-            FileObject fb = FileFactory.fromZip(zipFile, items[0], null);
-            chapter.setSource(TextFactory.fromFile(fb, JAR.TEXT_ENCODING));
-            book.append(chapter);
-        }
-
-        length = input.readShort();
-        buf = new byte[length];
-        input.readFully(buf);
-        book.setAttribute(Book.INTRO, TextFactory.fromString(new String(buf, JAR.META_ENCODING)));
+        return new String(buf, JAR.META_ENCODING);
     }
 }

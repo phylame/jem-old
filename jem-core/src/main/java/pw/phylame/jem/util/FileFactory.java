@@ -18,17 +18,14 @@
 
 package pw.phylame.jem.util;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.FileInputStream;
-import java.io.RandomAccessFile;
+import java.io.*;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.Objects;
-import java.util.Properties;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipEntry;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -37,46 +34,34 @@ import org.apache.commons.logging.LogFactory;
  * Factory class for creating <tt>FileObject</tt>.
  */
 public class FileFactory {
-    private static Log LOG = LogFactory.getLog(FileFactory.class);
-    
-    /** Some known MIME types */
-    private static HashMap<String, String> MIMEs = new HashMap<String, String>();
+    private static final Log LOG = LogFactory.getLog(FileFactory.class);
 
-    /** File of builtin MIME mapping */
+    /**
+     * File of builtin MIME mapping
+     */
     public static final String MIME_MAPPING_FILE = "mime.properties";
 
-    /** Loads some known MIMEs from file. */
-    private static void loadBuiltinMime() {
-        Properties prop = new Properties();
-        InputStream in = FileFactory.class.getResourceAsStream(MIME_MAPPING_FILE);
-        if (in == null) {       // not found file
-            LOG.debug("not found MIME mapping: " + MIME_MAPPING_FILE);
-            return;
-        }
-        try {
-            prop.load(in);
-        } catch (IOException e) {
-            LOG.debug("failed to load MIME mapping", e);
-        }
-        for (String fmt : prop.stringPropertyNames()) {
-            MIMEs.put(fmt, prop.getProperty(fmt));
-        }
-    }
-
-    static {
-        loadBuiltinMime();
-    }
+    /**
+     * Some known MIME types
+     */
+    public static final HashMap<String, String> names = new HashMap<String, String>();
 
     /**
      * Returns the MIME type of specified file name.
+     *
      * @param name path name of file
-     * @return string of MIME.
+     * @return string of MIME or empty string if <tt>name</tt>
+     * is <tt>null</tt> or empty
      */
-    private static String getMimeType(String name) {
-        if (name == null || name.equals("")) {
+    public static String getMimeType(String name) {
+        if (name == null || name.isEmpty()) {
             return "";
         }
-        String mime = MIMEs.get(FilenameUtils.getExtension(name));
+        String ext = FilenameUtils.getExtension(name);
+        if (ext.isEmpty()) {
+            return FileObject.UNKNOWN_MIME;
+        }
+        String mime = names.get(ext);
         if (mime != null) {
             return mime;
         } else {
@@ -86,175 +71,243 @@ public class FileFactory {
 
     /**
      * Detects MIME type by file name if not specified mime.
+     *
      * @param path path name of file
      * @param mime given mime
      * @return the mime type text
      */
     private static String getOrDetectMime(String path, String mime) {
-        if (mime == null || "".equals(mime)) {
+        if (mime == null || mime.isEmpty()) {
             return getMimeType(path);
         }
         return mime;
     }
 
-    private static class NormalFile extends AbstractFileObject {
-        private File mFile;
-        
+    private static class NormalFile extends AbstractFile {
+        private File file;
+
         NormalFile(File file, String mime) throws IOException {
             super(mime);
-            mFile = Objects.requireNonNull(file);
-            if (! mFile.exists()) {
-                throw new IOException("Not such file or directory: "+mFile.getPath());
+            if (file == null) {
+                throw new NullPointerException("file");
+            }
+            this.file = file;
+            if (!this.file.exists()) {
+                throw new IOException("Not such file or directory: " + this.file.getPath());
             }
         }
-        
+
         @Override
         public String getName() {
-            return mFile.getPath();
+            return file.getPath();
         }
 
         @Override
         public InputStream openStream() throws IOException {
-            return new FileInputStream(mFile);
+            return new FileInputStream(file);
         }
 
         @Override
-        public String toString() {
-            return "file:///" + mFile.getAbsolutePath();
+        public byte[] readAll() throws IOException {
+            return FileUtils.readFileToByteArray(file);
+        }
+
+        @Override
+        public long writeTo(OutputStream output) throws IOException {
+            return FileUtils.copyFile(file, output);
         }
     }
-    
-    private static class InnerZip extends AbstractFileObject {
-        private ZipFile mZip;
-        private String mName;
-        
-        InnerZip(ZipFile zipFile, String entryName, String mime) throws IOException {
+
+    private static class InnerZip extends AbstractFile {
+        private ZipFile zip;
+        private String name;
+
+        InnerZip(ZipFile zipFile, String entry, String mime) throws IOException {
             super(mime);
-            mZip = Objects.requireNonNull(zipFile);
-            mName = Objects.requireNonNull(entryName);
-            if (mZip.getEntry(mName) == null) {
-                throw new IOException("Not such entry in ZIP: "+mName);
+            if (zipFile == null) {
+                throw new NullPointerException("zipFile");
+            }
+            zip = zipFile;
+            if (entry == null) {
+                throw new NullPointerException("entry");
+            }
+            name = entry;
+            if (zip.getEntry(name) == null) {
+                throw new IOException("Not such entry in ZIP: " + name);
             }
         }
-        
+
         @Override
         public String getName() {
-            return mName;
+            return name;
         }
 
         @Override
         public InputStream openStream() throws IOException {
-            ZipEntry entry = mZip.getEntry(mName);
+            ZipEntry entry = zip.getEntry(name);
             assert entry != null;
-            return mZip.getInputStream(entry);
+            return zip.getInputStream(entry);
         }
 
         @Override
         public String toString() {
-            return "zip://" + mZip.getName() + "!" + mName;
+            return "zip://" + zip.getName() + "!" + name + ";mime=" + getMime();
         }
     }
 
-    private static class FileBlock extends AbstractFileObject {
-        private String mName;
-        private RandomAccessFile mFile;
-        private long mOffset, mSize, mOldOffset = -1;
+    private static class BlockFile extends AbstractFile {
+        private String name;
+        private RandomAccessFile file;
+        private long offset, size, oldOffset = -1;
 
-        FileBlock(String name, RandomAccessFile file, long offset, long size, String mime)
+        BlockFile(String name, RandomAccessFile file, long offset, long size, String mime)
                 throws IOException {
             super(mime);
-            mName = Objects.requireNonNull(name);
-            mFile = Objects.requireNonNull(file);
-            mOffset = offset;
-            mSize = size;
-            if (mSize > (mFile.length() - mOffset)) {
-                throw new IOException("Available size lesser than " + mSize);
+            if (name == null) {
+                throw new NullPointerException("name");
+            }
+            this.name = name;
+            if (file == null) {
+                throw new NullPointerException("file");
+            }
+            this.file = file;
+            this.offset = offset;
+            this.size = size;
+            if (this.size > (this.file.length() - this.offset)) {
+                throw new IOException("Source size < " + this.size);
             }
         }
 
         @Override
         public String getName() {
-            return mName;
+            return name;
         }
 
         @Override
         public InputStream openStream() throws IOException {
-            mOldOffset = mFile.getFilePointer();
-            mFile.seek(mOffset);
-            return new InputStream() {
-                private long readBytes = 0;
+            oldOffset = file.getFilePointer();
+            file.seek(offset);
+            return new RAFInputStream(file, size);
+        }
 
-                @Override
-                public int read() throws IOException {
-                    if (readBytes++ >= mSize) {
-                        return -1;
-                    }
-                    return mFile.read();
-                }
-            };
+        @Override
+        public byte[] readAll() throws IOException {
+            oldOffset = file.getFilePointer();
+            file.seek(offset);
+            byte[] buf = new byte[(int) size];
+            int n = file.read(buf);
+            reset();
+            if (n < size) {
+                return java.util.Arrays.copyOf(buf, n);
+            } else {
+                return buf;
+            }
+        }
+
+        @Override
+        public long writeTo(OutputStream output) throws IOException {
+            oldOffset = file.getFilePointer();
+            file.seek(offset);
+            byte[] buf = new byte[(int) size];
+            int n = file.read(buf);
+            output.write(buf);
+            reset();
+            return n;
         }
 
         @Override
         public void reset() throws IOException {
-            if (mOldOffset != -1) {
-                mFile.seek(mOldOffset);
+            if (oldOffset != -1) {
+                file.seek(oldOffset);
             }
-            mOldOffset = -1;
+            oldOffset = -1;
         }
 
         @Override
         public String toString() {
-            return String.format("block %s <offset=%d; size=%d>", getName(), mOffset, mSize);
+            return String.format("block://%s;offset=%d;size=%d;mime=%s",
+                    getName(), offset, size, getMime());
         }
     }
 
-    private static class URLFile extends AbstractFileObject {
-        private URL mUrl;
+    private static class URLFile extends AbstractFile {
+        private URL url;
 
         URLFile(URL url, String mime) {
             super(mime);
-            mUrl = Objects.requireNonNull(url);
+            if (url == null) {
+                throw new NullPointerException("url");
+            }
+            this.url = url;
         }
 
         @Override
         public String getName() {
-            return mUrl.getPath();
+            return url.getPath();
         }
 
         @Override
         public InputStream openStream() throws IOException {
-            return mUrl.openStream();
+            return url.openStream();
+        }
+
+        @Override
+        public byte[] readAll() throws IOException {
+            return IOUtils.toByteArray(url);
+        }
+
+        @Override
+        public long writeTo(OutputStream output) throws IOException {
+            byte[] b = readAll();
+            output.write(b);
+            return b.length;
         }
 
         @Override
         public String toString() {
-            return mUrl.toString();
+            return url.toString() + ";mime=" + getMime();
         }
     }
 
-    private static class EmptyFile extends AbstractFileObject {
-        private String mName;
+    private static class ByteFile extends AbstractFile {
+        private String name;
+        private byte[] buf;
 
-        private static InputStream input = new InputStream() {
-            @Override
-            public int read() throws IOException {
-                return -1;
-            }
-        };
-
-        protected EmptyFile(String name, String mime) {
+        ByteFile(String name, byte[] buf, String mime) {
             super(mime);
-            mName = name;
+            if (name == null) {
+                throw new NullPointerException("name");
+            }
+            this.buf = (buf != null) ? buf : new byte[0];
+            this.name = name;
         }
 
         @Override
         public String getName() {
-            return mName;
+            return name;
         }
 
         @Override
         public InputStream openStream() throws IOException {
-            return input;
+            return new ByteArrayInputStream(buf);
+        }
+
+        @Override
+        public byte[] readAll() throws IOException {
+            byte[] b = new byte[buf.length];
+            System.arraycopy(buf, 0, b, 0, b.length);
+            return b;
+        }
+
+        @Override
+        public long writeTo(OutputStream output) throws IOException {
+            output.write(buf);
+            return buf.length;
+        }
+
+        @Override
+        public String toString() {
+            return "bytes://" + super.toString();
         }
     }
 
@@ -262,22 +315,67 @@ public class FileFactory {
         return new NormalFile(file, getOrDetectMime(file.getPath(), mime));
     }
 
-    public static FileObject fromZip(ZipFile zipFile, String entryName,
+    public static FileObject fromZip(ZipFile zipFile, String entry,
                                      String mime) throws IOException {
-        return new InnerZip(zipFile, entryName, getOrDetectMime(entryName, mime));
+        return new InnerZip(zipFile, entry, getOrDetectMime(entry, mime));
     }
 
     public static FileObject fromBlock(String name, RandomAccessFile file,
                                        long offset, long size,
                                        String mime) throws IOException {
-        return new FileBlock(name, file, offset, size, getOrDetectMime(name, mime));
+        return new BlockFile(name, file, offset, size, getOrDetectMime(name, mime));
     }
 
     public static FileObject fromURL(URL url, String mime) {
         return new URLFile(url, getOrDetectMime(url.getPath(), mime));
     }
 
-    public static FileObject emptyFile(String name, String mime) {
-        return new EmptyFile(name, getOrDetectMime(name, mime));
+    public static FileObject fromBytes(String name, byte[] bytes, String mime) {
+        return new ByteFile(name, bytes, getOrDetectMime(name, mime));
+    }
+
+    private static FileObject EMPTY_FILE;
+
+    public static FileObject emptyFile() {
+        if (EMPTY_FILE == null) {
+            EMPTY_FILE = new ByteFile("_empty_", new byte[0], FileObject.UNKNOWN_MIME);
+        }
+        return EMPTY_FILE;
+    }
+
+    /**
+     * Loads some known MIMEs from file.
+     */
+    private static void loadBuiltinMime() {
+        URL url = FileFactory.class.getResource(MIME_MAPPING_FILE);
+        if (url == null) {       // not found file
+            LOG.debug("not found MIME mapping: " + MIME_MAPPING_FILE);
+            return;
+        }
+        LineIterator iterator = new LineIterator(url, null);
+        iterator.commentLabel = "#";
+        iterator.trimSpace = true;
+        iterator.skipEmpty = true;
+
+        while (iterator.hasNext()) {
+            String line = iterator.next();
+            int index = line.indexOf('=');
+            if (index < 0) {
+                continue;
+            }
+            String name = line.substring(0, index).trim();
+            if (name.isEmpty()) {
+                continue;
+            }
+            String mime = line.substring(index + 1).trim();
+            if (mime.isEmpty()) {
+                continue;
+            }
+            names.put(name, mime);
+        }
+    }
+
+    static {
+        loadBuiltinMime();
     }
 }

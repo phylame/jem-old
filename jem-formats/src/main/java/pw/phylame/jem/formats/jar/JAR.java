@@ -30,7 +30,12 @@ public final class JAR {
 
     static final String MANIFEST_FILE = "META-INF/MANIFEST.MF";
 
-    static String MANIFEST_TEMPLATE = "Manifest-Version: 1.0\n" +
+    /**
+     * Java ME template book file
+     */
+    static final String JAR_TEMPLATE = "book.jar";
+
+    static final String MANIFEST_TEMPLATE = "Manifest-Version: 1.0\n" +
             "Created-By: %s v%s\n" +
             "MIDlet-1: %s,/jm.PNG,JavaBook\n" +
             "MIDlet-Vendor: %s\n" +

@@ -20,45 +20,72 @@ package pw.phylame.jem.core;
 
 /**
  * Declares key name of chapter attributes.
+ *
  * @since 2.1.0
  */
 public interface Attributes {
-    /** Key name for book author.*/
-    String AUTHOR    = "author";
+    /**
+     * Key name for book author.
+     */
+    String AUTHOR = "author";
 
-    /** Key name for chapter and book cover.*/
-    String COVER     = "cover";
+    /**
+     * Key name for chapter and book cover.
+     */
+    String COVER = "cover";
 
-    /** Key name for book date.*/
-    String DATE      = "date";
+    /**
+     * Key name for book date.
+     */
+    String DATE = "date";
 
-    /** Key name for book genre.*/
-    String GENRE     = "genre";
+    /**
+     * Key name for book genre.
+     */
+    String GENRE = "genre";
 
-    /** Key name for chapter and book intro.*/
-    String INTRO     = "intro";
+    /**
+     * Key name for chapter and book intro.
+     */
+    String INTRO = "intro";
 
-    /** Key name for book language.*/
-    String LANGUAGE  = "language";
+    /**
+     * Key name for book language.
+     */
+    String LANGUAGE = "language";
 
-    /** Key name for book publisher.*/
+    /**
+     * Key name for book publisher.
+     */
     String PUBLISHER = "publisher";
 
-    /** Key name for book rights.*/
-    String RIGHTS    = "rights";
+    /**
+     * Key name for book rights.
+     */
+    String RIGHTS = "rights";
 
-    /** Key name for book state.*/
-    String STATE     = "state";
+    /**
+     * Key name for book state.
+     */
+    String STATE = "state";
 
-    /** Key name for book subject.*/
-    String SUBJECT   = "subject";
+    /**
+     * Key name for book subject.
+     */
+    String SUBJECT = "subject";
 
-    /** Key name for part, chapter and book title.*/
-    String TITLE     = "title";
+    /**
+     * Key name for part, chapter and book title.
+     */
+    String TITLE = "title";
 
-    /** Key name for book vendor. */
-    String VENDOR    = "vendor";
+    /**
+     * Key name for book vendor.
+     */
+    String VENDOR = "vendor";
 
-    /** Key name for word number of chapter. */
-    String WORDS     = "words";
+    /**
+     * Key name for word number of chapter.
+     */
+    String WORDS = "words";
 }

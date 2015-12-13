@@ -1,7 +1,7 @@
 # jem-formats - Format implements for Jem
 
 ## Currently supported formats
-- PMAB 1.x, 2.x, 3.x
+- PMAB: 2.0, 3.0
 - TXT
-- UMD text, comic and cartoon
+- UMD: text, cartoon
 - JAR

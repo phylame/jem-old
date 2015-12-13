@@ -15,8 +15,8 @@
 # limitations under the License.
 # ------------------------------------------------------------------------------
 
-# Get the Jem home directory
-if [ -z "$JEM_HOME" -o ! -d "$JEM_HOME" ]; then
+# Get the SCJ home
+if [ -z "$SCJ_HOME" -o ! -d "$SCJ_HOME" ]; then
   PRG="$0"
   # need this for relative symlinks
   while [ -h "$PRG" ] ; do
@@ -29,11 +29,17 @@ if [ -z "$JEM_HOME" -o ! -d "$JEM_HOME" ]; then
     fi
   done
 
-  JEM_HOME=`dirname "$PRG"`/..
+  SCJ_HOME=`dirname "$PRG"`/..
 
   # make it fully qualified
-  JEM_HOME=`cd "$JEM_HOME" > /dev/null && pwd`
+  SCJ_HOME=`cd "$SCJ_HOME" > /dev/null && pwd`
 fi
 
-# Run Jem CLI
-java -jar "$JEM_HOME/lib/scj-1.1.0.jar" "$@"
+# Set extension JAR
+for i in "%SCJ_HOME%"\lib\ext\*.jar
+do
+  set EXTENSION_JAR="$i"
+done
+
+# Run Jem SCI
+java -Xbootclasspath/a:%EXTENSION_JAR% -jar "%SCJ_HOME%\lib\scj-1.3.jar" "$@"

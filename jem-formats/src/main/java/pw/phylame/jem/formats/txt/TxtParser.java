@@ -18,15 +18,16 @@
 
 package pw.phylame.jem.formats.txt;
 
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import pw.phylame.jem.core.Chapter;
-import pw.phylame.jem.core.Parser;
 import pw.phylame.jem.core.Book;
-import pw.phylame.jem.util.*;
+import pw.phylame.jem.core.Chapter;
+import pw.phylame.jem.util.FileFactory;
+import pw.phylame.jem.util.FileObject;
+import pw.phylame.jem.util.TextFactory;
+import pw.phylame.jem.formats.common.CommonParser;
+import pw.phylame.jem.formats.util.CacheCleaner;
 import pw.phylame.jem.formats.util.ParserException;
+import pw.phylame.jem.formats.util.text.TextUtils;
+import pw.phylame.jem.formats.util.BufferedRandomAccessFile;
 
 import java.io.*;
 import java.util.*;
@@ -34,148 +35,154 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.commons.io.FilenameUtils;
+
 /**
  * <tt>Parser</tt> implement for TXT book.
  */
-public class TxtParser implements Parser {
+public class TxtParser extends CommonParser<Reader, TxtParseConfig> {
     private static Log LOG = LogFactory.getLog(TxtParser.class);
 
     private static final String CACHED_TEXT_ENCODING = "UTF-16";
 
-    public static final String KEY_CHAPTER_PATTERN = "chapter_pattern";
-    public static final String KEY_TEXT_ENCODING = "txt_encoding";
-
-    public static String DEFAULT_CHAPTER_PATTERN = null;
-
-    private static void loadConfig() {
-        Properties prop = new Properties();
-        InputStream in = TxtParser.class.getResourceAsStream("txt.properties");
-        if (in != null) {
-            try {
-                prop.load(in);
-                DEFAULT_CHAPTER_PATTERN = prop.getProperty("chapter_pattern");
-            } catch (IOException e) {
-                LOG.debug("failed to load TXT parser configurations", e);
-            }
-        }
-    }
-
-    static {
-        loadConfig();
-    }
-
-    private RandomAccessFile source = null;
-
-    @Override
-    public String getName() {
-        return "txt";
+    public TxtParser() {
+        super("txt", TxtParseConfig.class, TxtParseConfig.CONFIG_SELF);
     }
 
     @Override
-    public Book parse(File file, Map<String, Object> kw)
-            throws IOException, JemException {
-        String encoding = System.getProperty("file.encoding"),
-                chapterPattern = DEFAULT_CHAPTER_PATTERN;
-        if (kw != null && kw.size() > 0) {
-            Object o = kw.get(KEY_TEXT_ENCODING);
-            if (o instanceof String) {
-                encoding = (String) o;
-            }
-            o = kw.get(KEY_CHAPTER_PATTERN);
-            if (o instanceof String) {
-                chapterPattern = (String) o;
-            }
+    protected Reader openInput(File file, TxtParseConfig config)
+            throws IOException {
+        InputStream stream = new FileInputStream(file);
+        String encoding = (config != null) ? config.encoding : TXT.defaultEncoding;
+        try {
+            return new BufferedReader(new InputStreamReader(stream, encoding));
+        } catch (UnsupportedEncodingException e) {
+            stream.close();
+            throw e;
         }
-
-        Reader reader = new BufferedReader(
-                new InputStreamReader(new FileInputStream(file), encoding));
-        return parse(reader, FilenameUtils.getBaseName(file.getPath()), chapterPattern);
     }
 
-    public Book parse(Reader reader, String title, String chapterPattern)
-            throws IOException, JemException {
+    @Override
+    public Book parse(Reader input, TxtParseConfig config) throws IOException,
+            ParserException {
+        if (config == null) {
+            config = new TxtParseConfig();
+        }
+        Book book = parse(input, FilenameUtils.getBaseName(source.getPath()), config);
+        book.setExtension(TxtInfo.FILE_INFO, new TxtInfo(config.encoding));
+        return book;
+    }
+
+    public Book parse(Reader reader, String title, TxtParseConfig config)
+            throws IOException, ParserException {
+        if (config == null) {
+            config = new TxtParseConfig();
+        }
         Pattern pattern;
         try {
-            pattern = Pattern.compile(chapterPattern, Pattern.MULTILINE);
+            pattern = Pattern.compile(config.pattern, config.patternFlags);
         } catch (PatternSyntaxException e) {
-            throw new ParserException(
-                    "Invalid chapter pattern: "+chapterPattern, e, getName());
+            throw parserException(e, "txt.parse.invalidPattern", config.pattern);
         }
-
-        Book book = new Book(title, "");
-        final File cache = File.createTempFile("TXT", ".tmp");
-        book.registerCleanup(new Chapter.Cleanable() {
-            @Override
-            public void clean(Chapter part) {
-                if (source != null) {
-                    try {
-                        source.close();
-                        if (! cache.delete()) {
-                            LOG.debug("cannot delete TXT cached file: "+cache.getPath());
-                        }
-                    } catch (IOException e) {
-                        LOG.debug("cannot close TXT cached file: "+cache.getPath());
-                    }
-                }
-            }
-        });
 
         // cached file content
         StringBuilder sb = new StringBuilder();
+        Object[] objects = cacheContent(reader, sb);
+        reader.close();
+
+        BufferedRandomAccessFile source = (BufferedRandomAccessFile) objects[0];
+        File cache = (File) objects[1];
+
+        Book book = new Book(title, "");
+        String raw = sb.toString();
         try {
-            char[] buf = new char[1024];
-            Writer writer = new BufferedWriter(
-                    new OutputStreamWriter(new FileOutputStream(cache), CACHED_TEXT_ENCODING));
+            List<Integer> offsets = new LinkedList<Integer>();
+            Matcher matcher = pattern.matcher(raw);
+            while (matcher.find()) {
+                offsets.add(matcher.start());
+                book.append(new Chapter(matcher.group()));
+            }
+            offsets.add(raw.length());
+
+            Iterator<Integer> offsetIterator = offsets.iterator();
+            Iterator<Chapter> chapterIterator = book.iterator();
+
+            int start = offsetIterator.next();
+            if (start > 0) {    // no formatted head store as intro
+                FileObject fb = FileFactory.fromBlock(
+                        "text_head.txt", source, 0, start << 1, "text/plain");
+                book.setIntro(TextFactory.fromFile(fb, CACHED_TEXT_ENCODING));
+            }
+
+            while (chapterIterator.hasNext()) {
+                Chapter chapter = chapterIterator.next();
+                title = chapter.getTitle();
+                if (config.trimChapterTitle) {
+                    title = TextUtils.trim(title);
+                }
+                chapter.setTitle(title);
+
+                int end = offsetIterator.next();
+                start += title.length();
+                int length = end - start;
+
+                FileObject fb = FileFactory.fromBlock(
+                        start + ".txt", source, start << 1, length << 1, "text/plain");
+                chapter.setContent(TextFactory.fromFile(fb, CACHED_TEXT_ENCODING));
+
+                start = end;
+            }
+        } catch (IOException e) {
+            source.close();
+            if (!cache.delete()) {
+                LOG.debug("cannot delete TXT cache: " + cache.getAbsolutePath());
+            }
+            throw e;
+        }
+        book.registerCleanup(new CacheCleaner(source, cache));
+
+        System.gc();
+
+        return book;
+    }
+
+    private Object[] cacheContent(Reader reader, StringBuilder sb)
+            throws IOException {
+        File cache = File.createTempFile("txt_", ".tmp");
+        Closeable dev = null;
+        try {
+            OutputStream stream = new FileOutputStream(cache);
+            dev = stream;
+            Writer writer = new OutputStreamWriter(stream, CACHED_TEXT_ENCODING);
+            dev = stream;
+            writer = new BufferedWriter(writer);
+            dev = writer;
+
+            char[] buf = new char[4096];
             int n;
-            while ((n=reader.read(buf)) != -1) {
+            while ((n = reader.read(buf)) != -1) {
                 writer.write(buf, 0, n);
                 sb.append(buf, 0, n);
             }
             writer.close();
-            source = new RandomAccessFile(cache, "r");
-        } catch (IOException ex) {
-            book.cleanup();
-            throw ex;
+
+            dev = null;
+            return new Object[]{new BufferedRandomAccessFile(cache, "r"), cache};
+        } catch (IOException e) {
+            if (dev != null) {
+                dev.close();
+                dev = null;
+            }
+            if (!cache.delete()) {
+                LOG.debug("cannot delete TXT cache: " + cache.getAbsolutePath());
+            }
+            throw e;
+        } finally {
+            if (dev != null) {
+                dev.close();
+            }
         }
-
-        String raw = sb.toString();
-
-        List<Integer> offsets = new LinkedList<Integer>();
-        Matcher matcher = pattern.matcher(raw);
-        while (matcher.find()) {
-            offsets.add(matcher.start());
-            book.append(new Chapter(matcher.group()));
-        }
-        offsets.add(raw.length());
-
-        Iterator<Integer> offsetIt = offsets.iterator();
-        Iterator<Chapter> partIt = book.iterator();
-
-        int start = offsetIt.next();
-        if (start > 0) {    // no formatted head
-            FileObject fb = FileFactory.fromBlock("text_head.txt",
-                    source, 0, start*2, null);
-            book.setAttribute(Book.INTRO, TextFactory.fromFile(fb, CACHED_TEXT_ENCODING));
-        }
-
-        while (partIt.hasNext()) {
-            Chapter part = partIt.next();
-            title = part.stringAttribute(Book.TITLE);
-            int end = offsetIt.next();
-            start += title.length();
-            int length = end - start;
-
-            part.setAttribute(Book.TITLE, title.trim());
-            FileObject fb = FileFactory.fromBlock(start + ".txt",
-                    source, start * 2, length * 2, null);
-            part.setSource(TextFactory.fromFile(fb, CACHED_TEXT_ENCODING));
-
-            start = end;
-        }
-
-        raw = null;
-        System.gc();
-
-        return book;
     }
 }

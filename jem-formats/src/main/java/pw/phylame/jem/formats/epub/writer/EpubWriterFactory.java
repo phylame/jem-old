@@ -21,7 +21,7 @@ package pw.phylame.jem.formats.epub.writer;
 public class EpubWriterFactory {
     public static EpubWriter getWriter(String version) {
         if (version.equals("2.0")) {
-            return new WriterV2();
+            return new EPUB_2_0();
         } else {
             return null;
         }

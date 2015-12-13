@@ -18,122 +18,159 @@
 
 package pw.phylame.jem.util;
 
-import java.util.Objects;
-import java.io.Writer;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.BufferedInputStream;
+import java.io.*;
+import java.util.List;
+import java.util.LinkedList;
+
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * Factory class for creating <tt>TextObject</tt>.
  */
 public class TextFactory {
-    private static Log LOG = LogFactory.getLog(TextFactory.class);
-
-    private static class StringSource implements TextObject {
-        private CharSequence mText;
-        private String       mType;
-
-        StringSource(CharSequence str, String type) {
-            mText = Objects.requireNonNull(str);
-            mType = Objects.requireNonNull(type);
+    /**
+     * Returns list of lines split from text content in this object.
+     *
+     * @param str       the input string
+     * @param skipEmpty <tt>true</tt> to skip empty line
+     * @return list of lines, never <tt>null</tt>
+     */
+    public static List<String> splitLines(String str, boolean skipEmpty) {
+        List<String> lines = new LinkedList<String>();
+        int ix, begin = 0, length = str.length();
+        String sub;
+        for (ix = 0; ix < length; ) {
+            char ch = str.charAt(ix);
+            if ('\n' == ch) {   // \n
+                sub = str.substring(begin, ix);
+                if (!sub.isEmpty() || !skipEmpty) {
+                    lines.add(sub);
+                }
+                begin = ++ix;
+            } else if ('\r' == ch) {
+                sub = str.substring(begin, ix);
+                if (!sub.isEmpty() || !skipEmpty) {
+                    lines.add(sub);
+                }
+                if (ix + 1 < length && '\n' == str.charAt(ix + 1)) {   // \r\n
+                    begin = ix += 2;
+                } else {    // \r
+                    begin = ++ix;
+                }
+            } else {
+                ++ix;
+            }
         }
+        if (ix >= begin) {
+            sub = str.substring(begin);
+            if (!sub.isEmpty() || !skipEmpty) {
+                lines.add(sub);
+            }
+        }
+        return lines;
+    }
 
-        @Override
-        public String getType() {
-            return mType;
+    private static class RawText extends AbstractText {
+        private CharSequence text;
+
+        RawText(CharSequence str, String type) {
+            super(type);
+            if (str == null) {
+                throw new NullPointerException("str");
+            }
+            this.text = str;
         }
 
         @Override
         public String getText() {
-            return mText.toString();
-        }
-
-        @Override
-        public String[] getLines() {
-            return mText.toString().split("(\\r\\n)|(\\r)|(\\n)");
+            return text.toString();
         }
 
         @Override
         public void writeTo(Writer writer) throws IOException {
-            writer.write(mText.toString());
+            writer.write(text.toString());
         }
     }
 
-    private static class FileSource implements TextObject {
-        private FileObject mFile;
-        private String      mEncoding;
-        private String      mType;
+    private static class FileText extends AbstractText {
+        private FileObject file;
+        private String encoding;
 
-        FileSource(FileObject file, String encoding, String type) {
-            mFile = Objects.requireNonNull(file);
+        FileText(FileObject file, String encoding, String type) {
+            super(type);
+            if (file == null) {
+                throw new NullPointerException("file");
+            }
+            this.file = file;
             // if null, using platform default encoding
-            mEncoding = encoding;
-            mType = Objects.requireNonNull(type);
+            this.encoding = (encoding != null) ? encoding :
+                    System.getProperty("file.encoding");
         }
 
         @Override
-        public String getType() {
-            return mType;
-        }
-
-        @Override
-        public String getText() {
-            BufferedInputStream input = null;
+        public String getText() throws Exception {
+            InputStream stream = file.openStream();
+            assert stream != null;
+            BufferedInputStream input = new BufferedInputStream(stream);
             try {
-                InputStream stream = mFile.openStream();
-                assert stream != null;
-                input = new BufferedInputStream(stream);
-                return IOUtils.toString(input, mEncoding);
-            } catch (IOException e) {
-                LOG.debug(e);
-                return null;
+                return IOUtils.toString(input, encoding);
             } finally {
-                try {
-                    if (input != null) {
-                        input.close();
-                    }
-                    mFile.reset();
-                } catch (IOException e) {
-                    LOG.debug(e);
-                }
+                input.close();
+                file.reset();
             }
         }
 
         @Override
-        public String[] getLines() {
-            BufferedInputStream input = null;
+        public List<String> getLines(boolean skipEmpty) throws Exception {
+            InputStream stream = file.openStream();
+            assert stream != null;
+            BufferedInputStream input = new BufferedInputStream(stream);
+            BufferedReader reader;
             try {
-                InputStream stream = mFile.openStream();
-                assert stream != null;
-                input = new BufferedInputStream(stream);
-                return IOUtils.readLines(input, mEncoding).toArray(new String[0]);
+                reader = new BufferedReader(new InputStreamReader(input, encoding));
             } catch (IOException e) {
-                LOG.debug(e);
-                return null;
-            } finally {
-                try {
-                    if (input != null) {
-                        input.close();
+                input.close();
+                throw e;
+            }
+            List<String> lines = new LinkedList<String>();
+            try {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    if (!line.isEmpty() || !skipEmpty) {
+                        lines.add(line);
                     }
-                    mFile.reset();
-                } catch (IOException e) {
-                    LOG.debug(e);
                 }
+                return lines;
+            } finally {
+                reader.close();
+                file.reset();
             }
         }
 
         @Override
         public void writeTo(Writer writer) throws IOException {
-            InputStream stream = mFile.openStream();
-            BufferedInputStream input = new BufferedInputStream(stream);
-            IOUtils.copy(input, writer, mEncoding);
-            input.close();
-            mFile.reset();
+            BufferedInputStream input = null;
+            try {
+                InputStream stream = file.openStream();
+                assert stream != null;
+                input = new BufferedInputStream(stream);
+                IOUtils.copy(input, writer, encoding);
+            } finally {
+                if (input != null) {
+                    input.close();
+                    file.reset();
+                }
+            }
         }
+    }
+
+    private static TextObject EMPTY_TEXT;
+
+    public static TextObject emptyText() {
+        if (EMPTY_TEXT == null) {
+            EMPTY_TEXT = new RawText("", TextObject.PLAIN);
+        }
+        return EMPTY_TEXT;
     }
 
     public static TextObject fromString(CharSequence str) {
@@ -141,11 +178,11 @@ public class TextFactory {
     }
 
     public static TextObject fromString(CharSequence str, String type) {
-        return new StringSource(str, type);
+        return new RawText(str, type);
     }
 
     public static TextObject fromFile(FileObject file) {
-        return fromFile(file, null);
+        return fromFile(file, null, TextObject.PLAIN);
     }
 
     public static TextObject fromFile(FileObject file, String encoding) {
@@ -153,6 +190,6 @@ public class TextFactory {
     }
 
     public static TextObject fromFile(FileObject file, String encoding, String type) {
-        return new FileSource(file, encoding, type);
+        return new FileText(file, encoding, type);
     }
 }

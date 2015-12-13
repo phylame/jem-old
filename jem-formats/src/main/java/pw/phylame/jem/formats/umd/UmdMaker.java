@@ -24,153 +24,129 @@ import org.apache.commons.logging.LogFactory;
 
 import pw.phylame.jem.core.Chapter;
 import pw.phylame.jem.core.Book;
-import pw.phylame.jem.core.Maker;
+import pw.phylame.jem.formats.common.CommonMaker;
+import pw.phylame.jem.formats.util.text.TextConfig;
+import pw.phylame.jem.formats.util.text.TextRender;
+import pw.phylame.jem.formats.util.text.TextUtils;
 import pw.phylame.jem.util.FileObject;
-import pw.phylame.jem.util.JemException;
-import pw.phylame.jem.formats.util.MakerException;
-import pw.phylame.jem.formats.util.ExceptionFactory;
 
-import pw.phylame.tools.ZLibUtils;
-import pw.phylame.tools.NumberUtils;
-import static pw.phylame.tools.ByteUtils.littleRender;
+import pw.phylame.jem.formats.util.*;
+
+import static pw.phylame.jem.formats.util.ByteUtils.littleRender;
 
 import java.io.*;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Date;
-import java.util.Map;
 
 /**
  * <tt>Maker</tt> implement for UMD book.
  */
-public class UmdMaker implements Maker {
+public class UmdMaker extends CommonMaker<UmdMakeConfig> {
     private static Log LOG = LogFactory.getLog(UmdMaker.class);
 
-    public static final String KEY_UMD_TYPE = "umd_type";
-
     private Book book;
-    private int umdType;
     private OutputStream output;
-    private long writtenBytes = 0;
+    private long writtenBytes = 0L;
 
-    private RandomAccessFile source = null;
-
-    @Override
-    public String getName() {
-        return "umd";
+    public UmdMaker() {
+        super("umd", UmdMakeConfig.class, UmdMakeConfig.CONFIG_SELF);
     }
 
     @Override
-    public void make(Book book, File file, Map<String, Object> kw)
-            throws IOException, JemException {
-        OutputStream output = new BufferedOutputStream(new FileOutputStream(file));
-        int umdType = UMD.TEXT;
-        if (kw != null && kw.size() > 0) {
-            Object o = kw.get(KEY_UMD_TYPE);
-            if (o != null) {
-                if (o instanceof Integer) {
-                    umdType = (Integer) o;
-                } else if (o instanceof String) {
-                    try {
-                        umdType = Integer.parseInt((String) o);
-                    } catch (NumberFormatException e) {
-                        LOG.debug("invalid UMD type: " + o, e);
-                    }
-                } else {
-                    throw ExceptionFactory.forInvalidIntegerArgument(KEY_UMD_TYPE, o);
-                }
-            }
+    public void make(Book book, OutputStream output, UmdMakeConfig config)
+            throws IOException, MakerException {
+        if (config == null) {
+            config = new UmdMakeConfig();
         }
-        make(book, output, umdType);
-        output.close();
-    }
-
-    public void make(Book book, OutputStream output, int umdType)
-            throws IOException, JemException {
         this.output = output;
-        this.umdType = umdType;
         this.book = book;
 
-        output.write(littleRender.putUint32(UMD.FILE_MAGIC));
-        switch (umdType) {
+        writtenBytes = 0L;
+        output.write(littleRender.putUInt32(UMD.FILE_MAGIC));
+        switch (config.umdType) {
             case UMD.TEXT:
-                makeText();
+                makeText(config.textConfig);
                 break;
             case UMD.CARTOON:
-                makeCartoon();
+                makeCartoon(config);
                 break;
             case UMD.COMIC:
                 makeComic();
                 break;
             default:
-                throw new MakerException("Invalid UMD type: "+umdType, getName());
+                throw makerException("umd.make.invalidType", config.umdType);
         }
     }
 
-    private void makeText() throws IOException {
-        writeUmdHead();
+    private void makeText(TextConfig config) throws IOException {
+        writeUmdHead(UMD.TEXT);
         writeAttributes();
-        List<Long> offsets = new ArrayList<Long>();
-        List<String> titles = new ArrayList<String>();
 
         // prepare text
-        final File cache = File.createTempFile("umd_", ".stf");
-        book.registerCleanup(new Chapter.Cleanable() {
-            @Override
-            public void clean(Chapter part) {
+        File cache = File.createTempFile("umd_", ".tmp");
+        BufferedRandomAccessFile source = null;
+        try {
+            source = new BufferedRandomAccessFile(cache, "rw");
+            UmdRender umdRender = new UmdRender(this, source);
+            config.lineSeparator = UMD.UMD_LINE_FEED;
+            try {
+                TextRender.renderBook(book, umdRender, config);
+            } catch (Exception e) {
+                throw new IOException(e);
+            }
+
+            long contentLength = source.getFilePointer();
+            source.seek(0L);
+
+            writeContentLength(contentLength);
+            writeChapterOffsets(umdRender.offsets);
+            writeChapterTitles(umdRender.titles);
+
+            LinkedList<Long> blockChecks = new LinkedList<Long>();
+            writeText(source, contentLength, blockChecks);
+            writeContentEnd(blockChecks);
+
+            writeCoverImage();
+            writeSimplePageOffsets(contentLength);
+            writeUmdEnd();
+        } finally {
+            try {
                 if (source != null) {
-                    try {
-                        source.close();
-                        if (! cache.delete()) {
-                            LOG.debug("cannot delete UMD cached file: "+cache.getPath());
-                        }
-                    } catch (IOException e) {
-                        LOG.debug("cannot close UMD cached file: "+cache.getPath());
-                    }
+                    source.close();
+                }
+            } finally {
+                if (!cache.delete()) {
+                    LOG.debug("cannot delete UMD cached file: " + cache.getPath());
                 }
             }
-        });
-        source = new RandomAccessFile(cache, "rw");
-        for (Chapter sub: book) {
-            cachePart(sub, source, titles, offsets);
-        }
-        long contentLength = source.getFilePointer();
-        source.seek(0L);
-
-        writeContentLength(contentLength);
-        writeChapterOffsets(offsets);
-        writeChapterTitles(titles);
-
-        List<Long> blockChecks = new ArrayList<Long>();
-        writeText(source, contentLength, blockChecks);
-        writeContentEnd(blockChecks);
-
-        writeCoverImage();
-        writeSimplePageOffsets(contentLength);
-        writeUmdEnd();
-
-        source.close();
-        source = null;
-        if (! cache.delete()) {
-            LOG.debug("cannot delete UMD cached file: "+cache.getPath());
         }
     }
 
-    private void makeCartoon() throws IOException {
-        writeUmdHead();
+    private void makeCartoon(UmdMakeConfig config) throws IOException {
+        writeUmdHead(UMD.CARTOON);
         writeAttributes();
         // ignored chapter offsets and titles
-        List<FileObject> images = new ArrayList<FileObject>();
+        List<FileObject> images;
         String imageFormat = "jpg";
 
-        // prepare images
-        for (Chapter sub: book) {
-            findImages(sub, images);
+        // get cartoon images
+        if (config.cartoonImages != null && !config.cartoonImages.isEmpty()) {
+            images = config.cartoonImages;
+            imageFormat = config.imageFormat;
+        } else {
+            images = new LinkedList<FileObject>();
+            // prepare images
+            for (Chapter sub : book) {
+                findImages(sub, images);
+            }
         }
+
+        writeChapterOffsets(null);
+        writeChapterTitles(null);
         writeImageFormat(imageFormat);
 
-        List<Long> blockChecks = new ArrayList<Long>();
+        LinkedList<Long> blockChecks = new LinkedList<Long>();
         writeImages(images, blockChecks);
         writeContentEnd(blockChecks);
 
@@ -179,34 +155,33 @@ public class UmdMaker implements Maker {
         writeUmdEnd();
     }
 
-    private void makeComic() {
-
+    private void makeComic() throws MakerException {
+        throw makerException("umd.make.unsupportedType", UMD.COMIC);
     }
 
-    private void writeChunk(int id, boolean hasAddition, byte[] data)
-            throws IOException {
-        writeChunk(id, hasAddition ? 1 : 0, data);
+    private void writeChunk(int id, boolean hasAddition, byte[] data) throws IOException {
+        writeChunk(id, hasAddition ? UMD.CONTENT_APPENDED : UMD.CONTENT_SINGLE, data);
     }
 
     private void writeChunk(int id, int type, byte[] data) throws IOException {
         output.write(UMD.CHUNK_SEPARATOR);
-        output.write(littleRender.putUint16(id));
+        output.write(littleRender.putUInt16(id));
         output.write(type);
-        output.write(5+data.length);
+        output.write(5 + data.length);
         output.write(data);
-        writtenBytes += 5+data.length;
+        writtenBytes += 5 + data.length;
     }
 
-    private void writeAddition(long check, byte[] data) throws IOException {
+    private void writeAddition(long checkVal, byte[] data) throws IOException {
         output.write(UMD.ADDITION_SEPARATOR);
-        output.write(littleRender.putUint32(check));
-        output.write(littleRender.putUint32(9+data.length));
+        output.write(littleRender.putUInt32(checkVal));
+        output.write(littleRender.putUInt32(9 + data.length));
         output.write(data);
-        writtenBytes += 9+data.length;
+        writtenBytes += 9 + data.length;
     }
 
     // 1
-    private void writeUmdHead() throws IOException {
+    private void writeUmdHead(int umdType) throws IOException {
         byte[] data = new byte[3];
         data[0] = (byte) umdType;
         int val = NumberUtils.randInteger(0x401, 0x7FFF);
@@ -215,68 +190,73 @@ public class UmdMaker implements Maker {
         writeChunk(UMD.CDT_UMD_HEAD, false, data);
     }
 
-    // 2-9
-    private void writeAttributes() throws IOException{
-        writeChunk(UMD.CDT_TITLE, false, book.stringAttribute(Book.TITLE).getBytes(UMD.TEXT_ENCODING));
+    private void writeMetaField(int id, String str) throws IOException {
+        if (!TextUtils.isValid(str)) {
+            return;
+        }
+        writeChunk(id, false, str.getBytes(UMD.TEXT_ENCODING));
+    }
 
-        writeChunk(UMD.CDT_AUTHOR, false, book.stringAttribute(Book.AUTHOR).getBytes(UMD.TEXT_ENCODING));
+    // 2-9
+    private void writeAttributes() throws IOException {
+        writeMetaField(UMD.CDT_TITLE, book.getTitle());
+        writeMetaField(UMD.CDT_AUTHOR, book.getAuthor());
 
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime((Date) book.getAttribute(Book.DATE));
-        writeChunk(UMD.CDT_YEAR, false,
-                Integer.toString(calendar.get(Calendar.YEAR)).getBytes(UMD.TEXT_ENCODING));
+        calendar.setTime(book.getDate());
+        writeMetaField(UMD.CDT_YEAR, Integer.toString(calendar.get(Calendar.YEAR)));
+        writeMetaField(UMD.CDT_MONTH, Integer.toString(calendar.get(Calendar.MONTH) + 1));
+        writeMetaField(UMD.CDT_DAY, Integer.toString(calendar.get(Calendar.DAY_OF_MONTH)));
 
-        writeChunk(UMD.CDT_MONTH, false,
-                Integer.toString(calendar.get(Calendar.MONTH) + 1).getBytes(UMD.TEXT_ENCODING));
-
-        writeChunk(UMD.CDT_DAY, false,
-                Integer.toString(calendar.get(Calendar.DAY_OF_MONTH)).getBytes(UMD.TEXT_ENCODING));
-
-        writeChunk(UMD.CDT_GENRE, false,
-                book.stringAttribute(Book.GENRE).getBytes(UMD.TEXT_ENCODING));
-
-        writeChunk(UMD.CDT_PUBLISHER, false,
-                book.stringAttribute(Book.PUBLISHER).getBytes(UMD.TEXT_ENCODING));
-
-        writeChunk(UMD.CDT_VENDOR, false,
-                book.stringAttribute(Book.VENDOR).getBytes(UMD.TEXT_ENCODING));
+        writeMetaField(UMD.CDT_GENRE, book.getGenre());
+        writeMetaField(UMD.CDT_PUBLISHER, book.getPublisher());
+        writeMetaField(UMD.CDT_VENDOR, book.getVendor());
     }
 
     // B
     private void writeContentLength(long length) throws IOException {
-        writeChunk(UMD.CDT_CONTENT_LENGTH, false, littleRender.putUint32(length));
+        writeChunk(UMD.CDT_CONTENT_LENGTH, false, littleRender.putUInt32(length));
     }
 
     // 83
-    private void writeChapterOffsets(List<Long> chapterOffsets) throws IOException {
-        int check = NumberUtils.randInteger(0x3000, 0x3FFF);
-        writeChunk(UMD.CDT_CHAPTER_OFFSET, true, littleRender.putUint32(check));
-        ByteArrayOutputStream o = new ByteArrayOutputStream();
-        for (long offset: chapterOffsets) {
-            o.write(littleRender.putUint32(offset));
+    private void writeChapterOffsets(LinkedList<Long> offsets) throws IOException {
+        int checkVal = NumberUtils.randInteger(0x3000, 0x3FFF);
+        writeChunk(UMD.CDT_CHAPTER_OFFSET, true, littleRender.putUInt32(checkVal));
+        byte[] data;
+        if (offsets != null && !offsets.isEmpty()) {
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            for (long offset : offsets) {
+                out.write(littleRender.putUInt32(offset));
+            }
+            data = out.toByteArray();
+        } else {
+            data = new byte[0];
         }
-        writeAddition(check, o.toByteArray());
-        o.close();
+        writeAddition(checkVal, data);
     }
 
     // 84
-    private void writeChapterTitles(List<String> titles) throws IOException {
-        int check = NumberUtils.randInteger(0x4000, 0x4FFF);
-        writeChunk(UMD.CDT_CHAPTER_TITLE, true, littleRender.putUint32(check));
-        ByteArrayOutputStream o = new ByteArrayOutputStream();
-        for (String title: titles) {
-            byte[] data =title.getBytes(UMD.TEXT_ENCODING);
-            o.write(data.length);
-            o.write(data);
+    private void writeChapterTitles(LinkedList<String> titles) throws IOException {
+        int checkVal = NumberUtils.randInteger(0x4000, 0x4FFF);
+        writeChunk(UMD.CDT_CHAPTER_TITLE, true, littleRender.putUInt32(checkVal));
+        byte[] data;
+        if (titles != null && !titles.isEmpty()) {
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            for (String title : titles) {
+                byte[] b = title.getBytes(UMD.TEXT_ENCODING);
+                out.write(b.length);
+                out.write(b);
+            }
+            data = out.toByteArray();
+        } else {
+            data = new byte[0];
         }
-        writeAddition(check, o.toByteArray());
-        o.close();
+        writeAddition(checkVal, data);
     }
 
     // E
     private void writeImageFormat(String format) throws IOException {
-        byte[] bytes = new byte[1];
-        bytes[0] = (byte) UMD.getFormatOfName(format);
+        byte[] bytes = {(byte) UMD.formatOfName(format)};
         writeChunk(UMD.CDT_IMAGE_FORMAT, false, bytes);
     }
 
@@ -287,8 +267,10 @@ public class UmdMaker implements Maker {
         if (key != null && key instanceof byte[]) {
             data = (byte[]) key;
         } else {
-            data = new byte[16];
-            java.util.Arrays.fill(data, (byte) 0);
+            data = new byte[]{  // 0 x 16
+                    0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0
+            };
         }
         writeChunk(UMD.CDT_LICENSE_KEY, false, data);
     }
@@ -302,38 +284,38 @@ public class UmdMaker implements Maker {
         } else {
             bookId = NumberUtils.randInteger(0, 1000) + 0x10000000;
         }
-        byte[] data = littleRender.putUint32(bookId);
+        byte[] data = littleRender.putUInt32(bookId);
         writeChunk(UMD.CDT_CONTENT_ID, false, data);
     }
 
     // 81
-    private void writeContentEnd(List<Long> blockChecks) throws IOException {
-        int check = NumberUtils.randInteger(0x2000, 0x2FFF);
-        writeChunk(UMD.CDT_CONTENT_END, true, littleRender.putUint32(check));
-        ByteArrayOutputStream o = new ByteArrayOutputStream();
-        for (long offset: blockChecks) {
-            o.write(littleRender.putUint32(offset));
+    private void writeContentEnd(LinkedList<Long> blockChecks) throws IOException {
+        int randVal = NumberUtils.randInteger(0x2000, 0x2FFF);
+        writeChunk(UMD.CDT_CONTENT_END, true, littleRender.putUInt32(randVal));
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        for (long checkVal : blockChecks) {
+            out.write(littleRender.putUInt32(checkVal));
         }
-        writeAddition(check, o.toByteArray());
-        o.close();
+        writeAddition(randVal, out.toByteArray());
+        out.close();
     }
 
     // 82
     private void writeCoverImage() throws IOException {
-        FileObject cover = (FileObject) book.getAttribute(Book.COVER);
+        FileObject cover = book.getCover();
         if (cover == null) {
             return;
         }
-        int type = UMD.getFormatOfName(FilenameUtils.getExtension(cover.getName()));
-        int check = NumberUtils.randInteger(0x1000, 0x1FFF);
+        int type = UMD.formatOfName(FilenameUtils.getExtension(cover.getName()));
+        int checkVal = NumberUtils.randInteger(0x1000, 0x1FFF);
         byte[] data = new byte[5];
         data[0] = (byte) type;
-        System.arraycopy(littleRender.putUint32(check), 0, data, 1, 4);
+        System.arraycopy(littleRender.putUInt32(checkVal), 0, data, 1, 4);
         writeChunk(UMD.CDT_COVER_IMAGE, true, data);
-        writeAddition(check, cover.readAll());
+        writeAddition(checkVal, cover.readAll());
     }
 
-    // 87
+    // 87, placeholder page
     private void writeSimplePageOffsets(long contentLength) throws IOException {
         int[][] pages = {
                 {0x1, 0x10, 0xD0},
@@ -342,59 +324,41 @@ public class UmdMaker implements Maker {
                 {0x1, 0x10, 0xB0},
                 {0x5, 0x0A, 0xA6}
         };
-        for (int[] page: pages) {
-            byte[] data = new byte[6];
-            data[0] = (byte) page[1];
-            data[1] = (byte) page[2];
-            long check = NumberUtils.randLong(0x7000, 0x7FFF);
-            System.arraycopy(littleRender.putUint32(check), 0, data, 1, 4);
-            writeChunk(UMD.CDT_PAGE_OFFSET, page[0], data);
-            data = new byte[12];
-            System.arraycopy(littleRender.putUint32(17), 0, data, 0, 4);
-            System.arraycopy(littleRender.putUint32(0), 0, data, 4, 4);
-            System.arraycopy(littleRender.putUint32(contentLength), 0, data, 8, 4);
-            writeAddition(check, data);
+        byte[] buf6 = new byte[6], buf12 = new byte[12];
+        for (int[] page : pages) {
+            buf6[0] = (byte) page[1];
+            buf6[1] = (byte) page[2];
+            long checkVal = NumberUtils.randLong(0x7000, 0x7FFF);
+            System.arraycopy(littleRender.putUInt32(checkVal), 0, buf6, 2, 4);
+            writeChunk(UMD.CDT_PAGE_OFFSET, page[0], buf6);
+
+            System.arraycopy(littleRender.putUInt32(17), 0, buf12, 0, 4);
+            System.arraycopy(littleRender.putUInt32(0), 0, buf12, 4, 4);
+            System.arraycopy(littleRender.putUInt32(contentLength), 0, buf12, 8, 4);
+            writeAddition(checkVal, buf12);
         }
     }
 
     // C
     private void writeUmdEnd() throws IOException {
         long length = writtenBytes;
-        length += 1+2+2+4+4;
-        writeChunk(UMD.CDT_UMD_END, false, littleRender.putUint32(length));
+        length += 1 + 2 + 2 + 4 + 4;
+        writeChunk(UMD.CDT_UMD_END, false, littleRender.putUInt32(length));
     }
 
-    private void cachePart(Chapter part, RandomAccessFile file, List<String> titles,
-                           List<Long> offsets) throws IOException {
-        String title = part.stringAttribute(Book.TITLE);
-        titles.add(title);
-        offsets.add(file.getFilePointer());
-        writeString(file, title + UMD.SYMBIAN_LINE_FEED);
-        String text = part.getSource().getText();
-        if (text.length() != 0) {
-            text = text.replaceAll("(\\r\\n)|(\\n)|(\\r)", UMD.SYMBIAN_LINE_FEED);
-            writeString(file, text+UMD.SYMBIAN_LINE_FEED);
-        }
-        for (Chapter sub: part) {
-            cachePart(sub, file, titles, offsets);
-        }
-    }
-
-    private void writeText(RandomAccessFile file, long contentLength,
-                           List<Long> blockChecks) throws IOException {
-        int count = (int) Math.ceil(contentLength / (double) UMD.BLOCK_SIZE);
-        if (count == 1) {
-            count = 2;
-        }
-        int randValA = NumberUtils.randInteger(0, count-1);
-        int randValB = NumberUtils.randInteger(0, count - 1);
-        for (int i=0; i<count; ++i) {
-            long randVal = NumberUtils.randLong(4026530000L, 4294970000L);
-            blockChecks.add(randVal);
+    private void writeText(BufferedRandomAccessFile file, long contentLength,
+                           LinkedList<Long> blockChecks) throws IOException {
+        int count = (int) (contentLength >> 15);  // div 0x8000
+        count += ((contentLength & 0x7FFF) > 0) ? 1 : 0;    // mod 0x8000 > 0
+        int randValA = NumberUtils.randInteger(0, count);
+        int randValB = NumberUtils.randInteger(0, count);
+        for (int i = 0; i < count; ++i) {
+            long checkVal = NumberUtils.randLong(4026530000L, 4294970000L);
+            blockChecks.add(checkVal);
             byte[] buf = new byte[UMD.BLOCK_SIZE];
             file.read(buf);
             byte[] data = ZLibUtils.compress(buf);
-            writeAddition(randVal, data);
+            writeAddition(checkVal, data);
             if (i == randValA) {
                 writeLicenseKey();
             } else if (i == randValB) {
@@ -403,33 +367,33 @@ public class UmdMaker implements Maker {
         }
     }
 
-    private void writeString(RandomAccessFile file, String text) throws IOException {
+    void writeString(RandomAccessFile file, String text) throws IOException {
         byte[] data = text.getBytes(UMD.TEXT_ENCODING);
         file.write(data);
     }
 
-    private void findImages(Chapter part, List<FileObject> images) {
-        Object o = part.getAttribute(Book.COVER, null);
-        if (o instanceof FileObject) {
-            images.add((FileObject) o);
+    private void findImages(Chapter chapter, List<FileObject> images) {
+        FileObject cover = chapter.getCover();
+        if (cover != null) {
+            images.add(cover);
         }
-        for (Chapter sub: part) {
+        for (Chapter sub : chapter) {
             findImages(sub, images);
         }
     }
 
-    private void writeImages(List<FileObject> images, List<Long> blockChecks)
+    private void writeImages(List<FileObject> images, LinkedList<Long> blockChecks)
             throws IOException {
-        if (images.size() == 0) {
+        if (images.isEmpty()) {
             return;
         }
-        int rand = NumberUtils.randInteger(0, images.size()-1);
+        int randVal = NumberUtils.randInteger(0, images.size() - 1);
         int i = 0;
-        for (FileObject img: images) {
-            long check = NumberUtils.randLong(4026530000L, 4294970000L);
-            blockChecks.add(check);
-            writeAddition(check, img.readAll());
-            if (i++ == rand) {
+        for (FileObject img : images) {
+            long checkVal = NumberUtils.randLong(4026530000L, 4294970000L);
+            blockChecks.add(checkVal);
+            writeAddition(checkVal, img.readAll());
+            if (i++ == randVal) {
                 writeContentId();
             }
         }

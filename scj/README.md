@@ -1,5 +1,5 @@
 # scj - SCI (Simple Console Interface) for Jem
-A console tool to process e-books.
+Console tool for processing e-books.
 
 ## Required
 * pw-core 2.0+

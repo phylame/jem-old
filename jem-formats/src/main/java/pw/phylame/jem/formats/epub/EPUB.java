@@ -18,6 +18,16 @@
 
 package pw.phylame.jem.formats.epub;
 
+import pw.phylame.jem.core.Book;
+import pw.phylame.jem.formats.util.ZipUtils;
+import pw.phylame.jem.formats.util.text.TextUtils;
+import pw.phylame.jem.util.FileObject;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Locale;
+import java.util.zip.ZipOutputStream;
+
 /**
  * Constants and utilities for ePub.
  */
@@ -35,16 +45,16 @@ public class EPUB {
     public static final String DC_XML_NS = "http://purl.org/dc/elements/1.1/";
 
     // NCX (the Navigation Center eXtended)
-    public static final String NCX_FILE    = "toc.ncx";
+    public static final String NCX_FILE = "toc.ncx";
     public static final String NCX_FILE_ID = "ncx";
 
     public static final String BOOK_ID_NAME = "book_id";
 
     // required media type
-    public static final String MT_EPUB  = "application/epub+zip";
-    public static final String MT_OPF   = "application/oebps-package+xml";
-    public static final String MT_NCX   = "application/x-dtbncx+xml";
-    public static final String MT_CSS   = "text/css";
+    public static final String MT_EPUB = "application/epub+zip";
+    public static final String MT_OPF = "application/oebps-package+xml";
+    public static final String MT_NCX = "application/x-dtbncx+xml";
+    public static final String MT_CSS = "text/css";
     public static final String MT_XHTML = "application/xhtml+xml";
 
     // cover image
@@ -59,17 +69,30 @@ public class EPUB {
     public static final String DUOKAN_FULL_SCREEN = "duokan-page-fullscreen";
 
     // content
-    public static final String COVER_PAGE_ID   = "cover-page";
+    public static final String COVER_PAGE_ID = "cover-page";
     public static final String COVER_PAGE_FILE = "cover.xhtml";
 
-    public static final String INTRO_PAGE_ID   = "intro-page";
+    public static final String INTRO_PAGE_ID = "intro-page";
     public static final String INTRO_PAGE_FILE = "intro.xhtml";
 
-    public static final String INFO_PAGE_ID   = "info-page";
+    public static final String INFO_PAGE_ID = "info-page";
     public static final String INFO_PAGE_FILE = "info.xhtml";
 
-    public static final String TOC_PAGE_ID   = "toc-page";
+    public static final String TOC_PAGE_ID = "toc-page";
     public static final String TOC_PAGE_FILE = "toc.xhtml";
+
+    public static String dateFormat = "yyyy-M-d";
+
+    public static String languageOfBook(Book book) {
+        String lang = book.getLanguage();
+        if (!TextUtils.isValid(lang)) {
+            Locale locale = Locale.getDefault();
+            lang = locale.getLanguage() + "-" + locale.getCountry();
+        } else {
+            lang = lang.replace('_', '-');
+        }
+        return lang;
+    }
 
     public static String getOpsPath(String name, EpubConfig config) {
         return config.opsDir + "/" + name;

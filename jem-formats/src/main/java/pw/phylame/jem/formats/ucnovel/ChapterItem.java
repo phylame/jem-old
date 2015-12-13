@@ -1,5 +1,7 @@
 /*
- * Copyright 2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2015 Peng Wan <phylame@163.com>
+ *
+ * This file is part of Jem.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +27,7 @@ public class ChapterItem {
     private int id;
     private String title;
     private long startIndex, endIndex;
-    private Date updated;
+    private Date updateTime;
     private boolean isNew;
     private int itemIndex;
     private String cdnURL;
@@ -63,12 +65,12 @@ public class ChapterItem {
         this.title = title;
     }
 
-    public Date getUpdated() {
-        return updated;
+    public Date getUpdateTime() {
+        return updateTime;
     }
 
-    public void setUpdated(Date updated) {
-        this.updated = updated;
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 
     public String getCdnURL() {

@@ -18,20 +18,16 @@
 
 package pw.phylame.jem.formats.umd;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import pw.phylame.jem.core.Chapter;
-import pw.phylame.jem.core.Parser;
 import pw.phylame.jem.core.Book;
-import pw.phylame.jem.util.*;
+import pw.phylame.jem.core.Chapter;
+import pw.phylame.jem.util.FileFactory;
+import pw.phylame.jem.util.FileObject;
+import pw.phylame.jem.util.AbstractText;
+import pw.phylame.jem.formats.common.NonConfig;
+import pw.phylame.jem.formats.common.BinaryBookParser;
+import pw.phylame.jem.formats.util.ZLibUtils;
 import pw.phylame.jem.formats.util.ParserException;
 
-import pw.phylame.tools.DateUtils;
-import pw.phylame.tools.ZLibUtils;
-import static pw.phylame.tools.ByteUtils.littleParser;
-
-import java.io.File;
 import java.io.Writer;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -41,417 +37,354 @@ import java.util.*;
 /**
  * <tt>Parser</tt> implement for UMD book.
  */
-public class UmdParser implements Parser {
-    private static Log LOG = LogFactory.getLog(UmdParser.class);
-
-    private RandomAccessFile source;
-    private Book book = null;
-    private int umdType;
-    private long contentLength;
-    private int coverFormat, imageFormat;
-    private HashMap<Long, Integer> blockOwners = new HashMap<Long, Integer>();
-    private ArrayList<DataBlock> blocks = new ArrayList<DataBlock>();
-
-    @Override
-    public String getName() {
-        return "umd";
+public class UmdParser extends BinaryBookParser<NonConfig> {
+    public UmdParser() {
+        super("umd");
     }
 
-    @Override
-    public Book parse(final File file, Map<String, Object> kw)
-            throws IOException, JemException {
-        final RandomAccessFile in = new RandomAccessFile(file, "r");
-        book = parse(in);
-        book.registerCleanup(new Chapter.Cleanable() {
-            @Override
-            public void clean(Chapter part) {
-                try {
-                    in.close();
-                } catch (IOException e) {
-                    LOG.debug("cannot close UMD source: "+file.getAbsolutePath(), e);
-                }
-            }
-        });
-        return book;
-    }
+    private class ParserData {
+        final RandomAccessFile file;
+        final Book book;
+        int umdType;
 
-    public Book parse(RandomAccessFile in) throws IOException, JemException {
-        source = in;
-        if (! isUmd()) {
-            throw new ParserException("Invalid UMD file: magic number", getName());
+        int year = 0, month = 0, day = 0;
+
+        int chapterCount;
+
+        long contentLength;
+        int coverFormat, imageFormat;
+
+        final ArrayList<TextBlock> blocks = new ArrayList<TextBlock>();
+
+        ParserData(RandomAccessFile file) {
+            this.file = file;
+            book = new Book();
         }
-        book = new Book();
-        book.setAttribute(Book.DATE, new Date());
+    }
+
+    @Override
+    protected void validateFile(RandomAccessFile input, NonConfig config)
+            throws IOException, ParserException {
+        if (readUInt32(input) != UMD.FILE_MAGIC) {
+            throw parserException("umd.parse.invalidMagic");
+        }
+    }
+
+    @Override
+    public Book parse(RandomAccessFile input, NonConfig config)
+            throws IOException, ParserException {
+        return parse(input);
+    }
+
+    public Book parse(RandomAccessFile file) throws IOException, ParserException {
+        ParserData pd = new ParserData(file);
         int sep;
-        while ((sep=source.read()) != -1) {
-            if (sep == UMD.CHUNK_SEPARATOR) {
-                readChunk();
-            } else if (sep == UMD.ADDITION_SEPARATOR) {
-                readAddition();
-            } else {
-                throw new ParserException(
-                        "Bad UMD file: unexpected separator: "+sep, getName());
+        while ((sep = file.read()) != -1) {
+            switch (sep) {
+                case UMD.CHUNK_SEPARATOR:
+                    readChunk(pd);
+                    break;
+                case UMD.ADDITION_SEPARATOR:
+                    readContent(pd);
+                    break;
+                default:
+                    throw parserException("umd.parse.badSeparator", sep);
             }
         }
-        return book;
+        pd.book.setExtension(UmdInfo.FILE_INFO, new UmdInfo(pd.umdType));
+        return pd.book;
     }
 
-    private boolean isUmd() throws IOException {
-        return readInt(source) == UMD.FILE_MAGIC;
-    }
+    private void readChunk(ParserData pd) throws IOException, ParserException {
+        RandomAccessFile file = pd.file;
+        Book book = pd.book;
 
-    private void readChunk() throws IOException, JemException {
-        int chunkId = readShort(source), type = source.read(),
-                length = source.read() - 5;
+        int chunkId = readUInt16(file);
+        file.skipBytes(1);
+        int length = file.read() - 5;
 
         switch (chunkId) {
-            case UMD.CDT_UMD_HEAD:
-                umdType = source.read();
-                --length;
-                break;
-            case UMD.CDT_TITLE:
-                book.setAttribute(Book.TITLE, readString(length));
-                length = 0;
-                break;
-            case UMD.CDT_AUTHOR:
-                book.setAttribute(Book.AUTHOR, readString(length));
-                length = 0;
-                break;
-            case UMD.CDT_YEAR:
-                String s = readString(length);
-                try {
-                    int year = Integer.parseInt(s);
-                    book.setAttribute(Book.DATE,
-                            DateUtils.modifyDate((Date)book.getAttribute(Book.DATE),
-                            Calendar.YEAR, year));
-                } catch (Exception e) {
-                    LOG.debug("invalid UMD year: "+s, e);
+            case UMD.CDT_UMD_HEAD: {
+                int umdType = file.read();
+                if (umdType != UMD.TEXT && umdType != UMD.CARTOON) {
+                    throw parserException("umd.parse.invalidType", umdType);
                 }
-                length = 0;
-                break;
-            case UMD.CDT_MONTH:
-                s = readString(length);
-                try {
-                    int month = Integer.parseInt(s);
-                    book.setAttribute(Book.DATE,
-                            DateUtils.modifyDate((Date)book.getAttribute(Book.DATE),
-                            Calendar.MONTH, month));
-                } catch (Exception e) {
-                    LOG.debug("invalid UMD month: "+s, e);
-                }
-                length = 0;
-                break;
-            case UMD.CDT_DAY:
-                s = readString(length);
-                try {
-                    int day = Integer.parseInt(s);
-                    book.setAttribute(Book.DATE,
-                            DateUtils.modifyDate((Date)book.getAttribute(Book.DATE),
-                            Calendar.DAY_OF_MONTH, day));
-                } catch (Exception e) {
-                    LOG.debug("invalid UMD day: "+s, e);
-                }
-                length = 0;
-                break;
-            case UMD.CDT_GENRE:
-                book.setAttribute(Book.GENRE, readString(length));
-                length = 0;
-                break;
-            case UMD.CDT_PUBLISHER:
-                book.setAttribute(Book.PUBLISHER, readString(length));
-                length = 0;
-                break;
-            case UMD.CDT_VENDOR:
-                book.setAttribute(Book.VENDOR, readString(length));
-                length = 0;
-                break;
-            case UMD.CDT_CONTENT_LENGTH:
-                contentLength = readInt(source);
-                length -= 4;
-                break;
-            case UMD.CDT_CHAPTER_OFFSET:
-            case UMD.CDT_CHAPTER_TITLE:
-            case UMD.CDT_CONTENT_END:
-            case 0x85:                  // unknown
-            case 0x86:                  // unknown
-                long check = readInt(source);
-                blockOwners.put(check, chunkId);
-                length -= 4;
-                break;
-            case UMD.CDT_IMAGE_FORMAT:
-                imageFormat = source.read();
-                --length;
-                break;
-            case UMD.CDT_CONTENT_ID:
-                book.setAttribute("book_id", readInt(source));
-                length -= 4;
-                break;
-            case UMD.CDT_CDS_KEY:
+                pd.umdType = umdType;
+                file.skipBytes(2);
+            }
+            break;
+            case UMD.CDT_TITLE: {
+                book.setTitle(readString(file, length));
+            }
+            break;
+            case UMD.CDT_AUTHOR: {
+                book.setAuthor(readString(file, length));
+            }
+            break;
+            case UMD.CDT_YEAR: {
+                pd.year = Integer.parseInt(readString(file, length));
+            }
+            break;
+            case UMD.CDT_MONTH: {
+                pd.month = Integer.parseInt(readString(file, length)) - 1;
+            }
+            break;
+            case UMD.CDT_DAY: {
+                pd.day = Integer.parseInt(readString(file, length));
+            }
+            break;
+            case UMD.CDT_GENRE: {
+                book.setGenre(readString(file, length));
+            }
+            break;
+            case UMD.CDT_PUBLISHER: {
+                book.setPublisher(readString(file, length));
+            }
+            break;
+            case UMD.CDT_VENDOR: {
+                book.setVendor(readString(file, length));
+            }
+            break;
+            case UMD.CDT_CONTENT_LENGTH: {
+                pd.contentLength = readUInt32(file);
+            }
+            break;
+            case UMD.CDT_CHAPTER_OFFSET: {
+                file.skipBytes(9);
+                readChapterOffsets(pd);
+            }
+            break;
+            case UMD.CDT_CHAPTER_TITLE: {
+                file.skipBytes(9);
+                readChapterTitles(pd);
+            }
+            break;
+            case UMD.CDT_CONTENT_END: {
+                file.skipBytes(9);
+                readContentEnd(pd.file);
+            }
+            break;
+            case 0x85:
+            case 0x86: {
+                file.skipBytes(9);
+                skipBlock(pd.file);
+            }
+            break;
+            case UMD.CDT_IMAGE_FORMAT: {
+                pd.imageFormat = file.read();
+            }
+            break;
+            case UMD.CDT_CONTENT_ID: {
+                book.setAttribute("book_id", readUInt32(file));
+            }
+            break;
+            case UMD.CDT_CDS_KEY: {
                 byte[] bytes = new byte[length];
-                if (source.read(bytes) != length) {
-                    throw new ParserException("Bad UMD file: CDS key", getName());
+                if (file.read(bytes) != length) {
+                    throw parserException("umd.parse.badCDSKey");
                 }
-                book.setAttribute("cds_key", bytes);
-                length = 0;
-                break;
-            case UMD.CDT_LICENSE_KEY:
-                bytes = new byte[length];
-                if (source.read(bytes) != length) {
-                    throw new ParserException("Bad UMD file: license key", getName());
+                book.setAttribute("cds_key",
+                        FileFactory.fromBytes("cds_key", bytes, FileObject.UNKNOWN_MIME));
+            }
+            break;
+            case UMD.CDT_LICENSE_KEY: {
+                byte[] bytes = new byte[length];
+                if (file.read(bytes) != length) {
+                    throw parserException("umd.parse.badLicenseKey");
                 }
-                book.setAttribute("license_key", bytes);
-                length = 0;
-                break;
-            case UMD.CDT_COVER_IMAGE:
-                coverFormat = source.read();
-                check = readInt(source);
-                blockOwners.put(check, chunkId);
-                length -= 1 + 4;
-                break;
-            case UMD.CDT_PAGE_OFFSET:
+                book.setAttribute("license_key",
+                        FileFactory.fromBytes("license_key", bytes, FileObject.UNKNOWN_MIME));
+            }
+            break;
+            case UMD.CDT_COVER_IMAGE: {
+                pd.coverFormat = file.read();
+                file.skipBytes(9);
+                readCoverImage(pd);
+            }
+            break;
+            case UMD.CDT_PAGE_OFFSET: {
                 // ignore page information
-                source.skipBytes(2);
-                check = readInt(source);
-                blockOwners.put(check, chunkId);
-                length -= 2 + 4;
-                break;
-            case UMD.CDT_UMD_END:
-                if (readInt(source) != source.getFilePointer()) {
-                    throw new ParserException("Bad UMD file: end position", getName());
+                file.skipBytes(11);
+                readPageOffsets(pd);
+            }
+            break;
+            case UMD.CDT_UMD_END: {
+                if (readUInt32(file) != file.getFilePointer()) {
+                    throw parserException("umd.parse.badEnd");
                 }
-                length -= 4;
-                break;
+                if (pd.year > 0 && pd.day > 0) {
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.set(Calendar.YEAR, pd.year);
+                    calendar.set(Calendar.MONTH, pd.month);
+                    calendar.set(Calendar.DAY_OF_MONTH, pd.day);
+                    book.setDate(calendar.getTime());
+                }
+            }
+            break;
             case 0xD:
                 // ignored
                 break;
         }
-        source.skipBytes(length);
     }
 
-    private String readString(int size) throws IOException, JemException {
-        byte[] bytes = new byte[size];
-        if (source.read(bytes) != size) {
-            throw new ParserException("Bad UMD file: attributes", getName());
-        }
-        return new String(bytes, UMD.TEXT_ENCODING);
+    private String readString(RandomAccessFile file, int length)
+            throws IOException, ParserException {
+        return new String(readBytes(file, length), UMD.TEXT_ENCODING);
     }
 
-    private void readAddition() throws IOException, JemException {
-        long check = readInt(source);
-        Integer chunkId = blockOwners.get(check);
-
-        if (chunkId == null) {
-            readContent();
-            return;
-        }
-        blockOwners.remove(check);
-        switch (chunkId) {
-            case UMD.CDT_CHAPTER_OFFSET:
-                readChapterOffsets();
-                break;
-            case UMD.CDT_CHAPTER_TITLE:
-                readChapterTitles();
-                break;
-            case UMD.CDT_CONTENT_END:
-                readContentEnd();
-                break;
-            case UMD.CDT_COVER_IMAGE:
-                readCoverImage();
-                break;
-            case UMD.CDT_PAGE_OFFSET:
-                readPageOffsets();
-                break;
-            default:
-                skipBlock();
-                break;
-        }
+    private void skipBlock(RandomAccessFile file) throws IOException,
+            ParserException {
+        long length = readUInt32(file) - 9;
+        file.skipBytes((int) length);
     }
 
-    private void skipBlock() throws IOException {
-        long length = readInt(source) - 9;
-        source.skipBytes((int) length);
-    }
+    private void readChapterOffsets(ParserData pd) throws IOException,
+            ParserException {
+        RandomAccessFile file = pd.file;
+        Book book = pd.book;
+        long count = (readUInt32(file) - 9) >> 2; // div 4
+        pd.chapterCount = (int) count;
 
-    private void readChapterTitles() throws IOException, JemException {
-        if (umdType != UMD.TEXT) {
-            skipBlock();
+        if (pd.chapterCount == 0) {     // no chapter
             return;
         }
 
-        long length = readInt(source) - 9;
-        long end = source.getFilePointer() + length;
-        int ix = 0;
-        while (source.getFilePointer() < end) {
-            int size = source.read();
-            byte[] bytes = new byte[size];
-            if (source.read(bytes) != size) {
-                throw new ParserException("Bad UMD file: chapter titles", getName());
+        long prevOffset = readUInt32(file);
+        UmdText umdText = new UmdText(file, prevOffset, 0, pd.blocks);
+        book.append(new Chapter("", umdText));
+        for (int ix = 1; ix < count; ++ix) {
+            long offset = readUInt32(file);
+            umdText.size = offset - prevOffset;
+            umdText = new UmdText(file, offset, 0, pd.blocks);
+            prevOffset = offset;
+            book.append(new Chapter("", umdText));
+        }
+        umdText.size = pd.contentLength - prevOffset;
+    }
+
+    private void readChapterTitles(ParserData pd) throws IOException,
+            ParserException {
+        RandomAccessFile file = pd.file;
+        file.skipBytes(4);
+        for (Chapter chapter : pd.book) {
+            String title = readString(file, file.read());
+            chapter.setTitle(title);
+        }
+    }
+
+    private void readContentEnd(RandomAccessFile file) throws IOException,
+            ParserException {
+        // ignored
+        skipBlock(file);
+    }
+
+    private void readCoverImage(ParserData pd) throws IOException,
+            ParserException {
+        RandomAccessFile file = pd.file;
+
+        long length = readUInt32(file) - 9;
+        String format = UMD.nameOfFormat(pd.coverFormat);
+        FileObject cover = FileFactory.fromBlock("cover." + format, file,
+                file.getFilePointer(), length, "image/" + format);
+        pd.book.setCover(cover);
+        file.skipBytes((int) length);
+    }
+
+    private void readPageOffsets(ParserData pd) throws IOException,
+            ParserException {
+        // ignored
+        skipBlock(pd.file);
+    }
+
+    private void readContent(ParserData pd) throws IOException, ParserException {
+        RandomAccessFile file = pd.file;
+        Book book = pd.book;
+
+        file.skipBytes(4);
+        long offset, length = readUInt32(file) - 9;
+        offset = file.getFilePointer();
+
+        switch (pd.umdType) {
+            case UMD.TEXT: {
+                pd.blocks.add(new TextBlock((int) file.getFilePointer(), (int) length));
             }
-            String title = new String(bytes, UMD.TEXT_ENCODING);
-            try {
-                book.get(ix++).setAttribute(Book.TITLE, title);
-            } catch (IndexOutOfBoundsException e) {
-                book.append(new Chapter(title));
-            }
-        }
-    }
-
-    private void readChapterOffsets() throws IOException {
-        if (umdType != UMD.TEXT) {
-            skipBlock();
-            return;
-        }
-
-        long length = readInt(source) - 9, last = 0;
-        length /= 4;
-
-        Chapter chapter = null;
-        for (int ix = 0; ix < length; ++ix) {
-            long offset = readInt(source);
-            try {
-                chapter = book.get(ix);
-            } catch (IndexOutOfBoundsException e) {
-                chapter = new Chapter();
+            break;
+            case UMD.CARTOON: {
+                String format = UMD.nameOfFormat(pd.imageFormat);
+                String name = String.format("img_%d.%s", book.size() + 1, format);
+                FileObject image = FileFactory.fromBlock(name, file, offset, length,
+                        "image/" + format);
+                Chapter chapter = new Chapter(String.valueOf(book.size() + 1));
+                chapter.setCover(image);
                 book.append(chapter);
             }
-            chapter.setSource(new UmdSource(source, offset, 0, blocks));
-            if (ix > 0) {
-                long size = offset - last;
-                Chapter prev = book.get(ix-1);
-                ((UmdSource)prev.getSource()).mSize = size;
-            }
-            last = offset;
-        }
-        if (contentLength > 0 && chapter != null) {
-            ((UmdSource)chapter.getSource()).mSize = contentLength - last;
-        }
-    }
-
-    private void readContentEnd() throws IOException {
-        // ignored
-        skipBlock();
-    }
-
-    private void readCoverImage() throws IOException {
-        long length = readInt(source) - 9;
-        FileObject cover = FileFactory.fromBlock(
-                "cover."+UMD.getNameOfFormat(coverFormat),
-                source,
-                source.getFilePointer(),
-                length,
-                null);
-        book.setAttribute(Book.COVER, cover);
-        source.skipBytes((int) length);
-    }
-
-    private void readPageOffsets() throws IOException {
-        // ignored
-        skipBlock();
-    }
-
-    private void readContent() throws IOException {
-        long offset, length = readInt(source) - 9;
-        offset = source.getFilePointer();
-
-        switch (umdType) {
-            case UMD.TEXT:
-                blocks.add(new DataBlock((int)source.getFilePointer(), (int)length));
-                break;
-            case UMD.CARTOON:
-                String name = String.format("cartoon_%d.%s", book.size()+1,
-                        UMD.getNameOfFormat(imageFormat));
-                FileObject image = FileFactory.fromBlock(
-                        name, source, offset, length, null);
-                book.append(new Chapter(String.valueOf(book.size() + 1),
-                        TextFactory.fromString(""), image, null));
-                break;
+            break;
             case UMD.COMIC:
                 break;
         }
-        source.skipBytes((int) length);
+        file.skipBytes((int) length);
     }
 
-    private static long readInt(RandomAccessFile in) throws IOException {
-        byte[] b = new byte[4];
-        if (in.read(b) != 4) {
-            return -1;
+    @Override
+    protected byte[] readBytes(RandomAccessFile input, int size) throws IOException,
+            ParserException {
+        byte[] b = super.readBytes(input, size);
+        if (b == null) {
+            throw parserException("umd.parse.invalidFile");
         }
-        return littleParser.getUint32(b, 0);
+        return b;
     }
 
-    private static int readShort(RandomAccessFile in) throws IOException {
-        byte[] b = new byte[2];
-        if (in.read(b) != 2) {
-            return -1;
-        }
-        return littleParser.getUint16(b, 0);
-    }
+    class TextBlock {
+        final int offset, length;
 
-    static class DataBlock {
-        public int offset, length;
-
-        public DataBlock(int offset, int length) {
+        TextBlock(int offset, int length) {
             this.offset = offset;
             this.length = length;
         }
     }
 
-    static class UmdSource implements TextObject {
-        private RandomAccessFile mFile;
-        long mOffset, mSize;
-        private List<DataBlock> mBlocks;
+    private class UmdText extends AbstractText {
+        private final RandomAccessFile file;
+        private final long offset;
+        long size;
+        private final List<TextBlock> blocks;
 
-        public UmdSource(RandomAccessFile file, long offset, long size,
-                         List<DataBlock> blocks) {
-            mFile = Objects.requireNonNull(file);
-            mOffset = offset;
-            mSize = size;
-            mBlocks = blocks;
-        }
-
-        @Override
-        public String getType() {
-            return PLAIN;
+        UmdText(RandomAccessFile file, long offset, long size, List<TextBlock> blocks) {
+            super(PLAIN);
+            this.file = Objects.requireNonNull(file);
+            this.offset = offset;
+            this.size = size;
+            this.blocks = blocks;
         }
 
         private String rawText() throws IOException {
-            int           index  = (int) (mOffset / UMD.BLOCK_SIZE);
-            int           start  = (int) (mOffset % UMD.BLOCK_SIZE);
-            int           length = -start;
-            StringBuilder sb     = new StringBuilder();
+            int index = (int) (offset >> 15);   // div 0x8000
+            int start = (int) (offset & 0x7FFF);    // mod 0x8000
+            int length = -start;
+            StringBuilder sb = new StringBuilder();
             do {
-                DataBlock block = mBlocks.get(index++);
-                mFile.seek(block.offset);
+                TextBlock block = blocks.get(index++);
+                file.seek(block.offset);
                 byte[] bytes = new byte[block.length];
-                int n = mFile.read(bytes);
+                int n = file.read(bytes);
                 bytes = ZLibUtils.decompress(bytes, 0, n);
                 length += bytes.length;
                 sb.append(new String(bytes, UMD.TEXT_ENCODING));
-                if (mSize <= length) {
-                    return sb.substring(start / 2, start / 2 + (int) mSize / 2);
+                if (size <= length) {
+                    return sb.substring(start >> 1, (int) (start + size) >> 1); // div 2
                 }
             } while (true);
         }
 
         @Override
-        public String getText() {
-            try {
-                return rawText().replaceAll(UMD.SYMBIAN_LINE_FEED,
-                        System.lineSeparator());
-            } catch (IOException e) {
-                LOG.debug(e);
-                return null;
-            }
+        public String getText() throws IOException {
+            return rawText().replaceAll(UMD.UMD_LINE_FEED, System.lineSeparator());
         }
 
         @Override
-        public String[] getLines() {
-            try {
-                return rawText().split(UMD.SYMBIAN_LINE_FEED);
-            } catch (IOException e) {
-                LOG.debug(e);
-                return null;
-            }
+        public List<String> getLines(boolean skipEmpty) throws IOException {
+            return Arrays.asList(rawText().split(UMD.UMD_LINE_FEED));
         }
 
         @Override

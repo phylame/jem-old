@@ -20,8 +20,6 @@ package pw.phylame.jem.formats.epub;
 
 import java.util.zip.Deflater;
 import pw.phylame.jem.core.Jem;
-import pw.phylame.jem.formats.epub.html.StyleProvider;
-import pw.phylame.jem.formats.epub.html.DefaultStyleProvider;
 
 /**
  * Configuration for making ePub.
@@ -38,15 +36,13 @@ public class EpubConfig {
 
     // XML style
     public String xmlEncoding = "UTF-8", xmlIndent = "\t", xmlLineSeparator =
-            System.lineSeparator();
+            System.getProperty("line.separator");
 
     // encoding for html content
     public String htmlEncoding = "UTF-8";
 
     // indent for html content
     public String htmlIndent = "\t";
-
-    public StyleProvider styleProvider = new DefaultStyleProvider();
 
     // ZIP compression
     public int zipMethod = Deflater.DEFLATED, zipLevel = Deflater.DEFAULT_COMPRESSION;

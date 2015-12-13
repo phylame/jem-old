@@ -24,24 +24,16 @@ import pw.phylame.jem.util.JemException;
  * Exception for Jem Maker errors.
  */
 public class MakerException extends JemException {
-    private String format;
 
-    public MakerException(String message, String format) {
+    public MakerException(String message) {
         super(message);
-        this.format = format;
     }
 
-    public MakerException(String message, Throwable cause, String format) {
+    public MakerException(String message, Throwable cause) {
         super(message, cause);
-        this.format = format;
     }
 
-    public MakerException(Throwable cause, String format) {
+    public MakerException(Throwable cause) {
         super(cause);
-        this.format = format;
-    }
-
-    public String getFormat() {
-        return format;
     }
 }

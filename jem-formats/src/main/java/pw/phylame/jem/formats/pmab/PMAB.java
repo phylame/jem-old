@@ -18,19 +18,10 @@
 
 package pw.phylame.jem.formats.pmab;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
- * Defines constants and common methods.
+ * Constants for PMAB.
  */
 public final class PMAB {
-    private static Log LOG = LogFactory.getLog(PMAB.class);
 
     ///// MIME type for PMAB /////
     static final String MIME_FILE = "mimetype";
@@ -44,27 +35,8 @@ public final class PMAB {
     static final String PBC_FILE = "content.xml";
     public static final String PBC_XML_NS = "http://phylame.pw/format/pmab/pbc";
 
-    public static boolean isPmab(ZipFile zipFile) {
-        ZipEntry entry = zipFile.getEntry(MIME_FILE);
-        if (entry == null) {
-            return false;
-        }
-        InputStream stream = null;
-        try {
-            stream = zipFile.getInputStream(entry);
-            String text = IOUtils.toString(stream).trim();
-            return MT_PMAB.equals(text);
-        } catch (IOException e) {
-            LOG.debug("cannot load "+MIME_FILE, e);
-            return false;
-        } finally {
-            if (stream != null) {
-                try {
-                    stream.close();
-                } catch (IOException e) {
-                    LOG.debug("cannot close "+MIME_FILE, e);
-                }
-            }
-        }
-    }
+    /**
+     * Default encoding for maker and parser.
+     */
+    public static String defaultEncoding = System.getProperty("file.encoding");
 }

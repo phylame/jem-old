@@ -1,5 +1,7 @@
 /*
- * Copyright 2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2015 Peng Wan <phylame@163.com>
+ *
+ * This file is part of Jem.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,8 +26,8 @@ import java.util.Date;
 public class NovelDetails {
     private String name;
     private String author;
-    private Date expired;
-    private Date updated;
+    private Date expireTime;
+    private Date updateTime;
     private String table;
 
     public String getAuthor() {
@@ -36,12 +38,12 @@ public class NovelDetails {
         this.author = author;
     }
 
-    public Date getExpired() {
-        return expired;
+    public Date getExpireTime() {
+        return expireTime;
     }
 
-    public void setExpired(Date expired) {
-        this.expired = expired;
+    public void setExpireTime(Date expireTime) {
+        this.expireTime = expireTime;
     }
 
     public String getName() {
@@ -52,12 +54,12 @@ public class NovelDetails {
         this.name = name;
     }
 
-    public Date getUpdated() {
-        return updated;
+    public Date getUpdateTime() {
+        return updateTime;
     }
 
-    public void setUpdated(Date updated) {
-        this.updated = updated;
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 
     public String getTable() {

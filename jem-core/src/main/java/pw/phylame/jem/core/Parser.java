@@ -21,6 +21,7 @@ package pw.phylame.jem.core;
 import java.util.Map;
 import java.io.File;
 import java.io.IOException;
+
 import pw.phylame.jem.util.JemException;
 
 /**
@@ -29,17 +30,19 @@ import pw.phylame.jem.util.JemException;
 public interface Parser {
     /**
      * Returns the format name (normally the extension name).
+     *
      * @return the name of format
      */
     String getName();
 
     /**
      * Parses book file and stores to <tt>Book</tt>.
-     * @param file the book file
-     * @param kw arguments to the parser
+     *
+     * @param file      the book file
+     * @param arguments arguments to the parser
      * @return <tt>Book</tt> represents the book file
-     * @throws IOException occurs IO errors
+     * @throws IOException  occurs IO errors
      * @throws JemException occurs errors when parsing book file
      */
-    Book parse(File file, Map<String, Object> kw) throws IOException, JemException;
+    Book parse(File file, Map<String, Object> arguments) throws IOException, JemException;
 }

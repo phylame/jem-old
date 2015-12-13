@@ -11,13 +11,14 @@
     </dependencySets>
     <fileSets>
         <fileSet>
-            <outputDirectory>/</outputDirectory>
+            <outputDirectory>./</outputDirectory>
             <includes>
                 <include>README.md</include>
+                <include>LICENSE</include>
             </includes>
         </fileSet>
         <fileSet>
-            <outputDirectory>/bin</outputDirectory>
+            <outputDirectory>./bin</outputDirectory>
             <directory>src/main/scripts</directory>
             <includes>
                 <include>jem.sh</include>

@@ -1,5 +1,7 @@
 /*
- * Copyright 2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2015 Peng Wan <phylame@163.com>
+ *
+ * This file is part of Jem.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,17 +21,20 @@ package pw.phylame.jem.formats.ucnovel;
 import java.net.URL;
 import java.io.File;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.util.Map;
 import java.util.Enumeration;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Chapter;
+import pw.phylame.jem.core.Parser;
+import pw.phylame.jem.formats.util.BufferedRandomAccessFile;
+import pw.phylame.jem.formats.util.MessageBundle;
+import pw.phylame.jem.formats.util.ParserException;
+import pw.phylame.jem.formats.util.SourceCleaner;
 import pw.phylame.jem.util.FileObject;
 import pw.phylame.jem.util.FileFactory;
 import pw.phylame.jem.util.TextFactory;
 import pw.phylame.jem.util.JemException;
 import pw.phylame.jem.util.JemUtilities;
-import pw.phylame.jem.formats.util.AbstractParser;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -37,7 +42,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * Jem Parser for UC Browser Novels.
  */
-public class UCNovelParser extends AbstractParser implements ChapterWatcher {
+public class UCNovelParser implements Parser, ChapterWatcher {
     private static Log LOG = LogFactory.getLog(UCNovelParser.class);
 
     public static final String KEY_BOOK_ID = "uc_book_id";
@@ -46,13 +51,13 @@ public class UCNovelParser extends AbstractParser implements ChapterWatcher {
     static final String CATALOG_FILE_NAME = "com.UCMobile_catalog";
     static final String TEXT_ENCODING     = "UTF-8";
 
-    private File   mDbFile;
-    private String mBookId;
+    private File catalogFile;
+    private String bookId;
 
-    private NovelDbReader    mDbReader  = null;
-    private RandomAccessFile mNovelFile = null;
+    private NovelDbReader dbReader = null;
+    private BufferedRandomAccessFile source;
 
-    private Book mBook;
+    private Book book;
 
     @Override
     public String getName() {
@@ -60,8 +65,8 @@ public class UCNovelParser extends AbstractParser implements ChapterWatcher {
     }
 
     private String getBookId(Map<String, Object> kw) throws JemException {
-        JemException ex = makeParserException("No '" + KEY_BOOK_ID + "' specified in parser arguments");
-        if (kw == null || kw.size() == 0) {
+        JemException ex = new JemException(MessageBundle.getText("ucnovel.parse.noBookId", KEY_BOOK_ID));
+        if (kw == null || kw.isEmpty()) {
             throw ex;
         }
 
@@ -82,76 +87,71 @@ public class UCNovelParser extends AbstractParser implements ChapterWatcher {
         if (file.isDirectory()) {
             file = new File(file, CATALOG_FILE_NAME);
         }
-        mDbFile = file;
-        mBookId = bookId;
+        catalogFile = file;
+        this.bookId = bookId;
 
         loadDbReader();
-        if (mDbReader == null) {
-            throw makeParserException("No NovelDbReader found");
+        if (dbReader == null) {
+            throw new ParserException(
+                    MessageBundle.getText("ucnovel.parse.noDbReader", DB_READER_CONFIG));
         }
-        mDbReader.init(mDbFile.getPath(), mBookId);
+        dbReader.init(catalogFile.getPath(), this.bookId);
 
         return fetchBook();
     }
 
     private Book fetchBook() throws IOException, JemException {
-        mBook = new Book();
+        book = new Book();
 
-        try {
-            NovelDetails details = readDetails();
-            File file = new File(mDbFile.getParent(), mBookId+"/"+mBookId+".ucnovel");
-            mNovelFile = new RandomAccessFile(file, "r");
-            mDbReader.watchChapter(this, details.getTable());
-        } catch (IOException ex) {
-            mDbReader.cleanup();
-            throw new JemException(ex);
-        }
-
-        mBook.registerCleanup(new Chapter.Cleanable() {
+        NovelDetails details = readDetails();
+        File file = new File(catalogFile.getParent(), bookId +"/"+ bookId +".ucnovel");
+        source = new BufferedRandomAccessFile(file, "r");
+        SourceCleaner cleaner = new SourceCleaner(source, file.getAbsolutePath(), new Runnable() {
             @Override
-            public void clean(Chapter chapter) {
-                mDbReader.cleanup();
-                if (mNovelFile != null) {
-                    try {
-                        mNovelFile.close();
-                    } catch (IOException e) {
-                        LOG.debug(e);
-                    }
-                }
+            public void run() {
+                dbReader.cleanup();
             }
         });
+        try {
+            dbReader.watchChapter(this, details.getTable());
+        } catch (JemException e) {
+            cleaner.clean(null);
+            throw e;
+        }
 
-        return mBook;
+        book.registerCleanup(cleaner);
+        return book;
     }
 
     private NovelDetails readDetails() throws JemException {
-        NovelDetails details = mDbReader.fetchDetails();
-        mBook.setAttribute(Book.TITLE, details.getName());
-        mBook.setAttribute(Book.AUTHOR, details.getAuthor());
-        mBook.setAttribute(Book.DATE, details.getExpired());
-        mBook.setAttribute("update_time", details.getUpdated());
+        NovelDetails details = dbReader.fetchDetails();
+        book.setTitle(details.getName());
+        book.setAuthor(details.getAuthor());
+        book.setDate( details.getExpireTime());
+        book.setAttribute("update_time", details.getUpdateTime());
         return details;
     }
 
     @Override
     public void watch(ChapterItem item) throws JemException {
         Chapter chapter = new Chapter(item.getTitle());
-        chapter.setAttribute("update_time", item.getUpdated());
+        chapter.setAttribute("update_time", item.getUpdateTime());
 
         FileObject fb;
         try {
             fb = FileFactory.fromBlock("chapter-" + item.getId() + ".txt",
-                    mNovelFile, item.getStartIndex(), item.getEndIndex() - item.getStartIndex() + 1, null);
+                    source, item.getStartIndex(), item.getEndIndex() - item.getStartIndex() + 1, "text/plain");
         } catch (IOException e) {
             throw new JemException(e);
         }
-        chapter.setSource(TextFactory.fromFile(fb, TEXT_ENCODING));
+        chapter.setContent(TextFactory.fromFile(fb, TEXT_ENCODING));
 
-        mBook.append(chapter);
+        book.append(chapter);
     }
 
     private void loadDbReader() throws JemException {
-        Enumeration<URL> urls = JemUtilities.getResources(DB_READER_CONFIG);
+        Enumeration<URL> urls = JemUtilities.resourcesForPath(DB_READER_CONFIG,
+                UCNovelParser.class.getClassLoader());
         if (urls == null) {
             return;
         }
@@ -162,7 +162,7 @@ public class UCNovelParser extends AbstractParser implements ChapterWatcher {
                 String name = IOUtils.toString(url).trim();
                 Class<?> clazz = Class.forName(name);
                 if (NovelDbReader.class.isAssignableFrom(clazz)) {
-                    mDbReader = (NovelDbReader) clazz.newInstance();
+                    dbReader = (NovelDbReader) clazz.newInstance();
                 } else {
                     throw new JemException("Invalid NovelDbReader: "+name);
                 }

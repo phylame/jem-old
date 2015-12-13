@@ -18,128 +18,166 @@
 
 package pw.phylame.jem.formats.epub.opf;
 
-import org.apache.commons.io.FilenameUtils;
-import org.dom4j.Element;
-import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
 import pw.phylame.jem.core.Book;
-import pw.phylame.jem.formats.epub.EPUB;
-import pw.phylame.jem.formats.epub.EpubConfig;
-import pw.phylame.jem.formats.util.ZipUtils;
-import pw.phylame.tools.DateUtils;
-import pw.phylame.tools.StringUtils;
+import pw.phylame.jem.formats.epub.*;
+import pw.phylame.jem.formats.util.MakerException;
+import pw.phylame.jem.formats.util.text.TextUtils;
+import pw.phylame.jem.formats.util.xml.XmlRender;
 import pw.phylame.jem.util.TextObject;
-import pw.phylame.jem.util.FileObject;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.zip.ZipOutputStream;
+import java.util.List;
 
 /**
  * OPF 2.0 implements.
  */
-public class OPF_2_0 extends AbstractOpfBuilder {
+class OPF_2_0 implements OpfWriter {
+    public static final String BOOK_ID_NAME = "book-id";
     public static final String OPF_XML_NS = "http://www.idpf.org/2007/opf";
     public static final String OPF_VERSION_2 = "2.0";
 
+    // DCMI (the Dublin Core Metadata Initiative)
+    public static final String DC_XML_NS = "http://purl.org/dc/elements/1.1/";
+
     public static final String[] OPTIONAL_METADATA = {"source", "relation", "format"};
 
-    private void addDcmi(Element parent, Book book, String uuid, ZipOutputStream zipout, EpubConfig config)
-            throws IOException {
-        Element elem = parent.addElement("dc:identifier").addAttribute("id", EPUB.BOOK_ID_NAME);
-        elem.addAttribute("opf:scheme", "uuid").setText(uuid);
 
-        parent.addElement("dc:title").setText(book.stringAttribute(Book.TITLE));
+    private XmlRender xmlRender;
+    private EpubMakeConfig epubConfig;
 
-        String str = book.stringAttribute(Book.AUTHOR);
-        if (!StringUtils.isEmpty(str)) {
-            parent.addElement("dc:creator").addAttribute("opf:role", "aut").setText(str);
+    @Override
+    public void write(Book book, EpubMakeConfig epubConfig, XmlRender xmlRender,
+                      String coverID, List<Resource> resources,
+                      List<SpineItem> spineItems, String ncxID, List<GuideItem> guideItems)
+            throws IOException, MakerException {
+        this.xmlRender = xmlRender;
+        this.epubConfig = epubConfig;
+        xmlRender.startXml();
+        xmlRender.startTag("package").attribute("version", OPF_VERSION_2);
+        xmlRender.attribute("unique-identifier", BOOK_ID_NAME);
+        xmlRender.attribute("xmlns", OPF_XML_NS);
+
+        writeMetadata(book, coverID);
+
+        // manifest
+        xmlRender.startTag("manifest");
+        for (Resource resource : resources) {
+            xmlRender.startTag("item").attribute("id", resource.id);
+            xmlRender.attribute("href", resource.href);
+            xmlRender.attribute("media-type", resource.mediaType);
+            xmlRender.endTag();
+        }
+        xmlRender.endTag();
+
+        // spine
+        xmlRender.startTag("spine").attribute("toc", ncxID);
+        for (SpineItem item : spineItems) {
+            xmlRender.startTag("itemref").attribute("idref", item.idref);
+            if (!item.linear) {
+                xmlRender.attribute("linear", "no");
+            }
+            if (item.properties != null) {
+                xmlRender.attribute("properties", item.properties);
+            }
+            xmlRender.endTag();
+        }
+        xmlRender.endTag();
+        // guide
+        xmlRender.startTag("guide");
+        for (GuideItem item : guideItems) {
+            xmlRender.startTag("reference").attribute("href", item.href);
+            xmlRender.attribute("type", item.type);
+            xmlRender.attribute("title", item.title).endTag();
+        }
+        xmlRender.endTag();
+
+        xmlRender.endTag(); // package
+        xmlRender.endXml();
+    }
+
+    private void writeMetadata(Book book, String coverID) throws IOException, MakerException {
+        xmlRender.startTag("metadata");
+        xmlRender.attribute("xmlns:dc", DC_XML_NS).attribute("xmlns:opf", OPF_XML_NS);
+        addDcmi(book, epubConfig.uuid, coverID);
+        xmlRender.endTag();
+    }
+
+    private void addDcmi(Book book, String uuid, String coverID) throws IOException, MakerException {
+        xmlRender.startTag("dc:identifier").attribute("id", BOOK_ID_NAME);
+        xmlRender.attribute("opf:scheme", "uuid").text(uuid).endTag();
+
+        xmlRender.startTag("dc:title").text(book.getTitle()).endTag();
+
+        String str = book.getAuthor();
+        if (! str.isEmpty()) {
+            xmlRender.startTag("dc:creator");
+            xmlRender.attribute("opf:role", "aut").text(str).endTag();
         }
 
-        str = book.stringAttribute(Book.GENRE);
-        if (!StringUtils.isEmpty(str)) {
-            parent.addElement("dc:type").setText(str);
+        str = book.getGenre();
+        if (! str.isEmpty()) {
+            xmlRender.startTag("dc:type").text(str).endTag();
         }
 
-        str = book.stringAttribute(Book.SUBJECT);
-        if (!StringUtils.isEmpty(str)) {
-            parent.addElement("dc:subject").setText(str);
+        str = book.getSubject();
+        if (! str.isEmpty()) {
+            xmlRender.startTag("dc:subject").text(str).endTag();
         }
 
-        TextObject intro = (TextObject)book.getAttribute(Book.INTRO);
+        TextObject intro = book.getIntro();
         if (intro != null) {
-            String text = intro.getText();
-            if (text.length() > 0) {
-                parent.addElement("dc:description").setText(text);
+            String text = TextUtils.fetchText(intro);
+            if (! text.isEmpty()) {
+                xmlRender.startTag("dc:description").text(text).endTag();
             }
         }
 
-        str = book.stringAttribute(Book.PUBLISHER);
-        if (!StringUtils.isEmpty(str)) {
-            parent.addElement("dc:publisher").setText(str);
+        str = book.getPublisher();
+        if (! str.isEmpty()) {
+            xmlRender.startTag("dc:publisher").text(str).endTag();
         }
 
-        FileObject cover = (FileObject)book.getAttribute(Book.COVER);
-        if (cover != null) {
-            coverHref = String.format("%s/%s.%s", config.imageDir, EPUB.COVER_NAME,
-                    FilenameUtils.getExtension(cover.getName()));
-            ZipUtils.writeFile(cover, zipout, EPUB.getOpsPath(coverHref, config));
-            addManifestItem(EPUB.COVER_FILE_ID, coverHref, cover.getMime());
-            parent.addElement("meta").addAttribute("name", "cover").addAttribute("content", EPUB.COVER_FILE_ID);
+        if (coverID != null) {
+            xmlRender.startTag("meta").attribute("name", "cover");
+            xmlRender.attribute("content", coverID).endTag();
         }
 
-        Date date = (Date)book.getAttribute(Book.DATE);
+        Date date = book.getDate();
         if (date != null) {
-            elem = parent.addElement("dc:date").addAttribute("opf:event", "creation");
-            elem.setText(DateUtils.formatDate(date, config.dateFormat));
+            xmlRender.startTag("dc:date").attribute("opf:event", "creation");
+            xmlRender.text(TextUtils.formatDate(date, epubConfig.dateFormat));
+            xmlRender.endTag();
 
             Date today = new Date();
             if (! today.equals(date)) {
-                elem = parent.addElement("dc:date").addAttribute("opf:event", "modification");
-                elem.setText(DateUtils.formatDate(today, config.dateFormat));
+                xmlRender.startTag("dc:date").attribute("opf:event", "modification");
+                xmlRender.text(TextUtils.formatDate(today, epubConfig.dateFormat));
+                xmlRender.endTag();
             }
         }
 
-        str = book.stringAttribute(Book.LANGUAGE);
-        if (!StringUtils.isEmpty(str)) {
-            parent.addElement("dc:language").setText(str);
+        str = book.getLanguage();
+        if (! str.isEmpty()) {
+            xmlRender.startTag("dc:language").text(str).endTag();
         }
 
-        str = book.stringAttribute(Book.RIGHTS);
-        if (!StringUtils.isEmpty(str)) {
-            parent.addElement("dc:rights").setText(str);
+        str = book.getRights();
+        if (! str.isEmpty()) {
+            xmlRender.startTag("dc:rights").text(str).endTag();
         }
 
-        str = book.stringAttribute(Book.VENDOR);
-        if (!StringUtils.isEmpty(str)) {
-            parent.addElement("dc:contributor").addAttribute("opf:role", "bkp").setText(str);
+        str = book.getVendor();
+        if (! str.isEmpty()) {
+            xmlRender.startTag("dc:contributor").attribute("opf:role", "bkp");
+            xmlRender.text(str).endTag();
         }
 
         for (String key: OPTIONAL_METADATA) {
-            str = book.stringAttribute(key, null);
-            if (! StringUtils.isEmpty(str)) {
-                parent.addElement("dc:"+key).setText(str);
+            str = book.stringAttribute(key, "");
+            if (! str.isEmpty()) {
+                xmlRender.startTag("dc:" + key).text(str).endTag();
             }
         }
-    }
-
-    @Override
-    public Document make(Book book, String uuid, ZipOutputStream zipout, EpubConfig config) throws IOException {
-        Document doc = DocumentHelper.createDocument();
-        Element root = doc.addElement("package", OPF_XML_NS);
-        root.addAttribute("version", OPF_VERSION_2);
-        root.addAttribute("unique-identifier", EPUB.BOOK_ID_NAME);
-
-        Element metadataElement = root.addElement("metadata");
-        metadataElement.addNamespace("dc", EPUB.DC_XML_NS);
-        metadataElement.addNamespace("opf", OPF_XML_NS);
-
-        manifestElement = root.addElement("manifest");
-        spineElement = root.addElement("spine").addAttribute("toc", EPUB.NCX_FILE_ID);
-        guideElement = root.addElement("guide");
-
-        addDcmi(metadataElement, book, uuid, zipout, config);
-
-        return doc;
     }
 }

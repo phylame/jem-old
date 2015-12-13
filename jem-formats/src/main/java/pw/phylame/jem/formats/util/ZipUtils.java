@@ -18,22 +18,53 @@
 
 package pw.phylame.jem.formats.util;
 
+
 import pw.phylame.jem.util.FileObject;
 import pw.phylame.jem.util.TextObject;
 
-import java.io.Writer;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-
+import java.io.*;
+import java.util.zip.ZipFile;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import org.apache.commons.io.IOUtils;
+
 /**
- * ZIP utilities.
+ * Utilities operations for ZIP..
  */
-public class ZipUtils {
-    public static void writeFile(FileObject file, ZipOutputStream zipout,
-                                 String name) throws IOException {
+public final class ZipUtils {
+    private ZipUtils() {
+    }
+
+    public static InputStream openStream(ZipFile zipFile, String name)
+            throws IOException {
+        ZipEntry zipEntry = zipFile.getEntry(name);
+        if (zipEntry == null) {
+            throw ExceptionFactory.ioException("error.zip.noEntry",
+                    name, zipFile.getName());
+        }
+        return zipFile.getInputStream(zipEntry);
+    }
+
+    public static String readString(ZipFile zipFile, String name,
+                                    String encoding) throws IOException {
+        InputStream stream = openStream(zipFile, name);
+        try {
+            return IOUtils.toString(stream, encoding);
+        } finally {
+            stream.close();
+        }
+    }
+
+    public static void writeString(String str, String name, String encoding,
+                                   ZipOutputStream zipout) throws IOException {
+        zipout.putNextEntry(new ZipEntry(name));
+        zipout.write(str.getBytes(encoding));
+        zipout.closeEntry();
+    }
+
+    public static void writeFile(FileObject file, String name,
+                                 ZipOutputStream zipout) throws IOException {
         zipout.putNextEntry(new ZipEntry(name));
         file.writeTo(zipout);
         zipout.closeEntry();
@@ -41,20 +72,21 @@ public class ZipUtils {
 
     /**
      * Writes text content in TextObject to PMAB archive.
-     * @param text the TextObject
-     * @param zipout PMAB archive stream
-     * @param name name of entry to store text content
+     *
+     * @param text     the TextObject
+     * @param name     name of entry to store text content
      * @param encoding encoding to encode text
-     * @throws IOException occurs IO errors when writing text
+     * @param zipout   PMAB archive stream
+     * @throws NullPointerException if arguments contain <tt>null</tt>
+     * @throws IOException          if occurs IO errors when writing text
      */
-    public static void writeText(TextObject text, ZipOutputStream zipout,
-                                 String name, String encoding)
-            throws IOException {
-        zipout.putNextEntry(new ZipEntry(name));
+    public static void writeText(TextObject text, String name, String encoding,
+                                 ZipOutputStream zipout) throws IOException {
         if (encoding == null) {
-            encoding = System.getProperty("file.encoding");
+            throw new NullPointerException("encoding");
         }
-        Writer writer = new OutputStreamWriter(zipout, encoding);
+        zipout.putNextEntry(new ZipEntry(name));
+        Writer writer = new BufferedWriter(new OutputStreamWriter(zipout, encoding));
         text.writeTo(writer);
         writer.flush();
         zipout.closeEntry();

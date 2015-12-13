@@ -28,15 +28,51 @@ import java.io.OutputStream;
  * so that <tt>openStream</tt> can be called any times.</p>
  */
 public interface FileObject {
+    String UNKNOWN_MIME = "application/octet-stream";
+
+    /**
+     * Returns name of file content.
+     *
+     * @return the name, never be <tt>null</tt>
+     */
     String getName();
 
+    /**
+     * Returns the MIME type of file content.
+     *
+     * @return the MIME string, never be <tt>null</tt>
+     */
     String getMime();
 
+    /**
+     * Opens an <tt>InputStream</tt> for reading file content.
+     *
+     * @return the stream, never be <tt>null</tt>
+     * @throws IOException if occur IO errors
+     */
     InputStream openStream() throws IOException;
 
+    /**
+     * Resets object for next operation.
+     *
+     * @throws IOException if occur IO errors
+     */
     void reset() throws IOException;
 
+    /**
+     * Reads all bytes from file content.
+     *
+     * @return the byte array, never be <tt>null</tt>
+     * @throws IOException if occur IO errors
+     */
     byte[] readAll() throws IOException;
 
+    /**
+     * Writes file content to specified output.
+     *
+     * @param output the destination output
+     * @return number of written bytes
+     * @throws IOException if occur IO errors
+     */
     long writeTo(OutputStream output) throws IOException;
 }

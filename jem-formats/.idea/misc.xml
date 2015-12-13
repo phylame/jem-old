@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="EntryPointsManager">
-    <entry_points version="2.0" />
+    <entry_points version="2.0">
+      <entry_point TYPE="method" FQNAME="pw.phylame.jem.formats.jar.JarMaker.MetaItem MetaItem(java.lang.String name, int size, java.lang.String title)" />
+    </entry_points>
   </component>
   <component name="IdProvider" IDEtalkID="45027DA0DAC8B2D0397F2F898895AA11" />
   <component name="JavadocGenerationManager">

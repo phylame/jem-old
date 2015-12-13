@@ -21,6 +21,7 @@ package pw.phylame.jem.core;
 import java.util.Map;
 import java.io.File;
 import java.io.IOException;
+
 import pw.phylame.jem.util.JemException;
 
 /**
@@ -29,17 +30,19 @@ import pw.phylame.jem.util.JemException;
 public interface Maker {
     /**
      * Returns the format name (normally the extension name).
+     *
      * @return the name of format
      */
     String getName();
 
     /**
      * Writes <tt>Book</tt> to book file.
-     * @param book the <tt>Book</tt> to be written
-     * @param file output file to store book
-     * @param kw arguments to the maker
+     *
+     * @param book      the <tt>Book</tt> to be written
+     * @param file      output file to store book
+     * @param arguments arguments to the maker
      * @throws java.io.IOException occurs IO errors
-     * @throws JemException occurs errors when making book file
+     * @throws JemException        occurs errors when making book file
      */
-    void make(Book book, File file, Map<String, Object> kw) throws IOException, JemException;
+    void make(Book book, File file, Map<String, Object> arguments) throws IOException, JemException;
 }

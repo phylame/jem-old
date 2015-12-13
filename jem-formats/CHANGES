@@ -22,3 +22,6 @@ ChangeLog
 
 * v1.4.0
   o. add EBK support
+
+* v1.6
+  o. adapted to jem-core 2.3

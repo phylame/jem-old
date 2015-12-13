@@ -20,6 +20,7 @@ package pw.phylame.jem.util;
 
 import java.io.Writer;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * <tt>TextObject</tt> provides unicode source.
@@ -38,24 +39,31 @@ public interface TextObject {
 
     /**
      * Returns type of text content.
+     *
      * @return the type
      */
     String getType();
 
     /**
      * Returns text content of this object.
-     * @return the string of text or <tt>null</tt> if failed.
+     *
+     * @return the string of text, never <tt>null</tt>
+     * @throws Exception if failed to get text
      */
-    String getText();
+    String getText() throws Exception;
 
     /**
-     * Returns array of lines split from text content in this object.
-     * @return array of lines or <tt>null</tt> if failed.
+     * Returns list of lines split from text content in this object.
+     *
+     * @param skipEmpty <tt>true</tt> to skip empty line
+     * @return list of lines, never <tt>null</tt>
+     * @throws Exception if failed to get lines
      */
-    String[] getLines();
+    List<String> getLines(boolean skipEmpty) throws Exception;
 
     /**
      * Writes all text content in this object to output writer.
+     *
      * @param writer output <tt>Writer</tt> to store text content
      * @throws IOException occurs IO errors
      */

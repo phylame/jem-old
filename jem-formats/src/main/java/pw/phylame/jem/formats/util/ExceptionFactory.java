@@ -18,14 +18,48 @@
 
 package pw.phylame.jem.formats.util;
 
-import pw.phylame.jem.util.JemException;
+import pw.phylame.jem.formats.util.config.InvalidConfigException;
 
-public class ExceptionFactory {
-    public static JemException forInvalidStringArgument(String key, Object o) {
-        return new JemException(I18nMessage.getText("Error.InvalidStringArgument", key, o));
+import java.io.IOException;
+
+public final class ExceptionFactory {
+    private ExceptionFactory() {
     }
 
-    public static JemException forInvalidIntegerArgument(String key, Object o) {
-        return new JemException(I18nMessage.getText("Error.InvalidIntegerArgument", key, o));
+    public static IOException ioException(String msg, Object... args) {
+        return new IOException(MessageBundle.getText(msg, args));
+    }
+
+    public static ParserException parserException(String msg, Object... args) {
+        return new ParserException(MessageBundle.getText(msg, args));
+    }
+
+    public static ParserException parserException(Throwable cause, String msg,
+                                                  Object... args) {
+        return new ParserException(MessageBundle.getText(msg, args), cause);
+    }
+
+    public static MakerException makerException(String msg, Object... args) {
+        return new MakerException(MessageBundle.getText(msg, args));
+    }
+
+    public static MakerException makerException(Throwable cause, String msg,
+                                                Object... args) {
+        return new MakerException(MessageBundle.getText(msg, args), cause);
+    }
+
+    public static InvalidConfigException invalidObjectArgument(String key, Object o,
+                                                               String className) {
+        String msg = MessageBundle.getText("error.config.invalidObject",
+                key, o, className);
+        return new InvalidConfigException(key, o, msg);
+    }
+
+    public static InvalidConfigException invalidObjectArgument(Throwable cause,
+                                                               String key, Object o,
+                                                               String className) {
+        String msg = MessageBundle.getText("error.config.invalidObject",
+                key, o, className);
+        return new InvalidConfigException(key, o, msg, cause);
     }
 }
