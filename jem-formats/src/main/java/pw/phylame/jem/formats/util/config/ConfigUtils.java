@@ -30,6 +30,25 @@ public final class ConfigUtils {
     private ConfigUtils() {
     }
 
+    public static <CF extends CommonConfig> CF fetchConfig(Map<String, Object> kw, String key, Class<CF> clazz)
+            throws InvalidConfigException {
+        CF config = fetchObject(kw, key, null, clazz);
+        if (config != null) {
+            return config;
+        }
+        config = defaultConfig(clazz);
+        config.fetch(kw);
+        return config;
+    }
+
+    public static <CF extends CommonConfig> CF defaultConfig(Class<CF> clazz) {
+        try {
+            return clazz.newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            throw new AssertionError("BUG: the constructor of config class is unavailable: " + clazz, e);
+        }
+    }
+
     /**
      * Parses config from raw string.
      */
@@ -37,59 +56,49 @@ public final class ConfigUtils {
         T parse(String str);
     }
 
-    public static String fetchString(Map<String, Object> kw, String key,
-                                     String defaultValue)
+    public static String fetchString(Map<String, Object> kw, String key, String defaultValue)
             throws InvalidConfigException {
         return fetchObject(kw, key, defaultValue, String.class);
     }
 
-    public static boolean fetchBoolean(Map<String, Object> kw, String key,
-                                       boolean defaultValue)
+    public static boolean fetchBoolean(Map<String, Object> kw, String key, boolean defaultValue)
             throws InvalidConfigException {
-        Boolean b = fetchObject(kw, key, defaultValue, Boolean.class,
-                BooleanParser.sharedParser());
+        Boolean b = fetchObject(kw, key, defaultValue, Boolean.class, BooleanParser.sharedParser());
         return (b != null) && b;
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> List<T> fetchList(Map<String, Object> kw, String key,
-                                        List<T> defaultValue,
+    public static <T> List<T> fetchList(Map<String, Object> kw, String key, List<T> defaultValue,
                                         Class<T> clazz) throws InvalidConfigException {
         Object o = kw.get(key);
         if (o == null) {
             return kw.containsKey(key) ? null : defaultValue;
         }
         if (!(o instanceof List)) {
-            throw ExceptionFactory.invalidObjectArgument(key, o,
-                    "List<" + clazz.getName() + ">");
+            throw ExceptionFactory.invalidObjectArgument(key, o, "List<" + clazz.getName() + ">");
         }
         List list = (List) o;
         // just check one element
         if (!clazz.isInstance(list.get(0))) {
-            throw ExceptionFactory.invalidObjectArgument(key, o,
-                    "List<" + clazz.getName() + ">");
+            throw ExceptionFactory.invalidObjectArgument(key, o, "List<" + clazz.getName() + ">");
         }
         return (List<T>) list;
     }
 
-    public static int fetchInteger(Map<String, Object> kw, String key,
-                                   int defaultValue) throws InvalidConfigException {
-        Integer n = fetchObject(kw, key, defaultValue, Integer.class,
-                IntegerParser.sharedParser());
+    public static int fetchInteger(Map<String, Object> kw, String key, int defaultValue)
+            throws InvalidConfigException {
+        Integer n = fetchObject(kw, key, defaultValue, Integer.class, IntegerParser.sharedParser());
         return (n != null) ? n : 0;
     }
 
-    public static <T> T fetchObject(Map<String, Object> kw, String key,
-                                    T defaultValue, Class<T> clazz)
+    public static <T> T fetchObject(Map<String, Object> kw, String key, T defaultValue, Class<T> clazz)
             throws InvalidConfigException {
         return fetchObject(kw, key, defaultValue, clazz, null);
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> T fetchObject(Map<String, Object> kw, String key,
-                                    T defaultValue, Class<T> clazz,
-                                    ConfigParser<T> parser)
-            throws InvalidConfigException {
+    public static <T> T fetchObject(Map<String, Object> kw, String key, T defaultValue, Class<T> clazz,
+                                    ConfigParser<T> parser) throws InvalidConfigException {
         Object o = kw.get(key);
         if (o == null) {
             return kw.containsKey(key) ? null : defaultValue;

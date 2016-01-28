@@ -60,11 +60,11 @@ public class EditorConfig extends ISettings {
     }
 
     private EditorConfig() throws IOException {
-        super(true, Imabw.SETTINGS_HOME + "editor", true);
+        super(Imabw.SETTINGS_HOME + "editor", true, true);
     }
 
     private EditorConfig(int unused) throws IOException {
-        super(false, null, false);
+        super(null, false, false);
     }
 
     @Override

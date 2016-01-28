@@ -38,11 +38,11 @@ public interface Parser {
     /**
      * Parses book file and stores to <tt>Book</tt>.
      *
-     * @param file      the book file
+     * @param file      the input book file
      * @param arguments arguments to the parser
      * @return <tt>Book</tt> represents the book file
-     * @throws IOException  occurs IO errors
-     * @throws JemException occurs errors when parsing book file
+     * @throws IOException  if occurs I/O errors
+     * @throws JemException if occurs errors when parsing book file
      */
     Book parse(File file, Map<String, Object> arguments) throws IOException, JemException;
 }

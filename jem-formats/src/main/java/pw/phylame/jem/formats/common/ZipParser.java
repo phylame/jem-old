@@ -27,14 +27,9 @@ import java.util.zip.ZipFile;
 /**
  * Common parser for e-book file archived with ZIP.
  */
-public abstract class
-ZipBookParser<CF extends CommonConfig> extends CommonParser<ZipFile, CF> {
-    public ZipBookParser(String name) {
-        super(name);
-    }
-
-    public ZipBookParser(String name, Class<CF> configClass, String configKey) {
-        super(name, configClass, configKey);
+public abstract class ZipParser<CF extends CommonConfig> extends CommonParser<ZipFile, CF> {
+    protected ZipParser(String name, String configKey, Class<CF> configClass) {
+        super(name, configKey, configClass);
     }
 
     @Override

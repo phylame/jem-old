@@ -19,7 +19,7 @@
 package pw.phylame.jem.core;
 
 /**
- * Declares key name of chapter attributes.
+ * Declares name of attributes supported by Jem for chapter and book.
  *
  * @since 2.1.0
  */

@@ -22,28 +22,24 @@ import pw.phylame.imabw.app.model.MakerData;
 import pw.phylame.imabw.app.model.OpenResult;
 import pw.phylame.imabw.app.model.ParseResult;
 import pw.phylame.imabw.app.model.ParserData;
+import pw.phylame.imabw.app.util.BookUtils;
 import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Chapter;
 import pw.phylame.jem.core.BookHelper;
-import pw.phylame.jem.formats.util.text.TextUtils;
-import pw.phylame.jem.util.FileFactory;
-import pw.phylame.jem.util.TextObject;
-import pw.phylame.jem.util.UnsupportedFormatException;
-import pw.phylame.jem.formats.util.FileInfo;
+
+import static pw.phylame.jem.formats.util.text.TextUtils.*;
+
+import pw.phylame.jem.util.*;
 import pw.phylame.imabw.app.config.JemConfig;
 import pw.phylame.imabw.app.ui.dialog.DialogFactory;
 
+import java.io.*;
 import java.util.*;
-import java.io.File;
-import java.io.IOException;
-import java.io.FileNotFoundException;
 import java.awt.Component;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -225,12 +221,12 @@ public class Worker {
                                       boolean openMode, boolean multiple) {
         if (initFormat == null || initFormat.isEmpty()) {
             if (initFile != null) {
-                initFormat = FilenameUtils.getExtension(initFile.getPath());
+                initFormat = IOUtils.getExtension(initFile.getPath());
                 if (initFormat.isEmpty()) {
-                    initFormat = Jem.PMAB_FORMAT;
+                    initFormat = Jem.PMAB;
                 }
             } else {
-                initFormat = Jem.PMAB_FORMAT;
+                initFormat = Jem.PMAB;
             }
         }
 
@@ -275,111 +271,33 @@ public class Worker {
         }
     }
 
-    public Map<String, Object> duplicateAttributes(Chapter chapter) {
-        HashMap<String, Object> map = new HashMap<>();
-        for (Map.Entry<String, Object> entry : chapter.attributeEntries()) {
-            map.put(entry.getKey(), entry.getValue());
-        }
-        return map;
+    public String readableTypeName(String type) {
+        return app.getOptionalText("common.item.type." + type, capitalized(type));
     }
 
-    private void addAttributes(Book book) {
-        String[] names = {Book.COVER, Book.DATE, Book.LANGUAGE, Book.AUTHOR,
-                Book.VENDOR, Book.RIGHTS, Book.STATE};
-        for (String name : names) {
-            Object value = book.getAttribute(name);
-            if (value != null) {
-                continue;
-            }
-            value = getDefaultAttribute(name);
-            if (value != null) {
-                book.setAttribute(name, value);
-            }
-        }
+    public String readableItemType(Object value) {
+        return readableTypeName((value == null) ? "str" : Jem.typeOfVariant(value).toLowerCase());
     }
 
-    public Object getDefaultAttribute(String name) {
-        switch (name) {
-            case Book.COVER: {
-                String path = JemConfig.sharedInstance().getAttribute(Chapter.COVER);
-                if (path != null && !(path = path.trim()).isEmpty()) {
-                    try {
-                        return FileFactory.fromFile(new File(path), null);
-                    } catch (IOException e) {
-                        LOG.error("cannot load default book cover: " + path, e);
-                    }
-                }
-                return null;
-            }
-            case Book.DATE:
-                return new Date();
-            case Book.LANGUAGE:
-                return Locale.getDefault().toLanguageTag();
-            case Book.WORDS:
-                return 0;
-            default:
-                return JemConfig.sharedInstance().getAttribute(name);
-        }
-    }
-
-    // translate readable attribute name
-    public String printableAttributeName(String name) {
-        name = TextUtils.toCamelized(name).toString();
-        return app.getOptionalText(
-                "common.attributes.name." + name,
-                TextUtils.toCapitalized(name).toString());
-    }
-
-    // translate readable attribute type
-    public String printableAttributeType(Object value) {
-        String type = (value == null) ? "str"
-                : TextUtils.toCamelized(Jem.variantType(value)).toString();
-        return app.getOptionalText("common.attribute.type." + type, type);
-    }
-
-    // translate readable attribute value
-    public String printableAttributeValue(String name, Object value) {
+    public String readableItemValue(Object value) {
         if (value == null) {
-            return "";
+            throw new NullPointerException();
         }
-        if (value instanceof Date) {
-            return TextUtils.formatDate((Date) value, "yy-M-d");
-        } else if (value instanceof TextObject) {
-            String str = contentOfText((TextObject) value, "");
-            return str.substring(0, Math.min(str.length(), 40));
-        } else if (name.equals(Chapter.LANGUAGE) && value instanceof String) {
-            return Locale.forLanguageTag(((String) value).replace('_', '-')).getDisplayName();
+        String type = Jem.typeOfVariant(value);
+        switch (type) {
+            case "str":
+                return value.toString();
+            case "text":
+                return fetchText((TextObject) value, "");
+            case "datetime":
+                return formatDate((Date) value, "yy-M-d");
+            case "locale":
+                return ((Locale) value).getDisplayName();
+            case "bool":
+                return app.getText("common.item.value." + value);
+            default:
+                return value.toString();
         }
-        return String.valueOf(value);
-    }
-
-    public String[] getFileInfo(Book book) {
-        Object o = book.getExtension(FileInfo.FILE_INFO);
-        if (o instanceof FileInfo) {
-            FileInfo fileInfo = (FileInfo) o;
-            Set<Map.Entry<String, Object>> entries = fileInfo.infoEntries();
-            String[] strings = new String[entries.size() * 2];
-            int ix = 0;
-            for (Map.Entry<String, Object> entry : entries) {
-                strings[ix++] = fileInfo.localizedKey(entry.getKey());
-                strings[ix++] = fileInfo.localizedValue(entry.getValue());
-            }
-            return strings;
-        } else {
-            return null;
-        }
-    }
-
-    public String contentOfText(TextObject text, String defaultValue) {
-        try {
-            return text.getText();
-        } catch (Exception e) {
-            return defaultValue;
-        }
-    }
-
-    public String contentOfChapter(Chapter chapter, String defaultValue) {
-        return contentOfText(chapter.getContent(), defaultValue);
     }
 
     /**
@@ -393,16 +311,15 @@ public class Worker {
     public Book newBook(Component parent, String title, String name) {
         if (name == null || name.isEmpty()) {
             name = DialogFactory.inputText(parent, title,
-                    app.getText("dialog.newBook.inputTip"),
-                    app.getText("dialog.newBook.defaultTitle"), false, false);
+                    app.getText("d.newBook.inputTip"),
+                    app.getText("d.newBook.defaultTitle"), false, false);
             if (name == null) {
                 return null;
             }
         }
 
-        String author = JemConfig.sharedInstance().getAttribute(Book.AUTHOR);
-        Book book = new Book(name, author != null ? author : "");
-        addAttributes(book);
+        Book book = new Book(name);
+        BookUtils.addAttributes(book);
 
         book.append(new Chapter(app.getText("dialog.newChapter.defaultTitle")));
         return book;
@@ -425,11 +342,22 @@ public class Worker {
         return new Chapter(name);
     }
 
+    public void storeToFile(FileObject fb, File file) throws IOException {
+        try (InputStream in = fb.openStream(); FileOutputStream out = new FileOutputStream(file)) {
+            IOUtils.copy(in, out, -1);
+            fb.reset();
+        }
+    }
+
+    public void storeToFile(TextObject tb, File file, String encoding) throws IOException {
+        IOUtils.write(file, fetchText(tb, ""), encoding);
+    }
+
     public File duplicateToCache(File source) throws IOException {
         File cache = null;
         try {
             cache = File.createTempFile("imabw_", ".tmp");
-            FileUtils.copyFile(source, cache);
+            IOUtils.copyFile(source, cache);
         } catch (IOException ex) {
             deleteCache(cache);
             throw ex;
@@ -468,7 +396,6 @@ public class Worker {
         Book book;
         try {
             book = Jem.readBook(input, pd.format, pd.arguments);
-            addAttributes(book);
         } catch (Exception ex) {
             // file is cached
             deleteCache(cache);
@@ -508,10 +435,14 @@ public class Worker {
             }
             file = od.getFile();
             format = od.getFormat();
+        } else {
+            format = null;
         }
-        arguments = getParseArguments(parent, format);
-        if (arguments == null) {   // cancel config arguments
-            return null;
+        if (arguments == null) {
+            arguments = getParseArguments(parent, format);
+            if (arguments == null) {   // cancel config arguments
+                return null;
+            }
         }
         return new ParserData(file, format, arguments, false);
     }
@@ -522,13 +453,13 @@ public class Worker {
 
     public void showOpenError(Component parent, String title, ParserData data,
                               Throwable err) {
-        String str = app.getText("dialog.openBook.failed", data.file, transErrorMessage(err));
+        String str = app.getText("d.openBook.failed", data.file, transErrorMessage(err));
         DialogFactory.viewException(parent, title, str, err);
     }
 
     public void showSaveError(Component parent, String title, MakerData data,
                               Throwable e) {
-        String str = app.getText("dialog.saveBook.failed", data.file, transErrorMessage(e));
+        String str = app.getText("d.saveBook.failed", data.file, transErrorMessage(e));
         DialogFactory.viewException(parent, title, str, e);
     }
 

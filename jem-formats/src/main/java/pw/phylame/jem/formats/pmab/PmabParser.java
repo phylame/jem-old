@@ -27,9 +27,10 @@ import pw.phylame.jem.util.TextObject;
 import pw.phylame.jem.formats.util.ZipUtils;
 import pw.phylame.jem.formats.util.NumberUtils;
 import pw.phylame.jem.formats.util.ParserException;
-import pw.phylame.jem.formats.util.xml.XmlUtils;
-import pw.phylame.jem.formats.util.text.TextUtils;
-import pw.phylame.jem.formats.common.ZipBookParser;
+import pw.phylame.jem.formats.common.ZipParser;
+
+import static pw.phylame.jem.formats.util.xml.XmlUtils.*;
+import static pw.phylame.jem.formats.util.text.TextUtils.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,8 +43,8 @@ import org.xmlpull.v1.XmlPullParserException;
 /**
  * PMAB e-book parser.
  */
-public class PmabParser extends ZipBookParser<PmabParseConfig> {
-    private PmabParseConfig myConfig;
+public class PmabParser extends ZipParser<PmabParseConfig> {
+    private PmabParseConfig mycfg;
     // temporary book
     private Book book;
     // PBM 3 data
@@ -61,11 +62,11 @@ public class PmabParser extends ZipBookParser<PmabParseConfig> {
     private HashMap<String, Object> metaInfo;
 
     public PmabParser() {
-        super("pmab", PmabParseConfig.class, PmabParseConfig.CONFIG_SELF);
+        super("pmab", PmabParseConfig.CONFIG_SELF, PmabParseConfig.class);
     }
 
     @Override
-    protected void validateFile(ZipFile input, PmabParseConfig config)
+    protected void validateInput(ZipFile input, PmabParseConfig config)
             throws IOException, ParserException {
         String text = ZipUtils.readString(input, PMAB.MIME_FILE, null);
         if (!PMAB.MT_PMAB.equals(text)) {
@@ -77,34 +78,33 @@ public class PmabParser extends ZipBookParser<PmabParseConfig> {
     @Override
     public Book parse(ZipFile input, PmabParseConfig config) throws IOException,
             ParserException {
-        myConfig = (config != null) ? config : new PmabParseConfig();
+        mycfg = (config != null) ? config : new PmabParseConfig();
         book = new Book();
-        XmlPullParser xpp = XmlUtils.newPullParser();
+        XmlPullParser xpp = newPullParser();
         int version = readPBM(input, xpp);
         readPBC(input, xpp);
-
         book.setExtension(PmabInfo.FILE_INFO, new PmabInfo(version, metaInfo));
         return book;
     }
 
     private int getVersion(XmlPullParser xpp, String error) throws ParserException {
-        String str = XmlUtils.getAttribute(xpp, "version");
-        if (str.equals("3.0")) {
-            return 3;
-        } else if (str.equals("2.0")) {
-            return 2;
-        } else {
-            throw parserException(error, str);
+        String str = getAttribute(xpp, "version");
+        switch (str) {
+            case "3.0":
+                return 3;
+            case "2.0":
+                return 2;
+            default:
+                throw parserException(error, str);
         }
     }
 
     private int readPBM(ZipFile zipFile, XmlPullParser xpp) throws IOException,
             ParserException {
-        InputStream stream = ZipUtils.openStream(zipFile, PMAB.PBM_FILE);
         int pbmVersion = 0;
         boolean hasText = false;
         StringBuilder textBuffer = new StringBuilder();
-        try {
+        try (InputStream stream = ZipUtils.openStream(zipFile, PMAB.PBM_FILE)) {
             xpp.setInput(stream, null);
             int eventType = xpp.getEventType();
             do {
@@ -142,16 +142,13 @@ public class PmabParser extends ZipBookParser<PmabParseConfig> {
                 eventType = xpp.next();
             } while (eventType != XmlPullParser.END_DOCUMENT);
         } catch (XmlPullParserException e) {
-            throw parserException(e, "pmab.parse.invalidPBM",
-                    e.getLocalizedMessage());
-        } finally {
-            stream.close();
+            throw parserException(e, "pmab.parse.invalidPBM", e.getLocalizedMessage());
         }
         return pbmVersion;
     }
 
-    private String findPbm3ItemConfig(String name, String[] parts,
-                                      String defaultValue) {
+    private String findV3Config(String name, String[] parts,
+                                String defaultValue) {
         for (int ix = 1; ix < parts.length; ++ix) {
             String str = parts[ix];
             int pos = str.indexOf('=');
@@ -162,27 +159,30 @@ public class PmabParser extends ZipBookParser<PmabParseConfig> {
         return defaultValue;
     }
 
-    private Object parsePMABv3Item(String text, ZipFile zipFile)
+    private Object parseV3Item(String text, ZipFile zipFile)
             throws IOException, ParserException {
         Object value;
-        if (!TextUtils.isValid(itemType)) {
+        if (isEmpty(itemType)) {
             value = text;
         } else {
             String[] parts = itemType.split(";");
             String type = parts[0];
             if (type.equals("str")) {
-                value = text;
-            } else if (type.equals("datetime") || type.equals("date")
-                    || type.equals("time")) {
-                String format = findPbm3ItemConfig("format", parts,
-                        myConfig.dateFormat);
-                value = TextUtils.parseDate(text, format);
+                if (itemName.equals(Chapter.LANGUAGE)) {
+                    value = parseLocale(text);
+                } else {
+                    value = text;
+                }
+            } else if (type.equals("datetime") || type.equals("date") || type.equals("time")) {
+                String format = findV3Config("format", parts, mycfg.dateFormat);
+                value = parseDate(text, format);
             } else if (type.startsWith("text/")) {  // text object
                 String t = type.substring(5);
                 FileObject fb = FileFactory.fromZip(zipFile, text, "text/" + t);
-                String encoding = findPbm3ItemConfig("encoding", parts,
-                        myConfig.textEncoding);
+                String encoding = findV3Config("encoding", parts, mycfg.textEncoding);
                 value = TextFactory.fromFile(fb, encoding, t);
+            } else if (type.equals("locale")) {
+                value = parseLocale(text);
             } else if (type.matches("[\\w]+/[\\w\\-]+")) {   // file object
                 value = FileFactory.fromZip(zipFile, text, type);
             } else if (type.equals("int") || type.equals("uint")) {
@@ -190,7 +190,7 @@ public class PmabParser extends ZipBookParser<PmabParseConfig> {
             } else if (type.equals("real")) {
                 value = NumberUtils.parseDouble(text);
             } else if (type.equals("bytes")) {
-                System.err.println("PMAB: <item> with 'bytes' type is ignored");
+                System.err.println("***PMAB: <item> with 'bytes' type is ignored***");
                 value = text;
             } else if (type.equals("bool")) {
                 value = Boolean.parseBoolean(text);
@@ -203,17 +203,21 @@ public class PmabParser extends ZipBookParser<PmabParseConfig> {
 
     private boolean startPBMv3(String tag, XmlPullParser xpp) throws ParserException {
         boolean hasText = false;
-        if (tag.equals("item")) {
-            itemName = XmlUtils.getAttribute(xpp, "name");
-            itemType = xpp.getAttributeValue(null, "type");
-            hasText = true;
-        } else if (tag.equals("attributes")) {
-            inAttributes = true;
-        } else if (tag.equals("meta")) {
-            metaInfo.put(XmlUtils.getAttribute(xpp, "name"),
-                    XmlUtils.getAttribute(xpp, "value"));
-        } else if (tag.equals("head")) {
-            metaInfo = new HashMap<String, Object>();
+        switch (tag) {
+            case "item":
+                itemName = getAttribute(xpp, "name");
+                itemType = xpp.getAttributeValue(null, "type");
+                hasText = true;
+                break;
+            case "attributes":
+                inAttributes = true;
+                break;
+            case "meta":
+                metaInfo.put(getAttribute(xpp, "name"), getAttribute(xpp, "value"));
+                break;
+            case "head":
+                metaInfo = new HashMap<>();
+                break;
         }
         return hasText;
     }
@@ -221,7 +225,7 @@ public class PmabParser extends ZipBookParser<PmabParseConfig> {
     private void endPBMv3(String tag, StringBuilder textBuffer, ZipFile zipFile)
             throws IOException, ParserException {
         if (tag.equals("item")) {
-            Object value = parsePMABv3Item(textBuffer.toString().trim(), zipFile);
+            Object value = parseV3Item(textBuffer.toString().trim(), zipFile);
             if (inAttributes) {
                 book.setAttribute(itemName, value);
             } else {
@@ -239,69 +243,77 @@ public class PmabParser extends ZipBookParser<PmabParseConfig> {
     private boolean startPBMv2(String tag, XmlPullParser xpp, ZipFile zipFile)
             throws IOException, ParserException {
         boolean hasText = false;
-        if (tag.equals("attr")) {
-            if (checkCount()) {
-                attrName = XmlUtils.getAttribute(xpp, "name");
-                if (attrName.equals(Book.COVER)) {
-                    mediaType = xpp.getAttributeValue(null, "media-type");
-                } else {
-                    mediaType = null;
-                }
-                hasText = true;
-            }
-        } else if (tag.equals("item")) {
-            if (checkCount()) {
-                String name = XmlUtils.getAttribute(xpp, "name");
-                String type = xpp.getAttributeValue(null, "type");
-                if (!TextUtils.isValid(type) || type.equals("text")) {
-                    String value = XmlUtils.getAttribute(xpp, "value");
-                    book.setExtension(name, value);
-                } else if (type.equals("number")) {
-                    String value = XmlUtils.getAttribute(xpp, "value");
-                    book.setExtension(name, NumberUtils.parseNumber(value));
-                } else if (type.equals("file")) {    // file will be processed in <object>
-                    attrName = name;
-                } else {
-                    throw parserException("pmab.parse2.unknownItemType", name);
-                }
-            }
-        } else if (tag.equals("object")) {
-            if (checkCount()) {
-                String href = XmlUtils.getAttribute(xpp, "href");
-                String mime = XmlUtils.getAttribute(xpp, "media-type");
-                FileObject fb = FileFactory.fromZip(zipFile, href, mime);
-                Object value = fb;
-                if (mime.startsWith("text/plain")) {
-                    String encoding = xpp.getAttributeValue(null, "encoding");
-                    if (!TextUtils.isValid(encoding)) {
-                        value = TextFactory.fromFile(fb, myConfig.textEncoding);
+        switch (tag) {
+            case "attr":
+                if (checkCount()) {
+                    attrName = getAttribute(xpp, "name");
+                    if (attrName.equals(Book.COVER)) {
+                        mediaType = xpp.getAttributeValue(null, "media-type");
                     } else {
-                        value = TextFactory.fromFile(fb, encoding);
+                        mediaType = null;
+                    }
+                    hasText = true;
+                }
+                break;
+            case "item":
+                if (checkCount()) {
+                    String name = getAttribute(xpp, "name");
+                    String type = xpp.getAttributeValue(null, "type");
+                    if (isEmpty(type) || type.equals("text")) {
+                        book.setExtension(name, getAttribute(xpp, "value"));
+                    } else if (type.equals("number")) {
+                        String value = getAttribute(xpp, "value");
+                        book.setExtension(name, NumberUtils.parseNumber(value));
+                    } else if (type.equals("file")) {    // file will be processed in <object>
+                        attrName = name;
+                    } else {
+                        throw parserException("pmab.parse.2.unknownItemType", name);
                     }
                 }
-                book.setExtension(attrName, value);
+                break;
+            case "object":
+                if (checkCount()) {
+                    String href = getAttribute(xpp, "href");
+                    String mime = getAttribute(xpp, "media-type");
+                    FileObject fb = FileFactory.fromZip(zipFile, href, mime);
+                    Object value = fb;
+                    if (mime.startsWith("text/plain")) {
+                        String encoding = xpp.getAttributeValue(null, "encoding");
+                        if (isEmpty(encoding)) {
+                            value = TextFactory.fromFile(fb, mycfg.textEncoding);
+                        } else {
+                            value = TextFactory.fromFile(fb, encoding);
+                        }
+                    }
+                    book.setExtension(attrName, value);
+                }
+                break;
+            case "metadata": {
+                String str = xpp.getAttributeValue(null, "count");
+                if (isValid(str)) {
+                    count = NumberUtils.parseInt(str);
+                } else {
+                    count = -1;
+                }
+                order = 0;
+                break;
             }
-        } else if (tag.equals("metadata")) {
-            String str = xpp.getAttributeValue(null, "count");
-            if (TextUtils.isValid(str)) {
-                count = NumberUtils.parseInt(str);
-            } else {
-                count = -1;
+            case "extension": {
+                String str = xpp.getAttributeValue(null, "count");
+                if (isValid(str)) {
+                    count = NumberUtils.parseInt(str);
+                } else {
+                    count = -1;
+                }
+                order = 0;
+                break;
             }
-            order = 0;
-        } else if (tag.equals("extension")) {
-            String str = xpp.getAttributeValue(null, "count");
-            if (TextUtils.isValid(str)) {
-                count = NumberUtils.parseInt(str);
-            } else {
-                count = -1;
-            }
-            order = 0;
-        } else if (tag.equals("meta")) {
-            metaInfo.put(XmlUtils.getAttribute(xpp, "name"),
-                    XmlUtils.getAttribute(xpp, "content"));
-        } else if (tag.equals("head")) {
-            metaInfo = new HashMap<String, Object>();
+            case "meta":
+                metaInfo.put(getAttribute(xpp, "name"), getAttribute(xpp, "content"));
+                break;
+            case "head":
+                metaInfo = new HashMap<>();
+                break;
         }
         return hasText;
     }
@@ -312,11 +324,13 @@ public class PmabParser extends ZipBookParser<PmabParseConfig> {
             if (checkCount()) {
                 String text = textBuffer.toString().trim();
                 Object value;
-                if (attrName.equals("date")) {
-                    value = TextUtils.parseDate(text, myConfig.dateFormat);
-                } else if (attrName.equals("intro")) {
+                if (attrName.equals(Chapter.DATE)) {
+                    value = parseDate(text, mycfg.dateFormat);
+                } else if (attrName.equals(Chapter.INTRO)) {
                     value = TextFactory.fromString(text);
-                } else if (TextUtils.isValid(mediaType)) {
+                } else if (attrName.equals(Chapter.LANGUAGE)) {
+                    value = parseLocale(text);
+                } else if (isValid(mediaType)) {
                     value = FileFactory.fromZip(zipFile, text, mediaType);
                 } else {
                     value = text;
@@ -331,11 +345,10 @@ public class PmabParser extends ZipBookParser<PmabParseConfig> {
 
     private void readPBC(ZipFile zipFile, XmlPullParser xpp) throws IOException,
             ParserException {
-        InputStream stream = ZipUtils.openStream(zipFile, PMAB.PBC_FILE);
         int pbcVersion = 0;
         boolean hasText = false;
         StringBuilder textBuffer = new StringBuilder();
-        try {
+        try (InputStream stream = ZipUtils.openStream(zipFile, PMAB.PBC_FILE)) {
             xpp.setInput(stream, null);
             int eventType = xpp.getEventType();
             do {
@@ -377,10 +390,7 @@ public class PmabParser extends ZipBookParser<PmabParseConfig> {
                 eventType = xpp.next();
             } while (eventType != XmlPullParser.END_DOCUMENT);
         } catch (XmlPullParserException e) {
-            throw parserException(e, "pmab.parse.invalidPBC",
-                    e.getLocalizedMessage());
-        } finally {
-            stream.close();
+            throw parserException(e, "pmab.parse.invalidPBC", e.getLocalizedMessage());
         }
     }
 
@@ -392,78 +402,95 @@ public class PmabParser extends ZipBookParser<PmabParseConfig> {
 
     private boolean startPBCv3(String tag, XmlPullParser xpp) throws ParserException {
         boolean hasText = false;
-        if (tag.equals("chapter")) {
-            appendChapter();
-        } else if (tag.equals("item")) {
-            itemName = XmlUtils.getAttribute(xpp, "name");
-            itemType = xpp.getAttributeValue(null, "type");
-            hasText = true;
-        } else if (tag.equals("content")) {
-            itemType = xpp.getAttributeValue(null, "type");
-            hasText = true;
+        switch (tag) {
+            case "chapter":
+                appendChapter();
+                break;
+            case "item":
+                itemName = getAttribute(xpp, "name");
+                itemType = xpp.getAttributeValue(null, "type");
+                hasText = true;
+                break;
+            case "content":
+                itemType = xpp.getAttributeValue(null, "type");
+                hasText = true;
+                break;
         }
         return hasText;
     }
 
     private void endPBCv3(String tag, StringBuilder textBuffer, ZipFile zipFile)
             throws IOException, ParserException {
-        if (tag.equals("chapter")) {
-            currentChapter = currentChapter.getParent();
-        } else if (tag.equals("item")) {
-            String text = textBuffer.toString().trim();
-            currentChapter.setAttribute(itemName, parsePMABv3Item(text, zipFile));
-        } else if (tag.equals("content")) {
-            TextObject content;
-            String text = textBuffer.toString().trim();
-            if (!TextUtils.isValid(itemType)) {
-                content = TextFactory.fromString(text);
-            } else if (itemType.startsWith("text/")) {
-                String[] parts = itemType.split(";");
-                FileObject fb = FileFactory.fromZip(zipFile, text, parts[0]);
-                String encoding = findPbm3ItemConfig("encoding", parts,
-                        myConfig.textEncoding);
-                content = TextFactory.fromFile(fb, encoding);
-            } else {
-                content = TextFactory.fromString(text);
+        switch (tag) {
+            case "chapter":
+                currentChapter = currentChapter.getParent();
+                break;
+            case "item": {
+                String text = textBuffer.toString().trim();
+                currentChapter.setAttribute(itemName, parseV3Item(text, zipFile));
+                break;
             }
-            currentChapter.setContent(content);
+            case "content": {
+                TextObject content;
+                String text = textBuffer.toString().trim();
+                if (isEmpty(itemType)) {
+                    content = TextFactory.fromString(text);
+                } else if (itemType.startsWith("text/")) {
+                    String[] parts = itemType.split(";");
+                    FileObject fb = FileFactory.fromZip(zipFile, text, parts[0]);
+                    String encoding = findV3Config("encoding", parts, mycfg.textEncoding);
+                    content = TextFactory.fromFile(fb, encoding);
+                } else {
+                    content = TextFactory.fromString(text);
+                }
+                currentChapter.setContent(content);
+                break;
+            }
         }
     }
 
     private boolean startPBCv2(String tag, XmlPullParser xpp, ZipFile zipFile)
             throws IOException, ParserException {
         boolean hasText = false;
-        if (tag.equals("chapter")) {
-            String href = xpp.getAttributeValue(null, "href");
-            if (!TextUtils.isValid(href)) {
-                appendChapter();
-            } else {
-                FileObject fb = FileFactory.fromZip(zipFile, href, "text/plain");
-                chapterEncoding = xpp.getAttributeValue(null, "encoding");
-                if (!TextUtils.isValid(chapterEncoding)) {
-                    chapterEncoding = myConfig.textEncoding;
-                }
-                appendChapter();
-                currentChapter.setContent(TextFactory.fromFile(fb, chapterEncoding));
-            }
-        } else if (tag.equals("title")) {
-            hasText = true;
-        } else if (tag.equals("cover")) {
-            String href = XmlUtils.getAttribute(xpp, "href");
-            String mime = XmlUtils.getAttribute(xpp, "media-type");
-            currentChapter.setCover(FileFactory.fromZip(zipFile, href, mime));
-        } else if (tag.equals("intro")) {
-            String href = XmlUtils.getAttribute(xpp, "href");
-            FileObject fb = FileFactory.fromZip(zipFile, href, "text/plain");
-            String encoding = xpp.getAttributeValue(null, "encoding");
-            if (!TextUtils.isValid(encoding)) {
-                if (myConfig.useChapterEncoding) {
-                    encoding = chapterEncoding;
+        switch (tag) {
+            case "chapter": {
+                String href = xpp.getAttributeValue(null, "href");
+                if (isEmpty(href)) {
+                    appendChapter();
                 } else {
-                    encoding = myConfig.textEncoding;
+                    FileObject fb = FileFactory.fromZip(zipFile, href, "text/plain");
+                    chapterEncoding = xpp.getAttributeValue(null, "encoding");
+                    if (isEmpty(chapterEncoding)) {
+                        chapterEncoding = mycfg.textEncoding;
+                    }
+                    appendChapter();
+                    currentChapter.setContent(TextFactory.fromFile(fb, chapterEncoding));
                 }
+                break;
             }
-            currentChapter.setIntro(TextFactory.fromFile(fb, encoding));
+            case "title":
+                hasText = true;
+                break;
+            case "cover": {
+                String href = getAttribute(xpp, "href");
+                String mime = getAttribute(xpp, "media-type");
+                currentChapter.setCover(FileFactory.fromZip(zipFile, href, mime));
+                break;
+            }
+            case "intro": {
+                String href = getAttribute(xpp, "href");
+                FileObject fb = FileFactory.fromZip(zipFile, href, "text/plain");
+                String encoding = xpp.getAttributeValue(null, "encoding");
+                if (isEmpty(encoding)) {
+                    if (mycfg.useChapterEncoding) {
+                        encoding = chapterEncoding;
+                    } else {
+                        encoding = mycfg.textEncoding;
+                    }
+                }
+                currentChapter.setIntro(TextFactory.fromFile(fb, encoding));
+                break;
+            }
         }
         return hasText;
     }

@@ -35,16 +35,12 @@ class ErrorTracer extends CommonDialog {
 
     public ErrorTracer(Frame owner, String title, boolean modal) {
         super(owner, title, modal);
-        if (isUndecorated()) {
-            getRootPane().setWindowDecorationStyle(JRootPane.ERROR_DIALOG);
-        }
+        setDecorationStyleIfNeed(JRootPane.ERROR_DIALOG);
     }
 
     public ErrorTracer(Dialog owner, String title, boolean modal) {
         super(owner, title, modal);
-        if (isUndecorated()) {
-            getRootPane().setWindowDecorationStyle(JRootPane.ERROR_DIALOG);
-        }
+        setDecorationStyleIfNeed(JRootPane.ERROR_DIALOG);
     }
 
     void setTipText(String tipText) {

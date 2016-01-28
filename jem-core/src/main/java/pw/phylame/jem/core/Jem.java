@@ -18,130 +18,107 @@
 
 package pw.phylame.jem.core;
 
-import java.util.Map;
-import java.util.Date;
-import java.util.HashMap;
+import java.util.*;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import pw.phylame.jem.util.FileObject;
-import pw.phylame.jem.util.TextObject;
-import pw.phylame.jem.util.JemException;
-import pw.phylame.jem.util.UnsupportedFormatException;
+import pw.phylame.jem.util.*;
 
 /**
  * This class contains utility methods for book operations.
  */
 public final class Jem {
-    private static final Log LOG = LogFactory.getLog(Jem.class);
-
     /**
-     * Jem version
+     * Version message.
      */
     public static final String VERSION = "2.3";
 
     /**
-     * Jem vendor
+     * Vendor message.
      */
     public static final String VENDOR = "PW";
 
     /**
-     * Format of Pem default format
+     * The default format of Jem.
      */
-    public static final String PMAB_FORMAT = "pmab";
+    public static final String PMAB = "pmab";
+
+    /**
+     * Gets the format of specified file path.
+     *
+     * @param path the path string
+     * @return string represent the format
+     */
+    public static String formatByExtension(String path) {
+        return BookHelper.nameOfExtension(IOUtils.getExtension(path));
+    }
 
     public static Parser getParser(String format) throws UnsupportedFormatException {
         if (format == null) {
-            throw new NullPointerException("format");
+            throw new NullPointerException();
         }
 
         Parser parser;
         try {
             parser = BookHelper.getParser(format);
-        } catch (IllegalAccessException e) {
-            format = format.toUpperCase();
-            LOG.debug("cannot access parser class for " + format, e);
-            throw new UnsupportedFormatException(format, "Unsupported format: " + format, e);
-        } catch (InstantiationException e) {
-            format = format.toUpperCase();
-            LOG.debug("cannot create parser instance for " + format, e);
-            throw new UnsupportedFormatException(format, "Unsupported format: " + format, e);
-        } catch (ClassNotFoundException e) {
-            format = format.toUpperCase();
-            LOG.debug("not found parser class for " + format, e);
-            throw new UnsupportedFormatException(format, "Unsupported format: " + format, e);
-        } catch (UnsupportedFormatException e) {
-            format = format.toUpperCase();
-            LOG.debug("no registered parser class for " + format, e);
-            throw new UnsupportedFormatException(format, "Unsupported format: " + format, e);
+        } catch (IllegalAccessException | ClassNotFoundException | InstantiationException e) {
+            throw new UnsupportedFormatException(format, "Unsupported format '" + format + '\'', e);
         }
-
+        if (parser == null) {
+            throw new UnsupportedFormatException(format, "Unsupported format '" + format + '\'');
+        }
         return parser;
     }
 
     /**
      * Reads <tt>Book</tt> from book file.
      *
-     * @param file   book file to be read
-     * @param format format of the book file
-     * @param kw     arguments to parser
+     * @param input     book file to be read
+     * @param format    format of the book file
+     * @param arguments arguments to parser
      * @return <tt>Book</tt> instance represents the book file
-     * @throws NullPointerException             if the file or format is <tt>null</tt>
-     * @throws java.io.IOException              occurs IO errors
-     * @throws pw.phylame.jem.util.JemException occurs errors when parsing book file
+     * @throws NullPointerException if the file or format is <tt>null</tt>
+     * @throws IOException          if occurs I/O errors
+     * @throws JemException         if occurs errors when parsing book file
      */
-    public static Book readBook(File file, String format, Map<String, Object> kw)
+    public static Book readBook(File input, String format, Map<String, Object> arguments)
             throws IOException, JemException {
-        if (file == null) {
-            throw new NullPointerException("file");
+        if (input == null) {
+            throw new NullPointerException("input");
         }
-        Parser parser = getParser(format);
-        return parser.parse(file, kw);
+        return getParser(format).parse(input, arguments);
     }
 
     public static Maker getMaker(String format) throws UnsupportedFormatException {
         if (format == null) {
-            throw new NullPointerException("format");
+            throw new NullPointerException();
         }
 
         Maker maker;
         try {
             maker = BookHelper.getMaker(format);
-        } catch (IllegalAccessException e) {
-            format = format.toUpperCase();
-            LOG.debug("cannot access maker class for " + format, e);
-            throw new UnsupportedFormatException(format, "Unsupported format: " + format, e);
-        } catch (InstantiationException e) {
-            format = format.toUpperCase();
-            LOG.debug("cannot create maker instance for " + format, e);
-            throw new UnsupportedFormatException(format, "Unsupported format: " + format, e);
-        } catch (ClassNotFoundException e) {
-            format = format.toUpperCase();
-            LOG.debug("not found maker class for " + format, e);
-            throw new UnsupportedFormatException(format, "Unsupported format: " + format, e);
-        } catch (UnsupportedFormatException e) {
-            format = format.toUpperCase();
-            LOG.debug("no registered maker class for " + format, e);
-            throw new UnsupportedFormatException(format, "Unsupported format: " + format, e);
+        } catch (IllegalAccessException | ClassNotFoundException | InstantiationException e) {
+            throw new UnsupportedFormatException(format, "Unsupported format '" + format + "'", e);
         }
-
+        if (maker == null) {
+            throw new UnsupportedFormatException(format, "Unsupported format '" + format + "'");
+        }
         return maker;
     }
 
     /**
      * Writes <tt>Book</tt> to book with specified format.
      *
-     * @param book   the <tt>Book</tt> to be written
-     * @param output output book file
-     * @param format output format
-     * @param kw     arguments to maker
-     * @throws NullPointerException             if the book, output or format is <tt>null</tt>
-     * @throws java.io.IOException              occurs IO errors
-     * @throws pw.phylame.jem.util.JemException occurs errors when making book file
+     * @param book      the <tt>Book</tt> to be written
+     * @param output    output book file
+     * @param format    output format
+     * @param arguments arguments to maker
+     * @throws NullPointerException if the book, output or format is <tt>null</tt>
+     * @throws IOException          if occurs I/O errors
+     * @throws JemException         if occurs errors when making book file
      */
-    public static void writeBook(Book book, File output, String format, Map<String, Object> kw)
+    public static void writeBook(Book book, File output, String format, Map<String, Object> arguments)
             throws IOException, JemException {
         if (book == null) {
             throw new NullPointerException("book");
@@ -149,8 +126,26 @@ public final class Jem {
         if (output == null) {
             throw new NullPointerException("output");
         }
-        Maker maker = getMaker(format);
-        maker.make(book, output, kw);
+        getMaker(format).make(book, output, arguments);
+    }
+
+    /**
+     * Converts specified chapter to <tt>Book</tt> instance.
+     * <p>Attributes and sub-chapter of specified chapter will be copied to
+     * the new book.</p>
+     * <p><strong>NOTE:</strong> the returned book is recommended for
+     * only temporary using as it change the child-parent relation of <tt>chapter</tt>,
+     * and the book should not call {@link Chapter#cleanup()} method.
+     *
+     * @param chapter the chapter to be converted
+     * @return the new book
+     * @throws NullPointerException if the chapter is <tt>null</tt>
+     */
+    public static Book toBook(Chapter chapter) {
+        if (chapter == null) {
+            throw new NullPointerException();
+        }
+        return new Book(chapter);
     }
 
     /**
@@ -163,7 +158,7 @@ public final class Jem {
      * @throws IndexOutOfBoundsException if the index in indices is out of
      *                                   range (index &lt; 0 || index &ge; size())
      */
-    public static Chapter chapterForIndex(Chapter chapter, int[] indices) {
+    public static Chapter locate(Chapter chapter, int[] indices) {
         if (chapter == null) {
             throw new NullPointerException("chapter");
         }
@@ -177,40 +172,20 @@ public final class Jem {
             try {
                 chapter = chapter.chapterAt(index);
             } catch (IndexOutOfBoundsException e) {
-                throw new IndexOutOfBoundsException(
-                        chapter.getTitle() + ": " + e.getMessage());
+                throw new IndexOutOfBoundsException(chapter.getTitle() + ": " + e.getMessage());
             }
         }
         return chapter;
     }
 
     /**
-     * Converts specified chapter to <tt>Book</tt> instance.
-     * <p>Attributes and sub-parts of specified chapter will be copied to
-     * the new book.</p>
-     * <p><strong>NOTE:</strong> the returned book is recommended for
-     * only temporary using as it change the child-parent relation of <tt>chapter</tt>,
-     * and the book should not call {@link Chapter#cleanup()} method.
-     *
-     * @param chapter the chapter to be converted
-     * @return the new book
-     * @throws NullPointerException if the chapter is <tt>null</tt>
-     */
-    public static Book chapterToBook(Chapter chapter) {
-        if (chapter == null) {
-            throw new NullPointerException();
-        }
-        return new Book(chapter);
-    }
-
-    /**
-     * Returns the depth of sub-parts tree in specified chapter.
+     * Returns the depth of sub-chapter tree in specified chapter.
      *
      * @param chapter the chapter
      * @return depth of the chapter
      * @throws NullPointerException if the chapter is <tt>null</tt>
      */
-    public static int depthOfChapter(Chapter chapter) {
+    public static int depthOf(Chapter chapter) {
         if (chapter == null) {
             throw new NullPointerException();
         }
@@ -221,7 +196,7 @@ public final class Jem {
 
         int depth = 0;
         for (Chapter sub : chapter) {
-            int d = depthOfChapter(sub);
+            int d = depthOf(sub);
             if (d > depth) {
                 depth = d;
             }
@@ -230,45 +205,205 @@ public final class Jem {
         return depth + 1;
     }
 
-    public static final Map<Class<?>, String> variantTypes = new HashMap<Class<?>, String>();
-
-    static {
-        variantTypes.put(Character.class, "str");
-        variantTypes.put(String.class, "str");
-        variantTypes.put(CharSequence.class, "str");
-        variantTypes.put(Date.class, "datetime");
-        variantTypes.put(Byte.class, "int");
-        variantTypes.put(Short.class, "int");
-        variantTypes.put(Integer.class, "int");
-        variantTypes.put(Long.class, "int");
-        variantTypes.put(Boolean.class, "bool");
-        variantTypes.put(Float.class, "real");
-        variantTypes.put(Double.class, "real");
-        variantTypes.put(Number.class, "real");
+    /**
+     * Filter for matching <tt>Chapter</tt>.
+     */
+    public interface Filter {
+        /**
+         * Tests the specified chapter is wanted or not.
+         *
+         * @param chapter the chapter
+         * @return <tt>true</tt> if the chapter is matched
+         */
+        boolean accept(Chapter chapter);
     }
 
     /**
-     * Returns type name of attribute value format for PEM declaration.
+     * Finds a matched sub-chapter from specified chapter with filter.
      *
-     * @param obj attribute value
+     * @param chapter   the parent chapter
+     * @param filter    the filter
+     * @param from      begin index of sub-chapter to be filtered in <tt>chapter</tt>
+     * @param recursion <tt>true</tt> to find sub-chapter(s) of <tt>chapter</tt>
+     * @return the first matched chapter or <tt>null</tt> if no matched found
+     */
+    public static Chapter find(Chapter chapter, Filter filter, int from, boolean recursion) {
+        Chapter c;
+        for (int ix = from; ix < chapter.size(); ++ix) {
+            c = chapter.chapterAt(ix);
+            if (filter.accept(c)) {
+                return c;
+            }
+            if (c.isSection() && recursion) {
+                c = find(c, filter, 0, true);
+                if (c != null) {
+                    return c;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Selected sub-chapter from specified chapter with specified condition.
+     *
+     * @param chapter   the parent chapter
+     * @param filter    the filter
+     * @param result    store matched chapters
+     * @param limit     limits of matched chapters
+     * @param recursion <tt>true</tt> to find sub-chapter(s) of <tt>chapter</tt>
+     * @return the number of found chapter(s)
+     */
+    public static int select(Chapter chapter, Filter filter, List<Chapter> result,
+                             int limit, boolean recursion) {
+        int count = 0;
+        for (Chapter c : chapter) {
+            if (filter.accept(c)) {
+                result.add(c);
+                if (++count == limit) {
+                    break;
+                }
+            }
+            if (c.isSection() && recursion) {
+                count += select(c, filter, result, limit, true);
+            }
+        }
+        return count;
+    }
+
+    // declare variant type aliases
+    public static final String FILE = "file";
+    public static final String TEXT = "text";
+    public static final String STRING = "str";
+    public static final String INTEGER = "int";
+    public static final String REAL = "real";
+    public static final String LOCALE = "locale";
+    public static final String DATETIME = "datetime";
+    public static final String BOOLEAN = "bool";
+
+    /**
+     * Returns supported types by Jem.
+     *
+     * @return array of type names
+     */
+    public static String[] supportedTypes() {
+        return new String[]{FILE, TEXT, STRING, INTEGER, REAL, LOCALE, DATETIME, BOOLEAN};
+    }
+
+    public static final HashMap<Class<?>, String> variantTypes = new HashMap<>();
+
+    static {
+        variantTypes.put(Character.class, STRING);
+        variantTypes.put(String.class, STRING);
+        variantTypes.put(Date.class, DATETIME);
+        variantTypes.put(Locale.class, LOCALE);
+        variantTypes.put(Byte.class, INTEGER);
+        variantTypes.put(Short.class, INTEGER);
+        variantTypes.put(Integer.class, INTEGER);
+        variantTypes.put(Long.class, INTEGER);
+        variantTypes.put(Boolean.class, BOOLEAN);
+        variantTypes.put(Float.class, REAL);
+        variantTypes.put(Double.class, REAL);
+    }
+
+    /**
+     * Returns type name of specified object.
+     *
+     * @param o attribute value
      * @return the type name
      * @throws NullPointerException if the obj is <tt>null</tt>
      */
-    public static String variantType(Object obj) {
-        if (obj == null) {
+    public static String typeOfVariant(Object o) {
+        if (o == null) {
             throw new NullPointerException();
         }
-        Class<?> clazz = obj.getClass();
+        Class<?> clazz = o.getClass();
         String name = variantTypes.get(clazz);
         if (name != null) {
             return name;
         }
         if (TextObject.class.isAssignableFrom(clazz)) {
-            return "text";
+            return TEXT;
         } else if (FileObject.class.isAssignableFrom(clazz)) {
-            return "file";
+            return FILE;
         } else {
             return clazz.getName();
+        }
+    }
+
+    public static final HashMap<String, String> attributeTypes = new HashMap<>();
+
+    static {
+        attributeTypes.put(Attributes.COVER, FILE);
+        attributeTypes.put(Attributes.INTRO, TEXT);
+        attributeTypes.put(Attributes.WORDS, INTEGER);
+        attributeTypes.put(Attributes.DATE, DATETIME);
+        attributeTypes.put(Attributes.LANGUAGE, LOCALE);
+    }
+
+    /**
+     * Returns type of specified attribute name.
+     *
+     * @param name name of attribute
+     * @return the type string
+     */
+    public static String typeOfAttribute(String name) {
+        String type = attributeTypes.get(name);
+        return type != null ? type : STRING;
+    }
+
+    /**
+     * Returns default value of specified type.
+     *
+     * @param type type string
+     * @return the value
+     */
+    public static Object defaultOfType(String type) {
+        switch (type) {
+            case STRING:
+                return "";
+            case TEXT:
+                return TextFactory.emptyText();
+            case FILE:
+                return FileFactory.emptyFile();
+            case DATETIME:
+                return new Date();
+            case LOCALE:
+                return Locale.getDefault();
+            case INTEGER:
+                return 0;
+            case REAL:
+                return 0.0D;
+            case BOOLEAN:
+                return false;
+            default:
+                return "";
+        }
+    }
+
+    /**
+     * Converts specified object to string.
+     *
+     * @param o the object
+     * @return a string represent the object
+     */
+    public static String formatVariant(Object o) {
+        if (o == null) {
+            return "";
+        }
+        switch (typeOfVariant(o)) {
+            case TEXT:
+                try {
+                    return ((TextObject) o).getText();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            case DATETIME:
+                return new SimpleDateFormat("yy-M-d").format((Date) o);
+            case LOCALE:
+                return ((Locale) o).getDisplayName();
+            default:
+                return String.valueOf(o);
         }
     }
 }

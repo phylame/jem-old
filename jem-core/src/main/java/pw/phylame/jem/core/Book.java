@@ -18,10 +18,12 @@
 
 package pw.phylame.jem.core;
 
-import java.util.Map;
 import java.util.Set;
+import java.util.Map;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.Locale;
+
+import pw.phylame.jem.util.VariantMap;
 
 /**
  * Common <tt>Book</tt> model describes book structure.
@@ -39,7 +41,16 @@ public class Book extends Chapter {
      * Constructs instance with empty title and author.
      */
     public Book() {
-        this("", "");
+        super();
+    }
+
+    /**
+     * Constructs instance with specified title.
+     *
+     * @param title the title of book
+     */
+    public Book(String title) {
+        super(title);
     }
 
     /**
@@ -55,9 +66,7 @@ public class Book extends Chapter {
     }
 
     Book(Chapter chapter) {
-        updateAttributes(chapter);
-        children.addAll(chapter.children);
-        content = chapter.content;
+        super(chapter);
     }
 
     public String getAuthor() {
@@ -69,11 +78,7 @@ public class Book extends Chapter {
     }
 
     public Date getDate() {
-        Object o = getAttribute(DATE);
-        if (o instanceof Date) {
-            return (Date) o;
-        }
-        return null;
+        return attributes.get(DATE, null, Date.class);
     }
 
     public void setDate(Date date) {
@@ -88,11 +93,11 @@ public class Book extends Chapter {
         setAttribute(GENRE, genre);
     }
 
-    public String getLanguage() {
-        return stringAttribute(LANGUAGE, "");
+    public Locale getLanguage() {
+        return attributes.get(LANGUAGE, null, Locale.class);
     }
 
-    public void setLanguage(String language) {
+    public void setLanguage(Locale language) {
         setAttribute(LANGUAGE, language);
     }
 
@@ -141,23 +146,20 @@ public class Book extends Chapter {
     // *********************
 
     /**
-     * Extension mapping
+     * Extensions map.
      */
-    protected final HashMap<String, Object> extensions = new HashMap<String, Object>();
+    protected final VariantMap extensions = new VariantMap();
 
     /**
      * Associates the specified value with the specified name in extensions.
-     * <p>If the {@code name} not exists add a new item, otherwise overwritten
+     * <p>If the <tt>name</tt> not exists add a new extension, otherwise overwritten
      * old value.</p>
      *
-     * @param name  name of the item
-     * @param value value of the item, cannot be <tt>null</tt>
+     * @param name  name of the extension
+     * @param value value of the extension, cannot be <tt>null</tt>
      * @throws NullPointerException if the <tt>value</tt> is <tt>null</tt>
      */
     public void setExtension(String name, Object value) {
-        if (value == null) {
-            throw new NullPointerException("value");
-        }
         extensions.put(name, value);
     }
 
@@ -169,42 +171,29 @@ public class Book extends Chapter {
      * otherwise <tt>not</tt>
      */
     public boolean hasExtension(String name) {
-        return extensions.containsKey(name);
+        return extensions.contains(name);
     }
 
     /**
-     * Returns item value in extensions by its name, if not present
-     * returns {@code defaultValue}.
+     * Returns extension in extensions map by its name, if not present
+     * returns <tt>defaultValue</tt>.
      *
-     * @param name         name of item
-     * @param defaultValue default value to returned if not found item
+     * @param name         name of extension
+     * @param defaultValue default value to returned if not found extension
      *                     with <tt>name</tt>
-     * @return item value associated with <tt>name</tt> or
-     * <tt>defaultValue</tt> if not found item for <tt>name</tt>
+     * @return extension value associated with <tt>name</tt> or
+     * <tt>defaultValue</tt> if not found extension for <tt>name</tt>
      */
     public Object getExtension(String name, Object defaultValue) {
-        Object v = extensions.get(name);
-        return (v != null) ? v : defaultValue;
+        return extensions.get(name, defaultValue);
     }
 
     /**
-     * Returns item value in extensions by its name, if not present
-     * returns <tt>null</tt>.
+     * Removes one extension with specified name from extensions.
      *
-     * @param name name of item
-     * @return item value associated with <tt>name</tt> or
-     * <tt>null</tt> if not found item for <tt>name</tt>
-     */
-    public Object getExtension(String name) {
-        return getExtension(name, null);
-    }
-
-    /**
-     * Removes one item with specified name from extensions.
-     *
-     * @param name name of item
-     * @return the previous item value associated with <tt>name</tt>, or
-     * <tt>null</tt> if there was item for <tt>name</tt>.
+     * @param name name of extension
+     * @return the previous extension value associated with <tt>name</tt>, or
+     * <tt>null</tt> if there was extension for <tt>name</tt>.
      */
     public Object removeExtension(String name) {
         return extensions.remove(name);
@@ -218,21 +207,21 @@ public class Book extends Chapter {
     }
 
     /**
-     * Returns size of extensions in this object.
+     * Returns number of extensions in this object.
      *
      * @return number of items
      */
-    public int extensionSize() {
+    public int extensionCount() {
         return extensions.size();
     }
 
     /**
-     * Returns all names of item in extensions.
+     * Returns all names of extension in extensions.
      *
-     * @return sequence of item names
+     * @return sequence of extension names
      */
     public String[] extensionNames() {
-        return extensions.keySet().toArray(new String[extensions.size()]);
+        return extensions.keys();
     }
 
     /**
@@ -242,7 +231,7 @@ public class Book extends Chapter {
      * @since 2.3
      */
     public Set<Map.Entry<String, Object>> extensionEntries() {
-        return extensions.entrySet();
+        return extensions.entries();
     }
 
     @Override

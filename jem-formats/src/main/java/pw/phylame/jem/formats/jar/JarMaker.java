@@ -20,8 +20,9 @@ package pw.phylame.jem.formats.jar;
 
 import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.Book;
+import pw.phylame.jem.util.IOUtils;
 import pw.phylame.jem.util.TextObject;
-import pw.phylame.jem.formats.common.ZipBookMaker;
+import pw.phylame.jem.formats.common.ZipMaker;
 import pw.phylame.jem.formats.util.MakerException;
 import pw.phylame.jem.formats.util.ZipUtils;
 import pw.phylame.jem.formats.util.text.TextConfig;
@@ -33,14 +34,13 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
-import org.apache.commons.io.IOUtils;
 
 /**
  * <tt>Maker</tt> implement for JAR book.
  */
-public class JarMaker extends ZipBookMaker<JarMakeConfig> {
+public class JarMaker extends ZipMaker<JarMakeConfig> {
     public JarMaker() {
-        super("jar", JarMakeConfig.class, JarMakeConfig.CONFIG_SELF);
+        super("jar", JarMakeConfig.CONFIG_SELF, JarMakeConfig.class);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class JarMaker extends ZipBookMaker<JarMakeConfig> {
         String title = book.getTitle();
         String mf = String.format(JAR.MANIFEST_TEMPLATE,
                 "Jem", Jem.VERSION, title, config.vendor, title);
-        ZipUtils.writeString(mf, JAR.MANIFEST_FILE, JAR.META_ENCODING, zipout);
+        ZipUtils.writeString(mf, JAR.MANIFEST_FILE, JAR.METADATA_ENCODING, zipout);
 
         JarRender jarRender = new JarRender(zipout);
         try {
@@ -83,7 +83,7 @@ public class JarMaker extends ZipBookMaker<JarMakeConfig> {
             ZipEntry entry;
             while ((entry = zis.getNextEntry()) != null) {
                 zipout.putNextEntry(new ZipEntry(entry.getName()));
-                IOUtils.copy(zis, zipout);
+                IOUtils.copy(zis, zipout, -1);
                 zis.closeEntry();
                 zipout.closeEntry();
             }
@@ -97,19 +97,19 @@ public class JarMaker extends ZipBookMaker<JarMakeConfig> {
                            TextConfig config) throws Exception {
         zipout.putNextEntry(new ZipEntry("0"));
         DataOutput output = new DataOutputStream(zipout);
-        output.writeInt(JAR.FILE_HEADER);
+        output.writeInt(JAR.FILE_MAGIC_NUMBER);
         String title = book.getTitle();
-        byte[] b = title.getBytes(JAR.META_ENCODING);
+        byte[] b = title.getBytes(JAR.METADATA_ENCODING);
         output.writeByte(b.length);
         output.write(b);
 
-        b = String.valueOf(items.size()).getBytes(JAR.META_ENCODING);
+        b = String.valueOf(items.size()).getBytes(JAR.METADATA_ENCODING);
         output.writeShort(b.length);
         output.write(b);
 
         for (MetaItem item : items) {
             String str = item.name + "," + item.size + "," + item.title;
-            b = str.getBytes(JAR.META_ENCODING);
+            b = str.getBytes(JAR.METADATA_ENCODING);
             output.writeShort(b.length);
             output.write(b);
         }
@@ -121,7 +121,7 @@ public class JarMaker extends ZipBookMaker<JarMakeConfig> {
         } else {
             str = "";
         }
-        b = str.getBytes(JAR.META_ENCODING);
+        b = str.getBytes(JAR.METADATA_ENCODING);
         output.writeShort(b.length);
         output.write(b);
         zipout.closeEntry();

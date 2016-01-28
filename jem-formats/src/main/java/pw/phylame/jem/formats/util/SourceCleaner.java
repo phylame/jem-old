@@ -18,44 +18,33 @@
 
 package pw.phylame.jem.formats.util;
 
-import pw.phylame.jem.core.Chapter;
-
 import java.io.Closeable;
-import java.io.IOException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import pw.phylame.jem.util.IOUtils;
+import pw.phylame.jem.core.Chapter;
 
 /**
  * Cleans input source of book.
  */
 public class SourceCleaner implements Chapter.Cleanable {
-    private static Log LOG = LogFactory.getLog(SourceCleaner.class);
+    private final Closeable source;
+    private final Runnable addon;
 
-    protected final Closeable dev;
-    protected final String name;
-    protected final Runnable extTask;
-
-    public SourceCleaner(Closeable dev, String name) {
-        this(dev, name, null);
+    public SourceCleaner(Closeable source) {
+        this.source = source;
+        addon = null;
     }
 
-    public SourceCleaner(Closeable dev, String name, Runnable extTask) {
-        this.dev = dev;
-        this.name = name;
-        this.extTask = extTask;
+    public SourceCleaner(Closeable source, Runnable addon) {
+        this.source = source;
+        this.addon = addon;
     }
 
     @Override
     public void clean(Chapter chapter) {
-        try {
-            dev.close();
-        } catch (IOException e) {
-            LOG.debug("cannot close source file: " + name, e);
-        } finally {
-            if (extTask != null) {
-                extTask.run();
-            }
+        IOUtils.closeQuietly(source);
+        if (addon != null) {
+            addon.run();
         }
     }
 }

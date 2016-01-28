@@ -27,8 +27,9 @@ import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Chapter;
 import pw.phylame.jem.core.BookHelper;
+import pw.phylame.jem.formats.txt.TxtParseConfig;
+import pw.phylame.jem.util.IOUtils;
 import pw.phylame.jem.util.JemException;
-import org.apache.commons.io.FilenameUtils;
 
 /**
  * Utilities for debug parser and maker.
@@ -38,7 +39,7 @@ public final class DebugUtils {
     }
 
     public static Book parseFile(String path, Map<String, Object> kw) {
-        String format = BookHelper.nameOfExtension(FilenameUtils.getExtension(path));
+        String format = BookHelper.nameOfExtension(IOUtils.getExtension(path));
         if (format == null) {
             System.err.println("unsupported format: " + path);
             return null;
@@ -50,16 +51,14 @@ public final class DebugUtils {
         Book book = null;
         try {
             book = Jem.readBook(new File(path), format, kw);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JemException e) {
+        } catch (IOException | JemException e) {
             e.printStackTrace();
         }
         return book;
     }
 
     public static void makeFile(Book book, String path, Map<String, Object> kw) {
-        String format = BookHelper.nameOfExtension(FilenameUtils.getExtension(path));
+        String format = BookHelper.nameOfExtension(IOUtils.getExtension(path));
         if (format == null) {
             System.err.println("unsupported format: " + path);
             return;
@@ -67,13 +66,10 @@ public final class DebugUtils {
         makeFile(book, path, format, kw);
     }
 
-    public static void makeFile(Book book, String path, String format,
-                                Map<String, Object> kw) {
+    public static void makeFile(Book book, String path, String format, Map<String, Object> kw) {
         try {
             Jem.writeBook(book, new File(path), format, kw);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JemException e) {
+        } catch (IOException | JemException e) {
             e.printStackTrace();
         }
     }
@@ -83,7 +79,7 @@ public final class DebugUtils {
         if (size % 2 != 0) {
             throw new IllegalArgumentException("size of objects must % 2 = 0");
         }
-        HashMap<String, Object> map = new HashMap<String, Object>();
+        HashMap<String, Object> map = new HashMap<>();
         for (int ix = 0; ix < size; ix += 2) {
             map.put(objects[ix].toString(), objects[ix + 1]);
         }
@@ -91,16 +87,16 @@ public final class DebugUtils {
     }
 
     public static void printAttributes(Chapter ch) {
-        System.out.println(ch.attributeSize() + " attributes of " + ch.getTitle());
+        System.out.println(ch.attributeCount() + " attributes of " + ch.getTitle());
         for (Map.Entry<String, Object> entry : ch.attributeEntries()) {
-            System.out.println(" " + entry.getKey() + "=" + entry.getValue());
+            System.out.println(" " + entry.getKey() + "=" + Jem.formatVariant(entry.getValue()));
         }
     }
 
     public static void printExtension(Book book) {
-        System.out.println(book.extensionSize() + " extensions of " + book.getTitle());
+        System.out.println(book.extensionCount() + " extensions of " + book.getTitle());
         for (Map.Entry<String, Object> entry : book.extensionEntries()) {
-            System.out.println(" " + entry.getKey() + "=" + entry.getValue());
+            System.out.println(" " + entry.getKey() + "=" + Jem.formatVariant(entry.getValue()));
         }
     }
 
@@ -118,6 +114,21 @@ public final class DebugUtils {
         for (Chapter sub : ch) {
             printTOC(sub, prefix + order + separator, separator);
             ++order;
+        }
+    }
+
+    public static void main(String[] args) {
+        Map<String, Object> kw = makeConfig(
+                TxtParseConfig.TEXT_ENCODING, "GBK"
+                , TxtParseConfig.CHAPTER_PATTERN, "^第[一二三四五六七八九十百零]+[(卷)(章\\s)].*\\r\\n"
+        );
+        String path = "D:\\tmp\\辽东钉子户.txt";
+        Book book = parseFile(path, kw);
+        printTOC(book);
+        try {
+            Jem.writeBook(book, new File("D:/tmp/a.pmab"), "pmab", null);
+        } catch (IOException | JemException e) {
+            e.printStackTrace();
         }
     }
 }

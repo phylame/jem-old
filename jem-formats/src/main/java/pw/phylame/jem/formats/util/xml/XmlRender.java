@@ -18,30 +18,30 @@
 
 package pw.phylame.jem.formats.util.xml;
 
-import org.xmlpull.v1.XmlSerializer;
-import pw.phylame.jem.formats.util.MakerException;
-import pw.phylame.jem.formats.util.text.TextUtils;
-
 import java.io.Writer;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.LinkedList;
 
+import org.xmlpull.v1.XmlSerializer;
+import pw.phylame.jem.formats.util.MakerException;
+import pw.phylame.jem.formats.util.text.TextUtils;
+
 /**
  * Renders XML document.
  */
 public class XmlRender {
-    private XmlSerializer xmlSerializer;
-    private XmlConfig config;
+    private final XmlSerializer xmlSerializer;
+    private final XmlConfig config;
 
-    private boolean doIndent;
+    private final boolean doIndent;
     private int indentCount;
 
-    private LinkedList<TagEntry> tagStack = new LinkedList<TagEntry>();
+    private final LinkedList<TagEntry> tagStack = new LinkedList<>();
 
     public XmlRender(XmlConfig config) throws MakerException {
-        this.xmlSerializer = XmlUtils.newSerializer();
         this.config = config;
+        xmlSerializer = XmlUtils.newSerializer();
         doIndent = TextUtils.isValid(config.indentString);
     }
 
@@ -86,7 +86,7 @@ public class XmlRender {
             return;
         }
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < count; ++i) {
             sb.append(config.indentString);
         }
         xmlSerializer.text(sb.toString());
@@ -125,8 +125,7 @@ public class XmlRender {
         return this;
     }
 
-    public XmlRender attribute(String namespace, String name, String value)
-            throws IOException {
+    public XmlRender attribute(String namespace, String name, String value) throws IOException {
         xmlSerializer.attribute(namespace, name, value);
         return this;
     }
@@ -153,13 +152,13 @@ public class XmlRender {
     }
 
     private class TagEntry {
-        String namespace;
-        String name;
+        private final String namespace;
+        private final String name;
 
         // for endTag, if hasSubTag add line separator and indent
-        boolean hasSubTag = false;
+        private boolean hasSubTag = false;
 
-        TagEntry(String namespace, String name) {
+        private TagEntry(String namespace, String name) {
             this.namespace = namespace;
             this.name = name;
         }

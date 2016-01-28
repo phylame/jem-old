@@ -19,7 +19,6 @@
 package pw.phylame.jem.formats.epub.writer;
 
 import pw.phylame.jem.core.Book;
-import pw.phylame.jem.formats.epub.EpubConfig;
 import pw.phylame.jem.formats.epub.Resource;
 import pw.phylame.jem.formats.util.text.TextUtils;
 
@@ -29,14 +28,12 @@ import pw.phylame.jem.formats.epub.ncx.NcxWriterFactory;
 import pw.phylame.jem.formats.epub.opf.OpfWriter;
 import pw.phylame.jem.formats.epub.opf.OpfWriterFactory;
 import pw.phylame.jem.formats.util.MakerException;
-import pw.phylame.jem.util.JemException;
 
-import java.io.IOException;
-import java.io.StringWriter;
 import java.util.List;
 import java.util.UUID;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
+import java.io.IOException;
+import java.io.StringWriter;
 
 /**
  * ePub 2.0 implements.

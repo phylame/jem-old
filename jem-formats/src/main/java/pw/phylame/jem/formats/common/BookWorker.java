@@ -30,74 +30,45 @@ import pw.phylame.jem.formats.util.config.InvalidConfigException;
  * Common e-book parser.
  */
 abstract class BookWorker<CF extends CommonConfig> {
-    private String name;
-
-    @SuppressWarnings("unchecked")
-    public BookWorker(String name) {
-        this(name, (Class<CF>) NonConfig.class, null);
-    }
-
-    public BookWorker(String name, Class<CF> configClass, String configKey) {
-        if (name == null) {
-            throw new NullPointerException("name");
-        }
-        if (configClass == null) {
-            throw new NullPointerException("configClass");
-        }
-        if (configKey == null && configClass != NonConfig.class) {
-            throw new NullPointerException("configKey");
-        }
-        this.name = name;
-        this.configClass = configClass;
-        this.configKey = configKey;
-    }
-
-    public String getName() {
-        return name;
-    }
+    /**
+     * Name of the worker.
+     */
+    private final String name;
 
     /**
      * Key for fetch <tt>CF</tt> object from config map.
      */
-    protected String configKey;
+    protected final String configKey;
 
     /**
      * Type of custom <tt>CF</tt> class.
      */
-    protected Class<CF> configClass;
+    protected final Class<CF> configClass;
+
+    BookWorker(String name, String configKey, Class<CF> configClass) {
+        if (name == null) {
+            throw new NullPointerException("name");
+        }
+        if (configKey != null && configClass == null) {
+            throw new IllegalArgumentException("'configKey' is valid but 'configClass' not");
+        }
+        this.name = name;
+        this.configKey = configKey;
+        this.configClass = configClass;
+    }
+
+    public final String getName() {
+        return name;
+    }
 
     // 1
-    protected CF fetchConfig(Map<String, Object> kw) throws InvalidConfigException {
-        if (configClass == NonConfig.class) {    // no config
+    protected final CF fetchConfig(Map<String, Object> kw) throws InvalidConfigException {
+        if (configKey == null) {   // no config required
             return null;
         }
-        CF config = ConfigUtils.fetchObject(kw, configKey, null, configClass);
-        if (config != null) {
-            return config;
-        }
-        config = defaultConfig();
-        config.fetch(kw);
-        return config;
-    }
-
-    private CF defaultConfig() {
-        try {
-            return configClass.newInstance();
-        } catch (InstantiationException e) {
-            throw new AssertionError("config cannot be instantiated");
-        } catch (IllegalAccessException e) {
-            throw new AssertionError("constructor of config is inaccessible");
-        }
-    }
-
-    CF fetchOrCreate(Map<String, Object> kw) throws InvalidConfigException {
-        if (kw != null && !kw.isEmpty()) {
-            return fetchConfig(kw);
-        } else if (configClass != NonConfig.class) {
-            return defaultConfig();
-        } else {
-            return null;
-        }
+        return kw == null || kw.isEmpty()
+                ? ConfigUtils.defaultConfig(configClass)
+                : ConfigUtils.fetchConfig(kw, configKey, configClass);
     }
 
     protected IOException ioException(String msg, Object... args) {

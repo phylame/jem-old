@@ -50,7 +50,7 @@ public class Manager extends ICommandDispatcher implements Constants {
         this.viewer = app.getForm();
         viewer.setStatusText(app.getText("viewer.status.ready"));
 
-        newFile(app.getText("dialog.newBook.defaultTitle"));
+        newFile(app.getText("d.newBook.defaultTitle"));
         viewer.setVisible(true);
 
 //        editSettings(viewer);
@@ -58,7 +58,7 @@ public class Manager extends ICommandDispatcher implements Constants {
         if (!context.inputs.isEmpty()) {
             // only open the last input file
             File input = new File(context.inputs.getLast());
-            openBook(app.getText("dialog.openBook.title"),
+            openBook(app.getText("d.openBook.title"),
                     new ParserData(input, context.format, context.kw, true));
         }
     }
@@ -98,7 +98,7 @@ public class Manager extends ICommandDispatcher implements Constants {
      * @param name name of the new book, if <tt>null</tt>, user need input new name.
      */
     public void newFile(String name) {
-        String title = app.getText("dialog.newBook.title");
+        String title = app.getText("d.newBook.title");
         if (!maybeSaving(title)) {
             return;
         }
@@ -110,7 +110,7 @@ public class Manager extends ICommandDispatcher implements Constants {
             task.cleanup();
         }
         activateTask(BookTask.fromNewBook(book));
-        app.localizedMessage("dialog.newBook.finished", book);
+        app.localizedMessage("d.newBook.finished", book);
     }
 
     /**
@@ -123,17 +123,17 @@ public class Manager extends ICommandDispatcher implements Constants {
      */
     public void openBook(String title, ParserData pd) {
         if (!pd.file.exists()) {
-            localizedError(viewer, title, "dialog.openBook.fileNotExist", pd.file);
+            localizedError(viewer, title, "d.openBook.fileNotExist", pd.file);
             return;
         }
 
         if (!BookHelper.hasParser(pd.format)) {
-            localizedError(viewer, title, "dialog.openBook.unsupportedFormat", pd.format);
+            localizedError(viewer, title, "d.openBook.unsupportedFormat", pd.format);
             return;
         }
 
-        String tip = app.getText("dialog.openBook.tipText", pd.file);
-        String waiting = app.getText("dialog.openBook.waitingText");
+        String tip = app.getText("d.openBook.tipText", pd.file);
+        String waiting = app.getText("d.openBook.waitingText");
         openWaiting(viewer, title, tip, waiting, new OpenBookWork(title, pd), false);
     }
 
@@ -145,7 +145,7 @@ public class Manager extends ICommandDispatcher implements Constants {
     }
 
     public void openFile(File file) {
-        String title = app.getText("dialog.openBook.title");
+        String title = app.getText("d.openBook.title");
         if (!maybeSaving(title)) {
             return;
         }
@@ -170,11 +170,11 @@ public class Manager extends ICommandDispatcher implements Constants {
         String tip = app.getText("dialog.askSaving.tip");
         int rev = askSaving(viewer, title, tip);
         switch (rev) {
-            case 0: // discard
+            case OPTION_DISCARD:
                 break;
-            case 1: // save
+            case OPTION_OK:
                 return saveFile();
-            default:    // cancel
+            default:
                 return false;
         }
         return true;
@@ -182,12 +182,12 @@ public class Manager extends ICommandDispatcher implements Constants {
 
     public void saveBook(String title, MakerData md, boolean isSaveAs) {
         if (!BookHelper.hasMaker(md.format)) {
-            localizedError(viewer, title, "dialog.saveBook.unsupportedFormat", md.format);
+            localizedError(viewer, title, "d.saveBook.unsupportedFormat", md.format);
             return;
         }
 
-        String tip = app.getText("dialog.saveBook.tipText", md.file);
-        String waiting = app.getText("dialog.saveBook.waitingText");
+        String tip = app.getText("d.saveBook.tipText", md.file);
+        String waiting = app.getText("d.saveBook.waitingText");
         openWaiting(viewer, title, tip, waiting, new SaveBookWork(title, md, isSaveAs), false);
     }
 
@@ -199,7 +199,7 @@ public class Manager extends ICommandDispatcher implements Constants {
      * @return <tt>true</tt> if book was saved, otherwise <tt>false</tt>.
      */
     public boolean saveFile() {
-        String title = app.getText("dialog.saveBook.title", task.getBook());
+        String title = app.getText("d.saveBook.title", task.getBook());
         MakerData md = worker.makeMakerData(viewer, title, task.getBook(),
                 task.getSource(), task.getFormat(), task.getMakerArguments());
         if (md == null) {
@@ -210,7 +210,7 @@ public class Manager extends ICommandDispatcher implements Constants {
     }
 
     public void saveAsFile() {
-        String title = app.getText("dialog.saveAsBook.title", task.getBook());
+        String title = app.getText("d.saveAsBook.title", task.getBook());
         MakerData md = worker.makeMakerData(viewer, title, task.getBook(),
                 task.getSource(), null, null);
         if (md == null) {
@@ -225,7 +225,7 @@ public class Manager extends ICommandDispatcher implements Constants {
     }
 
     public void exitApp() {
-        if (!maybeSaving(app.getText("dialog.exitApp.title"))) {
+        if (!maybeSaving(app.getText("d.exitApp.title"))) {
             return;
         }
         if (task != null) {
@@ -302,7 +302,7 @@ public class Manager extends ICommandDispatcher implements Constants {
         protected void onSuccess(List<ParseResult> result) {
             ParseResult pr = result.get(0);
             activateTask(BookTask.fromOpenBook(pr));
-            app.localizedMessage("dialog.openBook.finished", pr.pd.file);
+            app.localizedMessage("d.openBook.finished", pr.pd.file);
             hideWaitingDialog();
         }
     }
@@ -328,11 +328,11 @@ public class Manager extends ICommandDispatcher implements Constants {
         protected void onSuccess(File result) {
             if (saveAs) {
                 hideWaitingDialog();
-                localizedInformation(viewer, title, "dialog.saveAsBook.finished", result);
+                localizedInformation(viewer, title, "d.saveAsBook.finished", result);
             } else {
                 viewer.setActionEnable(FILE_DETAILS, true);
                 viewer.updateTitle();
-                app.localizedMessage("dialog.saveBook.finished", result);
+                app.localizedMessage("d.saveBook.finished", result);
                 hideWaitingDialog();
             }
         }

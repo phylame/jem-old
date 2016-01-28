@@ -23,11 +23,12 @@ import java.io.InputStream;
 import java.io.RandomAccessFile;
 
 /**
- * Warps area <tt>RandomAccessFile</tt> as <tt>InputStream</tt>.
+ * Wrapper for block of <tt>RandomAccessFile</tt> as <tt>InputStream</tt>.
  */
 public class RAFInputStream extends InputStream {
     private RandomAccessFile source;
-    private long begpos, curpos, endpos;
+    private long curpos;
+    private long endpos;    // pos: size + 1
 
     public RAFInputStream(RandomAccessFile source, long size) throws IOException {
         this(source, source.getFilePointer(), size);
@@ -41,8 +42,8 @@ public class RAFInputStream extends InputStream {
         this.source = source;
         long length = source.length();
 
-        curpos = begpos = (offset < 0) ? 0 : offset;
-        endpos = (size < 0) ? length : begpos + size + 1;
+        curpos = (offset < 0) ? 0 : offset;
+        endpos = (size < 0) ? length : curpos + size + 1;
 
         if (curpos >= length) {
             throw new IllegalArgumentException("offset >= length of source");
@@ -64,27 +65,35 @@ public class RAFInputStream extends InputStream {
 
     @Override
     public int read(byte[] b, int off, int len) throws IOException {
-        if (curpos + len < endpos) {
-            curpos += len;
-            return source.read(b, off, len);
-        } else {
+        if (b == null) {
+            throw new NullPointerException();
+        } else if (off < 0 || len < 0 || len > b.length - off) {
+            throw new IndexOutOfBoundsException();
+        } else if (len == 0) {
+            return 0;
+        }
+        long count = endpos - curpos - 1;
+        if (count == 0) {
             return -1;
         }
+        count = count < len ? count : len;
+        len = source.read(b, off, (int) count);
+        curpos += count;
+        return len;
     }
 
     @Override
     public long skip(long n) throws IOException {
-        long pos = curpos + n;
-        if (pos >= begpos && pos < endpos) {
-            curpos = pos;
-            return source.skipBytes((int) n);
-        } else {
+        if (n < 0) {
             return 0;
         }
+        n = source.skipBytes((int) Math.min(n, endpos - curpos - 1));
+        curpos = endpos;
+        return n;
     }
 
     @Override
     public int available() throws IOException {
-        return (int) (endpos - curpos);
+        return (int) (endpos - curpos - 1);
     }
 }

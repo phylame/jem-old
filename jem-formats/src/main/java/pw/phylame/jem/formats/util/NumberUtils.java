@@ -65,8 +65,7 @@ public final class NumberUtils {
         try {
             return Integer.parseInt(str);
         } catch (NumberFormatException e) {
-            throw ExceptionFactory.parserException(e,
-                    "error.number.invalidInteger", str);
+            throw ExceptionFactory.parserException(e, "error.number.invalidInteger", str);
         }
     }
 
@@ -74,8 +73,7 @@ public final class NumberUtils {
         try {
             return Double.parseDouble(str);
         } catch (NumberFormatException e) {
-            throw ExceptionFactory.parserException(e,
-                    "error.number.invalidDouble", str);
+            throw ExceptionFactory.parserException(e, "error.number.invalidDouble", str);
         }
     }
 
@@ -83,8 +81,7 @@ public final class NumberUtils {
         try {
             return NumberFormat.getInstance().parse(str);
         } catch (ParseException e) {
-            throw ExceptionFactory.parserException(e,
-                    "error.number.invalidNumber", str);
+            throw ExceptionFactory.parserException(e, "error.number.invalidNumber", str);
         }
     }
 }

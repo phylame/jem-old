@@ -23,10 +23,10 @@ import java.util.List;
 import pw.phylame.jem.util.TextObject;
 
 /**
- * Convert HTML to plain text.
+ * Convert styled text to plain text.
  */
-public interface HtmlConverter {
-    String getText(TextObject text) throws Exception;
+public interface TextConverter {
+    String getText(TextObject text);
 
-    List<String> getLines(TextObject text, boolean skipEmpty) throws Exception;
+    List<String> getLines(TextObject text, boolean skipEmpty);
 }

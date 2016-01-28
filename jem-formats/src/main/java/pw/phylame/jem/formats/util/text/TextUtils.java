@@ -18,16 +18,13 @@
 
 package pw.phylame.jem.formats.util.text;
 
-import java.util.List;
-import java.util.Date;
-import java.util.Collection;
+import pw.phylame.jem.formats.util.ExceptionFactory;
+import pw.phylame.jem.formats.util.ParserException;
+import pw.phylame.jem.util.TextObject;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
-import pw.phylame.jem.util.TextObject;
-import pw.phylame.jem.formats.util.MakerException;
-import pw.phylame.jem.formats.util.ParserException;
-import pw.phylame.jem.formats.util.ExceptionFactory;
+import java.util.*;
 
 /**
  * String & text utilities.
@@ -42,75 +39,106 @@ public final class TextUtils {
     }
 
     public static String formatDate(Date date, String format) {
-        SimpleDateFormat sdf = new SimpleDateFormat(format);
-        return sdf.format(date);
+        return new SimpleDateFormat(format).format(date);
+    }
+
+    public static Date parseDate(String text, String format, Date defaultDate) {
+        try {
+            return new SimpleDateFormat(format).parse(text);
+        } catch (ParseException e) {
+            return defaultDate;
+        }
     }
 
     public static Date parseDate(String text, String format) throws ParserException {
-        SimpleDateFormat sdf = new SimpleDateFormat(format);
         try {
-            return sdf.parse(text);
+            return new SimpleDateFormat(format).parse(text);
         } catch (ParseException e) {
-            throw ExceptionFactory.parserException(e,
-                    "error.text.invalidDate", text, format);
+            throw ExceptionFactory.parserException(e, "error.text.invalidDate", text, format);
         }
     }
 
-    public static String fetchText(TextObject tb) throws MakerException {
-        try {
-            return tb.getText();
-        } catch (Exception e) {
-            throw ExceptionFactory.makerException(e, "error.text.fetchText");
+    public static String formatLocale(Locale locale) {
+        String language = locale.getLanguage(), country = locale.getCountry();
+        return isValid(country) ? language + '-' + country : language;
+    }
+
+    public static Locale parseLocale(String tag) {
+        int index = tag.indexOf('-');
+        if (index == -1) {
+            index = tag.indexOf('_');
         }
+        String language, country;
+        if (index == -1) {
+            language = tag;
+            country = "";
+        } else {
+            language = tag.substring(0, index);
+            country = tag.substring(index + 1);
+        }
+        return new Locale(language, country);
     }
 
     /**
-     * Tests <code>str</code> is valid or not, a valid string is not null and length > 0
+     * Tests specified <tt>CharSequence</tt> is empty or not.
      *
-     * @param str a <tt>CharSequence</tt> represent string
-     * @return <code>true</code> if <code>str</code> is not null and length > 0,
+     * @param cs the char sequence
+     * @return <tt>true</tt> if <code>cs</code> is <tt>null</tt> or length = 0, otherwise <tt>false</tt>
+     */
+    public static boolean isEmpty(CharSequence cs) {
+        return cs == null || cs.length() == 0;
+    }
+
+    /**
+     * Tests <code>cs</code> is valid or not, a valid string is not null and length > 0
+     *
+     * @param cs a <tt>CharSequence</tt> represent string
+     * @return <code>true</code> if <code>cs</code> is not null and length > 0,
      * otherwise <code>false</code>
      */
-    public static boolean isValid(CharSequence str) {
-        return str != null && str.length() != 0;
+    public static boolean isValid(CharSequence cs) {
+        return cs != null && cs.length() != 0;
+    }
+
+    public static String toString(CharSequence cs) {
+        return cs != null ? cs.toString() : null;
     }
 
     /**
-     * Returns a copy of {@code str} that first letter was converted to upper case.
+     * Returns a copy of {@code cs} that first letter was converted to upper case.
      *
-     * @param str a <tt>CharSequence</tt> represent string
+     * @param cs a <tt>CharSequence</tt> represent string
      * @return string which first character is upper
      */
-    public static CharSequence toCapitalized(CharSequence str) {
-        if (!isValid(str)) {
-            return str;
+    public static String capitalized(CharSequence cs) {
+        if (isEmpty(cs)) {
+            return toString(cs);
         }
-        return Character.toUpperCase(str.charAt(0)) +
-                str.subSequence(1, str.length()).toString().toLowerCase();
+        return Character.toUpperCase(cs.charAt(0)) + cs.subSequence(1, cs.length()).toString().toLowerCase();
     }
 
-    public static CharSequence toCamelized(CharSequence str) {
-        if (!isValid(str)) {
-            return str;
+    public static String camelized(CharSequence cs) {
+        if (isEmpty(cs)) {
+            return toString(cs);
         }
-        return Character.toLowerCase(str.charAt(0)) + str.subSequence(1, str.length()).toString();
+        return Character.toLowerCase(cs.charAt(0)) + cs.subSequence(1, cs.length()).toString();
     }
 
     /**
-     * Returns a copy of {@code str} that each word was converted to capital.
+     * Returns a copy of {@code cs} that each word was converted to capital.
      *
-     * @param str a <tt>CharSequence</tt> represent string
+     * @param cs a <tt>CharSequence</tt> represent string
      * @return string which each word is capital
      */
-    public static CharSequence toTitled(CharSequence str) {
-        if (!isValid(str)) {
-            return str;
+    public static String titled(CharSequence cs) {
+        if (isEmpty(cs)) {
+            return toString(cs);
         }
-        StringBuilder sb = new StringBuilder(str.length());
+        StringBuilder sb = new StringBuilder(cs.length());
         boolean isFirst = true;
-        int length = str.length();
+        int length = cs.length();
         for (int i = 0; i < length; ++i) {
-            char ch = str.charAt(i);
+            char ch = cs.charAt(i);
             if (!Character.isLetter(ch)) {
                 isFirst = true;
             } else if (isFirst) {
@@ -125,16 +153,36 @@ public final class TextUtils {
     }
 
     /**
+     * Like {@link String#trim()} but removes Chinese paragraph prefix (u3000).
+     *
+     * @param cs the input string
+     * @return the string removed space
+     */
+    public static String trimmed(CharSequence cs) {
+        int len = cs.length();
+        int st = 0;
+
+        char ch;
+        while ((st < len) && (((ch = cs.charAt(st)) <= ' ') || (ch == CHINESE_INDENT))) {
+            st++;
+        }
+        while ((st < len) && (((ch = cs.charAt(len - 1)) <= ' ') || (ch == CHINESE_INDENT))) {
+            len--;
+        }
+        return toString(((st > 0) || (len < cs.length())) ? cs.subSequence(st, len) : cs);
+    }
+
+    /**
      * Tests if all characters of specified string are upper case.
      *
-     * @param str a <tt>CharSequence</tt> represent string
+     * @param cs a <tt>CharSequence</tt> represent string
      * @return <tt>true</tt> if all characters are upper case or
      * <tt>false</tt> if contains lower case character(s)
      */
-    public static boolean isLowerCase(CharSequence str) {
-        for (int i = 0; i < str.length(); ++i) {
+    public static boolean isLowerCase(CharSequence cs) {
+        for (int i = 0; i < cs.length(); ++i) {
             /* found upper case */
-            if (Character.isUpperCase(str.charAt(i))) {
+            if (Character.isUpperCase(cs.charAt(i))) {
                 return false;
             }
         }
@@ -144,39 +192,18 @@ public final class TextUtils {
     /**
      * Tests if all characters of specified string are lower case.
      *
-     * @param str a <tt>CharSequence</tt> represent string
+     * @param cs a <tt>CharSequence</tt> represent string
      * @return <tt>true</tt> if all characters are lower case or
      * <tt>false</tt> if contains upper case character(s)
      */
-    public static boolean isUpperCase(CharSequence str) {
-        for (int i = 0; i < str.length(); ++i) {
+    public static boolean isUpperCase(CharSequence cs) {
+        for (int i = 0; i < cs.length(); ++i) {
             /* found lower case */
-            if (Character.isLowerCase(str.charAt(i))) {
+            if (Character.isLowerCase(cs.charAt(i))) {
                 return false;
             }
         }
         return true;
-    }
-
-    /**
-     * Like {@link String#trim()} but removes Chinese paragraph prefix (u3000).
-     *
-     * @param str the input string
-     * @return the string removed space
-     */
-    public static String trim(String str) {
-        int len = str.length();
-        int st = 0;
-        char[] val = str.toCharArray();
-
-        char ch;
-        while ((st < len) && (((ch = val[st]) <= ' ') || (ch == CHINESE_INDENT))) {
-            st++;
-        }
-        while ((st < len) && (((ch = val[len - 1]) <= ' ') || (ch == CHINESE_INDENT))) {
-            len--;
-        }
-        return ((st > 0) || (len < val.length)) ? str.substring(st, len) : str;
     }
 
     public static <T> String join(CharSequence separator, T[] objects) {
@@ -200,38 +227,43 @@ public final class TextUtils {
         return sb.toString();
     }
 
-    public static String plainText(TextObject text,
-                                   HtmlConverter converter) throws Exception {
-        if (TextObject.HTML.equals(text.getType())) {
-            return htmlText(text, converter);
-        } else {
+    public static String fetchText(TextObject text, String defaultText) {
+        try {
             return text.getText();
+        } catch (Exception e) {
+            return defaultText;
         }
     }
 
-    public static String htmlText(TextObject text, HtmlConverter converter)
-            throws Exception {
-        if (converter == null) {
-            return text.getText();
+    public static List<String> fetchLines(TextObject text, boolean skipEmpty) {
+        try {
+            return text.getLines(skipEmpty);
+        } catch (Exception e) {
+            return Collections.emptyList();
         }
-        return converter.getText(text);
     }
 
-    public static List<String> plainLines(TextObject text, boolean skipEmpty,
-                                          HtmlConverter converter) throws Exception {
-        if (TextObject.HTML.equals(text.getType())) {
-            return htmlLines(text, skipEmpty, converter);
+    public static String plainText(TextObject text, TextConverter converter) {
+        if (!TextObject.PLAIN.equals(text.getType())) {
+            return styledText(text, converter);
         } else {
-            return text.getLines(skipEmpty);
+            return fetchText(text, null);
         }
     }
 
-    public static List<String> htmlLines(TextObject text, boolean skipEmpty,
-                                         HtmlConverter converter) throws Exception {
-        if (converter == null) {
-            return text.getLines(skipEmpty);
+    public static String styledText(TextObject text, TextConverter converter) {
+        return converter != null ? converter.getText(text) : fetchText(text, null);
+    }
+
+    public static List<String> plainLines(TextObject text, boolean skipEmpty, TextConverter converter) {
+        if (!TextObject.PLAIN.equals(text.getType())) {
+            return styledLines(text, skipEmpty, converter);
+        } else {
+            return fetchLines(text, skipEmpty);
         }
-        // not supported currently
-        return converter.getLines(text, skipEmpty);
+    }
+
+    public static List<String> styledLines(TextObject text, boolean skipEmpty, TextConverter converter) {
+        return converter != null ? converter.getLines(text, skipEmpty) : fetchLines(text, skipEmpty);
     }
 }

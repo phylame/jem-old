@@ -34,8 +34,7 @@ public final class ExceptionFactory {
         return new ParserException(MessageBundle.getText(msg, args));
     }
 
-    public static ParserException parserException(Throwable cause, String msg,
-                                                  Object... args) {
+    public static ParserException parserException(Throwable cause, String msg, Object... args) {
         return new ParserException(MessageBundle.getText(msg, args), cause);
     }
 
@@ -43,23 +42,18 @@ public final class ExceptionFactory {
         return new MakerException(MessageBundle.getText(msg, args));
     }
 
-    public static MakerException makerException(Throwable cause, String msg,
-                                                Object... args) {
+    public static MakerException makerException(Throwable cause, String msg, Object... args) {
         return new MakerException(MessageBundle.getText(msg, args), cause);
     }
 
-    public static InvalidConfigException invalidObjectArgument(String key, Object o,
-                                                               String className) {
-        String msg = MessageBundle.getText("error.config.invalidObject",
-                key, o, className);
+    public static InvalidConfigException invalidObjectArgument(String key, Object o, String className) {
+        String msg = MessageBundle.getText("error.config.invalidObject", key, o, className);
         return new InvalidConfigException(key, o, msg);
     }
 
-    public static InvalidConfigException invalidObjectArgument(Throwable cause,
-                                                               String key, Object o,
+    public static InvalidConfigException invalidObjectArgument(Throwable cause, String key, Object o,
                                                                String className) {
-        String msg = MessageBundle.getText("error.config.invalidObject",
-                key, o, className);
+        String msg = MessageBundle.getText("error.config.invalidObject", key, o, className);
         return new InvalidConfigException(key, o, msg, cause);
     }
 }

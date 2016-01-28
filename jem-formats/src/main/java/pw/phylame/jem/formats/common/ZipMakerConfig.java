@@ -29,7 +29,7 @@ import pw.phylame.jem.formats.util.config.InvalidConfigException;
 /**
  * Base config for ZIP e-book.
  */
-public abstract class ZipBookConfig implements CommonConfig {
+public abstract class ZipMakerConfig implements CommonConfig {
     public static final String ZIP_METHOD = "zip.method";       // int
     public static final String ZIP_LEVEL = "zip.level";         // int
     public static final String ZIP_COMMENT = "zip.comment";     // String

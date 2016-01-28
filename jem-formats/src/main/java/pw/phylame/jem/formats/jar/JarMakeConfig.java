@@ -20,7 +20,7 @@ package pw.phylame.jem.formats.jar;
 
 import java.util.Map;
 
-import pw.phylame.jem.formats.common.ZipBookConfig;
+import pw.phylame.jem.formats.common.ZipMakerConfig;
 import pw.phylame.jem.formats.util.config.ConfigUtils;
 import pw.phylame.jem.formats.util.Versions;
 import pw.phylame.jem.formats.util.text.TextConfig;
@@ -29,7 +29,7 @@ import pw.phylame.jem.formats.util.config.InvalidConfigException;
 /**
  * Config for making JAR book.
  */
-public class JarMakeConfig extends ZipBookConfig {
+public class JarMakeConfig extends ZipMakerConfig {
     public static final String CONFIG_SELF = "jar.make.config";    // JarMakeConfig
     public static final String VENDOR = "jar.make.vendor"; // String
 

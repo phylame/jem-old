@@ -19,7 +19,7 @@
 if [ -z "$IMABW_HOME" -o ! -d "$IMABW_HOME" ]; then
   PRG="$0"
   # need this for relative symlinks
-  while [ -h "$PRG" ] ; do
+  while [ -h "$PRG" ]; do
     ls=`ls -ld "$PRG"`
     link=`expr "$ls" : '.*-> \(.*\)$'`
     if expr "$link" : '/.*' > /dev/null; then
@@ -36,10 +36,17 @@ if [ -z "$IMABW_HOME" -o ! -d "$IMABW_HOME" ]; then
 fi
 
 # Set extension JAR
-for i in "$IMABW_HOME"\lib\ext\*.jar
-do
-  set EXTENSION_JAR="$i"
-done
+EXT_LIB=""
+EXT_DIR="$IMABW_HOME"/lib/ext
+if [ -d "$EXT_DIR" ]; then
+  for f in "$EXT_DIR"/*.jar; do
+    EXT_LIB="$EXT_LIB:$f"
+  done
+  if [ -n "$EXT_LIB" ]; then
+    len=`expr length "$EXT_LIB"`
+    EXT_LIB=`expr substr "$EXT_LIB" 2 "$len"`
+  fi
+fi
 
-# Run Jem Imabw
-java -Xbootclasspath/a:%EXTENSION_JAR% -jar "$IMABW_HOME\lib\imabw-2.2.jar" "$@"
+# Run Jem SCI
+java -Xbootclasspath/a:"$EXT_LIB" -jar "$IMABW_HOME/lib/imabw.jar" "$@"

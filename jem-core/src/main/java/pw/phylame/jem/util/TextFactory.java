@@ -18,11 +18,14 @@
 
 package pw.phylame.jem.util;
 
-import java.io.*;
+import java.io.Reader;
+import java.io.Writer;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.LinkedList;
 
-import org.apache.commons.io.IOUtils;
+import pw.phylame.jem.core.Jem;
 
 /**
  * Factory class for creating <tt>TextObject</tt>.
@@ -34,23 +37,27 @@ public class TextFactory {
      * @param str       the input string
      * @param skipEmpty <tt>true</tt> to skip empty line
      * @return list of lines, never <tt>null</tt>
+     * @throws NullPointerException if the <tt>str</tt> is <tt>null</tt>
      */
-    public static List<String> splitLines(String str, boolean skipEmpty) {
-        List<String> lines = new LinkedList<String>();
+    public static List<String> splitLines(CharSequence str, boolean skipEmpty) {
+        if (str == null) {
+            throw new NullPointerException("str");
+        }
+        List<String> lines = new LinkedList<>();
         int ix, begin = 0, length = str.length();
-        String sub;
+        CharSequence sub;
         for (ix = 0; ix < length; ) {
             char ch = str.charAt(ix);
             if ('\n' == ch) {   // \n
-                sub = str.substring(begin, ix);
-                if (!sub.isEmpty() || !skipEmpty) {
-                    lines.add(sub);
+                sub = str.subSequence(begin, ix);
+                if (sub.length() > 0 || !skipEmpty) {
+                    lines.add(sub.toString());
                 }
                 begin = ++ix;
             } else if ('\r' == ch) {
-                sub = str.substring(begin, ix);
-                if (!sub.isEmpty() || !skipEmpty) {
-                    lines.add(sub);
+                sub = str.subSequence(begin, ix);
+                if (sub.length() > 0 || !skipEmpty) {
+                    lines.add(sub.toString());
                 }
                 if (ix + 1 < length && '\n' == str.charAt(ix + 1)) {   // \r\n
                     begin = ix += 2;
@@ -62,18 +69,22 @@ public class TextFactory {
             }
         }
         if (ix >= begin) {
-            sub = str.substring(begin);
-            if (!sub.isEmpty() || !skipEmpty) {
-                lines.add(sub);
+            sub = str.subSequence(begin, str.length());
+            if (sub.length() > 0 || !skipEmpty) {
+                lines.add(sub.toString());
             }
         }
         return lines;
     }
 
     private static class RawText extends AbstractText {
-        private CharSequence text;
+        static {
+            Jem.variantTypes.put(RawText.class, Jem.TEXT);
+        }
 
-        RawText(CharSequence str, String type) {
+        private final CharSequence text;
+
+        private RawText(CharSequence str, String type) {
             super(type);
             if (str == null) {
                 throw new NullPointerException("str");
@@ -82,84 +93,47 @@ public class TextFactory {
         }
 
         @Override
-        public String getText() {
+        public String getText() throws Exception {
             return text.toString();
-        }
-
-        @Override
-        public void writeTo(Writer writer) throws IOException {
-            writer.write(text.toString());
         }
     }
 
     private static class FileText extends AbstractText {
-        private FileObject file;
-        private String encoding;
+        static {
+            Jem.variantTypes.put(FileText.class, Jem.TEXT);
+        }
 
-        FileText(FileObject file, String encoding, String type) {
+        private final FileObject file;
+        private final String encoding;
+
+        private FileText(FileObject file, String encoding, String type) {
             super(type);
             if (file == null) {
                 throw new NullPointerException("file");
             }
             this.file = file;
             // if null, using platform default encoding
-            this.encoding = (encoding != null) ? encoding :
-                    System.getProperty("file.encoding");
+            this.encoding = encoding;
         }
 
         @Override
         public String getText() throws Exception {
-            InputStream stream = file.openStream();
-            assert stream != null;
-            BufferedInputStream input = new BufferedInputStream(stream);
-            try {
-                return IOUtils.toString(input, encoding);
-            } finally {
-                input.close();
-                file.reset();
+            try (InputStream stream = file.openStream()) {
+                return IOUtils.toString(stream, encoding);
             }
         }
 
         @Override
         public List<String> getLines(boolean skipEmpty) throws Exception {
-            InputStream stream = file.openStream();
-            assert stream != null;
-            BufferedInputStream input = new BufferedInputStream(stream);
-            BufferedReader reader;
-            try {
-                reader = new BufferedReader(new InputStreamReader(input, encoding));
-            } catch (IOException e) {
-                input.close();
-                throw e;
-            }
-            List<String> lines = new LinkedList<String>();
-            try {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    if (!line.isEmpty() || !skipEmpty) {
-                        lines.add(line);
-                    }
-                }
-                return lines;
-            } finally {
-                reader.close();
-                file.reset();
+            try (InputStream stream = file.openStream()) {
+                return IOUtils.toLines(stream, encoding, skipEmpty);
             }
         }
 
         @Override
-        public void writeTo(Writer writer) throws IOException {
-            BufferedInputStream input = null;
-            try {
-                InputStream stream = file.openStream();
-                assert stream != null;
-                input = new BufferedInputStream(stream);
-                IOUtils.copy(input, writer, encoding);
-            } finally {
-                if (input != null) {
-                    input.close();
-                    file.reset();
-                }
+        public int writeTo(Writer writer) throws IOException {
+            try (Reader reader = IOUtils.openReader(file.openStream(), encoding)) {
+                return IOUtils.copy(reader, writer, -1);
             }
         }
     }

@@ -31,6 +31,7 @@ import pw.phylame.gaf.ixin.IQuietAction;
 import pw.phylame.imabw.app.model.*;
 import pw.phylame.imabw.app.ui.Editable;
 import pw.phylame.imabw.app.ui.tree.undo.*;
+import pw.phylame.imabw.app.util.BookUtils;
 import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Chapter;
@@ -429,13 +430,13 @@ public class ContentsTree extends JPanel implements Editable {
         Map<String, Object> oldAttributes;
         if (removePresent) {
             // backup all attributes
-            oldAttributes = worker.duplicateAttributes(chapter);
+            oldAttributes = BookUtils.dumpAttributes(chapter);
             chapter.clearAttributes();
         } else {
             // only backup modified attributes
             oldAttributes = new HashMap<>();
             for (String name : newAttributes.keySet()) {
-                oldAttributes.put(name, chapter.getAttribute(name));
+                oldAttributes.put(name, chapter.getAttribute(name, null));
             }
         }
         chapter.updateAttributes(newAttributes);
@@ -649,7 +650,7 @@ public class ContentsTree extends JPanel implements Editable {
     }
 
     public void exportChapter() {
-        Book book = Jem.chapterToBook(getSingleChapter());
+        Book book = Jem.toBook(getSingleChapter());
         String title = app.getText("contents.exportChapter.title", book.getTitle());
 
         MakerData md = worker.makeMakerData(viewer, title, book, null, null, null);
@@ -729,7 +730,7 @@ public class ContentsTree extends JPanel implements Editable {
             if (tab != null) {  // opened
                 builder.append(tab.getEditor().getTextComponent().getText()).append("\n");
             } else {
-                builder.append(worker.contentOfChapter(ch, "")).append("\n");
+                builder.append(BookUtils.contentOfChapter(ch, "")).append("\n");
             }
         });
         target.setContent(TextFactory.fromString(builder.toString()));
@@ -851,9 +852,22 @@ public class ContentsTree extends JPanel implements Editable {
         tree.addSelectionInterval(0, tree.getRowCount());
     }
 
+    private String transRegex(String key) {
+        return ".*" + key + ".*";
+    }
+
     @Override
     public void find() {
-        featureDeveloping(viewer);
+        Chapter chapter = getSingleChapter();
+        String key = inputText(this, app.getText("contents.find.title"),
+                app.getText("contents.find.tip"), chapter.getTitle(), true, false);
+        if (key == null) {
+            return;
+        }
+        chapter = Jem.find(chapter, c -> c.getTitle().matches(transRegex(key)), 0, true);
+        if (chapter != null) {
+            focusToChapter(chapter);
+        }
     }
 
     @Override
@@ -866,9 +880,56 @@ public class ContentsTree extends JPanel implements Editable {
         featureDeveloping(viewer);
     }
 
+    private String positionOf(Chapter chapter) {
+        LinkedList<String> indices = new LinkedList<>();
+        Chapter parent = chapter.getParent();
+        while (parent != null) {
+            indices.addFirst(Integer.toString(parent.indexOf(chapter) + 1));
+            chapter = parent;
+            parent = parent.getParent();
+        }
+        return String.join(":", indices);
+    }
+
+    private int[] parseIndexes(String str) {
+        ArrayList<Integer> indices = new ArrayList<>(5);
+        String[] parts = str.split(":");
+        for (String s : parts) {
+            try {
+                int n = Integer.parseInt(s);
+                if (n == 0) {
+                    return null;
+                }
+                indices.add(n - 1);
+            } catch (NumberFormatException e) {
+                return null;
+            }
+        }
+        int[] r = new int[indices.size()];
+        Arrays.setAll(r, indices::get);
+        return r;
+    }
+
     @Override
     public void gotoPosition() {
-        featureDeveloping(viewer);
+        Chapter chapter = getSingleChapter();
+
+        String str = inputText(viewer, app.getText("contents.goto.title"),
+                app.getText("contents.goto.tip"),
+                positionOf(chapter), true, false);
+        if (str == null) {
+            return;
+        }
+        int[] indices = parseIndexes(str);
+        if (indices == null) {
+            return;
+        }
+        try {
+            chapter = Jem.locate(chapter, indices);
+        } catch (IndexOutOfBoundsException e) {
+            return;
+        }
+        focusToChapter(chapter);
     }
 
     private class ShowMenuAction extends AbstractAction {

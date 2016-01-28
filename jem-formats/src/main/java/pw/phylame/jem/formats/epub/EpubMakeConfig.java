@@ -20,7 +20,7 @@ package pw.phylame.jem.formats.epub;
 
 import java.util.Map;
 
-import pw.phylame.jem.formats.common.ZipBookConfig;
+import pw.phylame.jem.formats.common.ZipMakerConfig;
 import pw.phylame.jem.formats.util.config.ConfigUtils;
 import pw.phylame.jem.formats.util.config.InvalidConfigException;
 import pw.phylame.jem.formats.util.html.HtmlConfig;
@@ -29,7 +29,7 @@ import pw.phylame.jem.formats.util.xml.XmlConfig;
 /**
  * Config for making ePub book.
  */
-public class EpubMakeConfig extends ZipBookConfig {
+public class EpubMakeConfig extends ZipMakerConfig {
     public static final String CONFIG_SELF = "epub.make.config";
     public static final String VERSION = "epub.make.version";
     public static final String UUID = "epub.make.uuid";

@@ -19,14 +19,16 @@
 package pw.phylame.jem.util;
 
 import java.util.List;
+import java.io.Writer;
+import java.io.IOException;
 
 /**
  * Abstract class for <tt>TextObject</tt>.
  */
 public abstract class AbstractText implements TextObject {
-    private String type;
+    private final String type;
 
-    public AbstractText(String type) {
+    protected AbstractText(String type) {
         if (type == null) {
             throw new NullPointerException();
         }
@@ -40,7 +42,14 @@ public abstract class AbstractText implements TextObject {
 
     @Override
     public List<String> getLines(boolean skipEmpty) throws Exception {
-        return TextFactory.splitLines(getText(), false);
+        return TextFactory.splitLines(getText(), skipEmpty);
+    }
+
+    @Override
+    public int writeTo(Writer writer) throws Exception {
+        String text = getText();
+        writer.write(text);
+        return text.length();
     }
 
     @Override

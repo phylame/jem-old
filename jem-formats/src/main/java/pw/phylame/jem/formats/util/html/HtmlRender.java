@@ -48,8 +48,8 @@ public class HtmlRender {
         }
     }
 
-    private HtmlConfig config;
-    private XmlRender xmlRender;
+    private final HtmlConfig config;
+    private final XmlRender xmlRender;
 
     public HtmlRender(HtmlConfig config) throws MakerException {
         if (config.htmlLanguage == null) {
@@ -91,8 +91,8 @@ public class HtmlRender {
      * $common-title: intro-title, $style
      * $common-text: intro, $style
      */
-    public void renderIntro(String title, String bookTitle, String introTitle,
-                            TextObject intro) throws IOException {
+    public void renderIntro(String title, String bookTitle, String introTitle, TextObject intro)
+            throws IOException {
         renderCoverIntro(title, null, null, bookTitle, introTitle, intro);
     }
 
@@ -146,8 +146,7 @@ public class HtmlRender {
      * $common-part: title, $style, intro, $style
      * $common-contents: titles, links, $style
      */
-    public void renderSection(String title, TextObject intro, List<Link> links)
-            throws IOException {
+    public void renderSection(String title, TextObject intro, List<Link> links) throws IOException {
         renderSection(title, null, null, intro, links);
     }
 
@@ -156,8 +155,8 @@ public class HtmlRender {
      * $common-part: title, $style, intro, $style
      * $common-contents: titles, links, $style
      */
-    public void renderSection(String title, String cover, String alt,
-                              TextObject intro, List<Link> links) throws IOException {
+    public void renderSection(String title, String cover, String alt, TextObject intro,
+                              List<Link> links) throws IOException {
         beginHtml(title);
         if (cover != null) {
             writeImage(cover, alt, config.style.sectionCover);
@@ -178,8 +177,7 @@ public class HtmlRender {
      * $common-part: title, $style, intro, $style
      * $common-text: content, $style
      */
-    public void renderChapter(String title, TextObject intro, TextObject content)
-            throws IOException {
+    public void renderChapter(String title, TextObject intro, TextObject content) throws IOException {
         renderChapter(title, null, null, intro, content);
     }
 
@@ -188,8 +186,8 @@ public class HtmlRender {
      * $common-part: title, $style, intro, $style
      * $common-text: content, $style
      */
-    public void renderChapter(String title, String cover, String alt,
-                              TextObject intro, TextObject content) throws IOException {
+    public void renderChapter(String title, String cover, String alt, TextObject intro,
+                              TextObject content) throws IOException {
         beginHtml(title);
         if (cover != null) {
             writeImage(cover, alt, config.style.chapterCover);
@@ -202,8 +200,7 @@ public class HtmlRender {
     /*
      * $common-image: href, style
      */
-    private void renderCover0(String title, String href, String alt,
-                              String style) throws IOException {
+    private void renderCover0(String title, String href, String alt, String style) throws IOException {
         beginHtml(title);
         writeImage(href, alt, style);
         endHtml();
@@ -233,8 +230,8 @@ public class HtmlRender {
      * </div>
      * $common-text: intro, intro-style (when intro is not null)
      */
-    private void writePart(String title, String titleStyle, TextObject intro,
-                           String introStyle) throws IOException {
+    private void writePart(String title, String titleStyle, TextObject intro, String introStyle)
+            throws IOException {
         writeTitle(title, titleStyle);
         if (intro != null) {
             writeText(intro, introStyle);
@@ -249,18 +246,13 @@ public class HtmlRender {
      * </div>
      */
     private void writeText(TextObject text, String style) throws IOException {
-        List<String> lines;
-        try {
-            lines = text.getLines(config.skipEmpty);
-        } catch (Exception e) {
-            throw new IOException(e);
-        }
-        if (lines.isEmpty()) {
+        List<String> lines = TextUtils.fetchLines(text, config.skipEmpty);
+        if (lines == null || lines.isEmpty()) {
             return;
         }
         xmlRender.startTag("div").attribute("class", style);
         for (String line : lines) {
-            xmlRender.startTag("p").text(TextUtils.trim(line)).endTag();
+            xmlRender.startTag("p").text(TextUtils.trimmed(line)).endTag();
         }
         xmlRender.endTag();
     }

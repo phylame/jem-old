@@ -28,7 +28,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.text.ParseException;
 
-class SimpleInputDialog extends CommonDialog {
+class SimpleInputDialog extends CommonDialog<Object> {
     private JTextField textField;
     private JButton buttonOk;
     private Object initValue;
@@ -41,16 +41,12 @@ class SimpleInputDialog extends CommonDialog {
 
     public SimpleInputDialog(Frame owner, String title, boolean modal) {
         super(owner, title, modal);
-        if (isUndecorated()) {
-            getRootPane().setWindowDecorationStyle(JRootPane.QUESTION_DIALOG);
-        }
+        setDecorationStyleIfNeed(JRootPane.QUESTION_DIALOG);
     }
 
     public SimpleInputDialog(Dialog owner, String title, boolean modal) {
         super(owner, title, modal);
-        if (isUndecorated()) {
-            getRootPane().setWindowDecorationStyle(JRootPane.QUESTION_DIALOG);
-        }
+        setDecorationStyleIfNeed(JRootPane.QUESTION_DIALOG);
     }
 
     void setInitValue(Object initValue) {
@@ -74,7 +70,7 @@ class SimpleInputDialog extends CommonDialog {
     }
 
     @Override
-    Object getResult() {
+    public Object getResult() {
         if (!inputted) {
             return null;
         } else if (formatter != null) {
@@ -86,14 +82,14 @@ class SimpleInputDialog extends CommonDialog {
 
     @Override
     protected void createComponents(JPanel userPane) {
-        Action closeAction = new IAction(BUTTON_OK) {
+        Action okAction = new IAction(BUTTON_OK) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 inputted = true;
                 dispose();
             }
         };
-        defaultButton = buttonOk = new JButton(closeAction);
+        defaultButton = buttonOk = new JButton(okAction);
 
         createTextField(formatter);
 
@@ -113,7 +109,6 @@ class SimpleInputDialog extends CommonDialog {
             if (initValue != null) {
                 textField.setText(initValue.toString());
             }
-            textField.selectAll();
             buttonOk.setEnabled(initValue != null && !initValue.equals("")
                     && !requireChange);
         } else {
@@ -123,17 +118,15 @@ class SimpleInputDialog extends CommonDialog {
             this.formatter = formatter;
         }
         textField.setColumns(32);
+        textField.selectAll();
+        buttonOk.setEnabled(!requireChange && (canEmpty || !"".equals(initValue)));
 
         final Document doc = textField.getDocument();
         textField.addCaretListener(e -> {
-            if (doc.getLength() == 0) {
-                buttonOk.setEnabled(canEmpty);
-            } else if (requireChange) {
-                if (initValue != null) {
-                    buttonOk.setEnabled(isChanged());
-                } else {
-                    buttonOk.setEnabled(true);
-                }
+            if (doc.getLength() == 0) { // empty
+                buttonOk.setEnabled(canEmpty && (!requireChange || !"".equals(initValue)));
+            } else if (requireChange) { // not empty
+                buttonOk.setEnabled(initValue == null || isChanged());
             } else {
                 buttonOk.setEnabled(true);
             }

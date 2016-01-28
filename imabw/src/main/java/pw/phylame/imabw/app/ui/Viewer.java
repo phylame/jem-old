@@ -42,7 +42,6 @@ import pw.phylame.imabw.app.ui.com.StatusIndicator;
  */
 public class Viewer extends IForm implements Constants {
     private static final Imabw app = Imabw.sharedInstance();
-
     private JSplitPane splitPane;
     private WelcomePage welcomePage;
     private ContentsTree contentsTree;

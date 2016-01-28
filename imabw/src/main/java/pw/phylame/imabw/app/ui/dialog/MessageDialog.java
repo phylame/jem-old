@@ -50,17 +50,19 @@ class MessageDialog extends IOptionDialog {
         setOptions(alignment, 0, CommonDialog.BUTTON_CLOSE);
     }
 
-    void setDecorationStyle(int style) {
-        getRootPane().setWindowDecorationStyle(style);
+    void setDecorationStyleIfNeed(int style) {
+        if (isUndecorated()) {
+            getRootPane().setWindowDecorationStyle(style);
+        }
     }
 
     void setIconStyle(IconStyle style) {
         if (style == null) {
             setIcon(null);
-            setDecorationStyle(JRootPane.NONE);
+            setDecorationStyleIfNeed(JRootPane.NONE);
         } else {
             setIcon(app.loadIcon("dialog/" + style.name + ".png"));
-            setDecorationStyle(style.decorationStyle);
+            setDecorationStyleIfNeed(style.decorationStyle);
         }
     }
 

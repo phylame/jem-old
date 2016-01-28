@@ -22,6 +22,7 @@ import java.io.*;
 import java.util.HashMap;
 
 import pw.phylame.imabw.app.Imabw;
+import pw.phylame.imabw.app.util.BookUtils;
 import pw.phylame.jem.core.Chapter;
 import pw.phylame.imabw.app.Worker;
 import pw.phylame.jem.util.FileObject;
@@ -45,7 +46,7 @@ public class EditorTab implements Chapter.Cleanable {
 
     public EditorTab(Chapter chapter) {
         this.chapter = chapter;
-        this.editor = new TextEditor(this, Worker.sharedInstance().contentOfChapter(chapter, ""));
+        this.editor = new TextEditor(this, BookUtils.contentOfChapter(chapter, ""));
         // query if already cached
         cache = fileCaches.get(chapter);
     }

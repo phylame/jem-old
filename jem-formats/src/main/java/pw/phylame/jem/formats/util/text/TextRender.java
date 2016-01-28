@@ -18,11 +18,11 @@
 
 package pw.phylame.jem.formats.util.text;
 
-import pw.phylame.jem.core.Chapter;
-import pw.phylame.jem.util.TextObject;
-
 import java.util.List;
 import java.util.LinkedList;
+
+import pw.phylame.jem.core.Chapter;
+import pw.phylame.jem.util.TextObject;
 
 /**
  * Render book text with plain style.
@@ -34,11 +34,11 @@ public final class TextRender {
     /**
      * Renders chapter of book to contents with one level.
      */
-    public static void renderBook(Chapter book, TextWriter writer,
-                                  TextConfig config) throws Exception {
+    public static void renderBook(Chapter book, TextWriter writer, TextConfig config)
+            throws Exception {
         RenderHelper maker = new RenderHelper(writer, config);
-        for (Chapter sub : book) {
-            walkChapter(sub, maker);
+        for (Chapter c : book) {
+            walkChapter(c, maker);
         }
     }
 
@@ -51,22 +51,23 @@ public final class TextRender {
      * @return number of written lines
      * @throws Exception if occurs error while rendering text
      */
-    public static int renderLines(TextObject text, TextWriter writer,
-                                  TextConfig config) throws Exception {
+    public static int renderLines(TextObject text, TextWriter writer, TextConfig config)
+            throws Exception {
         return renderLines(text, writer, config, false);
     }
 
-    private static int renderLines(TextObject text, TextWriter writer,
-                                   TextConfig config,
+    private static int renderLines(TextObject text, TextWriter writer, TextConfig config,
                                    boolean prependLF) throws Exception {
-        List<String> lines = TextUtils.plainLines(text, config.skipEmptyLine,
-                config.htmlConverter);
+        List<String> lines = TextUtils.plainLines(text, config.skipEmptyLine, config.textConverter);
+        if (lines == null) {
+            return 0;
+        }
         int ix = 1, size = lines.size();
         if (prependLF && size > 0) {
             writer.writeText(config.lineSeparator);
         }
         for (String line : lines) {
-            line = TextUtils.trim(line);
+            line = TextUtils.trimmed(line);
             writer.writeText(config.paragraphPrefix + line);
             if (ix++ != size) {
                 writer.writeText(config.lineSeparator);
@@ -75,8 +76,7 @@ public final class TextRender {
         return size;
     }
 
-    public static String renderLines(TextObject text, TextConfig config)
-            throws Exception {
+    public static String renderLines(TextObject text, TextConfig config) throws Exception {
         StringWriter writer = new StringWriter();
         renderLines(text, writer, config);
         return writer.toString();
@@ -91,18 +91,17 @@ public final class TextRender {
      * @return written state, <tt>true</tt> if has text written, otherwise not
      * @throws Exception if occurs error while rendering text
      */
-    public static boolean renderText(TextObject text, TextWriter writer,
-                                     TextConfig config) throws Exception {
+    public static boolean renderText(TextObject text, TextWriter writer, TextConfig config)
+            throws Exception {
         return renderText(text, writer, config, false);
     }
 
-    private static boolean renderText(TextObject text, TextWriter writer,
-                                      TextConfig config,
+    private static boolean renderText(TextObject text, TextWriter writer, TextConfig config,
                                       boolean prependLF) throws Exception {
         if (config.formatParagraph) {
             return renderLines(text, writer, config, prependLF) > 0;
         } else {
-            String str = TextUtils.plainText(text, config.htmlConverter);
+            String str = TextUtils.plainText(text, config.textConverter);
             if (!str.isEmpty()) {
                 if (prependLF) {
                     writer.writeText(config.lineSeparator);
@@ -115,12 +114,11 @@ public final class TextRender {
         }
     }
 
-    public static String renderText(TextObject text, TextConfig config)
-            throws Exception {
+    public static String renderText(TextObject text, TextConfig config) throws Exception {
         if (config.formatParagraph) {
             return renderLines(text, config);
         } else {
-            return TextUtils.plainText(text, config.htmlConverter);
+            return TextUtils.plainText(text, config.textConverter);
         }
     }
 
@@ -146,14 +144,13 @@ public final class TextRender {
         }
     }
 
-    private static void walkChapter(Chapter chapter, RenderHelper maker)
-            throws Exception {
+    private static void walkChapter(Chapter chapter, RenderHelper maker) throws Exception {
         maker.beginItem(chapter);
 
         maker.writeText(chapter);
 
-        for (Chapter sub : chapter) {
-            walkChapter(sub, maker);
+        for (Chapter c : chapter) {
+            walkChapter(c, maker);
         }
 
         maker.endItem();
@@ -169,7 +166,7 @@ public final class TextRender {
             this.config = config;
             this.writer = writer;
             if (config.joinTitles) {
-                titleStack = new LinkedList<String>();
+                titleStack = new LinkedList<>();
             }
         }
 

@@ -31,14 +31,9 @@ import static pw.phylame.jem.formats.util.ByteUtils.littleParser;
 /**
  * Common parser for binary e-book file.
  */
-public abstract class BinaryBookParser<CF extends CommonConfig>
-        extends CommonParser<RandomAccessFile, CF> {
-    public BinaryBookParser(String name) {
-        super(name);
-    }
-
-    public BinaryBookParser(String name, Class<CF> configClass, String configKey) {
-        super(name, configClass, configKey);
+public abstract class BinaryParser<CF extends CommonConfig> extends CommonParser<RandomAccessFile, CF> {
+    protected BinaryParser(String name, String configKey, Class<CF> configClass) {
+        super(name, configKey, configClass);
     }
 
     @Override
@@ -46,22 +41,34 @@ public abstract class BinaryBookParser<CF extends CommonConfig>
         return new BufferedRandomAccessFile(file, "r");
     }
 
-    protected byte[] readBytes(RandomAccessFile input, int size) throws IOException,
-            ParserException {
+    /**
+     * Invoked if failed to read file content.
+     *
+     * @throws ParserException raise Jem error
+     */
+    protected abstract void onReadingError() throws ParserException;
+
+    protected byte[] readBytes(RandomAccessFile input, int size) throws IOException, ParserException {
+        return readBytes(input, size, null);
+    }
+
+    protected byte[] readBytes(RandomAccessFile input, int size, String errorKey) throws IOException, ParserException {
         byte[] b = new byte[size];
         if (input.read(b) != size) {
-            throw new IOException();
+            if (errorKey == null) {
+                onReadingError();
+            } else {
+                throw parserException(errorKey);
+            }
         }
         return b;
     }
 
-    protected long readUInt32(RandomAccessFile input) throws IOException,
-            ParserException {
+    protected long readUInt32(RandomAccessFile input) throws IOException, ParserException {
         return littleParser.getUInt32(readBytes(input, 4), 0);
     }
 
-    protected int readUInt16(RandomAccessFile input) throws IOException,
-            ParserException {
+    protected int readUInt16(RandomAccessFile input) throws IOException, ParserException {
         return littleParser.getUInt16(readBytes(input, 2), 0);
     }
 }

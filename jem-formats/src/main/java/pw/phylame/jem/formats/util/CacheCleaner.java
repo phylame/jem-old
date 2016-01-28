@@ -21,31 +21,18 @@ package pw.phylame.jem.formats.util;
 import java.io.File;
 import java.io.Closeable;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
- * Closes and deletes cache file.
+ * Clean up cache file.
  */
 public class CacheCleaner extends SourceCleaner {
-    private static Log LOG = LogFactory.getLog(CacheCleaner.class);
-
-    public CacheCleaner(Closeable dev, File cache) {
-        super(dev, cache.getAbsolutePath(), new DeleteCache(cache));
-    }
-
-    private static class DeleteCache implements Runnable {
-        private final File cache;
-
-        DeleteCache(File cache) {
-            this.cache = cache;
-        }
-
-        @Override
-        public void run() {
-            if (!cache.delete()) {
-                LOG.debug("cannot delete cache file: " + cache.getAbsolutePath());
+    public CacheCleaner(Closeable closeable, final File cache) {
+        super(closeable, new Runnable() {
+            @Override
+            public void run() {
+                if (!cache.delete()) {
+                    throw new RuntimeException("Failed to delete cache: " + cache);
+                }
             }
-        }
+        });
     }
 }

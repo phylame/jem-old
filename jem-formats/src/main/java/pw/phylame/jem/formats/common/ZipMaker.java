@@ -28,24 +28,21 @@ import java.util.zip.ZipOutputStream;
 /**
  * Common Jem writer for e-book archived with ZIP.
  */
-public abstract class
-ZipBookMaker<CF extends ZipBookConfig> extends CommonMaker<CF> {
-
-    public ZipBookMaker(String name, Class<CF> configClass, String configKey) {
-        super(name, configClass, configKey);
+public abstract class ZipMaker<CF extends ZipMakerConfig> extends CommonMaker<CF> {
+    protected ZipMaker(String name, String configKey, Class<CF> configClass) {
+        super(name, configKey, configClass);
     }
 
-    public abstract void make(Book book, ZipOutputStream zipout, CF config)
-            throws IOException, MakerException;
+    protected abstract void make(Book book, ZipOutputStream zipout, CF config) throws IOException, MakerException;
 
     @Override
-    public void make(Book book, OutputStream output, CF config) throws IOException,
-            MakerException {
+    public final void make(Book book, OutputStream output, CF config) throws IOException, MakerException {
         ZipOutputStream zipout = new ZipOutputStream(output);
         zipout.setMethod(config.zipMethod);
         zipout.setLevel(config.zipLevel);
         zipout.setComment(config.zipComment);
         make(book, zipout, config);
+        zipout.flush();
         zipout.close();
     }
 }

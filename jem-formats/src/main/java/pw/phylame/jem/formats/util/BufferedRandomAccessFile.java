@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 
 public class BufferedRandomAccessFile extends RandomAccessFile {
-    private static final int DEFAULT_BUFFER_BIT_LEN = 10;
+    private static final int DEFAULT_BUFFER_BIT_LEN = 12;
 
     protected byte buf[];
     protected int bufbitlen;
@@ -41,7 +41,7 @@ public class BufferedRandomAccessFile extends RandomAccessFile {
     protected String filename;
     protected long initfilelen;
 
-    public BufferedRandomAccessFile(String name) throws  IOException {
+    public BufferedRandomAccessFile(String name) throws IOException {
         this(name, "r", DEFAULT_BUFFER_BIT_LEN);
     }
 
@@ -49,7 +49,7 @@ public class BufferedRandomAccessFile extends RandomAccessFile {
         this(file.getPath(), "r", DEFAULT_BUFFER_BIT_LEN);
     }
 
-    public BufferedRandomAccessFile(String name, int bufbitlen) throws  IOException {
+    public BufferedRandomAccessFile(String name, int bufbitlen) throws IOException {
         this(name, "r", bufbitlen);
     }
 
@@ -65,7 +65,7 @@ public class BufferedRandomAccessFile extends RandomAccessFile {
         this(file.getPath(), mode, DEFAULT_BUFFER_BIT_LEN);
     }
 
-    public BufferedRandomAccessFile(String name, String mode, int bufbitlen) throws IOException  {
+    public BufferedRandomAccessFile(String name, String mode, int bufbitlen) throws IOException {
         super(name, mode);
         this.init(name, mode, bufbitlen);
     }
@@ -75,21 +75,21 @@ public class BufferedRandomAccessFile extends RandomAccessFile {
     }
 
     private void init(String name, String mode, int bufbitlen) throws IOException {
-        this.append = ! mode.equals("r");
+        if (bufbitlen < 0) {
+            throw new IllegalArgumentException("bufbitlen size must > 0");
+        }
+
+        this.append = !mode.equals("r");
 
         this.filename = name;
         this.initfilelen = super.length();
         this.fileendpos = this.initfilelen - 1;
         this.curpos = super.getFilePointer();
 
-        if (bufbitlen < 0) {
-            throw new IllegalArgumentException("bufbitlen size must > 0");
-        }
-
         this.bufbitlen = bufbitlen;
         this.bufsize = 1 << bufbitlen;
         this.buf = new byte[this.bufsize];
-        this.bufmask = ~((long)this.bufsize - 1L);
+        this.bufmask = ~((long) this.bufsize - 1L);
         this.bufdirty = false;
         this.bufusedsize = 0;
         this.bufstartpos = -1;
@@ -109,7 +109,7 @@ public class BufferedRandomAccessFile extends RandomAccessFile {
     private int fillbuf() throws IOException {
         super.seek(this.bufstartpos);
         this.bufdirty = false;
-        return super.read(this.buf);
+        return super.read(this.buf, 0, this.bufsize);
     }
 
     public byte read(long pos) throws IOException {
@@ -125,7 +125,7 @@ public class BufferedRandomAccessFile extends RandomAccessFile {
             }
         }
         this.curpos = pos;
-        return this.buf[(int)(pos - this.bufstartpos)];
+        return this.buf[(int) (pos - this.bufstartpos)];
     }
 
     public void append(byte bw) throws IOException {
@@ -135,7 +135,7 @@ public class BufferedRandomAccessFile extends RandomAccessFile {
     public void write(byte bw, long pos) throws IOException {
 
         if ((pos >= this.bufstartpos) && (pos <= this.bufendpos)) { // write pos in buf
-            this.buf[(int)(pos - this.bufstartpos)] = bw;
+            this.buf[(int) (pos - this.bufstartpos)] = bw;
             this.bufdirty = true;
 
             if (pos == this.fileendpos + 1) { // write pos is append pos
@@ -146,7 +146,7 @@ public class BufferedRandomAccessFile extends RandomAccessFile {
             this.seek(pos);
 
             if ((pos >= 0) && (pos <= this.fileendpos) && (this.fileendpos != 0)) { // write pos is modify file
-                this.buf[(int)(pos - this.bufstartpos)] = bw;
+                this.buf[(int) (pos - this.bufstartpos)] = bw;
 
             } else if (((pos == 0) && (this.fileendpos == 0)) || (pos == this.fileendpos + 1)) { // write pos is append pos
                 this.buf[0] = bw;
@@ -166,9 +166,9 @@ public class BufferedRandomAccessFile extends RandomAccessFile {
         long writeendpos = this.curpos + len - 1;
 
         if (writeendpos <= this.bufendpos) { // b[] in cur buf
-            System.arraycopy(b, off, this.buf, (int)(this.curpos - this.bufstartpos), len);
+            System.arraycopy(b, off, this.buf, (int) (this.curpos - this.bufstartpos), len);
             this.bufdirty = true;
-            this.bufusedsize = (int)(writeendpos - this.bufstartpos + 1);//(int)(this.curpos - this.bufstartpos + len - 1);
+            this.bufusedsize = (int) (writeendpos - this.bufstartpos + 1);//(int)(this.curpos - this.bufstartpos + len - 1);
 
         } else { // b[] not in cur buf
             super.seek(this.curpos);
@@ -178,7 +178,7 @@ public class BufferedRandomAccessFile extends RandomAccessFile {
         if (writeendpos > this.fileendpos)
             this.fileendpos = writeendpos;
 
-        this.seek(writeendpos+1);
+        this.seek(writeendpos + 1);
     }
 
     @Override
@@ -186,12 +186,12 @@ public class BufferedRandomAccessFile extends RandomAccessFile {
 
         long readendpos = this.curpos + len - 1;
 
-        if (readendpos <= this.bufendpos && readendpos <= this.fileendpos ) { // read in buf
-            System.arraycopy(this.buf, (int)(this.curpos - this.bufstartpos), b, off, len);
+        if (readendpos <= this.bufendpos && readendpos <= this.fileendpos) { // read in buf
+            System.arraycopy(this.buf, (int) (this.curpos - this.bufstartpos), b, off, len);
         } else { // read b[] size > buf[]
 
             if (readendpos > this.fileendpos) { // read b[] part in file
-                len = (int)(this.length() - this.curpos + 1);
+                len = (int) (this.length() - this.curpos + 1);
             }
 
             super.seek(this.curpos);
@@ -233,7 +233,7 @@ public class BufferedRandomAccessFile extends RandomAccessFile {
             this.flushbuf();
 
             if ((pos >= 0) && (pos <= this.fileendpos) && (this.fileendpos != 0)) { // seek pos in file (file length > 0)
-                this.bufstartpos =  pos & this.bufmask;
+                this.bufstartpos = pos & this.bufmask;
                 this.bufusedsize = this.fillbuf();
 
             } else if (((pos == 0) && (this.fileendpos == 0)) || (pos == this.fileendpos + 1)) { // seek pos is append pos

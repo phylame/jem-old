@@ -23,6 +23,7 @@ import java.util.Map;
 
 import pw.phylame.jem.core.Book;
 import pw.phylame.imabw.app.Worker;
+import pw.phylame.jem.core.BookHelper;
 
 /**
  * Warps arguments of Jem maker.
@@ -40,7 +41,10 @@ public class MakerData {
     public MakerData(Book book, File file, String format, Map<String, Object> arguments) {
         this.book = book;
         this.file = file;
-        this.format = format;
+        this.format = BookHelper.nameOfExtension(format);
+        if (this.format == null) {
+            this.format = format;
+        }
         this.arguments = arguments;
     }
 }

@@ -37,16 +37,12 @@ class LongInputDialog extends CommonDialog<String> {
 
     public LongInputDialog(Frame owner, String title, boolean modal) {
         super(owner, title, modal);
-        if (isUndecorated()) {
-            getRootPane().setWindowDecorationStyle(JRootPane.QUESTION_DIALOG);
-        }
+        setDecorationStyleIfNeed(JRootPane.QUESTION_DIALOG);
     }
 
     public LongInputDialog(Dialog owner, String title, boolean modal) {
         super(owner, title, modal);
-        if (isUndecorated()) {
-            getRootPane().setWindowDecorationStyle(JRootPane.QUESTION_DIALOG);
-        }
+        setDecorationStyleIfNeed(JRootPane.QUESTION_DIALOG);
     }
 
     void setTipText(String tipText) {
@@ -66,12 +62,14 @@ class LongInputDialog extends CommonDialog<String> {
     }
 
     @Override
-    String getResult() {
+    public String getResult() {
         return inputted ? textArea.getText() : null;
     }
 
     private void createTextArea() {
         textArea = new JTextArea(null, initText, 15, 26);
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
         buttonOk.setEnabled(initText != null && !initText.isEmpty() && !requireChange);
         final Document doc = textArea.getDocument();
         textArea.addCaretListener(e -> {

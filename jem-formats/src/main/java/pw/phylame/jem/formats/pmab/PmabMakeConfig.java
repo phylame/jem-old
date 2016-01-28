@@ -20,7 +20,7 @@ package pw.phylame.jem.formats.pmab;
 
 import java.util.Map;
 
-import pw.phylame.jem.formats.common.ZipBookConfig;
+import pw.phylame.jem.formats.common.ZipMakerConfig;
 import pw.phylame.jem.formats.util.xml.XmlConfig;
 import pw.phylame.jem.formats.util.config.ConfigUtils;
 import pw.phylame.jem.formats.util.config.InvalidConfigException;
@@ -28,7 +28,7 @@ import pw.phylame.jem.formats.util.config.InvalidConfigException;
 /**
  * Config for making PMAB book.
  */
-public class PmabMakeConfig extends ZipBookConfig {
+public class PmabMakeConfig extends ZipMakerConfig {
     public static final String CONFIG_SELF = "pmab.make.config";
 
     public static final String VERSION = "pmab.make.version";

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2016 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -24,11 +24,15 @@ import pw.phylame.jem.formats.util.config.CommonConfig;
 import pw.phylame.jem.formats.util.config.InvalidConfigException;
 
 /**
- * Placeholder config for <tt>BookWorker</tt>.
+ * Placeholder for non configurable book worker,
  */
-public class NonConfig implements CommonConfig {
-    @Override
-    public void fetch(Map<String, Object> kw) throws InvalidConfigException {
+public final class NonConfig implements CommonConfig {
+    private NonConfig() {
+        // cannot be instantiated
+    }
 
+    @Override
+    public final void fetch(Map<String, Object> kw) throws InvalidConfigException {
+        // nothinh
     }
 }

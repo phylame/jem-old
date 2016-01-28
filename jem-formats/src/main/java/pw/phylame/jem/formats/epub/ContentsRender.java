@@ -18,7 +18,6 @@
 
 package pw.phylame.jem.formats.epub;
 
-import org.apache.commons.io.FilenameUtils;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Chapter;
 import pw.phylame.jem.formats.epub.writer.EpubWriter;
@@ -27,6 +26,7 @@ import pw.phylame.jem.formats.util.MessageBundle;
 import pw.phylame.jem.formats.util.html.HtmlRender;
 import pw.phylame.jem.formats.util.html.StyleProvider;
 import pw.phylame.jem.util.FileObject;
+import pw.phylame.jem.util.IOUtils;
 import pw.phylame.jem.util.TextObject;
 
 import java.io.IOException;
@@ -60,12 +60,12 @@ public class ContentsRender {
 
     public static final String TOC_NAME = "toc";
 
-    private Book book;
-    private EpubWriter epubWriter;
-    private EpubMakeConfig epubConfig;
+    private final Book book;
+    private final EpubWriter epubWriter;
+    private final EpubMakeConfig epubConfig;
     private HtmlRender htmlRender;
-    private ZipOutputStream zipout;
-    private ContentsListener contentsListener;
+    private final ZipOutputStream zipout;
+    private final ContentsListener contentsListener;
 
     public ContentsRender(Book book, EpubWriter epubWriter,
                           EpubMakeConfig epubConfig, ZipOutputStream zipout,
@@ -78,9 +78,9 @@ public class ContentsRender {
     }
 
     private String coverID;
-    private List<Resource> resources = new LinkedList<Resource>();
-    private List<SpineItem> spines = new LinkedList<SpineItem>();
-    private List<GuideItem> guides = new LinkedList<GuideItem>();
+    private final List<Resource> resources = new LinkedList<>();
+    private final List<SpineItem> spines = new LinkedList<>();
+    private final List<GuideItem> guides = new LinkedList<>();
 
     private void newResource(String id, String href, String mime) {
         resources.add(new Resource(id, href, mime));
@@ -206,7 +206,7 @@ public class ContentsRender {
     // return links of sub-chapters
     private List<HtmlRender.Link> processSection(Chapter section, String suffix,
                                                  String myHref) throws IOException {
-        List<HtmlRender.Link> links = new LinkedList<HtmlRender.Link>();
+        List<HtmlRender.Link> links = new LinkedList<>();
         HtmlRender.Link link;
         String mySuffix;
         int count = 1;
@@ -334,8 +334,7 @@ public class ContentsRender {
      * @throws IOException if occur IO errors
      */
     private String writeImage(FileObject file, String name, String id) throws IOException {
-        String path = IMAGE_DIR + "/" + name + "." +
-                FilenameUtils.getExtension(file.getName());
+        String path = IMAGE_DIR + "/" + name + "." + IOUtils.getExtension(file.getName());
         writeIntoEpub(file, path, id, file.getMime());
         return "../" + path;    // relative to HTML in textDir
     }

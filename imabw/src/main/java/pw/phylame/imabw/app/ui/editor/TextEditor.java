@@ -225,7 +225,7 @@ public class TextEditor extends JPanel {
         try {
             row = textArea.getLineOfOffset(textArea.getCaretPosition());
         } catch (BadLocationException ex) {
-            app.error("cannot get current row", ex);
+            app.error(ex, "cannot get current row");
         }
         return row;
     }
@@ -236,7 +236,7 @@ public class TextEditor extends JPanel {
             int row = textArea.getLineOfOffset(textArea.getCaretPosition());
             column = textArea.getCaretPosition() - textArea.getLineStartOffset(row);
         } catch (BadLocationException ex) {
-            app.error("cannot get current column", ex);
+            app.error(ex, "cannot get current column");
         }
         return column;
     }
@@ -302,7 +302,7 @@ public class TextEditor extends JPanel {
                 try {
                     doc.remove(textArea.getCaretPosition(), 1);
                 } catch (BadLocationException ex) {
-                    app.error("cannot remove caret", ex);
+                    app.error(ex, "cannot remove caret");
                 }
             }
         }
@@ -355,9 +355,10 @@ public class TextEditor extends JPanel {
     }
 
     public void gotoPosition() {
-        String str = DialogFactory.inputText(viewer, app.getText("editors.gotoLine.title"),
+        String str = DialogFactory.inputText(viewer,
+                app.getText("editors.gotoLine.title"),
                 app.getText("editors.gotoLine.inputTip"),
-                (getCurrentRow() + 1) + ":" + (getCurrentColumn() + 1), false, false);
+                (getCurrentRow() + 1) + ":" + (getCurrentColumn() + 1), true, false);
         if (str == null) {
             return;
         }
@@ -387,9 +388,9 @@ public class TextEditor extends JPanel {
         try {
             int position = textArea.getLineStartOffset(line) + column;
             textArea.setCaretPosition(position);
-        } catch (BadLocationException e) {
+        } catch (BadLocationException ex) {
             // ignored
-            app.error("cannot go to: " + e.offsetRequested(), e);
+            app.error(ex, "cannot go to: " + ex.offsetRequested());
         }
     }
 
@@ -419,7 +420,7 @@ public class TextEditor extends JPanel {
                     textArea.setCaretPosition(textArea.getLineStartOffset(line - 1));
                 }
             } catch (BadLocationException ex) {
-                app.error("cannot get row number", ex);
+                app.error(ex, "cannot get row number");
             }
         }
     }
@@ -438,7 +439,7 @@ public class TextEditor extends JPanel {
                     textArea.setCaretPosition(textArea.getLineStartOffset(line + 1));
                 }
             } catch (BadLocationException ex) {
-                app.error("cannot get row number", ex);
+                app.error(ex, "cannot get row number");
             }
         }
     }
@@ -480,7 +481,7 @@ public class TextEditor extends JPanel {
                     text = textArea.getText(start, end - start);
                     textArea.replaceRange(null, start, end);
                 } catch (BadLocationException ex) {
-                    app.error("cannot get row number", ex);
+                    app.error(ex, "cannot get row number");
                     return;
                 }
             }

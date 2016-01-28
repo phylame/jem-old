@@ -18,12 +18,12 @@
 
 package pw.phylame.jem.util;
 
+import java.util.List;
 import java.io.Writer;
 import java.io.IOException;
-import java.util.List;
 
 /**
- * <tt>TextObject</tt> provides unicode source.
+ * Provides reused unicode text source.
  */
 public interface TextObject {
 
@@ -48,7 +48,7 @@ public interface TextObject {
      * Returns text content of this object.
      *
      * @return the string of text, never <tt>null</tt>
-     * @throws Exception if failed to get text
+     * @throws Exception if occur error when fetching text
      */
     String getText() throws Exception;
 
@@ -57,15 +57,16 @@ public interface TextObject {
      *
      * @param skipEmpty <tt>true</tt> to skip empty line
      * @return list of lines, never <tt>null</tt>
-     * @throws Exception if failed to get lines
+     * @throws Exception if occur error when fetching text
      */
     List<String> getLines(boolean skipEmpty) throws Exception;
 
     /**
-     * Writes all text content in this object to output writer.
+     * Writes text content in this object to output writer.
      *
      * @param writer output <tt>Writer</tt> to store text content
-     * @throws IOException occurs IO errors
+     * @return number of written characters
+     * @throws Exception if occur error when fetching text or writing to writer
      */
-    void writeTo(Writer writer) throws IOException;
+    int writeTo(Writer writer) throws Exception;
 }

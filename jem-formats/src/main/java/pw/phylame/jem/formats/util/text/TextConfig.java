@@ -42,7 +42,7 @@ public class TextConfig implements CommonConfig {
     public static final String LINE_SEPARATOR = "text.render.lineSeparator";    // String
     public static final String SUFFIX_TEXT = "text.render.suffixText";  // String
     public static final String PADDING_LINE = "text.render.paddingLine";  // String
-    public static final String HTML_CONVERTER = "text.render.htmlConverter";    // HtmlConverter
+    public static final String HTML_CONVERTER = "text.render.textConverter";    // TextConverter
 
     /**
      * Write chapter title before chapter text.
@@ -82,8 +82,7 @@ public class TextConfig implements CommonConfig {
     /**
      * Paragraph prefix used when formatParagraph is enable.
      */
-    public String paragraphPrefix =
-            MessageBundle.getText("text.render.paragraphPrefix");
+    public String paragraphPrefix = MessageBundle.getText("text.render.paragraphPrefix");
 
     /**
      * Skip empty line, (enable when formatParagraph is enable).
@@ -107,10 +106,10 @@ public class TextConfig implements CommonConfig {
     public boolean paddingLine = true;
 
     /**
-     * The <tt>HtmlConverter</tt> for converting HTML to plain text. If not
+     * The <tt>TextConverter</tt> for converting HTML to plain text. If not
      * specify, the origin HTML will be rendered.
      */
-    public HtmlConverter htmlConverter = null;
+    public TextConverter textConverter = null;
 
     /**
      * Fetches config object from Jem maker arguments.
@@ -120,16 +119,8 @@ public class TextConfig implements CommonConfig {
      * @return <tt>RenderConfig</tt> object
      * @throws InvalidConfigException if invalid config found
      */
-    public static TextConfig fetchInstance(Map<String, Object> kw)
-            throws InvalidConfigException {
-        TextConfig config = ConfigUtils.fetchObject(kw, CONFIG_SELF, null,
-                TextConfig.class);
-        if (config != null) {
-            return config;
-        }
-        config = new TextConfig();
-        config.fetch(kw);
-        return config;
+    public static TextConfig fetchInstance(Map<String, Object> kw) throws InvalidConfigException {
+        return ConfigUtils.fetchConfig(kw, CONFIG_SELF, TextConfig.class);
     }
 
     @Override
@@ -137,22 +128,15 @@ public class TextConfig implements CommonConfig {
         prefixText = ConfigUtils.fetchString(kw, PREFIX_TEXT, prefixText);
         writeTitle = ConfigUtils.fetchBoolean(kw, WRITE_TITLE, writeTitle);
         joinTitles = ConfigUtils.fetchBoolean(kw, JOIN_TITLES, joinTitles);
-        titleSeparator = ConfigUtils.fetchString(kw, TITLE_SEPARATOR,
-                titleSeparator);
+        titleSeparator = ConfigUtils.fetchString(kw, TITLE_SEPARATOR, titleSeparator);
         writeIntro = ConfigUtils.fetchBoolean(kw, WRITE_INTRO, writeIntro);
-        introSeparator = ConfigUtils.fetchString(kw, INTRO_SEPARATOR,
-                introSeparator);
-        formatParagraph = ConfigUtils.fetchBoolean(kw, FORMAT_PARAGRAPH,
-                formatParagraph);
-        paragraphPrefix = ConfigUtils.fetchString(kw, PARAGRAPH_PREFIX,
-                paragraphPrefix);
-        skipEmptyLine = ConfigUtils.fetchBoolean(kw, SKIP_EMPTY_LINE,
-                skipEmptyLine);
-        lineSeparator = ConfigUtils.fetchString(kw, LINE_SEPARATOR,
-                lineSeparator);
+        introSeparator = ConfigUtils.fetchString(kw, INTRO_SEPARATOR, introSeparator);
+        formatParagraph = ConfigUtils.fetchBoolean(kw, FORMAT_PARAGRAPH, formatParagraph);
+        paragraphPrefix = ConfigUtils.fetchString(kw, PARAGRAPH_PREFIX, paragraphPrefix);
+        skipEmptyLine = ConfigUtils.fetchBoolean(kw, SKIP_EMPTY_LINE, skipEmptyLine);
+        lineSeparator = ConfigUtils.fetchString(kw, LINE_SEPARATOR, lineSeparator);
         paddingLine = ConfigUtils.fetchBoolean(kw, PADDING_LINE, paddingLine);
         suffixText = ConfigUtils.fetchString(kw, SUFFIX_TEXT, suffixText);
-        htmlConverter = ConfigUtils.fetchObject(kw, HTML_CONVERTER, htmlConverter,
-                HtmlConverter.class);
+        textConverter = ConfigUtils.fetchObject(kw, HTML_CONVERTER, textConverter, TextConverter.class);
     }
 }

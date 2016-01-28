@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Enumeration;
+
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Chapter;
 import pw.phylame.jem.core.Parser;
@@ -30,26 +31,17 @@ import pw.phylame.jem.formats.util.BufferedRandomAccessFile;
 import pw.phylame.jem.formats.util.MessageBundle;
 import pw.phylame.jem.formats.util.ParserException;
 import pw.phylame.jem.formats.util.SourceCleaner;
-import pw.phylame.jem.util.FileObject;
-import pw.phylame.jem.util.FileFactory;
-import pw.phylame.jem.util.TextFactory;
-import pw.phylame.jem.util.JemException;
-import pw.phylame.jem.util.JemUtilities;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import pw.phylame.jem.util.*;
 
 /**
  * Jem Parser for UC Browser Novels.
  */
 public class UCNovelParser implements Parser, ChapterWatcher {
-    private static Log LOG = LogFactory.getLog(UCNovelParser.class);
-
     public static final String KEY_BOOK_ID = "uc_book_id";
 
-    static final String DB_READER_CONFIG  = "META-INF/pw-jem/ucnovel-reader";
+    static final String DB_READER_CONFIG = "META-INF/pw-jem/ucnovel-reader";
     static final String CATALOG_FILE_NAME = "com.UCMobile_catalog";
-    static final String TEXT_ENCODING     = "UTF-8";
+    static final String TEXT_ENCODING = "UTF-8";
 
     private File catalogFile;
     private String bookId;
@@ -92,8 +84,7 @@ public class UCNovelParser implements Parser, ChapterWatcher {
 
         loadDbReader();
         if (dbReader == null) {
-            throw new ParserException(
-                    MessageBundle.getText("ucnovel.parse.noDbReader", DB_READER_CONFIG));
+            throw new ParserException(MessageBundle.getText("ucnovel.parse.noDbReader", DB_READER_CONFIG));
         }
         dbReader.init(catalogFile.getPath(), this.bookId);
 
@@ -104,9 +95,9 @@ public class UCNovelParser implements Parser, ChapterWatcher {
         book = new Book();
 
         NovelDetails details = readDetails();
-        File file = new File(catalogFile.getParent(), bookId +"/"+ bookId +".ucnovel");
+        File file = new File(catalogFile.getParent(), bookId + "/" + bookId + ".ucnovel");
         source = new BufferedRandomAccessFile(file, "r");
-        SourceCleaner cleaner = new SourceCleaner(source, file.getAbsolutePath(), new Runnable() {
+        SourceCleaner cleaner = new SourceCleaner(source, new Runnable() {
             @Override
             public void run() {
                 dbReader.cleanup();
@@ -127,7 +118,7 @@ public class UCNovelParser implements Parser, ChapterWatcher {
         NovelDetails details = dbReader.fetchDetails();
         book.setTitle(details.getName());
         book.setAuthor(details.getAuthor());
-        book.setDate( details.getExpireTime());
+        book.setDate(details.getExpireTime());
         book.setAttribute("update_time", details.getUpdateTime());
         return details;
     }
@@ -150,7 +141,7 @@ public class UCNovelParser implements Parser, ChapterWatcher {
     }
 
     private void loadDbReader() throws JemException {
-        Enumeration<URL> urls = JemUtilities.resourcesForPath(DB_READER_CONFIG,
+        Enumeration<URL> urls = IOUtils.getResources(DB_READER_CONFIG,
                 UCNovelParser.class.getClassLoader());
         if (urls == null) {
             return;
@@ -159,21 +150,16 @@ public class UCNovelParser implements Parser, ChapterWatcher {
         if (urls.hasMoreElements()) {
             URL url = urls.nextElement();
             try {
-                String name = IOUtils.toString(url).trim();
+                String name = IOUtils.toString(url.openStream(), null).trim();
                 Class<?> clazz = Class.forName(name);
                 if (NovelDbReader.class.isAssignableFrom(clazz)) {
                     dbReader = (NovelDbReader) clazz.newInstance();
                 } else {
-                    throw new JemException("Invalid NovelDbReader: "+name);
+                    throw new JemException("Invalid NovelDbReader: " + name);
                 }
-            } catch (IOException e) {
-                LOG.debug("no NovelDbReader found", e);
-            } catch (ClassNotFoundException e) {
-                LOG.debug("no NovelDbReader found", e);
-            } catch (InstantiationException e) {
-                LOG.debug("no NovelDbReader found", e);
-            } catch (IllegalAccessException e) {
-                LOG.debug("no NovelDbReader found", e);
+            } catch (IOException | IllegalAccessException
+                    | InstantiationException | ClassNotFoundException e) {
+                throw new JemException("Failed to load NovelDbReader", e);
             }
         }
     }

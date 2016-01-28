@@ -135,15 +135,13 @@ public class TabbedEditor extends JPanel implements Editable {
         viewer.new MenuAction(Imabw.TO_TITLED) {
             @Override
             public void actionPerformed(ActionEvent e) {
-                getActiveTab().getEditor().formatSelection(s ->
-                        TextUtils.toTitled(s).toString());
+                getActiveTab().getEditor().formatSelection(TextUtils::titled);
             }
         };
         viewer.new MenuAction(Imabw.TO_CAPITALIZED) {
             @Override
             public void actionPerformed(ActionEvent e) {
-                getActiveTab().getEditor().formatSelection(s ->
-                        TextUtils.toCapitalized(s).toString());
+                getActiveTab().getEditor().formatSelection(TextUtils::capitalized);
             }
         };
         viewer.new MenuAction(Imabw.JOIN_LINES) {
@@ -557,6 +555,7 @@ public class TabbedEditor extends JPanel implements Editable {
             switch (getTabCount()) {
                 case 0:             // closed all tabs
                     updateTabActions(false);
+                    updateTextActions(false);
                     viewer.updateTitle();
                     viewer.showWelcomePage();
                     viewer.getStatusIndicator().setEditorStatus(false);

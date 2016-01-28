@@ -32,7 +32,7 @@ import java.io.*;
  */
 public class TxtMaker extends CommonMaker<TxtMakeConfig> {
     public TxtMaker() {
-        super("txt", TxtMakeConfig.class, TxtMakeConfig.CONFIG_SELF);
+        super("txt", TxtMakeConfig.CONFIG_SELF, TxtMakeConfig.class);
     }
 
     @Override

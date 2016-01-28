@@ -18,6 +18,7 @@
 
 package pw.phylame.imabw.app;
 
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -127,9 +128,17 @@ public class Imabw extends IApplication<Viewer> implements Constants {
 
         debugLevel = DebugLevel.Echo;
 
-        if (Boolean.getBoolean("imabw.debug")) {
-            String path = "src/main/resources/" + I18N_NAME;
-            installTranslator(new TranslateHelper(I18N_NAME, path, new String[]{""}));
+        String l10n = System.getProperty("imabw.debug.l10n", null);
+        if (l10n != null) {
+            String parts[] = l10n.split(";"), tags[], path;
+            if (parts.length == 1) {
+                path = "src/main/resources/" + I18N_NAME;
+                tags = new String[]{parts[0]};
+            } else {
+                path = parts[parts.length - 1];
+                tags = Arrays.copyOfRange(parts, 0, parts.length - 1);
+            }
+            installTranslator(new TranslateHelper(I18N_NAME, path, tags));
         } else {
             installTranslator(new Translator(I18N_NAME));
         }

@@ -18,6 +18,9 @@
 
 package pw.phylame.jem.formats.common;
 
+import java.io.*;
+import java.util.Map;
+
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Maker;
 import pw.phylame.jem.util.JemException;
@@ -25,41 +28,29 @@ import pw.phylame.jem.formats.util.MakerException;
 import pw.phylame.jem.formats.util.ExceptionFactory;
 import pw.phylame.jem.formats.util.config.CommonConfig;
 
-import java.io.*;
-import java.util.Map;
-
 /**
  * Common Jem maker.
  */
-public abstract class
-        CommonMaker<CF extends CommonConfig> extends BookWorker<CF> implements Maker {
-
-    public CommonMaker(String name, Class<CF> configClass, String configKey) {
-        super(name, configClass, configKey);
+public abstract class CommonMaker<CF extends CommonConfig> extends BookWorker<CF> implements Maker {
+    protected CommonMaker(String name, String configKey, Class<CF> configClass) {
+        super(name, configKey, configClass);
     }
 
-    public abstract void make(Book book, OutputStream output, CF config)
-            throws IOException, MakerException;
+    protected abstract void make(Book book, OutputStream output, CF config) throws IOException, MakerException;
 
     protected MakerException makerException(String msg, Object... args) {
         return ExceptionFactory.makerException(msg, args);
     }
 
-    protected MakerException makerException(Throwable cause,
-                                            String msg, Object... args) {
+    protected MakerException makerException(Throwable cause, String msg, Object... args) {
         return ExceptionFactory.makerException(cause, msg, args);
     }
 
     @Override
-    public void make(Book book, File file, Map<String, Object> arguments)
-            throws IOException, JemException {
-        OutputStream output = new FileOutputStream(file);
-        CF config = fetchOrCreate(arguments);
-        try {
-            output = new BufferedOutputStream(output);
+    public final void make(Book book, File file, Map<String, Object> arguments) throws IOException, JemException {
+        CF config = fetchConfig(arguments);
+        try (OutputStream output = new BufferedOutputStream(new FileOutputStream(file))) {
             make(book, output, config);
-        } finally {
-            output.close();
         }
     }
 }

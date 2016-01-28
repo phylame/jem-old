@@ -18,10 +18,6 @@
 
 package pw.phylame.jem.formats.umd;
 
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import pw.phylame.jem.core.Chapter;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.formats.common.CommonMaker;
@@ -31,6 +27,7 @@ import pw.phylame.jem.formats.util.text.TextUtils;
 import pw.phylame.jem.util.FileObject;
 
 import pw.phylame.jem.formats.util.*;
+import pw.phylame.jem.util.IOUtils;
 
 import static pw.phylame.jem.formats.util.ByteUtils.littleRender;
 
@@ -43,14 +40,12 @@ import java.util.List;
  * <tt>Maker</tt> implement for UMD book.
  */
 public class UmdMaker extends CommonMaker<UmdMakeConfig> {
-    private static Log LOG = LogFactory.getLog(UmdMaker.class);
-
     private Book book;
     private OutputStream output;
     private long writtenBytes = 0L;
 
     public UmdMaker() {
-        super("umd", UmdMakeConfig.class, UmdMakeConfig.CONFIG_SELF);
+        super("umd", UmdMakeConfig.CONFIG_SELF, UmdMakeConfig.class);
     }
 
     @Override
@@ -63,7 +58,7 @@ public class UmdMaker extends CommonMaker<UmdMakeConfig> {
         this.book = book;
 
         writtenBytes = 0L;
-        output.write(littleRender.putUInt32(UMD.FILE_MAGIC));
+        output.write(littleRender.putUInt32(UMD.FILE_MAGIC_NUMBER));
         switch (config.umdType) {
             case UMD.TEXT:
                 makeText(config.textConfig);
@@ -85,9 +80,7 @@ public class UmdMaker extends CommonMaker<UmdMakeConfig> {
 
         // prepare text
         File cache = File.createTempFile("umd_", ".tmp");
-        BufferedRandomAccessFile source = null;
-        try {
-            source = new BufferedRandomAccessFile(cache, "rw");
+        try (BufferedRandomAccessFile source = new BufferedRandomAccessFile(cache, "rw")) {
             UmdRender umdRender = new UmdRender(this, source);
             config.lineSeparator = UMD.UMD_LINE_FEED;
             try {
@@ -103,7 +96,7 @@ public class UmdMaker extends CommonMaker<UmdMakeConfig> {
             writeChapterOffsets(umdRender.offsets);
             writeChapterTitles(umdRender.titles);
 
-            LinkedList<Long> blockChecks = new LinkedList<Long>();
+            LinkedList<Long> blockChecks = new LinkedList<>();
             writeText(source, contentLength, blockChecks);
             writeContentEnd(blockChecks);
 
@@ -111,14 +104,8 @@ public class UmdMaker extends CommonMaker<UmdMakeConfig> {
             writeSimplePageOffsets(contentLength);
             writeUmdEnd();
         } finally {
-            try {
-                if (source != null) {
-                    source.close();
-                }
-            } finally {
-                if (!cache.delete()) {
-                    LOG.debug("cannot delete UMD cached file: " + cache.getPath());
-                }
+            if (!cache.delete()) {
+                System.err.println("Failed delete UMD cached file: " + cache);
             }
         }
     }
@@ -135,7 +122,7 @@ public class UmdMaker extends CommonMaker<UmdMakeConfig> {
             images = config.cartoonImages;
             imageFormat = config.imageFormat;
         } else {
-            images = new LinkedList<FileObject>();
+            images = new LinkedList<>();
             // prepare images
             for (Chapter sub : book) {
                 findImages(sub, images);
@@ -146,7 +133,7 @@ public class UmdMaker extends CommonMaker<UmdMakeConfig> {
         writeChapterTitles(null);
         writeImageFormat(imageFormat);
 
-        LinkedList<Long> blockChecks = new LinkedList<Long>();
+        LinkedList<Long> blockChecks = new LinkedList<>();
         writeImages(images, blockChecks);
         writeContentEnd(blockChecks);
 
@@ -306,7 +293,7 @@ public class UmdMaker extends CommonMaker<UmdMakeConfig> {
         if (cover == null) {
             return;
         }
-        int type = UMD.formatOfName(FilenameUtils.getExtension(cover.getName()));
+        int type = UMD.formatOfName(IOUtils.getExtension(cover.getName()));
         int checkVal = NumberUtils.randInteger(0x1000, 0x1FFF);
         byte[] data = new byte[5];
         data[0] = (byte) type;

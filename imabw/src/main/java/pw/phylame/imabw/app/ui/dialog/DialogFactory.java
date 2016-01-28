@@ -33,7 +33,6 @@ import java.util.Locale;
 
 import com.toedter.calendar.JCalendar;
 import com.toedter.components.JLocaleChooser;
-import org.apache.commons.io.FilenameUtils;
 import pw.phylame.gaf.ixin.IAction;
 import pw.phylame.gaf.ixin.ICommonDialog;
 import pw.phylame.gaf.ixin.IQuietAction;
@@ -41,15 +40,21 @@ import pw.phylame.gaf.ixin.IxinUtilities;
 import pw.phylame.imabw.app.Imabw;
 import pw.phylame.imabw.app.Worker;
 import pw.phylame.imabw.app.model.OpenResult;
+import pw.phylame.imabw.app.util.BookUtils;
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Chapter;
 import pw.phylame.jem.formats.util.text.TextUtils;
+import pw.phylame.jem.util.IOUtils;
 
 /**
  * Factory for creating dialogs.
  */
 public final class DialogFactory {
     private static final Imabw app = Imabw.sharedInstance();
+
+    public static final int OPTION_OK = 0;
+    public static final int OPTION_CANCEL = 1;
+    public static final int OPTION_DISCARD = 2;
 
     public static JFileChooser fileChooser = new JFileChooser();
 
@@ -136,7 +141,7 @@ public final class DialogFactory {
     public static void showText(Component parent, String title, Object message) {
         MessageDialog dialog = createDialog(parent, title, true, MessageDialog.class);
         dialog.setMessage(message);
-        dialog.setDecorationStyle(JRootPane.PLAIN_DIALOG);
+        dialog.setDecorationStyleIfNeed(JRootPane.PLAIN_DIALOG);
         dialog.addCloseButton(SwingConstants.CENTER);
         dialog.showModal();
     }
@@ -150,7 +155,7 @@ public final class DialogFactory {
         MessageDialog dialog = createDialog(parent, title, true, MessageDialog.class);
         dialog.setIconStyle(MessageDialog.IconStyle.Information);
         dialog.setMessage(message);
-        dialog.setDecorationStyle(JRootPane.INFORMATION_DIALOG);
+        dialog.setDecorationStyleIfNeed(JRootPane.INFORMATION_DIALOG);
         dialog.addCloseButton(SwingConstants.RIGHT);
         dialog.showModal();
     }
@@ -164,7 +169,7 @@ public final class DialogFactory {
         MessageDialog dialog = createDialog(parent, title, true, MessageDialog.class);
         dialog.setIconStyle(MessageDialog.IconStyle.Warning);
         dialog.setMessage(message);
-        dialog.setDecorationStyle(JRootPane.WARNING_DIALOG);
+        dialog.setDecorationStyleIfNeed(JRootPane.WARNING_DIALOG);
         dialog.addCloseButton(SwingConstants.RIGHT);
         dialog.showModal();
     }
@@ -178,7 +183,7 @@ public final class DialogFactory {
         MessageDialog dialog = createDialog(parent, title, true, MessageDialog.class);
         dialog.setIconStyle(MessageDialog.IconStyle.Alert);
         dialog.setMessage(message);
-        dialog.setDecorationStyle(JRootPane.ERROR_DIALOG);
+        dialog.setDecorationStyleIfNeed(JRootPane.ERROR_DIALOG);
         dialog.addCloseButton(SwingConstants.RIGHT);
         dialog.showModal();
     }
@@ -188,16 +193,32 @@ public final class DialogFactory {
         showError(parent, title, app.getText(message, args));
     }
 
-    // return 0: discard, 1: save, other: cancel
-    public static int askSaving(Component parent, String title, Object message) {
-        int option = showOptions(parent, title, message,
-                MessageDialog.IconStyle.Save,
+    public static int showAsking(Component parent, String title,
+                                 MessageDialog.IconStyle icon, Object message) {
+        int option = showOptions(parent, title, message, icon,
                 -1, 2,
-                "dialog.askSaving.buttonDiscard",
+                "dialog.asking.discard",
                 Box.createHorizontalGlue(),
-                "dialog.askSaving.buttonSave",
-                "dialog.askSaving.buttonCancel");
-        return option < 1 ? option : option - 1;
+                "dialog.asking.ok",
+                "dialog.asking.cancel");
+        switch (option) {
+            case 0:
+                return OPTION_DISCARD;
+            case 2:
+                return OPTION_OK;
+            default:
+                return OPTION_CANCEL;
+        }
+    }
+
+    public static int localizedAsking(Component parent, String title,
+                                      MessageDialog.IconStyle icon,
+                                      String message, Object... args) {
+        return showAsking(parent, title, icon, app.getText(message, args));
+    }
+
+    public static int askSaving(Component parent, String title, Object message) {
+        return showAsking(parent, title, MessageDialog.IconStyle.Save, message);
     }
 
     public static int showOptions(Component parent, String title, Object message,
@@ -206,44 +227,44 @@ public final class DialogFactory {
         MessageDialog dialog = createDialog(parent, title, true, MessageDialog.class);
         dialog.setIconStyle(style);
         dialog.setMessage(message);
-        dialog.setDecorationStyle(JRootPane.QUESTION_DIALOG);
+        dialog.setDecorationStyleIfNeed(JRootPane.QUESTION_DIALOG);
         dialog.setOptions(alignment, defaultOption, options);
         return dialog.showModal();
     }
 
     public static Date selectDate(Component parent, String title,
-                                  String tipText, Date initDate) {
+                                  String tip, Date initDate) {
         JCalendar calendar = new JCalendar(initDate);
-        Object[] message = new Object[]{tipText, calendar};
+        Object[] message = new Object[]{tip, calendar};
         int choice = showOptions(parent, title, message, null, SwingConstants.RIGHT,
                 0, CommonDialog.BUTTON_OK, CommonDialog.BUTTON_CANCEL);
         return choice == 0 ? calendar.getDate() : null;
     }
 
     public static Locale selectLocale(Component parent, String title,
-                                      String tipText, Locale initLocale) {
+                                      String tip, Locale initLocale) {
         JLocaleChooser localeChooser = new JLocaleChooser();
         if (initLocale != null) {
             localeChooser.setLocale(initLocale);
         }
-        Object[] message = new Object[]{tipText, localeChooser};
+        Object[] message = new Object[]{tip, localeChooser};
 
         int choice = showOptions(parent, title, message, null, SwingConstants.RIGHT,
                 0, CommonDialog.BUTTON_OK, CommonDialog.BUTTON_CANCEL);
         return choice == 0 ? localeChooser.getLocale() : null;
     }
 
-    public static String selectLocale(Component parent, String title, String tipText,
+    public static String selectLocale(Component parent, String title, String tip,
                                       String langTag) {
-        Locale locale = selectLocale(parent, title, tipText, Locale.forLanguageTag(langTag));
+        Locale locale = selectLocale(parent, title, tip, Locale.forLanguageTag(langTag));
         return locale != null ? locale.toLanguageTag() : null;
     }
 
-    public static Object inputContent(Component parent, String title, String tipText,
+    public static Object inputContent(Component parent, String title, String tip,
                                       Object initValue, boolean requireChange, boolean canEmpty,
                                       JFormattedTextField.AbstractFormatter formatter) {
         SimpleInputDialog dialog = createDialog(parent, title, true, SimpleInputDialog.class);
-        dialog.setTipText(tipText);
+        dialog.setTipText(tip);
         dialog.setInitValue(initValue);
         dialog.setRequireChange(requireChange);
         dialog.setCanEmpty(canEmpty);
@@ -251,27 +272,27 @@ public final class DialogFactory {
         return dialog.makeShow(false);
     }
 
-    public static String inputText(Component parent, String title, String tipText,
+    public static String inputText(Component parent, String title, String tip,
                                    String initText, boolean requireChange, boolean canEmpty) {
-        return (String) inputContent(parent, title, tipText, initText, requireChange, canEmpty, null);
+        return (String) inputContent(parent, title, tip, initText, requireChange, canEmpty, null);
     }
 
-    public static Long inputInteger(Component parent, String title, String tipText,
+    public static Long inputInteger(Component parent, String title, String tip,
                                     long initValue, boolean requireChange) {
-        return (Long) inputContent(parent, title, tipText, initValue, requireChange, false,
+        return (Long) inputContent(parent, title, tip, initValue, requireChange, false,
                 new NumberFormatter(NumberFormat.getIntegerInstance()));
     }
 
-    public static Number inputNumber(Component parent, String title, String tipText,
+    public static Number inputNumber(Component parent, String title, String tip,
                                      Number initValue, boolean requireChange) {
-        return (Number) inputContent(parent, title, tipText, initValue, requireChange, false,
+        return (Number) inputContent(parent, title, tip, initValue, requireChange, false,
                 new NumberFormatter(NumberFormat.getNumberInstance()));
     }
 
-    public static String longInput(Component parent, String title, String tipText,
+    public static String longInput(Component parent, String title, String tip,
                                    String initText, boolean requireChange, boolean canEmpty) {
         LongInputDialog dialog = createDialog(parent, title, true, LongInputDialog.class);
-        dialog.setTipText(tipText);
+        dialog.setTipText(tip);
         dialog.setInitText(initText);
         dialog.setRequireChange(requireChange);
         dialog.setCanEmpty(canEmpty);
@@ -303,17 +324,17 @@ public final class DialogFactory {
         }
     }
 
-    public static void setApproveButtonName(String name, String tipText) {
+    public static void setApproveButtonName(String name, String tip) {
         Object[] parts = IxinUtilities.mnemonicOfText(name);
         fileChooser.setApproveButtonText((String) parts[0]);
         fileChooser.setApproveButtonMnemonic((int) parts[1]);
-        fileChooser.setApproveButtonToolTipText(tipText);
+        fileChooser.setApproveButtonToolTipText(tip);
     }
 
     // i18nKey: translation key
     public static void setApproveButtonName(String i18nKey) {
-        String name = app.getText(i18nKey), tipText = app.getText(i18nKey + IAction.tipKeySuffix);
-        setApproveButtonName(name, tipText);
+        String name = app.getText(i18nKey), tip = app.getText(i18nKey + IAction.tipKeySuffix);
+        setApproveButtonName(name, tip);
     }
 
     public static void setCurrentDirectory(File dir) {
@@ -347,7 +368,7 @@ public final class DialogFactory {
     private static File fileWithExtension() {
         File file = fileChooser.getSelectedFile();
 
-        if (FilenameUtils.getExtension(file.getPath()).isEmpty()) {
+        if (IOUtils.getExtension(file.getPath()).isEmpty()) {
             // append extension by choose extension filter
             FileFilter filter = fileChooser.getFileFilter();
             if (filter instanceof FileNameExtensionFilter) {
@@ -386,42 +407,49 @@ public final class DialogFactory {
         return null;
     }
 
-    public static void viewException(Component parent, String title, String tipText,
+    public static void viewException(Component parent, String title, String tip,
                                      Throwable error) {
         ErrorTracer dialog = createDialog(parent, title, true, ErrorTracer.class);
-        dialog.setTipText(tipText);
+        dialog.setTipText(tip);
         dialog.setError(error);
-        dialog.setVisible(true);
+        dialog.makeShow(false);
     }
 
-    public static Object chooseItem(Component parent, String title, String tipText,
-                                    Object[] items, Object initItem, boolean editable) {
+    public static void localizedException(Component parent, String title,
+                                          Throwable error,
+                                          String message, Object... args) {
+        String tip = app.getText(message, args);
+        viewException(parent, title, tip, error);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T> T chooseItem(Component parent, String title, String tip,
+                                   T[] items, T defaultItem, boolean editable) {
         int i = 0, index = -1;
-        for (Object item : items) {
-            if (item.equals(initItem)) {
+        for (T item : items) {
+            if (item.equals(defaultItem)) {
                 index = i;
                 break;
             }
             ++i;
         }
 
-        JComboBox<Object> comboBox = new JComboBox<>(items);
+        JComboBox<T> comboBox = new JComboBox<>(items);
         comboBox.setEditable(editable);
         if (index != -1) {
             comboBox.setSelectedIndex(index);
-        } else if (initItem != null) {
-            comboBox.addItem(initItem);
+        } else if (defaultItem != null) {
+            comboBox.addItem(defaultItem);
             comboBox.setSelectedIndex(comboBox.getItemCount() - 1);
         } else {
             comboBox.setSelectedIndex(0);
         }
 
-        Object[] comps = {tipText, comboBox};
-        int rev = JOptionPane.showConfirmDialog(parent, comps, title,
-                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-        return rev == JOptionPane.OK_OPTION ? items[comboBox.getSelectedIndex()] : null;
+        Object[] comps = {tip, comboBox};
+        int choice = showOptions(parent, title, comps, null, SwingConstants.RIGHT, 0,
+                CommonDialog.BUTTON_OK, CommonDialog.BUTTON_CANCEL);
+        return choice == 0 ? (T) comboBox.getSelectedItem() : null;
     }
-
 
     public static String displayableStringMap(String[] strings, String title) {
         StringBuilder builder = new StringBuilder("<html><table>");
@@ -447,12 +475,12 @@ public final class DialogFactory {
                 app.getText("dialog.fileDetails.path"), file.getAbsoluteFile().getParent(),
                 app.getText("dialog.fileDetails.size"), worker.formatFileSize(file.length()),
                 app.getText("dialog.fileDetails.date"), TextUtils.formatDate(date, "yyyy-M-d H:m:s"),
-                app.getText("dialog.fileDetails.format"), FilenameUtils.getExtension(file.getPath()).toUpperCase(),
+                app.getText("dialog.fileDetails.format"), IOUtils.getExtension(file.getPath()).toUpperCase(),
         };
         String title;
         if (book != null) {
             title = app.getText("dialog.fileDetails.tipLabel", book.getTitle());
-            String[] infos = worker.getFileInfo(book);
+            String[] infos = BookUtils.getFileInfo(book);
             if (infos != null) {
                 String[] tmp = new String[strings.length + infos.length];
                 System.arraycopy(strings, 0, tmp, 0, strings.length);
@@ -475,15 +503,19 @@ public final class DialogFactory {
     }
 
     public static void editAttributes(Component parent, Chapter chapter) {
-        EditChapterAttributes dialog = createDialog(parent,
-                app.getText("dialog.editAttributes.title", chapter.getTitle()),
-                true, EditChapterAttributes.class);
+        ChapterAttributes dialog = createDialog(parent,
+                app.getText("d.attributes.title", chapter.getTitle()),
+                true, ChapterAttributes.class);
         dialog.setChapter(chapter);
         dialog.makeShow(true);
     }
 
     public static void editExtensions(Component parent, Book book) {
-
+        EditExtensions dialog = createDialog(parent,
+                app.getText("d.extensions.title", book.getTitle()),
+                true, EditExtensions.class);
+        dialog.setBook(book);
+        dialog.makeShow(true);
     }
 
     public static void featureDeveloping(Component parent) {
@@ -491,26 +523,26 @@ public final class DialogFactory {
     }
 
     static WaitingDialog createWaitingDialog(Component parent, String title,
-                                             String tipText, String waitingText) {
+                                             String tip, String waitingText) {
         WaitingDialog dialog = createDialog(parent, title, true, WaitingDialog.class);
-        dialog.setTipText(tipText);
+        dialog.setTipText(tip);
         dialog.setWaitingText(waitingText);
         return dialog;
     }
 
     public static void openWaiting(Component parent, String title,
-                                   String tipText, String waitingText,
+                                   String tip, String waitingText,
                                    WaitingWork work, boolean cancelable) {
-        WaitingDialog dialog = createWaitingDialog(parent, title, tipText, waitingText);
+        WaitingDialog dialog = createWaitingDialog(parent, title, tip, waitingText);
         dialog.setWork(work, cancelable, true);
         work.execute();
         dialog.makeShow(false);
     }
 
     public static void openProgress(Component parent, String title,
-                                    String tipText, String waitingText,
+                                    String tip, String waitingText,
                                     WaitingWork work, boolean cancelable) {
-        WaitingDialog dialog = createWaitingDialog(parent, title, tipText, waitingText);
+        WaitingDialog dialog = createWaitingDialog(parent, title, tip, waitingText);
         dialog.setWork(work, cancelable, false);
         work.execute();
         dialog.makeShow(false);

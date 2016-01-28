@@ -18,18 +18,13 @@
 
 package pw.phylame.jem.core;
 
+import java.util.*;
 import java.net.URL;
-import java.util.Map;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.HashMap;
-import java.util.Collections;
-import java.util.Enumeration;
+import java.io.IOException;
+import java.io.InputStream;
 
-import pw.phylame.jem.util.JemUtilities;
-import pw.phylame.jem.util.LineIterator;
-import pw.phylame.jem.util.ObjectFactory;
-import pw.phylame.jem.util.UnsupportedFormatException;
+import pw.phylame.jem.util.IOUtils;
+import pw.phylame.jem.util.ImplementFactory;
 
 /**
  * This class manages the parsers and makers.
@@ -56,33 +51,25 @@ public final class BookHelper {
      */
     public static final String MAKER_DEFINE_FILE = "META-INF/pw-jem/makers.properties";
 
-    private static final String COMMENT_LABEL = "#";
-    private static final String NAME_PATH_SEPARATOR = "=";
-    private static final String NAME_EXTENSION_SEPARATOR = ";";
-    private static final String EXTENSION_SEPARATOR = " ";
-
     /**
      * Holds registered <tt>Parser</tt> class information.
      */
-    private static final Map<String, ObjectFactory<Parser>> parsers =
-            new HashMap<String, ObjectFactory<Parser>>();
+    private static final ImplementFactory<Parser> parsers = new ImplementFactory<>(Parser.class);
 
     /**
      * Holds registered <tt>Maker</tt> class information.
      */
-    private static final Map<String, ObjectFactory<Maker>> makers =
-            new HashMap<String, ObjectFactory<Maker>>();
+    private static final ImplementFactory<Maker> makers = new ImplementFactory<>(Maker.class);
 
     /**
      * Mapping parser and maker name to file extension names.
      */
-    private static final Map<String, Set<String>> extensions =
-            new HashMap<String, Set<String>>();
+    private static final HashMap<String, Set<String>> extensions = new HashMap<>();
 
     /**
      * Mapping file extension name to parser and maker name.
      */
-    private static final Map<String, String> names = new HashMap<String, String>();
+    private static final HashMap<String, String> names = new HashMap<>();
 
     /**
      * Registers parser class with specified name.
@@ -96,18 +83,7 @@ public final class BookHelper {
      *                                  <tt>path</tt> is <tt>null</tt> or empty string
      */
     public static void registerParser(String name, String path) {
-        if (name == null || name.isEmpty()) {
-            throw new IllegalArgumentException("name cannot be null or empty");
-        }
-        if (path == null || path.isEmpty()) {
-            throw new IllegalArgumentException("path cannot be null or empty");
-        }
-        ObjectFactory<Parser> factory = parsers.get(name);
-        if (factory != null) {
-            factory.path = path;
-        } else {
-            parsers.put(name, new ObjectFactory<Parser>(name, path, Parser.class));
-        }
+        parsers.registerImplement(name, path);
     }
 
     /**
@@ -121,28 +97,16 @@ public final class BookHelper {
      * @throws NullPointerException     if the <tt>clazz</tt> is <tt>null</tt>
      */
     public static void registerParser(String name, Class<? extends Parser> clazz) {
-        if (name == null || name.isEmpty()) {
-            throw new IllegalArgumentException("name cannot be null or empty");
-        }
-        if (clazz == null) {
-            throw new NullPointerException("clazz");
-        }
-        ObjectFactory<Parser> factory = parsers.get(name);
-        if (factory != null) {
-            factory.clazz = clazz;
-        } else {
-            parsers.put(name, new ObjectFactory<Parser>(name, clazz, Parser.class));
-        }
+        parsers.registerImplement(name, clazz);
     }
 
     /**
      * Removes registered parser with specified name.
      *
      * @param name name of the parser
-     * @return the <tt>ObjectFactory</tt> for the parser name if exists
      */
-    public static ObjectFactory<Parser> removeParser(String name) {
-        return parsers.remove(name);
+    public static void removeParser(String name) {
+        parsers.removeImplement(name);
     }
 
     /**
@@ -152,7 +116,7 @@ public final class BookHelper {
      * @return <tt>true</tt> if the parser is registered otherwise <tt>false</tt>
      */
     public static boolean hasParser(String name) {
-        return parsers.containsKey(name);
+        return parsers.hasImplement(name);
     }
 
     /**
@@ -161,8 +125,7 @@ public final class BookHelper {
      * @return sequence of format names
      */
     public static String[] supportedParsers() {
-        Set<String> names = parsers.keySet();
-        return names.toArray(new String[names.size()]);
+        return parsers.implementNames();
     }
 
     /**
@@ -170,26 +133,13 @@ public final class BookHelper {
      *
      * @param name name of the parser
      * @return <tt>Parser</tt> instance or <tt>null</tt> if parser not registered
-     * @throws NullPointerException       if the <tt>name</tt> is <tt>null</tt>
-     * @throws IllegalAccessException     cannot access the parser class
-     * @throws InstantiationException     cannot create new instance of parser class
-     * @throws ClassNotFoundException     if registered class path is invalid
-     * @throws UnsupportedFormatException if the parser is not registered
+     * @throws NullPointerException   if the <tt>name</tt> is <tt>null</tt>
+     * @throws IllegalAccessException cannot access the parser class
+     * @throws InstantiationException cannot create new instance of parser class
+     * @throws ClassNotFoundException if registered class path is invalid
      */
-    public static Parser getParser(String name) throws IllegalAccessException,
-            InstantiationException, ClassNotFoundException, UnsupportedFormatException {
-        if (name == null) {
-            throw new NullPointerException();
-        }
-        ObjectFactory<Parser> factory = parsers.get(name);
-        if (factory == null) {
-            throw new UnsupportedFormatException(name, "Not found book parser: " + name);
-        }
-        Parser parser = factory.newInstance();
-        if (parser == null) {
-            throw new UnsupportedFormatException(name, "Class not extend Parser: " + factory.path);
-        }
-        return parser;
+    public static Parser getParser(String name) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        return parsers.newImplement(name);
     }
 
     /**
@@ -204,18 +154,7 @@ public final class BookHelper {
      *                                  <tt>path</tt> is <tt>null</tt> or empty string
      */
     public static void registerMaker(String name, String path) {
-        if (name == null || name.isEmpty()) {
-            throw new IllegalArgumentException("name cannot be null or empty");
-        }
-        if (path == null || path.isEmpty()) {
-            throw new IllegalArgumentException("path cannot be null or empty");
-        }
-        ObjectFactory<Maker> factory = makers.get(name);
-        if (factory != null) {
-            factory.path = path;
-        } else {
-            makers.put(name, new ObjectFactory<Maker>(name, path, Maker.class));
-        }
+        makers.registerImplement(name, path);
     }
 
     /**
@@ -229,28 +168,16 @@ public final class BookHelper {
      * @throws NullPointerException     if the <tt>clazz</tt> is <tt>null</tt>
      */
     public static void registerMaker(String name, Class<? extends Maker> clazz) {
-        if (name == null || name.isEmpty()) {
-            throw new IllegalArgumentException("name cannot be null or empty");
-        }
-        if (clazz == null) {
-            throw new NullPointerException("clazz");
-        }
-        ObjectFactory<Maker> factory = makers.get(name);
-        if (factory != null) {
-            factory.clazz = clazz;
-        } else {
-            makers.put(name, new ObjectFactory<Maker>(name, clazz, Maker.class));
-        }
+        makers.registerImplement(name, clazz);
     }
 
     /**
      * Removes registered maker with specified name.
      *
      * @param name name of the maker
-     * @return the <tt>ObjectFactory</tt> for the maker name if exists
      */
-    public static ObjectFactory<Maker> removeMaker(String name) {
-        return makers.remove(name);
+    public static void removeMaker(String name) {
+        makers.removeImplement(name);
     }
 
     /**
@@ -260,7 +187,7 @@ public final class BookHelper {
      * @return <tt>true</tt> if the maker is registered otherwise <tt>false</tt>
      */
     public static boolean hasMaker(String name) {
-        return makers.containsKey(name);
+        return makers.hasImplement(name);
     }
 
     /**
@@ -269,8 +196,7 @@ public final class BookHelper {
      * @return sequence of format names
      */
     public static String[] supportedMakers() {
-        Set<String> names = makers.keySet();
-        return names.toArray(new String[names.size()]);
+        return makers.implementNames();
     }
 
     /**
@@ -278,26 +204,13 @@ public final class BookHelper {
      *
      * @param name name of the maker
      * @return <tt>Maker</tt> instance or <tt>null</tt> if maker not registered
-     * @throws NullPointerException       if the <tt>name</tt> is <tt>null</tt>
-     * @throws IllegalAccessException     cannot access the maker class
-     * @throws InstantiationException     cannot create new instance of maker class
-     * @throws ClassNotFoundException     if registered class path is invalid
-     * @throws UnsupportedFormatException if the maker is not registered
+     * @throws NullPointerException   if the <tt>name</tt> is <tt>null</tt>
+     * @throws IllegalAccessException cannot access the maker class
+     * @throws InstantiationException cannot create new instance of maker class
+     * @throws ClassNotFoundException if registered class path is invalid
      */
-    public static Maker getMaker(String name) throws IllegalAccessException,
-            InstantiationException, ClassNotFoundException, UnsupportedFormatException {
-        if (name == null) {
-            throw new NullPointerException();
-        }
-        ObjectFactory<Maker> factory = makers.get(name);
-        if (factory == null) {
-            throw new UnsupportedFormatException(name, "Not found book maker: " + name);
-        }
-        Maker maker = factory.newInstance();
-        if (maker == null) {
-            throw new UnsupportedFormatException(name, "Class not extend Maker: " + factory.path);
-        }
-        return maker;
+    public static Maker getMaker(String name) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        return makers.newImplement(name);
     }
 
     /**
@@ -314,7 +227,7 @@ public final class BookHelper {
         }
         Set<String> old = BookHelper.extensions.get(name);
         if (old == null) {
-            BookHelper.extensions.put(name, old = new HashSet<String>());
+            BookHelper.extensions.put(name, old = new HashSet<>());
         }
         if (extensions == null) {
             old.add(name);
@@ -347,73 +260,40 @@ public final class BookHelper {
         return names.get(extension);
     }
 
-    /**
-     * Registers custom parser classes from config file.
-     */
-    private static void registerCustomParsers(ClassLoader classLoader) {
-        Enumeration<URL> urls = JemUtilities.resourcesForPath(PARSER_DEFINE_FILE, classLoader);
+    private static final String NAME_EXTENSION_SEPARATOR = ";";
+    private static final String EXTENSION_SEPARATOR = " ";
+
+    private static <T> void loadRegisters(ClassLoader cl, String path, ImplementFactory<T> factory) {
+        Enumeration<URL> urls = IOUtils.getResources(path, cl);
         if (urls == null) {
             return;
         }
-        while (urls.hasMoreElements()) {
-            LineIterator iterator = new LineIterator(urls.nextElement(), null);
-            iterator.commentLabel = COMMENT_LABEL;
-            iterator.trimSpace = true;
-            iterator.skipEmpty = true;
-
-            while (iterator.hasNext()) {
-                String line = iterator.next();
-                String[] parts = line.split(NAME_PATH_SEPARATOR);
-                if (parts.length != 2) {
-                    continue;
-                }
-                String name = parts[0];
-                parts = parts[1].split(NAME_EXTENSION_SEPARATOR, 2);
-                registerParser(name, parts[0]);
-                if (parts.length > 1) {
-                    mapExtensions(name, parts[1].split(EXTENSION_SEPARATOR));
-                } else {
-                    mapExtensions(name, null);
+        InputStream in;
+        Properties prop;
+        try {
+            while (urls.hasMoreElements()) {
+                in = urls.nextElement().openStream();
+                prop = new Properties();
+                prop.load(in);
+                for (Map.Entry<Object, Object> entry : prop.entrySet()) {
+                    String name = entry.getKey().toString();
+                    String[] parts = entry.getValue().toString().split(NAME_EXTENSION_SEPARATOR, 2);
+                    factory.registerImplement(name, parts[0]);
+                    if (parts.length > 1) {
+                        mapExtensions(name, parts[1].split(EXTENSION_SEPARATOR));
+                    } else {
+                        mapExtensions(name, null);
+                    }
                 }
             }
-        }
-    }
-
-    /**
-     * Registers custom maker classes from config file.
-     */
-    private static void registerCustomMakers(ClassLoader classLoader) {
-        Enumeration<URL> urls = JemUtilities.resourcesForPath(MAKER_DEFINE_FILE, classLoader);
-        if (urls == null) {
-            return;
-        }
-        while (urls.hasMoreElements()) {
-            LineIterator iterator = new LineIterator(urls.nextElement(), null);
-            iterator.commentLabel = COMMENT_LABEL;
-            iterator.trimSpace = true;
-            iterator.skipEmpty = true;
-
-            while (iterator.hasNext()) {
-                String line = iterator.next();
-                String[] parts = line.split(NAME_PATH_SEPARATOR);
-                if (parts.length != 2) {
-                    continue;
-                }
-                String name = parts[0];
-                parts = parts[1].split(NAME_EXTENSION_SEPARATOR, 2);
-                registerMaker(name, parts[0]);
-                if (parts.length > 1) {
-                    mapExtensions(name, parts[1].split(EXTENSION_SEPARATOR));
-                } else {
-                    mapExtensions(name, null);
-                }
-            }
+        } catch (IOException e) {
+            // ignored
         }
     }
 
     static {
-        ClassLoader classLoader = JemUtilities.getContextClassLoader();
-        registerCustomParsers(classLoader);
-        registerCustomMakers(classLoader);
+        ClassLoader classLoader = IOUtils.getContextClassLoader();
+        loadRegisters(classLoader, PARSER_DEFINE_FILE, parsers);
+        loadRegisters(classLoader, MAKER_DEFINE_FILE, makers);
     }
 }

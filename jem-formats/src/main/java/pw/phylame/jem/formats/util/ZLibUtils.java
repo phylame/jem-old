@@ -89,20 +89,20 @@ public final class ZLibUtils {
         compresser.reset();
         compresser.setInput(data, offset, length);
         compresser.finish();
-        ByteArrayOutputStream bos = new ByteArrayOutputStream(length);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream(length);
         try {
             byte[] buf = new byte[BUFFER_SIZE];
             while (!compresser.finished()) {
                 int i = compresser.deflate(buf);
-                bos.write(buf, 0, i);
+                baos.write(buf, 0, i);
             }
-            output = bos.toByteArray();
+            output = baos.toByteArray();
         } catch (Exception e) {
             output = Arrays.copyOfRange(data, offset, offset + length);
             e.printStackTrace();
         } finally {
             try {
-                bos.close();
+                baos.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -165,20 +165,20 @@ public final class ZLibUtils {
         Inflater decompresser = new Inflater();
         decompresser.reset();
         decompresser.setInput(data, offset, length);
-        ByteArrayOutputStream o = new ByteArrayOutputStream(length);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream(length);
         try {
             byte[] buf = new byte[BUFFER_SIZE];
             while (!decompresser.finished()) {
                 int i = decompresser.inflate(buf);
-                o.write(buf, 0, i);
+                baos.write(buf, 0, i);
             }
-            output = o.toByteArray();
+            output = baos.toByteArray();
         } catch (Exception e) {
             output = Arrays.copyOfRange(data, offset, offset + length);
             e.printStackTrace();
         } finally {
             try {
-                o.close();
+                baos.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }

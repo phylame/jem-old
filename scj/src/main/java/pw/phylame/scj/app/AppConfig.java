@@ -50,14 +50,14 @@ public class AppConfig extends Settings {
     public void reset() {
         clear();
 
-        setComment(String.format("Configurations for PW SCJ %s\nCreated: %s",
-                Constants.VERSION, new Date()));
+        setComment(String.format("Configurations for PW SCJ %s\nCreated: %s", Constants.VERSION, new Date()));
 
         setAppLocale(Locale.getDefault());
         setDebugLevel(getDebugLevel());
         setOutputFormat(getOutputFormat());
         setViewKey(getViewKey());
         setTocIndent(getTocIndent());
+        setChanged(true);
     }
 
     Locale getAppLocale() {
@@ -77,7 +77,7 @@ public class AppConfig extends Settings {
     }
 
     String getOutputFormat() {
-        return getString("jem.output.defaultFormat", Jem.PMAB_FORMAT);
+        return getString("jem.output.defaultFormat", Jem.PMAB);
     }
 
     void setOutputFormat(String format) {

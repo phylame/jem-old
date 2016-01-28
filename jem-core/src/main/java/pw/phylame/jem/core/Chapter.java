@@ -20,19 +20,17 @@ package pw.phylame.jem.core;
 
 import java.util.Set;
 import java.util.Map;
-import java.util.List;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 import pw.phylame.jem.util.FileObject;
 import pw.phylame.jem.util.TextObject;
-import pw.phylame.jem.util.TextFactory;
+import pw.phylame.jem.util.VariantMap;
 
 /**
- * <p>Abstract chapter model in book contents.</p>
- * <p>The <tt>Chapter</tt> represents base chapter of book, it may be:</p>
+ * <p>Common chapter model in book contents.</p>
+ * <p>The <tt>Chapter</tt> represents base element of book, it may be:</p>
  * <ul>
  * <li>Chapter: common chapter</li>
  * <li>Section: collection of chapters</li>
@@ -50,10 +48,10 @@ import pw.phylame.jem.util.TextFactory;
 public class Chapter implements Iterable<Chapter>, Attributes {
 
     /**
-     * Constructs chapter used empty title and content.
+     * Constructs chapter used empty title.
      */
     public Chapter() {
-        this("", TextFactory.emptyText());
+        setTitle("");
     }
 
     /**
@@ -63,7 +61,7 @@ public class Chapter implements Iterable<Chapter>, Attributes {
      * @throws NullPointerException if the <tt>title</tt> is <tt>null</tt>
      */
     public Chapter(String title) {
-        this(title, TextFactory.emptyText());
+        setTitle(title);
     }
 
     /**
@@ -78,33 +76,38 @@ public class Chapter implements Iterable<Chapter>, Attributes {
         setContent(content);
     }
 
-
     /**
      * Constructs chapter with specified title, content, cover image
      * and intro text.
      *
      * @param title   title of chapter
-     * @param content text content provider
      * @param cover   <tt>FileObject</tt> contains cover image, <tt>null</tt> will be ignored
      * @param intro   intro text, <tt>null</tt> will be ignored
+     * @param content text content provider
      * @throws NullPointerException if the argument list contains <tt>null</tt>
      */
-    public Chapter(String title, TextObject content, FileObject cover, TextObject intro) {
+    public Chapter(String title, FileObject cover, TextObject intro, TextObject content) {
         setTitle(title);
-        setContent(content);
         setCover(cover);
         setIntro(intro);
+        setContent(content);
+    }
+
+    Chapter(Chapter other) {
+        attributes.update(other.attributes);
+        children.addAll(other.children);
+        content = other.content;
     }
 
     // ************************
     // ** Attributes support **
     // ************************
 
-    protected final Map<String, Object> attributes = new HashMap<String, Object>();
+    protected final VariantMap attributes = new VariantMap();
 
     /**
      * Associates the specified value with the specified name in attributes map.
-     * <p>If the {@code name} not exists add a new attribute, otherwise
+     * <p>If the <tt>name</tt> not exists add a new attribute, otherwise
      * overwritten old value.</p>
      *
      * @param name  name of the attribute
@@ -112,51 +115,27 @@ public class Chapter implements Iterable<Chapter>, Attributes {
      * @throws NullPointerException if the <tt>value</tt> is <tt>null</tt>
      */
     public void setAttribute(String name, Object value) {
-        if (value == null) {
-            throw new NullPointerException("value cannot be null");
-        }
         attributes.put(name, value);
-    }
-
-    public void updateAttributes(Map<String, Object> map) {
-        updateAttributes(map, false);
     }
 
     /**
      * Updates attributes with specified map.
      *
-     * @param map            the content key-value map
-     * @param removePresents <tt>true</tt> to remove all presented attributes
-     *                       before updating
+     * @param map the content key-value map
      * @throws NullPointerException if the <tt>map</tt> is <tt>null</tt>
      */
-    public void updateAttributes(Map<String, Object> map, boolean removePresents) {
-        if (map == null) {
-            throw new NullPointerException();
-        }
-        if (removePresents) {
-            attributes.clear();
-        }
-        attributes.putAll(map);
-    }
-
-    public void updateAttributes(Chapter ch) {
-        updateAttributes(ch, false);
+    public void updateAttributes(Map<String, Object> map) {
+        attributes.update(map);
     }
 
     /**
-     * Updates attributes with other chapter.
+     * Updates attributes with attributes of specified chapter.
      *
-     * @param ch             another chapter
-     * @param removePresents <tt>true</tt> to remove all presented attributes
-     *                       before updating
-     * @throws NullPointerException if the <tt>ch</tt> is <tt>null</tt>
+     * @param chapter another chapter
+     * @throws NullPointerException if the <tt>chapter</tt> is <tt>null</tt>
      */
-    public void updateAttributes(Chapter ch, boolean removePresents) {
-        if (ch == null) {
-            throw new NullPointerException();
-        }
-        updateAttributes(ch.attributes, removePresents);
+    public void updateAttributes(Chapter chapter) {
+        attributes.update(chapter.attributes);
     }
 
     /**
@@ -167,57 +146,32 @@ public class Chapter implements Iterable<Chapter>, Attributes {
      * otherwise <tt>not</tt>
      */
     public boolean hasAttribute(String name) {
-        return attributes.containsKey(name);
+        return attributes.contains(name);
     }
 
     /**
-     * Returns attribute value by its name. If {@code name} not exists
-     * return {@code defaultValue}.
+     * Returns attribute by its name. If <tt>name</tt> not exists
+     * return <tt>defaultValue</tt>.
      *
      * @param name         name of the attribute
-     * @param defaultValue the default value of the name
+     * @param defaultValue the default value for the name
      * @return the value to which the specified name is mapped, or
      * <tt>defaultValue</tt> if this map contains no attribute for the name
      */
     public Object getAttribute(String name, Object defaultValue) {
-        Object v = attributes.get(name);
-        return (v != null) ? v : defaultValue;
+        return attributes.get(name, defaultValue);
     }
 
     /**
-     * Returns attribute value by its name. If {@code name} not exists
-     * return {@code null}.
-     *
-     * @param name name of the attribute
-     * @return the value to which the specified name is mapped, or
-     * <tt>null</tt> if this map contains no attribute for the name
-     */
-    public Object getAttribute(String name) {
-        return getAttribute(name, null);
-    }
-
-    /**
-     * Returns attribute value converted to string by its name.
+     * Returns attribute converted to string by its name.
      *
      * @param name         name of the attribute
-     * @param defaultValue the default value of the name
+     * @param defaultValue the default value for the name
      * @return the value to which the specified name is mapped, or
      * <tt>defaultValue</tt> if this map contains no attribute for the name
      */
     public String stringAttribute(String name, String defaultValue) {
-        Object v = attributes.get(name);
-        return (v != null) ? v.toString() : defaultValue;
-    }
-
-    /**
-     * Returns attribute value converted to string by its name.
-     *
-     * @param name name of the attribute
-     * @return the value to which the specified name is mapped, or
-     * <tt>null</tt> if this map contains no attribute for the name
-     */
-    public String stringAttribute(String name) {
-        return stringAttribute(name, null);
+        return attributes.get(name, defaultValue);
     }
 
     /**
@@ -238,11 +192,11 @@ public class Chapter implements Iterable<Chapter>, Attributes {
     }
 
     /**
-     * Returns size of attributes map.
+     * Returns number of attributes.
      *
      * @return number of attributes
      */
-    public int attributeSize() {
+    public int attributeCount() {
         return attributes.size();
     }
 
@@ -252,7 +206,7 @@ public class Chapter implements Iterable<Chapter>, Attributes {
      * @return sequence of attribute names
      */
     public String[] attributeNames() {
-        return attributes.keySet().toArray(new String[attributes.size()]);
+        return attributes.keys();
     }
 
     /**
@@ -262,7 +216,7 @@ public class Chapter implements Iterable<Chapter>, Attributes {
      * @since 2.3
      */
     public Set<Map.Entry<String, Object>> attributeEntries() {
-        return attributes.entrySet();
+        return attributes.entries();
     }
 
     public String getTitle() {
@@ -274,11 +228,7 @@ public class Chapter implements Iterable<Chapter>, Attributes {
     }
 
     public FileObject getCover() {
-        Object o = getAttribute(COVER);
-        if (o instanceof FileObject) {
-            return (FileObject) o;
-        }
-        return null;
+        return attributes.get(COVER, null, FileObject.class);
     }
 
     public void setCover(FileObject cover) {
@@ -286,11 +236,7 @@ public class Chapter implements Iterable<Chapter>, Attributes {
     }
 
     public TextObject getIntro() {
-        Object o = getAttribute(INTRO);
-        if (o instanceof TextObject) {
-            return (TextObject) o;
-        }
-        return null;
+        return attributes.get(INTRO, null, TextObject.class);
     }
 
     public void setIntro(TextObject intro) {
@@ -300,15 +246,11 @@ public class Chapter implements Iterable<Chapter>, Attributes {
     /**
      * Returns word number of content.
      *
-     * @return the word number
+     * @return the word number or {@literal 0} if absent.
      * @since 2.3.1
      */
     public Integer getWords() {
-        Object o = getAttribute(WORDS);
-        if (o instanceof Integer) {
-            return (Integer) o;
-        }
-        return null;
+        return attributes.get(WORDS, 0, Integer.class);
     }
 
     /**
@@ -333,7 +275,7 @@ public class Chapter implements Iterable<Chapter>, Attributes {
     /**
      * Returns the current content.
      *
-     * @return the TextObject
+     * @return the TextObject, or <tt>null</tt> if not present
      * @since 2.3.1
      */
     public TextObject getContent() {
@@ -358,6 +300,9 @@ public class Chapter implements Iterable<Chapter>, Attributes {
     // ** Sub-chapter operations **
     // ****************************
 
+    /**
+     * Parent of current chapter.
+     */
     private Chapter parent = null;
 
     /**
@@ -370,17 +315,18 @@ public class Chapter implements Iterable<Chapter>, Attributes {
     }
 
     /**
-     * Sub-chapters
+     * Sub-chapters list.
      */
-    protected final List<Chapter> children = new ArrayList<Chapter>();
+    protected final ArrayList<Chapter> children = new ArrayList<>();
 
-    private void checkChapter(Chapter chapter) {
+    private Chapter checkChapter(Chapter chapter) {
         if (chapter == null) {
             throw new NullPointerException();
         }
-        if (chapter.getParent() != null) {
-            throw new IllegalArgumentException("chapter already in a certain section");
+        if (chapter.parent != null) {
+            throw new IllegalArgumentException("Chapter already in some section: " + chapter);
         }
+        return chapter;
     }
 
     /**
@@ -390,8 +336,7 @@ public class Chapter implements Iterable<Chapter>, Attributes {
      * @throws NullPointerException if the <tt>chapter</tt> is <tt>null</tt>
      */
     public void append(Chapter chapter) {
-        checkChapter(chapter);
-        children.add(chapter);
+        children.add(checkChapter(chapter));
         chapter.parent = this;
     }
 
@@ -405,8 +350,7 @@ public class Chapter implements Iterable<Chapter>, Attributes {
      *                                   range (index &lt; 0 || index &ge; size())
      */
     public void insert(int index, Chapter chapter) {
-        checkChapter(chapter);
-        children.add(index, chapter);
+        children.add(index, checkChapter(chapter));
         chapter.parent = this;
     }
 
@@ -423,7 +367,7 @@ public class Chapter implements Iterable<Chapter>, Attributes {
             throw new NullPointerException();
         }
         // not contained in children list
-        if (chapter.getParent() != this) {  // to be faster
+        if (chapter.parent != this) {  // to be faster
             return -1;
         }
         return children.indexOf(chapter);
@@ -434,7 +378,7 @@ public class Chapter implements Iterable<Chapter>, Attributes {
      *
      * @param index index of the chapter to be removed
      * @return the chapter at specified position or <tt>null</tt>
-     * if {@code index} not exists
+     * if <tt>index</tt> not exists
      * @throws IndexOutOfBoundsException if the index is out of range (index &lt; 0 || index &ge; size())
      */
     public Chapter removeAt(int index) {
@@ -475,11 +419,10 @@ public class Chapter implements Iterable<Chapter>, Attributes {
      * @throws IndexOutOfBoundsException if the index is out of range (index &lt; 0 || index &ge; size())
      */
     public Chapter replace(int index, Chapter chapter) {
-        checkChapter(chapter);
-        Chapter oldChapter = children.set(index, chapter);
+        Chapter previous = children.set(index, checkChapter(chapter));
         chapter.parent = this;
-        oldChapter.parent = null;
-        return oldChapter;
+        previous.parent = null;
+        return previous;
     }
 
     /**
@@ -487,7 +430,7 @@ public class Chapter implements Iterable<Chapter>, Attributes {
      *
      * @param index index of the chapter to return
      * @return the chapter at specified position or <tt>null</tt>
-     * if {@code index} not exists
+     * if <tt>index</tt> not exists
      * @throws IndexOutOfBoundsException if the index is out of range (index &lt; 0 || index &ge; size())
      */
     public Chapter chapterAt(int index) {
@@ -554,7 +497,7 @@ public class Chapter implements Iterable<Chapter>, Attributes {
     /**
      * Clean works
      */
-    private final List<Cleanable> cleaners = new LinkedList<Cleanable>();
+    private final LinkedList<Cleanable> cleaners = new LinkedList<>();
 
     /**
      * Registers the specified <tt>Cleanable</tt> to clean works list.
@@ -592,6 +535,7 @@ public class Chapter implements Iterable<Chapter>, Attributes {
             work.clean(this);
         }
         cleaners.clear();
+        // remove all attributes
         clearAttributes();
 
         // clean all sub chapters
@@ -609,7 +553,7 @@ public class Chapter implements Iterable<Chapter>, Attributes {
     protected void finalize() throws Throwable {
         super.finalize();
         if (!cleaned) {
-            System.err.printf("***Chapter \"%s@%d\" not cleaned***\n", getTitle(), hashCode());
+            System.err.printf("*** Chapter \"%s@%d\" not cleaned ***\n", getTitle(), hashCode());
         }
     }
 
@@ -626,10 +570,10 @@ public class Chapter implements Iterable<Chapter>, Attributes {
         if (isSection()) {
             throw new UnsupportedOperationException("copy a section is unsupported");
         }
-        Chapter aCopy = new Chapter();
-        aCopy.attributes.putAll(attributes);
-        aCopy.content = content;    // TextObject is read-only
-        return aCopy;
+        Chapter dump = new Chapter();
+        dump.attributes.update(attributes);
+        dump.content = content;    // TextObject is reusable
+        return dump;
     }
 
     public String debugMessage() {

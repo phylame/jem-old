@@ -41,7 +41,7 @@ public class UISnap extends ISettings {
     }
 
     private UISnap() throws IOException {
-        super(true, Constants.SETTINGS_HOME + "snap", true);
+        super(Constants.SETTINGS_HOME + "snap", true, true);
         setComment("Stores state of UI components");
     }
 }

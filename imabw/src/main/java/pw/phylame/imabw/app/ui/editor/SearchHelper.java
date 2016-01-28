@@ -35,9 +35,7 @@ class SearchHelper {
 
     SearchHelper(TextEditor editor) {
         this.editor = editor;
-        editor.getTextComponent().addCaretListener(e -> {
-            position = e.getDot();
-        });
+        editor.getTextComponent().addCaretListener(e -> position = e.getDot());
     }
 
     private String getMatchText() {

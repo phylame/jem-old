@@ -18,15 +18,9 @@
 
 package pw.phylame.jem.formats.epub;
 
-import pw.phylame.jem.core.Book;
-import pw.phylame.jem.formats.util.ZipUtils;
-import pw.phylame.jem.formats.util.text.TextUtils;
-import pw.phylame.jem.util.FileObject;
-
-import java.io.File;
-import java.io.IOException;
 import java.util.Locale;
-import java.util.zip.ZipOutputStream;
+
+import pw.phylame.jem.core.Book;
 
 /**
  * Constants and utilities for ePub.
@@ -84,17 +78,10 @@ public class EPUB {
     public static String dateFormat = "yyyy-M-d";
 
     public static String languageOfBook(Book book) {
-        String lang = book.getLanguage();
-        if (!TextUtils.isValid(lang)) {
-            Locale locale = Locale.getDefault();
-            lang = locale.getLanguage() + "-" + locale.getCountry();
-        } else {
-            lang = lang.replace('_', '-');
+        Locale locale = book.getLanguage();
+        if (locale == null) {
+            locale = Locale.getDefault();
         }
-        return lang;
-    }
-
-    public static String getOpsPath(String name, EpubConfig config) {
-        return config.opsDir + "/" + name;
+        return locale.getLanguage() + "-" + locale.getCountry();
     }
 }

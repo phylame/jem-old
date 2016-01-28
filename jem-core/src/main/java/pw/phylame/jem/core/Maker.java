@@ -41,8 +41,8 @@ public interface Maker {
      * @param book      the <tt>Book</tt> to be written
      * @param file      output file to store book
      * @param arguments arguments to the maker
-     * @throws java.io.IOException occurs IO errors
-     * @throws JemException        occurs errors when making book file
+     * @throws IOException  if occurs I/O errors
+     * @throws JemException if occurs errors when making book file
      */
     void make(Book book, File file, Map<String, Object> arguments) throws IOException, JemException;
 }

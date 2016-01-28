@@ -27,3 +27,4 @@ ChangeLog
   o. some convenience accessors for chapter and book attribute
   o. Rename xxxItem methods in Book to xxxExtension
   o. optimize and bugfix
+  o. rename Jem.PMAB_FORMAT to Jem.PMAB

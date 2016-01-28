@@ -56,11 +56,11 @@ public class AppConfig extends Settings {
     }
 
     private AppConfig() throws IOException {
-        super(true, Constants.SETTINGS_HOME + "settings", true);
+        super(Constants.SETTINGS_HOME + "settings", true, true);
     }
 
     private AppConfig(int unused) throws IOException {
-        super(false, null, false);
+        super(null, false, false);
     }
 
     @Override

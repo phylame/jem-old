@@ -34,21 +34,13 @@ public class XmlConfig implements CommonConfig {
     public static final String LINE_SEPARATOR = "xml.render.lineSeparator";
     public static final String INDENT_STRING = "xml.render.indentString";
 
-    public String encoding = System.getProperty("file.encoding");
+    public String encoding = "UTF-8";
     public boolean standalone = true;
     public String lineSeparator = "\n";
     public String indentString = "\t";
 
-    public static XmlConfig fetchInstance(Map<String, Object> kw)
-            throws InvalidConfigException {
-        XmlConfig config = ConfigUtils.fetchObject(kw, CONFIG_SELF, null,
-                XmlConfig.class);
-        if (config != null) {
-            return config;
-        }
-        config = new XmlConfig();
-        config.fetch(kw);
-        return config;
+    public static XmlConfig fetchInstance(Map<String, Object> kw) throws InvalidConfigException {
+        return ConfigUtils.fetchConfig(kw, CONFIG_SELF, XmlConfig.class);
     }
 
     @Override

@@ -35,9 +35,7 @@ class AboutImabw extends CommonDialog {
     AboutImabw(Frame owner) {
         super(owner, app.getText("dialog.aboutApp.title"), true);
         initialize(false);
-        if (isUndecorated()) {
-            getRootPane().setWindowDecorationStyle(JRootPane.INFORMATION_DIALOG);
-        }
+        setDecorationStyleIfNeed(JRootPane.INFORMATION_DIALOG);
     }
 
     @Override

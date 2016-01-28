@@ -62,6 +62,10 @@ public class UmdMakeConfig implements CommonConfig {
      */
     public String imageFormat = "jpg";
 
+    public UmdMakeConfig() {
+        textConfig.writeTitle = false;
+    }
+
     @Override
     public void fetch(Map<String, Object> kw) throws InvalidConfigException {
         textConfig = TextConfig.fetchInstance(kw);

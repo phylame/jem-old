@@ -24,11 +24,10 @@ import pw.phylame.jem.util.FileFactory;
 import pw.phylame.jem.util.FileObject;
 import pw.phylame.jem.util.AbstractText;
 import pw.phylame.jem.formats.common.NonConfig;
-import pw.phylame.jem.formats.common.BinaryBookParser;
+import pw.phylame.jem.formats.common.BinaryParser;
 import pw.phylame.jem.formats.util.ZLibUtils;
 import pw.phylame.jem.formats.util.ParserException;
 
-import java.io.Writer;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
@@ -37,9 +36,9 @@ import java.util.*;
 /**
  * <tt>Parser</tt> implement for UMD book.
  */
-public class UmdParser extends BinaryBookParser<NonConfig> {
+public class UmdParser extends BinaryParser<NonConfig> {
     public UmdParser() {
-        super("umd");
+        super("umd", null, null);
     }
 
     private class ParserData {
@@ -54,7 +53,7 @@ public class UmdParser extends BinaryBookParser<NonConfig> {
         long contentLength;
         int coverFormat, imageFormat;
 
-        final ArrayList<TextBlock> blocks = new ArrayList<TextBlock>();
+        final ArrayList<TextBlock> blocks = new ArrayList<>();
 
         ParserData(RandomAccessFile file) {
             this.file = file;
@@ -63,20 +62,18 @@ public class UmdParser extends BinaryBookParser<NonConfig> {
     }
 
     @Override
-    protected void validateFile(RandomAccessFile input, NonConfig config)
-            throws IOException, ParserException {
-        if (readUInt32(input) != UMD.FILE_MAGIC) {
+    protected void validateInput(RandomAccessFile input, NonConfig config) throws IOException, ParserException {
+        if (readUInt32(input) != UMD.FILE_MAGIC_NUMBER) {
             throw parserException("umd.parse.invalidMagic");
         }
     }
 
     @Override
-    public Book parse(RandomAccessFile input, NonConfig config)
-            throws IOException, ParserException {
-        return parse(input);
+    protected Book parse(RandomAccessFile input, NonConfig config) throws IOException, ParserException {
+        return parse0(input);
     }
 
-    public Book parse(RandomAccessFile file) throws IOException, ParserException {
+    private Book parse0(RandomAccessFile file) throws IOException, ParserException {
         ParserData pd = new ParserData(file);
         int sep;
         while ((sep = file.read()) != -1) {
@@ -179,21 +176,15 @@ public class UmdParser extends BinaryBookParser<NonConfig> {
             }
             break;
             case UMD.CDT_CDS_KEY: {
-                byte[] bytes = new byte[length];
-                if (file.read(bytes) != length) {
-                    throw parserException("umd.parse.badCDSKey");
-                }
-                book.setAttribute("cds_key",
-                        FileFactory.fromBytes("cds_key", bytes, FileObject.UNKNOWN_MIME));
+                byte[] bytes = readBytes(file, length, "umd.parse.badCDSKey");
+                book.setAttribute("cds_key", FileFactory.fromBytes("cds_key", bytes,
+                        FileObject.UNKNOWN_MIME));
             }
             break;
             case UMD.CDT_LICENSE_KEY: {
-                byte[] bytes = new byte[length];
-                if (file.read(bytes) != length) {
-                    throw parserException("umd.parse.badLicenseKey");
-                }
-                book.setAttribute("license_key",
-                        FileFactory.fromBytes("license_key", bytes, FileObject.UNKNOWN_MIME));
+                byte[] bytes = readBytes(file, length, "umd.parse.badLicenseKey");
+                book.setAttribute("license_key", FileFactory.fromBytes("license_key", bytes,
+                        FileObject.UNKNOWN_MIME));
             }
             break;
             case UMD.CDT_COVER_IMAGE: {
@@ -227,19 +218,16 @@ public class UmdParser extends BinaryBookParser<NonConfig> {
         }
     }
 
-    private String readString(RandomAccessFile file, int length)
-            throws IOException, ParserException {
+    private String readString(RandomAccessFile file, int length) throws IOException, ParserException {
         return new String(readBytes(file, length), UMD.TEXT_ENCODING);
     }
 
-    private void skipBlock(RandomAccessFile file) throws IOException,
-            ParserException {
+    private void skipBlock(RandomAccessFile file) throws IOException, ParserException {
         long length = readUInt32(file) - 9;
         file.skipBytes((int) length);
     }
 
-    private void readChapterOffsets(ParserData pd) throws IOException,
-            ParserException {
+    private void readChapterOffsets(ParserData pd) throws IOException, ParserException {
         RandomAccessFile file = pd.file;
         Book book = pd.book;
         long count = (readUInt32(file) - 9) >> 2; // div 4
@@ -262,8 +250,7 @@ public class UmdParser extends BinaryBookParser<NonConfig> {
         umdText.size = pd.contentLength - prevOffset;
     }
 
-    private void readChapterTitles(ParserData pd) throws IOException,
-            ParserException {
+    private void readChapterTitles(ParserData pd) throws IOException, ParserException {
         RandomAccessFile file = pd.file;
         file.skipBytes(4);
         for (Chapter chapter : pd.book) {
@@ -272,14 +259,12 @@ public class UmdParser extends BinaryBookParser<NonConfig> {
         }
     }
 
-    private void readContentEnd(RandomAccessFile file) throws IOException,
-            ParserException {
+    private void readContentEnd(RandomAccessFile file) throws IOException, ParserException {
         // ignored
         skipBlock(file);
     }
 
-    private void readCoverImage(ParserData pd) throws IOException,
-            ParserException {
+    private void readCoverImage(ParserData pd) throws IOException, ParserException {
         RandomAccessFile file = pd.file;
 
         long length = readUInt32(file) - 9;
@@ -290,8 +275,7 @@ public class UmdParser extends BinaryBookParser<NonConfig> {
         file.skipBytes((int) length);
     }
 
-    private void readPageOffsets(ParserData pd) throws IOException,
-            ParserException {
+    private void readPageOffsets(ParserData pd) throws IOException, ParserException {
         // ignored
         skipBlock(pd.file);
     }
@@ -312,8 +296,7 @@ public class UmdParser extends BinaryBookParser<NonConfig> {
             case UMD.CARTOON: {
                 String format = UMD.nameOfFormat(pd.imageFormat);
                 String name = String.format("img_%d.%s", book.size() + 1, format);
-                FileObject image = FileFactory.fromBlock(name, file, offset, length,
-                        "image/" + format);
+                FileObject image = FileFactory.fromBlock(name, file, offset, length, "image/" + format);
                 Chapter chapter = new Chapter(String.valueOf(book.size() + 1));
                 chapter.setCover(image);
                 book.append(chapter);
@@ -326,13 +309,8 @@ public class UmdParser extends BinaryBookParser<NonConfig> {
     }
 
     @Override
-    protected byte[] readBytes(RandomAccessFile input, int size) throws IOException,
-            ParserException {
-        byte[] b = super.readBytes(input, size);
-        if (b == null) {
-            throw parserException("umd.parse.invalidFile");
-        }
-        return b;
+    protected void onReadingError() throws ParserException {
+        throw parserException("umd.parse.invalidFile", source);
     }
 
     class TextBlock {
@@ -350,9 +328,9 @@ public class UmdParser extends BinaryBookParser<NonConfig> {
         long size;
         private final List<TextBlock> blocks;
 
-        UmdText(RandomAccessFile file, long offset, long size, List<TextBlock> blocks) {
+        private UmdText(RandomAccessFile file, long offset, long size, List<TextBlock> blocks) {
             super(PLAIN);
-            this.file = Objects.requireNonNull(file);
+            this.file = file;
             this.offset = offset;
             this.size = size;
             this.blocks = blocks;
@@ -385,11 +363,6 @@ public class UmdParser extends BinaryBookParser<NonConfig> {
         @Override
         public List<String> getLines(boolean skipEmpty) throws IOException {
             return Arrays.asList(rawText().split(UMD.UMD_LINE_FEED));
-        }
-
-        @Override
-        public void writeTo(Writer writer) throws IOException {
-            writer.write(rawText());
         }
     }
 }

@@ -22,7 +22,7 @@ import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Chapter;
 import pw.phylame.jem.util.AbstractText;
 import pw.phylame.jem.formats.common.NonConfig;
-import pw.phylame.jem.formats.common.BinaryBookParser;
+import pw.phylame.jem.formats.common.BinaryParser;
 import pw.phylame.jem.formats.util.ZLibUtils;
 import pw.phylame.jem.formats.util.ByteUtils;
 import pw.phylame.jem.formats.util.ParserException;
@@ -31,7 +31,7 @@ import pw.phylame.jem.formats.util.text.TextUtils;
 import java.io.*;
 import java.util.ArrayList;
 
-public class Ebk2Parser extends BinaryBookParser<NonConfig> {
+public class Ebk2Parser extends BinaryParser<NonConfig> {
 
     private class ParserData {
         final RandomAccessFile file;
@@ -44,7 +44,7 @@ public class Ebk2Parser extends BinaryBookParser<NonConfig> {
         int blockCount;
         int mediaCount;
 
-        final ArrayList<TextBlock> blocks = new ArrayList<TextBlock>();
+        final ArrayList<TextBlock> blocks = new ArrayList<>();
 
         ParserData(RandomAccessFile file) {
             this.file = file;
@@ -53,12 +53,11 @@ public class Ebk2Parser extends BinaryBookParser<NonConfig> {
     }
 
     public Ebk2Parser() {
-        super("ebk");
+        super("ebk", null, null);
     }
 
     @Override
-    public Book parse(RandomAccessFile input, NonConfig config)
-            throws IOException, ParserException {
+    protected Book parse(RandomAccessFile input, NonConfig config) throws IOException, ParserException {
         ParserData pd = new ParserData(input);
         readHeader(pd);
         readChapterIndexes(pd);
@@ -76,7 +75,6 @@ public class Ebk2Parser extends BinaryBookParser<NonConfig> {
         if (version != 2) {
             throw parserException("ebk.parse.unsupportedVersion", version);
         }
-        book.setExtension("ebk_version", 2);
 
         file.skipBytes(4);     // ebk2 size
         book.setTitle(readString(file, 64));
@@ -89,16 +87,14 @@ public class Ebk2Parser extends BinaryBookParser<NonConfig> {
         file.skipBytes(8);     // media size and txt size
     }
 
-    private void readChapterIndexes(ParserData pd) throws IOException,
-            ParserException {
+    private void readChapterIndexes(ParserData pd) throws IOException, ParserException {
         byte[] b = readBytes(pd.file, (int) pd.indexSize);
         ByteArrayInputStream stream = new ByteArrayInputStream(ZLibUtils.decompress(b));
         readChapters(pd, stream);
         readBlocks(pd, stream);
     }
 
-    private void readChapters(ParserData pd, InputStream stream)
-            throws IOException, ParserException {
+    private void readChapters(ParserData pd, InputStream stream) throws IOException, ParserException {
         String title;
         long offset, length;
 
@@ -113,8 +109,7 @@ public class Ebk2Parser extends BinaryBookParser<NonConfig> {
         }
     }
 
-    private void readBlocks(ParserData pd, InputStream stream)
-            throws IOException, ParserException {
+    private void readBlocks(ParserData pd, InputStream stream) throws IOException, ParserException {
         long offset, length;
         for (int i = 0; i < pd.blockCount; ++i) {
             offset = readUInt32(stream);
@@ -124,17 +119,11 @@ public class Ebk2Parser extends BinaryBookParser<NonConfig> {
     }
 
     @Override
-    protected byte[] readBytes(RandomAccessFile input, int size)
-            throws IOException, ParserException {
-        byte[] b = super.readBytes(input, size);
-        if (b == null) {
-            throw parserException("ebk.parse.invalidFile");
-        }
-        return b;
+    protected void onReadingError() throws ParserException {
+        throw parserException("ebk.parse.invalidFile", source);
     }
 
-    private byte[] readBytes(InputStream in, long size) throws IOException,
-            ParserException {
+    private byte[] readBytes(InputStream in, long size) throws IOException, ParserException {
         byte[] b = new byte[(int) size];
         if (in.read(b) != size) {
             throw parserException("ebk.parse.invalidFile");
@@ -146,38 +135,33 @@ public class Ebk2Parser extends BinaryBookParser<NonConfig> {
         return ByteUtils.littleParser.getInt32(readBytes(in, 4), 0);
     }
 
-    private String readString(RandomAccessFile file, int length) throws IOException,
-            ParserException {
-        String str = new String(readBytes(file, length), EBK.TEXT_ENCODING);
-        return TextUtils.trim(str);
+    private String readString(RandomAccessFile file, int length) throws IOException, ParserException {
+        return TextUtils.trimmed(new String(readBytes(file, length), EBK.TEXT_ENCODING));
     }
 
-    private String readString(InputStream in, int length) throws IOException,
-            ParserException {
-        String str = new String(readBytes(in, length), EBK.TEXT_ENCODING);
-        return TextUtils.trim(str);
+    private String readString(InputStream in, int length) throws IOException, ParserException {
+        return TextUtils.trimmed(new String(readBytes(in, length), EBK.TEXT_ENCODING));
     }
 
     private class TextBlock {
-        final long offset, size;
+        private final long offset, size;
 
-        TextBlock(long offset, long size) {
+        private TextBlock(long offset, long size) {
             this.offset = offset;
             this.size = size;
         }
     }
 
     private class EbkText extends AbstractText {
-        final private RandomAccessFile file;
+        private final RandomAccessFile file;
         private final ArrayList<TextBlock> blocks;
         private final long offset;
         private final long size;
 
-        int headSize;
-        long indexSize;
+        private int headSize;
+        private long indexSize;
 
-        EbkText(RandomAccessFile file, ArrayList<TextBlock> blocks,
-                long offset, long size) {
+        private EbkText(RandomAccessFile file, ArrayList<TextBlock> blocks, long offset, long size) {
             super(PLAIN);
             this.file = file;
             this.blocks = blocks;
@@ -207,11 +191,6 @@ public class Ebk2Parser extends BinaryBookParser<NonConfig> {
         @Override
         public String getText() throws IOException {
             return rawText();
-        }
-
-        @Override
-        public void writeTo(Writer writer) throws IOException {
-            writer.write(rawText());
         }
     }
 }

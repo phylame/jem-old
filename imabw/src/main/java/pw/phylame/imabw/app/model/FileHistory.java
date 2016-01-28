@@ -18,16 +18,17 @@
 
 package pw.phylame.imabw.app.model;
 
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 
+import pw.phylame.jem.util.IOUtils;
 import pw.phylame.jem.util.FileFactory;
 import pw.phylame.imabw.app.Imabw;
 import pw.phylame.imabw.app.config.AppConfig;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -61,15 +62,17 @@ public class FileHistory {
         if (!file.exists()) {
             return;
         }
-        try {
-            Iterator<String> iterator = FileUtils.lineIterator(file, HISTORY_ENCODING);
-            while (iterator.hasNext()) {
+        try (BufferedReader r = IOUtils.openReader(file, HISTORY_ENCODING)) {
+            String line;
+            while ((line = r.readLine()) != null) {
+                if (line.isEmpty()) {
+                    continue;
+                }
                 if (histories.size() > config.getHistoryLimits()) {
                     break;
                 }
-                String path = iterator.next();
-                histories.addLast(path);
-                checks.add(path);
+                histories.addLast(line);
+                checks.add(line);
             }
         } catch (IOException e) {
             LOG.error("cannot read history: " + file.getPath(), e);
@@ -84,8 +87,11 @@ public class FileHistory {
             return;
         }
         File file = getHistoryFile();
-        try {
-            FileUtils.writeLines(file, HISTORY_ENCODING, histories);
+        String nl = System.lineSeparator();
+        try (BufferedWriter writer = IOUtils.openWriter(file, HISTORY_ENCODING)) {
+            for (String history : histories) {
+                writer.write(history + nl);
+            }
         } catch (IOException e) {
             LOG.error("cannot write history: " + file.getPath(), e);
         }

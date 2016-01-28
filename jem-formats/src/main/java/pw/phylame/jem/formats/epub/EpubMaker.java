@@ -19,7 +19,7 @@
 package pw.phylame.jem.formats.epub;
 
 import pw.phylame.jem.core.Book;
-import pw.phylame.jem.formats.common.ZipBookMaker;
+import pw.phylame.jem.formats.common.ZipMaker;
 import pw.phylame.jem.formats.epub.writer.EpubWriter;
 import pw.phylame.jem.formats.epub.writer.EpubWriterFactory;
 import pw.phylame.jem.formats.util.MakerException;
@@ -31,9 +31,9 @@ import java.util.zip.ZipOutputStream;
 /**
  * ePub e-book maker.
  */
-public class EpubMaker extends ZipBookMaker<EpubMakeConfig> {
+public class EpubMaker extends ZipMaker<EpubMakeConfig> {
     public EpubMaker() {
-        super("epub", EpubMakeConfig.class, EpubMakeConfig.CONFIG_SELF);
+        super("epub", EpubMakeConfig.CONFIG_SELF, EpubMakeConfig.class);
     }
 
     @Override

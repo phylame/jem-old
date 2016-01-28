@@ -44,16 +44,6 @@ public final class XmlUtils {
         }
     }
 
-    public static String getAttribute(XmlPullParser xpp, String name)
-            throws ParserException {
-        String str = xpp.getAttributeValue(null, name);
-        if (!TextUtils.isValid(str)) {
-            throw ExceptionFactory.parserException(
-                    "error.xml.noAttribute", name, xpp.getName());
-        }
-        return str;
-    }
-
     public static XmlSerializer newSerializer() throws MakerException {
         try {
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -63,4 +53,11 @@ public final class XmlUtils {
         }
     }
 
+    public static String getAttribute(XmlPullParser xpp, String name) throws ParserException {
+        String str = xpp.getAttributeValue(null, name);
+        if (!TextUtils.isValid(str)) {
+            throw ExceptionFactory.parserException("error.xml.noAttribute", name, xpp.getName());
+        }
+        return str;
+    }
 }

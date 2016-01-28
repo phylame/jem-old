@@ -58,7 +58,7 @@ class NCX_2005_1 implements NcxWriter, ContentsListener {
         epubConfig.htmlConfig.htmlLanguage = lang;
         xmlRender.attribute("xml:lang", lang).attribute("xmlns", NAMESPACE);
 
-        int depth = Jem.depthOfChapter(book);
+        int depth = Jem.depthOf(book);
         writeHead(depth, epubConfig.uuid, 0, 0, xmlRender);
 
         // docTitle

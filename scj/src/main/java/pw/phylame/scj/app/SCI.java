@@ -18,25 +18,23 @@
 
 package pw.phylame.scj.app;
 
-import org.apache.commons.cli.*;
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import pw.phylame.gaf.cli.*;
-import pw.phylame.gaf.core.Translator;
-import pw.phylame.jem.core.BookHelper;
-import pw.phylame.jem.core.Jem;
-
 import java.io.File;
 import java.util.Locale;
 
+import pw.phylame.gaf.cli.*;
+import pw.phylame.gaf.core.Translator;
+import pw.phylame.jem.core.Jem;
+import pw.phylame.jem.core.BookHelper;
+import org.apache.commons.cli.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 public class SCI extends CApplication implements Constants {
-    private static Log LOG = LogFactory.getLog(SCI.class);
-    private String syntax;
+    private static final Log LOG = LogFactory.getLog(SCI.class);
 
     SCI(String[] args) {
         super(NAME, VERSION, args);
-        debugTipKey = "error.detailTip";
+        errorTipKey = "error.detailTip";
     }
 
     static SCI sharedInstance() {
@@ -61,50 +59,70 @@ public class SCI extends CApplication implements Constants {
 
         // verbose
         Option option = Option.builder(OPTION_DEBUG_LEVEL)
-                .argName(getText("help.debugLevel.argName")).hasArg()
-                .desc(getText("help.debugLevel", debugLevel)).build();
+                .argName(getText("help.debugLevel.argName"))
+                .hasArg()
+                .desc(getText("help.debugLevel", debugLevel))
+                .build();
         addOption(option, new GetDebugLevel());
 
         // input format
         option = Option.builder(OPTION_INPUT_FORMAT)
-                .argName(getText("help.formatName")).hasArg()
-                .desc(getText("help.inputFmt")).build();
+                .argName(getText("help.formatName"))
+                .hasArg()
+                .desc(getText("help.inputFmt"))
+                .build();
         addOption(option, new GetInputFormat());
 
         // parse arguments
         option = Option.builder(OPTION_PARSE_ARGUMENTS)
-                .argName(getText("help.kvName")).numberOfArgs(2).valueSeparator()
-                .desc(getText("help.parserArgs")).build();
+                .argName(getText("help.kvName"))
+                .numberOfArgs(2)
+                .valueSeparator()
+                .desc(getText("help.parserArgs"))
+                .build();
         addOption(option, new CFetchProperties(OPTION_PARSE_ARGUMENTS));
 
         // output attributes
         option = Option.builder(OPTION_ATTRIBUTES)
-                .argName(getText("help.kvName")).numberOfArgs(2).valueSeparator()
-                .desc(getText("help.attribute")).build();
+                .argName(getText("help.kvName"))
+                .numberOfArgs(2)
+                .valueSeparator()
+                .desc(getText("help.attribute"))
+                .build();
         addOption(option, new CFetchProperties(OPTION_ATTRIBUTES));
 
         // output extension
         option = Option.builder(OPTION_EXTENSIONS)
-                .argName(getText("help.kvName")).numberOfArgs(2).valueSeparator()
-                .desc(getText("help.extension")).build();
+                .argName(getText("help.kvName"))
+                .numberOfArgs(2)
+                .valueSeparator()
+                .desc(getText("help.extension"))
+                .build();
         addOption(option, new CFetchProperties(OPTION_EXTENSIONS));
 
         // output path
         option = Option.builder(OPTION_OUTPUT)
-                .argName(getText("help.output.argName")).hasArg()
-                .desc(getText("help.output.path")).build();
+                .argName(getText("help.output.argName"))
+                .hasArg()
+                .desc(getText("help.output.path"))
+                .build();
         addOption(option, new CFetchString(OPTION_OUTPUT));
 
         // output format
         option = Option.builder(OPTION_OUTPUT_FORMAT)
-                .argName(getText("help.formatName")).hasArg()
-                .desc(getText("help.outputFmt", Jem.PMAB_FORMAT.toUpperCase())).build();
+                .argName(getText("help.formatName"))
+                .hasArg()
+                .desc(getText("help.outputFmt", Jem.PMAB))
+                .build();
         addOption(option, new GetOutputFormat());
 
         // make arguments
         option = Option.builder(OPTION_MAKE_ARGUMENTS)
-                .argName(getText("help.kvName")).numberOfArgs(2).valueSeparator()
-                .desc(getText("help.makerArgs")).build();
+                .argName(getText("help.kvName"))
+                .numberOfArgs(2)
+                .valueSeparator()
+                .desc(getText("help.makerArgs"))
+                .build();
         addOption(option, new CFetchProperties(OPTION_MAKE_ARGUMENTS));
 
         OptionGroup optionGroup = new OptionGroup();
@@ -121,43 +139,24 @@ public class SCI extends CApplication implements Constants {
 
         // extract and indices
         option = Option.builder(OPTION_EXTRACT)
-                .argName(getText("help.extract.argName")).hasArg()
-                .desc(getText("help.extract")).build();
+                .argName(getText("help.extract.argName"))
+                .hasArg()
+                .desc(getText("help.extract"))
+                .build();
         optionGroup.addOption(option);
         addOption(option, new ExtractBook(OPTION_EXTRACT));
 
         // view and names
         option = Option.builder(OPTION_VIEW)
-                .argName(getText("help.view.argName")).hasArg().valueSeparator()
-                .desc(getText("help.view")).build();
+                .argName(getText("help.view.argName"))
+                .hasArg()
+                .valueSeparator()
+                .desc(getText("help.view"))
+                .build();
         defaultCommand = new ViewBook(OPTION_VIEW);
         addOption(option, defaultCommand);
 
         addOptionGroup(optionGroup);
-    }
-
-    @Override
-    protected void onOptionError(ParseException e) {
-        String msg;
-        if (e instanceof UnrecognizedOptionException) {
-            msg = getText("error.option.unrecognized",
-                    ((UnrecognizedOptionException) e).getOption());
-        } else if (e instanceof MissingOptionException) {
-            msg = getText("error.option.missingOption",
-                    ((MissingOptionException) e).getMissingOptions());
-        } else if (e instanceof MissingArgumentException) {
-            msg = getText("error.option.missingArgument",
-                    "-" + ((MissingArgumentException) e).getOption().getOpt());
-        } else if (e instanceof AlreadySelectedException) {
-            AlreadySelectedException ase = (AlreadySelectedException) e;
-            msg = getText("error.option.multiOptions",
-                    ase.getOptionGroup().getSelected(), ase.getOption().getOpt());
-        } else {
-            msg = e.getMessage();
-        }
-
-        error(msg);
-        System.out.println(syntax);
     }
 
     @Override
@@ -169,12 +168,12 @@ public class SCI extends CApplication implements Constants {
         if (!checkDebugLevel(config.getDebugLevel())) {
             exit(-1);
         }
+        super.onStart();
         try {
             loadPlugins();
         } catch (Exception ex) {
             LOG.debug("cannot load plugins", ex);
         }
-        super.onStart();
     }
 
     private class ShowHelp implements CCommand {
@@ -234,10 +233,6 @@ public class SCI extends CApplication implements Constants {
         return valid;
     }
 
-    String formatByExtension(String path) {
-        return BookHelper.nameOfExtension(FilenameUtils.getExtension(path));
-    }
-
     boolean checkInputFormat(String format) {
         if (!BookHelper.hasParser(format)) {
             localizedError("error.input.unsupported", format);
@@ -282,6 +277,7 @@ public class SCI extends CApplication implements Constants {
         String[] inputs = app.getInputs();
         if (inputs.length == 0) {
             localizedError("error.input.empty");
+            return -1;
         }
         Worker.InputOption inputOption = getInputOption();
         String initFormat = inputOption.format;
@@ -296,7 +292,7 @@ public class SCI extends CApplication implements Constants {
                 continue;
             }
 
-            String format = (initFormat != null) ? initFormat : formatByExtension(input);
+            String format = (initFormat != null) ? initFormat : Jem.formatByExtension(input);
             if (!checkInputFormat(format)) {
                 status = -1;
                 continue;
@@ -310,7 +306,7 @@ public class SCI extends CApplication implements Constants {
     }
 
     private class GetDebugLevel extends CFetchString {
-        GetDebugLevel() {
+        private GetDebugLevel() {
             super(OPTION_DEBUG_LEVEL);
         }
 
@@ -321,7 +317,7 @@ public class SCI extends CApplication implements Constants {
     }
 
     private class GetInputFormat extends CFetchString {
-        GetInputFormat() {
+        private GetInputFormat() {
             super(OPTION_INPUT_FORMAT);
         }
 
@@ -332,7 +328,7 @@ public class SCI extends CApplication implements Constants {
     }
 
     private class GetOutputFormat extends CFetchString {
-        GetOutputFormat() {
+        private GetOutputFormat() {
             super(OPTION_OUTPUT_FORMAT);
         }
 
@@ -360,6 +356,7 @@ public class SCI extends CApplication implements Constants {
             String[] inputs = app.getInputs();
             if (inputs.length == 0) {
                 localizedError("error.input.empty");
+                return -1;
             }
             return Worker.joinBook(inputs, getInputOption(), getOutputOption()) ? 0 : -1;
         }
@@ -368,7 +365,7 @@ public class SCI extends CApplication implements Constants {
     private class ExtractBook extends CFetchList implements CCommand, SCITask {
         private String[] indices;
 
-        ExtractBook(String option) {
+        private ExtractBook(String option) {
             super(option);
         }
 
@@ -391,7 +388,7 @@ public class SCI extends CApplication implements Constants {
     private class ViewBook extends CFetchList implements CCommand, SCITask {
         private String[] names;
 
-        ViewBook(String option) {
+        private ViewBook(String option) {
             super(option);
         }
 

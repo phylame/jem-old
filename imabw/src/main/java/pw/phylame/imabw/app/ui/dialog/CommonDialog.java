@@ -39,20 +39,26 @@ public abstract class CommonDialog<R> extends ICommonDialog {
         super(owner, title, modal);
     }
 
-    R getResult() {
-        return null;
-    }
-
-    R makeShow(boolean resizable) {
-        initialize(resizable);
-        setVisible(true);
-        return getResult();
-    }
-
     @Override
     protected JPanel createControlsPane(int alignment, Component... components) {
         JPanel pane = super.createControlsPane(alignment, components);
         pane.setBackground(pane.getBackground().darker());
         return pane;
+    }
+
+    public void setDecorationStyleIfNeed(int style) {
+        if (isUndecorated()) {
+            getRootPane().setWindowDecorationStyle(style);
+        }
+    }
+
+    public R getResult() {
+        return null;
+    }
+
+    public R makeShow(boolean resizable) {
+        initialize(resizable);
+        setVisible(true);
+        return getResult();
     }
 }

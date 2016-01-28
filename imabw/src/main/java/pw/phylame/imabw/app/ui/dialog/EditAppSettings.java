@@ -26,17 +26,17 @@ import pw.phylame.imabw.app.config.AppConfig;
 import pw.phylame.imabw.app.config.EditorConfig;
 import pw.phylame.imabw.app.config.JemConfig;
 import pw.phylame.imabw.app.config.UIConfig;
+import pw.phylame.imabw.app.ui.com.MappingTable;
+import pw.phylame.imabw.app.util.BookUtils;
 import pw.phylame.jem.util.TextFactory;
 import say.swing.JFontChooser;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import java.awt.Font;
-import java.awt.Color;
-import java.awt.Frame;
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.*;
+import java.util.List;
 
 import static pw.phylame.imabw.app.ui.dialog.DialogFactory.*;
 
@@ -152,7 +152,9 @@ class EditAppSettings extends CommonDialog {
         AppConfig.sharedInstance().update(dumpedAppConfig);
         UIConfig.sharedInstance().update(dumpedUIConfig);
         EditorConfig.sharedInstance().update(dumpedEditorConfig);
-        JemConfig.sharedInstance().update(dumpedJemConfig, true);
+        JemConfig jemConfig = JemConfig.sharedInstance();
+        jemConfig.clear();
+        jemConfig.update(dumpedJemConfig);
     }
 
     private void onOk() {
@@ -183,7 +185,7 @@ class EditAppSettings extends CommonDialog {
             try {
                 IxinUtilities.setLafTheme(laf);
             } catch (RuntimeException e) {
-                localizedError(this, getTitle(), "settings.gui.laf.invalid", laf);
+                localizedError(this, getTitle(), "settings.update.invalidLaf", laf);
             }
         }
         if (hasTask(UPDATE_FONT)) {
@@ -283,6 +285,7 @@ class EditAppSettings extends CommonDialog {
             dumpedUIConfig.setGlobalFont(font);
             lbGlobalFontViewer.setFont(font);
             lbGlobalFontViewer.setText(toString(font));
+            notifyModified();
             addTask(UPDATE_FONT);
         });
 
@@ -606,11 +609,11 @@ class EditAppSettings extends CommonDialog {
         public String getColumnName(int column) {
             switch (column) {
                 case 0:
-                    return app.getText("common.attributes.field.name");
+                    return app.getText("com.table.field.key");
                 case 1:
-                    return app.getText("common.attributes.field.comment");
+                    return app.getText("common.table.field.name");
                 default:
-                    return app.getText("common.attributes.field.value");
+                    return app.getText("com.table.field.value");
             }
         }
 
@@ -626,9 +629,9 @@ class EditAppSettings extends CommonDialog {
                 case 0:
                     return name;
                 case 1:
-                    return worker.printableAttributeName(name);
+                    return BookUtils.nameOfAttribute(name);
                 default:
-                    return worker.printableAttributeValue(name, values.get(name));
+                    return worker.readableItemValue(values.get(name));
             }
         }
 
@@ -644,6 +647,52 @@ class EditAppSettings extends CommonDialog {
                 dumpedJemConfig.setAttribute(name, aValue.toString());
                 notifyModified();
             }
+        }
+    }
+
+    private class DefaultsTable extends MappingTable<String, String> {
+        private final int KEY_COLUMN = 0;
+        private final int NAME_COLUMN = 1;
+        private final int VALUE_COLUMN = 2;
+
+        private Worker worker = Worker.sharedInstance();
+
+        private DefaultsTable() {
+            super(3);
+        }
+
+        @Override
+        protected String nameOfColumn(int column) {
+            switch (column) {
+                case KEY_COLUMN:
+                    return app.getText("com.table.field.key");
+                case NAME_COLUMN:
+                    return app.getText("common.table.field.name");
+                default:
+                    return app.getText("com.table.field.value");
+            }
+        }
+
+        @Override
+        protected Object valueOfCell(String key, int column) {
+            switch (column) {
+                case KEY_COLUMN:
+                    return key;
+                case NAME_COLUMN:
+                    return BookUtils.nameOfAttribute(key);
+                default:
+                    return valueFor(key);
+            }
+        }
+
+        @Override
+        protected void createItem() {
+
+        }
+
+        @Override
+        protected String modifyValue(String key, Object oldValue) {
+            return null;
         }
     }
 

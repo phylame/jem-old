@@ -33,8 +33,8 @@ class UmdRender implements TextWriter {
     UmdRender(UmdMaker umdMaker, RandomAccessFile file) {
         this.umdMaker = umdMaker;
         this.file = file;
-        this.offsets = new LinkedList<Long>();
-        this.titles = new LinkedList<String>();
+        this.offsets = new LinkedList<>();
+        this.titles = new LinkedList<>();
     }
 
     @Override

@@ -23,7 +23,7 @@ import java.util.Map;
 
 import pw.phylame.imabw.app.Worker;
 import pw.phylame.jem.core.BookHelper;
-import org.apache.commons.io.FilenameUtils;
+import pw.phylame.jem.util.IOUtils;
 
 /**
  * Warps arguments of Jem parser.
@@ -47,14 +47,17 @@ public class ParserData {
         if (format == null || format.isEmpty()) {
             this.format = detectFormat(file);
         } else {
-            this.format = format;
+            this.format = BookHelper.nameOfExtension(format);
+            if (this.format == null) {
+                this.format = format;
+            }
         }
         this.arguments = arguments;
         this.useCache = useCache;
     }
 
     private String detectFormat(File file) {
-        String extension = FilenameUtils.getExtension(file.getPath()).toLowerCase();
+        String extension = IOUtils.getExtension(file.getPath()).toLowerCase();
         String format = BookHelper.nameOfExtension(extension);
         return format != null ? format : extension;
     }

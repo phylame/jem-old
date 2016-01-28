@@ -40,7 +40,7 @@ public abstract class FileInfo {
     protected static final String TYPE = "common.info.type";
     protected static final String VERSION = "common.info.version";
 
-    protected final HashMap<String, Object> properties = new HashMap<String, Object>();
+    protected final HashMap<String, Object> properties = new HashMap<>();
 
     protected final void put(String key, Object value) {
         properties.put(key, value);
@@ -58,7 +58,7 @@ public abstract class FileInfo {
         try {
             return MessageBundle.getText(key);
         } catch (MissingResourceException e) {
-            return TextUtils.toCapitalized(key).toString();
+            return TextUtils.capitalized(key);
         }
     }
 

@@ -28,6 +28,7 @@ import pw.phylame.jem.util.TextObject;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * OPF 2.0 implements.
@@ -110,31 +111,31 @@ class OPF_2_0 implements OpfWriter {
         xmlRender.startTag("dc:title").text(book.getTitle()).endTag();
 
         String str = book.getAuthor();
-        if (! str.isEmpty()) {
+        if (!str.isEmpty()) {
             xmlRender.startTag("dc:creator");
             xmlRender.attribute("opf:role", "aut").text(str).endTag();
         }
 
         str = book.getGenre();
-        if (! str.isEmpty()) {
+        if (!str.isEmpty()) {
             xmlRender.startTag("dc:type").text(str).endTag();
         }
 
         str = book.getSubject();
-        if (! str.isEmpty()) {
+        if (!str.isEmpty()) {
             xmlRender.startTag("dc:subject").text(str).endTag();
         }
 
         TextObject intro = book.getIntro();
         if (intro != null) {
-            String text = TextUtils.fetchText(intro);
-            if (! text.isEmpty()) {
+            String text = TextUtils.fetchText(intro, null);
+            if (TextUtils.isValid(text)) {
                 xmlRender.startTag("dc:description").text(text).endTag();
             }
         }
 
         str = book.getPublisher();
-        if (! str.isEmpty()) {
+        if (!str.isEmpty()) {
             xmlRender.startTag("dc:publisher").text(str).endTag();
         }
 
@@ -150,32 +151,32 @@ class OPF_2_0 implements OpfWriter {
             xmlRender.endTag();
 
             Date today = new Date();
-            if (! today.equals(date)) {
+            if (!today.equals(date)) {
                 xmlRender.startTag("dc:date").attribute("opf:event", "modification");
                 xmlRender.text(TextUtils.formatDate(today, epubConfig.dateFormat));
                 xmlRender.endTag();
             }
         }
 
-        str = book.getLanguage();
-        if (! str.isEmpty()) {
-            xmlRender.startTag("dc:language").text(str).endTag();
+        Locale locale = book.getLanguage();
+        if (locale != null) {
+            xmlRender.startTag("dc:language").text(TextUtils.formatLocale(locale)).endTag();
         }
 
         str = book.getRights();
-        if (! str.isEmpty()) {
+        if (!str.isEmpty()) {
             xmlRender.startTag("dc:rights").text(str).endTag();
         }
 
         str = book.getVendor();
-        if (! str.isEmpty()) {
+        if (!str.isEmpty()) {
             xmlRender.startTag("dc:contributor").attribute("opf:role", "bkp");
             xmlRender.text(str).endTag();
         }
 
-        for (String key: OPTIONAL_METADATA) {
+        for (String key : OPTIONAL_METADATA) {
             str = book.stringAttribute(key, "");
-            if (! str.isEmpty()) {
+            if (!str.isEmpty()) {
                 xmlRender.startTag("dc:" + key).text(str).endTag();
             }
         }

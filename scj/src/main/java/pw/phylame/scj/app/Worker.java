@@ -18,15 +18,23 @@
 
 package pw.phylame.scj.app;
 
+import java.util.*;
 import java.net.URL;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
 
-import pw.phylame.jem.core.*;
-import pw.phylame.jem.util.*;
+import static java.lang.System.*;
+import static pw.phylame.jem.core.Jem.*;
+
+import pw.phylame.jem.core.Book;
+import pw.phylame.jem.core.Chapter;
+import pw.phylame.jem.formats.util.text.TextUtils;
+import pw.phylame.jem.util.TextFactory;
+import pw.phylame.jem.util.FileFactory;
+import pw.phylame.jem.util.JemException;
+import pw.phylame.jem.util.UnsupportedFormatException;
 import pw.phylame.jem.formats.pmab.PmabMakeConfig;
 import pw.phylame.jem.formats.util.MakerException;
 import pw.phylame.jem.formats.util.ParserException;
@@ -35,13 +43,13 @@ import pw.phylame.jem.formats.util.ParserException;
  * Utility class for SCJ.
  */
 public final class Worker implements Constants {
-    private static SCI app = SCI.sharedInstance();
+    private static final SCI app = SCI.sharedInstance();
 
     static Map<String, Object> propertiesToMap(Properties prop) {
-        HashMap<String, Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         if (prop != null) {
-            for (Object o : prop.keySet()) {
-                map.put((String) o, prop.get(o));
+            for (Map.Entry<Object, Object> entry : prop.entrySet()) {
+                map.put(entry.toString(), entry.getValue());
             }
         }
         return map;
@@ -88,7 +96,7 @@ public final class Worker implements Constants {
     static Book openBook(InputOption option) {
         Book book = null;
         try {
-            book = Jem.readBook(option.file, option.format, option.arguments);
+            book = readBook(option.file, option.format, option.arguments);
         } catch (IOException e) {
             app.localizedError(e, "error.loadFile", option.file);
         } catch (JemException e) {
@@ -108,29 +116,42 @@ public final class Worker implements Constants {
     }
 
     static boolean setAttributes(Chapter chapter, Map<String, Object> attributes) {
-        for (String key : attributes.keySet()) {
-            String str = (String) attributes.get(key);
-            Object value = null;
+        for (Map.Entry<String, Object> entry : attributes.entrySet()) {
+            String key = entry.getKey();
+            String str = entry.getValue().toString();
             if (str.isEmpty()) {
                 chapter.removeAttribute(key);
-            } else if (Chapter.COVER.equals(key)) {
-                try {
-                    value = FileFactory.fromURL(detectURL(str), null);
-                } catch (IOException e) {
-                    app.localizedError(e, "sci.attribute.cover.invalid", str);
-                    return false;
+                continue;
+            }
+            Object value;
+            switch (key) {
+                case Chapter.COVER: {
+                    try {
+                        value = FileFactory.fromURL(detectURL(str), null);
+                    } catch (IOException e) {
+                        app.localizedError(e, "sci.attribute.cover.invalid", str);
+                        return false;
+                    }
                 }
-            } else if (Chapter.DATE.equals(key)) {
-                try {
-                    value = new SimpleDateFormat(DATE_FORMAT).parse(str);
-                } catch (ParseException e) {
-                    app.localizedError("sci.attribute.date.invalid", str);
-                    return false;
+                break;
+                case Chapter.DATE: {
+                    try {
+                        value = new SimpleDateFormat(DATE_FORMAT).parse(str);
+                    } catch (ParseException e) {
+                        app.localizedError("sci.attribute.date.invalid", str);
+                        return false;
+                    }
                 }
-            } else if (Chapter.INTRO.equals(key)) {
-                value = TextFactory.fromString(str);
-            } else {
-                value = str;
+                break;
+                case Chapter.INTRO:
+                    value = TextFactory.fromString(str);
+                    break;
+                case Chapter.LANGUAGE:
+                    value = TextUtils.parseLocale(str);
+                    break;
+                default:
+                    value = str;
+                    break;
             }
             if (value != null) {
                 chapter.setAttribute(key, value);
@@ -139,9 +160,10 @@ public final class Worker implements Constants {
         return true;
     }
 
-    static void setExtension(Book book, Map<String, Object> items) {
-        for (String key : items.keySet()) {
-            String str = (String) items.get(key);
+    static void setExtension(Book book, Map<String, Object> extensions) {
+        for (Map.Entry<String, Object> entry : extensions.entrySet()) {
+            String key = entry.getKey();
+            String str = entry.getValue().toString();
             if (str.isEmpty()) {
                 book.removeExtension(key);
             } else {
@@ -163,7 +185,7 @@ public final class Worker implements Constants {
         }
         String path = null;
         try {
-            Jem.writeBook(book, output, option.format, option.arguments);
+            writeBook(book, output, option.format, option.arguments);
             path = output.getPath();
         } catch (IOException e) {
             app.localizedError(e, "error.saveFile", option.file);
@@ -186,7 +208,7 @@ public final class Worker implements Constants {
 
         String path = saveBook(book, outputOption);
         if (path != null) {
-            System.out.println(path);
+            out.println(path);
         }
 
         book.cleanup();
@@ -205,7 +227,7 @@ public final class Worker implements Constants {
                 continue;
             }
 
-            String format = (initFormat != null) ? initFormat : app.formatByExtension(input);
+            String format = (initFormat != null) ? initFormat : formatByExtension(input);
             if (!app.checkInputFormat(format)) {
                 continue;
             }
@@ -225,7 +247,7 @@ public final class Worker implements Constants {
 
         String path = saveBook(book, outputOption);
         if (path != null) {
-            System.out.println(path);
+            out.println(path);
         }
 
         book.cleanup();
@@ -267,13 +289,13 @@ public final class Worker implements Constants {
             book.cleanup();
             return false;
         }
-        Chapter chapter = Jem.chapterForIndex(book, indexes);
+        Chapter chapter = locate(book, indexes);
         if (chapter == null) {
             book.cleanup();
             return false;
         }
 
-        Book outBook = Jem.chapterToBook(chapter);
+        Book outBook = toBook(chapter);
         if (!chapter.isSection()) {
             outBook.append(new Chapter(app.getText("sci.contentTitle"),
                     chapter.getContent()));
@@ -288,7 +310,7 @@ public final class Worker implements Constants {
 
         String path = saveBook(outBook, outputOption);
         if (path != null) {
-            System.out.println(path);
+            out.println(path);
         }
 
         outBook.cleanup();
@@ -318,7 +340,7 @@ public final class Worker implements Constants {
                 String[] names = new String[]{key.replaceFirst("item\\$", "")};
                 state = viewExtension(book, names) && state;
             } else {
-                viewAttribute(book, new String[]{key}, System.lineSeparator(), false, false);
+                viewAttribute(book, new String[]{key}, lineSeparator(), false, false);
             }
         }
 
@@ -326,37 +348,10 @@ public final class Worker implements Constants {
         return state;
     }
 
-    private static String formatVariant(String key, Object value) {
-        String str = "";
-        if (value instanceof FileObject) {
-            str = value.toString();
-        } else if (value instanceof TextObject) {
-            try {
-                str = ((TextObject) value).getText();
-            } catch (Exception e) {
-                app.localizedError(e, "error.view.invalidText");
-            }
-        } else if (value instanceof Date) {
-            str = new SimpleDateFormat(DATE_FORMAT).format((Date) value);
-        } else if (value != null) {
-            if (key != null) {
-                if (key.equals(Book.LANGUAGE)) {
-                    String tag = ((String) value).replace('_', '-');
-                    str = Locale.forLanguageTag(tag).getDisplayName();
-                } else {
-                    str = String.valueOf(value);
-                }
-            } else {
-                str = String.valueOf(value);
-            }
-        }
-        return str;
-    }
-
     private static void walkTree(Chapter chapter, String prefix, String[] keys,
                                  boolean showAttributes, boolean showOrder,
                                  String indent, boolean showBrackets) {
-        System.out.print(prefix);
+        out.print(prefix);
         if (showAttributes) {
             viewAttribute(chapter, keys, ", ", showBrackets, true);
         }
@@ -377,7 +372,7 @@ public final class Worker implements Constants {
 
     private static void viewToc(Chapter chapter, String[] keys, String indent,
                                 boolean showOrder, boolean showBrackets) {
-        System.out.println(app.getText("sci.view.tocTitle", chapter.getTitle()));
+        out.println(app.getText("sci.view.tocTitle", chapter.getTitle()));
         walkTree(chapter, "", keys, false, showOrder, indent, showBrackets);
     }
 
@@ -393,7 +388,7 @@ public final class Worker implements Constants {
                 viewToc(chapter, names, AppConfig.sharedInstance().getTocIndent(), true, true);
             } else if (key.equals(VIEW_TEXT)) {
                 try {
-                    System.out.println(chapter.getContent().getText());
+                    out.println(chapter.getContent().getText());
                 } catch (Exception e) {
                     app.localizedError(e, "error.view.fetchContent", chapter.getTitle());
                 }
@@ -407,25 +402,23 @@ public final class Worker implements Constants {
                 if (chapter instanceof Book) {
                     names.add(VIEW_EXTENSION);
                 }
-                System.out.println(String.join(", ", names));
+                out.println(String.join(", ", names));
             } else if (key.equals(VIEW_SIZE) && !chapter.hasAttribute(VIEW_SIZE)) {
-                String str = formatVariant(null, chapter.size());
-                if (!"".equals(str)) {
-                    lines.add(app.getText("sci.view.attributeFormat", key,
-                            "\"" + str + "\""));
+                String str = Integer.toString(chapter.size());
+                if (!str.isEmpty()) {
+                    lines.add(app.getText("sci.view.attributeFormat", key, str));
                 }
             } else {
                 Object value = chapter.getAttribute(key, null);
                 String str;
                 if (value != null) {
-                    str = formatVariant(key, value);
+                    str = formatVariant(value);
                 } else {
                     str = "";
                 }
 
                 if (!str.isEmpty() || !ignoreEmpty) {
-                    lines.add(app.getText("sci.view.attributeFormat", key,
-                            "\"" + str + "\""));
+                    lines.add(app.getText("sci.view.attributeFormat", key, str));
                 }
             }
         }
@@ -433,9 +426,9 @@ public final class Worker implements Constants {
             return;
         }
         if (showBrackets) {
-            System.out.println("<" + String.join(sep, lines) + ">");
+            out.println("<" + String.join(sep, lines) + ">");
         } else {
-            System.out.println(String.join(sep, lines));
+            out.println(String.join(sep, lines));
         }
     }
 
@@ -447,9 +440,9 @@ public final class Worker implements Constants {
                 app.localizedError("error.view.notFoundItem", name);
                 state = false;
             } else {
-                String str = formatVariant(null, value);
-                System.out.println(app.getText("sci.view.extensionFormat", name,
-                        Jem.variantType(value), str));
+                String str = formatVariant(value);
+                out.println(app.getText("sci.view.extensionFormat", name,
+                        typeOfVariant(value), str));
             }
         }
         return state;
@@ -468,8 +461,8 @@ public final class Worker implements Constants {
             return false;
         }
         try {
-            viewAttribute(Jem.chapterForIndex(book, indexes),
-                    new String[]{key}, System.lineSeparator(), false, false);
+            viewAttribute(locate(book, indexes), new String[]{key},
+                    lineSeparator(), false, false);
             return true;
         } catch (IndexOutOfBoundsException e) {
             app.localizedError(e, "error.view.notFoundChapter", index, book.getTitle());

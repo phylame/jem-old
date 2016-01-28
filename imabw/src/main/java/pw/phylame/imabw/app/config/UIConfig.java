@@ -41,7 +41,6 @@ public class UIConfig extends ISettings {
                 throw new RuntimeException("cannot load ui config", e);
             }
         }
-        mapSupportedLafs();
         return instance;
     }
 
@@ -55,26 +54,12 @@ public class UIConfig extends ISettings {
         }
     }
 
-    private static void mapSupportedLafs() {
-        final String[] lafMaps = {
-                "JGoodies", "com.jgoodies.looks.plastic.PlasticLookAndFeel",
-                "JGoodies 3D", "com.jgoodies.looks.plastic.Plastic3DLookAndFeel",
-                "JGoodies XP", "com.jgoodies.looks.plastic.PlasticXPLookAndFeel",
-                "Kunststoff", "com.incors.plaf.kunststoff.KunststoffLookAndFeel",
-                "JTattoo Acryl", "com.jtattoo.plaf.acryl.AcrylLookAndFeel",
-                "JTattoo Texture", "com.jtattoo.plaf.texture.TextureLookAndFeel",
-        };
-        for (int i = 0; i < lafMaps.length; i += 2) {
-            IxinUtilities.mapLafPath(lafMaps[i], lafMaps[i + 1]);
-        }
-    }
-
     private UIConfig() throws IOException {
-        super(true, Constants.SETTINGS_HOME + "ui", true);
+        super(Constants.SETTINGS_HOME + "ui", true, true);
     }
 
     private UIConfig(int unused) throws IOException {
-        super(false, null, false);
+        super(null, false, false);
     }
 
     @Override

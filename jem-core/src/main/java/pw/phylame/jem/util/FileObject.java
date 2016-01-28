@@ -23,56 +23,47 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
- * Provides read only input source.
- * <p><tt>FileObject</tt> is designed for multiple uses,
- * so that <tt>openStream</tt> can be called any times.</p>
+ * Provides reused read-only input source.
  */
 public interface FileObject {
     String UNKNOWN_MIME = "application/octet-stream";
 
     /**
-     * Returns name of file content.
+     * Returns name of the file object.
      *
      * @return the name, never be <tt>null</tt>
      */
     String getName();
 
     /**
-     * Returns the MIME type of file content.
+     * Returns the MIME type of the content.
      *
      * @return the MIME string, never be <tt>null</tt>
      */
     String getMime();
 
     /**
-     * Opens an <tt>InputStream</tt> for reading file content.
+     * Opens an <tt>InputStream</tt> for reading the content.
      *
      * @return the stream, never be <tt>null</tt>
-     * @throws IOException if occur IO errors
+     * @throws IOException if occurs I/O errors
      */
     InputStream openStream() throws IOException;
 
     /**
-     * Resets object for next operation.
-     *
-     * @throws IOException if occur IO errors
-     */
-    void reset() throws IOException;
-
-    /**
-     * Reads all bytes from file content.
+     * Reads all bytes from the file object.
      *
      * @return the byte array, never be <tt>null</tt>
-     * @throws IOException if occur IO errors
+     * @throws IOException if occurs I/O errors
      */
     byte[] readAll() throws IOException;
 
     /**
-     * Writes file content to specified output.
+     * Writes the file object to specified output.
      *
-     * @param output the destination output
+     * @param out the destination output
      * @return number of written bytes
-     * @throws IOException if occur IO errors
+     * @throws IOException if occurs I/O errors
      */
-    long writeTo(OutputStream output) throws IOException;
+    int writeTo(OutputStream out) throws IOException;
 }

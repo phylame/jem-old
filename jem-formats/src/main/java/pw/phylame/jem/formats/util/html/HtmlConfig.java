@@ -68,16 +68,8 @@ public class HtmlConfig implements CommonConfig {
      */
     public boolean skipEmpty = true;
 
-    public static HtmlConfig fetchInstance(Map<String, Object> kw)
-            throws InvalidConfigException {
-        HtmlConfig config = ConfigUtils.fetchObject(kw, CONFIG_SELF, null,
-                HtmlConfig.class);
-        if (config != null) {
-            return config;
-        }
-        config = new HtmlConfig();
-        config.fetch(kw);
-        return config;
+    public static HtmlConfig fetchInstance(Map<String, Object> kw) throws InvalidConfigException {
+        return ConfigUtils.fetchConfig(kw, CONFIG_SELF, HtmlConfig.class);
     }
 
     @Override

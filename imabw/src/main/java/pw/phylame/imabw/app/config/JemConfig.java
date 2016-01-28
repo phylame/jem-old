@@ -19,7 +19,6 @@
 package pw.phylame.imabw.app.config;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,11 +53,11 @@ public class JemConfig extends Settings {
     }
 
     private JemConfig() throws IOException {
-        super(true, Imabw.SETTINGS_HOME + "jem", true);
+        super(Imabw.SETTINGS_HOME + "jem", true, true);
     }
 
     private JemConfig(int unused) throws IOException {
-        super(false, null, false);
+        super(null, false, false);
     }
 
     @Override

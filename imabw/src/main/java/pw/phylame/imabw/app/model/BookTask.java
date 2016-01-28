@@ -84,6 +84,7 @@ public class BookTask {
 
     private HashMap<Chapter, ModifiedState> modifiedStates = new HashMap<>();
 
+    private boolean extensionModified = false;
     private HashSet<Chapter> editedChapters = new HashSet<>();
 
     private ModifiedState getOrCreate(Chapter chapter) {
@@ -101,6 +102,12 @@ public class BookTask {
             editedChapters.remove(state.chapter);
         }
         Imabw.sharedInstance().getForm().updateTitle();
+    }
+
+    public void bookExtensionModified(boolean modified) {
+        ModifiedState state = getOrCreate(book);
+        state.setExtModified(modified);
+        checkModified(state);
     }
 
     public void chapterTextModified(Chapter chapter, boolean modified) {
@@ -154,31 +161,34 @@ public class BookTask {
         private int textCount = 0;
         private int attrCount = 0;
         private int subCount = 0;
+        private int extCount = 0;
 
         private ModifiedState(Chapter chapter) {
             this.chapter = chapter;
         }
 
         private boolean isModified() {
-            return textCount != 0 || attrCount != 0 || subCount != 0;
+            return textCount != 0 || attrCount != 0 || subCount != 0 | extCount != 0;
         }
 
         private void setTextModified(boolean modified) {
             textCount += modified ? 1 : -1;
-
             System.err.println(chapter.getTitle() + " textCount: " + textCount);
         }
 
         private void setAttrModified(boolean modified) {
             attrCount += modified ? 1 : -1;
-
             System.err.println(chapter.getTitle() + " attrCount: " + attrCount);
         }
 
         private void setSubModified(boolean modified) {
             subCount += modified ? 1 : -1;
-
             System.err.println(chapter.getTitle() + " subCount: " + subCount);
+        }
+
+        private void setExtModified(boolean modified) {
+            extCount += modified ? 1 : -1;
+            System.err.println(book.getTitle() + " extCount: " + extCount);
         }
     }
 }

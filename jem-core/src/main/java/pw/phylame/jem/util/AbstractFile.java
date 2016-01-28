@@ -21,15 +21,12 @@ package pw.phylame.jem.util;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.BufferedInputStream;
-
-import org.apache.commons.io.IOUtils;
 
 /**
- * Abstract <tt>FileObject</tt> implement.
+ * Abstract <tt>FileObject</tt> implementation.
  */
 public abstract class AbstractFile implements FileObject {
-    private String mime;
+    private final String mime;
 
     protected AbstractFile(String mime) {
         if (mime == null) {
@@ -45,34 +42,15 @@ public abstract class AbstractFile implements FileObject {
 
     @Override
     public byte[] readAll() throws IOException {
-        InputStream input = null;
-        try {
-            InputStream stream = openStream();
-            assert stream != null;
-            input = new BufferedInputStream(stream);
-            return IOUtils.toByteArray(input);
-        } finally {
-            IOUtils.closeQuietly(input);
-            reset();
+        try (InputStream in = openStream()) {
+            return IOUtils.toBytes(in);
         }
     }
 
     @Override
-    public void reset() throws IOException {
-
-    }
-
-    @Override
-    public long writeTo(OutputStream output) throws IOException {
-        InputStream input = null;
-        try {
-            InputStream stream = openStream();
-            assert stream != null;
-            input = new BufferedInputStream(stream);
-            return IOUtils.copy(input, output);
-        } finally {
-            IOUtils.closeQuietly(input);
-            reset();
+    public int writeTo(OutputStream out) throws IOException {
+        try (InputStream in = openStream()) {
+            return IOUtils.copy(in, out, -1);
         }
     }
 

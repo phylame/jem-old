@@ -18,6 +18,8 @@
 
 package pw.phylame.imabw.app;
 
+import pw.phylame.gaf.ixin.IxinUtilities;
+
 /**
  * Constants for Imabw.
  */
@@ -38,7 +40,7 @@ public interface Constants {
     // default config
     int MAX_HISTORY_LIMITS = 28;
     int DEFAULT_HISTORY_LIMITS = 18;
-    String DEFAULT_LAF_THEME = "System";
+    String DEFAULT_LAF_THEME = IxinUtilities.DEFAULT_LAF_NAME;
     String DEFAULT_ICON_SET = "default";
 
     // viewer operations

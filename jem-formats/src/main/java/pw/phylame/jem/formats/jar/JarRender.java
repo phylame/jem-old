@@ -32,7 +32,7 @@ class JarRender implements TextWriter {
 
     JarRender(ZipOutputStream zipout) {
         this.zipout = zipout;
-        this.items = new LinkedList<JarMaker.MetaItem>();
+        this.items = new LinkedList<>();
     }
 
     // for generating entry name
