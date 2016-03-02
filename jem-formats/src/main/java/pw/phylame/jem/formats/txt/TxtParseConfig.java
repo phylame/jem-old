@@ -18,50 +18,43 @@
 
 package pw.phylame.jem.formats.txt;
 
-import pw.phylame.jem.formats.util.MessageBundle;
-import pw.phylame.jem.formats.util.config.ConfigUtils;
-import pw.phylame.jem.formats.util.config.CommonConfig;
-import pw.phylame.jem.formats.util.config.InvalidConfigException;
-
-import java.util.Map;
 import java.util.regex.Pattern;
+
+import pw.phylame.jem.formats.util.MessageBundle;
+import pw.phylame.jem.formats.util.config.ConfigKey;
+import pw.phylame.jem.formats.util.config.AbstractConfig;
 
 /**
  * Config for parse TXT file.
  */
-public class TxtParseConfig implements CommonConfig {
-    public static final String CONFIG_SELF = "txt.parse.config";   // TxtParseConfig
-    public static final String TEXT_ENCODING = "txt.parse.encoding";      // String
-    public static final String CHAPTER_PATTERN = "txt.parse.pattern";     // String
-    public static final String PATTERN_FLAGS = "txt.parse.patternFlags";  // int
-    public static final String TRIM_CHAPTER_TITLE = "txt.parse.trimChapterTitle";   // boolean
+public class TxtParseConfig extends AbstractConfig {
+    public static final String CONFIG_SELF = "txt.parse.config";
+    public static final String ENCODING = "txt.parse.encoding";
+    public static final String PATTERN = "txt.parse.pattern";
+    public static final String PATTERN_FLAGS = "txt.parse.patternFlags";
+    public static final String TRIM_CHAPTER_TITLE = "txt.parse.trimChapterTitle";
 
     /**
      * Text encoding of input file
      */
+    @ConfigKey(ENCODING)
     public String encoding = TXT.defaultEncoding;
 
     /**
      * Chapter title regex pattern
      */
+    @ConfigKey(PATTERN)
     public String pattern = MessageBundle.getText("txt.parse.pattern");
 
     /**
      * Regex pattern flag.
      */
+    @ConfigKey(PATTERN_FLAGS)
     public int patternFlags = Pattern.MULTILINE;
 
     /**
      * Remove leading and tailing space of chapter title.
      */
+    @ConfigKey(TRIM_CHAPTER_TITLE)
     public boolean trimChapterTitle = true;
-
-    @Override
-    public void fetch(Map<String, Object> kw) throws InvalidConfigException {
-        encoding = ConfigUtils.fetchString(kw, TEXT_ENCODING, encoding);
-        pattern = ConfigUtils.fetchString(kw, CHAPTER_PATTERN, pattern);
-        patternFlags = ConfigUtils.fetchInteger(kw, PATTERN_FLAGS, patternFlags);
-        trimChapterTitle = ConfigUtils.fetchBoolean(kw, TRIM_CHAPTER_TITLE,
-                trimChapterTitle);
-    }
 }

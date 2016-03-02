@@ -1,7 +1,8 @@
 Manifest-Version: 1.0
 Class-Path: commons-logging-1.2.jar jgoodies-common-1.8.1.jar xpp3-1.1
- .4c.jar jem-formats-1.6.jar commons-io-2.4.jar jcalendar-1.4.jar pw-i
- xin-1.3.jar jem-core-2.3.jar jfontchooser-1.0.5.jar log4j-1.2.17.jar 
- JTattoo-1.6.11.jar jgoodies-looks-2.7.0.jar pw-gaf-1.3.jar
+ .4c.jar jem-formats-1.7.jar commons-io-2.4.jar jcalendar-1.4.jar pw-i
+ xin-1.3.jar jem-core-2.4.jar jfontchooser-1.0.5.jar log4j-1.2.17.jar 
+ JTattoo-1.6.11.jar jgoodies-looks-2.7.0.jar pw-gaf-1.3.jar ucnovel-jd
+ bc-reader-1.0.0.jar sqlite-jdbc-3.8.11.1.jar
 Main-Class: pw.phylame.imabw.app.Imabw
 

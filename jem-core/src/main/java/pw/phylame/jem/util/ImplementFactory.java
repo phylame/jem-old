@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2016 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -22,10 +22,12 @@ import java.util.HashMap;
 
 public class ImplementFactory<T> {
     private final Class<T> type;
-    private final HashMap<String, ImplHolder> implementations = new HashMap<>();
+    private final HashMap<String, ImplItem> implementations = new HashMap<>();
+    private final HashMap<String, T> objectCache;
 
-    public ImplementFactory(Class<T> type) {
+    public ImplementFactory(Class<T> type, boolean reusable) {
         this.type = type;
+        objectCache = reusable ? new HashMap<String, T>() : null;
     }
 
     public void registerImplement(String name, String path) {
@@ -35,11 +37,14 @@ public class ImplementFactory<T> {
         if (path == null || path.isEmpty()) {
             throw new IllegalArgumentException("path cannot be null or empty");
         }
-        ImplHolder imp = implementations.get(name);
-        if (imp != null) {
-            imp.path = path;
+        ImplItem impl = implementations.get(name);
+        if (impl != null) {
+            impl.path = path;
+            if (objectCache != null) {
+                objectCache.remove(name);
+            }
         } else {
-            implementations.put(name, new ImplHolder(path));
+            implementations.put(name, new ImplItem(path));
         }
     }
 
@@ -50,11 +55,14 @@ public class ImplementFactory<T> {
         if (clazz == null) {
             throw new NullPointerException("clazz");
         }
-        ImplHolder imp = implementations.get(name);
-        if (imp != null) {
-            imp.clazz = clazz;
+        ImplItem impl = implementations.get(name);
+        if (impl != null) {
+            impl.clazz = clazz;
+            if (objectCache != null) {
+                objectCache.remove(name);
+            }
         } else {
-            implementations.put(name, new ImplHolder(clazz));
+            implementations.put(name, new ImplItem(clazz));
         }
     }
 
@@ -64,36 +72,49 @@ public class ImplementFactory<T> {
 
     public void removeImplement(String name) {
         implementations.remove(name);
+        if (objectCache != null) {
+            objectCache.remove(name);
+        }
     }
 
     public String[] implementNames() {
         return implementations.keySet().toArray(new String[implementations.size()]);
     }
 
-    public T newImplement(String name) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+    public T newInstance(String name) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         if (name == null) {
             throw new NullPointerException();
         }
-        ImplHolder imp = implementations.get(name);
-        return imp != null ? imp.instantiate() : null;
+        T obj = null;
+        if (objectCache != null && (obj = objectCache.get(name)) != null) { // get from cache
+            return obj;
+        }
+        ImplItem impl = implementations.get(name);
+        if (impl != null) {
+            obj = impl.instantiate();
+            if (objectCache != null) {
+                objectCache.put(name, obj);
+            }
+        }
+        return obj;
     }
 
-    private class ImplHolder {
+    private class ImplItem {
         private String path;
         private Class<? extends T> clazz;
 
-        private ImplHolder(String path) {
+        private ImplItem(String path) {
             this.path = path;
         }
 
-        private ImplHolder(Class<? extends T> clazz) {
+        private ImplItem(Class<? extends T> clazz) {
             this.clazz = clazz;
         }
 
         /**
          * Creates a new instance of implement for <tt>T</tt>.
          *
-         * @return the new instance or <tt>null</tt> if class for path does not extends <tt>T</tt>.
+         * @return the new instance or <tt>null</tt> if class for path does not extends from <tt>T</tt>.
          * @throws ClassNotFoundException if the class of <tt>path</tt> is not found
          * @throws IllegalAccessException if the class of <tt>path</tt> is inaccessible
          * @throws InstantiationException if cannot create instance of the class
@@ -103,7 +124,9 @@ public class ImplementFactory<T> {
             if (clazz != null) {
                 clazz.newInstance();
             }
-            assert path != null;
+            if (path == null) {
+                throw new AssertionError("BUG: implementation without clazz and path specified");
+            }
             Class<?> klass = Class.forName(path);
             if (!type.isAssignableFrom(klass)) {
                 return null;

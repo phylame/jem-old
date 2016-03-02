@@ -33,7 +33,7 @@ class AboutImabw extends CommonDialog {
     private static final Imabw app = Imabw.sharedInstance();
 
     AboutImabw(Frame owner) {
-        super(owner, app.getText("dialog.aboutApp.title"), true);
+        super(owner, app.getText("d.aboutApp.title"), true);
         initialize(false);
         setDecorationStyleIfNeed(JRootPane.INFORMATION_DIALOG);
     }
@@ -44,14 +44,14 @@ class AboutImabw extends CommonDialog {
         JLabel iconLabel = new JLabel(app.localizedIcon("app.icon"));
 
         // information text
-        String str = app.getText("dialog.aboutApp.content", app.getText("app.name"),
+        String str = app.getText("d.aboutApp.content", app.getText("app.name"),
                 Imabw.VERSION, System.getProperty("os.name"), Jem.VERSION, Versions.VERSION);
 
         JLabel textLabel = new JLabel(str, null, JLabel.LEADING);
 
-        JLabel licenseLabel = LinkedLabel.fromAction("dialog.aboutApp.license", "app.license");
-        JLabel homeLabel = LinkedLabel.fromAction("dialog.aboutApp.home", "app.home");
-        JLabel contactLabel = LinkedLabel.fromAction("dialog.aboutApp.contact", "app.email");
+        JLabel licenseLabel = LinkedLabel.fromAction("d.aboutApp.license", "app.license");
+        JLabel homeLabel = LinkedLabel.fromAction("d.aboutApp.home", "app.home");
+        JLabel contactLabel = LinkedLabel.fromAction("d.aboutApp.contact", "app.email");
 
         // link label
         JPanel linkPane = new JPanel(new FlowLayout(FlowLayout.LEADING));

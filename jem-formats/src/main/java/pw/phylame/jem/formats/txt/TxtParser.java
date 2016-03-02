@@ -18,22 +18,22 @@
 
 package pw.phylame.jem.formats.txt;
 
-import pw.phylame.jem.core.Book;
-import pw.phylame.jem.core.Chapter;
-import pw.phylame.jem.formats.util.CacheCleaner;
-import pw.phylame.jem.util.FileFactory;
-import pw.phylame.jem.util.IOUtils;
-import pw.phylame.jem.util.TextFactory;
-import pw.phylame.jem.formats.common.CommonParser;
-import pw.phylame.jem.formats.util.ParserException;
-import pw.phylame.jem.formats.util.text.TextUtils;
-import pw.phylame.jem.formats.util.BufferedRandomAccessFile;
-
 import java.io.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import pw.phylame.jem.core.Book;
+import pw.phylame.jem.core.Chapter;
+import pw.phylame.jem.util.IOUtils;
+import pw.phylame.jem.util.TextFactory;
+import pw.phylame.jem.util.FileFactory;
+import pw.phylame.jem.formats.common.CommonParser;
+import pw.phylame.jem.formats.util.CacheCleaner;
+import pw.phylame.jem.formats.util.ParserException;
+import pw.phylame.jem.formats.util.ExceptionFactory;
+import pw.phylame.jem.formats.util.text.TextUtils;
+import pw.phylame.jem.formats.util.BufferedRandomAccessFile;
 
 /**
  * <tt>Parser</tt> implement for TXT book.
@@ -46,7 +46,7 @@ public class TxtParser extends CommonParser<Reader, TxtParseConfig> {
     }
 
     @Override
-    protected Reader openInput(File file, TxtParseConfig config) throws IOException {
+    protected Reader openFile(File file, TxtParseConfig config) throws IOException, ParserException {
         FileInputStream stream = new FileInputStream(file);
         try {
             return new BufferedReader(new InputStreamReader(stream, config.encoding));
@@ -57,18 +57,25 @@ public class TxtParser extends CommonParser<Reader, TxtParseConfig> {
     }
 
     @Override
-    protected Book parse(Reader input, TxtParseConfig config) throws IOException, ParserException {
-        Book book = parse0(input, IOUtils.getBaseName(source.getPath()), config);
+    public Book parse(Reader input, TxtParseConfig config) throws IOException, ParserException {
+        if (config == null) {
+            config = new TxtParseConfig();
+        }
+        String title = (source != null) ? IOUtils.getBaseName(source.getPath()) : "";
+        Book book = parse(input, title, config);
         book.setExtension(TxtInfo.FILE_INFO, new TxtInfo(config.encoding));
         return book;
     }
 
-    private Book parse0(Reader reader, String title, TxtParseConfig config) throws IOException, ParserException {
+    public Book parse(Reader reader, String title, TxtParseConfig config) throws IOException, ParserException {
+        if (config == null) {
+            config = new TxtParseConfig();
+        }
         Pattern pattern;
         try {
             pattern = Pattern.compile(config.pattern, config.patternFlags);
         } catch (PatternSyntaxException e) {
-            throw parserException(e, "txt.parse.invalidPattern", config.pattern);
+            throw ExceptionFactory.parserException(e, "txt.parse.invalidPattern", config.pattern);
         }
 
         // cached file content
@@ -92,8 +99,8 @@ public class TxtParser extends CommonParser<Reader, TxtParseConfig> {
                 if (config.trimChapterTitle) {
                     prevOffset += title.length();
                 }
-                fb = FileFactory.fromBlock("0.txt", source, prevOffset << 1, 0, "text/plain");
-                book.append(new Chapter(TextUtils.trimmed(title), TextFactory.fromFile(fb, CACHE_ENCODING)));
+                fb = FileFactory.forBlock("0.txt", source, prevOffset << 1, 0, TXT.MIME_PLAIN_TEXT);
+                book.append(new Chapter(TextUtils.trimmed(title), TextFactory.forFile(fb, CACHE_ENCODING)));
             } else {
                 source.close();
                 if (!cache.delete()) {
@@ -110,15 +117,15 @@ public class TxtParser extends CommonParser<Reader, TxtParseConfig> {
                     offset += title.length();
                 }
 
-                fb = FileFactory.fromBlock(book.size() + ".txt", source, offset << 1, 0, "text/plain");
+                fb = FileFactory.forBlock(book.size() + ".txt", source, offset << 1, 0, TXT.MIME_PLAIN_TEXT);
                 prevOffset = offset;
-                book.append(new Chapter(TextUtils.trimmed(title), TextFactory.fromFile(fb, CACHE_ENCODING)));
+                book.append(new Chapter(TextUtils.trimmed(title), TextFactory.forFile(fb, CACHE_ENCODING)));
             }
             fb.size = (raw.length() - prevOffset) << 1;
 
             if (firstOffset > 0) {    // no formatted head store as intro
-                fb = FileFactory.fromBlock("head.txt", source, 0, firstOffset << 1, "text/plain");
-                book.setIntro(TextFactory.fromFile(fb, CACHE_ENCODING));
+                fb = FileFactory.forBlock("head.txt", source, 0, firstOffset << 1, TXT.MIME_PLAIN_TEXT);
+                book.setIntro(TextFactory.forFile(fb, CACHE_ENCODING));
             }
         } catch (IOException e) {
             source.close();
@@ -135,7 +142,7 @@ public class TxtParser extends CommonParser<Reader, TxtParseConfig> {
     }
 
     private Object[] cacheContent(Reader reader, StringBuilder sb) throws IOException {
-        File cache = File.createTempFile("txt_", ".tmp");
+        File cache = File.createTempFile("jem_txt_", ".tmp");
         Closeable closeable = null;
         try {
             OutputStream stream = new FileOutputStream(cache);

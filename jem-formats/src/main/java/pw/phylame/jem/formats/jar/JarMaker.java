@@ -18,22 +18,22 @@
 
 package pw.phylame.jem.formats.jar;
 
-import pw.phylame.jem.core.Jem;
-import pw.phylame.jem.core.Book;
-import pw.phylame.jem.util.IOUtils;
-import pw.phylame.jem.util.TextObject;
-import pw.phylame.jem.formats.common.ZipMaker;
-import pw.phylame.jem.formats.util.MakerException;
-import pw.phylame.jem.formats.util.ZipUtils;
-import pw.phylame.jem.formats.util.text.TextConfig;
-import pw.phylame.jem.formats.util.text.TextRender;
-
 import java.io.*;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
+import pw.phylame.jem.core.Jem;
+import pw.phylame.jem.core.Book;
+import pw.phylame.jem.util.IOUtils;
+import pw.phylame.jem.util.TextObject;
+import pw.phylame.jem.formats.common.ZipMaker;
+import pw.phylame.jem.formats.util.ZipUtils;
+import pw.phylame.jem.formats.util.MakerException;
+import pw.phylame.jem.formats.util.ExceptionFactory;
+import pw.phylame.jem.formats.util.text.TextConfig;
+import pw.phylame.jem.formats.util.text.TextRender;
 
 /**
  * <tt>Maker</tt> implement for JAR book.
@@ -44,8 +44,8 @@ public class JarMaker extends ZipMaker<JarMakeConfig> {
     }
 
     @Override
-    public void make(Book book, ZipOutputStream zipout, JarMakeConfig config)
-            throws IOException, MakerException {
+    public void make(Book book, ZipOutputStream zipout, JarMakeConfig config) throws IOException,
+            MakerException {
         if (config == null) {
             config = new JarMakeConfig();
         }
@@ -54,8 +54,7 @@ public class JarMaker extends ZipMaker<JarMakeConfig> {
 
         // MANIFEST
         String title = book.getTitle();
-        String mf = String.format(JAR.MANIFEST_TEMPLATE,
-                "Jem", Jem.VERSION, title, config.vendor, title);
+        String mf = String.format(JAR.MANIFEST_TEMPLATE, "Jem", Jem.VERSION, title, config.vendor, title);
         ZipUtils.writeString(mf, JAR.MANIFEST_FILE, JAR.METADATA_ENCODING, zipout);
 
         JarRender jarRender = new JarRender(zipout);
@@ -76,10 +75,9 @@ public class JarMaker extends ZipMaker<JarMakeConfig> {
     private void copyTemplate(ZipOutputStream zipout) throws IOException {
         InputStream stream = JarMaker.class.getResourceAsStream(JAR.JAR_TEMPLATE);
         if (stream == null) {
-            throw ioException("jar.make.noTemplate", JAR.JAR_TEMPLATE);
+            throw ExceptionFactory.ioException("jar.make.noTemplate", JAR.JAR_TEMPLATE);
         }
-        ZipInputStream zis = new ZipInputStream(stream);
-        try {
+        try (ZipInputStream zis = new ZipInputStream(stream)) {
             ZipEntry entry;
             while ((entry = zis.getNextEntry()) != null) {
                 zipout.putNextEntry(new ZipEntry(entry.getName()));
@@ -88,16 +86,15 @@ public class JarMaker extends ZipMaker<JarMakeConfig> {
                 zipout.closeEntry();
             }
         } finally {
-            zis.close();
             stream.close();
         }
     }
 
-    private void writeMeta(Book book, ZipOutputStream zipout, List<MetaItem> items,
-                           TextConfig config) throws Exception {
+    private void writeMeta(Book book, ZipOutputStream zipout, List<NavItem> items, TextConfig config)
+            throws Exception {
         zipout.putNextEntry(new ZipEntry("0"));
         DataOutput output = new DataOutputStream(zipout);
-        output.writeInt(JAR.FILE_MAGIC_NUMBER);
+        output.writeInt(JAR.MAGIC_NUMBER);
         String title = book.getTitle();
         byte[] b = title.getBytes(JAR.METADATA_ENCODING);
         output.writeByte(b.length);
@@ -107,7 +104,7 @@ public class JarMaker extends ZipMaker<JarMakeConfig> {
         output.writeShort(b.length);
         output.write(b);
 
-        for (MetaItem item : items) {
+        for (NavItem item : items) {
             String str = item.name + "," + item.size + "," + item.title;
             b = str.getBytes(JAR.METADATA_ENCODING);
             output.writeShort(b.length);
@@ -127,12 +124,12 @@ public class JarMaker extends ZipMaker<JarMakeConfig> {
         zipout.closeEntry();
     }
 
-    static class MetaItem {
+    static class NavItem {
         final String name;
         final int size;
         final String title;
 
-        MetaItem(String name, int size, String title) {
+        NavItem(String name, int size, String title) {
             this.name = name;
             this.size = size;
             this.title = title;

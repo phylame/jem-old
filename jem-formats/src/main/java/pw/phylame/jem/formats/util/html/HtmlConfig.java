@@ -20,26 +20,30 @@ package pw.phylame.jem.formats.util.html;
 
 import java.util.Map;
 
-import pw.phylame.jem.formats.util.config.ConfigUtils;
-import pw.phylame.jem.formats.util.config.CommonConfig;
-import pw.phylame.jem.formats.util.config.InvalidConfigException;
+import pw.phylame.jem.formats.util.config.ConfigKey;
+import pw.phylame.jem.formats.util.config.AbstractConfig;
 
 /**
  * Config for rendering HTML.
  */
-public class HtmlConfig implements CommonConfig {
+public class HtmlConfig extends AbstractConfig {
     public static final String CONFIG_SELF = "html.render.config";
     public static final String ENCODING = "html.render.encoding";
     public static final String INDENT_STRING = "html.render.indentString";
+    public static final String META_INFO = "html.render.metaInfo";
+    public static final String STYLE_PROVIDER = "html.render.styleProvider";
+    public static final String SKIP_EMPTY_LINE = "html.render.skipEmptyLine";
 
     /**
      * Encoding for writing HTML.
      */
+    @ConfigKey(ENCODING)
     public String encoding = "UTF-8";
 
     /**
      * HTML indent string.
      */
+    @ConfigKey(INDENT_STRING)
     public String indentString = "\t";
 
     /**
@@ -56,25 +60,18 @@ public class HtmlConfig implements CommonConfig {
     /**
      * Addition messages to HTML head->meta element.
      */
+    @ConfigKey(META_INFO)
     public Map<String, String> metaInfo;
 
     /**
      * HTML CSS config.
      */
+    @ConfigKey(STYLE_PROVIDER)
     public StyleProvider style;
 
     /**
      * When making paragraph skip empty line of <tt>TextObject</tt>.
      */
+    @ConfigKey(SKIP_EMPTY_LINE)
     public boolean skipEmpty = true;
-
-    public static HtmlConfig fetchInstance(Map<String, Object> kw) throws InvalidConfigException {
-        return ConfigUtils.fetchConfig(kw, CONFIG_SELF, HtmlConfig.class);
-    }
-
-    @Override
-    public void fetch(Map<String, Object> kw) throws InvalidConfigException {
-        encoding = ConfigUtils.fetchString(kw, ENCODING, encoding);
-        indentString = ConfigUtils.fetchString(kw, INDENT_STRING, indentString);
-    }
 }

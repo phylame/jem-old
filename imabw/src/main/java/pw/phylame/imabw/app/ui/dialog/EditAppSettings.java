@@ -86,7 +86,7 @@ class EditAppSettings extends CommonDialog {
     private DefaultsModel tbmDefaults;
 
     public EditAppSettings(Frame owner) {
-        super(owner, app.getText("dialog.settings.title"), true);
+        super(owner, app.getText("settings.title"), true);
         resetComponents();
         initialize(true);
         setSize(Math.max(getWidth(), 632), Math.max(getHeight(), 317));
@@ -99,7 +99,7 @@ class EditAppSettings extends CommonDialog {
 
     private void createButtons() {
         JButton btnReset = new JButton(
-                new IAction("dialog.settings.buttonReset") {
+                new IAction("settings.buttonReset") {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         onReset();
@@ -107,7 +107,7 @@ class EditAppSettings extends CommonDialog {
                 });
 
         buttonOk = new JButton(
-                new IAction("dialog.settings.buttonOk") {
+                new IAction("settings.buttonOk") {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         onOk();
@@ -117,7 +117,7 @@ class EditAppSettings extends CommonDialog {
         defaultButton = buttonOk;
 
         JButton btnCancel = new JButton(
-                new IAction("dialog.settings.buttonCancel") {
+                new IAction("settings.buttonCancel") {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         onCancel();
@@ -186,6 +186,7 @@ class EditAppSettings extends CommonDialog {
                 IxinUtilities.setLafTheme(laf);
             } catch (RuntimeException e) {
                 localizedError(this, getTitle(), "settings.update.invalidLaf", laf);
+                dumpedUIConfig.setLafTheme(UIConfig.sharedInstance().getLafTheme());
             }
         }
         if (hasTask(UPDATE_FONT)) {
@@ -324,7 +325,7 @@ class EditAppSettings extends CommonDialog {
     }
 
     private Color editColor(Color initColor) {
-        return JColorChooser.showDialog(this, app.getText("dialog.chooseColor.title"), initColor);
+        return JColorChooser.showDialog(this, app.getText("d.chooseColor.title"), initColor);
     }
 
     private void createEditorPage() {
@@ -609,11 +610,11 @@ class EditAppSettings extends CommonDialog {
         public String getColumnName(int column) {
             switch (column) {
                 case 0:
-                    return app.getText("com.table.field.key");
+                    return app.getText("common.table.field.key");
                 case 1:
                     return app.getText("common.table.field.name");
                 default:
-                    return app.getText("com.table.field.value");
+                    return app.getText("common.table.field.value");
             }
         }
 
@@ -665,11 +666,11 @@ class EditAppSettings extends CommonDialog {
         protected String nameOfColumn(int column) {
             switch (column) {
                 case KEY_COLUMN:
-                    return app.getText("com.table.field.key");
+                    return app.getText("common.table.field.key");
                 case NAME_COLUMN:
                     return app.getText("common.table.field.name");
                 default:
-                    return app.getText("com.table.field.value");
+                    return app.getText("common.table.field.value");
             }
         }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2016 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -45,10 +45,9 @@ import pw.phylame.jem.util.VariantMap;
  * <li>clean works: task for cleaning resources and others</li>
  * </ul>
  */
-public class Chapter implements Iterable<Chapter>, Attributes {
-
+public class Chapter implements Cloneable, Attributes, Iterable<Chapter> {
     /**
-     * Constructs chapter used empty title.
+     * Constructs chapter with empty title.
      */
     public Chapter() {
         setTitle("");
@@ -93,17 +92,15 @@ public class Chapter implements Iterable<Chapter>, Attributes {
         setContent(content);
     }
 
-    Chapter(Chapter other) {
-        attributes.update(other.attributes);
-        children.addAll(other.children);
-        content = other.content;
+    public Chapter(Chapter chapter) {
+        chapter.dump(this);
     }
 
     // ************************
     // ** Attributes support **
     // ************************
 
-    protected final VariantMap attributes = new VariantMap();
+    protected VariantMap attributes = new VariantMap();
 
     /**
      * Associates the specified value with the specified name in attributes map.
@@ -203,7 +200,7 @@ public class Chapter implements Iterable<Chapter>, Attributes {
     /**
      * Returns all names in attributes map.
      *
-     * @return sequence of attribute names
+     * @return array of attribute names
      */
     public String[] attributeNames() {
         return attributes.keys();
@@ -317,7 +314,7 @@ public class Chapter implements Iterable<Chapter>, Attributes {
     /**
      * Sub-chapters list.
      */
-    protected final ArrayList<Chapter> children = new ArrayList<>();
+    protected ArrayList<Chapter> children = new ArrayList<>();
 
     private Chapter checkChapter(Chapter chapter) {
         if (chapter == null) {
@@ -553,30 +550,42 @@ public class Chapter implements Iterable<Chapter>, Attributes {
     protected void finalize() throws Throwable {
         super.finalize();
         if (!cleaned) {
-            System.err.printf("*** Chapter \"%s@%d\" not cleaned ***\n", getTitle(), hashCode());
+            System.err.printf("*** BUG: Chapter \"%s@%d\" not cleaned ***\n", getTitle(), hashCode());
         }
     }
 
     /**
-     * Returns a copy of current chapter.
-     * <p>The current chapter must be a simple chapter without any sub-chapters,
-     * see {@link Chapter#isSection()}.
-     * <p><strong>Just</strong> attributes and content will be copied.
+     * Returns a shallow copy of this <tt>Chapter</tt> instance.
      *
-     * @return the new copy chapter
-     * @throws UnsupportedOperationException if current chapter is section
+     * @return a shallow copy of this chapter
      */
-    public Chapter copy() {
-        if (isSection()) {
-            throw new UnsupportedOperationException("copy a section is unsupported");
+    @SuppressWarnings("unchecked")
+    @Override
+    public Object clone() {
+        Chapter result;
+        try {
+            result = (Chapter) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new InternalError(e);
         }
-        Chapter dump = new Chapter();
-        dump.attributes.update(attributes);
-        dump.content = content;    // TextObject is reusable
-        return dump;
+        dump(result);
+        return result;
     }
 
-    public String debugMessage() {
+    @SuppressWarnings("unchecked")
+    protected void dump(Chapter chapter) {
+        chapter.attributes = (VariantMap) attributes.clone();
+        chapter.children = (ArrayList<Chapter>) children.clone();
+        chapter.parent = parent;
+        chapter.content = content;
+    }
+
+    /**
+     * Renders debug string of this chapter
+     *
+     * @return the string
+     */
+    public String debug() {
         return getClass().getSimpleName() + ": attributes=" + attributes;
     }
 

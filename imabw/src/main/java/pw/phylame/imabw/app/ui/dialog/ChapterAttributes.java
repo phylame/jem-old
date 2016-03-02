@@ -138,19 +138,19 @@ class ChapterAttributes extends CommonDialog {
         lbCoverDetails = new JLabel(null, null, JLabel.CENTER);
         lbCoverDetails.setBorder(BorderFactory.createEmptyBorder(1, 0, 2, 0));
 
-        JButton btnOpen = new JButton(new IAction("d.attributes.openCover") {
+        JButton btnOpen = new JButton(new IAction("attributes.openCover") {
             @Override
             public void actionPerformed(ActionEvent e) {
                 openCover();
             }
         });
-        btnSaveCover = new JButton(new IAction("d.attributes.saveCover") {
+        btnSaveCover = new JButton(new IAction("attributes.saveCover") {
             @Override
             public void actionPerformed(ActionEvent e) {
                 saveCover();
             }
         });
-        btnRemoveCover = new JButton(new IAction("d.attributes.removeCover") {
+        btnRemoveCover = new JButton(new IAction("attributes.removeCover") {
             @Override
             public void actionPerformed(ActionEvent e) {
                 removeCover();
@@ -174,7 +174,7 @@ class ChapterAttributes extends CommonDialog {
         buttonPane.add(btnRemoveCover);
 
         JPanel pane = new JPanel(new BorderLayout());
-        IxinUtilities.localizedTitleBorder(pane, "d.attributes.cover.title", app);
+        IxinUtilities.localizedTitleBorder(pane, "attributes.cover.title", app);
         pane.add(coverPane, BorderLayout.CENTER);
         pane.add(buttonPane, BorderLayout.PAGE_END);
 
@@ -182,14 +182,14 @@ class ChapterAttributes extends CommonDialog {
     }
 
     private void openCover() {
-        String title = app.getText("d.attributes.openCover.title");
+        String title = app.getText("attributes.openCover.title");
         OpenResult od = worker.selectOpenImage(this, title);
         if (od == null) {
             return;
         }
         FileObject fb;
         try {
-            fb = FileFactory.fromFile(od.getFile(), null);
+            fb = FileFactory.forFile(od.getFile(), null);
         } catch (IOException e) {
             throw new AssertionError("BUG: unexpected IOException here");
         }
@@ -203,7 +203,7 @@ class ChapterAttributes extends CommonDialog {
     }
 
     private void saveCover() {
-        String title = app.getText("d.attributes.saveCover.title");
+        String title = app.getText("attributes.saveCover.title");
         OpenResult od = worker.selectSaveImage(this, title);
         if (od == null) {
             return;
@@ -215,10 +215,10 @@ class ChapterAttributes extends CommonDialog {
         try {
             ImageIO.write(image, od.getFormat(), file);
             localizedInformation(this, title,
-                    "d.attributes.saveCover.result", file.getPath());
+                    "attributes.saveCover.result", file.getPath());
         } catch (IOException e) {
             localizedException(this, title, e,
-                    "d.attributes.saveCover.error", file.getPath(), e.getLocalizedMessage());
+                    "attributes.saveCover.error", file.getPath(), e.getLocalizedMessage());
         }
     }
 
@@ -250,7 +250,7 @@ class ChapterAttributes extends CommonDialog {
     private void updateCover(ImageIcon cover, String mime) {
         if (cover == null) {
             lbCoverImage.setIcon(null);
-            lbCoverImage.setText(app.getText("d.attributes.cover.alt"));
+            lbCoverImage.setText(app.getText("attributes.cover.alt"));
             lbCoverDetails.setVisible(false);
             btnSaveCover.setEnabled(false);
             btnRemoveCover.setEnabled(false);
@@ -258,7 +258,7 @@ class ChapterAttributes extends CommonDialog {
             Dimension size = new Dimension((int) (getWidth() * 0.33), (int) (getHeight() * 0.75));
             lbCoverImage.setIcon(scaleImageIcon(cover, size));
             lbCoverImage.setText(null);
-            lbCoverDetails.setText(app.getText("d.attributes.cover.details",
+            lbCoverDetails.setText(app.getText("attributes.cover.details",
                     cover.getIconWidth(), cover.getIconHeight(), mime));
             lbCoverDetails.setVisible(true);
             btnSaveCover.setEnabled(true);
@@ -275,20 +275,14 @@ class ChapterAttributes extends CommonDialog {
                 cover = new ImageIcon(image);
             } else {
                 localizedError(this, title,
-                        "d.attributes.invalidCover", fb.getName());
+                        "attributes.invalidCover", fb.getName());
             }
         } catch (IOException e) {
             if (notifyUser) {
                 localizedException(this, title, e,
-                        "d.attributes.openCover.error", fb.getName(), e.getLocalizedMessage());
+                        "attributes.openCover.error", fb.getName(), e.getLocalizedMessage());
             } else {
                 app.error(e, "cannot load cover image of " + chapter.getTitle());
-            }
-        } finally {
-            try {
-                fb.reset();
-            } catch (IOException e) {
-                // ignored
             }
         }
         return cover;
@@ -320,19 +314,19 @@ class ChapterAttributes extends CommonDialog {
             }
         });
         JScrollPane scrollPane = new JScrollPane(taIntro);
-        IxinUtilities.localizedTitleBorder(scrollPane, "d.attributes.intro.title", app);
+        IxinUtilities.localizedTitleBorder(scrollPane, "attributes.intro.title", app);
         return scrollPane;
     }
 
     private JPanel createButtonPane() {
-        JButton btnReset = new JButton(new IAction("d.attributes.buttonReset") {
+        JButton btnReset = new JButton(new IAction("attributes.buttonReset") {
             @Override
             public void actionPerformed(ActionEvent e) {
                 reset();
             }
         });
 
-        btnSave = new JButton(new IAction("d.attributes.buttonSave") {
+        btnSave = new JButton(new IAction("attributes.buttonSave") {
             @Override
             public void actionPerformed(ActionEvent e) {
                 onOk();
@@ -340,7 +334,7 @@ class ChapterAttributes extends CommonDialog {
         });
         btnSave.setEnabled(false);
 
-        defaultButton = createCloseButton("d.attributes.buttonCancel");
+        defaultButton = createCloseButton("attributes.buttonCancel");
         return createControlsPane(SwingConstants.RIGHT, btnReset, btnSave, defaultButton);
     }
 
@@ -375,10 +369,10 @@ class ChapterAttributes extends CommonDialog {
     }
 
     private void syncToChapter() {
-        attributes.put(Chapter.INTRO, TextFactory.fromString(taIntro.getText()));
+        attributes.put(Chapter.INTRO, TextFactory.forString(taIntro.getText()));
         app.getForm().getContentsTree().updateChapterAttributes(chapter, attributes, true,
                 app.getText("undo.message.editAttributes"));
-        app.localizedMessage("d.attributes.result", chapter);
+        app.localizedMessage("attributes.result", chapter);
     }
 
     private void onOk() {
@@ -393,7 +387,7 @@ class ChapterAttributes extends CommonDialog {
         if (modified) {
             int option = localizedAsking(this, getTitle(),
                     MessageDialog.IconStyle.Question,
-                    "d.attributes.askQuit", chapter);
+                    "attributes.askQuit", chapter);
             switch (option) {
                 case OPTION_OK:
                     onOk();
@@ -425,7 +419,7 @@ class ChapterAttributes extends CommonDialog {
             typeColumn = 2;
             valueColumn = 3;
             Collections.addAll(selectableNames, Chapter.STATE, Chapter.GENRE);
-            createComponents(app.getText("d.attributes.table.title"), null);
+            createComponents(app.getText("attributes.table.title"), null);
         }
 
         @Override
@@ -471,7 +465,7 @@ class ChapterAttributes extends CommonDialog {
 
         @Override
         protected String getModifyTitle(String key) {
-            return app.getText("d.attributes.modify.title", nameOfKey(key));
+            return app.getText("attributes.modify.title", nameOfKey(key));
         }
 
         @Override

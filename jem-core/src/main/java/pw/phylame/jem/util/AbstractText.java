@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2016 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -20,7 +20,6 @@ package pw.phylame.jem.util;
 
 import java.util.List;
 import java.io.Writer;
-import java.io.IOException;
 
 /**
  * Abstract class for <tt>TextObject</tt>.
@@ -49,6 +48,7 @@ public abstract class AbstractText implements TextObject {
     public int writeTo(Writer writer) throws Exception {
         String text = getText();
         writer.write(text);
+        writer.flush();
         return text.length();
     }
 

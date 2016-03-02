@@ -30,6 +30,10 @@ public final class ExceptionFactory {
         return new IOException(MessageBundle.getText(msg, args));
     }
 
+    public static IOException ioException(Throwable cause, String msg, Object... args) {
+        return new IOException(MessageBundle.getText(msg, args), cause);
+    }
+
     public static ParserException parserException(String msg, Object... args) {
         return new ParserException(MessageBundle.getText(msg, args));
     }

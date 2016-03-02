@@ -74,7 +74,9 @@ public final class ZipUtils {
     public static void writeText(TextObject text, String name, String encoding, ZipOutputStream zipout)
             throws IOException {
         zipout.putNextEntry(new ZipEntry(name));
-        Writer writer = encoding != null ? new OutputStreamWriter(zipout, encoding) : new OutputStreamWriter(zipout);
+        Writer writer = encoding != null
+                ? new OutputStreamWriter(zipout, encoding)
+                : new OutputStreamWriter(zipout);
         try {
             text.writeTo(writer);
         } catch (Exception e) {

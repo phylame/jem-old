@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # ------------------------------------------------------------------------------
 # Copyright 2014-2015 Peng Wan <phylame@163.com>
 #
@@ -49,4 +49,4 @@ if [ -d "$EXT_DIR" ]; then
 fi
 
 # Run Jem SCI
-java -Xbootclasspath/a:"$EXT_LIB" -jar "$IMABW_HOME/lib/imabw.jar" "$@"
+java -Xbootclasspath/a:"$EXT_LIB" -jar "$IMABW_HOME/lib/imabw-2.2.1.jar" "$@"

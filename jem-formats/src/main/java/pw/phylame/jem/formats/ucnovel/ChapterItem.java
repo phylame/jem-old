@@ -21,87 +21,16 @@ package pw.phylame.jem.formats.ucnovel;
 import java.util.Date;
 
 /**
- * Chapter item of UC novel.
+ * Holds chapter information for UC novel.
  */
 public class ChapterItem {
-    private int id;
-    private String title;
-    private long startIndex, endIndex;
-    private Date updateTime;
-    private boolean isNew;
-    private int itemIndex;
-    private String cdnURL;
-    private String contentKey;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public long getEndIndex() {
-        return endIndex;
-    }
-
-    public void setEndIndex(long endIndex) {
-        this.endIndex = endIndex;
-    }
-
-    public long getStartIndex() {
-        return startIndex;
-    }
-
-    public void setStartIndex(long startIndex) {
-        this.startIndex = startIndex;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public String getCdnURL() {
-        return cdnURL;
-    }
-
-    public void setCdnURL(String cdnURL) {
-        this.cdnURL = cdnURL;
-    }
-
-    public String getContentKey() {
-        return contentKey;
-    }
-
-    public void setContentKey(String contentKey) {
-        this.contentKey = contentKey;
-    }
-
-    public boolean isNew() {
-        return isNew;
-    }
-
-    public void setIsNew(boolean isNew) {
-        this.isNew = isNew;
-    }
-
-    public int getItemIndex() {
-        return itemIndex;
-    }
-
-    public void setItemIndex(int itemIndex) {
-        this.itemIndex = itemIndex;
-    }
+    public int id;
+    public String title;
+    public long startIndex, endIndex;
+    public Date updateTime;
+    public boolean isNew;
+    public int itemIndex;
+    public String offlinePath;
+    public String cdnURL;
+    public String contentKey;
 }

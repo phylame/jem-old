@@ -19,9 +19,7 @@
 package pw.phylame.jem.formats.common;
 
 import java.util.Map;
-import java.io.IOException;
 
-import pw.phylame.jem.formats.util.ExceptionFactory;
 import pw.phylame.jem.formats.util.config.ConfigUtils;
 import pw.phylame.jem.formats.util.config.CommonConfig;
 import pw.phylame.jem.formats.util.config.InvalidConfigException;
@@ -38,12 +36,12 @@ abstract class BookWorker<CF extends CommonConfig> {
     /**
      * Key for fetch <tt>CF</tt> object from config map.
      */
-    protected final String configKey;
+    private final String configKey;
 
     /**
      * Type of custom <tt>CF</tt> class.
      */
-    protected final Class<CF> configClass;
+    private final Class<CF> configClass;
 
     BookWorker(String name, String configKey, Class<CF> configClass) {
         if (name == null) {
@@ -66,12 +64,6 @@ abstract class BookWorker<CF extends CommonConfig> {
         if (configKey == null) {   // no config required
             return null;
         }
-        return kw == null || kw.isEmpty()
-                ? ConfigUtils.defaultConfig(configClass)
-                : ConfigUtils.fetchConfig(kw, configKey, configClass);
-    }
-
-    protected IOException ioException(String msg, Object... args) {
-        return ExceptionFactory.ioException(msg, args);
+        return ConfigUtils.fetchConfig(kw, configKey, configClass);
     }
 }

@@ -115,14 +115,14 @@ class SearchBar extends JSplitPane {
         jpLeft.add((spacer = Box.createRigidArea(new Dimension(0, 3))));
         jpLeft.add((tfTarget = new JTextField()));
 
-        btnReplace = new JButton(new IAction("Editor.Searcher.ButtonReplace") {
+        btnReplace = new JButton(new IAction("editors.searcher.buttonReplace") {
             @Override
             public void actionPerformed(ActionEvent e) {
                 editor.replaceNext();
             }
         });
         btnReplace.setEnabled(false);
-        btnReplaceAll = new JButton(new IAction("Editor.Searcher.ButtonReplaceAll") {
+        btnReplaceAll = new JButton(new IAction("editors.searcher.buttonReplaceAll") {
             @Override
             public void actionPerformed(ActionEvent e) {
                 editor.replaceAll();

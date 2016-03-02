@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2016 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -36,9 +36,8 @@ import pw.phylame.jem.util.VariantMap;
  * </ul>
  */
 public class Book extends Chapter {
-
     /**
-     * Constructs instance with empty title and author.
+     * Constructs instance with empty title.
      */
     public Book() {
         super();
@@ -65,8 +64,12 @@ public class Book extends Chapter {
         setAuthor(author);
     }
 
-    Book(Chapter chapter) {
-        super(chapter);
+    public Book(Chapter chapter) {
+        chapter.dump(this);
+    }
+
+    public Book(Book book) {
+        book.dump(this);
     }
 
     public String getAuthor() {
@@ -148,7 +151,7 @@ public class Book extends Chapter {
     /**
      * Extensions map.
      */
-    protected final VariantMap extensions = new VariantMap();
+    protected VariantMap extensions = new VariantMap();
 
     /**
      * Associates the specified value with the specified name in extensions.
@@ -241,7 +244,15 @@ public class Book extends Chapter {
     }
 
     @Override
-    public String debugMessage() {
-        return super.debugMessage() + ", extensions=" + extensions;
+    protected void dump(Chapter chapter) {
+        super.dump(chapter);
+        if (chapter instanceof Book) {
+            ((Book) chapter).extensions = (VariantMap) extensions.clone();
+        }
+    }
+
+    @Override
+    public String debug() {
+        return super.debug() + ", extensions=" + extensions;
     }
 }

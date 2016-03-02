@@ -18,19 +18,18 @@
 
 package pw.phylame.jem.formats.epub.writer;
 
-import pw.phylame.jem.core.Book;
-import pw.phylame.jem.formats.epub.EPUB;
-import pw.phylame.jem.formats.epub.EpubMakeConfig;
-import pw.phylame.jem.formats.util.ExceptionFactory;
-import pw.phylame.jem.formats.util.MakerException;
-import pw.phylame.jem.formats.util.ZipUtils;
-import pw.phylame.jem.formats.util.xml.XmlRender;
-import pw.phylame.jem.util.FileObject;
-import pw.phylame.jem.util.TextObject;
-
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.zip.ZipOutputStream;
+
+import pw.phylame.jem.core.Book;
+import pw.phylame.jem.util.FileObject;
+import pw.phylame.jem.util.TextObject;
+import pw.phylame.jem.formats.epub.EPUB;
+import pw.phylame.jem.formats.epub.EpubMakeConfig;
+import pw.phylame.jem.formats.util.MakerException;
+import pw.phylame.jem.formats.util.ZipUtils;
+import pw.phylame.jem.formats.util.xml.XmlRender;
 
 /**
  * Common ePub writer.
@@ -45,8 +44,8 @@ public abstract class EpubWriter {
     protected ZipOutputStream zipout;
     protected XmlRender xmlRender;
 
-    public void write(Book book, EpubMakeConfig config, ZipOutputStream zipout)
-            throws IOException, MakerException {
+    public void write(Book book, EpubMakeConfig config, ZipOutputStream zipout) throws IOException,
+            MakerException {
         this.book = book;
         this.config = config;
         this.zipout = zipout;
@@ -56,10 +55,6 @@ public abstract class EpubWriter {
 
     protected abstract void write() throws IOException, MakerException;
 
-    protected MakerException makerException(String msg, Object... args) {
-        return ExceptionFactory.makerException(msg, args);
-    }
-
     public String pathInOps(String name) {
         return OPS_DIR + "/" + name;
     }
@@ -68,13 +63,11 @@ public abstract class EpubWriter {
         ZipUtils.writeFile(file, pathInOps(name), zipout);
     }
 
-    public void writeIntoOps(String text, String name, String encoding)
-            throws IOException {
+    public void writeIntoOps(String text, String name, String encoding) throws IOException {
         ZipUtils.writeString(text, pathInOps(name), encoding, zipout);
     }
 
-    public void writeIntoOps(TextObject text, String name, String encoding)
-            throws IOException {
+    public void writeIntoOps(TextObject text, String name, String encoding) throws IOException {
         ZipUtils.writeText(text, pathInOps(name), encoding, zipout);
     }
 
@@ -93,7 +86,6 @@ public abstract class EpubWriter {
         xmlRender.endTag();
         xmlRender.endXml();
 
-        ZipUtils.writeString(writer.toString(), EPUB.CONTAINER_FILE,
-                config.xmlConfig.encoding, zipout);
+        ZipUtils.writeString(writer.toString(), EPUB.CONTAINER_FILE, config.xmlConfig.encoding, zipout);
     }
 }

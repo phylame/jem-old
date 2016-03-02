@@ -18,14 +18,14 @@
 
 package pw.phylame.jem.formats.txt;
 
+import java.io.*;
+
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.util.TextObject;
 import pw.phylame.jem.formats.common.CommonMaker;
 import pw.phylame.jem.formats.util.MakerException;
 import pw.phylame.jem.formats.util.text.TextUtils;
 import pw.phylame.jem.formats.util.text.TextRender;
-
-import java.io.*;
 
 /**
  * <tt>Maker</tt> implement for TXT book.
@@ -36,8 +36,7 @@ public class TxtMaker extends CommonMaker<TxtMakeConfig> {
     }
 
     @Override
-    public void make(Book book, OutputStream output, TxtMakeConfig config)
-            throws IOException, MakerException {
+    public void make(Book book, OutputStream output, TxtMakeConfig config) throws IOException, MakerException {
         if (config == null) {
             config = new TxtMakeConfig();
         }
@@ -50,8 +49,7 @@ public class TxtMaker extends CommonMaker<TxtMakeConfig> {
         }
     }
 
-    public void make(Book book, Writer writer, TxtMakeConfig config)
-            throws IOException {
+    public void make(Book book, Writer writer, TxtMakeConfig config) throws IOException {
         if (config == null) {
             config = new TxtMakeConfig();
         }
@@ -59,16 +57,15 @@ public class TxtMaker extends CommonMaker<TxtMakeConfig> {
             writer = new BufferedWriter(writer);
         }
         String lineSeparator = config.textConfig.lineSeparator;
-        if (TextUtils.isValid(config.headerText)) {
-            writer.write(config.headerText + lineSeparator);
+        if (TextUtils.isValid(config.header)) {
+            writer.write(config.header + lineSeparator);
         }
         writer.write(book.getTitle() + lineSeparator);
         String author = book.getAuthor();
         if (!author.isEmpty()) {
             writer.write(author + lineSeparator);
         }
-        TxtRender txtRender = new TxtRender(writer, config.additionLine,
-                lineSeparator);
+        TxtRender txtRender = new TxtRender(writer, config.additionLine, lineSeparator);
         try {
             TextObject intro = book.getIntro();
             if (intro != null) {
@@ -80,14 +77,13 @@ public class TxtMaker extends CommonMaker<TxtMakeConfig> {
             if (book.isSection()) {
                 TextRender.renderBook(book, txtRender, config.textConfig);
             } else {        // book has not sub-parts, then save its content
-                TextRender.renderText(book.getContent(), txtRender,
-                        config.textConfig);
+                TextRender.renderText(book.getContent(), txtRender, config.textConfig);
             }
         } catch (Exception e) {
             throw new IOException(e);
         }
-        if (TextUtils.isValid(config.footerText)) {
-            writer.write(config.footerText);
+        if (TextUtils.isValid(config.footer)) {
+            writer.write(config.footer);
         }
         writer.flush();
     }

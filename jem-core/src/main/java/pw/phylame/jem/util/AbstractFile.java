@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2016 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -42,15 +42,15 @@ public abstract class AbstractFile implements FileObject {
 
     @Override
     public byte[] readAll() throws IOException {
-        try (InputStream in = openStream()) {
-            return IOUtils.toBytes(in);
+        try (InputStream stream = openStream()) {
+            return IOUtils.toBytes(stream);
         }
     }
 
     @Override
     public int writeTo(OutputStream out) throws IOException {
-        try (InputStream in = openStream()) {
-            return IOUtils.copy(in, out, -1);
+        try (InputStream stream = openStream()) {
+            return IOUtils.copy(stream, out, -1);
         }
     }
 

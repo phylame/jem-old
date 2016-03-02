@@ -18,6 +18,7 @@
 
 package pw.phylame.imabw.app;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.HashMap;
@@ -144,6 +145,12 @@ public class Imabw extends IApplication<Viewer> implements Constants {
         }
 
         setDelegate(manager = new Manager(this));
+
+        try {
+            loadPlugins();
+        } catch (IOException | ClassNotFoundException | IllegalAccessException | InstantiationException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

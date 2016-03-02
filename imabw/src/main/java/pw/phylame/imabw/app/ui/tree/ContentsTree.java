@@ -53,7 +53,7 @@ public class ContentsTree extends JPanel implements Editable {
     private static final String CHAPTER_SEPARATOR = "->";
 
     private static final Object[] NEW_MENU_MODEL = {
-            "contents.menu.new",
+            "contents.contextMenu.new",
             Imabw.NEW_CHAPTER, Imabw.IMPORT_CHAPTER
     };
 
@@ -650,7 +650,7 @@ public class ContentsTree extends JPanel implements Editable {
     }
 
     public void exportChapter() {
-        Book book = Jem.toBook(getSingleChapter());
+        Book book = new Book(getSingleChapter());
         String title = app.getText("contents.exportChapter.title", book.getTitle());
 
         MakerData md = worker.makeMakerData(viewer, title, book, null, null, null);
@@ -733,7 +733,7 @@ public class ContentsTree extends JPanel implements Editable {
                 builder.append(BookUtils.contentOfChapter(ch, "")).append("\n");
             }
         });
-        target.setContent(TextFactory.fromString(builder.toString()));
+        target.setContent(TextFactory.forString(builder.toString()));
         // undo supported
         undoManager.chaptersJoined(target, index, undoQueue,
                 app.getText("undo.message.joinChapter"));

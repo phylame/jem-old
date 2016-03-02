@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2016 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -54,12 +54,12 @@ public final class BookHelper {
     /**
      * Holds registered <tt>Parser</tt> class information.
      */
-    private static final ImplementFactory<Parser> parsers = new ImplementFactory<>(Parser.class);
+    private static final ImplementFactory<Parser> parsers = new ImplementFactory<>(Parser.class, true);
 
     /**
      * Holds registered <tt>Maker</tt> class information.
      */
-    private static final ImplementFactory<Maker> makers = new ImplementFactory<>(Maker.class);
+    private static final ImplementFactory<Maker> makers = new ImplementFactory<>(Maker.class, true);
 
     /**
      * Mapping parser and maker name to file extension names.
@@ -139,7 +139,7 @@ public final class BookHelper {
      * @throws ClassNotFoundException if registered class path is invalid
      */
     public static Parser getParser(String name) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
-        return parsers.newImplement(name);
+        return parsers.newInstance(name);
     }
 
     /**
@@ -210,7 +210,7 @@ public final class BookHelper {
      * @throws ClassNotFoundException if registered class path is invalid
      */
     public static Maker getMaker(String name) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
-        return makers.newImplement(name);
+        return makers.newInstance(name);
     }
 
     /**
@@ -280,7 +280,7 @@ public final class BookHelper {
                     String[] parts = entry.getValue().toString().split(NAME_EXTENSION_SEPARATOR, 2);
                     factory.registerImplement(name, parts[0]);
                     if (parts.length > 1) {
-                        mapExtensions(name, parts[1].split(EXTENSION_SEPARATOR));
+                        mapExtensions(name, parts[1].toLowerCase().split(EXTENSION_SEPARATOR));
                     } else {
                         mapExtensions(name, null);
                     }

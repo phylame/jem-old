@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.LinkedList;
 
 import pw.phylame.jem.core.Chapter;
+import pw.phylame.jem.util.TextFactory;
 import pw.phylame.jem.util.TextObject;
 
 /**
@@ -37,8 +38,8 @@ public final class TextRender {
     public static void renderBook(Chapter book, TextWriter writer, TextConfig config)
             throws Exception {
         RenderHelper maker = new RenderHelper(writer, config);
-        for (Chapter c : book) {
-            walkChapter(c, maker);
+        for (Chapter ch : book) {
+            walkChapter(ch, maker);
         }
     }
 
@@ -57,13 +58,13 @@ public final class TextRender {
     }
 
     private static int renderLines(TextObject text, TextWriter writer, TextConfig config,
-                                   boolean prependLF) throws Exception {
+                                   boolean prependNL) throws Exception {
         List<String> lines = TextUtils.plainLines(text, config.skipEmptyLine, config.textConverter);
         if (lines == null) {
             return 0;
         }
         int ix = 1, size = lines.size();
-        if (prependLF && size > 0) {
+        if (prependNL && size > 0) {
             writer.writeText(config.lineSeparator);
         }
         for (String line : lines) {
@@ -162,7 +163,7 @@ public final class TextRender {
 
         private LinkedList<String> titleStack;
 
-        RenderHelper(TextWriter writer, TextConfig config) {
+        private RenderHelper(TextWriter writer, TextConfig config) {
             this.config = config;
             this.writer = writer;
             if (config.joinTitles) {
@@ -170,13 +171,13 @@ public final class TextRender {
             }
         }
 
-        void beginItem(Chapter chapter) {
+        private void beginItem(Chapter chapter) {
             if (config.joinTitles) {
                 titleStack.addLast(chapter.getTitle());
             }
         }
 
-        void writeText(Chapter chapter) throws Exception {
+        private void writeText(Chapter chapter) throws Exception {
             String lineSeparator = config.lineSeparator;
             String title;
             if (config.joinTitles) {
@@ -209,7 +210,7 @@ public final class TextRender {
             }
             // content
             TextObject content = chapter.getContent();
-            renderText(content, writer, config, true);
+            renderText(content != null ? content : TextFactory.emptyText(), writer, config, true);
             // suffix
             if (TextUtils.isValid(config.suffixText)) {
                 writer.writeText(lineSeparator + config.suffixText);
@@ -221,7 +222,7 @@ public final class TextRender {
             writer.endChapter();
         }
 
-        void endItem() {
+        private void endItem() {
             if (config.joinTitles) {
                 titleStack.removeLast();
             }

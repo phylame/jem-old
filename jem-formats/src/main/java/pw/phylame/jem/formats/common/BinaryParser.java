@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 
 import pw.phylame.jem.formats.util.ParserException;
+import pw.phylame.jem.formats.util.ExceptionFactory;
 import pw.phylame.jem.formats.util.BufferedRandomAccessFile;
 import pw.phylame.jem.formats.util.config.CommonConfig;
 
@@ -37,7 +38,7 @@ public abstract class BinaryParser<CF extends CommonConfig> extends CommonParser
     }
 
     @Override
-    protected RandomAccessFile openInput(File file, CF config) throws IOException {
+    protected RandomAccessFile openFile(File file, CF config) throws IOException, ParserException {
         return new BufferedRandomAccessFile(file, "r");
     }
 
@@ -48,20 +49,21 @@ public abstract class BinaryParser<CF extends CommonConfig> extends CommonParser
      */
     protected abstract void onReadingError() throws ParserException;
 
-    protected byte[] readBytes(RandomAccessFile input, int size) throws IOException, ParserException {
-        return readBytes(input, size, null);
-    }
-
-    protected byte[] readBytes(RandomAccessFile input, int size, String errorKey) throws IOException, ParserException {
-        byte[] b = new byte[size];
-        if (input.read(b) != size) {
-            if (errorKey == null) {
+    protected byte[] readBytes(RandomAccessFile input, int size, String error, Object... args)
+            throws IOException, ParserException {
+        byte[] bytes = new byte[size];
+        if (input.read(bytes) != size) {
+            if (error == null) {
                 onReadingError();
             } else {
-                throw parserException(errorKey);
+                throw ExceptionFactory.parserException(error, args);
             }
         }
-        return b;
+        return bytes;
+    }
+
+    protected byte[] readBytes(RandomAccessFile input, int size) throws IOException, ParserException {
+        return readBytes(input, size, null);
     }
 
     protected long readUInt32(RandomAccessFile input) throws IOException, ParserException {

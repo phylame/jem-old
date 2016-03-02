@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2016 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -26,6 +26,9 @@ import java.io.OutputStream;
  * Provides reused read-only input source.
  */
 public interface FileObject {
+    /**
+     * MIME type for any file.
+     */
     String UNKNOWN_MIME = "application/octet-stream";
 
     /**

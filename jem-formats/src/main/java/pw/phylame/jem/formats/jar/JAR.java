@@ -22,7 +22,7 @@ package pw.phylame.jem.formats.jar;
  * Defines constants and common methods.
  */
 public final class JAR {
-    static final int FILE_MAGIC_NUMBER = 0x13000;
+    static final int MAGIC_NUMBER = 0x13000;
 
     static final String METADATA_ENCODING = "UTF-8";
 

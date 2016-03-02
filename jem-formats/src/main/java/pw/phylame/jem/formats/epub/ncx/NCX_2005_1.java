@@ -18,6 +18,10 @@
 
 package pw.phylame.jem.formats.epub.ncx;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.zip.ZipOutputStream;
+
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Jem;
 import pw.phylame.jem.formats.epub.*;
@@ -25,10 +29,6 @@ import pw.phylame.jem.formats.epub.writer.EpubWriter;
 import pw.phylame.jem.formats.util.MakerException;
 import pw.phylame.jem.formats.util.text.TextUtils;
 import pw.phylame.jem.formats.util.xml.XmlRender;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.zip.ZipOutputStream;
 
 /**
  * NCX version 2005-1
@@ -46,8 +46,7 @@ class NCX_2005_1 implements NcxWriter, ContentsListener {
     private ContentsRender contentsRender;
 
     @Override
-    public void write(Book book, EpubMakeConfig epubConfig, XmlRender xmlRender,
-                      EpubWriter epubWriter,
+    public void write(Book book, EpubMakeConfig epubConfig, XmlRender xmlRender, EpubWriter epubWriter,
                       ZipOutputStream zipout) throws IOException, MakerException {
         this.xmlRender = xmlRender;
         xmlRender.startXml();
@@ -76,8 +75,7 @@ class NCX_2005_1 implements NcxWriter, ContentsListener {
         // navMap
         xmlRender.startTag("navMap");
         // render contents
-        contentsRender = new ContentsRender(book, epubWriter,
-                epubConfig, zipout, this);
+        contentsRender = new ContentsRender(book, epubWriter, epubConfig, zipout, this);
         contentsRender.start();
 
         xmlRender.endTag(); // navMap
@@ -106,24 +104,23 @@ class NCX_2005_1 implements NcxWriter, ContentsListener {
         return contentsRender.getGuideItems();
     }
 
-    private void writeHead(int depth, String uuid,
-                           int totalPageCount, int maxPageNumber,
+    private void writeHead(int depth, String uuid, int totalPageCount, int maxPageNumber,
                            XmlRender xmlRender) throws IOException {
         xmlRender.startTag("head");
-        xmlRender.startTag("meta").attribute("name", "dtb:uid");
-        xmlRender.attribute("content", uuid).endTag();
-        xmlRender.startTag("meta").attribute("name", "dtb:depth");
-        xmlRender.attribute("content", Integer.toString(depth)).endTag();
-        xmlRender.startTag("meta").attribute("name", "dtb:totalPageCount");
-        xmlRender.attribute("content", Integer.toString(totalPageCount)).endTag();
-        xmlRender.startTag("meta").attribute("name", "dtb:maxPageNumber");
-        xmlRender.attribute("content", Integer.toString(maxPageNumber)).endTag();
+        writeMeta("dtb:uid", uuid, xmlRender);
+        writeMeta("dtb:depth", Integer.toString(depth), xmlRender);
+        writeMeta("dtb:totalPageCount", Integer.toString(totalPageCount), xmlRender);
+        writeMeta("dtb:maxPageNumber", Integer.toString(maxPageNumber), xmlRender);
         xmlRender.endTag();
     }
 
+    private void writeMeta(String name, String value, XmlRender xmlRender) throws IOException {
+        xmlRender.startTag("meta").attribute("name", name);
+        xmlRender.attribute("content", value).endTag();
+    }
 
     @Override
-    public void startNaviPoint(String id, String href, String title) throws IOException {
+    public void startNavPoint(String id, String href, String title) throws IOException {
         xmlRender.startTag("navPoint").attribute("id", id);
         xmlRender.attribute("playOrder", Integer.toString(playOrder++));
 
@@ -135,7 +132,7 @@ class NCX_2005_1 implements NcxWriter, ContentsListener {
     }
 
     @Override
-    public void endNaviPoint() throws IOException {
+    public void endNavPoint() throws IOException {
         xmlRender.endTag(); // navPoint
     }
 }

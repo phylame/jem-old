@@ -24,7 +24,7 @@ import pw.phylame.jem.formats.util.MessageBundle;
  * Defines constants and methods.
  */
 public final class UMD {
-    static final long FILE_MAGIC_NUMBER = 0xde9a9b89L;
+    static final long MAGIC_NUMBER = 0xde9a9b89L;
 
     static final String TEXT_ENCODING = "UTF-16LE";
 

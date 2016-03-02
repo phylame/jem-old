@@ -18,8 +18,16 @@
 
 package pw.phylame.jem.formats.epub.writer;
 
+import java.util.List;
+import java.util.UUID;
+import java.util.zip.ZipEntry;
+import java.io.IOException;
+import java.io.StringWriter;
+
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.formats.epub.Resource;
+import pw.phylame.jem.formats.util.ExceptionFactory;
+import pw.phylame.jem.formats.util.MakerException;
 import pw.phylame.jem.formats.util.text.TextUtils;
 
 import pw.phylame.jem.formats.epub.EPUB;
@@ -27,13 +35,6 @@ import pw.phylame.jem.formats.epub.ncx.NcxWriter;
 import pw.phylame.jem.formats.epub.ncx.NcxWriterFactory;
 import pw.phylame.jem.formats.epub.opf.OpfWriter;
 import pw.phylame.jem.formats.epub.opf.OpfWriterFactory;
-import pw.phylame.jem.formats.util.MakerException;
-
-import java.util.List;
-import java.util.UUID;
-import java.util.zip.ZipEntry;
-import java.io.IOException;
-import java.io.StringWriter;
 
 /**
  * ePub 2.0 implements.
@@ -48,13 +49,13 @@ class EPUB_2_0 extends EpubWriter {
 
     @Override
     protected void write() throws IOException, MakerException {
-        if (!TextUtils.isValid(config.uuid)) {
+        if (TextUtils.isEmpty(config.uuid)) {
             config.uuid = getUUID(book);
         }
         // make and write NCX document
         NcxWriter ncxWriter = NcxWriterFactory.getWriter("2005-1");
         if (ncxWriter == null) {
-            throw makerException("epub.make.v2.noNCX_2005_1");
+            throw ExceptionFactory.makerException("epub.make.v2.noNCX_2005_1");
         }
         StringWriter writer = new StringWriter();
         xmlRender.setOutput(writer);
@@ -67,7 +68,7 @@ class EPUB_2_0 extends EpubWriter {
 
         OpfWriter opfWriter = OpfWriterFactory.getWriter("2.0");
         if (opfWriter == null) {
-            throw makerException("epub.make.v2.noOPF_2_0");
+            throw ExceptionFactory.makerException("epub.make.v2.noOPF_2_0");
         }
         String opfPath = pathInOps(OPF_FILE);
         zipout.putNextEntry(new ZipEntry(opfPath));
@@ -75,7 +76,7 @@ class EPUB_2_0 extends EpubWriter {
         opfWriter.write(book, config, xmlRender, ncxWriter.getCoverID(),
                 resources, ncxWriter.getSpineItems(), EPUB.NCX_FILE_ID,
                 ncxWriter.getGuideItems());
-//        xmlRender.flush();
+        xmlRender.flush();
         zipout.closeEntry();
 
         writeContainer(opfPath);
@@ -84,9 +85,9 @@ class EPUB_2_0 extends EpubWriter {
     private String getUUID(Book book) {
         // UUID of the book
         String uuid = book.stringAttribute("uuid", null);
-        if (!TextUtils.isValid(uuid)) {
+        if (TextUtils.isEmpty(uuid)) {
             uuid = book.stringAttribute("isbn", null);
-            if (!TextUtils.isValid(uuid)) {
+            if (TextUtils.isEmpty(uuid)) {
                 uuid = UUID.randomUUID().toString();
             }
         }

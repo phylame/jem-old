@@ -22,6 +22,7 @@ import pw.phylame.jem.core.Book;
 import pw.phylame.jem.formats.common.ZipMaker;
 import pw.phylame.jem.formats.epub.writer.EpubWriter;
 import pw.phylame.jem.formats.epub.writer.EpubWriterFactory;
+import pw.phylame.jem.formats.util.ExceptionFactory;
 import pw.phylame.jem.formats.util.MakerException;
 import pw.phylame.jem.formats.util.ZipUtils;
 
@@ -39,12 +40,9 @@ public class EpubMaker extends ZipMaker<EpubMakeConfig> {
     @Override
     public void make(Book book, ZipOutputStream zipout, EpubMakeConfig config)
             throws IOException, MakerException {
-        if (config == null) {
-            config = new EpubMakeConfig();
-        }
         EpubWriter writer = EpubWriterFactory.getWriter(config.version);
         if (writer == null) {
-            throw makerException("epub.make.unsupportedVersion", config.version);
+            throw ExceptionFactory.makerException("epub.make.unsupportedVersion", config.version);
         }
         writeMIME(zipout);
         writer.write(book, config, zipout);

@@ -18,6 +18,9 @@
 
 package pw.phylame.jem.formats.ebk;
 
+import java.io.*;
+import java.util.ArrayList;
+
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Chapter;
 import pw.phylame.jem.util.AbstractText;
@@ -26,107 +29,85 @@ import pw.phylame.jem.formats.common.BinaryParser;
 import pw.phylame.jem.formats.util.ZLibUtils;
 import pw.phylame.jem.formats.util.ByteUtils;
 import pw.phylame.jem.formats.util.ParserException;
+import pw.phylame.jem.formats.util.ExceptionFactory;
 import pw.phylame.jem.formats.util.text.TextUtils;
 
-import java.io.*;
-import java.util.ArrayList;
-
 public class Ebk2Parser extends BinaryParser<NonConfig> {
-
-    private class ParserData {
-        final RandomAccessFile file;
-        final Book book;
-
-        int headSize;
-        long indexSize;
-
-        int chapterCount;
-        int blockCount;
-        int mediaCount;
-
-        final ArrayList<TextBlock> blocks = new ArrayList<>();
-
-        ParserData(RandomAccessFile file) {
-            this.file = file;
-            book = new Book();
-        }
-    }
-
     public Ebk2Parser() {
         super("ebk", null, null);
     }
 
     @Override
-    protected Book parse(RandomAccessFile input, NonConfig config) throws IOException, ParserException {
-        ParserData pd = new ParserData(input);
-        readHeader(pd);
-        readChapterIndexes(pd);
-        pd.book.setExtension(EbkInfo.FILE_INFO, new EbkInfo(2));
-        return pd.book;
+    public Book parse(RandomAccessFile input, NonConfig config) throws IOException, ParserException {
+        InternalData data = new InternalData(input);
+        readHeader(data);
+        readIndexes(data);
+        data.book.setExtension(EbkInfo.FILE_INFO, new EbkInfo(2));
+        return data.book;
     }
 
-    private void readHeader(ParserData pd) throws IOException, ParserException {
-        RandomAccessFile file = pd.file;
-        Book book = pd.book;
+    private void readHeader(InternalData data) throws IOException, ParserException {
+        RandomAccessFile file = data.file;
+        Book book = data.book;
 
         book.setAttribute("book_id", readUInt32(file));
-        pd.headSize = readUInt16(file);
+        data.headerSize = readUInt16(file);
         int version = readUInt16(file);
         if (version != 2) {
-            throw parserException("ebk.parse.unsupportedVersion", version);
+            throw ExceptionFactory.parserException("ebk.parse.unsupportedVersion", version);
         }
 
         file.skipBytes(4);     // ebk2 size
         book.setTitle(readString(file, 64));
         file.skipBytes(4);     // file size
-        pd.indexSize = readUInt32(file);
+        data.indexesSize = readUInt32(file);
         file.skipBytes(4);     // first block
-        pd.chapterCount = readUInt16(file);
-        pd.blockCount = readUInt16(file);
-        pd.mediaCount = (int) readUInt32(file);
+        data.chapterCount = readUInt16(file);
+        data.blockCount = readUInt16(file);
+        data.mediaCount = (int) readUInt32(file);
         file.skipBytes(8);     // media size and txt size
     }
 
-    private void readChapterIndexes(ParserData pd) throws IOException, ParserException {
-        byte[] b = readBytes(pd.file, (int) pd.indexSize);
-        ByteArrayInputStream stream = new ByteArrayInputStream(ZLibUtils.decompress(b));
-        readChapters(pd, stream);
-        readBlocks(pd, stream);
+    private void readIndexes(InternalData data) throws IOException, ParserException {
+        byte[] bytes = readBytes(data.file, (int) data.indexesSize);
+        ByteArrayInputStream stream = new ByteArrayInputStream(ZLibUtils.decompress(bytes));
+        readChapters(data, stream);
+        readBlocks(data, stream);
     }
 
-    private void readChapters(ParserData pd, InputStream stream) throws IOException, ParserException {
+    private void readChapters(InternalData data, InputStream stream) throws IOException, ParserException {
         String title;
         long offset, length;
 
-        for (int i = 0; i < pd.chapterCount; ++i) {
+        for (int i = 0; i < data.chapterCount; ++i) {
             title = readString(stream, 64);
             offset = readUInt32(stream);
             length = readUInt32(stream);
-            EbkText content = new EbkText(pd.file, pd.blocks, offset, length);
-            content.headSize = pd.headSize;
-            content.indexSize = pd.indexSize;
-            pd.book.append(new Chapter(title, content));
+            EbkText content = new EbkText(data.file, data.blocks, offset, length);
+            content.headSize = data.headerSize;
+            content.indexSize = data.indexesSize;
+            data.book.append(new Chapter(title, content));
         }
     }
 
-    private void readBlocks(ParserData pd, InputStream stream) throws IOException, ParserException {
+    private void readBlocks(InternalData data, InputStream stream) throws IOException, ParserException {
         long offset, length;
-        for (int i = 0; i < pd.blockCount; ++i) {
+        for (int i = 0; i < data.blockCount; ++i) {
             offset = readUInt32(stream);
             length = readUInt32(stream);
-            pd.blocks.add(new TextBlock(offset, length));
+            data.blocks.add(new TextBlock(offset, length));
         }
     }
 
     @Override
     protected void onReadingError() throws ParserException {
-        throw parserException("ebk.parse.invalidFile", source);
+        throw ExceptionFactory.parserException("ebk.parse.invalidFile", source);
     }
 
     private byte[] readBytes(InputStream in, long size) throws IOException, ParserException {
         byte[] b = new byte[(int) size];
         if (in.read(b) != size) {
-            throw parserException("ebk.parse.invalidFile");
+            throw ExceptionFactory.parserException("ebk.parse.invalidFile");
         }
         return b;
     }
@@ -149,6 +130,25 @@ public class Ebk2Parser extends BinaryParser<NonConfig> {
         private TextBlock(long offset, long size) {
             this.offset = offset;
             this.size = size;
+        }
+    }
+
+    private class InternalData {
+        private final RandomAccessFile file;
+        private final Book book;
+
+        private int headerSize;
+        private long indexesSize;
+
+        private int chapterCount;
+        private int blockCount;
+        private int mediaCount;
+
+        private final ArrayList<TextBlock> blocks = new ArrayList<>();
+
+        private InternalData(RandomAccessFile file) {
+            this.file = file;
+            book = new Book();
         }
     }
 

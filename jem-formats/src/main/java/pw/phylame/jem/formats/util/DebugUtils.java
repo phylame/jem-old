@@ -28,6 +28,7 @@ import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Chapter;
 import pw.phylame.jem.core.BookHelper;
 import pw.phylame.jem.formats.txt.TxtParseConfig;
+import pw.phylame.jem.formats.ucnovel.NovelConfig;
 import pw.phylame.jem.util.IOUtils;
 import pw.phylame.jem.util.JemException;
 
@@ -67,8 +68,12 @@ public final class DebugUtils {
     }
 
     public static void makeFile(Book book, String path, String format, Map<String, Object> kw) {
+        File file = new File(path);
+        if (file.isDirectory()) {
+            file = new File(file, book.getTitle() + "." + format);
+        }
         try {
-            Jem.writeBook(book, new File(path), format, kw);
+            Jem.writeBook(book, file, format, kw);
         } catch (IOException | JemException e) {
             e.printStackTrace();
         }
@@ -117,18 +122,15 @@ public final class DebugUtils {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws JemException {
         Map<String, Object> kw = makeConfig(
-                TxtParseConfig.TEXT_ENCODING, "GBK"
-                , TxtParseConfig.CHAPTER_PATTERN, "^第[一二三四五六七八九十百零]+[(卷)(章\\s)].*\\r\\n"
+
         );
-        String path = "D:\\tmp\\辽东钉子户.txt";
-        Book book = parseFile(path, kw);
-        printTOC(book);
-        try {
-            Jem.writeBook(book, new File("D:/tmp/a.pmab"), "pmab", null);
-        } catch (IOException | JemException e) {
-            e.printStackTrace();
-        }
+        String input
+                = "D:\\tmp\\xyz.pmab";
+        String output
+                = "D:\\tmp";
+        makeFile(parseFile(input, kw), output, "epub", kw);
     }
+
 }

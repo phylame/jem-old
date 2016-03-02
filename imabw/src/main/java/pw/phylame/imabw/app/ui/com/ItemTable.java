@@ -70,11 +70,11 @@ public abstract class ItemTable extends MappingTable<String, Object> {
     @Override
     protected String nameOfColumn(int column) {
         if (column == keyColumn) {
-            return app.getText("com.table.field.key");
+            return app.getText("common.table.field.key");
         } else if (column == typeColumn) {
-            return app.getText("com.table.field.type");
+            return app.getText("common.table.field.type");
         } else if (column == valueColumn) {
-            return app.getText("com.table.field.value");
+            return app.getText("common.table.field.value");
         } else {
             return null;
         }
@@ -153,7 +153,7 @@ public abstract class ItemTable extends MappingTable<String, Object> {
                         null, null, null, true, false);
                 if (od != null) {
                     try {
-                        value = FileFactory.fromFile(od.getFile(), null);
+                        value = FileFactory.forFile(od.getFile(), null);
                     } catch (IOException e) {
                         throw new AssertionError("BUG: unexpected IOException here.");
                     }
@@ -165,7 +165,7 @@ public abstract class ItemTable extends MappingTable<String, Object> {
                         app.getText("itemTable.modifyItem.inputText"),
                         TextUtils.fetchText((TextObject) oldValue, ""), true, false);
                 if (text != null) {
-                    value = TextFactory.fromString(text);
+                    value = TextFactory.forString(text);
                 }
             }
             break;

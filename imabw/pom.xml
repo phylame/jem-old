@@ -3,6 +3,10 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+    <modules>
+        <module>plugins</module>
+    </modules>
     <parent>
         <groupId>pw-books</groupId>
         <artifactId>pw-books</artifactId>
@@ -10,7 +14,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>imabw</artifactId>
-    <version>2.2</version>
+    <version>2.2.1</version>
 
     <name>Imabw</name>
     <description>A GUI e-book editor based on Swing</description>
@@ -26,7 +30,12 @@
         <dependency>
             <groupId>pw-books</groupId>
             <artifactId>jem-formats</artifactId>
-            <version>1.6</version>
+            <version>1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>pw-books</groupId>
+            <artifactId>ucnovel-jdbc-reader</artifactId>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>pw-tools</groupId>

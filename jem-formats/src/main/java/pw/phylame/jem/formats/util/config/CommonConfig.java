@@ -18,8 +18,9 @@
 
 package pw.phylame.jem.formats.util.config;
 
-import java.util.Map;
-
 public interface CommonConfig {
-    void fetch(Map<String, Object> kw) throws InvalidConfigException;
+    /**
+     * Adjusts config after fetching from map.
+     */
+    void adjust();
 }

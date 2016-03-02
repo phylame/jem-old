@@ -25,3 +25,7 @@ ChangeLog
 
 * v1.6
   o. adapted to jem-core 2.3
+
+* v1.7
+  o. adapted to jem-core 2.4
+  o. add ConfigField annotation for auto-fetching

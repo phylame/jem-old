@@ -89,7 +89,7 @@ class LongInputDialog extends CommonDialog<String> {
 
     @Override
     protected void createComponents(JPanel userPane) {
-        JButton buttonLoad = new JButton(new IAction("dialog.input.buttonLoad") {
+        JButton buttonLoad = new JButton(new IAction("d.input.buttonLoad") {
             @Override
             public void actionPerformed(ActionEvent e) {
                 loadFile();

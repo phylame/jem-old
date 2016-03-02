@@ -87,7 +87,7 @@ public class StyleProvider {
         } else {
             url = new URL(cssPath);
         }
-        defaultInstance.cssFile = FileFactory.fromURL(url, "text/css");
+        defaultInstance.cssFile = FileFactory.forURL(url, "text/css");
 
         defaultInstance.bookCover = prop.getProperty("bookCover");
 

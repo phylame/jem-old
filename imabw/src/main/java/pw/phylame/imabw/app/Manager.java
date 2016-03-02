@@ -167,7 +167,7 @@ public class Manager extends ICommandDispatcher implements Constants {
         if (task == null || !task.isBookModified()) {
             return true;
         }
-        String tip = app.getText("dialog.askSaving.tip");
+        String tip = app.getText("d.askSaving.tip");
         int rev = askSaving(viewer, title, tip);
         switch (rev) {
             case OPTION_DISCARD:

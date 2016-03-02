@@ -102,7 +102,7 @@ public final class BookUtils {
                 String path = JemConfig.sharedInstance().getAttribute(Chapter.COVER);
                 if (path != null && !(path = path.trim()).isEmpty()) {
                     try {
-                        return FileFactory.fromFile(new File(path), null);
+                        return FileFactory.forFile(new File(path), null);
                     } catch (IOException e) {
                         Log.error("cannot load default book cover: " + path, e);
                     }
@@ -129,7 +129,7 @@ public final class BookUtils {
         Object o = book.getExtension(FileInfo.FILE_INFO, null);
         if (o instanceof FileInfo) {
             FileInfo fileInfo = (FileInfo) o;
-            Set<Map.Entry<String, Object>> entries = fileInfo.infoEntries();
+            Set<Map.Entry<String, Object>> entries = fileInfo.entries();
             String[] strings = new String[entries.size() * 2];
             int ix = 0;
             for (Map.Entry<String, Object> entry : entries) {

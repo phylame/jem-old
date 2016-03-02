@@ -28,7 +28,6 @@ import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Parser;
 import pw.phylame.jem.util.JemException;
 import pw.phylame.jem.formats.util.SourceCleaner;
-import pw.phylame.jem.formats.util.ExceptionFactory;
 import pw.phylame.jem.formats.util.ParserException;
 import pw.phylame.jem.formats.util.config.CommonConfig;
 
@@ -39,7 +38,7 @@ public abstract class CommonParser<IN extends Closeable, CF extends CommonConfig
         extends BookWorker<CF> implements Parser {
     /**
      * The input file to parse.
-     * <p>This value will be accessible after {@link #validateInput(Closeable, CommonConfig)}
+     * <p>This value will be accessible after {@link #validateFile(Closeable, CommonConfig)}
      */
     protected File source;
 
@@ -48,7 +47,7 @@ public abstract class CommonParser<IN extends Closeable, CF extends CommonConfig
     }
 
     // 2
-    protected abstract IN openInput(File file, CF config) throws IOException;
+    protected abstract IN openFile(File file, CF config) throws IOException, ParserException;
 
     // 3
 
@@ -62,42 +61,36 @@ public abstract class CommonParser<IN extends Closeable, CF extends CommonConfig
      * @throws IOException     if occurs I/O error
      * @throws ParserException if the input is invalid
      */
-    protected void validateInput(IN input, CF config) throws IOException, ParserException {
+    protected void validateFile(IN input, CF config) throws IOException, ParserException {
 
     }
 
     // 4
-    protected abstract Book parse(IN input, CF config) throws IOException, ParserException;
-
-    protected ParserException parserException(String msg, Object... args) {
-        return ExceptionFactory.parserException(msg, args);
-    }
-
-    protected ParserException parserException(Throwable cause, String msg, Object... args) {
-        return ExceptionFactory.parserException(cause, msg, args);
-    }
+    public abstract Book parse(IN input, CF config) throws IOException, ParserException;
 
     @Override
     public final Book parse(File file, Map<String, Object> arguments) throws IOException, JemException {
         if (!file.exists()) {
-            throw new FileNotFoundException("No such file or directory: " + file);
+            throw new FileNotFoundException(file.getPath());
         }
         CF config = fetchConfig(arguments);
-        IN input = openInput(file, config);
+        IN input = openFile(file, config);
         if (input == null) {
-            throw new AssertionError("Implementation of \"IN openInput(File file, CF config)\" must return valid input");
+            throw new AssertionError("Implementation of \"IN openFile(File file, CF config)\" " +
+                    "must return valid input");
         }
         Book book;
         try {
-            validateInput(input, config);
+            validateFile(input, config);
             source = file;
             book = parse(input, config);
-        } catch (IOException | JemException | RuntimeException ex) {
+            if (book == null) {
+                throw new AssertionError("Implementation of \"Book parse(IN input, CF config)\"" +
+                        " must return valid book");
+            }
+        } catch (IOException | JemException | RuntimeException | AssertionError ex) {
             input.close();
             throw ex;
-        }
-        if (book == null) {
-            throw new AssertionError("Implementation of \"Book parse(IN input, CF config)\" must return valid book");
         }
         book.registerCleanup(new SourceCleaner(input));
         return book;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2016 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -32,7 +32,7 @@ public final class Jem {
     /**
      * Version message.
      */
-    public static final String VERSION = "2.3";
+    public static final String VERSION = "2.4";
 
     /**
      * Vendor message.
@@ -51,7 +51,7 @@ public final class Jem {
      * @return string represent the format
      */
     public static String formatByExtension(String path) {
-        return BookHelper.nameOfExtension(IOUtils.getExtension(path));
+        return BookHelper.nameOfExtension(IOUtils.getExtension(path).toLowerCase());
     }
 
     public static Parser getParser(String format) throws UnsupportedFormatException {
@@ -141,6 +141,7 @@ public final class Jem {
      * @return the new book
      * @throws NullPointerException if the chapter is <tt>null</tt>
      */
+    @Deprecated
     public static Book toBook(Chapter chapter) {
         if (chapter == null) {
             throw new NullPointerException();
@@ -228,16 +229,16 @@ public final class Jem {
      * @return the first matched chapter or <tt>null</tt> if no matched found
      */
     public static Chapter find(Chapter chapter, Filter filter, int from, boolean recursion) {
-        Chapter c;
+        Chapter ch;
         for (int ix = from; ix < chapter.size(); ++ix) {
-            c = chapter.chapterAt(ix);
-            if (filter.accept(c)) {
-                return c;
+            ch = chapter.chapterAt(ix);
+            if (filter.accept(ch)) {
+                return ch;
             }
-            if (c.isSection() && recursion) {
-                c = find(c, filter, 0, true);
-                if (c != null) {
-                    return c;
+            if (ch.isSection() && recursion) {
+                ch = find(ch, filter, 0, true);
+                if (ch != null) {
+                    return ch;
                 }
             }
         }
@@ -254,8 +255,8 @@ public final class Jem {
      * @param recursion <tt>true</tt> to find sub-chapter(s) of <tt>chapter</tt>
      * @return the number of found chapter(s)
      */
-    public static int select(Chapter chapter, Filter filter, List<Chapter> result,
-                             int limit, boolean recursion) {
+    public static int select(Chapter chapter, Filter filter, List<Chapter> result, int limit,
+                             boolean recursion) {
         int count = 0;
         for (Chapter c : chapter) {
             if (filter.accept(c)) {
@@ -290,7 +291,7 @@ public final class Jem {
         return new String[]{FILE, TEXT, STRING, INTEGER, REAL, LOCALE, DATETIME, BOOLEAN};
     }
 
-    public static final HashMap<Class<?>, String> variantTypes = new HashMap<>();
+    private static final HashMap<Class<?>, String> variantTypes = new HashMap<>();
 
     static {
         variantTypes.put(Character.class, STRING);
@@ -304,6 +305,10 @@ public final class Jem {
         variantTypes.put(Boolean.class, BOOLEAN);
         variantTypes.put(Float.class, REAL);
         variantTypes.put(Double.class, REAL);
+    }
+
+    public static void mapVariantType(Class<?> clazz, String type) {
+        variantTypes.put(clazz, type);
     }
 
     /**
@@ -331,7 +336,7 @@ public final class Jem {
         }
     }
 
-    public static final HashMap<String, String> attributeTypes = new HashMap<>();
+    private static final HashMap<String, String> attributeTypes = new HashMap<>();
 
     static {
         attributeTypes.put(Attributes.COVER, FILE);
@@ -339,6 +344,10 @@ public final class Jem {
         attributeTypes.put(Attributes.WORDS, INTEGER);
         attributeTypes.put(Attributes.DATE, DATETIME);
         attributeTypes.put(Attributes.LANGUAGE, LOCALE);
+    }
+
+    public static void mapAttributeType(String name, String type) {
+        attributeTypes.put(name, type);
     }
 
     /**

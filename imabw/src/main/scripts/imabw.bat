@@ -25,6 +25,6 @@ for %%i in ("%IMABW_HOME%"\lib\ext\*.jar) do set EXTENSION_JAR=!EXTENSION_JAR!;%
 set EXTENSION_JAR=%EXTENSION_JAR:~1%
 
 :: -- Run Jem Imabw
-start javaw -Xbootclasspath/a:%EXTENSION_JAR% -jar "%IMABW_HOME%\lib\imabw-2.2.jar" %*
+start javaw -Xbootclasspath/a:%EXTENSION_JAR% -jar "%IMABW_HOME%\lib\imabw-2.2.1.jar" %*
 
 endlocal

@@ -18,56 +18,50 @@
 
 package pw.phylame.jem.formats.txt;
 
-import java.util.Map;
-
 import pw.phylame.jem.formats.util.text.TextConfig;
-import pw.phylame.jem.formats.util.config.ConfigUtils;
-import pw.phylame.jem.formats.util.config.CommonConfig;
-import pw.phylame.jem.formats.util.config.InvalidConfigException;
+import pw.phylame.jem.formats.util.config.ConfigKey;
+import pw.phylame.jem.formats.util.config.AbstractConfig;
 
 /**
  * Config for making TXT book.
  */
-public class TxtMakeConfig implements CommonConfig {
-    public static final String CONFIG_SELF = "txt.make.config"; // RenderConfig
-    public static final String TEXT_ENCODING = "txt.make.encoding"; // String
-    public static final String HEADER_TEXT = "txt.make.header";    // String
-    public static final String ADDITION_LINE = "txt.make.additionLine"; // String
-    public static final String FOOTER_TEXT = "txt.make.footer";    // String
+public class TxtMakeConfig extends AbstractConfig {
+    public static final String CONFIG_SELF = "txt.make.config";
+    public static final String TEXT_CONFIG = "txt.make.textConfig";
+    public static final String ENCODING = "txt.make.encoding";
+    public static final String HEADER = "txt.make.header";
+    public static final String ADDITION_LINE = "txt.make.additionLine";
+    public static final String FOOTER = "txt.make.footer";
 
     /**
      * Render config for rendering book text.
      *
      * @see TextConfig
      */
+    @ConfigKey(TEXT_CONFIG)
     public TextConfig textConfig = new TextConfig();
 
     /**
      * Encoding for converting book text.
      */
+    @ConfigKey(ENCODING)
     public String encoding = TXT.defaultEncoding;
 
     /**
      * Text appended to header of TXT file.
      */
-    public String headerText = null;
+    @ConfigKey(HEADER)
+    public String header = null;
 
     /**
      * Add addition end line separator for each chapter
      */
+    @ConfigKey(ADDITION_LINE)
     public boolean additionLine = true;
 
     /**
      * Text appended to footer of TXT file.
      */
-    public String footerText = null;
-
-    @Override
-    public void fetch(Map<String, Object> kw) throws InvalidConfigException {
-        textConfig = TextConfig.fetchInstance(kw);
-        encoding = ConfigUtils.fetchString(kw, TEXT_ENCODING, encoding);
-        headerText = ConfigUtils.fetchString(kw, HEADER_TEXT, headerText);
-        additionLine = ConfigUtils.fetchBoolean(kw, ADDITION_LINE, additionLine);
-        footerText = ConfigUtils.fetchString(kw, FOOTER_TEXT, footerText);
-    }
+    @ConfigKey(FOOTER)
+    public String footer = null;
 }

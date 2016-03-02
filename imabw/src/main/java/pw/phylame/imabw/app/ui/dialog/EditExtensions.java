@@ -84,14 +84,14 @@ class EditExtensions extends CommonDialog {
     }
 
     private JPanel createButtonPane() {
-        JButton btnReset = new JButton(new IAction("d.extensions.buttonReset") {
+        JButton btnReset = new JButton(new IAction("extensions.buttonReset") {
             @Override
             public void actionPerformed(ActionEvent e) {
                 reset();
             }
         });
 
-        btnSave = new JButton(new IAction("d.extensions.buttonSave") {
+        btnSave = new JButton(new IAction("extensions.buttonSave") {
             @Override
             public void actionPerformed(ActionEvent e) {
                 onOk();
@@ -99,7 +99,7 @@ class EditExtensions extends CommonDialog {
         });
         btnSave.setEnabled(false);
 
-        defaultButton = createCloseButton("d.extensions.buttonCancel");
+        defaultButton = createCloseButton("extensions.buttonCancel");
         return createControlsPane(SwingConstants.RIGHT, btnReset, btnSave, defaultButton);
     }
 
@@ -126,7 +126,7 @@ class EditExtensions extends CommonDialog {
         if (modified) {
             int option = localizedAsking(this, getTitle(),
                     MessageDialog.IconStyle.Question,
-                    "d.extensions.askQuit", book);
+                    "extensions.askQuit", book);
             switch (option) {
                 case OPTION_OK:
                     onOk();
@@ -152,13 +152,13 @@ class EditExtensions extends CommonDialog {
         }
 //        app.getForm().getContentsTree().updateChapterAttributes(chapter, attributes, true,
 //                app.getText("undo.message.editAttributes"));
-        app.localizedMessage("d.extensions.result", book);
+        app.localizedMessage("extensions.result", book);
     }
 
     private class ExtensionsTable extends ItemTable {
         private ExtensionsTable() {
             super(3);
-            createComponents(null, app.getText("d.extensions.comment"));
+            createComponents(null, app.getText("extensions.comment"));
         }
 
         @Override
@@ -178,7 +178,7 @@ class EditExtensions extends CommonDialog {
 
         @Override
         protected String getModifyTitle(String key) {
-            return app.getText("d.extensions.modify.title", nameOfKey(key));
+            return app.getText("extensions.modify.title", nameOfKey(key));
         }
 
         @Override

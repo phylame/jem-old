@@ -18,36 +18,28 @@
 
 package pw.phylame.jem.formats.util.xml;
 
-import java.util.Map;
-
-import pw.phylame.jem.formats.util.config.ConfigUtils;
-import pw.phylame.jem.formats.util.config.CommonConfig;
-import pw.phylame.jem.formats.util.config.InvalidConfigException;
+import pw.phylame.jem.formats.util.config.ConfigKey;
+import pw.phylame.jem.formats.util.config.AbstractConfig;
 
 /**
  * Config for rendering XML.
  */
-public class XmlConfig implements CommonConfig {
+public class XmlConfig extends AbstractConfig {
     public static final String CONFIG_SELF = "xml.render.config";
     public static final String ENCODING = "xml.render.encoding";
     public static final String STANDALONE = "xml.render.standalone";
     public static final String LINE_SEPARATOR = "xml.render.lineSeparator";
     public static final String INDENT_STRING = "xml.render.indentString";
 
+    @ConfigKey(ENCODING)
     public String encoding = "UTF-8";
+
+    @ConfigKey(STANDALONE)
     public boolean standalone = true;
+
+    @ConfigKey(LINE_SEPARATOR)
     public String lineSeparator = "\n";
+
+    @ConfigKey(INDENT_STRING)
     public String indentString = "\t";
-
-    public static XmlConfig fetchInstance(Map<String, Object> kw) throws InvalidConfigException {
-        return ConfigUtils.fetchConfig(kw, CONFIG_SELF, XmlConfig.class);
-    }
-
-    @Override
-    public void fetch(Map<String, Object> kw) throws InvalidConfigException {
-        encoding = ConfigUtils.fetchString(kw, ENCODING, encoding);
-        standalone = ConfigUtils.fetchBoolean(kw, STANDALONE, standalone);
-        lineSeparator = ConfigUtils.fetchString(kw, LINE_SEPARATOR, lineSeparator);
-        indentString = ConfigUtils.fetchString(kw, INDENT_STRING, indentString);
-    }
 }

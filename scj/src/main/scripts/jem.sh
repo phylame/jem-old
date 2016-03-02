@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # ------------------------------------------------------------------------------
 # Copyright 2014-2015 Peng Wan <phylame@163.com>
 #
@@ -49,4 +49,4 @@ if [ -d "$EXT_DIR" ]; then
 fi
 
 # Run Jem SCI
-java -Xbootclasspath/a:"$EXT_LIB" -jar "$SCJ_HOME"/lib/scj-1.3.jar "$@"
+java -Xbootclasspath/a:"$EXT_LIB" -jar "$SCJ_HOME"/lib/scj-1.3.1.jar "$@"

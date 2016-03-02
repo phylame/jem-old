@@ -108,7 +108,7 @@ public final class DialogFactory {
         dialog.setMessage(message);
 
         if (dnaa != null && dnaa.length > 0) {
-            Action action = new IQuietAction("dialog.common.checkNotAskAgain");
+            Action action = new IQuietAction("d.common.checkNotAskAgain");
             JCheckBox checkBox = new JCheckBox(action);
             checkBox.setOpaque(false);
             dialog.setOptions(-1,
@@ -197,10 +197,10 @@ public final class DialogFactory {
                                  MessageDialog.IconStyle icon, Object message) {
         int option = showOptions(parent, title, message, icon,
                 -1, 2,
-                "dialog.asking.discard",
+                "d.asking.discard",
                 Box.createHorizontalGlue(),
-                "dialog.asking.ok",
-                "dialog.asking.cancel");
+                "d.asking.ok",
+                "d.asking.cancel");
         switch (option) {
             case 0:
                 return OPTION_DISCARD;
@@ -350,7 +350,7 @@ public final class DialogFactory {
         prepareFileChooser(title, JFileChooser.FILES_ONLY, multiple,
                 initFile, initDir, acceptAll, filters, initFilter);
 
-        setApproveButtonName("dialog.openFile.approveButton");
+        setApproveButtonName("d.openFile.approveButton");
 
         if (fileChooser.showOpenDialog(parent) != JFileChooser.APPROVE_OPTION) {
             return null;
@@ -387,7 +387,7 @@ public final class DialogFactory {
         prepareFileChooser(title, JFileChooser.FILES_ONLY, false,
                 initFile, initDir, acceptAll, filters, initFilter);
 
-        setApproveButtonName("dialog.saveFile.approveButton");
+        setApproveButtonName("d.saveFile.approveButton");
 
         while (fileChooser.showSaveDialog(parent) == JFileChooser.APPROVE_OPTION) {
             File file = fileWithExtension();
@@ -395,7 +395,7 @@ public final class DialogFactory {
             if (file.exists()) {
                 if (askOverwrite) {
                     if (!showConfirm(parent, title,
-                            app.getText("dialog.saveFile.askOverwrite", file.getPath()))) {
+                            app.getText("d.saveFile.askOverwrite", file.getPath()))) {
                         continue;
                     }
                 }
@@ -471,15 +471,15 @@ public final class DialogFactory {
 
         Date date = new Date(file.lastModified());
         String[] strings = {
-                app.getText("dialog.fileDetails.name"), file.getName(),
-                app.getText("dialog.fileDetails.path"), file.getAbsoluteFile().getParent(),
-                app.getText("dialog.fileDetails.size"), worker.formatFileSize(file.length()),
-                app.getText("dialog.fileDetails.date"), TextUtils.formatDate(date, "yyyy-M-d H:m:s"),
-                app.getText("dialog.fileDetails.format"), IOUtils.getExtension(file.getPath()).toUpperCase(),
+                app.getText("d.fileDetails.name"), file.getName(),
+                app.getText("d.fileDetails.path"), file.getAbsoluteFile().getParent(),
+                app.getText("d.fileDetails.size"), worker.formatFileSize(file.length()),
+                app.getText("d.fileDetails.date"), TextUtils.formatDate(date, "yyyy-M-d H:m:s"),
+                app.getText("d.fileDetails.format"), IOUtils.getExtension(file.getPath()).toUpperCase(),
         };
         String title;
         if (book != null) {
-            title = app.getText("dialog.fileDetails.tipLabel", book.getTitle());
+            title = app.getText("d.fileDetails.tipLabel", book.getTitle());
             String[] infos = BookUtils.getFileInfo(book);
             if (infos != null) {
                 String[] tmp = new String[strings.length + infos.length];
@@ -488,7 +488,7 @@ public final class DialogFactory {
                 strings = tmp;
             }
         } else {
-            title = app.getText("dialog.fileDetails.title");
+            title = app.getText("d.fileDetails.title");
         }
 
         showText(parent, title, displayableStringMap(strings, null));
@@ -504,7 +504,7 @@ public final class DialogFactory {
 
     public static void editAttributes(Component parent, Chapter chapter) {
         ChapterAttributes dialog = createDialog(parent,
-                app.getText("d.attributes.title", chapter.getTitle()),
+                app.getText("attributes.title", chapter.getTitle()),
                 true, ChapterAttributes.class);
         dialog.setChapter(chapter);
         dialog.makeShow(true);
@@ -512,14 +512,14 @@ public final class DialogFactory {
 
     public static void editExtensions(Component parent, Book book) {
         EditExtensions dialog = createDialog(parent,
-                app.getText("d.extensions.title", book.getTitle()),
+                app.getText("extensions.title", book.getTitle()),
                 true, EditExtensions.class);
         dialog.setBook(book);
         dialog.makeShow(true);
     }
 
     public static void featureDeveloping(Component parent) {
-        localizedInformation(parent, app.getText("app.name"), "dialog.feature.developing");
+        localizedInformation(parent, app.getText("app.name"), "d.feature.developing");
     }
 
     static WaitingDialog createWaitingDialog(Component parent, String title,

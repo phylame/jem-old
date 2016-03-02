@@ -73,8 +73,8 @@ public class EditorTab implements Chapter.Cleanable {
         cache = File.createTempFile("imabw_chapter_", ".tmp");
         chapter.registerCleanup(this);
 
-        FileObject fb = FileFactory.fromFile(cache, null);
-        chapter.setContent(TextFactory.fromFile(fb, CACHE_ENCODING));
+        FileObject fb = FileFactory.forFile(cache, null);
+        chapter.setContent(TextFactory.forFile(fb, CACHE_ENCODING));
         fileCaches.put(chapter, cache);
     }
 

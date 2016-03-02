@@ -18,31 +18,31 @@
 
 package pw.phylame.jem.formats.common;
 
-import pw.phylame.jem.core.Book;
-import pw.phylame.jem.formats.util.MakerException;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.zip.ZipOutputStream;
 
+import pw.phylame.jem.core.Book;
+import pw.phylame.jem.formats.util.MakerException;
+
 /**
  * Common Jem writer for e-book archived with ZIP.
  */
-public abstract class ZipMaker<CF extends ZipMakerConfig> extends CommonMaker<CF> {
+public abstract class ZipMaker<CF extends ZipMakeConfig> extends CommonMaker<CF> {
     protected ZipMaker(String name, String configKey, Class<CF> configClass) {
         super(name, configKey, configClass);
     }
 
-    protected abstract void make(Book book, ZipOutputStream zipout, CF config) throws IOException, MakerException;
+    public abstract void make(Book book, ZipOutputStream zipout, CF config) throws IOException, MakerException;
 
     @Override
     public final void make(Book book, OutputStream output, CF config) throws IOException, MakerException {
-        ZipOutputStream zipout = new ZipOutputStream(output);
-        zipout.setMethod(config.zipMethod);
-        zipout.setLevel(config.zipLevel);
-        zipout.setComment(config.zipComment);
-        make(book, zipout, config);
-        zipout.flush();
-        zipout.close();
+        try (ZipOutputStream zipout = new ZipOutputStream(output)) {
+            zipout.setMethod(config.zipMethod);
+            zipout.setLevel(config.zipLevel);
+            zipout.setComment(config.zipComment);
+            make(book, zipout, config);
+            zipout.flush();
+        }
     }
 }

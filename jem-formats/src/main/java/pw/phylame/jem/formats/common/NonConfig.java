@@ -18,21 +18,13 @@
 
 package pw.phylame.jem.formats.common;
 
-import java.util.Map;
-
-import pw.phylame.jem.formats.util.config.CommonConfig;
-import pw.phylame.jem.formats.util.config.InvalidConfigException;
+import pw.phylame.jem.formats.util.config.AbstractConfig;
 
 /**
  * Placeholder for non configurable book worker,
  */
-public final class NonConfig implements CommonConfig {
+public final class NonConfig extends AbstractConfig {
     private NonConfig() {
         // cannot be instantiated
-    }
-
-    @Override
-    public final void fetch(Map<String, Object> kw) throws InvalidConfigException {
-        // nothinh
     }
 }

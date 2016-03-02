@@ -19,7 +19,9 @@
 package pw.phylame.scj.app;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Locale;
+import java.util.Properties;
 
 import pw.phylame.gaf.cli.*;
 import pw.phylame.gaf.core.Translator;
@@ -28,6 +30,11 @@ import pw.phylame.jem.core.BookHelper;
 import org.apache.commons.cli.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import pw.phylame.jem.formats.ucnovel.NovelConfig;
+import pw.phylame.jem.formats.ucnovel.NovelDbReader;
+import pw.phylame.jem.formats.ucnovel.NovelInfo;
+import pw.phylame.jem.formats.ucnovel.UCNovelParser;
+import pw.phylame.jem.formats.util.ParserException;
 
 public class SCI extends CApplication implements Constants {
     private static final Log LOG = LogFactory.getLog(SCI.class);
@@ -157,6 +164,13 @@ public class SCI extends CApplication implements Constants {
         addOption(option, defaultCommand);
 
         addOptionGroup(optionGroup);
+
+        // list uc novels
+        option = Option.builder(OPTION_LIST_NOVELS)
+                .longOpt(OPTION_LIST_NOVELS_LONG)
+                .desc(getText("help.ucnovels"))
+                .build();
+        addOption(option, new ListUCNovels());
     }
 
     @Override
@@ -335,6 +349,45 @@ public class SCI extends CApplication implements Constants {
         @Override
         protected boolean validateValue(String value) {
             return checkOutputFormat(value);
+        }
+    }
+
+    private class ListUCNovels implements CCommand {
+
+        @Override
+        public int perform(CApplication app) {
+            String[] inputs = app.getInputs();
+            if (inputs.length == 0) {
+                localizedError("error.input.empty");
+                return -1;
+            }
+            String readerPath = null;
+            Properties prop = (Properties) app.getContext().get(OPTION_PARSE_ARGUMENTS);
+            if (prop != null) {
+                readerPath = prop.getProperty(NovelConfig.READER_CONFIG);
+            }
+            try (NovelDbReader reader = readerPath != null
+                    ? UCNovelParser.loadDbReader(readerPath)
+                    : UCNovelParser.loadDbReader()) {
+                File file;
+                for (String input : inputs) {
+                    file = new File(input);
+                    if (file.isDirectory()) {
+                        file = new File(file, UCNovelParser.CATALOG_FILE_NAME);
+                    }
+                    reader.init(file.getPath());
+                    NovelInfo info;
+                    for (String novelId : reader.fetchNovels()) {
+                        info = reader.fetchInfo(novelId);
+                        System.out.println(app.getText("ucnovels.novelTemplate", novelId,
+                                info.name, info.author, info.expireTime, info.updateTime, info.table));
+                        System.out.println();
+                    }
+                }
+            } catch (IOException | ParserException e) {
+                app.localizedError(e, "ucnovels.error");
+            }
+            return 0;
         }
     }
 

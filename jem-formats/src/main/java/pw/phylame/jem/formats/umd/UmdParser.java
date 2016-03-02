@@ -18,6 +18,10 @@
 
 package pw.phylame.jem.formats.umd;
 
+import java.util.*;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Chapter;
 import pw.phylame.jem.util.FileFactory;
@@ -27,11 +31,7 @@ import pw.phylame.jem.formats.common.NonConfig;
 import pw.phylame.jem.formats.common.BinaryParser;
 import pw.phylame.jem.formats.util.ZLibUtils;
 import pw.phylame.jem.formats.util.ParserException;
-
-import java.io.IOException;
-import java.io.RandomAccessFile;
-
-import java.util.*;
+import pw.phylame.jem.formats.util.ExceptionFactory;
 
 /**
  * <tt>Parser</tt> implement for UMD book.
@@ -41,60 +41,41 @@ public class UmdParser extends BinaryParser<NonConfig> {
         super("umd", null, null);
     }
 
-    private class ParserData {
-        final RandomAccessFile file;
-        final Book book;
-        int umdType;
-
-        int year = 0, month = 0, day = 0;
-
-        int chapterCount;
-
-        long contentLength;
-        int coverFormat, imageFormat;
-
-        final ArrayList<TextBlock> blocks = new ArrayList<>();
-
-        ParserData(RandomAccessFile file) {
-            this.file = file;
-            book = new Book();
+    @Override
+    protected void validateFile(RandomAccessFile input, NonConfig config) throws IOException,
+            ParserException {
+        if (readUInt32(input) != UMD.MAGIC_NUMBER) {
+            throw ExceptionFactory.parserException("umd.parse.invalidMagic");
         }
     }
 
     @Override
-    protected void validateInput(RandomAccessFile input, NonConfig config) throws IOException, ParserException {
-        if (readUInt32(input) != UMD.FILE_MAGIC_NUMBER) {
-            throw parserException("umd.parse.invalidMagic");
-        }
+    public Book parse(RandomAccessFile input, NonConfig config) throws IOException, ParserException {
+        return parse(input);
     }
 
-    @Override
-    protected Book parse(RandomAccessFile input, NonConfig config) throws IOException, ParserException {
-        return parse0(input);
-    }
-
-    private Book parse0(RandomAccessFile file) throws IOException, ParserException {
-        ParserData pd = new ParserData(file);
+    public Book parse(RandomAccessFile file) throws IOException, ParserException {
+        InternalData data = new InternalData(file);
         int sep;
         while ((sep = file.read()) != -1) {
             switch (sep) {
                 case UMD.CHUNK_SEPARATOR:
-                    readChunk(pd);
+                    readChunk(data);
                     break;
                 case UMD.ADDITION_SEPARATOR:
-                    readContent(pd);
+                    readContent(data);
                     break;
                 default:
-                    throw parserException("umd.parse.badSeparator", sep);
+                    throw ExceptionFactory.parserException("umd.parse.badSeparator", sep);
             }
         }
-        pd.book.setExtension(UmdInfo.FILE_INFO, new UmdInfo(pd.umdType));
-        return pd.book;
+        data.book.setExtension(UmdInfo.FILE_INFO, new UmdInfo(data.umdType));
+        return data.book;
     }
 
-    private void readChunk(ParserData pd) throws IOException, ParserException {
-        RandomAccessFile file = pd.file;
-        Book book = pd.book;
+    private void readChunk(InternalData data) throws IOException, ParserException {
+        RandomAccessFile file = data.file;
+        Book book = data.book;
 
         int chunkId = readUInt16(file);
         file.skipBytes(1);
@@ -104,9 +85,9 @@ public class UmdParser extends BinaryParser<NonConfig> {
             case UMD.CDT_UMD_HEAD: {
                 int umdType = file.read();
                 if (umdType != UMD.TEXT && umdType != UMD.CARTOON) {
-                    throw parserException("umd.parse.invalidType", umdType);
+                    throw ExceptionFactory.parserException("umd.parse.invalidType", umdType);
                 }
-                pd.umdType = umdType;
+                data.umdType = umdType;
                 file.skipBytes(2);
             }
             break;
@@ -119,15 +100,15 @@ public class UmdParser extends BinaryParser<NonConfig> {
             }
             break;
             case UMD.CDT_YEAR: {
-                pd.year = Integer.parseInt(readString(file, length));
+                data.year = Integer.parseInt(readString(file, length));
             }
             break;
             case UMD.CDT_MONTH: {
-                pd.month = Integer.parseInt(readString(file, length)) - 1;
+                data.month = Integer.parseInt(readString(file, length)) - 1;
             }
             break;
             case UMD.CDT_DAY: {
-                pd.day = Integer.parseInt(readString(file, length));
+                data.day = Integer.parseInt(readString(file, length));
             }
             break;
             case UMD.CDT_GENRE: {
@@ -143,32 +124,32 @@ public class UmdParser extends BinaryParser<NonConfig> {
             }
             break;
             case UMD.CDT_CONTENT_LENGTH: {
-                pd.contentLength = readUInt32(file);
+                data.contentLength = readUInt32(file);
             }
             break;
             case UMD.CDT_CHAPTER_OFFSET: {
                 file.skipBytes(9);
-                readChapterOffsets(pd);
+                readChapterOffsets(data);
             }
             break;
             case UMD.CDT_CHAPTER_TITLE: {
                 file.skipBytes(9);
-                readChapterTitles(pd);
+                readChapterTitles(data);
             }
             break;
             case UMD.CDT_CONTENT_END: {
                 file.skipBytes(9);
-                readContentEnd(pd.file);
+                readContentEnd(data.file);
             }
             break;
             case 0x85:
             case 0x86: {
                 file.skipBytes(9);
-                skipBlock(pd.file);
+                skipBlock(data.file);
             }
             break;
             case UMD.CDT_IMAGE_FORMAT: {
-                pd.imageFormat = file.read();
+                data.imageFormat = file.read();
             }
             break;
             case UMD.CDT_CONTENT_ID: {
@@ -177,37 +158,37 @@ public class UmdParser extends BinaryParser<NonConfig> {
             break;
             case UMD.CDT_CDS_KEY: {
                 byte[] bytes = readBytes(file, length, "umd.parse.badCDSKey");
-                book.setAttribute("cds_key", FileFactory.fromBytes("cds_key", bytes,
+                book.setAttribute("cds_key", FileFactory.forBytes("cds_key", bytes,
                         FileObject.UNKNOWN_MIME));
             }
             break;
             case UMD.CDT_LICENSE_KEY: {
                 byte[] bytes = readBytes(file, length, "umd.parse.badLicenseKey");
-                book.setAttribute("license_key", FileFactory.fromBytes("license_key", bytes,
+                book.setAttribute("license_key", FileFactory.forBytes("license_key", bytes,
                         FileObject.UNKNOWN_MIME));
             }
             break;
             case UMD.CDT_COVER_IMAGE: {
-                pd.coverFormat = file.read();
+                data.coverFormat = file.read();
                 file.skipBytes(9);
-                readCoverImage(pd);
+                readCoverImage(data);
             }
             break;
             case UMD.CDT_PAGE_OFFSET: {
                 // ignore page information
                 file.skipBytes(11);
-                readPageOffsets(pd);
+                readPageOffsets(data);
             }
             break;
             case UMD.CDT_UMD_END: {
                 if (readUInt32(file) != file.getFilePointer()) {
-                    throw parserException("umd.parse.badEnd");
+                    throw ExceptionFactory.parserException("umd.parse.badEnd");
                 }
-                if (pd.year > 0 && pd.day > 0) {
+                if (data.year > 0 && data.day > 0) {
                     Calendar calendar = Calendar.getInstance();
-                    calendar.set(Calendar.YEAR, pd.year);
-                    calendar.set(Calendar.MONTH, pd.month);
-                    calendar.set(Calendar.DAY_OF_MONTH, pd.day);
+                    calendar.set(Calendar.YEAR, data.year);
+                    calendar.set(Calendar.MONTH, data.month);
+                    calendar.set(Calendar.DAY_OF_MONTH, data.day);
                     book.setDate(calendar.getTime());
                 }
             }
@@ -227,35 +208,35 @@ public class UmdParser extends BinaryParser<NonConfig> {
         file.skipBytes((int) length);
     }
 
-    private void readChapterOffsets(ParserData pd) throws IOException, ParserException {
-        RandomAccessFile file = pd.file;
-        Book book = pd.book;
+    private void readChapterOffsets(InternalData data) throws IOException, ParserException {
+        RandomAccessFile file = data.file;
+        Book book = data.book;
         long count = (readUInt32(file) - 9) >> 2; // div 4
-        pd.chapterCount = (int) count;
+        data.chapterCount = (int) count;
 
-        if (pd.chapterCount == 0) {     // no chapter
+        if (data.chapterCount == 0) {     // no chapter
             return;
         }
 
         long prevOffset = readUInt32(file);
-        UmdText umdText = new UmdText(file, prevOffset, 0, pd.blocks);
+        UmdText umdText = new UmdText(file, prevOffset, 0, data.blocks);
         book.append(new Chapter("", umdText));
         for (int ix = 1; ix < count; ++ix) {
             long offset = readUInt32(file);
             umdText.size = offset - prevOffset;
-            umdText = new UmdText(file, offset, 0, pd.blocks);
+            umdText = new UmdText(file, offset, 0, data.blocks);
             prevOffset = offset;
             book.append(new Chapter("", umdText));
         }
-        umdText.size = pd.contentLength - prevOffset;
+        umdText.size = data.contentLength - prevOffset;
     }
 
-    private void readChapterTitles(ParserData pd) throws IOException, ParserException {
-        RandomAccessFile file = pd.file;
+    private void readChapterTitles(InternalData data) throws IOException, ParserException {
+        RandomAccessFile file = data.file;
         file.skipBytes(4);
-        for (Chapter chapter : pd.book) {
+        for (Chapter ch : data.book) {
             String title = readString(file, file.read());
-            chapter.setTitle(title);
+            ch.setTitle(title);
         }
     }
 
@@ -264,39 +245,39 @@ public class UmdParser extends BinaryParser<NonConfig> {
         skipBlock(file);
     }
 
-    private void readCoverImage(ParserData pd) throws IOException, ParserException {
-        RandomAccessFile file = pd.file;
+    private void readCoverImage(InternalData data) throws IOException, ParserException {
+        RandomAccessFile file = data.file;
 
         long length = readUInt32(file) - 9;
-        String format = UMD.nameOfFormat(pd.coverFormat);
-        FileObject cover = FileFactory.fromBlock("cover." + format, file,
+        String format = UMD.nameOfFormat(data.coverFormat);
+        FileObject cover = FileFactory.forBlock("cover." + format, file,
                 file.getFilePointer(), length, "image/" + format);
-        pd.book.setCover(cover);
+        data.book.setCover(cover);
         file.skipBytes((int) length);
     }
 
-    private void readPageOffsets(ParserData pd) throws IOException, ParserException {
+    private void readPageOffsets(InternalData data) throws IOException, ParserException {
         // ignored
-        skipBlock(pd.file);
+        skipBlock(data.file);
     }
 
-    private void readContent(ParserData pd) throws IOException, ParserException {
-        RandomAccessFile file = pd.file;
-        Book book = pd.book;
+    private void readContent(InternalData data) throws IOException, ParserException {
+        RandomAccessFile file = data.file;
+        Book book = data.book;
 
         file.skipBytes(4);
         long offset, length = readUInt32(file) - 9;
         offset = file.getFilePointer();
 
-        switch (pd.umdType) {
+        switch (data.umdType) {
             case UMD.TEXT: {
-                pd.blocks.add(new TextBlock((int) file.getFilePointer(), (int) length));
+                data.blocks.add(new TextBlock((int) file.getFilePointer(), (int) length));
             }
             break;
             case UMD.CARTOON: {
-                String format = UMD.nameOfFormat(pd.imageFormat);
+                String format = UMD.nameOfFormat(data.imageFormat);
                 String name = String.format("img_%d.%s", book.size() + 1, format);
-                FileObject image = FileFactory.fromBlock(name, file, offset, length, "image/" + format);
+                FileObject image = FileFactory.forBlock(name, file, offset, length, "image/" + format);
                 Chapter chapter = new Chapter(String.valueOf(book.size() + 1));
                 chapter.setCover(image);
                 book.append(chapter);
@@ -310,22 +291,42 @@ public class UmdParser extends BinaryParser<NonConfig> {
 
     @Override
     protected void onReadingError() throws ParserException {
-        throw parserException("umd.parse.invalidFile", source);
+        throw ExceptionFactory.parserException("umd.parse.invalidFile", source);
     }
 
-    class TextBlock {
-        final int offset, length;
+    private class TextBlock {
+        private final int offset, length;
 
-        TextBlock(int offset, int length) {
+        private TextBlock(int offset, int length) {
             this.offset = offset;
             this.length = length;
+        }
+    }
+
+    private class InternalData {
+        private final RandomAccessFile file;
+        private final Book book;
+        private int umdType;
+
+        private int year = 0, month = 0, day = 0;
+
+        private int chapterCount;
+
+        private long contentLength;
+        private int coverFormat, imageFormat;
+
+        private final ArrayList<TextBlock> blocks = new ArrayList<>();
+
+        private InternalData(RandomAccessFile file) {
+            this.file = file;
+            book = new Book();
         }
     }
 
     private class UmdText extends AbstractText {
         private final RandomAccessFile file;
         private final long offset;
-        long size;
+        private long size;
         private final List<TextBlock> blocks;
 
         private UmdText(RandomAccessFile file, long offset, long size, List<TextBlock> blocks) {

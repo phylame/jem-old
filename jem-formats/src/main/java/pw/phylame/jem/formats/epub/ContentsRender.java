@@ -27,6 +27,7 @@ import pw.phylame.jem.formats.util.html.HtmlRender;
 import pw.phylame.jem.formats.util.html.StyleProvider;
 import pw.phylame.jem.util.FileObject;
 import pw.phylame.jem.util.IOUtils;
+import pw.phylame.jem.util.TextFactory;
 import pw.phylame.jem.util.TextObject;
 
 import java.io.IOException;
@@ -97,11 +98,11 @@ public class ContentsRender {
     private void newNaviItem(String id, String href, String title, String properties)
             throws IOException {
         newSpineItem(id, true, properties);
-        contentsListener.startNaviPoint(id, href, title);
+        contentsListener.startNavPoint(id, href, title);
     }
 
     private void endNaviItem() throws IOException {
-        contentsListener.endNaviPoint();
+        contentsListener.endNavPoint();
     }
 
     public String getCoverID() {
@@ -269,7 +270,7 @@ public class ContentsRender {
         String chapterTitle = chapter.getTitle();
 
         TextObject content = chapter.getContent();
-        if (content.getType().equals(TextObject.HTML)) {    // content already HTML
+        if (content != null && content.getType().equals(TextObject.HTML)) {    // content already HTML
             href = writeText(content, baseName, name);
             newNaviItem(baseName, href, chapterTitle, null);
             endNaviItem();
@@ -286,7 +287,7 @@ public class ContentsRender {
         zipout.putNextEntry(zipEntry);
         htmlRender.setOutput(zipout);
         htmlRender.renderChapter(chapterTitle, coverHref, chapterTitle,
-                chapter.getIntro(), content);
+                chapter.getIntro(), content != null ? content : TextFactory.emptyText());
         zipout.closeEntry();
 
         newResource(baseName, href, MT_XHTML);

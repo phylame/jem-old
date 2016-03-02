@@ -28,7 +28,7 @@ import pw.phylame.jem.formats.util.text.TextWriter;
 
 class JarRender implements TextWriter {
     private final ZipOutputStream zipout;
-    final List<JarMaker.MetaItem> items;
+    final List<JarMaker.NavItem> items;
 
     JarRender(ZipOutputStream zipout) {
         this.zipout = zipout;
@@ -59,6 +59,6 @@ class JarRender implements TextWriter {
     @Override
     public void endChapter() throws IOException {
         zipout.closeEntry();
-        items.add(new JarMaker.MetaItem(name, length + 2, title));
+        items.add(new JarMaker.NavItem(name, length + 2, title));
     }
 }

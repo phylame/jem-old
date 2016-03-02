@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2016 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -26,6 +26,7 @@ import pw.phylame.jem.util.JemException;
 
 /**
  * <tt>Maker</tt> used for making <tt>Book</tt> to book file.
+ * <p><strong>NOTE: </strong> the instance of <tt>Maker</tt> be reusable.
  */
 public interface Maker {
     /**

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2016 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -34,32 +34,32 @@ public class TextFactory {
     /**
      * Returns list of lines split from text content in this object.
      *
-     * @param str       the input string
+     * @param cs        the input string
      * @param skipEmpty <tt>true</tt> to skip empty line
      * @return list of lines, never <tt>null</tt>
-     * @throws NullPointerException if the <tt>str</tt> is <tt>null</tt>
+     * @throws NullPointerException if the <tt>cs</tt> is <tt>null</tt>
      */
-    public static List<String> splitLines(CharSequence str, boolean skipEmpty) {
-        if (str == null) {
-            throw new NullPointerException("str");
+    public static List<String> splitLines(CharSequence cs, boolean skipEmpty) {
+        if (cs == null) {
+            throw new NullPointerException("cs");
         }
         List<String> lines = new LinkedList<>();
-        int ix, begin = 0, length = str.length();
+        int ix, begin = 0, length = cs.length();
         CharSequence sub;
         for (ix = 0; ix < length; ) {
-            char ch = str.charAt(ix);
+            char ch = cs.charAt(ix);
             if ('\n' == ch) {   // \n
-                sub = str.subSequence(begin, ix);
+                sub = cs.subSequence(begin, ix);
                 if (sub.length() > 0 || !skipEmpty) {
                     lines.add(sub.toString());
                 }
                 begin = ++ix;
             } else if ('\r' == ch) {
-                sub = str.subSequence(begin, ix);
+                sub = cs.subSequence(begin, ix);
                 if (sub.length() > 0 || !skipEmpty) {
                     lines.add(sub.toString());
                 }
-                if (ix + 1 < length && '\n' == str.charAt(ix + 1)) {   // \r\n
+                if (ix + 1 < length && '\n' == cs.charAt(ix + 1)) {   // \r\n
                     begin = ix += 2;
                 } else {    // \r
                     begin = ++ix;
@@ -69,7 +69,7 @@ public class TextFactory {
             }
         }
         if (ix >= begin) {
-            sub = str.subSequence(begin, str.length());
+            sub = cs.subSequence(begin, cs.length());
             if (sub.length() > 0 || !skipEmpty) {
                 lines.add(sub.toString());
             }
@@ -79,7 +79,7 @@ public class TextFactory {
 
     private static class RawText extends AbstractText {
         static {
-            Jem.variantTypes.put(RawText.class, Jem.TEXT);
+            Jem.mapVariantType(RawText.class, Jem.TEXT);
         }
 
         private final CharSequence text;
@@ -100,7 +100,7 @@ public class TextFactory {
 
     private static class FileText extends AbstractText {
         static {
-            Jem.variantTypes.put(FileText.class, Jem.TEXT);
+            Jem.mapVariantType(FileText.class, Jem.TEXT);
         }
 
         private final FileObject file;
@@ -140,30 +140,30 @@ public class TextFactory {
 
     private static TextObject EMPTY_TEXT;
 
-    public static TextObject emptyText() {
+    public static synchronized TextObject emptyText() {
         if (EMPTY_TEXT == null) {
             EMPTY_TEXT = new RawText("", TextObject.PLAIN);
         }
         return EMPTY_TEXT;
     }
 
-    public static TextObject fromString(CharSequence str) {
-        return fromString(str, TextObject.PLAIN);
+    public static TextObject forString(CharSequence str) {
+        return forString(str, TextObject.PLAIN);
     }
 
-    public static TextObject fromString(CharSequence str, String type) {
+    public static TextObject forString(CharSequence str, String type) {
         return new RawText(str, type);
     }
 
-    public static TextObject fromFile(FileObject file) {
-        return fromFile(file, null, TextObject.PLAIN);
+    public static TextObject forFile(FileObject file) {
+        return forFile(file, null, TextObject.PLAIN);
     }
 
-    public static TextObject fromFile(FileObject file, String encoding) {
-        return fromFile(file, encoding, TextObject.PLAIN);
+    public static TextObject forFile(FileObject file, String encoding) {
+        return forFile(file, encoding, TextObject.PLAIN);
     }
 
-    public static TextObject fromFile(FileObject file, String encoding, String type) {
+    public static TextObject forFile(FileObject file, String encoding, String type) {
         return new FileText(file, encoding, type);
     }
 }

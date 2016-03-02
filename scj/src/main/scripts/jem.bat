@@ -25,6 +25,6 @@ for %%i in ("%SCJ_HOME%"\lib\ext\*.jar) do set EXTENSION_JAR=!EXTENSION_JAR!;%%i
 set EXTENSION_JAR=%EXTENSION_JAR:~1%
 
 :: -- Run Jem SCI
-java -Xbootclasspath/a:%EXTENSION_JAR% -jar "%SCJ_HOME%\lib\scj-1.3.jar" %*
+java -Xbootclasspath/a:%EXTENSION_JAR% -jar "%SCJ_HOME%\lib\scj-1.3.1.jar" %*
 
 endlocal

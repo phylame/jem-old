@@ -18,41 +18,33 @@
 
 package pw.phylame.jem.formats.pmab;
 
-import java.util.Map;
-
-import pw.phylame.jem.formats.util.config.ConfigUtils;
-import pw.phylame.jem.formats.util.config.CommonConfig;
-import pw.phylame.jem.formats.util.config.InvalidConfigException;
+import pw.phylame.jem.formats.common.ZipParseConfig;
+import pw.phylame.jem.formats.util.config.ConfigKey;
 
 /**
  * Config for parse PMAB file.
  */
-public class PmabParseConfig implements CommonConfig {
-    public static final String CONFIG_SELF = "pmab.parse.config";  // PmabParseConfig
-    public static final String TEXT_ENCODING = "pmab.parse.textEncoding"; // String
-    public static final String USE_CHAPTER_ENCODING = "pmab.parse.useChapterEncoding";   // boolean
-    public static final String DEFAULT_DATE_FORMAT = "pmab.parse.dateFormat"; // String
+public class PmabParseConfig extends ZipParseConfig {
+    public static final String CONFIG_SELF = "pmab.parse.config";
+    public static final String TEXT_ENCODING = "pmab.parse.textEncoding";
+    public static final String USE_CHAPTER_ENCODING = "pmab.parse.useChapterEncoding";
+    public static final String DATE_FORMAT = "pmab.parse.dateFormat";
 
     /**
      * default encoding for chapter and intro text
      */
+    @ConfigKey(TEXT_ENCODING)
     public String textEncoding = PMAB.defaultEncoding;
 
     /**
      * PMAB 2: when intro encoding is not existed, use chapter encoding
      */
+    @ConfigKey(USE_CHAPTER_ENCODING)
     public boolean useChapterEncoding = true;
 
     /**
      * default date format if the format in PMAB is unknown
      **/
+    @ConfigKey(DATE_FORMAT)
     public String dateFormat = "yyyy-M-d H:m:S";
-
-    @Override
-    public void fetch(Map<String, Object> kw) throws InvalidConfigException {
-        textEncoding = ConfigUtils.fetchString(kw, TEXT_ENCODING, textEncoding);
-        useChapterEncoding = ConfigUtils.fetchBoolean(kw, USE_CHAPTER_ENCODING,
-                useChapterEncoding);
-        dateFormat = ConfigUtils.fetchString(kw, DEFAULT_DATE_FORMAT, dateFormat);
-    }
 }

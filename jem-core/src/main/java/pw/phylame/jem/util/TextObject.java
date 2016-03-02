@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2016 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -20,20 +20,18 @@ package pw.phylame.jem.util;
 
 import java.util.List;
 import java.io.Writer;
-import java.io.IOException;
 
 /**
  * Provides reused unicode text source.
  */
 public interface TextObject {
-
     /**
      * Type for plain text.
      */
     String PLAIN = "plain";
 
     /**
-     * Type for HTML text.
+     * Type for html text.
      */
     String HTML = "html";
 
@@ -47,7 +45,7 @@ public interface TextObject {
     /**
      * Returns text content of this object.
      *
-     * @return the string of text, never <tt>null</tt>
+     * @return the string of text, never be <tt>null</tt>
      * @throws Exception if occur error when fetching text
      */
     String getText() throws Exception;
@@ -56,7 +54,7 @@ public interface TextObject {
      * Returns list of lines split from text content in this object.
      *
      * @param skipEmpty <tt>true</tt> to skip empty line
-     * @return list of lines, never <tt>null</tt>
+     * @return list of lines, never be <tt>null</tt>
      * @throws Exception if occur error when fetching text
      */
     List<String> getLines(boolean skipEmpty) throws Exception;
@@ -66,7 +64,7 @@ public interface TextObject {
      *
      * @param writer output <tt>Writer</tt> to store text content
      * @return number of written characters
-     * @throws Exception if occur error when fetching text or writing to writer
+     * @throws Exception if occur error when fetching text or writing content
      */
     int writeTo(Writer writer) throws Exception;
 }

@@ -39,6 +39,7 @@
     <modules>
         <module>jem-core</module>
         <module>jem-formats</module>
+	<module>ucnovel-jdbc-reader</module>
     </modules>
 
     <build>

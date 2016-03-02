@@ -28,11 +28,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="imabw" />
+        <module name="plugins" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="imabw" target="1.8" />
+      <module name="plugins" target="1.8" />
       <module name="resources" target="1.8" />
     </bytecodeTargetLevel>
   </component>

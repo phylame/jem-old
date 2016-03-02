@@ -18,23 +18,22 @@
 
 package pw.phylame.jem.formats.umd;
 
-import pw.phylame.jem.core.Chapter;
+import java.io.*;
+import java.util.List;
+import java.util.LinkedList;
+import java.util.Calendar;
+
 import pw.phylame.jem.core.Book;
+import pw.phylame.jem.core.Chapter;
+import pw.phylame.jem.formats.util.*;
+import pw.phylame.jem.util.IOUtils;
+import pw.phylame.jem.util.FileObject;
 import pw.phylame.jem.formats.common.CommonMaker;
 import pw.phylame.jem.formats.util.text.TextConfig;
 import pw.phylame.jem.formats.util.text.TextRender;
 import pw.phylame.jem.formats.util.text.TextUtils;
-import pw.phylame.jem.util.FileObject;
-
-import pw.phylame.jem.formats.util.*;
-import pw.phylame.jem.util.IOUtils;
 
 import static pw.phylame.jem.formats.util.ByteUtils.littleRender;
-
-import java.io.*;
-import java.util.LinkedList;
-import java.util.Calendar;
-import java.util.List;
 
 /**
  * <tt>Maker</tt> implement for UMD book.
@@ -49,8 +48,8 @@ public class UmdMaker extends CommonMaker<UmdMakeConfig> {
     }
 
     @Override
-    public void make(Book book, OutputStream output, UmdMakeConfig config)
-            throws IOException, MakerException {
+    public void make(Book book, OutputStream output, UmdMakeConfig config) throws IOException,
+            MakerException {
         if (config == null) {
             config = new UmdMakeConfig();
         }
@@ -58,7 +57,7 @@ public class UmdMaker extends CommonMaker<UmdMakeConfig> {
         this.book = book;
 
         writtenBytes = 0L;
-        output.write(littleRender.putUInt32(UMD.FILE_MAGIC_NUMBER));
+        output.write(littleRender.putUInt32(UMD.MAGIC_NUMBER));
         switch (config.umdType) {
             case UMD.TEXT:
                 makeText(config.textConfig);
@@ -70,7 +69,7 @@ public class UmdMaker extends CommonMaker<UmdMakeConfig> {
                 makeComic();
                 break;
             default:
-                throw makerException("umd.make.invalidType", config.umdType);
+                throw ExceptionFactory.makerException("umd.make.invalidType", config.umdType);
         }
     }
 
@@ -143,7 +142,7 @@ public class UmdMaker extends CommonMaker<UmdMakeConfig> {
     }
 
     private void makeComic() throws MakerException {
-        throw makerException("umd.make.unsupportedType", UMD.COMIC);
+        throw ExceptionFactory.makerException("umd.make.unsupportedType", UMD.COMIC);
     }
 
     private void writeChunk(int id, boolean hasAddition, byte[] data) throws IOException {
@@ -333,8 +332,8 @@ public class UmdMaker extends CommonMaker<UmdMakeConfig> {
         writeChunk(UMD.CDT_UMD_END, false, littleRender.putUInt32(length));
     }
 
-    private void writeText(BufferedRandomAccessFile file, long contentLength,
-                           LinkedList<Long> blockChecks) throws IOException {
+    private void writeText(BufferedRandomAccessFile file, long contentLength, LinkedList<Long> blockChecks)
+            throws IOException {
         int count = (int) (contentLength >> 15);  // div 0x8000
         count += ((contentLength & 0x7FFF) > 0) ? 1 : 0;    // mod 0x8000 > 0
         int randValA = NumberUtils.randInteger(0, count);
@@ -364,8 +363,8 @@ public class UmdMaker extends CommonMaker<UmdMakeConfig> {
         if (cover != null) {
             images.add(cover);
         }
-        for (Chapter sub : chapter) {
-            findImages(sub, images);
+        for (Chapter ch : chapter) {
+            findImages(ch, images);
         }
     }
 

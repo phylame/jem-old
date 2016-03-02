@@ -20,21 +20,21 @@ package pw.phylame.jem.formats.pmab;
 
 import java.util.Map;
 
-import pw.phylame.jem.formats.common.ZipMakerConfig;
+import pw.phylame.jem.formats.common.ZipMakeConfig;
+import pw.phylame.jem.formats.util.config.ConfigKey;
 import pw.phylame.jem.formats.util.xml.XmlConfig;
-import pw.phylame.jem.formats.util.config.ConfigUtils;
-import pw.phylame.jem.formats.util.config.InvalidConfigException;
 
 /**
  * Config for making PMAB book.
  */
-public class PmabMakeConfig extends ZipMakerConfig {
+public class PmabMakeConfig extends ZipMakeConfig {
     public static final String CONFIG_SELF = "pmab.make.config";
 
     public static final String VERSION = "pmab.make.version";
     public static final String TEXT_DIR = "pmab.make.textDir";
     public static final String IMAGE_DIR = "pmab.make.imageDir";
     public static final String EXTRA_DIR = "pmab.make.extraDir";
+    public static final String XML_CONFIG = "pmab.make.xmlConfig";
     public static final String TEXT_ENCODING = "pmab.make.encoding";
     public static final String DATE_FORMAT = "pmab.make.dateFormat";
     public static final String META_INFO = "pmab.make.metaInfo";
@@ -42,60 +42,54 @@ public class PmabMakeConfig extends ZipMakerConfig {
     /**
      * Output PMAB version
      */
+    @ConfigKey(VERSION)
     public String version = "3.0";
 
     /**
      * Directory in PMAB for storing text.
      */
+    @ConfigKey(TEXT_DIR)
     public String textDir = "text";
 
     /**
      * Directory in PMAB for storing images.
      */
+    @ConfigKey(IMAGE_DIR)
     public String imageDir = "images";
 
     /**
      * Directory in PMAB for storing extra file(s).
      */
+    @ConfigKey(EXTRA_DIR)
     public String extraDir = "extras";
 
     /**
      * XML render config.
      */
+    @ConfigKey(XML_CONFIG)
     public XmlConfig xmlConfig = new XmlConfig();
 
     /**
      * Encoding for converting all text in PMAB.
      */
+    @ConfigKey(TEXT_ENCODING)
     public String textEncoding = PMAB.defaultEncoding;
 
     /**
      * Format for storing <tt>Date</tt> value.
      */
+    @ConfigKey(DATE_FORMAT)
     public String dateFormat = "yyyy-M-d";
 
     /**
      * Addition information to PMAB archive.
      * <p><strong>NOTE:</strong> The key and value stored as String.
      */
+    @ConfigKey(META_INFO)
     public Map<Object, Object> metaInfo = null;
 
-    public PmabMakeConfig() {
-        xmlConfig.standalone = true;
-    }
-
     @Override
-    @SuppressWarnings("unchecked")
-    public void fetch(Map<String, Object> kw) throws InvalidConfigException {
-        super.fetch(kw);
-        xmlConfig = XmlConfig.fetchInstance(kw);
+    public void adjust() {
         xmlConfig.standalone = true;
-        version = ConfigUtils.fetchString(kw, VERSION, version);
-        textDir = ConfigUtils.fetchString(kw, TEXT_DIR, textDir);
-        imageDir = ConfigUtils.fetchString(kw, IMAGE_DIR, imageDir);
-        extraDir = ConfigUtils.fetchString(kw, EXTRA_DIR, extraDir);
-        textEncoding = ConfigUtils.fetchString(kw, TEXT_ENCODING, textEncoding);
-        dateFormat = ConfigUtils.fetchString(kw, DATE_FORMAT, dateFormat);
-        metaInfo = ConfigUtils.fetchObject(kw, META_INFO, null, Map.class);
     }
 }

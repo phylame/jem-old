@@ -26,14 +26,14 @@ import pw.phylame.gaf.ixin.IxinUtilities;
 public interface Constants {
     // meta data
     String NAME = "imabw";
-    String VERSION = "2.2";
+    String VERSION = "2.2.1";
     String DOCUMENT = "https://git.oschina.net/phylame/pw-books";
 
     String SETTINGS_HOME = "config/";
 
-    String RESOURCE_DIR = "pw-imabw/";
+    String RESOURCE_DIR = "pw/phylame/imabw/res/";
     String IMAGE_DIR = "gfx/";
-    String I18N_DIR = "pw/phylame/imabw/i18n/";
+    String I18N_DIR = "pw/phylame/imabw/res/i18n/";
     String I18N_NAME = I18N_DIR + "imabw";
 
 

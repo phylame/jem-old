@@ -73,7 +73,7 @@ class WaitingDialog extends CommonDialog {
         userPane.add(tipLabel);
         userPane.add(progressBar);
 
-        cancelButton = createCloseButton("dialog.waiting.buttonCancel");
+        cancelButton = createCloseButton("d.waiting.buttonCancel");
         cancelButton.setEnabled(cancelable);
         defaultButton = cancelButton;
         controlsPane = createControlsPane(SwingConstants.RIGHT, cancelButton);

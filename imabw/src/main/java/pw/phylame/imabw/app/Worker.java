@@ -321,7 +321,7 @@ public class Worker {
         Book book = new Book(name);
         BookUtils.addAttributes(book);
 
-        book.append(new Chapter(app.getText("dialog.newChapter.defaultTitle")));
+        book.append(new Chapter(app.getText("d.newChapter.defaultTitle")));
         return book;
     }
 
@@ -334,8 +334,8 @@ public class Worker {
      */
     public Chapter newChapter(Component parent, String title) {
         String name = DialogFactory.inputText(parent, title,
-                app.getText("dialog.newChapter.inputTip"),
-                app.getText("dialog.newChapter.defaultTitle"), false, false);
+                app.getText("d.newChapter.inputTip"),
+                app.getText("d.newChapter.defaultTitle"), false, false);
         if (name == null) {
             return null;
         }
@@ -345,7 +345,6 @@ public class Worker {
     public void storeToFile(FileObject fb, File file) throws IOException {
         try (InputStream in = fb.openStream(); FileOutputStream out = new FileOutputStream(file)) {
             IOUtils.copy(in, out, -1);
-            fb.reset();
         }
     }
 
@@ -466,10 +465,10 @@ public class Worker {
     public String transErrorMessage(Throwable err) {
         String str;
         if (err instanceof UnsupportedFormatException) {
-            str = app.getText("dialog.error.unsupportedFormat",
+            str = app.getText("d.error.unsupportedFormat",
                     ((UnsupportedFormatException) err).getFormat());
         } else if (err instanceof FileNotFoundException) {
-            str = app.getText("dialog.error.fileNotExists");
+            str = app.getText("d.error.fileNotExists");
         } else {
             str = err.getLocalizedMessage();
         }

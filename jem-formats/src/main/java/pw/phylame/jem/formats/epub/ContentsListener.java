@@ -24,7 +24,7 @@ import java.io.IOException;
  * Listener for <tt>ContentsRender</tt>.
  */
 public interface ContentsListener {
-    void startNaviPoint(String id, String href, String title) throws IOException;
+    void startNavPoint(String id, String href, String title) throws IOException;
 
-    void endNaviPoint() throws IOException;
+    void endNavPoint() throws IOException;
 }

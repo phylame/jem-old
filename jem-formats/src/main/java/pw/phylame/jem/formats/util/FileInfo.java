@@ -50,7 +50,7 @@ public abstract class FileInfo {
         properties.putAll(m);
     }
 
-    public final Set<Map.Entry<String, Object>> infoEntries() {
+    public final Set<Map.Entry<String, Object>> entries() {
         return properties.entrySet();
     }
 
@@ -70,7 +70,7 @@ public abstract class FileInfo {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         int ix = 0, end = properties.size() - 1;
-        for (Map.Entry<String, Object> entry : infoEntries()) {
+        for (Map.Entry<String, Object> entry : entries()) {
             builder.append(localizedKey(entry.getKey())).append("=");
             builder.append(localizedValue(entry.getValue()));
             if (ix++ != end) {

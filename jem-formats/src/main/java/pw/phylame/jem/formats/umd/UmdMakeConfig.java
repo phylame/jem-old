@@ -18,34 +18,35 @@
 
 package pw.phylame.jem.formats.umd;
 
-import java.util.Map;
 import java.util.List;
 
 import pw.phylame.jem.util.FileObject;
 import pw.phylame.jem.formats.util.text.TextConfig;
-import pw.phylame.jem.formats.util.config.ConfigUtils;
-import pw.phylame.jem.formats.util.config.CommonConfig;
-import pw.phylame.jem.formats.util.config.InvalidConfigException;
+import pw.phylame.jem.formats.util.config.ConfigKey;
+import pw.phylame.jem.formats.util.config.AbstractConfig;
 
 /**
  * Config for making UMD book.
  */
-public class UmdMakeConfig implements CommonConfig {
-    public static final String CONFIG_SELF = "umd.make.config";    // UmdMakeConfig
-    public static final String UMD_TYPE = "umd.make.type";  // int
-    public static final String CARTOON_IMAGES = "umd.make.cartoonImages";   // List<FileObject>
-    public static final String IMAGE_FORMAT = "umd.make.imageFormat";   // String
+public class UmdMakeConfig extends AbstractConfig {
+    public static final String CONFIG_SELF = "umd.make.config";
+    public static final String TEXT_CONFIG = "umd.make.textConfig";
+    public static final String UMD_TYPE = "umd.make.type";
+    public static final String CARTOON_IMAGES = "umd.make.cartoonImages";
+    public static final String IMAGE_FORMAT = "umd.make.imageFormat";
 
     /**
      * Config for rendering book text.
      *
      * @see TextConfig
      */
+    @ConfigKey(TEXT_CONFIG)
     public TextConfig textConfig = new TextConfig();
 
     /**
      * Output UMD type, may be {@link UMD#TEXT}, {@link UMD#CARTOON}, {@link UMD#COMIC}
      */
+    @ConfigKey(UMD_TYPE)
     public int umdType = UMD.TEXT;
 
     /**
@@ -55,23 +56,17 @@ public class UmdMakeConfig implements CommonConfig {
      * <p><strong>NOTE:</strong> this value will be available when <tt>umdType</tt>
      * is {@link UMD#CARTOON}.
      */
+    @ConfigKey(CARTOON_IMAGES)
     public List<FileObject> cartoonImages = null;
 
     /**
      * Format of image in <tt>cartoonImages</tt>, ex: jpg, png, bmp..
      */
+    @ConfigKey(IMAGE_FORMAT)
     public String imageFormat = "jpg";
 
-    public UmdMakeConfig() {
-        textConfig.writeTitle = false;
-    }
-
     @Override
-    public void fetch(Map<String, Object> kw) throws InvalidConfigException {
-        textConfig = TextConfig.fetchInstance(kw);
-        umdType = ConfigUtils.fetchInteger(kw, UMD_TYPE, umdType);
-        cartoonImages = ConfigUtils.fetchList(kw, CARTOON_IMAGES, cartoonImages,
-                FileObject.class);
-        imageFormat = ConfigUtils.fetchString(kw, IMAGE_FORMAT, imageFormat);
+    public void adjust() {
+        textConfig.writeTitle = false;
     }
 }

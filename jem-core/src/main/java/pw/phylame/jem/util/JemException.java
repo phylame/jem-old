@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2016 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -22,7 +22,6 @@ package pw.phylame.jem.util;
  * The base exception class for Jem errors.
  */
 public class JemException extends Exception {
-
     public JemException() {
         super();
     }

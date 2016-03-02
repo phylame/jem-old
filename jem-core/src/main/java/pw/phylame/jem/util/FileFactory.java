@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2016 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -29,7 +29,6 @@ import pw.phylame.jem.core.Jem;
  * Factory class for creating <tt>FileObject</tt>.
  */
 public class FileFactory {
-
     /**
      * Detects MIME type by file name if not specified.
      *
@@ -38,15 +37,12 @@ public class FileFactory {
      * @return the mime type text
      */
     private static String getOrDetectMime(String path, String mime) {
-        if (mime == null || mime.isEmpty()) {
-            return IOUtils.getMimeType(path);
-        }
-        return mime;
+        return mime == null || mime.isEmpty() ? IOUtils.getMimeType(path) : mime;
     }
 
     private static class NormalFile extends AbstractFile {
         static {
-            Jem.variantTypes.put(NormalFile.class, Jem.FILE);
+            Jem.mapVariantType(NormalFile.class, Jem.FILE);
         }
 
         private final File file;
@@ -78,7 +74,7 @@ public class FileFactory {
 
     private static class EntryFile extends AbstractFile {
         static {
-            Jem.variantTypes.put(EntryFile.class, Jem.FILE);
+            Jem.mapVariantType(EntryFile.class, Jem.FILE);
         }
 
         private final ZipFile zip;
@@ -116,9 +112,12 @@ public class FileFactory {
         }
     }
 
+    /**
+     * File object that represents a block of source file.
+     */
     public static class BlockFile extends AbstractFile {
         static {
-            Jem.variantTypes.put(BlockFile.class, Jem.FILE);
+            Jem.mapVariantType(BlockFile.class, Jem.FILE);
         }
 
         private final String name;
@@ -175,13 +174,13 @@ public class FileFactory {
 
         @Override
         public String toString() {
-            return String.format("block://%s;offset=%d;size=%d;mime=%s", getName(), offset, size, getMime());
+            return String.format("block://%s;offset=%d;size=%d", super.toString(), offset, size);
         }
     }
 
     private static class URLFile extends AbstractFile {
         static {
-            Jem.variantTypes.put(URLFile.class, Jem.FILE);
+            Jem.mapVariantType(URLFile.class, Jem.FILE);
         }
 
         private final URL url;
@@ -212,7 +211,7 @@ public class FileFactory {
 
     private static class ByteFile extends AbstractFile {
         static {
-            Jem.variantTypes.put(ByteFile.class, Jem.FILE);
+            Jem.mapVariantType(ByteFile.class, Jem.FILE);
         }
 
         private final String name;
@@ -254,33 +253,33 @@ public class FileFactory {
         }
     }
 
-    public static FileObject fromFile(File file, String mime) throws IOException {
+    private static FileObject EMPTY_FILE;
+
+    public static synchronized FileObject emptyFile() {
+        if (EMPTY_FILE == null) {
+            EMPTY_FILE = forBytes("_empty_", new byte[0], FileObject.UNKNOWN_MIME);
+        }
+        return EMPTY_FILE;
+    }
+
+    public static FileObject forFile(File file, String mime) throws IOException {
         return new NormalFile(file, getOrDetectMime(file.getPath(), mime));
     }
 
-    public static FileObject fromZip(ZipFile zipFile, String entry, String mime) throws IOException {
+    public static FileObject forZip(ZipFile zipFile, String entry, String mime) throws IOException {
         return new EntryFile(zipFile, entry, getOrDetectMime(entry, mime));
     }
 
-    public static BlockFile fromBlock(String name, RandomAccessFile file, long offset, long size,
-                                      String mime) throws IOException {
+    public static BlockFile forBlock(String name, RandomAccessFile file, long offset, long size,
+                                     String mime) throws IOException {
         return new BlockFile(name, file, offset, size, getOrDetectMime(name, mime));
     }
 
-    public static FileObject fromURL(URL url, String mime) {
+    public static FileObject forURL(URL url, String mime) {
         return new URLFile(url, getOrDetectMime(url.getPath(), mime));
     }
 
-    public static FileObject fromBytes(String name, byte[] bytes, String mime) {
+    public static FileObject forBytes(String name, byte[] bytes, String mime) {
         return new ByteFile(name, bytes, getOrDetectMime(name, mime));
-    }
-
-    private static FileObject EMPTY_FILE;
-
-    public static FileObject emptyFile() {
-        if (EMPTY_FILE == null) {
-            EMPTY_FILE = new ByteFile("_empty_", new byte[0], FileObject.UNKNOWN_MIME);
-        }
-        return EMPTY_FILE;
     }
 }

@@ -140,7 +140,7 @@ class TreeClipboard {
         Chapter[] dumps = chapters.toArray(new Chapter[chapters.size()]);
 
         if (copying) {
-            Arrays.setAll(dumps, ix -> dumps[ix].copy());   // make copy
+            Arrays.setAll(dumps, ix -> dumps[ix].clone());   // make copy
         } else {
             TreePath[] paths = contentsTree.pathOfChapters(dumps);
             contentsTree.deleteSelectedPaths(paths, null, undoQueue, null); // delete origin

@@ -27,9 +27,9 @@ import java.awt.*;
  * Common dialog for Imabw.
  */
 public abstract class CommonDialog<R> extends ICommonDialog {
-    public static final String BUTTON_OK = "dialog.common.buttonOk";
-    public static final String BUTTON_CANCEL = "dialog.common.buttonCancel";
-    public static final String BUTTON_CLOSE = "dialog.common.buttonClose";
+    public static final String BUTTON_OK = "d.common.buttonOk";
+    public static final String BUTTON_CANCEL = "d.common.buttonCancel";
+    public static final String BUTTON_CLOSE = "d.common.buttonClose";
 
     public CommonDialog(Dialog owner, String title, boolean modal) {
         super(owner, title, modal);

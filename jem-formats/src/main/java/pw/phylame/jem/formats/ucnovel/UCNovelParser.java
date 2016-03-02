@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 Peng Wan <phylame@163.com>
+ * Copyright 2014-2016 Peng Wan <phylame@163.com>
  *
  * This file is part of Jem.
  *
@@ -18,133 +18,53 @@
 
 package pw.phylame.jem.formats.ucnovel;
 
-import java.net.URL;
-import java.io.File;
-import java.io.IOException;
-import java.util.Map;
-import java.util.Enumeration;
-
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Chapter;
-import pw.phylame.jem.core.Parser;
+import pw.phylame.jem.formats.common.CommonParser;
 import pw.phylame.jem.formats.util.BufferedRandomAccessFile;
-import pw.phylame.jem.formats.util.MessageBundle;
+import pw.phylame.jem.formats.util.ExceptionFactory;
 import pw.phylame.jem.formats.util.ParserException;
-import pw.phylame.jem.formats.util.SourceCleaner;
+import pw.phylame.jem.formats.util.text.TextUtils;
 import pw.phylame.jem.util.*;
 
-/**
- * Jem Parser for UC Browser Novels.
- */
-public class UCNovelParser implements Parser, ChapterWatcher {
-    public static final String KEY_BOOK_ID = "uc_book_id";
+import java.io.File;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.net.URL;
+import java.util.Enumeration;
+import java.util.HashMap;
 
-    static final String DB_READER_CONFIG = "META-INF/pw-jem/ucnovel-reader";
-    static final String CATALOG_FILE_NAME = "com.UCMobile_catalog";
-    static final String TEXT_ENCODING = "UTF-8";
+public class UCNovelParser extends CommonParser<NovelDbReader, NovelConfig> implements ChapterWatcher {
+    public static final String DEFAULT_CONFIG_FILE = "META-INF/pw-jem/ucnovel-reader";
+    public static final String CATALOG_FILE_NAME = "com.UCMobile_catalog";
+    public static final String TEXT_ENCODING = "UTF-8";
 
-    private File catalogFile;
-    private String bookId;
-
-    private NovelDbReader dbReader = null;
-    private BufferedRandomAccessFile source;
-
+    private NovelConfig mycfg;
     private Book book;
+    private HashMap<String, RandomAccessFile> sourceCaches = new HashMap<>();
 
-    @Override
-    public String getName() {
-        return "ucnovel";
-    }
-
-    private String getBookId(Map<String, Object> kw) throws JemException {
-        JemException ex = new JemException(MessageBundle.getText("ucnovel.parse.noBookId", KEY_BOOK_ID));
-        if (kw == null || kw.isEmpty()) {
-            throw ex;
-        }
-
-        Object o = kw.get(KEY_BOOK_ID);
-        if (!(o instanceof String)) {
-            throw ex;
-        }
-
-        return (String) o;
+    public UCNovelParser() {
+        super("ucnovel", NovelConfig.CONFIG_SELF, NovelConfig.class);
     }
 
     @Override
-    public Book parse(File file, Map<String, Object> kw) throws IOException, JemException {
-        return parse(file, getBookId(kw));
-    }
-
-    public Book parse(File file, String bookId) throws IOException, JemException {
+    protected NovelDbReader openFile(File file, NovelConfig config) throws IOException, ParserException {
         if (file.isDirectory()) {
             file = new File(file, CATALOG_FILE_NAME);
         }
-        catalogFile = file;
-        this.bookId = bookId;
-
-        loadDbReader();
-        if (dbReader == null) {
-            throw new ParserException(MessageBundle.getText("ucnovel.parse.noDbReader", DB_READER_CONFIG));
-        }
-        dbReader.init(catalogFile.getPath(), this.bookId);
-
-        return fetchBook();
+        NovelDbReader reader = loadDbReader(config.readerConfig);
+        reader.init(file.getPath());
+        return reader;
     }
 
-    private Book fetchBook() throws IOException, JemException {
-        book = new Book();
-
-        NovelDetails details = readDetails();
-        File file = new File(catalogFile.getParent(), bookId + "/" + bookId + ".ucnovel");
-        source = new BufferedRandomAccessFile(file, "r");
-        SourceCleaner cleaner = new SourceCleaner(source, new Runnable() {
-            @Override
-            public void run() {
-                dbReader.cleanup();
-            }
-        });
-        try {
-            dbReader.watchChapter(this, details.getTable());
-        } catch (JemException e) {
-            cleaner.clean(null);
-            throw e;
-        }
-
-        book.registerCleanup(cleaner);
-        return book;
+    public static NovelDbReader loadDbReader() throws IOException {
+        return loadDbReader(DEFAULT_CONFIG_FILE);
     }
 
-    private NovelDetails readDetails() throws JemException {
-        NovelDetails details = dbReader.fetchDetails();
-        book.setTitle(details.getName());
-        book.setAuthor(details.getAuthor());
-        book.setDate(details.getExpireTime());
-        book.setAttribute("update_time", details.getUpdateTime());
-        return details;
-    }
-
-    @Override
-    public void watch(ChapterItem item) throws JemException {
-        Chapter chapter = new Chapter(item.getTitle());
-        chapter.setAttribute("update_time", item.getUpdateTime());
-
-        FileObject fb;
-        try {
-            fb = FileFactory.fromBlock("chapter-" + item.getId() + ".txt",
-                    source, item.getStartIndex(), item.getEndIndex() - item.getStartIndex() + 1, "text/plain");
-        } catch (IOException e) {
-            throw new JemException(e);
-        }
-        chapter.setContent(TextFactory.fromFile(fb, TEXT_ENCODING));
-
-        book.append(chapter);
-    }
-
-    private void loadDbReader() throws JemException {
-        Enumeration<URL> urls = IOUtils.getResources(DB_READER_CONFIG,
-                UCNovelParser.class.getClassLoader());
+    public static NovelDbReader loadDbReader(String readerConfig) throws IOException {
+        Enumeration<URL> urls = IOUtils.getResources(readerConfig, UCNovelParser.class.getClassLoader());
         if (urls == null) {
-            return;
+            throw ExceptionFactory.ioException("ucnovel.parse.notFoundDbReader", readerConfig);
         }
 
         if (urls.hasMoreElements()) {
@@ -153,14 +73,89 @@ public class UCNovelParser implements Parser, ChapterWatcher {
                 String name = IOUtils.toString(url.openStream(), null).trim();
                 Class<?> clazz = Class.forName(name);
                 if (NovelDbReader.class.isAssignableFrom(clazz)) {
-                    dbReader = (NovelDbReader) clazz.newInstance();
+                    return (NovelDbReader) clazz.newInstance();
                 } else {
-                    throw new JemException("Invalid NovelDbReader: " + name);
+                    throw ExceptionFactory.ioException("ucnovel.parse.invalidDbReader",
+                            NovelDbReader.class.getName());
                 }
-            } catch (IOException | IllegalAccessException
-                    | InstantiationException | ClassNotFoundException e) {
-                throw new JemException("Failed to load NovelDbReader", e);
+            } catch (IOException | IllegalAccessException | InstantiationException | ClassNotFoundException e) {
+                throw ExceptionFactory.ioException(e, "ucnovel.parse.cannotMakeDbReader",
+                        NovelDbReader.class.getName());
             }
         }
+        throw ExceptionFactory.ioException("ucnovel.parse.notFoundDbReader", readerConfig);
+    }
+
+    @Override
+    public Book parse(NovelDbReader reader, NovelConfig config) throws IOException, ParserException {
+        if (config == null || TextUtils.isEmpty(config.novelId)) {
+            throw ExceptionFactory.parserException("ucnovel.parse.noBookId", NovelConfig.NOVEL_ID);
+        }
+        return fetchBook(reader, config);
+    }
+
+    private Book fetchBook(NovelDbReader reader, NovelConfig config) throws ParserException {
+        mycfg = config;
+        book = new Book();
+        sourceCaches.clear();
+        reader.fetchChapters(this, fetchInfo(reader, config.novelId));
+        book.registerCleanup(new Chapter.Cleanable() {
+            @Override
+            public void clean(Chapter chapter) {
+                for (RandomAccessFile raf : sourceCaches.values()) {
+                    try {
+                        raf.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                sourceCaches.clear();
+            }
+        });
+        return book;
+    }
+
+    // return the table name for the fetched novel
+    private String fetchInfo(NovelDbReader reader, String novelId) throws ParserException {
+        NovelInfo info = reader.fetchInfo(novelId);
+        if (info == null) {
+            throw ExceptionFactory.parserException("ucnovel.parse.noSuchNovel", novelId);
+        }
+        book.setTitle(info.name);
+        book.setAuthor(info.author);
+        book.setDate(info.expireTime);
+        book.setAttribute("update_time", info.updateTime);
+        return info.table;
+    }
+
+    @Override
+    public void watch(ChapterItem item) throws ParserException {
+        Chapter chapter = new Chapter(item.title);
+        chapter.setAttribute("update_time", item.updateTime);
+        if (!item.offlinePath.isEmpty()) {
+            try {
+                chapter.setContent(TextFactory.forFile(openSource(item), TEXT_ENCODING));
+            } catch (IOException e) {
+                throw ExceptionFactory.parserException(e, "ucnovel.parse.badChapterItem", item.id);
+            }
+        }
+        book.append(chapter);
+    }
+
+    private FileObject openSource(ChapterItem item) throws IOException {
+        RandomAccessFile source = sourceCaches.get(item.offlinePath);
+        if (source == null) {
+            String path;
+            if (mycfg.novelFolder != null) {
+                path = mycfg.novelFolder + File.separatorChar + mycfg.novelId
+                        + File.separatorChar + IOUtils.getFullName(item.offlinePath);
+            } else {
+                path = item.offlinePath;
+            }
+            source = new BufferedRandomAccessFile(path, "r");
+            sourceCaches.put(item.offlinePath, source);
+        }
+        return FileFactory.forBlock("chapter-" + item.id + ".txt", source, item.startIndex,
+                item.endIndex - item.startIndex, "text/plain");
     }
 }

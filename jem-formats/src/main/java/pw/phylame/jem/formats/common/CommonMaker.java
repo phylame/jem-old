@@ -25,7 +25,6 @@ import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Maker;
 import pw.phylame.jem.util.JemException;
 import pw.phylame.jem.formats.util.MakerException;
-import pw.phylame.jem.formats.util.ExceptionFactory;
 import pw.phylame.jem.formats.util.config.CommonConfig;
 
 /**
@@ -36,15 +35,7 @@ public abstract class CommonMaker<CF extends CommonConfig> extends BookWorker<CF
         super(name, configKey, configClass);
     }
 
-    protected abstract void make(Book book, OutputStream output, CF config) throws IOException, MakerException;
-
-    protected MakerException makerException(String msg, Object... args) {
-        return ExceptionFactory.makerException(msg, args);
-    }
-
-    protected MakerException makerException(Throwable cause, String msg, Object... args) {
-        return ExceptionFactory.makerException(cause, msg, args);
-    }
+    public abstract void make(Book book, OutputStream output, CF config) throws IOException, MakerException;
 
     @Override
     public final void make(Book book, File file, Map<String, Object> arguments) throws IOException, JemException {

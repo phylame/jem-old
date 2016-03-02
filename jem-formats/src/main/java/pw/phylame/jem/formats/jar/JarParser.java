@@ -18,33 +18,33 @@
 
 package pw.phylame.jem.formats.jar;
 
+import java.io.*;
+import java.util.zip.ZipFile;
+
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.core.Chapter;
 import pw.phylame.jem.util.FileObject;
 import pw.phylame.jem.util.FileFactory;
 import pw.phylame.jem.util.TextFactory;
 import pw.phylame.jem.formats.common.ZipParser;
-import pw.phylame.jem.formats.common.NonConfig;
 import pw.phylame.jem.formats.util.ZipUtils;
 import pw.phylame.jem.formats.util.ParserException;
-
-import java.io.*;
-import java.util.zip.ZipFile;
+import pw.phylame.jem.formats.util.ExceptionFactory;
 
 /**
  * <tt>Parser</tt> implement for JAR book.
  */
-public class JarParser extends ZipParser<NonConfig> {
+public class JarParser extends ZipParser<JarParseConfig> {
     public JarParser() {
         super("jar", null, null);
     }
 
     @Override
-    protected Book parse(ZipFile input, NonConfig config) throws IOException, ParserException {
-        return parse0(input);
+    public Book parse(ZipFile input, JarParseConfig config) throws IOException, ParserException {
+        return parse(input);
     }
 
-    private Book parse0(ZipFile zipFile) throws IOException, ParserException {
+    public Book parse(ZipFile zipFile) throws IOException, ParserException {
         Book book = new Book();
         parseMetadata(book, zipFile);
         return book;
@@ -53,8 +53,8 @@ public class JarParser extends ZipParser<NonConfig> {
     private void parseMetadata(Book book, ZipFile zipFile) throws IOException, ParserException {
         try (InputStream stream = new BufferedInputStream(ZipUtils.openStream(zipFile, "0"))) {
             DataInput input = new DataInputStream(stream);
-            if (input.readInt() != JAR.FILE_MAGIC_NUMBER) {
-                throw parserException("jar.parse.badMetadata", zipFile.getName());
+            if (input.readInt() != JAR.MAGIC_NUMBER) {
+                throw ExceptionFactory.parserException("jar.parse.badMetadata", zipFile.getName());
             }
             book.setTitle(readString(input, 1));
 
@@ -62,22 +62,22 @@ public class JarParser extends ZipParser<NonConfig> {
             for (int i = 0; i < count; ++i) {
                 String[] items = readString(input, 2).split(",");
                 if (items.length < 3) {
-                    throw parserException("jar.parse.badMetadata", zipFile.getName());
+                    throw ExceptionFactory.parserException("jar.parse.badMetadata", zipFile.getName());
                 }
-                FileObject fb = FileFactory.fromZip(zipFile, items[0], "text/plain");
-                book.append(new Chapter(items[2], TextFactory.fromFile(fb, JAR.TEXT_ENCODING)));
+                FileObject fb = FileFactory.forZip(zipFile, items[0], "text/plain");
+                book.append(new Chapter(items[2], TextFactory.forFile(fb, JAR.TEXT_ENCODING)));
             }
 
             input.skipBytes(2); // what ?
             String str = readString(input, 2);
             if (!str.isEmpty()) {
-                book.setIntro(TextFactory.fromString(str));
+                book.setIntro(TextFactory.forString(str));
             }
         }
     }
 
     private String readString(DataInput input, int size) throws IOException {
-        int length = size == 1 ? input.readByte() : input.readShort();
+        int length = (size == 1) ? input.readByte() : input.readShort();
         byte[] b = new byte[length];
         input.readFully(b);
         return new String(b, JAR.METADATA_ENCODING);

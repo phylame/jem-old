@@ -22,10 +22,11 @@ import java.util.Set;
 import java.util.Map;
 import java.util.HashMap;
 
-public class VariantMap {
-    private final HashMap<String, Object> map = new HashMap<>();
+public class VariantMap implements Cloneable {
+    private HashMap<String, Object> map;
 
     public VariantMap() {
+        map = new HashMap<>();
     }
 
     public void put(String key, Object value) {
@@ -90,5 +91,29 @@ public class VariantMap {
 
     public Set<Map.Entry<String, Object>> entries() {
         return map.entrySet();
+    }
+
+    /**
+     * Returns a shallow copy of this <tt>VariantMap</tt> instance: the keys and
+     * values themselves are not cloned.
+     *
+     * @return a shallow copy of this map
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Object clone() {
+        VariantMap obj;
+        try {
+            obj = (VariantMap) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new InternalError(e);
+        }
+        obj.map = (HashMap<String, Object>) map.clone();
+        return obj;
+    }
+
+    @Override
+    public String toString() {
+        return map.toString();
     }
 }

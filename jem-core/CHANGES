@@ -28,3 +28,14 @@ ChangeLog
   o. Rename xxxItem methods in Book to xxxExtension
   o. optimize and bugfix
   o. rename Jem.PMAB_FORMAT to Jem.PMAB
+
+* v2.4
+  o. add cache to ImplementFactory for object reusing
+  o. change IOUtils.mimeMap to private and add method mapMimeType(String,String):void
+  o. change Jem.variantTypes to private and add method mapVariantType(Class<?>,String):void
+  o. change Jem.attributeTypes to private and add method mapAttributeType(String,String):void
+  o. add optional parameter bufSize to coping methods of IOUtils
+  o. remove method reset():void from TextObject
+  o. rename factory method in FileFactory and TextFactory from fromXXX to forXXX
+  o. getText, getLines, writeTo of TextObject will throws Exception and never return null
+  o. remove copy method of chapter instead of clone support for chapter and section

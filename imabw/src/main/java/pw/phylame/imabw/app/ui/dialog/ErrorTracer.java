@@ -59,7 +59,7 @@ class ErrorTracer extends CommonDialog {
         final Dimension detailsSize = new Dimension(480, 260);
 
         JButton detailsButton = new JButton(
-                new IAction("dialog.error.buttonDetails") {
+                new IAction("d.error.buttonDetails") {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (shown) {

@@ -18,15 +18,9 @@
 
 package pw.phylame.jem.formats.util.config;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-@Target(ElementType.FIELD)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface ConfigField {
-    String key();
-
-    Class<?> type() default String.class;
+public abstract class AbstractConfig implements CommonConfig {
+    @Override
+    public void adjust() {
+        // nothing
+    }
 }

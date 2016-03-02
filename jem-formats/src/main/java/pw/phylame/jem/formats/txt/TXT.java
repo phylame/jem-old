@@ -18,7 +18,6 @@
 
 package pw.phylame.jem.formats.txt;
 
-
 /**
  * Utilities and constants for TXT.
  */
@@ -26,6 +25,8 @@ public final class TXT {
 
     private TXT() {
     }
+
+    public static final String MIME_PLAIN_TEXT = "text/plain";
 
     /**
      * Default encoding for TXT parser and maker.

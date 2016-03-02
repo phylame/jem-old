@@ -18,53 +18,49 @@
 
 package pw.phylame.jem.formats.epub;
 
-import java.util.Map;
-
-import pw.phylame.jem.formats.common.ZipMakerConfig;
-import pw.phylame.jem.formats.util.config.ConfigUtils;
-import pw.phylame.jem.formats.util.config.InvalidConfigException;
+import pw.phylame.jem.formats.common.ZipMakeConfig;
+import pw.phylame.jem.formats.util.config.ConfigKey;
 import pw.phylame.jem.formats.util.html.HtmlConfig;
 import pw.phylame.jem.formats.util.xml.XmlConfig;
 
 /**
  * Config for making ePub book.
  */
-public class EpubMakeConfig extends ZipMakerConfig {
+public class EpubMakeConfig extends ZipMakeConfig {
     public static final String CONFIG_SELF = "epub.make.config";
     public static final String VERSION = "epub.make.version";
+    public static final String XML_CONFIG = "epub.make.xmlConfig";
+    public static final String HTML_CONFIG = "epub.make.htmlConfig";
     public static final String UUID = "epub.make.uuid";
+    public static final String DATE_FORMAT = "epub.make.dateFormat";
     public static final String SMALL_PAGE = "smallPage";
 
     /**
      * Output ePub version.
      */
+    @ConfigKey(VERSION)
     public String version = "2.0";
 
+    @ConfigKey(XML_CONFIG)
     public XmlConfig xmlConfig = new XmlConfig();
 
+    @ConfigKey(HTML_CONFIG)
     public HtmlConfig htmlConfig = new HtmlConfig();
 
+    @ConfigKey(UUID)
     public String uuid = null;
 
+    @ConfigKey(DATE_FORMAT)
     public String dateFormat = EPUB.dateFormat;
 
     /**
      * If <tt>smallPage</tt> is <tt>true</tt>, each HTML page will be smaller.
      */
+    @ConfigKey(SMALL_PAGE)
     public boolean smallPage = true;
 
-    public EpubMakeConfig() {
-        xmlConfig.standalone = true;
-    }
-
     @Override
-    public void fetch(Map<String, Object> kw) throws InvalidConfigException {
-        super.fetch(kw);
-        version = ConfigUtils.fetchString(kw, VERSION, version);
-        xmlConfig = XmlConfig.fetchInstance(kw);
+    public void adjust() {
         xmlConfig.standalone = true;
-        htmlConfig = HtmlConfig.fetchInstance(kw);
-        uuid = ConfigUtils.fetchString(kw, UUID, uuid);
-        smallPage = ConfigUtils.fetchBoolean(kw, SMALL_PAGE, smallPage);
     }
 }

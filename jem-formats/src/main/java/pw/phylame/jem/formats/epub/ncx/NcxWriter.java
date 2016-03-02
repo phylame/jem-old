@@ -18,22 +18,21 @@
 
 package pw.phylame.jem.formats.epub.ncx;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.zip.ZipOutputStream;
+
 import pw.phylame.jem.core.Book;
 import pw.phylame.jem.formats.epub.*;
 import pw.phylame.jem.formats.epub.writer.EpubWriter;
 import pw.phylame.jem.formats.util.MakerException;
 import pw.phylame.jem.formats.util.xml.XmlRender;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.zip.ZipOutputStream;
-
 /**
  * NCX builder.
  */
 public interface NcxWriter {
-    void write(Book book, EpubMakeConfig config, XmlRender xmlRender,
-               EpubWriter epubWriter,
+    void write(Book book, EpubMakeConfig config, XmlRender xmlRender, EpubWriter epubWriter,
                ZipOutputStream zipout) throws IOException, MakerException;
 
     String getCoverID();

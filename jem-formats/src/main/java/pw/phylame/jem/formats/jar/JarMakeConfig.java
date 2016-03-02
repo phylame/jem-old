@@ -18,37 +18,30 @@
 
 package pw.phylame.jem.formats.jar;
 
-import java.util.Map;
-
-import pw.phylame.jem.formats.common.ZipMakerConfig;
-import pw.phylame.jem.formats.util.config.ConfigUtils;
+import pw.phylame.jem.formats.common.ZipMakeConfig;
 import pw.phylame.jem.formats.util.Versions;
 import pw.phylame.jem.formats.util.text.TextConfig;
-import pw.phylame.jem.formats.util.config.InvalidConfigException;
+import pw.phylame.jem.formats.util.config.ConfigKey;
 
 /**
  * Config for making JAR book.
  */
-public class JarMakeConfig extends ZipMakerConfig {
-    public static final String CONFIG_SELF = "jar.make.config";    // JarMakeConfig
-    public static final String VENDOR = "jar.make.vendor"; // String
+public class JarMakeConfig extends ZipMakeConfig {
+    public static final String CONFIG_SELF = "jar.make.config";
+    public static final String TEXT_CONFIG = "jar.make.textConfig";
+    public static final String VENDOR = "jar.make.vendor";
 
     /**
      * Render config for rendering book text.
      *
      * @see TextConfig
      */
+    @ConfigKey(TEXT_CONFIG)
     public TextConfig textConfig = new TextConfig();
 
     /**
      * Vendor message of the JAR.
      */
+    @ConfigKey(VENDOR)
     public String vendor = Versions.VENDOR;
-
-    @Override
-    public void fetch(Map<String, Object> kw) throws InvalidConfigException {
-        super.fetch(kw);
-        textConfig = TextConfig.fetchInstance(kw);
-        vendor = ConfigUtils.fetchString(kw, VENDOR, vendor);
-    }
 }

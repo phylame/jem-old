@@ -18,8 +18,8 @@
 
 package pw.phylame.jem.formats.ucnovel;
 
-import pw.phylame.jem.util.JemException;
+import pw.phylame.jem.formats.util.ParserException;
 
 public interface ChapterWatcher {
-    void watch(ChapterItem item) throws JemException;
+    void watch(ChapterItem item) throws ParserException;
 }

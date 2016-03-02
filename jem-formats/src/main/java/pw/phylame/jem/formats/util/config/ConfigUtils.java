@@ -19,26 +19,17 @@
 package pw.phylame.jem.formats.util.config;
 
 import java.util.Map;
-import java.util.List;
+import java.util.HashMap;
+import java.lang.reflect.Field;
 
 import pw.phylame.jem.formats.util.ExceptionFactory;
+import pw.phylame.jem.formats.util.MessageBundle;
 
 /**
  * Utilities for maker and parser configurations
  */
 public final class ConfigUtils {
     private ConfigUtils() {
-    }
-
-    public static <CF extends CommonConfig> CF fetchConfig(Map<String, Object> kw, String key, Class<CF> clazz)
-            throws InvalidConfigException {
-        CF config = fetchObject(kw, key, null, clazz);
-        if (config != null) {
-            return config;
-        }
-        config = defaultConfig(clazz);
-        config.fetch(kw);
-        return config;
     }
 
     public static <CF extends CommonConfig> CF defaultConfig(Class<CF> clazz) {
@@ -49,6 +40,71 @@ public final class ConfigUtils {
         }
     }
 
+    public static <CF extends CommonConfig> CF fetchConfig(Map<String, Object> kw, String key, Class<CF> clazz)
+            throws InvalidConfigException {
+        if (kw == null || kw.isEmpty()) {
+            return defaultConfig(clazz);
+        }
+        CF config = fetchObject(kw, key, null, clazz); // find the config object by key
+        if (config != null) {
+            return config;
+        }
+        config = defaultConfig(clazz);
+        fetchFields(config, kw);
+        return config;
+    }
+
+    private static void fetchFields(CommonConfig config, Map<String, Object> kw) throws InvalidConfigException {
+        Field[] fields = config.getClass().getFields();
+        for (Field field : fields) {
+            ConfigKey configKey = field.getAnnotation(ConfigKey.class);
+            if (configKey == null) {
+                continue;
+            }
+            String key = configKey.value();
+            Class<?> type = field.getType();
+            try {
+                Object defaultValue = field.get(config);
+                Object value = ConfigUtils.fetchObject(kw, key, null, type);
+                if (value == null) {
+                    if (CommonConfig.class.isAssignableFrom(type)) {   // not found and field is CommonConfig
+                        fetchFields((CommonConfig) defaultValue, kw);
+                    }
+                    value = defaultValue;
+                }
+                field.set(config, value);
+            } catch (IllegalAccessException e) {
+                throw new InvalidConfigException(key, null,
+                        MessageBundle.getText("error.config.inaccessible", key, config.getClass().getName()));
+            }
+        }
+        if (fields.length > 0) {
+            config.adjust();
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T> T fetchObject(Map<String, Object> kw, String key, Object defaultValue, Class<T> type)
+            throws InvalidConfigException {
+        Object o = kw.get(key);
+        if (o == null) {
+            return kw.containsKey(key) ? null : (T) defaultValue;
+        }
+        if (type.isInstance(o)) {   // found the item
+            return (T) o;
+        }
+        ConfigParser<T> parser = getConfigParser(type);
+        if (parser != null && o instanceof String) { // parse string value
+            try {
+                return parser.parse((String) o);
+            } catch (RuntimeException e) {
+                throw ExceptionFactory.invalidObjectArgument(e, key, o, type.getName());
+            }
+        } else {
+            throw ExceptionFactory.invalidObjectArgument(key, o, type.getName());
+        }
+    }
+
     /**
      * Parses config from raw string.
      */
@@ -56,101 +112,29 @@ public final class ConfigUtils {
         T parse(String str);
     }
 
-    public static String fetchString(Map<String, Object> kw, String key, String defaultValue)
-            throws InvalidConfigException {
-        return fetchObject(kw, key, defaultValue, String.class);
-    }
+    private static HashMap<Class<?>, ConfigParser<?>> parserMap = new HashMap<>();
 
-    public static boolean fetchBoolean(Map<String, Object> kw, String key, boolean defaultValue)
-            throws InvalidConfigException {
-        Boolean b = fetchObject(kw, key, defaultValue, Boolean.class, BooleanParser.sharedParser());
-        return (b != null) && b;
+    public static <T> void mapConfigParser(Class<T> type, ConfigParser<T> parser) {
+        parserMap.put(type, parser);
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> List<T> fetchList(Map<String, Object> kw, String key, List<T> defaultValue,
-                                        Class<T> clazz) throws InvalidConfigException {
-        Object o = kw.get(key);
-        if (o == null) {
-            return kw.containsKey(key) ? null : defaultValue;
-        }
-        if (!(o instanceof List)) {
-            throw ExceptionFactory.invalidObjectArgument(key, o, "List<" + clazz.getName() + ">");
-        }
-        List list = (List) o;
-        // just check one element
-        if (!clazz.isInstance(list.get(0))) {
-            throw ExceptionFactory.invalidObjectArgument(key, o, "List<" + clazz.getName() + ">");
-        }
-        return (List<T>) list;
+    public static <T> ConfigParser<T> getConfigParser(Class<T> type) {
+        return (ConfigParser<T>) parserMap.get(type);
     }
 
-    public static int fetchInteger(Map<String, Object> kw, String key, int defaultValue)
-            throws InvalidConfigException {
-        Integer n = fetchObject(kw, key, defaultValue, Integer.class, IntegerParser.sharedParser());
-        return (n != null) ? n : 0;
-    }
-
-    public static <T> T fetchObject(Map<String, Object> kw, String key, T defaultValue, Class<T> clazz)
-            throws InvalidConfigException {
-        return fetchObject(kw, key, defaultValue, clazz, null);
-    }
-
-    @SuppressWarnings("unchecked")
-    public static <T> T fetchObject(Map<String, Object> kw, String key, T defaultValue, Class<T> clazz,
-                                    ConfigParser<T> parser) throws InvalidConfigException {
-        Object o = kw.get(key);
-        if (o == null) {
-            return kw.containsKey(key) ? null : defaultValue;
-        }
-        if (clazz.isInstance(o)) {
-            return (T) o;
-        } else if (parser != null && o instanceof String) {
-            try {
-                return parser.parse((String) o);
-            } catch (RuntimeException e) {
-                throw ExceptionFactory.invalidObjectArgument(e, key, o, clazz.getName());
+    static {
+        mapConfigParser(Boolean.class, new ConfigParser<Boolean>() {
+            @Override
+            public Boolean parse(String str) {
+                return Boolean.parseBoolean(str);
             }
-        } else {
-            throw ExceptionFactory.invalidObjectArgument(key, o, clazz.getName());
-        }
-    }
-
-    private static class BooleanParser implements ConfigParser<Boolean> {
-        private static BooleanParser instance = null;
-
-        static BooleanParser sharedParser() {
-            if (instance == null) {
-                instance = new BooleanParser();
+        });
+        mapConfigParser(Integer.class, new ConfigParser<Integer>() {
+            @Override
+            public Integer parse(String str) {
+                return Integer.parseInt(str);
             }
-            return instance;
-        }
-
-        private BooleanParser() {
-        }
-
-        @Override
-        public Boolean parse(String str) {
-            return Boolean.parseBoolean(str);
-        }
-    }
-
-    private static class IntegerParser implements ConfigParser<Integer> {
-        private static IntegerParser instance = null;
-
-        static IntegerParser sharedParser() {
-            if (instance == null) {
-                instance = new IntegerParser();
-            }
-            return instance;
-        }
-
-        private IntegerParser() {
-        }
-
-        @Override
-        public Integer parse(String str) throws NumberFormatException {
-            return Integer.parseInt(str);
-        }
+        });
     }
 }

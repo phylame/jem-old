@@ -23,7 +23,7 @@ package pw.phylame.scj.app;
  */
 public interface Constants {
     String NAME = "jem";
-    String VERSION = "1.3";
+    String VERSION = "1.3.1";
 
     String I18N_NAME = "pw/phylame/scj/i18n/scj";
 
@@ -60,4 +60,6 @@ public interface Constants {
     String OPTION_EXTENSIONS = "e";
     String OPTION_PARSE_ARGUMENTS = "p";
     String OPTION_MAKE_ARGUMENTS = "m";
+    String OPTION_LIST_NOVELS = "N";
+    String OPTION_LIST_NOVELS_LONG = "novels";
 }

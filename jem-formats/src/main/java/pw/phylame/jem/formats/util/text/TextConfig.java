@@ -18,17 +18,14 @@
 
 package pw.phylame.jem.formats.util.text;
 
-import java.util.Map;
-
 import pw.phylame.jem.formats.util.MessageBundle;
-import pw.phylame.jem.formats.util.config.ConfigUtils;
-import pw.phylame.jem.formats.util.config.CommonConfig;
-import pw.phylame.jem.formats.util.config.InvalidConfigException;
+import pw.phylame.jem.formats.util.config.ConfigKey;
+import pw.phylame.jem.formats.util.config.AbstractConfig;
 
 /**
  * Config for rendering text.
  */
-public class TextConfig implements CommonConfig {
+public class TextConfig extends AbstractConfig {
     public static final String CONFIG_SELF = "text.render.config";  // RenderConfig
     public static final String WRITE_TITLE = "text.render.writeTitle";  // boolean
     public static final String JOIN_TITLES = "text.render.joinTitles";  // boolean
@@ -42,101 +39,85 @@ public class TextConfig implements CommonConfig {
     public static final String LINE_SEPARATOR = "text.render.lineSeparator";    // String
     public static final String SUFFIX_TEXT = "text.render.suffixText";  // String
     public static final String PADDING_LINE = "text.render.paddingLine";  // String
-    public static final String HTML_CONVERTER = "text.render.textConverter";    // TextConverter
+    public static final String TEXT_CONVERTER = "text.render.textConverter";    // TextConverter
 
     /**
      * Write chapter title before chapter text.
      */
+    @ConfigKey(WRITE_TITLE)
     public boolean writeTitle = true;
 
     /**
      * Join chapter title chain with next specified separator.
      */
+    @ConfigKey(JOIN_TITLES)
     public boolean joinTitles = false;
 
     /**
      * Separator for joining title chain.
      */
+    @ConfigKey(TITLE_SEPARATOR)
     public String titleSeparator = " ";
 
     /**
      * Text added before chapter text and behind of chapter title.
      */
+    @ConfigKey(PREFIX_TEXT)
     public String prefixText = null;
 
     /**
      * Write intro text before chapter text.
      */
+    @ConfigKey(WRITE_INTRO)
     public boolean writeIntro = true;
 
     /**
      * Separator between intro text and chapter text.
      */
+    @ConfigKey(INTRO_SEPARATOR)
     public String introSeparator = "-------";
 
     /**
      * Process lines in text (prepend paragraph prefix to line).
      */
+    @ConfigKey(FORMAT_PARAGRAPH)
     public boolean formatParagraph = false;
 
     /**
      * Paragraph prefix used when formatParagraph is enable.
      */
+    @ConfigKey(PARAGRAPH_PREFIX)
     public String paragraphPrefix = MessageBundle.getText("text.render.paragraphPrefix");
 
     /**
      * Skip empty line, (enable when formatParagraph is enable).
      */
+    @ConfigKey(SKIP_EMPTY_LINE)
     public boolean skipEmptyLine = true;
 
     /**
      * Line separator.
      */
+    @ConfigKey(LINE_SEPARATOR)
     public String lineSeparator = System.getProperty("line.separator");
 
     /**
      * Text added at end of chapter text (before paddingLine),
      * append line separator to chapter text.
      */
+    @ConfigKey(SUFFIX_TEXT)
     public String suffixText = null;
 
     /**
      * Add a addition line separator after chapter text.
      */
+    @ConfigKey(PADDING_LINE)
     public boolean paddingLine = true;
 
     /**
      * The <tt>TextConverter</tt> for converting HTML to plain text. If not
      * specify, the origin HTML will be rendered.
      */
+    @ConfigKey(TEXT_CONVERTER)
     public TextConverter textConverter = null;
-
-    /**
-     * Fetches config object from Jem maker arguments.
-     * <p>If not config found in <tt>kw</tt>, a default config will be returned.
-     *
-     * @param kw the maker arguments
-     * @return <tt>RenderConfig</tt> object
-     * @throws InvalidConfigException if invalid config found
-     */
-    public static TextConfig fetchInstance(Map<String, Object> kw) throws InvalidConfigException {
-        return ConfigUtils.fetchConfig(kw, CONFIG_SELF, TextConfig.class);
-    }
-
-    @Override
-    public void fetch(Map<String, Object> kw) throws InvalidConfigException {
-        prefixText = ConfigUtils.fetchString(kw, PREFIX_TEXT, prefixText);
-        writeTitle = ConfigUtils.fetchBoolean(kw, WRITE_TITLE, writeTitle);
-        joinTitles = ConfigUtils.fetchBoolean(kw, JOIN_TITLES, joinTitles);
-        titleSeparator = ConfigUtils.fetchString(kw, TITLE_SEPARATOR, titleSeparator);
-        writeIntro = ConfigUtils.fetchBoolean(kw, WRITE_INTRO, writeIntro);
-        introSeparator = ConfigUtils.fetchString(kw, INTRO_SEPARATOR, introSeparator);
-        formatParagraph = ConfigUtils.fetchBoolean(kw, FORMAT_PARAGRAPH, formatParagraph);
-        paragraphPrefix = ConfigUtils.fetchString(kw, PARAGRAPH_PREFIX, paragraphPrefix);
-        skipEmptyLine = ConfigUtils.fetchBoolean(kw, SKIP_EMPTY_LINE, skipEmptyLine);
-        lineSeparator = ConfigUtils.fetchString(kw, LINE_SEPARATOR, lineSeparator);
-        paddingLine = ConfigUtils.fetchBoolean(kw, PADDING_LINE, paddingLine);
-        suffixText = ConfigUtils.fetchString(kw, SUFFIX_TEXT, suffixText);
-        textConverter = ConfigUtils.fetchObject(kw, HTML_CONVERTER, textConverter, TextConverter.class);
-    }
 }
