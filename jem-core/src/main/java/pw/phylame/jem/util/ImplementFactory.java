@@ -22,14 +22,27 @@ import java.util.HashMap;
 
 public class ImplementFactory<T> {
     private final Class<T> type;
-    private final HashMap<String, ImplItem> implementations = new HashMap<>();
+    private final HashMap<String, ImplHolder> implementations = new HashMap<>();
     private final HashMap<String, T> objectCache;
 
+    /**
+     * Constructs object with specified class type.
+     *
+     * @param type     class of the interface
+     * @param reusable <code>true</code> to reuse instance
+     */
     public ImplementFactory(Class<T> type, boolean reusable) {
         this.type = type;
         objectCache = reusable ? new HashMap<String, T>() : null;
     }
 
+    /**
+     * Registers new implementation with name and class path.
+     * <strong>NOTE:</strong> old implementation will be overwritten
+     *
+     * @param name name of the implementation
+     * @param path full class path of the implementation
+     */
     public void registerImplement(String name, String path) {
         if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("name cannot be null or empty");
@@ -37,17 +50,24 @@ public class ImplementFactory<T> {
         if (path == null || path.isEmpty()) {
             throw new IllegalArgumentException("path cannot be null or empty");
         }
-        ImplItem impl = implementations.get(name);
+        ImplHolder impl = implementations.get(name);
         if (impl != null) {
             impl.path = path;
             if (objectCache != null) {
                 objectCache.remove(name);
             }
         } else {
-            implementations.put(name, new ImplItem(path));
+            implementations.put(name, new ImplHolder(path));
         }
     }
 
+    /**
+     * Registers new implementation with name and class.
+     * <strong>NOTE:</strong> old implementation will be overwritten
+     *
+     * @param name  name of the implementation
+     * @param clazz class of the implementation
+     */
     public void registerImplement(String name, Class<? extends T> clazz) {
         if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("name cannot be null or empty");
@@ -55,14 +75,14 @@ public class ImplementFactory<T> {
         if (clazz == null) {
             throw new NullPointerException("clazz");
         }
-        ImplItem impl = implementations.get(name);
+        ImplHolder impl = implementations.get(name);
         if (impl != null) {
             impl.clazz = clazz;
             if (objectCache != null) {
                 objectCache.remove(name);
             }
         } else {
-            implementations.put(name, new ImplItem(clazz));
+            implementations.put(name, new ImplHolder(clazz));
         }
     }
 
@@ -81,6 +101,15 @@ public class ImplementFactory<T> {
         return implementations.keySet().toArray(new String[implementations.size()]);
     }
 
+    /**
+     * Returns an instance for specified implementation name.
+     *
+     * @param name name of the implementation
+     * @return instance for the implementation
+     * @throws IllegalAccessException if the class cannot access
+     * @throws InstantiationException if the instance cannot be created
+     * @throws ClassNotFoundException if the class path is invalid
+     */
     public T newInstance(String name) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         if (name == null) {
             throw new NullPointerException();
@@ -89,7 +118,7 @@ public class ImplementFactory<T> {
         if (objectCache != null && (obj = objectCache.get(name)) != null) { // get from cache
             return obj;
         }
-        ImplItem impl = implementations.get(name);
+        ImplHolder impl = implementations.get(name);
         if (impl != null) {
             obj = impl.instantiate();
             if (objectCache != null) {
@@ -99,15 +128,15 @@ public class ImplementFactory<T> {
         return obj;
     }
 
-    private class ImplItem {
+    private class ImplHolder {
         private String path;
         private Class<? extends T> clazz;
 
-        private ImplItem(String path) {
+        private ImplHolder(String path) {
             this.path = path;
         }
 
-        private ImplItem(Class<? extends T> clazz) {
+        private ImplHolder(Class<? extends T> clazz) {
             this.clazz = clazz;
         }
 

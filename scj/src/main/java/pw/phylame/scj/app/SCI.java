@@ -39,7 +39,7 @@ import pw.phylame.jem.formats.util.ParserException;
 public class SCI extends CApplication implements Constants {
     private static final Log LOG = LogFactory.getLog(SCI.class);
 
-    SCI(String[] args) {
+    private SCI(String[] args) {
         super(NAME, VERSION, args);
         errorTipKey = "error.detailTip";
     }
@@ -256,7 +256,7 @@ public class SCI extends CApplication implements Constants {
         return true;
     }
 
-    boolean checkOutputFormat(String format) {
+    private boolean checkOutputFormat(String format) {
         if (!BookHelper.hasMaker(format)) {
             localizedError("error.output.unsupported", format);
             System.out.println(getText("tip.unsupportedFormat"));
@@ -267,7 +267,7 @@ public class SCI extends CApplication implements Constants {
 
     private Worker.InputOption inputOption = null;
 
-    Worker.InputOption getInputOption() {
+    private Worker.InputOption getInputOption() {
         if (inputOption == null) {
             inputOption = new Worker.InputOption(getContext());
         }
@@ -276,7 +276,7 @@ public class SCI extends CApplication implements Constants {
 
     private Worker.OutputOption outputOption = null;
 
-    Worker.OutputOption getOutputOption() {
+    private Worker.OutputOption getOutputOption() {
         if (outputOption == null) {
             outputOption = new Worker.OutputOption(getContext());
         }
