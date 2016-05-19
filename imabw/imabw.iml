@@ -12,16 +12,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="jfontchooser-1.0.5" level="project" />
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="file://$MODULE_DIR$/../../tools/laf" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-        <jarDirectory url="file://$MODULE_DIR$/../../tools/laf" recursive="false" />
-      </library>
-    </orderEntry>
     <orderEntry type="library" name="Maven: pw-books:jem-formats:1.7" level="project" />
     <orderEntry type="library" name="Maven: pw-books:jem-core:2.4" level="project" />
     <orderEntry type="library" name="Maven: xpp3:xpp3:1.1.4c" level="project" />

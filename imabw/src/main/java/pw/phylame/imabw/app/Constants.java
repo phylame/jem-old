@@ -31,9 +31,9 @@ public interface Constants {
 
     String SETTINGS_HOME = "config/";
 
-    String RESOURCE_DIR = "pw/phylame/imabw/res/";
+    String RESOURCE_DIR = "pw/phylame/imabw/resources/";
     String IMAGE_DIR = "gfx/";
-    String I18N_DIR = "pw/phylame/imabw/res/i18n/";
+    String I18N_DIR = "pw/phylame/imabw/resources/i18n/";
     String I18N_NAME = I18N_DIR + "imabw";
 
 

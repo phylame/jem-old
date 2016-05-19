@@ -3,21 +3,96 @@
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
       <artifact name="imabw:jar" />
+      <artifact name="plugins:jar" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f819b0cb-303c-4600-b8fc-7d3cde016289" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/src/main/resources/META-INF/MANIFEST.MF" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/src/main/resources/META-INF/pw-gaf/plugin.prop" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imabw.iml" afterPath="$PROJECT_DIR$/imabw.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scripts/imabw.bat" afterPath="$PROJECT_DIR$/src/main/scripts/imabw.bat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/app/Constants.java" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/app/Constants.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/app/ui/dialog/EditAppSettings.form" afterPath="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/app/ui/dialog/EditAppSettings.form" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../jem-core/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/util/ImplementFactory.java" afterPath="$PROJECT_DIR$/../jem-core/src/main/java/pw/phylame/jem/util/ImplementFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/.gitignore" afterPath="$PROJECT_DIR$/../scj/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../scj/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/scj.iml" afterPath="$PROJECT_DIR$/../scj/scj.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/scj/app/SCI.java" afterPath="$PROJECT_DIR$/../scj/src/main/java/pw/phylame/scj/app/SCI.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/about-app-large.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/about-app-large.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/about-app.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/about-app.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/book-extensions-large.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/book-extensions-large.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/book-extensions.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/book-extensions.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/chapter-properties-large.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/chapter-properties-large.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/chapter-properties.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/chapter-properties.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/close-active-tab.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/close-active-tab.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/edit-copy-large.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/edit-copy-large.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/edit-copy.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/edit-copy.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/edit-cut-large.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/edit-cut-large.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/edit-cut.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/edit-cut.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/edit-delete-large.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/edit-delete-large.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/edit-delete.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/edit-delete.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/edit-paste-large.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/edit-paste-large.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/edit-paste.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/edit-paste.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/edit-redo-large.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/edit-redo-large.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/edit-redo.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/edit-redo.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/edit-select-all-large.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/edit-select-all-large.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/edit-select-all.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/edit-select-all.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/edit-settings-large.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/edit-settings-large.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/edit-settings.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/edit-settings.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/edit-undo-large.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/edit-undo-large.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/edit-undo.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/edit-undo.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/exit-app-large.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/exit-app-large.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/exit-app.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/exit-app.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/file-details-large.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/file-details-large.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/file-details.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/file-details.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/find-content-large.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/find-content-large.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/find-content.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/find-content.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/find-next-large.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/find-next-large.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/find-next.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/find-next.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/find-previous-large.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/find-previous-large.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/find-previous.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/find-previous.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/goto-position-large.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/goto-position-large.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/goto-position.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/goto-position.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/lock-contents-selected.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/lock-contents-selected.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/lock-contents.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/lock-contents.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/new-chapter.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/new-chapter.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/new-file-large.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/new-file-large.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/new-file.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/new-file.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/open-file-large.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/open-file-large.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/open-file.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/open-file.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/rename-chapter.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/rename-chapter.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/replace-text-large.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/replace-text-large.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/replace-text.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/replace-text.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/save-as-file-large.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/save-as-file-large.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/save-as-file.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/save-as-file.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/save-file-large.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/save-file-large.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/save-file.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/save-file.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/select-next-tab.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/select-next-tab.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/actions/select-previous-tab.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/actions/select-previous-tab.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/dialog/accept.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/dialog/accept.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/dialog/alert.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/dialog/alert.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/dialog/cancel.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/dialog/cancel.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/dialog/export.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/dialog/export.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/dialog/information.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/dialog/information.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/dialog/minus.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/dialog/minus.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/dialog/modify.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/dialog/modify.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/dialog/plus.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/dialog/plus.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/dialog/prohibit.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/dialog/prohibit.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/dialog/question.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/dialog/question.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/dialog/save.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/dialog/save.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/dialog/success.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/dialog/success.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/dialog/warning.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/dialog/warning.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/icon.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/icon.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/status/message.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/status/message.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/status/readonly.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/status/readonly.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/status/readwrite.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/status/readwrite.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/tab/close.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/tab/close.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/tree/book.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/tree/book.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/tree/chapter.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/tree/chapter.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/tree/contents.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/tree/contents.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/tree/refresh.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/tree/refresh.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/tree/search.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/tree/search.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/gfx/default/tree/section.png" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/gfx/default/tree/section.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/i18n/all.txt" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/i18n/all.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/i18n/imabw.properties" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/i18n/imabw.properties" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/i18n/imabw_zh_CN.properties" afterPath="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/i18n/imabw_zh_CN.properties" />
     </list>
     <ignored path="imabw.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -65,7 +140,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/app/ui/com/NamedComboBox.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/app/model/FileHistory.java" />
         <option value="D:/devel/Java/jdk1.8.0_60/src.zip!/javax/swing/SwingWorker.java" />
         <option value="$MAVEN_REPOSITORY$/pw-tools/pw-ixin/1.3/pw-ixin-1.3-sources.jar!/pw/phylame/gaf/ixin/ICommonDialog.java" />
@@ -102,7 +176,6 @@
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/app/ui/editor/SearchBar.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/app/ui/dialog/DialogFactory.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/app/ui/com/ItemTable.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/i18n/imabw_zh_CN.properties" />
         <option value="$PROJECT_DIR$/src/main/scripts/imabw.bat" />
         <option value="$MAVEN_REPOSITORY$/pw-books/jem-core/2.4/jem-core-2.4-sources.jar!/pw/phylame/jem/core/BookHelper.java" />
         <option value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/app/config/UIConfig.java" />
@@ -116,13 +189,16 @@
         <option value="$PROJECT_DIR$/src/main/scripts/imabw.sh" />
         <option value="$PROJECT_DIR$/plugins/src/main/java/pw/phylame/imabw/plugins/LafMapper.java" />
         <option value="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/i18n/imabw.properties" />
+        <option value="$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/i18n/imabw_zh_CN.properties" />
+        <option value="$PROJECT_DIR$/plugins/src/main/resources/META-INF/pw-gaf/plugin.prop" />
       </list>
     </option>
   </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" />
-  <component name="JsBuildToolPackageJson" detection-done="true" />
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -231,7 +307,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
+    <navigator currentView="PackagesPane" proportions="" version="1">
       <flattenPackages ProjectPane="false" />
       <showMembers />
       <showModules />
@@ -246,6 +322,10 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane />
+      </pane>
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -278,6 +358,38 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="plugins" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="META-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="imabw" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugins" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="META-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pw-gaf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="imabw" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="imabw" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
             </PATH_ELEMENT>
@@ -293,58 +405,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="pw.phylame.imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="i18n" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resource Bundle 'imabw'" />
-              <option name="myItemType" value="com.intellij.lang.properties.projectView.ResourceBundleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pw.phylame.imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="i18n" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pw.phylame.imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -364,97 +424,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pw.phylame.imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pw.phylame.imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dialog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pw.phylame.imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scratches" />
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imabw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -470,13 +439,14 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
     <property name="dynamic.classpath" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/plugins/target" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/pw/phylame/imabw/app/model" />
     <property name="FullScreen" value="false" />
     <property name="full.screen.before.presentation.mode" value="false" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="js-jscs-nodeInterpreter" value="D:\devel\nodejs\node.exe" />
   </component>
   <component name="RecentsManager">
     <key name="MoveMembersDialog.RECENTS_KEY">
@@ -553,6 +523,22 @@
       <envs />
       <method />
     </configuration>
+    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <method />
+    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -616,6 +602,9 @@
       <envs />
       <method />
     </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
     <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
       <MavenSettings>
         <option name="myGeneralSettings" />
@@ -644,6 +633,12 @@
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -925,11 +920,12 @@
       <workItem from="1457497042285" duration="156000" />
       <workItem from="1459695085039" duration="61000" />
       <workItem from="1459928971524" duration="45000" />
+      <workItem from="1463240769767" duration="783000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="448565000" />
+    <option name="totallyTimeSpent" value="449348000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1374" height="746" extended-state="6" />
@@ -937,28 +933,28 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31129032" sideWeight="0.49394855" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31129032" sideWeight="0.5060514" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33030304" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32096773" sideWeight="0.4939302" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32419354" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.204236" sideWeight="0.49434572" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.204236" sideWeight="0.49434572" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962063" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16969697" sideWeight="0.5056543" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38225806" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31129032" sideWeight="0.49394855" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39644012" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32142857" sideWeight="0.4939302" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31774193" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38225806" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1012,20 +1008,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/app/MessageCenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/plugins/src/main/java/pw/phylame/imabw/plugins/LafMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1185,23 +1167,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/i18n/imabw_zh_CN.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="708" column="0" selection-start-line="708" selection-start-column="0" selection-end-line="708" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider editor-type-id="ResourceBundle">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/app/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="128" column="11" selection-start-line="128" selection-start-column="11" selection-end-line="128" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/app/ui/com/LinkedLabel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1265,13 +1230,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/pw-tools/pw-gaf/1.3/pw-gaf-1.3-sources.jar!/pw/phylame/gaf/core/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="38" column="7" selection-start-line="38" selection-start-column="7" selection-end-line="38" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/app/config/UIConfig.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1307,28 +1265,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/app/Imabw.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="141" column="11" selection-start-line="141" selection-start-column="11" selection-end-line="141" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/plugins/src/main/java/pw/phylame/imabw/plugins/LafAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="40" column="5" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/plugins/src/main/java/pw/phylame/imabw/plugins/LafMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="49" column="49" selection-start-line="49" selection-start-column="49" selection-end-line="49" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/res/i18n/imabw.properties">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/i18n/imabw.properties">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="653" column="0" selection-start-line="653" selection-start-column="0" selection-end-line="653" selection-end-column="0" />
@@ -1363,7 +1300,6 @@
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="42">
             <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-            <folding />
           </first_editor>
           <second_editor />
         </state>
@@ -1373,6 +1309,95 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="21">
           <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/i18n/all.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/pw/phylame/imabw/resources/i18n/imabw_zh_CN.properties">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="757" column="35" selection-start-line="757" selection-start-column="35" selection-end-line="757" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="ResourceBundle">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/app/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-420">
+          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/app/ui/UIDesign.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-134">
+          <caret line="27" column="6" selection-start-line="27" selection-start-column="6" selection-end-line="27" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugins/src/main/java/pw/phylame/imabw/plugins/LafAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="40" column="5" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugins/src/main/java/pw/phylame/imabw/plugins/LafMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="49" column="49" selection-start-line="49" selection-start-column="49" selection-end-line="49" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/pw-tools/pw-gaf/1.3/pw-gaf-1.3-sources.jar!/pw/phylame/gaf/core/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <folding>
+            <element signature="method#loadPlugins#0;class#Application#0" expanded="true" />
+            <element signature="method#loadPlugins#1;class#Application#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pw/phylame/imabw/app/Imabw.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="91">
+          <caret line="149" column="17" selection-start-line="149" selection-start-column="17" selection-end-line="149" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#5821#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;class#Imabw#0" expanded="true" />
+            <element signature="method#Imabw#0;class#Imabw#0" expanded="true" />
+            <element signature="docComment;class#CLIContext#0;class#Imabw#0" expanded="true" />
+            <element signature="docComment;method#printCLIUsage#0;class#Imabw#0" expanded="true" />
+            <element signature="method#printCLIUsage#0;class#Imabw#0" expanded="true" />
+            <element signature="method#parseCLIOptions#0;class#Imabw#0" expanded="true" />
+            <element signature="method#createForm#0;class#Imabw#0" expanded="true" />
+            <element signature="method#run#0;class#Imabw#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugins/src/main/resources/META-INF/pw-gaf/plugin.prop">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" column="34" selection-start-line="1" selection-start-column="34" selection-end-line="1" selection-end-column="34" />
           <folding />
         </state>
       </provider>
@@ -1420,7 +1445,7 @@
       </state>
       <state key="GlobalLibrariesConfigurable.UI">
         <settings>
-          <last-edited>laf</last-edited>
+          <last-edited>scala-sdk-2.11.7</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
